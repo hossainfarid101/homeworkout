@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:homeworkout_flutter/custom/drawer/drawer_menu.dart';
 import 'package:homeworkout_flutter/interfaces/topbar_clicklistener.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
@@ -17,6 +18,7 @@ class CommonTopBar extends StatefulWidget {
   final bool isInfo;
   final bool isOptions;
   final bool isShowSubheader;
+  final bool isMenu;
 
   final String? subHeader;
 
@@ -29,6 +31,7 @@ class CommonTopBar extends StatefulWidget {
         this.isOptions = false,
         this.isShowSubheader = false,
         this.isShowSettingCircle = false,
+        this.isMenu = false,
         this.subHeader,
         Key? key,
       }) : super(key: key);
@@ -89,6 +92,26 @@ class _CommonTopBarState extends State<CommonTopBar> {
                 ),
               ),
             ),
+            InkWell(
+              onTap: () {
+                Scaffold.of(context).openDrawer();
+                //widget.clickListener.onTopBarClick(Constant.strMenu);
+              },
+              child: Visibility(
+                visible: widget.isMenu,
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                      top: 15.0, bottom: 15.0, left: 15.0, right: 15.0),
+                  child: Image.asset(
+                    'assets/icons/ic_menu.png',
+                    scale: 1.3,
+                    width: 30,
+                    height: 30,
+                    color: Colur.txtBlack,
+                  ),
+                ),
+              ),
+            ),
             Expanded(
                 flex: 1,
                 child: Container(
@@ -104,7 +127,7 @@ class _CommonTopBarState extends State<CommonTopBar> {
                         style: const TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 22,
-                            color: Colur.white),
+                            color: Colur.txtBlack),
                       ),
                       Visibility(
                         visible: widget.isShowSubheader,

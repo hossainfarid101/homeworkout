@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:homeworkout_flutter/ui/home_screen.dart';
+import 'package:homeworkout_flutter/ui/report/report_screen.dart';
+import 'package:homeworkout_flutter/ui/settings/settings_screen.dart';
+import 'package:homeworkout_flutter/ui/training_plan/training_plan_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/Debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
@@ -208,7 +210,7 @@ class _MyAppState extends State<MyApp> {
             statusBarIconBrightness: Brightness.dark,
             systemNavigationBarIconBrightness: Brightness.light,
           ),
-          child:HomeScreen(),
+          child: SettingsScreen(),
         ),
         );
   }

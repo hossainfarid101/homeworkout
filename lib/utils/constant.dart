@@ -4,6 +4,7 @@ import 'package:homeworkout_flutter/localization/locale_constant.dart';
 import 'package:intl/intl.dart';
 
 class Constant {
+  static const strMenu = "Menu";
   static const strBack = "Back";
   static const strDelete = "DELETE";
   static const strSetting = "Setting";

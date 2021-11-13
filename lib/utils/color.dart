@@ -6,6 +6,7 @@ class Colur {
   static const blue = Color(0xff3384FF);
   static const commonBgColor =  Color(0xffF7F8FA);
   static const grey =  Color(0xff7A7A7A);
+  static const iconGrey = Color(0X61000000);
 
 
   static const blueGradient1 =  Color(0xff0A71FE);
@@ -63,4 +64,6 @@ class Colur {
    Color(0xff8A3CFF),
    Color(0xffC040FF),
   ];
+
+
 }

@@ -50,6 +50,7 @@ dependencies:
   auto_size_text: 3.0.0-nullsafety.0
   rate_my_app: ^1.1.1
   date_picker_timeline: ^1.2.3
+  sqflite: ^2.0.0+4
 
 
 dev_dependencies:
@@ -68,9 +69,39 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-  #assets:
+  assets:
     #- assets/icons
+    - assets/icons/ic_menu.png
+    - assets/icons/ic_menu_library.png
+    - assets/icons/ic_menu_reminder.webp
+    - assets/icons/ic_menu_report.png
+    - assets/icons/ic_menu_restart_progress.webp
+    - assets/icons/ic_menu_setting.webp
+    - assets/icons/ic_training_plan.webp
+    - assets/icons/ic_setting_coach_tips.webp
+    - assets/icons/ic_setting_countdown_time.png
+    - assets/icons/ic_setting_device_tts_setting.png
+    - assets/icons/ic_setting_download_more_tts_langu.png
+    - assets/icons/ic_setting_download_tts_engine.png
+    - assets/icons/ic_setting_feedback.png
+    - assets/icons/ic_setting_health_data.png
+    - assets/icons/ic_setting_keep__screen.png
+    - assets/icons/ic_setting_lang.webp
+    - assets/icons/ic_setting_metric.png
+    - assets/icons/ic_setting_navigat_pre.png
+    - assets/icons/ic_setting_navigat_right.png
+    - assets/icons/ic_setting_privacy_policy.png
+    - assets/icons/ic_setting_rate_us.webp
+    - assets/icons/ic_setting_reminder.webp
+    - assets/icons/ic_setting_rest_set.png
+    - assets/icons/ic_setting_sec_arrow.png
+    - assets/icons/ic_setting_share.png
+    - assets/icons/ic_setting_test_voice.webp
+    - assets/icons/ic_setting_tts_engine.webp
+    - assets/icons/ic_setting_voice_guide.webp
     #- assets/images
+    - assets/images/men_banner.webp
+
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

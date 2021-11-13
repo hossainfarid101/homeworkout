@@ -71,4 +71,101 @@ class LanguageEn extends Languages {
 
   @override
   String get txtWeekGoalDesc => "Set weekly goals for a better body shape";
+
+  @override
+  String get txt7X4Challenge => "7 X 4 Challenge";
+
+  @override
+  String get txtAbsBeginner => "Abs Beginner";
+
+  @override
+  String get txtArmBeginner => "Arm Beginner";
+
+  @override
+  String get txtBeginner => "Beginner";
+
+  @override
+  String get txtChestBeginner => "Chest Beginner";
+
+  @override
+  String get txtDaysLeft => "Days Left";
+
+  @override
+  String get txtFullBody => "Full Body";
+
+  @override
+  String get txtLegBeginner => "Leg Beginner";
+
+  @override
+  String get txtLowerBody => "Lower Body";
+
+  @override
+  String get txtShoulderBackBeginner => "Shoulder & Back Beginner";
+
+  @override
+  String get txtDiscover => "Discover";
+
+  @override
+  String get txtReminder => "Reminder";
+
+  @override
+  String get txtRestartProgress => "Restart Progress";
+
+  @override
+  String get txtSettings => "Settings";
+
+  @override
+  String get txtCountdownTime => "Countdown Time";
+
+  @override
+  String get txtFeedBack => "FeedBack";
+
+  @override
+  String get txtGeneralSettings => "General Settings";
+
+  @override
+  String get txtHealthData => "Health Data";
+
+  @override
+  String get txtMetricImperialUnit => "Metric & Imperial Unit";
+
+  @override
+  String get txtPrivacyPolicy => "Privacy Policy";
+
+  @override
+  String get txtRateUs => "Rate Us";
+
+  @override
+  String get txtSecs => "Secs";
+
+  @override
+  String get txtShareWithFriends => "Share With Friends";
+
+  @override
+  String get txtSoundOptions => "Sound Options";
+
+  @override
+  String get txtSupportUs => "Support Us";
+
+  @override
+  String get txtTrainingrest => "Training Rest";
+
+  @override
+  String get txtVoiceOptions => "Voice Options";
+
+  @override
+  String get txtCommunity => "Community";
+
+  @override
+  String get txtDeviceTTSSetting => "Device TTS Setting";
+
+  @override
+  String get txtDownloadTTSEngine => "Download TTS Engine";
+
+  @override
+  String get txtSelectTTSEngine => "Select TTS Engine";
+
+  @override
+  String get txtTestVoice => "Test Voice";
+
 }

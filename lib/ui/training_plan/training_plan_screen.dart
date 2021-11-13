@@ -5,33 +5,29 @@ import 'package:homeworkout_flutter/main.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class TrainingPlanScreen extends StatefulWidget {
+  const TrainingPlanScreen({Key? key}) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _TrainingPlanScreenState createState() => _TrainingPlanScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _TrainingPlanScreenState extends State<TrainingPlanScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colur.commonBgColor,
-      key: MyApp.scaffoldKey,
-      drawer: const DrawerMenu(),
-      body: Builder(
-        builder: (context) {
-          return SafeArea(
-            child: CustomScrollView(
-              slivers: [
-                _homeTopBar(context)
-              ],
-              //child: _homeTopBar(context),
-            )
-          );
-        }
-      ),
-    );
+        backgroundColor: Colur.commonBgColor,
+        key: MyApp.scaffoldKey,
+        drawer: const DrawerMenu(),
+        body: Builder(
+            builder: (context) {
+              return SafeArea(
+                  child: CustomScrollView(
+                    slivers: [_homeTopBar(context)],
+                    //child: _homeTopBar(context),
+                  ));
+            }
+        ));
   }
 
   _homeTopBar(BuildContext context) {
@@ -39,136 +35,143 @@ class _HomeScreenState extends State<HomeScreen> {
       pinned: true,
       floating: true,
       centerTitle: false,
+      titleSpacing: 0,
+      leading: InkWell(
+          onTap: () {
+            Scaffold.of(context).openDrawer();
+          },
+          child: Image.asset(
+            "assets/icons/ic_menu.png",
+            scale: 1.3,
+            height: 20,
+            width: 20,
+          )),
       title: Text(
-      Languages.of(context)!.txtHomeWorkout.toUpperCase(),
-      overflow: TextOverflow.ellipsis,
-      style: const TextStyle(
-          color: Colur.white,
-          fontSize: 24,
-          fontWeight: FontWeight.w500
+        Languages.of(context)!.txtHomeWorkout.toUpperCase(),
+        overflow: TextOverflow.ellipsis,
+        style: const TextStyle(
+            color: Colur.white, fontSize: 24, fontWeight: FontWeight.w500),
       ),
-    ),
       expandedHeight: 340,
       flexibleSpace: FlexibleSpaceBar(
         background: Stack(
-        children: [
-          Container(
-            margin: const EdgeInsets.only(top: 70),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  children: [
-                    const Text(
-                        "6",
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            color: Colur.white,
-                            fontSize: 24,
-                            fontWeight: FontWeight.w500)),
-                    Text(Languages.of(context)!.txtWorkout.toUpperCase(),
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            color: Colur.white.withOpacity(0.6),
-                            fontSize: 18,
-                            fontWeight: FontWeight.w200)),
-                  ],
-                ),
-                Column(
-                  children: [
-                    const Text("3",
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            color: Colur.white,
-                            fontSize: 24,
-                            fontWeight: FontWeight.w500)),
-                    Text(Languages.of(context)!.txtKcal.toUpperCase(),
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            color: Colur.white.withOpacity(0.6),
-                            fontSize: 18,
-                            fontWeight: FontWeight.w200)),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Text(Utils.secondToMMSSFormat(95),
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                            color: Colur.white,
-                            fontSize: 24,
-                            fontWeight: FontWeight.w500)),
-                    Text(Languages.of(context)!.txtDuration.toUpperCase(),
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            color: Colur.white.withOpacity(0.6),
-                            fontSize: 18,
-                            fontWeight: FontWeight.w200)),
-                  ],
-                )
-              ],
-            ),
-          ),
-          Positioned(
-            top: 170,
-            left: 30,
-            right: 30,
-            child: Container(
-              height: 150,
-              width: 500,
-              decoration: const BoxDecoration(
-                color: Colur.white,
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-              ),
-              child: Column(
-                //crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: const EdgeInsets.only(top: 70),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Container(
-                    alignment: Alignment.topLeft,
-                    margin: const EdgeInsets.all(10),
-                    child: Text(Languages.of(context)!.txtWeekGoal.toUpperCase(),
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                            color: Colur.txtBlack,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500)),
+                  Column(
+                    children: [
+                      const Text("6",
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              color: Colur.white,
+                              fontSize: 24,
+                              fontWeight: FontWeight.w500)),
+                      Text(Languages.of(context)!.txtWorkout.toUpperCase(),
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              color: Colur.white.withOpacity(0.6),
+                              fontSize: 18,
+                              fontWeight: FontWeight.w200)),
+                    ],
                   ),
-                  Container(
-                    margin: const EdgeInsets.only(top: 10),
-                    child: Text(Languages.of(context)!.txtWeekGoalDesc,
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                            color: Colur.grey,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w200)),
+                  Column(
+                    children: [
+                      const Text("3",
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              color: Colur.white,
+                              fontSize: 24,
+                              fontWeight: FontWeight.w500)),
+                      Text(Languages.of(context)!.txtKcal.toUpperCase(),
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              color: Colur.white.withOpacity(0.6),
+                              fontSize: 18,
+                              fontWeight: FontWeight.w200)),
+                    ],
                   ),
-
-                  Container(
-                    height: 45,
-                    width: 300,
-                    decoration: const BoxDecoration(
-                      color: Colur.blue,
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
-                    ),
-                    margin: const EdgeInsets.only(top: 15),
-                    child: Center(
-                      child: Text(Languages.of(context)!.txtSetAGoal.toUpperCase(),
-                          textAlign: TextAlign.center,
+                  Column(
+                    children: [
+                      Text(Utils.secondToMMSSFormat(95),
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                              color: Colur.white,
+                              fontSize: 24,
+                              fontWeight: FontWeight.w500)),
+                      Text(Languages.of(context)!.txtDuration.toUpperCase(),
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              color: Colur.white.withOpacity(0.6),
+                              fontSize: 18,
+                              fontWeight: FontWeight.w200)),
+                    ],
+                  )
+                ],
+              ),
+            ),
+            Positioned(
+              top: 170,
+              left: 30,
+              right: 30,
+              child: Container(
+                height: 150,
+                width: 500,
+                decoration: const BoxDecoration(
+                  color: Colur.white,
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                child: Column(
+                  //crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      alignment: Alignment.topLeft,
+                      margin: const EdgeInsets.all(10),
+                      child: Text(
+                          Languages.of(context)!.txtWeekGoal.toUpperCase(),
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
                               color: Colur.txtBlack,
                               fontSize: 20,
                               fontWeight: FontWeight.w500)),
                     ),
-                  ),
-
-                ],
+                    Container(
+                      margin: const EdgeInsets.only(top: 10),
+                      child: Text(Languages.of(context)!.txtWeekGoalDesc,
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                              color: Colur.grey,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w200)),
+                    ),
+                    Container(
+                      height: 45,
+                      width: 300,
+                      decoration: const BoxDecoration(
+                        color: Colur.blue,
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                      ),
+                      margin: const EdgeInsets.only(top: 15),
+                      child: Center(
+                        child: Text(
+                            Languages.of(context)!.txtSetAGoal.toUpperCase(),
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                                color: Colur.txtBlack,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500)),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
-      ),
+          ],
+        ),
       ),
     );
     /*return Container(
