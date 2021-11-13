@@ -48,7 +48,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Preference().instance();
 
-  const AndroidInitializationSettings initializationSettingsAndroid =
+ /* const AndroidInitializationSettings initializationSettingsAndroid =
   AndroidInitializationSettings('app_icon');
 
   /// Note: permissions aren't requested here just to demonstrate that can be
@@ -76,15 +76,11 @@ Future<void> main() async {
           debugPrint('notification payload: $payload');
         }
 
-        /*if(payload != null && payload != Constant.STR_RUNNING_REMINDER) {
-          Future.delayed(Duration(seconds: 1)).then((value) => Navigator.push(MyApp.navigatorKey.currentState!.overlay!.context, MaterialPageRoute(builder: (context)=> DrinkWaterLevelScreen())));
-        } else if(payload != null && payload == Constant.STR_RUNNING_REMINDER){
-          Future.delayed(Duration(seconds: 1)).then((value) => Navigator.push(MyApp.navigatorKey.currentState!.overlay!.context, MaterialPageRoute(builder: (context)=> StartRunScreen())));
-        }*/
+
 
         selectedNotificationPayload = payload;
         selectNotificationSubject.add(payload);
-      });
+      });*/
 
   _configureLocalTimeZone();
 
