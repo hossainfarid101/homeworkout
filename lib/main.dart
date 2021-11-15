@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:homeworkout_flutter/ui/report/report_screen.dart';
 import 'package:homeworkout_flutter/ui/settings/settings_screen.dart';
-import 'package:homeworkout_flutter/ui/training_plan/training_plan_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/Debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
@@ -155,25 +153,6 @@ class _MyAppState extends State<MyApp> {
         locale: _locale,
         supportedLocales: const [
           Locale('en', ''),
-          /*Locale('zh', ''),
-          Locale('es', ''),
-          Locale('de', ''),
-          Locale('pt', ''),
-          Locale('ar', ''),
-          Locale('fr', ''),
-          Locale('ja', ''),
-          Locale('ru', ''),
-          Locale('ur', ''),
-          Locale('hi', ''),
-          Locale('vi', ''),
-          Locale('id', ''),
-          Locale('bn', ''),
-          Locale('ta', ''),
-          Locale('te', ''),
-          Locale('tr', ''),
-          Locale('ko', ''),
-          Locale('pa', ''),
-          Locale('it', ''),*/
         ],
         localizationsDelegates: const [
           AppLocalizationsDelegate(),

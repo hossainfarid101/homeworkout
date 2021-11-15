@@ -339,7 +339,7 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                           child: Container(
                             margin: const EdgeInsets.symmetric(horizontal: 10.0),
                             child: Text(
-                              Languages.of(context)!.txtCancel,
+                              Languages.of(context)!.txtCancel.toUpperCase(),
                               style: const TextStyle(
                                   color: Colur.txtPurple,
                                   fontSize: 15.0,

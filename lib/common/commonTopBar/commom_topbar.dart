@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:homeworkout_flutter/custom/drawer/drawer_menu.dart';
 import 'package:homeworkout_flutter/interfaces/topbar_clicklistener.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
@@ -60,8 +59,9 @@ class _CommonTopBarState extends State<CommonTopBar> {
                   padding: const EdgeInsets.only(
                       top: 15.0, bottom: 15.0, left: 15.0, right: 25.0),
                   child: Image.asset(
-                    'assets/icons/ic_back_white.png',
-                    scale: 3.7,
+                    'assets/icons/ic_back.webp',
+                    color: Colur.txtBlack,
+                    //scale: 1,
                     width: 20,
                     height: 20,
                   ),

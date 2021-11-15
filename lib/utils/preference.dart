@@ -29,7 +29,7 @@ class Preference {
   static const String targetValueForRuntime = "TARGETVALUE_FOR_RUNTIME";
   static const String targetValueForWalktime = "TARGETVALUE_FOR_WALKTIME";
   static const String sliderValue = "SLIDER_VALUE";
-  static const String isKMselected = "IS_KM_SELECTED";
+  static const String isKMSelected = "IS_KM_SELECTED";
   static const String startTimeReminder = "START_TIME_REMINDER";
   static const String dailyReminderTime = "DAILY_REMINDER_TIME";
   static const String drinkWaterInterval = "DRINK_WATER_INTERVAL";
@@ -59,8 +59,22 @@ class Preference {
   static const String duration = "DURATION";
   static const String isRedirect = "IS_REDIRECT";
 
+  static const String countdownTime ="COUNTDOWN_TIME";
+  static const String trainingRestTime = "TRAINING_REST_TIME";
+  static const String isMute = "IS_MUTE";
+  static const String isCoachTips = "IS_COACH_TIPS";
+  static const String isVoiceGuide = "IS_VOICE_GUIDE";
+  static const String dateOfBirth = "DATE_OF_BIRTH";
+  static const String isMale = "IS_MALE";
+  static const String isKG = "IS_KG";
+  static const String isCM = "IS_CM";
+
   // ------------------ SINGLETON -----------------------
   static final Preference _preference = Preference._internal();
+
+
+
+
 
   factory Preference() {
     return _preference;

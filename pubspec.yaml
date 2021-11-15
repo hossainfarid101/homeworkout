@@ -42,7 +42,7 @@ dependencies:
   permission_handler: ^8.2.6
   intl: ^0.17.0
   flutter_local_notifications: ^5.0.0+4
-  flutter_native_timezone: ^1.0.10
+  flutter_native_timezone: ^2.0.0
   rxdart: ^0.27.2
   charts_flutter: ^0.12.0
   share: ^2.0.4
@@ -51,6 +51,14 @@ dependencies:
   rate_my_app: ^1.1.1
   date_picker_timeline: ^1.2.3
   sqflite: ^2.0.0+4
+  group_radio_button: ^1.1.0
+  open_settings: ^2.0.2
+  android_intent_plus: ^3.0.2
+  flutter_tts: ^3.2.2
+  flutter_rounded_date_picker: ^2.0.2
+
+
+
 
 
 
@@ -100,6 +108,8 @@ flutter:
     - assets/icons/ic_setting_test_voice.webp
     - assets/icons/ic_setting_tts_engine.webp
     - assets/icons/ic_setting_voice_guide.webp
+    - assets/icons/ic_sound_options.png
+    - assets/icons/ic_back.webp
     #- assets/images
     - assets/images/men_banner.webp
 

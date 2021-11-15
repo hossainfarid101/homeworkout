@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Utils {
   static showToast(BuildContext context, String msg,
@@ -116,7 +121,7 @@ class Utils {
   }
   static double minPerKmToMinPerMile(double speedInKm){
 
-    double speedInmMile = speedInKm*1.609;
+    double speedInmMile = speedInKm * 1.609;
 
     return speedInmMile;
   }
@@ -132,13 +137,53 @@ class Utils {
   }
 
   static double secToHour(int sec) {
-    double hrs= sec/3600;
+    double hrs = sec/3600;
     return hrs;
   }
 
   static double secToMin(int sec) {
-    double mins= sec/60;
+    double mins = sec/60;
     return mins;
+  }
+
+  static downLoadTTS() {
+    if (Platform.isAndroid) {
+      try {
+        launch("market://search?q=text to speech&c=apps");
+      } on PlatformException {
+        launch("http://play.google.com/store/search?q=text to speech&c=apps");
+      } finally {
+        launch("http://play.google.com/store/search?q=text to speech&c=apps");
+      }
+    } else {
+      try {
+        launch("apps://itunes.apple.com/app/apple-store/texttospeech");
+      } on PlatformException {
+        launch("http://appstore.com/texttospeech");
+      } finally {
+        launch("http://appstore.com/texttospeech");
+      }
+    }
+  }
+
+  static textToSpeech(String speakText, FlutterTts flutterTts) async {
+    if (Platform.isAndroid) {
+      await flutterTts.awaitSpeakCompletion(true);
+      await flutterTts.setLanguage("en-GB");
+      await flutterTts.setVolume(1.0);
+      await flutterTts.setPitch(1.0);
+      await flutterTts.isLanguageAvailable("en-GB");
+      await flutterTts.setSpeechRate(0.5);
+      await flutterTts.speak(speakText);
+    } else {
+      await flutterTts.awaitSpeakCompletion(true);
+      await flutterTts.setLanguage("en-US");
+      await flutterTts.setVolume(1.0);
+      await flutterTts.setPitch(1.0);
+      await flutterTts.isLanguageAvailable("en-US");
+      await flutterTts.setSpeechRate(0.5);
+      await flutterTts.speak(speakText);
+    }
   }
 
 

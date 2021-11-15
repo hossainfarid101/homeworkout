@@ -30,6 +30,9 @@ class Constant {
   ];
   static const String emailPath = 'fitnessentertainmentapps@gmail.com';
 
+  static String shareLink = "Add the link";//TODO
+
+
   static String getPrivacyPolicyURL() {
     return "https://sites.google.com/view/trackerapp-pp/home";
   }

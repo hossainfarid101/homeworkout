@@ -6,6 +6,62 @@ abstract class Languages {
     return Localizations.of<Languages>(context, Languages);
   }
 
+  String get txtWeightUnit;
+
+  String get txtHeightUnit;
+
+  String get txtCM;
+
+  String get txtINCH;
+
+  String get txtHeight;
+
+  String get txtWeight;
+
+  String get txtGender;
+
+  String get txtBirthYear;
+
+  String get txtFemale;
+
+  String get txtMale;
+
+  String get txtTestVoiceTts;
+
+  String get txtHearTestVoice;
+
+  String get txtYes;
+
+  String get txtNo;
+
+  String get txtUnableToHearVoiceDesc;
+
+  String get txtChooseVoice;
+
+  String get txtGoogleSpeech;
+
+  String get txtCountdownTimeDialogHeading;
+
+  String get txtTrainingRestTimeDialogHeading;
+
+  String get txtCoachTipsDesc;
+
+  String get txtCoachTips;
+
+  String get txtMute;
+
+  String get txtOk;
+
+  String get txtSet;
+
+  String get txtVoiceGuide;
+
+  String get txtHomeWorkoutFeedbackiOS;
+
+  String get txtHomeWorkoutFeedbackAndroid;
+
+  String get txtShareDesc;
+
   String get txtDeviceTTSSetting;
 
   String get txtDownloadTTSEngine;
@@ -22,11 +78,11 @@ abstract class Languages {
 
   String get txtHealthData;
 
-  String  get txtMetricImperialUnit;
+  String get txtMetricImperialUnit;
 
-  String  get txtRateUs;
+  String get txtRateUs;
 
-  String  get txtSecs;
+  String get txtSecs;
 
   String get txtShareWithFriends;
 
@@ -34,7 +90,7 @@ abstract class Languages {
 
   String get txtSupportUs;
 
-  String get txtTrainingrest;
+  String get txtTrainingRest;
 
   String get txtVoiceOptions;
 

@@ -29,7 +29,7 @@ class LanguageEn extends Languages {
   String get txtRate => "Rate";
 
   @override
-  String get txtCancel => "CANCEL";
+  String get txtCancel => "Cancel";
 
   @override
   String get txtSave => "SAVE";
@@ -148,7 +148,7 @@ class LanguageEn extends Languages {
   String get txtSupportUs => "Support Us";
 
   @override
-  String get txtTrainingrest => "Training Rest";
+  String get txtTrainingRest => "Training Rest";
 
   @override
   String get txtVoiceOptions => "Voice Options";
@@ -167,5 +167,93 @@ class LanguageEn extends Languages {
 
   @override
   String get txtTestVoice => "Test Voice";
+
+  @override
+  String get txtShareDesc =>
+      "I'm training with Home Workout and am getting great results.\n\nHere are workouts for all your main muscle groups to help you build and tone muscles - no equipment needed. Challenge yourself! \n\nDownload the app:";
+
+  @override
+  String get txtHomeWorkoutFeedbackAndroid => "Home Workout Feedback - Android";
+
+  @override
+  String get txtHomeWorkoutFeedbackiOS => "Home Workout Feedback - iOS";
+
+  @override
+  String get txtCountdownTimeDialogHeading => "Set Duration (10 ~ 15 secs)";
+
+  @override
+  String get txtTrainingRestTimeDialogHeading => "Set Duration (10 ~ 180 secs)";
+
+  @override
+  String get txtCoachTipsDesc =>
+      "The accuracy of movement is the key to effectiveness.";
+
+  @override
+  String get txtCoachTips => "Coach tips";
+
+  @override
+  String get txtMute => "Mute";
+
+  @override
+  String get txtOk => "Ok";
+
+  @override
+  String get txtSet => "Set";
+
+  @override
+  String get txtVoiceGuide => "Voice guide";
+
+  @override
+  String get txtHearTestVoice => "Did you hear the test voice?";
+
+  @override
+  String get txtNo => "No";
+
+  @override
+  String get txtYes => "Yes";
+
+  @override
+  String get txtUnableToHearVoiceDesc =>
+      "The TTS engine you are using is not working now. Please, double check it and switch to another TTS engine or download voice language.";
+
+  @override
+  String get txtChooseVoice => "Please choose guide voice engine:";
+
+  @override
+  String get txtGoogleSpeech => "Google speech services";
+
+  @override
+  String get txtTestVoiceTts => "Did you hear the test voice?";
+
+  @override
+  String get txtFemale => "Female";
+
+  @override
+  String get txtMale => "Male";
+
+  @override
+  String get txtBirthYear => "Birth year";
+
+  @override
+  String get txtGender => "Gender";
+
+  @override
+  String get txtHeight => "Height";
+
+  @override
+  String get txtCM => "Cm";
+
+  @override
+  String get txtHeightUnit => "Height unit";
+
+  @override
+  String get txtWeightUnit => "Weight unit";
+
+  @override
+  String get txtINCH => "In";
+
+  @override
+  String get txtWeight => "Weight";
+
 
 }
