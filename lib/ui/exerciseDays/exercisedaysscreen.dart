@@ -149,7 +149,7 @@ class _ExerciseDaysScreenState extends State<ExerciseDaysScreen> {
           body: Column(
             children: [
               Container(
-                child: _widgetListOfDays(),
+                // child: _widgetListOfDays(),
               ),
             ],
           ),
@@ -171,6 +171,6 @@ class _ExerciseDaysScreenState extends State<ExerciseDaysScreen> {
   }
 
   itemListDays(int index) {
-
+    return Container();
   }
 }
