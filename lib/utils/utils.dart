@@ -187,4 +187,31 @@ class Utils {
   }
 
 
+  static List<String> getDaysNameOfWeek() {
+    final now = DateTime.now();
+    final firstDayOfWeek = now.subtract(Duration(days: now.weekday));
+    return List.generate(7, (index) => index)
+        .map((value) => DateFormat(DateFormat.WEEKDAY)
+        .format(firstDayOfWeek.add(Duration(days: value))))
+        .toList();
+  }
+
+  static List<String> getDaysDateOfWeek() {
+    final now = DateTime.now();
+    final firstDayOfWeek = now.subtract(Duration(days: now.weekday));
+    return List.generate(7, (index) => index)
+        .map((value) => DateFormat(DateFormat.DAY)
+        .format(firstDayOfWeek.add(Duration(days: value))))
+        .toList();
+  }
+
+  static List<String> getDaysDateForHistoryOfWeek() {
+    final now = DateTime.now();
+    final firstDayOfWeek = now.subtract(Duration(days: now.weekday));
+    return List.generate(7, (index) => index)
+        .map((value) => DateFormat("yyyy-MM-dd")
+        .format(firstDayOfWeek.add(Duration(days: value))))
+        .toList();
+  }
+
 }

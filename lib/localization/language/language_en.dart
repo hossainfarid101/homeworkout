@@ -255,5 +255,11 @@ class LanguageEn extends Languages {
   @override
   String get txtWeight => "Weight";
 
+  @override
+  String get txtMoreWorkout => "More Workouts";
+
+  @override
+  String get txtGo => "Go";
+
 
 }

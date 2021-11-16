@@ -45,7 +45,7 @@ class _CommonTopBarState extends State<CommonTopBar> {
     return SafeArea(
       bottom: false,
       child: Padding(
-        padding: const EdgeInsets.only(top: 5.0,bottom: 5),
+        padding: const EdgeInsets.only(top: 0.0,bottom: 0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -107,7 +107,7 @@ class _CommonTopBarState extends State<CommonTopBar> {
                     scale: 1.3,
                     width: 30,
                     height: 30,
-                    color: Colur.txtBlack,
+                    color: Colur.white,
                   ),
                 ),
               ),
@@ -126,8 +126,8 @@ class _CommonTopBarState extends State<CommonTopBar> {
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
                             fontWeight: FontWeight.w500,
-                            fontSize: 22,
-                            color: Colur.txtBlack),
+                            fontSize: 18,
+                            color: Colur.white),
                       ),
                       Visibility(
                         visible: widget.isShowSubheader,

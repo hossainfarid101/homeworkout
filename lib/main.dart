@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:homeworkout_flutter/ui/settings/settings_screen.dart';
+import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/Debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
@@ -147,7 +147,7 @@ class _MyAppState extends State<MyApp> {
         splashColor: Colur.transparent,
         highlightColor: Colur.transparent,
         fontFamily: 'Poppins',
-        primarySwatch: Colors.blue,
+
       ),
         debugShowCheckedModeBanner: false,
         locale: _locale,
@@ -170,22 +170,19 @@ class _MyAppState extends State<MyApp> {
           return supportedLocales.first;
         },
       darkTheme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch().copyWith(
-            secondary: Colur.white,
-            brightness: Brightness.light
-        ),
         appBarTheme: const AppBarTheme(
           backgroundColor: Colur.transparent,
+          systemOverlayStyle: SystemUiOverlayStyle.light
         ),
       ),
 
         home: const AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle(
             statusBarColor: Colur.transparent,
-            statusBarIconBrightness: Brightness.dark,
+            statusBarIconBrightness: Brightness.light,
             systemNavigationBarIconBrightness: Brightness.light,
           ),
-          child: SettingsScreen(),
+          child: TrainingScreen(),
         ),
         );
   }

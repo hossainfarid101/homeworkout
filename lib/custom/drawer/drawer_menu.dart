@@ -5,7 +5,7 @@ import 'package:homeworkout_flutter/ui/discover/discover_screen.dart';
 import 'package:homeworkout_flutter/ui/reminder/reminder_screen.dart';
 import 'package:homeworkout_flutter/ui/report/report_screen.dart';
 import 'package:homeworkout_flutter/ui/settings/settings_screen.dart';
-import 'package:homeworkout_flutter/ui/training_plan/training_plan_screen.dart';
+import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 
 class DrawerMenu extends StatefulWidget {
@@ -27,7 +27,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
           color:  Color(0xFFF1F4FB),
          ),
       margin: EdgeInsets.only(
-          top: MediaQuery.of(context).size.width / 10,
+
           right: MediaQuery.of(context).size.width / 3),
       child: Column(
         children: [
@@ -35,7 +35,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
             'assets/images/men_banner.webp',
             width: double.infinity,
             height: 150.0,
-            fit: BoxFit.fill,
+            fit: BoxFit.cover,
           ),
           Expanded(
             child: ListView.builder(
@@ -119,7 +119,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
       DrawerData(
         icon: "assets/icons/ic_training_plan.webp",
         text: Languages.of(context)!.txtTrainingPlans,
-        navPath: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const TrainingPlanScreen()))
+        navPath: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const TrainingScreen()))
       ),
     );
     drawerDataList.add(

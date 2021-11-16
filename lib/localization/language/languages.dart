@@ -171,4 +171,6 @@ abstract class Languages {
   String get txtLegBeginner;
 
   String get txtShoulderBackBeginner;
+  String get txtMoreWorkout;
+  String get txtGo;
 }
