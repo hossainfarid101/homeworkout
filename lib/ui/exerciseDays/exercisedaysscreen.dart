@@ -1,3 +1,4 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:homeworkout_flutter/custom/drawer/drawer_menu.dart';
@@ -24,7 +25,7 @@ class _ExerciseDaysScreenState extends State<ExerciseDaysScreen> {
 
   bool get isShrink {
     return _scrollController!.hasClients &&
-        _scrollController!.offset > (200 - kToolbarHeight);
+        _scrollController!.offset > (100 - kToolbarHeight);
   }
 
   @override
@@ -146,31 +147,216 @@ class _ExerciseDaysScreenState extends State<ExerciseDaysScreen> {
               ),
             ];
           },
-          body: Column(
-            children: [
-              Container(
-                // child: _widgetListOfDays(),
-              ),
-            ],
-          ),
+          body:Container(
+            color: Colur.iconGreyBg,
+              child: Column(
+                  children: [
+                    _widgetListOfDays(),
+                    Container(
+                      width: double.infinity,
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 20.0, vertical: 15.0),
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(40.0),
+                        gradient: LinearGradient(
+                            colors: [
+                              Colur.blueGradientButton1,
+                              Colur.blueGradientButton2,
+                            ],
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                            stops: [0.0, 1.0],
+                            tileMode: TileMode.clamp),
+                      ),
+                      child: TextButton(
+                        child: Text(
+                          Languages.of(context)!.txtGo.toUpperCase(),
+                          style: TextStyle(
+                            color: Colur.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 22.0,
+                          ),
+                        ),
+                        onPressed: () {},
+                      ),
+                    ),
+                  ],
+                ))
         ),
       ),
     );
   }
 
   _widgetListOfDays() {
-    return ListView.builder(
-      physics: NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: 8,
-      padding: const EdgeInsets.all(0),
-      itemBuilder: (BuildContext context, int index) {
-        return itemListDays(index);
-      },
+    return Expanded(
+      child: ListView.builder(
+        physics: NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: 4,
+        padding: const EdgeInsets.symmetric(vertical: 20),
+        itemBuilder: (BuildContext context, int index) {
+          return itemListDays(index);
+        },
+      ),
     );
   }
 
   itemListDays(int index) {
-    return Container();
+
+    var mainIndex = index;
+    /*return Container(
+      margin: const EdgeInsets.only(left: 20,bottom: 10,right: 10),
+      height: 100,
+      color: Colur.white,
+      child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 100,
+              childAspectRatio: 3,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10),
+          itemCount: 8,
+          itemBuilder: (BuildContext ctx, index) {
+            return _itemOfDays(index);
+          }),
+    );*/
+    return Container(
+      margin: const EdgeInsets.only(left: 10.0,right: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colur.theme,
+                ),
+                child: Icon(
+                  Icons.bolt_rounded,
+                  color: Colur.white,
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 5),
+                  child: Text(Languages.of(context)!.txtweek+" "+(index+1).toString()),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 5),
+                child: Text("1/7"),
+              ),
+
+            ],
+          ),
+          Row(
+            children: [
+              Container(
+                margin: const EdgeInsets.only(left: 10),
+                height: 130,
+                child: VerticalDivider(
+                  color: Colur.theme,
+                  width: 1,
+                  thickness: 1,
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.only(left: 20,right: 5),
+                  alignment: Alignment.center,
+                  color: Colur.white,
+                  height: 110,
+                  child: GridView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 100,
+                          childAspectRatio: 3,
+                          crossAxisSpacing: 0,
+                          mainAxisSpacing: 10),
+                      itemCount: 8,
+                      itemBuilder: (BuildContext ctx, index) {
+                        return _itemOfDays(index,mainIndex);
+                      }),
+                ),
+              )
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  _itemOfDays(int index, mainIndex){
+    return Container(
+      // color: Colur.iconGreyBg,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if(index == 0)...{
+            Container(
+              alignment: Alignment.center,
+              height: 60,
+              width: 60,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colur.theme
+              ),
+              child: Icon(Icons.done_rounded,size: 20,color: Colur.white,),
+            )
+          }
+          else if(index != 1 && index != 7)...{
+            Container(
+              alignment: Alignment.center,
+              height: 60,
+              width: 60,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                // border: Border.all(color: Colur.grey_icon),
+                border: Border.all(color: Colur.disableTxtColor),
+              ),
+              child: Text((index + 1).toString(),style: TextStyle(color: Colur.disableTxtColor),),
+            )
+          }else if(index == 7)...{
+            Container(
+              alignment: Alignment.center,
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/ic_challenge_uncomplete.webp"),
+                  scale: 8
+                )
+              ),
+              child: Container(
+                margin: const EdgeInsets.only(bottom: 5),
+                  child: Text(
+                (mainIndex + 1).toString(),
+                style: TextStyle(fontSize: 12),
+              )),
+            )
+          }
+          else...{
+            DottedBorder(
+              color: Colur.theme,
+              borderType: BorderType.Circle,
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(12)),
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 60,
+                  width: 60,
+                  child: Text((index + 1).toString(),style: TextStyle(color: (index != 0)?Colur.disableTxtColor:Colur.theme),),
+                ),
+              ),
+            )
+          },
+          Visibility(
+            visible: ((index == 3) || (index == 7))?false:true,
+            child: Icon(Icons.navigate_next_rounded,color: (index != 0)?Colur.disableTxtColor:Colur.theme,size: 20,),
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -107,7 +107,7 @@ class _CommonTopBarState extends State<CommonTopBar> {
                     scale: 1.3,
                     width: 30,
                     height: 30,
-                    color: Colur.white,
+                    color: Colur.black,
                   ),
                 ),
               ),
@@ -127,7 +127,7 @@ class _CommonTopBarState extends State<CommonTopBar> {
                         style: const TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 18,
-                            color: Colur.white),
+                            color: Colur.black),
                       ),
                       Visibility(
                         visible: widget.isShowSubheader,

@@ -317,7 +317,6 @@ class _TrainingScreenState extends State<TrainingScreen>
                     ),
                   ),
                 )
-
               ],
             ),
           ),

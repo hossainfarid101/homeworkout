@@ -173,4 +173,8 @@ abstract class Languages {
   String get txtShoulderBackBeginner;
   String get txtMoreWorkout;
   String get txtGo;
+  String get txtweek;
+  String get txtMinute;
+  String get txtHistory;
+  String get txtRecords;
 }

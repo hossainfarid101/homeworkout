@@ -14,7 +14,8 @@ class Colur {
   static const blueGradient2 =  Color(0xff0AEFFE);
 
   static const purpleGradientShadow =  Color(0x908C3CFF);
-
+  static const blueGradientButton1 = Color(0xff046FF9);
+  static const blueGradientButton2 = Color(0xff004DF8);
   static const progressBackgroundColor =  Color(0xff1B2153);
   static const lightYellowGradient1 =  Color(0xffF9CF45);
   static const lightYellowGradient2 =  Color(0xffEE9B1D);
@@ -44,6 +45,7 @@ class Colur {
   static const txtPurple =  Color(0xffC040FF);
   static const txtGreen =  Color(0xff24BF12);
   static const white =  Color(0xffFFFFFF);
+  static const disableTxtColor =  Color(0xffccccd2);
   static const roundedRectangleColor =  Color(0xff1B2153);
 
 

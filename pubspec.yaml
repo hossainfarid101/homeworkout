@@ -56,7 +56,7 @@ dependencies:
   android_intent_plus: ^3.0.2
   flutter_tts: ^3.2.2
   flutter_rounded_date_picker: ^2.0.2
-
+  dotted_border: ^2.0.0+1
 
 
 
@@ -78,7 +78,8 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
   assets:
-    #- assets/icons
+    - assets/icons/
+    - assets/icons/ic_challenge_complete_day.png
     - assets/icons/ic_menu.png
     - assets/icons/ic_menu_library.png
     - assets/icons/ic_menu_reminder.webp
@@ -110,6 +111,8 @@ flutter:
     - assets/icons/ic_sound_options.png
     - assets/icons/ic_back.webp
     - assets/images/
+    - assets/images/ic_challenge_uncomplete.webp
+    - assets/images/ic_challenge_complete.png
     - assets/images/bg_libray.webp
     - assets/images/abs_advanced.webp
     - assets/images/men_banner.webp

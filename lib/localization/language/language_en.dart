@@ -261,5 +261,17 @@ class LanguageEn extends Languages {
   @override
   String get txtGo => "Go";
 
+  @override
+  String get txtweek => "Week";
+
+  @override
+  String get txtMinute => "Minutes";
+
+  @override
+  String get txtHistory => "History";
+
+  @override
+  String get txtRecords => "Records";
+
 
 }
