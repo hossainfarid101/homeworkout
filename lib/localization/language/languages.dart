@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
 
 abstract class Languages {
-
   static Languages? of(BuildContext context) {
     return Localizations.of<Languages>(context, Languages);
   }
+
+  String get txtChallenge;
+
+  String get txtForBeginners;
+
+  String get txtQuarantineAtHome;
+
+  String get txtStart;
+
+  String get txtWorkouts;
+
+  String get txtMins;
 
   String get txtWeightUnit;
 
@@ -171,7 +182,9 @@ abstract class Languages {
   String get txtLegBeginner;
 
   String get txtShoulderBackBeginner;
+
   String get txtMoreWorkout;
+
   String get txtGo;
   String get txtweek;
   String get txtMinute;

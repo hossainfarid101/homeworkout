@@ -6,12 +6,7 @@ import 'package:intl/intl.dart';
 class Constant {
   static const strMenu = "Menu";
   static const strBack = "Back";
-  static const strDelete = "DELETE";
-  static const strSetting = "Setting";
-  static const strSettingCircle = "Setting_circle";
-  static const strClose = "CLOSE";
-  static const strInfo = "INFO";
-  static const strOptions = "OPTIONS";
+  static const strHistory = "History";
 
   static const minKG = 20.00;
   static const maxKG = 997.00;

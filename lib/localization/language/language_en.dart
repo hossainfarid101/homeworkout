@@ -262,6 +262,17 @@ class LanguageEn extends Languages {
   String get txtGo => "Go";
 
   @override
+  String get txtMins => "Mins";
+
+  @override
+  String get txtWorkouts => "Workouts";
+
+  @override
+  String get txtStart => "Start";
+
+  @override
+  String get txtQuarantineAtHome => "Quarantine at home";
+  @override
   String get txtweek => "Week";
 
   @override
@@ -273,5 +284,9 @@ class LanguageEn extends Languages {
   @override
   String get txtRecords => "Records";
 
+  @override
+  String get txtForBeginners => "For Beginners";
 
+  @override
+  String get txtChallenge => "Challenge";
 }

@@ -8,14 +8,18 @@ class Colur {
   static const grey =  Color(0xff7A7A7A);
   static const iconGrey = Color(0X61000000);
   static const iconGreyBg = Color(0XffF7F9FB);
-
+  static const topBarIconColor = Color(0Xff656870);
 
   static const blueGradient1 =  Color(0xff0A71FE);
   static const blueGradient2 =  Color(0xff0AEFFE);
 
-  static const purpleGradientShadow =  Color(0x908C3CFF);
   static const blueGradientButton1 = Color(0xff046FF9);
   static const blueGradientButton2 = Color(0xff004DF8);
+
+  static const blueDivider = Color(0xff004DF8);
+  static const grayDivider = Color(0xFFD6D6D6);
+
+  static const purpleGradientShadow =  Color(0x908C3CFF);
   static const progressBackgroundColor =  Color(0xff1B2153);
   static const lightYellowGradient1 =  Color(0xffF9CF45);
   static const lightYellowGradient2 =  Color(0xffEE9B1D);
@@ -33,7 +37,6 @@ class Colur {
   static const waterLevelWave1 =  Color(0xff42B2FF);
   static const waterLevelWave2 =  Color(0xff00AEFF);
 
-
   static const greenGradientColor1 =  Color(0xff21BE10);
   static const greenGradientColor2 =  Color(0xff7BDE56);
 
@@ -48,11 +51,8 @@ class Colur {
   static const disableTxtColor =  Color(0xffccccd2);
   static const roundedRectangleColor =  Color(0xff1B2153);
 
-
-
   static const unselectedStar =  Color(0x909195B6);
   static const selectedStar =  Color(0xffFFC804);
-
 
   static const gradYellowLight =  Color(0xffFFE94F);
   static const gradYellowDark =  Color(0xffF3B90E);
@@ -62,7 +62,6 @@ class Colur {
   static const graphHealth =  Color(0xff8C3CFF);
 
   static const redTurnOff =  Color(0xffEB5757);
-
 
   static const transparent_90 = Color(0x90FFFFFF);
   static const transparent_80 = Color(0x80FFFFFF);
@@ -77,7 +76,7 @@ class Colur {
   static const op_white = Color(0x50FFFFFF);
   static const op_white_70 = Color(0x70FFFFFF);
   static const black = Color(0xff000000);
-  static const txt_black = Color(0xff494949);
+  static const txt_black = Color(0xff000000);
   static const txt_op_black = Color(0x70494949);
   static const bg_black = Color(0x30494949);
   static const txt_gray = Color(0xff797F8A);

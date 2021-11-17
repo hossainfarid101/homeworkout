@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:homeworkout_flutter/custom/drawer/drawer_data.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
-import 'package:homeworkout_flutter/ui/discover/discover_screen.dart';
+import 'package:homeworkout_flutter/ui/discover/DisconverScreen.dart';
 import 'package:homeworkout_flutter/ui/reminder/reminder_screen.dart';
 import 'package:homeworkout_flutter/ui/report/report_screen.dart';
 import 'package:homeworkout_flutter/ui/settings/settings_screen.dart';

@@ -1,31 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_native_timezone/flutter_native_timezone.dart';
+import 'package:homeworkout_flutter/ui/discover/DisconverScreen.dart';
+import 'package:homeworkout_flutter/ui/exerciselist/ExerciseListScreen.dart';
+import 'package:homeworkout_flutter/ui/quarantineathome/QuarantineAtHomeScreen.dart';
 import 'package:homeworkout_flutter/ui/report/report_screen.dart';
 import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
-import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/Debug.dart';
+import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
-
-
-import 'localization/locale_constant.dart';
-import 'localization/localizations_delegate.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
-import 'package:flutter_native_timezone/flutter_native_timezone.dart';
+
+import 'localization/locale_constant.dart';
+import 'localization/localizations_delegate.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-FlutterLocalNotificationsPlugin();
+    FlutterLocalNotificationsPlugin();
 
 /// Streams are created so that app can respond to notification-related events
 /// since the plugin is initialised in the `main` function
 final BehaviorSubject<ReceivedNotification> didReceiveLocalNotificationSubject =
-BehaviorSubject<ReceivedNotification>();
+    BehaviorSubject<ReceivedNotification>();
 
 final BehaviorSubject<String?> selectNotificationSubject =
-BehaviorSubject<String?>();
+    BehaviorSubject<String?>();
 
 class ReceivedNotification {
   ReceivedNotification({
@@ -47,7 +49,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Preference().instance();
 
- /* const AndroidInitializationSettings initializationSettingsAndroid =
+  /* const AndroidInitializationSettings initializationSettingsAndroid =
   AndroidInitializationSettings('app_icon');
 
   /// Note: permissions aren't requested here just to demonstrate that can be
@@ -95,9 +97,10 @@ Future<void> _configureLocalTimeZone() async {
 class MyApp extends StatefulWidget {
   static final navigatorKey = GlobalKey<NavigatorState>();
   static final GlobalKey<ScaffoldState> scaffoldKey =
-  GlobalKey<ScaffoldState>();
+      GlobalKey<ScaffoldState>();
 
   const MyApp({Key? key}) : super(key: key);
+
   static void setLocale(BuildContext context, Locale newLocale) {
     var state = context.findAncestorStateOfType<_MyAppState>()!;
     state.setLocale(newLocale);
@@ -127,65 +130,63 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     isFirstTime();
     super.initState();
-
   }
+
   isFirstTime() async {
-    isFirstTimeUser = Preference.shared.getBool(Preference.isUserFirsttime)??true;
+    isFirstTimeUser =
+        Preference.shared.getBool(Preference.isUserFirsttime) ?? true;
     Debug.printLog(isFirstTimeUser.toString());
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        navigatorKey: MyApp.navigatorKey,
-        builder: (context, child) {
-          return MediaQuery(
-            child: child!,
-            data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-          );
-        },
+      navigatorKey: MyApp.navigatorKey,
+      builder: (context, child) {
+        return MediaQuery(
+          child: child!,
+          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+        );
+      },
       theme: ThemeData(
         splashColor: Colur.transparent,
         highlightColor: Colur.transparent,
         fontFamily: 'Poppins',
-
       ),
-        debugShowCheckedModeBanner: false,
-        locale: _locale,
-        supportedLocales: const [
-          Locale('en', ''),
-        ],
-        localizationsDelegates: const [
-          AppLocalizationsDelegate(),
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        localeResolutionCallback: (locale, supportedLocales) {
-          for (var supportedLocale in supportedLocales) {
-            if (supportedLocale.languageCode == locale?.languageCode &&
-                supportedLocale.countryCode == locale?.countryCode) {
-              return supportedLocale;
-            }
+      debugShowCheckedModeBanner: false,
+      locale: _locale,
+      supportedLocales: const [
+        Locale('en', ''),
+      ],
+      localizationsDelegates: const [
+        AppLocalizationsDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      localeResolutionCallback: (locale, supportedLocales) {
+        for (var supportedLocale in supportedLocales) {
+          if (supportedLocale.languageCode == locale?.languageCode &&
+              supportedLocale.countryCode == locale?.countryCode) {
+            return supportedLocale;
           }
-          return supportedLocales.first;
-        },
+        }
+        return supportedLocales.first;
+      },
       darkTheme: ThemeData(
         appBarTheme: const AppBarTheme(
-          backgroundColor: Colur.transparent,
-          systemOverlayStyle: SystemUiOverlayStyle.light
-        ),
+            backgroundColor: Colur.transparent,
+            systemOverlayStyle: SystemUiOverlayStyle.light),
       ),
-
-        home: const AnnotatedRegion<SystemUiOverlayStyle>(
-          value: SystemUiOverlayStyle(
-            statusBarColor: Colur.transparent,
-            statusBarIconBrightness: Brightness.light,
-            systemNavigationBarIconBrightness: Brightness.light,
-          ),
-          child: TrainingScreen(),
-          // child: ReportScreen(),
+      home: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle(
+          statusBarColor: Colur.transparent,
+          statusBarIconBrightness: Brightness.light,
+          systemNavigationBarIconBrightness: Brightness.light,
         ),
-        );
+        child: TrainingScreen(),
+        // child: DiscoverScreen(),
+      ),
+    );
   }
 }
