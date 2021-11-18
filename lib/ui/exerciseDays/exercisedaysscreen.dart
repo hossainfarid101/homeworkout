@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:homeworkout_flutter/custom/drawer/drawer_menu.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
+import 'package:homeworkout_flutter/ui/exerciselist/ExerciseListScreen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 
 class ExerciseDaysScreen extends StatefulWidget {
@@ -178,7 +179,9 @@ class _ExerciseDaysScreenState extends State<ExerciseDaysScreen> {
                             fontSize: 22.0,
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>ExerciseListScreen()));
+                        },
                       ),
                     ),
                   ],
@@ -205,21 +208,6 @@ class _ExerciseDaysScreenState extends State<ExerciseDaysScreen> {
   itemListDays(int index) {
 
     var mainIndex = index;
-    /*return Container(
-      margin: const EdgeInsets.only(left: 20,bottom: 10,right: 10),
-      height: 100,
-      color: Colur.white,
-      child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 100,
-              childAspectRatio: 3,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10),
-          itemCount: 8,
-          itemBuilder: (BuildContext ctx, index) {
-            return _itemOfDays(index);
-          }),
-    );*/
     return Container(
       margin: const EdgeInsets.only(left: 10.0,right: 10),
       child: Column(
@@ -337,19 +325,25 @@ class _ExerciseDaysScreenState extends State<ExerciseDaysScreen> {
             )
           }
           else...{
-            DottedBorder(
-              color: Colur.theme,
-              borderType: BorderType.Circle,
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(12)),
-                child: Container(
-                  alignment: Alignment.center,
-                  height: 60,
-                  width: 60,
-                  child: Text((index + 1).toString(),style: TextStyle(color: (index != 0)?Colur.disableTxtColor:Colur.theme),),
+            InkWell(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>ExerciseListScreen()));
+              },
+              child: DottedBorder(
+                color: Colur.theme,
+                borderType: BorderType.Circle,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 60,
+                    width: 60,
+                    child: Text((index + 1).toString(),style: TextStyle(color: (index != 0)?Colur.disableTxtColor:Colur.theme),),
+                  ),
                 ),
               ),
             )
+
           },
           Visibility(
             visible: ((index == 3) || (index == 7))?false:true,

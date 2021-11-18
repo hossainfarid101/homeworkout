@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:intl/intl.dart';
@@ -42,12 +43,31 @@ class Utils {
     return DateFormat.jm().format(DateTime.now());
   }
 
+  static double cmToIn(double heightValue) {
+    return double.parse((heightValue / 30.48).toStringAsFixed(1));
+  }
+
   static double lbToKg(double weightValue) {
     return double.parse((weightValue / 2.2046226218488).toStringAsFixed(1));
   }
 
   static double kgToLb(double weightValue) {
     return double.parse((weightValue * 2.2046226218488).toStringAsFixed(1));
+  }
+
+  static double inToCm(double ftValue, double inValue) {
+    return double.parse(
+        ((ftValue * 30.48) + (inValue * 2.54)).toStringAsFixed(1));
+  }
+
+  static double secToHour(int sec) {
+    double hrs = sec / 3600;
+    return hrs;
+  }
+
+  static double secToMin(int sec) {
+    double mins = sec / 60;
+    return mins;
   }
 
   static int daysInMonth(final int monthNum, final int year) {
@@ -136,15 +156,6 @@ class Utils {
     return total;
   }
 
-  static double secToHour(int sec) {
-    double hrs = sec/3600;
-    return hrs;
-  }
-
-  static double secToMin(int sec) {
-    double mins = sec/60;
-    return mins;
-  }
 
   static downLoadTTS() {
     if (Platform.isAndroid) {
@@ -212,6 +223,18 @@ class Utils {
         .map((value) => DateFormat("yyyy-MM-dd")
         .format(firstDayOfWeek.add(Duration(days: value))))
         .toList();
+  }
+
+  static String getPlanName(String planName, BuildContext context) {
+    if (planName == "1") {
+      return Languages.of(context)!.txtBeginnerDay;
+    } else if (planName == "2") {
+      return Languages.of(context)!.txtIntermediateDay;
+    } else if (planName == "3") {
+      return Languages.of(context)!.txtAdvanceDay;
+    } else {
+      return "";
+    }
   }
 
 }

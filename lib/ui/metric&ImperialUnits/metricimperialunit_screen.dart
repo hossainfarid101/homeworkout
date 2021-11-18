@@ -165,7 +165,7 @@ class _MetricImperialUnitsScreenState extends State<MetricImperialUnitsScreen>
                     } else {
                       isKG = true;
                     }
-                    Preference.shared.setBool(Preference.isKG, isKG!);
+                    Preference.shared.setBool(Preference.IS_KG, isKG!);
                   });
                   Navigator.pop(context);
                 },
@@ -209,10 +209,10 @@ class _MetricImperialUnitsScreenState extends State<MetricImperialUnitsScreen>
                   Debug.printLog(_heightUnit.toString());
                   if(_heightUnit == HeightUnit.cm) {
                     isCM = true;
-                    Preference.shared.setBool(Preference.isCM, true);
+                    Preference.shared.setBool(Preference.IS_CM, true);
                   } else {
                     isCM = false;
-                    Preference.shared.setBool(Preference.isCM, false);
+                    Preference.shared.setBool(Preference.IS_CM, false);
                   }
                   Navigator.pop(context);
                 }),
@@ -233,7 +233,7 @@ class _MetricImperialUnitsScreenState extends State<MetricImperialUnitsScreen>
   }
 
   _getPreference() {
-    isKG = Preference.shared.getBool(Preference.isKG) ?? true;
+    isKG = Preference.shared.getBool(Preference.IS_KG) ?? true;
     if(isKG!){
       _weightUnit = WeightUnit.kg;
     }else{
@@ -242,7 +242,7 @@ class _MetricImperialUnitsScreenState extends State<MetricImperialUnitsScreen>
     //Debug.printLog(isKG!.toString());
    // Debug.printLog(_weightUnit!.toString());
 
-    isCM = Preference.shared.getBool(Preference.isCM) ?? true;
+    isCM = Preference.shared.getBool(Preference.IS_CM) ?? true;
     if(isCM!){
       _heightUnit = HeightUnit.cm;
     }else{

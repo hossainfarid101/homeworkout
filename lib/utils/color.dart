@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 
 class Colur {
 
+
+  static const theme = Color(0xff3384FF);
+  static const theme_trans = Color(0x503384FF);
+
+
   static const transparent = Colors.transparent;
   static const blue = Color(0xff3384FF);
   static const commonBgColor =  Color(0xffF7F8FA);
@@ -73,6 +78,10 @@ class Colur {
   static const transparent_black_30 = Color(0x30000000);
   static const transparent_black_40 = Color(0x40000000);
   static const transparent_black_50 = Color(0x50000000);
+  static const transparent_grey_10 = Color(0x10F2F2F2);
+  static const transparent_grey_20 = Color(0x20F2F2F2);
+  static const transparent_grey_30 = Color(0x30F2F2F2);
+  static const transparent_grey_40 = Color(0x40F2F2F2);
   static const op_white = Color(0x50FFFFFF);
   static const op_white_70 = Color(0x70FFFFFF);
   static const black = Color(0xff000000);
@@ -88,12 +97,21 @@ class Colur {
   static const lightBlue_Twitter = Color(0xff00ACEE);
   static const lightGrey = Color(0x40797F8A);
   static const brand_orange = Color(0xffFFA904);
-  static const theme = blue;
+
   static const gray_light = Color(0xffeeeeee);
   static const gray_light_50 = Color(0x50eeeeee);
   static const bg_white = Color(0xfffafafa);
   static const bg_well_done = Color(0xff263143);
   static const selectedDay = Color(0xffC664D5);
+
+
+  static const colorFirst = Color(0xff91CEC0);
+  static const colorSecond = Color(0xff154C83);
+  static const colorThird = Color(0xff1DC974);
+  static const colorFour = Color(0xffCCC504);
+  static const colorFive = Color(0xffE09C55);
+  static const colorSix = Color(0xffCF2E2E);
+
 
   static const gradientForWeightColors = [
    Color(0xff8A3CFF),

@@ -1,0 +1,748 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:homeworkout_flutter/localization/language/languages.dart';
+import 'package:homeworkout_flutter/utils/color.dart';
+import 'package:homeworkout_flutter/utils/constant.dart';
+import 'package:homeworkout_flutter/utils/debug.dart';
+import 'package:homeworkout_flutter/utils/preference.dart';
+import 'package:homeworkout_flutter/utils/utils.dart';
+
+class AddBmiDialog extends StatefulWidget {
+  @override
+  _AddBmiDialogState createState() => _AddBmiDialogState();
+}
+
+class _AddBmiDialogState extends State<AddBmiDialog> {
+  TextEditingController weightController = TextEditingController();
+  TextEditingController CmHeightController = TextEditingController();
+  TextEditingController FtHeightController = TextEditingController();
+  TextEditingController InHeightController = TextEditingController();
+
+  bool? isKg;
+  bool? isLsb;
+
+  bool? isCm ;
+  bool? isIn ;
+
+  bool isConvert = true;
+
+  double? heightCm;
+  double? heightIn;
+  double? heightFt;
+  double? weight;
+
+  DateTime currentDate = DateTime.now();
+
+  bool? valHeight = false;
+  bool? valWeight = false;
+
+  @override
+  void initState() {
+    getPreference();
+
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colur.transparent,
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Center(
+          child: Wrap(
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 20.0),
+                decoration: BoxDecoration(
+                    color: Colur.white,
+                    borderRadius: BorderRadius.circular(8.0)),
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(top: 25.0, right: 5),
+                      child: Column(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(left: 25, bottom: 10),
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              Languages.of(context)!.txtWeight,
+                              style: TextStyle(
+                                  color: Colur.black,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 18.0),
+                            ),
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  margin: const EdgeInsets.only(left: 25.0),
+                                  child: TextFormField(
+                                    controller: weightController,
+                                    maxLines: 1,
+                                    maxLength: 5,
+                                    textInputAction: TextInputAction.done,
+                                    keyboardType: TextInputType.numberWithOptions(decimal: true),
+                                    inputFormatters: <TextInputFormatter>[
+                                      // FilteringTextInputFormatter.digitsOnly,
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp(r'^(\d+)?\.?\d{0,1}')),
+                                    ],
+                                    style: TextStyle(
+                                        color: Colur.txt_black,
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w500),
+                                    cursorColor: Colur.txt_gray,
+                                    decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.all(0.0),
+                                      hintText: "0.0",
+                                      hintStyle: TextStyle(
+                                          color: Colur.txt_black,
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.w500),
+                                      counterText: "",
+                                      enabledBorder: UnderlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colur.txt_black),
+                                      ),
+                                      focusedBorder: UnderlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colur.txt_black),
+                                      ),
+                                      border: UnderlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colur.txt_black),
+                                      ),
+                                    ),
+                                    onEditingComplete: () {
+                                      FocusScope.of(context).unfocus();
+                                    },
+                                  ),
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  if (weightController.text == "")
+                                    weightController.text = "0.0";
+                                  if (isLsb! && !isKg!) {
+                                    Debug.printLog(
+                                        "Before converted value of weightController --> " +
+                                            weightController.text);
+                                    weightController.text = Utils.lbToKg(
+                                            double.parse(weightController.text))
+                                        .toString();
+                                    Debug.printLog(
+                                        "After converted value of weightController in to LB to KG --> " +
+                                            weightController.text);
+                                  }
+                                  setState(() {
+                                    isKg = true;
+                                    isLsb = false;
+                                  });
+                                  Preference.shared.setBool(Preference.IS_KG, isKg!);
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.only(left: 20.0),
+                                  padding: const EdgeInsets.all(5.0),
+                                  decoration: (isKg!)
+                                      ? BoxDecoration(
+                                          color: Colur.theme,
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                        )
+                                      : BoxDecoration(
+                                          border: Border.all(
+                                            color: Colur.txt_black,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                        ),
+                                  child: Text(
+                                    Languages.of(context)!.txtKG.toUpperCase(),
+                                    style: TextStyle(
+                                        color: (isKg!)
+                                            ? Colur.white
+                                            : Colur.txt_black,
+                                        fontSize: 18.0,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  if (weightController.text == "")
+                                    weightController.text = "0.0";
+                                  if (isKg! && !isLsb!) {
+                                    Debug.printLog(
+                                        "Before converted value of weightController --> " +
+                                            weightController.text);
+                                    weightController.text = Utils.kgToLb(
+                                            double.parse(weightController.text))
+                                        .toString();
+                                    Debug.printLog(
+                                        "After converted value of weightController in to KG to LB --> " +
+                                            weightController.text);
+                                  }
+
+                                  setState(() {
+                                    isKg = false;
+                                    isLsb = true;
+                                  });
+                                  Preference.shared.setBool(Preference.IS_KG, isKg!);
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.only(
+                                      right: 15.0, left: 10.0),
+                                  padding: const EdgeInsets.all(5.0),
+                                  decoration: (isLsb!)
+                                      ? BoxDecoration(
+                                          color: Colur.theme,
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                        )
+                                      : BoxDecoration(
+                                          border: Border.all(
+                                            color: Colur.txt_black,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                        ),
+                                  child: Container(
+                                    margin: EdgeInsets.only(left: 4, right: 4),
+                                    child: Text(
+                                      Languages.of(context)!.txtLB.toUpperCase(),
+                                      style: TextStyle(
+                                          color: (isLsb!)
+                                              ? Colur.white
+                                              : Colur.txt_black,
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 25.0, right: 5),
+                      child: Column(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(left: 25, bottom: 10),
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              Languages.of(context)!.txtheight,
+                              style: TextStyle(
+                                  color: Colur.black,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 18.0),
+                            ),
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Visibility(
+                                visible: isCm!,
+                                child: Expanded(
+                                  child: Container(
+                                    margin: const EdgeInsets.only(left: 25.0),
+                                    child: TextFormField(
+                                      controller: CmHeightController,
+                                      maxLines: 1,
+                                      maxLength: 5,
+                                      textInputAction: TextInputAction.done,
+                                      keyboardType: TextInputType.numberWithOptions(decimal: true),
+                                      inputFormatters: <TextInputFormatter>[
+                                        // FilteringTextInputFormatter.digitsOnly,
+                                        FilteringTextInputFormatter.allow(
+                                            RegExp(r'^(\d+)?\.?\d{0,1}')),
+                                      ],
+                                      style: TextStyle(
+                                          color: Colur.txt_black,
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.w500),
+                                      cursorColor: Colur.txt_gray,
+                                      decoration: InputDecoration(
+                                        contentPadding: EdgeInsets.all(0.0),
+                                        hintText: "0.0",
+                                        hintStyle: TextStyle(
+                                            color: Colur.txt_black,
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.w500),
+                                        counterText: "",
+                                        enabledBorder: UnderlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colur.txt_black),
+                                        ),
+                                        focusedBorder: UnderlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colur.txt_black),
+                                        ),
+                                        border: UnderlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colur.txt_black),
+                                        ),
+                                      ),
+                                      onEditingComplete: () {
+                                        FocusScope.of(context).unfocus();
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Visibility(
+                                visible: isIn!,
+                                child: Expanded(
+                                  child: Container(
+                                    margin: const EdgeInsets.only(left: 25.0),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Container(
+                                            margin: const EdgeInsets.only(
+                                                right: 10.0),
+                                            child: TextFormField(
+                                              controller: FtHeightController,
+                                              maxLines: 1,
+                                              maxLength: 5,
+                                              textInputAction:
+                                                  TextInputAction.done,
+                                              keyboardType: TextInputType.number,
+                                              inputFormatters: <
+                                                  TextInputFormatter>[
+                                                // FilteringTextInputFormatter.digitsOnly,
+                                                FilteringTextInputFormatter.allow(
+                                                    RegExp(r'^(\d+)?\.?\d{0,1}')),
+                                              ],
+                                              style: TextStyle(
+                                                  color: Colur.txt_black,
+                                                  fontSize: 22,
+                                                  fontWeight: FontWeight.w500),
+                                              cursorColor: Colur.txt_gray,
+                                              decoration: InputDecoration(
+                                                contentPadding:
+                                                    EdgeInsets.all(0.0),
+                                                hintText: "0.0",
+                                                hintStyle: TextStyle(
+                                                    color: Colur.txt_black,
+                                                    fontSize: 22,
+                                                    fontWeight: FontWeight.w500),
+                                                counterText: "",
+                                                enabledBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: Colur.txt_black),
+                                                ),
+                                                focusedBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: Colur.txt_black),
+                                                ),
+                                                border: UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: Colur.txt_black),
+                                                ),
+                                              ),
+                                              onEditingComplete: () {
+                                                FocusScope.of(context).unfocus();
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Container(
+                                            margin:
+                                                const EdgeInsets.only(left: 10.0),
+                                            child: TextFormField(
+                                              controller: InHeightController,
+                                              maxLines: 1,
+                                              maxLength: 5,
+                                              textInputAction:
+                                                  TextInputAction.done,
+                                              keyboardType: TextInputType.number,
+                                              inputFormatters: <
+                                                  TextInputFormatter>[
+                                                // FilteringTextInputFormatter.digitsOnly,
+                                                FilteringTextInputFormatter.allow(
+                                                    RegExp(r'^(\d+)?\.?\d{0,1}')),
+                                              ],
+                                              style: TextStyle(
+                                                  color: Colur.txt_black,
+                                                  fontSize: 22,
+                                                  fontWeight: FontWeight.w500),
+                                              cursorColor: Colur.txt_gray,
+                                              decoration: InputDecoration(
+                                                contentPadding:
+                                                    EdgeInsets.all(0.0),
+                                                hintText: "0.0",
+                                                hintStyle: TextStyle(
+                                                    color: Colur.txt_black,
+                                                    fontSize: 22,
+                                                    fontWeight: FontWeight.w500),
+                                                counterText: "",
+                                                enabledBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: Colur.txt_black),
+                                                ),
+                                                focusedBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: Colur.txt_black),
+                                                ),
+                                                border: UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: Colur.txt_black),
+                                                ),
+                                              ),
+                                              onEditingComplete: () {
+                                                FocusScope.of(context).unfocus();
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  if (CmHeightController.text == "")
+                                    CmHeightController.text = "0.0";
+                                  if (isIn! && !isCm!) {
+                                    Debug.printLog(
+                                        "Before converted value of heightController --> " +
+                                            CmHeightController.text);
+                                    CmHeightController.text = Utils.inToCm(
+                                            double.parse(FtHeightController.text),
+                                            double.parse(InHeightController.text))
+                                        .toString();
+                                    Debug.printLog(
+                                        "After converted value of heightController in to CM to IN --> " +
+                                            CmHeightController.text);
+                                  }
+
+                                  setState(() {
+                                    isCm = true;
+                                    isIn = false;
+                                  });
+                                  Preference.shared.setBool(Preference.IS_CM, isCm!);
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.only(left: 20.0),
+                                  padding: const EdgeInsets.all(5.0),
+                                  decoration: (isCm!)
+                                      ? BoxDecoration(
+                                          color: Colur.theme,
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                        )
+                                      : BoxDecoration(
+                                          border: Border.all(
+                                            color: Colur.txt_black,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                        ),
+                                  child: Text(
+                                    Languages.of(context)!.txtCm.toUpperCase(),
+                                    style: TextStyle(
+                                        color: (isCm!)
+                                            ? Colur.white
+                                            : Colur.txt_black,
+                                        fontSize: 18.0,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  if (CmHeightController == "") {
+                                    FtHeightController.text = "0.0";
+                                    InHeightController.text == "0.0";
+                                  }
+                                  if (isCm! && !isIn!) {
+                                    Debug.printLog(
+                                        "Before converted value of heightController --> " +
+                                            FtHeightController.text);
+                                    FtHeightController.text = Utils.cmToIn(
+                                            double.parse(CmHeightController.text)).toStringAsFixed(0);
+                                    InHeightController.text = Utils.cmToIn(double.parse(CmHeightController.text))
+                                                .toString()
+                                                .split(".")[1];
+                                    Debug.printLog(
+                                        "After converted value of heightController in to Cm to In --> " +
+                                            FtHeightController.text +
+                                            InHeightController.text);
+                                  }
+
+                                  setState(() {
+                                    isCm = false;
+                                    isIn = true;
+                                  });
+                                  Preference.shared.setBool(Preference.IS_CM, isCm!);
+
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.only(
+                                      right: 15.0, left: 10.0),
+                                  padding: const EdgeInsets.all(5.0),
+                                  decoration: (isIn!)
+                                      ? BoxDecoration(
+                                          color: Colur.theme,
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                        )
+                                      : BoxDecoration(
+                                          border: Border.all(
+                                            color: Colur.txt_black,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                        ),
+                                  child: Container(
+                                    margin: EdgeInsets.only(left: 5, right: 5),
+                                    child: Text(
+                                      Languages.of(context)!.txtIn.toUpperCase(),
+                                      style: TextStyle(
+                                          color: (isIn!)
+                                              ? Colur.white
+                                              : Colur.txt_black,
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 50.0, bottom: 25.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              setState(() {
+                                Navigator.pop(context, 0);
+                              });
+                            },
+                            child: Container(
+                              margin: EdgeInsets.symmetric(horizontal: 10.0),
+                              child: Text(
+                                Languages.of(context)!.txtCancel.toUpperCase(),
+                                style: TextStyle(
+                                    color: Colur.theme,
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              saveBMI();
+                            },
+                            child: Container(
+                              margin: EdgeInsets.only(right: 20.0, left: 10.0),
+                              child: Text(
+                                Languages.of(context)!.txtSave.toUpperCase(),
+                                style: TextStyle(
+                                    color: Colur.theme,
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  saveBMI(){
+    if (isKg! && !isLsb!) {
+      if (double.parse(weightController.text) >=
+          Constant.MIN_KG &&
+          double.parse(weightController.text) <=
+              Constant.MAX_KG) {
+        if (isCm! && !isIn!) {
+          Debug.printLog("cm - ${CmHeightController.text}");
+          if (double.parse(CmHeightController.text) >= Constant.MIN_CM &&
+              double.parse(CmHeightController.text) <= Constant.MAX_CM) {
+
+            setState(() {
+              save();
+              Debug.printLog("true");
+            });
+          }else {
+            Utils.showToast(context, Languages.of(context)!.txtWarningForCm);
+          }
+        } else if (isIn! && !isCm!) {
+          Debug.printLog("ft - ${FtHeightController.text}");
+          Debug.printLog("inch - ${InHeightController.text}");
+          if (double.parse(FtHeightController.text) > Constant.MIN_FT &&
+              double.parse(FtHeightController.text) <= Constant.MAX_FT) {
+            setState(() {
+              save();
+              Debug.printLog("true");
+            });
+          }else {
+            Utils.showToast(context, Languages.of(context)!.txtWarningForInch);
+          }
+        }
+      } else {
+        Utils.showToast(context,
+            Languages.of(context)!.txtWarningForKg);
+      }
+    } else {
+      if (double.parse(weightController.text) >=
+          Constant.MIN_LBS &&
+          double.parse(weightController.text) <=
+              Constant.MAX_LBS) {
+        setState(() {
+          save();
+          Debug.printLog("true");
+        });
+      } else {
+        Utils.showToast(context,
+            Languages.of(context)!.txtWarningForLbs);
+      }
+    }
+  }
+
+   save() {
+    convertWeight();
+    convertHeight();
+
+    if (isCm! && !isIn!) {
+      Preference.shared
+          .setDouble(Preference.HEIGHT_CM, heightCm!);
+    }else {
+      Preference.shared
+          .setDouble(Preference.HEIGHT_FT, heightFt!);
+      Preference.shared
+          .setDouble(Preference.HEIGHT_IN, heightIn!);
+
+      Preference.shared
+          .setDouble(Preference.HEIGHT_CM, heightCm!);
+    }
+
+    Preference.shared
+        .setDouble(Preference.WEIGHT, weight!);
+    Navigator.pop(context);
+  }
+
+  void convertHeight() {
+    if (isCm! && !isIn!) {
+      heightCm = double.parse(CmHeightController.text);
+    } else {
+      heightFt = double.parse(FtHeightController.text);
+      heightIn = double.parse(InHeightController.text);
+      heightCm = Utils.inToCm(double.parse(FtHeightController.text), double.parse(InHeightController.text));
+    }
+  }
+
+  void convertWeight() {
+    if (isKg! && !isLsb!) {
+      weight = double.parse(weightController.text);
+    } else {
+      weight = Utils.lbToKg(double.parse(weightController.text));
+    }
+  }
+
+  /*validateWeight() {
+    if (isKg! && !isLsb!) {
+      if (double.parse(weightController.text) <= Constant.MIN_KG &&
+          double.parse(weightController.text) >= Constant.MAX_KG) {
+        Utils.showToast(context, Languages.of(context)!.txtWarningForKg);
+        return false;
+      } else {
+        return true;
+      }
+    } else if (isLsb! && !isKg!) {
+      if (double.parse(weightController.text) <= Constant.MIN_LBS &&
+          double.parse(weightController.text) >= Constant.MAX_LBS) {
+        Utils.showToast(context, Languages.of(context)!.txtWarningForLbs);
+        return false;
+      } else {
+        return true;
+      }
+    }
+
+    //return true;
+  }
+
+  validateHeight() {
+    if (isCm! && !isIn!) {
+      Debug.printLog("cm - ${CmHeightController.text}");
+      if (double.parse(CmHeightController.text) <= Constant.MIN_CM &&
+          double.parse(CmHeightController.text) >= Constant.MAX_CM) {
+        Utils.showToast(context, Languages.of(context)!.txtWarningForCm);
+        return false;
+      }else {
+        return true;
+      }
+    } else if (isIn! && !isCm!) {
+      Debug.printLog("ft - ${FtHeightController.text}");
+      Debug.printLog("inch - ${InHeightController.text}");
+      if (double.parse(InHeightController.text) <= Constant.MIN_INCH &&
+          double.parse(InHeightController.text) >= Constant.MAX_INCH &&
+          double.parse(FtHeightController.text) <= Constant.MIN_FT &&
+          double.parse(FtHeightController.text) >= Constant.MAX_FT) {
+        Utils.showToast(context, Languages.of(context)!.txtWarningForInch);
+        return false;
+      }else {
+        return true;
+      }
+    }
+
+    //return true;
+  }*/
+
+  getPreference() {
+    isKg = Preference.shared.getBool(Preference.IS_KG) ?? true;
+    isLsb = !isKg!;
+
+    weight = Preference.shared.getDouble(Preference.WEIGHT) ?? 0;
+    if (isKg! && !isLsb!) {
+      weightController.text = weight!.toStringAsFixed(1);
+    } else {
+      weightController.text = Utils.kgToLb(weight!).toStringAsFixed(1);
+    }
+
+
+    isCm = Preference.shared.getBool(Preference.IS_CM) ?? true;
+    isIn = !isCm!;
+
+    heightCm = Preference.shared.getDouble(Preference.HEIGHT_CM) ?? 0;
+    heightIn = Preference.shared.getDouble(Preference.HEIGHT_IN) ?? 0;
+    heightFt = Preference.shared.getDouble(Preference.HEIGHT_FT) ?? 0;
+    if (isCm! && !isIn!) {
+      CmHeightController.text = heightCm!.toStringAsFixed(1);
+    } else {
+     FtHeightController.text = heightFt!.toStringAsFixed(0);
+     InHeightController.text = heightIn!.toStringAsFixed(0);
+    }
+  }
+}

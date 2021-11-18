@@ -57,10 +57,10 @@ dependencies:
   flutter_tts: ^3.2.2
   flutter_rounded_date_picker: ^2.0.2
   dotted_border: ^2.0.0+1
-
-
-
-
+  align_positioned: ^2.0.4
+  table_calendar: ^3.0.2
+  date_format: ^2.0.4
+  flutter_picker: ^2.0.2
 
 dev_dependencies:
   flutter_test:
@@ -111,6 +111,8 @@ flutter:
     - assets/icons/ic_sound_options.png
     - assets/icons/ic_back.webp
     - assets/images/
+    - assets/images/arm_intermediate.webp
+    - assets/images/bg_set_week_goal.webp
     - assets/images/ic_challenge_uncomplete.webp
     - assets/images/ic_challenge_complete.png
     - assets/images/bg_libray.webp

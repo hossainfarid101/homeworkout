@@ -350,7 +350,7 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                         InkWell(
                           onTap: () {
                             if(isKg && !isLsb){
-                              if (double.parse(weightController.text.toString()) >= Constant.minKG && double.parse(weightController.text.toString()) <= Constant.maxKG){
+                              if (double.parse(weightController.text.toString()) >= Constant.MIN_KG && double.parse(weightController.text.toString()) <= Constant.MAX_KG){
                                 setState(() {
                                   //Insert weight in weight table.
                                   /*DataBaseHelper.insertWeight(WeightData(
@@ -365,7 +365,7 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                                 Utils.showToast(context, Languages.of(context)!.txtWarningForKg);
                               }
                             }else{
-                              if (double.parse(weightController.text.toString()) >= Constant.minLBS && double.parse(weightController.text.toString()) <= Constant.maxLBS) {
+                              if (double.parse(weightController.text.toString()) >= Constant.MIN_LBS && double.parse(weightController.text.toString()) <= Constant.MAX_LBS) {
                                 setState(() {
                                   //Insert weight in weight table.
                                   /*DataBaseHelper.insertWeight(WeightData(

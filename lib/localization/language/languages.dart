@@ -186,8 +186,73 @@ abstract class Languages {
   String get txtMoreWorkout;
 
   String get txtGo;
+
   String get txtweek;
+
   String get txtMinute;
+
   String get txtHistory;
+
   String get txtRecords;
+
+  String get txtCurrent;
+
+  String get txtHeaviest;
+
+  String get txtLightest;
+
+  String get txtBmiKg;
+
+  String get txtheight;
+
+  String get txtCm;
+
+  String get txtIn;
+
+  String get txtWarningForCm;
+
+  String get txtWarningForInch;
+
+  String get txtSeverelyUnderweight;
+
+  String get txtVeryUnderweight;
+
+  String get txtUnderweight;
+
+  String get txtOverWeight;
+
+  String get txtModeratelyObese;
+
+  String get txtVeryObese;
+
+  String get txtSeverelyObese;
+
+  String get txtObese;
+
+  String get txtHealthyWeight;
+
+  String get txtBeginnerDay;
+
+  String get txtIntermediate;
+
+  String get txtIntermediateDay;
+
+  String get txtAdvance;
+
+  String get txtAdvanceDay;
+
+  String get txtDelete;
+
+  String get txtDeleteExe;
+
+  String get txtSetWeeklyGoal;
+
+  String get txtSetGoalDesc;
+
+  String get txtWeeklyTrainingDays;
+
+  String get txtFirstDayOfWeek;
+  String get txtSunday;
+  String get txtMonday;
+  String get txtSaturday;
 }

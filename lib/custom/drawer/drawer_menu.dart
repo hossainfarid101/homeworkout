@@ -26,13 +26,11 @@ class _DrawerMenuState extends State<DrawerMenu> {
       decoration:  const BoxDecoration(
           color:  Color(0xFFF1F4FB),
          ),
-      margin: EdgeInsets.only(
-
-          right: MediaQuery.of(context).size.width / 3),
+      margin: EdgeInsets.only(right: MediaQuery.of(context).size.width / 3),
       child: Column(
         children: [
           Image.asset(
-            'assets/images/men_banner.webp',
+            'assets/images/arm_intermediate.webp',
             width: double.infinity,
             height: 150.0,
             fit: BoxFit.cover,
@@ -55,30 +53,6 @@ class _DrawerMenuState extends State<DrawerMenu> {
   _itemDrawer(int index) {
     return InkWell(
       onTap: () {
-        /*if (drawerDataList[index].navPath != null &&
-            drawerDataList[index].navPath.isNotEmpty) {
-          if (drawerDataList[index].navPath == "appReview") {
-            if (Platform.isIOS) {
-              rateMyApp.showRateDialog(context);
-              Navigator.pop(context);
-            } else {
-              rateMyApp.showRateDialog(context);
-            }
-          } else if (drawerDataList[index].navPath == "/chats") {
-            if ((Preference.shared.getBool(Preference.IS_PURCHASED) != null &&
-                Preference.shared.getBool(Preference.IS_PURCHASED))) {
-              Navigator.popAndPushNamed(context, drawerDataList[index].navPath)
-                  .then((value) => widget.listener.onRefresh());
-            } else {
-              Utils.showToast(context, Languages.of(context).txtNeedToPurchase);
-              Navigator.pop(context);
-            }
-          } else {
-            Navigator.popAndPushNamed(context, drawerDataList[index].navPath)
-                .then((value) => widget.listener.onRefresh());
-          }
-        } else
-          Navigator.pop(context);*/
         Navigator.pop(context);
       },
       child: Padding(
@@ -86,14 +60,14 @@ class _DrawerMenuState extends State<DrawerMenu> {
         child: Row(
           children: [
             Container(
-              height: 42,
-              width: 42,
+              height: 40,
+              width: 40,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(14.0),
                   ),
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Image.asset(drawerDataList[index].icon!),
+                child: Image.asset(drawerDataList[index].icon!,scale: 1,),
               ),
             ),
             Container(
@@ -102,9 +76,9 @@ class _DrawerMenuState extends State<DrawerMenu> {
                 drawerDataList[index].text!,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
-                    fontSize: 17,
+                    fontSize: 14,
                     color: Colur.txtBlack,
-                    fontWeight: FontWeight.w700),
+                    fontWeight: FontWeight.w500),
               ),
             ),
           ],

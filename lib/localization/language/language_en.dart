@@ -289,4 +289,102 @@ class LanguageEn extends Languages {
 
   @override
   String get txtChallenge => "Challenge";
+
+  @override
+  String get txtCurrent => "Current";
+
+  @override
+  String get txtHeaviest => "Heaviest";
+
+  @override
+  String get txtLightest => "Lightest";
+
+  @override
+  String get txtBmiKg => "BMI(kg/m\u00B2) :";
+
+  @override
+  String get txtheight => "Height";
+
+  @override
+  String get txtCm => "Cm";
+
+  @override
+  String get txtIn => "In";
+
+  @override
+  String get txtWarningForCm =>
+      "Please enter height greater than 20 cm and less 400 cm";
+
+  @override
+  String get txtWarningForInch =>
+      "Please enter height greater than 0 feet and less than 14 feet";
+
+  @override
+  String get txtModeratelyObese => "Moderately Obese";
+
+  @override
+  String get txtOverWeight => "OverWeight";
+
+  @override
+  String get txtSeverelyObese => "Severely Obese";
+
+  @override
+  String get txtSeverelyUnderweight => "Severely Underweight";
+
+  @override
+  String get txtUnderweight => "Underweight";
+
+  @override
+  String get txtVeryObese => "Very Obese";
+
+  @override
+  String get txtVeryUnderweight => "Very Underweight";
+
+  @override
+  String get txtHealthyWeight => "Healthy Weight";
+
+  @override
+  String get txtObese => "Obese";
+
+  @override
+  String get txtBeginnerDay => "Beginner Day ";
+
+  @override
+  String get txtAdvance => "Advance";
+
+  @override
+  String get txtIntermediate => "Intermediate";
+
+  @override
+  String get txtAdvanceDay => "Advanced Day ";
+
+  @override
+  String get txtIntermediateDay => "Intermediate Day ";
+
+  @override
+  String get txtDelete => "Delete";
+
+  @override
+  String get txtDeleteExe => "Are you sure you want to delete exercise?";
+
+  @override
+  String get txtSetWeeklyGoal => "Set your weekly goal";
+
+  @override
+  String get txtSetGoalDesc => "We recommend training at least 3 days weekly for a better result.";
+
+  @override
+  String get txtWeeklyTrainingDays => "Weekly training days";
+
+  @override
+  String get txtFirstDayOfWeek => "First day of week";
+
+  @override
+  String get txtMonday => "Monday";
+
+  @override
+  String get txtSaturday => "Saturday";
+
+  @override
+  String get txtSunday => "Sunday";
 }

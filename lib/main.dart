@@ -4,10 +4,13 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:homeworkout_flutter/ui/discover/DisconverScreen.dart';
+import 'package:homeworkout_flutter/ui/exerciseDays/exercisedaysscreen.dart';
 import 'package:homeworkout_flutter/ui/exerciselist/ExerciseListScreen.dart';
 import 'package:homeworkout_flutter/ui/quarantineathome/QuarantineAtHomeScreen.dart';
 import 'package:homeworkout_flutter/ui/report/report_screen.dart';
+import 'package:homeworkout_flutter/ui/setWeeklyGoal/set_weekly_goal_screen.dart';
 import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
+import 'package:homeworkout_flutter/ui/workoutHistory/workout_history_screen.dart';
 import 'package:homeworkout_flutter/utils/Debug.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
@@ -184,8 +187,8 @@ class _MyAppState extends State<MyApp> {
           statusBarIconBrightness: Brightness.light,
           systemNavigationBarIconBrightness: Brightness.light,
         ),
+        // child: SetWeeklyGoalScreen(),
         child: TrainingScreen(),
-        // child: DiscoverScreen(),
       ),
     );
   }

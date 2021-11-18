@@ -66,8 +66,23 @@ class Preference {
   static const String isVoiceGuide = "IS_VOICE_GUIDE";
   static const String dateOfBirth = "DATE_OF_BIRTH";
   static const String isMale = "IS_MALE";
-  static const String isKG = "IS_KG";
-  static const String isCM = "IS_CM";
+/*  static const String isKG = "IS_KG";
+  static const String isCM = "IS_CM";*/
+
+
+  static const String IS_KG = "IS_KG";
+  static const String IS_CM = "IS_CM";
+  static const String HEIGHT_CM = "HEIGHT_CM";
+  static const String HEIGHT_IN = "HEIGHT_IN";
+  static const String HEIGHT_FT = "HEIGHT_FT";
+  static const String WEIGHT = "WEIGHT";
+  static const String PREF_LAST_INPUT_FOOT = "PREF_LAST_INPUT_FOOT";
+  static const String PREF_LAST_INPUT_INCH = "PREF_LAST_INPUT_INCH";
+  static const String BMI = "BMI";
+  static const String BMI_TEXT = "BMI_TEXT";
+
+  static const String PREF_TRAINING_DAY = "PREF_TRAINING_DAY";
+  static const String PREF_FIRST_DAY = "PREF_FIRST_DAY";
 
   // ------------------ SINGLETON -----------------------
   static final Preference _preference = Preference._internal();

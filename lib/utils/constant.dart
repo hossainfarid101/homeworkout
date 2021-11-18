@@ -8,11 +8,31 @@ class Constant {
   static const strBack = "Back";
   static const strHistory = "History";
 
-  static const minKG = 20.00;
+/*  static const minKG = 20.00;
   static const maxKG = 997.00;
 
   static const minLBS = 45.00;
-  static const maxLBS = 2200.00;
+  static const maxLBS = 2200.00;*/
+
+  static const ML_100 = 100;
+  static const ML_150 = 150;
+  static const ML_250 = 250;
+  static const ML_500 = 500;
+
+  static const MIN_KG = 20.00;
+  static const MAX_KG = 997.00;
+
+  static const MIN_LBS = 45.00;
+  static const MAX_LBS = 2200.00;
+
+  static const MIN_CM = 20.00;
+  static const MAX_CM = 400.00;
+
+  static const MIN_INCH = 0.0;
+  static const MAX_INCH = 12.0;
+
+  static const MIN_FT = 0.0;
+  static const MAX_FT = 14.0;
 
   static List<MultiSelectDialogItem> daysList = [
     MultiSelectDialogItem("1", DateFormat.EEEE(getLocale().languageCode).dateSymbols.WEEKDAYS[0]),
