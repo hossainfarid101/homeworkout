@@ -4,7 +4,7 @@ import 'package:homeworkout_flutter/common/commonTopBar/commom_topbar.dart';
 import 'package:homeworkout_flutter/custom/drawer/drawer_menu.dart';
 import 'package:homeworkout_flutter/interfaces/topbar_clicklistener.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
-import 'package:homeworkout_flutter/ui/discover/DisconverScreen.dart';
+import 'package:homeworkout_flutter/ui/discover/DiscoverScreen.dart';
 import 'package:homeworkout_flutter/ui/exerciseDays/exercisedaysscreen.dart';
 import 'package:homeworkout_flutter/ui/exerciselist/ExerciseListScreen.dart';
 import 'package:homeworkout_flutter/ui/quarantineathome/QuarantineAtHomeScreen.dart';

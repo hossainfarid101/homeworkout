@@ -56,7 +56,7 @@ class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
         physics: AlwaysScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: 20,
-        padding: const EdgeInsets.symmetric(vertical: 10.0),
+        padding: const EdgeInsets.symmetric(vertical: 15.0),
         itemBuilder: (BuildContext context, int index) {
           return _itemQuarantineExerciseList(index);
         },
@@ -66,10 +66,10 @@ class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
 
   _itemQuarantineExerciseList(int index) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
+      margin: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 3.0),
       height: 140,
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(8.0),
+        borderRadius: BorderRadius.circular(6.0),
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(
@@ -95,7 +95,7 @@ class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          fontSize: 20,
+                          fontSize: 18,
                           color: Colur.white),
                     ),
                   ),

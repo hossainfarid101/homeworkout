@@ -5,6 +5,18 @@ abstract class Languages {
     return Localizations.of<Languages>(context, Languages);
   }
 
+  String get txtMin;
+
+  String get txtFastWorkout;
+
+  String get txtPicksForYou;
+
+  String get txtBodyFocus;
+
+  String get txtSleep;
+
+  String get txtWithEquipment;
+
   String get txtChallenge;
 
   String get txtForBeginners;

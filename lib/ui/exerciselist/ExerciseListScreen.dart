@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:homeworkout_flutter/custom/drawer/drawer_menu.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
-import 'package:homeworkout_flutter/utils/debug.dart';
 
 class ExerciseListScreen extends StatefulWidget {
   const ExerciseListScreen();
@@ -59,7 +57,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
             return <Widget>[
               SliverAppBar(
                 elevation: 0,
-                expandedHeight: 180.0,
+                expandedHeight: 148.0,
                 floating: false,
                 pinned: true,
                 backgroundColor: Colur.white,
@@ -94,7 +92,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
                   background: Container(
                     alignment: Alignment.bottomLeft,
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 30.0, vertical: 55.0),
+                        horizontal: 30.0, vertical: 45.0),
                     decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage(
@@ -107,8 +105,8 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colur.white,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 22.0,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20.0,
                       ),
                     ),
                   ),
@@ -143,13 +141,13 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
   _timesAndWorkoutsTitle() {
     return Container(
       alignment: Alignment.topCenter,
-      margin: const EdgeInsets.symmetric(vertical: 18.0, horizontal: 20.0),
+      margin: const EdgeInsets.symmetric(vertical: 13.0, horizontal: 20.0),
       child: Row(
         children: [
           Container(
             color: Colur.blueDivider,
-            height: 15,
-            width: 4,
+            height: 12,
+            width: 3,
           ),
           Expanded(
             child: Padding(
@@ -161,9 +159,9 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
                     Languages.of(context)!.txtWorkouts.toLowerCase(),
                 textAlign: TextAlign.left,
                 style: TextStyle(
-                  color: Colur.txt_black,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 20.0,
+                  color: Colur.txtBlack,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 18.0,
                 ),
               ),
             ),
@@ -182,16 +180,21 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
 
   _exerciseList() {
     return Expanded(
-      child: ReorderableListView(
-        children: <Widget>[
-          for (int index = 0; index < 20; index++)
-            ListTile(
-              key: Key('$index'),
-              tileColor: Colur.transparent,
-              title: _listOfExercise(index),
-            ),
-        ],
-        onReorder: (int oldIndex, int newIndex) {},
+      child: Theme(
+        data: ThemeData(
+          canvasColor: Colur.transparent,
+          shadowColor: Colur.transparent,
+        ),
+        child: ReorderableListView(
+          children: <Widget>[
+            for (int index = 0; index < 20; index++)
+              ListTile(
+                key: Key('$index'),
+                title: _listOfExercise(index),
+              ),
+          ],
+          onReorder: (int oldIndex, int newIndex) {},
+        ),
       ),
     );
   }
@@ -205,7 +208,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
               child: Icon(Icons.menu_rounded, color: Colur.iconGrey),
             ),
             Container(
-              height: 100.0,
+              height: 90.0,
               width: 100.0,
               margin: const EdgeInsets.all(10),
               child: Image.asset(
@@ -225,17 +228,17 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
                       style: TextStyle(
                           color: Colur.black,
                           fontWeight: FontWeight.w700,
-                          fontSize: 20.0),
+                          fontSize: 17.0),
                     ),
                     Container(
-                      margin: const EdgeInsets.only(top: 10.0),
+                      margin: const EdgeInsets.only(top: 8.0),
                       child: Row(
                         children: [
                           Expanded(
                             child: Text(
                               (index == 0) ? "00:20" : "x15",
                               style: TextStyle(
-                                  fontSize: 20.0,
+                                  fontSize: 16.0,
                                   fontWeight: FontWeight.w400,
                                   color: Colur.txt_gray),
                             ),
@@ -260,27 +263,27 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
   _startButton() {
     return Container(
       width: double.infinity,
-      margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 13.0),
+      padding: const EdgeInsets.symmetric(vertical: 5.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(40.0),
         gradient: LinearGradient(
-            colors: [
-              Colur.blueGradientButton1,
-              Colur.blueGradientButton2,
-            ],
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-            stops: [0.0, 1.0],
-            tileMode: TileMode.clamp),
+          colors: [
+            Colur.blueGradientButton1,
+            Colur.blueGradientButton2,
+          ],
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+          tileMode: TileMode.clamp,
+        ),
       ),
       child: TextButton(
         child: Text(
           Languages.of(context)!.txtStart.toUpperCase(),
           style: TextStyle(
             color: Colur.white,
-            fontWeight: FontWeight.w600,
-            fontSize: 22.0,
+            fontWeight: FontWeight.w700,
+            fontSize: 20.0,
           ),
         ),
         onPressed: () {},

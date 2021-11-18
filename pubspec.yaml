@@ -41,7 +41,7 @@ dependencies:
   fluttertoast: ^8.0.7
   permission_handler: ^8.2.6
   intl: ^0.17.0
-  flutter_local_notifications: ^5.0.0+4
+  flutter_local_notifications: ^9.1.2
   flutter_native_timezone: ^2.0.0
   rxdart: ^0.27.2
   charts_flutter: ^0.12.0

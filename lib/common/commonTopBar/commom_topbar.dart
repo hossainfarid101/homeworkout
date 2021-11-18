@@ -65,8 +65,8 @@ class _CommonTopBarState extends State<CommonTopBar> {
                   child: Image.asset(
                     'assets/icons/ic_menu.png',
                     scale: 1.3,
-                    width: 30,
-                    height: 30,
+                    width: 28,
+                    height: 28,
                     color: Colur.black,
                   ),
                 ),
@@ -86,8 +86,8 @@ class _CommonTopBarState extends State<CommonTopBar> {
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                           fontWeight: FontWeight.w700,
-                          fontSize: 19,
-                          color: Colur.txt_black),
+                          fontSize: 18,
+                          color: Colur.txtBlack),
                     ),
                   ],
                 ),

@@ -285,10 +285,28 @@ class LanguageEn extends Languages {
   String get txtRecords => "Records";
 
   @override
-  String get txtForBeginners => "For Beginners";
+  String get txtForBeginners => "For beginners";
 
   @override
   String get txtChallenge => "Challenge";
+
+  @override
+  String get txtWithEquipment => "With equipment";
+
+  @override
+  String get txtSleep => "Sleep";
+
+  @override
+  String get txtBodyFocus => "Body focus";
+
+  @override
+  String get txtPicksForYou => "Picks for you";
+
+  @override
+  String get txtFastWorkout => "Fast workout";
+
+  @override
+  String get txtMin => "Min";
 
   @override
   String get txtCurrent => "Current";

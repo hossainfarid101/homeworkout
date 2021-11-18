@@ -47,40 +47,47 @@ class _ExerciseDaysScreenState extends State<ExerciseDaysScreen> {
     return Theme(
       data: ThemeData(
         appBarTheme: AppBarTheme(
-        systemOverlayStyle: isShrink ? SystemUiOverlayStyle.dark:SystemUiOverlayStyle.light,
-        ),//
+          systemOverlayStyle:
+              isShrink ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light,
+        ), //
       ),
       child: Scaffold(
         drawer: DrawerMenu(),
         body: NestedScrollView(
-          controller: _scrollController,
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return <Widget>[
-              SliverAppBar(
-                elevation: 2,
-                titleSpacing:-5,
-                expandedHeight: 140.0,
-                floating: false,
-                pinned: true,
-                leading: InkWell(
-                    onTap: () {
-                      Scaffold.of(context).openDrawer();
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(0.0),
-                      child: Icon(Icons.menu,color: isShrink ? Colur.black : Colur.white,),
-                    )),
-                automaticallyImplyLeading: false,
-                title: Padding(
-                  padding: const EdgeInsets.all(0.0),
-                  child: Text(Languages.of(context)!.txt7X4Challenge,
+            controller: _scrollController,
+            headerSliverBuilder:
+                (BuildContext context, bool innerBoxIsScrolled) {
+              return <Widget>[
+                SliverAppBar(
+                  elevation: 2,
+                  titleSpacing: -5,
+                  expandedHeight: 140.0,
+                  floating: false,
+                  pinned: true,
+                  leading: InkWell(
+                      onTap: () {
+                        Scaffold.of(context).openDrawer();
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(0.0),
+                        child: Icon(
+                          Icons.menu,
+                          color: isShrink ? Colur.black : Colur.white,
+                        ),
+                      )),
+                  automaticallyImplyLeading: false,
+                  title: Padding(
+                    padding: const EdgeInsets.all(0.0),
+                    child: Text(
+                      Languages.of(context)!.txt7X4Challenge.toUpperCase(),
                       style: TextStyle(
                         color: isShrink ? Colur.black : Colur.white,
                         fontSize: 16.0,
-                      )),
-                ),
-                backgroundColor: Colors.white,
-                /*flexibleSpace: FlexibleSpaceBar(
+                      ),
+                    ),
+                  ),
+                  backgroundColor: Colors.white,
+                  /*flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
                   background: Image.asset(
                     'assets/images/abs_advanced.webp',
@@ -88,69 +95,68 @@ class _ExerciseDaysScreenState extends State<ExerciseDaysScreen> {
                   ),
 
                 ),*/
-                centerTitle: false,
-                flexibleSpace: FlexibleSpaceBar(
-                  centerTitle: true,
-                  background: Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(
-                          'assets/images/abs_advanced.webp',
-                        ),
-                        fit: BoxFit.cover
-                      )
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Container(
-                          child: Row(
-                            children: [
-                              Container(
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 15.0),
-                                child: Text(
-                                    "28 ${Languages.of(context)!.txtDaysLeft}",
-                                    style: TextStyle(
-                                        color: Colur.white, fontSize: 14.0)),
+                  centerTitle: false,
+                  flexibleSpace: FlexibleSpaceBar(
+                    centerTitle: true,
+                    background: Container(
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage(
+                                'assets/images/abs_advanced.webp',
                               ),
-                              Expanded(
-                                child: Container(
-                                  alignment: Alignment.centerRight,
-                                  margin:
-                                      const EdgeInsets.symmetric(horizontal: 15.0),
-                                  child: Text("10%",
+                              fit: BoxFit.cover)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Container(
+                            child: Row(
+                              children: [
+                                Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 15.0),
+                                  child: Text(
+                                      "28 ${Languages.of(context)!.txtDaysLeft}",
                                       style: TextStyle(
                                           color: Colur.white, fontSize: 14.0)),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(
-                              right: 10, left: 10, top: 10, bottom: 20),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10.0),
-                            child: LinearProgressIndicator(
-                              value: (10 / 100).toDouble(),
-                              valueColor:
-                                  AlwaysStoppedAnimation<Color>(Colur.theme),
-                              backgroundColor: Colur.transparent_50,
-                              minHeight: 5,
+                                Expanded(
+                                  child: Container(
+                                    alignment: Alignment.centerRight,
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 15.0),
+                                    child: Text("10%",
+                                        style: TextStyle(
+                                            color: Colur.white,
+                                            fontSize: 14.0)),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        )
-                      ],
+                          Container(
+                            margin: const EdgeInsets.only(
+                                right: 10, left: 10, top: 10, bottom: 20),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10.0),
+                              child: LinearProgressIndicator(
+                                value: (10 / 100).toDouble(),
+                                valueColor:
+                                    AlwaysStoppedAnimation<Color>(Colur.theme),
+                                backgroundColor: Colur.transparent_50,
+                                minHeight: 5,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ];
-          },
-          body:Container(
-            color: Colur.iconGreyBg,
-              child: Column(
+              ];
+            },
+            body: Container(
+                color: Colur.iconGreyBg,
+                child: Column(
                   children: [
                     _widgetListOfDays(),
                     Container(
@@ -180,13 +186,15 @@ class _ExerciseDaysScreenState extends State<ExerciseDaysScreen> {
                           ),
                         ),
                         onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>ExerciseListScreen()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ExerciseListScreen()));
                         },
                       ),
                     ),
                   ],
-                ))
-        ),
+                ))),
       ),
     );
   }
@@ -206,10 +214,9 @@ class _ExerciseDaysScreenState extends State<ExerciseDaysScreen> {
   }
 
   itemListDays(int index) {
-
     var mainIndex = index;
     return Container(
-      margin: const EdgeInsets.only(left: 10.0,right: 10),
+      margin: const EdgeInsets.only(left: 10.0, right: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -228,14 +235,15 @@ class _ExerciseDaysScreenState extends State<ExerciseDaysScreen> {
               Expanded(
                 child: Container(
                   margin: const EdgeInsets.symmetric(horizontal: 5),
-                  child: Text(Languages.of(context)!.txtweek+" "+(index+1).toString()),
+                  child: Text(Languages.of(context)!.txtweek +
+                      " " +
+                      (index + 1).toString()),
                 ),
               ),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 5),
                 child: Text("1/7"),
               ),
-
             ],
           ),
           Row(
@@ -251,20 +259,23 @@ class _ExerciseDaysScreenState extends State<ExerciseDaysScreen> {
               ),
               Expanded(
                 child: Container(
-                  margin: const EdgeInsets.only(left: 20,right: 5),
+                  margin: const EdgeInsets.only(left: 20, right: 5),
                   alignment: Alignment.center,
                   color: Colur.white,
-                  height: 110,
+                  height: 125,
                   child: GridView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                          maxCrossAxisExtent: 100,
-                          childAspectRatio: 3,
-                          crossAxisSpacing: 0,
-                          mainAxisSpacing: 10),
+                      physics: NeverScrollableScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithMaxCrossAxisExtent(
+                              maxCrossAxisExtent: 105,
+                              childAspectRatio: 3 / 1.2,
+                              crossAxisSpacing: 0,
+                              mainAxisSpacing: 10),
+                      padding: const EdgeInsets.all(0),
                       itemCount: 8,
+                      shrinkWrap: true,
                       itemBuilder: (BuildContext ctx, index) {
-                        return _itemOfDays(index,mainIndex);
+                        return _itemOfDays(index, mainIndex);
                       }),
                 ),
               )
@@ -275,82 +286,92 @@ class _ExerciseDaysScreenState extends State<ExerciseDaysScreen> {
     );
   }
 
-  _itemOfDays(int index, mainIndex){
-    return Container(
-      // color: Colur.iconGreyBg,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          if(index == 0)...{
-            Container(
-              alignment: Alignment.center,
-              height: 60,
-              width: 60,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colur.theme
-              ),
-              child: Icon(Icons.done_rounded,size: 20,color: Colur.white,),
-            )
-          }
-          else if(index != 1 && index != 7)...{
-            Container(
-              alignment: Alignment.center,
-              height: 60,
-              width: 60,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                // border: Border.all(color: Colur.grey_icon),
-                border: Border.all(color: Colur.disableTxtColor),
-              ),
-              child: Text((index + 1).toString(),style: TextStyle(color: Colur.disableTxtColor),),
-            )
-          }else if(index == 7)...{
-            Container(
-              alignment: Alignment.center,
-              width: 60,
-              height: 60,
-              decoration: BoxDecoration(
+  _itemOfDays(int index, mainIndex) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        if (index == 0) ...{
+          Container(
+            alignment: Alignment.center,
+            height: 60,
+            width: 60,
+            decoration:
+                BoxDecoration(shape: BoxShape.circle, color: Colur.theme),
+            child: Icon(
+              Icons.done_rounded,
+              size: 20,
+              color: Colur.white,
+            ),
+          )
+        } else if (index != 1 && index != 7) ...{
+          Container(
+            alignment: Alignment.center,
+            height: 60,
+            width: 60,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              // border: Border.all(color: Colur.grey_icon),
+              border: Border.all(color: Colur.disableTxtColor),
+            ),
+            child: Text(
+              (index + 1).toString(),
+              style: TextStyle(color: Colur.disableTxtColor, fontSize: 18),
+            ),
+          )
+        } else if (index == 7) ...{
+          Container(
+            alignment: Alignment.center,
+            width: 60,
+            height: 60,
+            decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/images/ic_challenge_uncomplete.webp"),
-                  scale: 8
-                )
-              ),
-              child: Container(
+                    image: AssetImage(
+                        "assets/images/ic_challenge_uncomplete.webp"),
+                    scale: 8)),
+            child: Container(
                 margin: const EdgeInsets.only(bottom: 5),
-                  child: Text(
-                (mainIndex + 1).toString(),
-                style: TextStyle(fontSize: 12),
-              )),
-            )
-          }
-          else...{
-            InkWell(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>ExerciseListScreen()));
-              },
-              child: DottedBorder(
-                color: Colur.theme,
-                borderType: BorderType.Circle,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(12)),
-                  child: Container(
-                    alignment: Alignment.center,
-                    height: 60,
-                    width: 60,
-                    child: Text((index + 1).toString(),style: TextStyle(color: (index != 0)?Colur.disableTxtColor:Colur.theme),),
-                  ),
+                child: Text(
+                  (mainIndex + 1).toString(),
+                  style: TextStyle(fontSize: 18, color: Colur.disableTxtColor),
+                )),
+          )
+        } else ...{
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ExerciseListScreen()));
+            },
+            child: DottedBorder(
+              color: Colur.theme,
+              borderType: BorderType.Circle,
+              strokeWidth: 1.5,
+              strokeCap: StrokeCap.butt,
+              dashPattern: [5, 3, 5, 3, 5, 3],
+              child: Container(
+                alignment: Alignment.center,
+                height: 60,
+                width: 60,
+                child: Text(
+                  (index + 1).toString(),
+                  style: TextStyle(color: Colur.theme, fontSize: 18),
                 ),
               ),
-            )
-
-          },
-          Visibility(
-            visible: ((index == 3) || (index == 7))?false:true,
-            child: Icon(Icons.navigate_next_rounded,color: (index != 0)?Colur.disableTxtColor:Colur.theme,size: 20,),
+            ),
+          )
+        },
+        Expanded(
+          child: Visibility(
+            visible: ((index == 3) || (index == 7)) ? false : true,
+            child: Icon(
+              Icons.navigate_next_rounded,
+              color: (index != 0) ? Colur.disableTxtColor : Colur.theme,
+              size: 20,
+            ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
