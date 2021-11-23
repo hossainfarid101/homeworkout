@@ -246,7 +246,7 @@ class _SetWeeklyGoalScreenState extends State<SetWeeklyGoalScreen> {
           ),
         ),
         onPressed: () {
-
+          Navigator.pop(context);
         },
       ),
     );

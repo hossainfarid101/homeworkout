@@ -7,10 +7,13 @@ import 'package:homeworkout_flutter/ui/discover/DiscoverScreen.dart';
 import 'package:homeworkout_flutter/ui/exerciseDays/exercisedaysscreen.dart';
 import 'package:homeworkout_flutter/ui/exerciselist/ExerciseListScreen.dart';
 import 'package:homeworkout_flutter/ui/quarantineathome/QuarantineAtHomeScreen.dart';
+import 'package:homeworkout_flutter/ui/reminder/reminder_screen.dart';
 import 'package:homeworkout_flutter/ui/report/report_screen.dart';
 import 'package:homeworkout_flutter/ui/setWeeklyGoal/set_weekly_goal_screen.dart';
+import 'package:homeworkout_flutter/ui/settings/settings_screen.dart';
 import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
 import 'package:homeworkout_flutter/ui/workoutHistory/workout_history_screen.dart';
+import 'package:homeworkout_flutter/ui/workout_complete/workout_complete_screen.dart';
 import 'package:homeworkout_flutter/utils/Debug.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
@@ -187,8 +190,15 @@ class _MyAppState extends State<MyApp> {
           statusBarIconBrightness: Brightness.light,
           systemNavigationBarIconBrightness: Brightness.light,
         ),
-        child: TrainingScreen(),
+        child: WorkoutCompleteScreen(),
       ),
+      routes: <String, WidgetBuilder>{
+        '/training': (BuildContext context) => TrainingScreen(),
+        '/discover': (BuildContext context) => DiscoverScreen(),
+        '/report': (BuildContext context) => ReportScreen(),
+        '/settings': (BuildContext context) => SettingsScreen(),
+        '/reminder': (BuildContext context) => ReminderScreen()
+      },
     );
   }
 }

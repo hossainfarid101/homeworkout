@@ -137,7 +137,7 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                       daysCount: daysCount!,
                       controller: _datePickerController,
                       initialSelectedDate: DateTime.now(),
-                      selectionColor: Colur.txtPurple,
+                      selectionColor: Colur.blue,
                       selectedTextColor: Colur.white,
                       monthTextStyle: const TextStyle(
                         fontWeight: FontWeight.w400,
@@ -252,7 +252,7 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                             padding: const EdgeInsets.all(5.0),
                             decoration: (isKg)
                                 ? BoxDecoration(
-                                    color: Colur.txtPurple,
+                                    color: Colur.blue,
                                     borderRadius: BorderRadius.circular(5.0),
                                   )
                                 : BoxDecoration(
@@ -300,7 +300,7 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                             padding: const EdgeInsets.all(5.0),
                             decoration: (isLsb)
                                 ? BoxDecoration(
-                                    color: Colur.txtPurple,
+                                    color: Colur.blue,
                                     borderRadius: BorderRadius.circular(5.0),
                                   )
                                 : BoxDecoration(
@@ -341,7 +341,7 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                             child: Text(
                               Languages.of(context)!.txtCancel.toUpperCase(),
                               style: const TextStyle(
-                                  color: Colur.txtPurple,
+                                  color: Colur.blue,
                                   fontSize: 15.0,
                                   fontWeight: FontWeight.w500),
                             ),
@@ -386,7 +386,7 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                             child: Text(
                               Languages.of(context)!.txtSave,
                               style: const TextStyle(
-                                  color: Colur.txtPurple,
+                                  color: Colur.blue,
                                   fontSize: 15.0,
                                   fontWeight: FontWeight.w500),
                             ),

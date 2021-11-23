@@ -7,6 +7,7 @@ class Constant {
   static const strMenu = "Menu";
   static const strBack = "Back";
   static const strHistory = "History";
+  static const strExerciseReminder = " Exercise Reminder";
 
 /*  static const minKG = 20.00;
   static const maxKG = 997.00;

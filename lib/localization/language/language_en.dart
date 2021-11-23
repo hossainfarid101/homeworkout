@@ -405,4 +405,30 @@ class LanguageEn extends Languages {
 
   @override
   String get txtSunday => "Sunday";
+
+  @override
+  String get txtRepeat => "Repeat";
+
+  @override
+  String get txtDailyReminder => "Daily Reminder";
+
+  @override
+  String get txtExerciseReminder => "Exercise Reminder";
+
+  @override
+  String get txtCompleted => "Completed";
+
+  @override
+  String get txtDay => "Day";
+
+  @override
+  String get txtExercises => "Exercises";
+
+  @override
+  String get txtNext => "Next";
+
+  @override
+  String get txtShare => "Share";
+
+
 }

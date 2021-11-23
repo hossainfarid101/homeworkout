@@ -5,7 +5,9 @@ import 'package:homeworkout_flutter/common/commonTopBar/commom_topbar.dart';
 import 'package:homeworkout_flutter/custom/drawer/drawer_menu.dart';
 import 'package:homeworkout_flutter/interfaces/topbar_clicklistener.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
+import 'package:homeworkout_flutter/ui/workoutHistory/workout_history_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
+import 'package:homeworkout_flutter/utils/constant.dart';
 
 class DiscoverScreen extends StatefulWidget {
   const DiscoverScreen({Key? key}) : super(key: key);
@@ -875,5 +877,9 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   }
 
   @override
-  void onTopBarClick(String name, {bool value = true}) {}
+  void onTopBarClick(String name, {bool value = true}) {
+    if(name == Constant.strHistory) {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => WorkoutHistoryScreen()));
+    }
+  }
 }

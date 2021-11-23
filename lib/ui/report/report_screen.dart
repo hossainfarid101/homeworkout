@@ -10,6 +10,7 @@ import 'package:homeworkout_flutter/custom/dialogs/add_weight_dialog.dart';
 import 'package:homeworkout_flutter/custom/drawer/drawer_menu.dart';
 import 'package:homeworkout_flutter/interfaces/topbar_clicklistener.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
+import 'package:homeworkout_flutter/ui/workoutHistory/workout_history_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
@@ -216,7 +217,7 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
       children: [
         InkWell(
           onTap: () {
-
+            Navigator.push(context, MaterialPageRoute(builder: (context) => WorkoutHistoryScreen()));
           },
           child: Row(
             children: [

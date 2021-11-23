@@ -87,7 +87,7 @@ class _MultiSelectDialogState<V> extends State<MultiSelectDialog<V>> {
       actions: <Widget>[
         TextButton(
           child: Text(widget.cancelButtonLabel!,style: const TextStyle(
-              color: Colur.txtPurple)),
+              color: Colur.theme)),
           onPressed: _onCancelTap,
         ),
         TextButton(
@@ -95,8 +95,8 @@ class _MultiSelectDialogState<V> extends State<MultiSelectDialog<V>> {
             widget.okButtonLabel!,
             style: TextStyle(
                 color: isDisable
-                    ? Colur.txtPurple.withOpacity(0.5)
-                    : Colur.txtPurple),
+                    ? Colur.theme.withOpacity(0.5)
+                    : Colur.theme),
           ),
           onPressed: _onSubmitTap,
         )

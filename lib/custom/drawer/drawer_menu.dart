@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:homeworkout_flutter/custom/drawer/drawer_data.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
-import 'package:homeworkout_flutter/ui/discover/DiscoverScreen.dart';
-import 'package:homeworkout_flutter/ui/reminder/reminder_screen.dart';
-import 'package:homeworkout_flutter/ui/report/report_screen.dart';
-import 'package:homeworkout_flutter/ui/settings/settings_screen.dart';
-import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 
 class DrawerMenu extends StatefulWidget {
@@ -53,7 +48,13 @@ class _DrawerMenuState extends State<DrawerMenu> {
   _itemDrawer(int index) {
     return InkWell(
       onTap: () {
-        Navigator.pop(context);
+        if (drawerDataList[index].navPath != null) {
+          Navigator.popAndPushNamed(context, drawerDataList[index].navPath!);
+        } else {
+          Navigator.pop(context);
+          _restartDialog();
+        }
+        //Navigator.pop(context);
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 5.0),
@@ -93,88 +94,89 @@ class _DrawerMenuState extends State<DrawerMenu> {
       DrawerData(
         icon: "assets/icons/ic_training_plan.webp",
         text: Languages.of(context)!.txtTrainingPlans,
-        navPath: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const TrainingScreen()))
+        navPath: '/training'
       ),
     );
     drawerDataList.add(
       DrawerData(
         icon: "assets/icons/ic_menu_library.png",
         text: Languages.of(context)!.txtDiscover,
-        navPath: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const DiscoverScreen()))
+        navPath: '/discover'
       ),
     );
     drawerDataList.add(
       DrawerData(
         icon: "assets/icons/ic_menu_report.png",
         text: Languages.of(context)!.txtReport,
-        navPath: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ReportScreen()))
+        navPath: '/report'
       ),
     );
     drawerDataList.add(
       DrawerData(
         icon: "assets/icons/ic_menu_setting.webp",
         text: Languages.of(context)!.txtSettings,
-        navPath: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsScreen()))
+        navPath: '/settings'
       ),
     );
     drawerDataList.add(
       DrawerData(
         icon: "assets/icons/ic_menu_reminder.webp",
         text: Languages.of(context)!.txtReminder,
-        navPath: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ReminderScreen()))
+        navPath: '/reminder'
       ),
     );
     drawerDataList.add(
       DrawerData(
         icon: "assets/icons/ic_menu_restart_progress.webp",
         text: Languages.of(context)!.txtRestartProgress,
-        navPath: () {
-          return showDialog(
-              context: context,
-              builder: (context){
-                return StatefulBuilder(
-                  builder: (context, setState) {
-                    return AlertDialog(
-                      title: Text(
-                        Languages.of(context)!.txtRestartProgress,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          color: Colur.txtBlack,
-                        ),
-                      ),
-                      actions: [
-
-                        TextButton(
-                          child: Text(
-                            Languages.of(context)!.txtCancel.toUpperCase(),
-                            style: const TextStyle(
-                              color:Colur.blue,
-                            ),
-                          ),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                        ),
-
-                        TextButton(
-                          child: Text(
-                            Languages.of(context)!.txtRestartProgress.toUpperCase(),
-                            style: const TextStyle(
-                                color:Colur.blue,
-                            ),
-                          ),
-                          onPressed: ()  {
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                      ],
-                    );
-                  },
-                );
-              });
-        }
       ),
     );
 
+  }
+
+  _restartDialog() {
+    return showDialog(
+        context: context,
+        builder: (context){
+          return StatefulBuilder(
+            builder: (context, setState) {
+              return AlertDialog(
+                title: Text(
+                  Languages.of(context)!.txtRestartProgress,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    color: Colur.txtBlack,
+                  ),
+                ),
+                actions: [
+
+                  TextButton(
+                    child: Text(
+                      Languages.of(context)!.txtCancel.toUpperCase(),
+                      style: const TextStyle(
+                        color:Colur.blue,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+
+                  TextButton(
+                    child: Text(
+                      Languages.of(context)!.txtSave.toUpperCase(),
+                      style: const TextStyle(
+                        color:Colur.blue,
+                      ),
+                    ),
+                    onPressed: ()  {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        });
   }
 }

@@ -2,7 +2,7 @@ class DrawerData {
 
   final String? icon;
   final String? text;
-  final Function? navPath;
+  final String? navPath;
 
   DrawerData({
     this.icon,
