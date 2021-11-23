@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:homeworkout_flutter/custom/dialogs/ExerciseDialog.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 
@@ -200,63 +201,78 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
   }
 
   _listOfExercise(int index) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Container(
-              child: Icon(Icons.menu_rounded, color: Colur.iconGrey),
-            ),
-            Container(
-              height: 90.0,
-              width: 100.0,
-              margin: const EdgeInsets.all(10),
-              child: Image.asset(
-                'assets/images/arm_advanced.webp',
-                gaplessPlayback: true,
-                fit: BoxFit.cover,
+    return InkWell(
+      onTap: (){
+
+        showDialog(
+          context: context,
+          barrierDismissible: true,
+          useSafeArea: true,
+          barrierColor: Colur.transparent,
+          builder: (BuildContext context) {
+            return ExerciseDialog();
+          },
+        );
+
+      },
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Container(
+                child: Icon(Icons.menu_rounded, color: Colur.iconGrey),
               ),
-            ),
-            Expanded(
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "JUMPING JACKS ${index.toString()}",
-                      style: TextStyle(
-                          color: Colur.black,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 17.0),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(top: 8.0),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              (index == 0) ? "00:20" : "x15",
-                              style: TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colur.txt_gray),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
+              Container(
+                height: 90.0,
+                width: 100.0,
+                margin: const EdgeInsets.all(10),
+                child: Image.asset(
+                  'assets/images/arm_advanced.webp',
+                  gaplessPlayback: true,
+                  fit: BoxFit.cover,
                 ),
               ),
-            )
-          ],
-        ),
-        Container(
-          margin: const EdgeInsets.only(left: 35.0),
-          child: _divider(),
-        )
-      ],
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "JUMPING JACKS ${index.toString()}",
+                        style: TextStyle(
+                            color: Colur.black,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 17.0),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 8.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                (index == 0) ? "00:20" : "x15",
+                                style: TextStyle(
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colur.txt_gray),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+          Container(
+            margin: const EdgeInsets.only(left: 35.0),
+            child: _divider(),
+          )
+        ],
+      ),
     );
   }
 
