@@ -280,7 +280,30 @@ abstract class Languages {
   String get txtWeeklyTrainingDays;
 
   String get txtFirstDayOfWeek;
+
   String get txtSunday;
+
   String get txtMonday;
+
   String get txtSaturday;
+
+  String get txtWeek;
+
+  String get txtBMI;
+
+  String get txtEasy;
+
+  String get txtIFeel;
+
+  String get txtExhausted;
+
+  String get txtSkip;
+
+  String get txtRest;
+
+  String get txtDone;
+
+  String get txtPrevious;
+
+  String get txtReadyToGo;
 }

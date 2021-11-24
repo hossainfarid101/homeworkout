@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:ui';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,7 +9,6 @@ import 'package:homeworkout_flutter/interfaces/topbar_clicklistener.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/localization/locale_constant.dart';
 import 'package:homeworkout_flutter/ui/exerciselist/ExerciseListScreen.dart';
-import 'package:homeworkout_flutter/ui/home/home_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
@@ -75,7 +73,6 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
 
   @override
   Widget build(BuildContext context) {
-    var fullHeight = MediaQuery.of(context).size.height;
     var fullWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SafeArea(

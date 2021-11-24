@@ -14,9 +14,9 @@ class AddBmiDialog extends StatefulWidget {
 
 class _AddBmiDialogState extends State<AddBmiDialog> {
   TextEditingController weightController = TextEditingController();
-  TextEditingController CmHeightController = TextEditingController();
-  TextEditingController FtHeightController = TextEditingController();
-  TextEditingController InHeightController = TextEditingController();
+  TextEditingController cmHeightController = TextEditingController();
+  TextEditingController ftHeightController = TextEditingController();
+  TextEditingController inHeightController = TextEditingController();
 
   bool? isKg;
   bool? isLsb;
@@ -255,7 +255,7 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                                   child: Container(
                                     margin: const EdgeInsets.only(left: 25.0),
                                     child: TextFormField(
-                                      controller: CmHeightController,
+                                      controller: cmHeightController,
                                       maxLines: 1,
                                       maxLength: 5,
                                       textInputAction: TextInputAction.done,
@@ -310,7 +310,7 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                                             margin: const EdgeInsets.only(
                                                 right: 10.0),
                                             child: TextFormField(
-                                              controller: FtHeightController,
+                                              controller: ftHeightController,
                                               maxLines: 1,
                                               maxLength: 5,
                                               textInputAction:
@@ -362,7 +362,7 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                                             margin:
                                                 const EdgeInsets.only(left: 10.0),
                                             child: TextFormField(
-                                              controller: InHeightController,
+                                              controller: inHeightController,
                                               maxLines: 1,
                                               maxLength: 5,
                                               textInputAction:
@@ -416,19 +416,19 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                               ),
                               InkWell(
                                 onTap: () {
-                                  if (CmHeightController.text == "")
-                                    CmHeightController.text = "0.0";
+                                  if (cmHeightController.text == "")
+                                    cmHeightController.text = "0.0";
                                   if (isIn! && !isCm!) {
                                     Debug.printLog(
                                         "Before converted value of heightController --> " +
-                                            CmHeightController.text);
-                                    CmHeightController.text = Utils.inToCm(
-                                            double.parse(FtHeightController.text),
-                                            double.parse(InHeightController.text))
+                                            cmHeightController.text);
+                                    cmHeightController.text = Utils.inToCm(
+                                            double.parse(ftHeightController.text),
+                                            double.parse(inHeightController.text))
                                         .toString();
                                     Debug.printLog(
                                         "After converted value of heightController in to CM to IN --> " +
-                                            CmHeightController.text);
+                                            cmHeightController.text);
                                   }
 
                                   setState(() {
@@ -466,23 +466,22 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                               ),
                               InkWell(
                                 onTap: () {
-                                  if (CmHeightController == "") {
-                                    FtHeightController.text = "0.0";
-                                    InHeightController.text == "0.0";
+                                  if (cmHeightController.text == "") {
+                                    ftHeightController.text = "0.0";
                                   }
                                   if (isCm! && !isIn!) {
                                     Debug.printLog(
                                         "Before converted value of heightController --> " +
-                                            FtHeightController.text);
-                                    FtHeightController.text = Utils.cmToIn(
-                                            double.parse(CmHeightController.text)).toStringAsFixed(0);
-                                    InHeightController.text = Utils.cmToIn(double.parse(CmHeightController.text))
+                                            ftHeightController.text);
+                                    ftHeightController.text = Utils.cmToIn(
+                                            double.parse(cmHeightController.text)).toStringAsFixed(0);
+                                    inHeightController.text = Utils.cmToIn(double.parse(cmHeightController.text))
                                                 .toString()
                                                 .split(".")[1];
                                     Debug.printLog(
                                         "After converted value of heightController in to Cm to In --> " +
-                                            FtHeightController.text +
-                                            InHeightController.text);
+                                            ftHeightController.text +
+                                            inHeightController.text);
                                   }
 
                                   setState(() {
@@ -587,9 +586,9 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
           double.parse(weightController.text) <=
               Constant.MAX_KG) {
         if (isCm! && !isIn!) {
-          Debug.printLog("cm - ${CmHeightController.text}");
-          if (double.parse(CmHeightController.text) >= Constant.MIN_CM &&
-              double.parse(CmHeightController.text) <= Constant.MAX_CM) {
+          Debug.printLog("cm - ${cmHeightController.text}");
+          if (double.parse(cmHeightController.text) >= Constant.MIN_CM &&
+              double.parse(cmHeightController.text) <= Constant.MAX_CM) {
 
             setState(() {
               save();
@@ -599,10 +598,10 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
             Utils.showToast(context, Languages.of(context)!.txtWarningForCm);
           }
         } else if (isIn! && !isCm!) {
-          Debug.printLog("ft - ${FtHeightController.text}");
-          Debug.printLog("inch - ${InHeightController.text}");
-          if (double.parse(FtHeightController.text) > Constant.MIN_FT &&
-              double.parse(FtHeightController.text) <= Constant.MAX_FT) {
+          Debug.printLog("ft - ${ftHeightController.text}");
+          Debug.printLog("inch - ${inHeightController.text}");
+          if (double.parse(ftHeightController.text) > Constant.MIN_FT &&
+              double.parse(ftHeightController.text) <= Constant.MAX_FT) {
             setState(() {
               save();
               Debug.printLog("true");
@@ -655,11 +654,11 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
 
   void convertHeight() {
     if (isCm! && !isIn!) {
-      heightCm = double.parse(CmHeightController.text);
+      heightCm = double.parse(cmHeightController.text);
     } else {
-      heightFt = double.parse(FtHeightController.text);
-      heightIn = double.parse(InHeightController.text);
-      heightCm = Utils.inToCm(double.parse(FtHeightController.text), double.parse(InHeightController.text));
+      heightFt = double.parse(ftHeightController.text);
+      heightIn = double.parse(inHeightController.text);
+      heightCm = Utils.inToCm(double.parse(ftHeightController.text), double.parse(inHeightController.text));
     }
   }
 
@@ -739,10 +738,10 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
     heightIn = Preference.shared.getDouble(Preference.HEIGHT_IN) ?? 0;
     heightFt = Preference.shared.getDouble(Preference.HEIGHT_FT) ?? 0;
     if (isCm! && !isIn!) {
-      CmHeightController.text = heightCm!.toStringAsFixed(1);
+      cmHeightController.text = heightCm!.toStringAsFixed(1);
     } else {
-     FtHeightController.text = heightFt!.toStringAsFixed(0);
-     InHeightController.text = heightIn!.toStringAsFixed(0);
+     ftHeightController.text = heightFt!.toStringAsFixed(0);
+     inHeightController.text = heightIn!.toStringAsFixed(0);
     }
   }
 }

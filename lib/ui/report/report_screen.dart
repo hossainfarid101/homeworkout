@@ -38,12 +38,12 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
 
   double? weightBMI;
   double? heightBMI;
-  double? BMI;
+  double? bmi;
 
   bool? isKg;
 
-  String? BMICategory;
-  Color? BMIColor;
+  String? bmiCategory;
+  Color? bmiColor;
   int? totalWorkout;
   double? totalKcal;
   int? totalMin;
@@ -72,33 +72,32 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
   getPreference() {
     weightBMI = Preference.shared.getDouble(Preference.WEIGHT) ?? 0;
     heightBMI = Preference.shared.getDouble(Preference.HEIGHT_CM) ?? 0;
-    BMI = Preference.shared.getDouble(Preference.BMI) ?? 0;
+    bmi = Preference.shared.getDouble(Preference.BMI) ?? 0;
     isKg = Preference.shared.getBool(Preference.IS_KG) ?? true;
-    BMICategory = Preference.shared.getString(Preference.BMI_TEXT) ?? "";
+    bmiCategory = Preference.shared.getString(Preference.BMI_TEXT) ?? "";
 
-    if (BMI! < 15) {
-      BMIColor = Colur.black;
-    } else if (BMI! >= 15 && BMI! < 16) {
-      BMIColor = Colur.colorFirst;
-    } else if (BMI! >= 16 && BMI! < 18.5) {
-      BMIColor = Colur.colorSecond;
-    } else if (BMI! >= 18.5 && BMI! <= 25) {
-      BMIColor = Colur.colorThird;
-    } else if (BMI! > 25 && BMI! < 30) {
-      BMIColor = Colur.colorFour;
-    } else if (BMI! >= 30 && BMI! < 35) {
-      BMIColor = Colur.colorFive;
-    } else if (BMI! >= 35 && BMI! < 40) {
-      BMIColor = Colur.colorSix;
-    } else if (BMI! >= 40) {
-      BMIColor = Colur.black;
+    if (bmi! < 15) {
+      bmiColor = Colur.black;
+    } else if (bmi! >= 15 && bmi! < 16) {
+      bmiColor = Colur.colorFirst;
+    } else if (bmi! >= 16 && bmi! < 18.5) {
+      bmiColor = Colur.colorSecond;
+    } else if (bmi! >= 18.5 && bmi! <= 25) {
+      bmiColor = Colur.colorThird;
+    } else if (bmi! > 25 && bmi! < 30) {
+      bmiColor = Colur.colorFour;
+    } else if (bmi! >= 30 && bmi! < 35) {
+      bmiColor = Colur.colorFive;
+    } else if (bmi! >= 35 && bmi! < 40) {
+      bmiColor = Colur.colorSix;
+    } else if (bmi! >= 40) {
+      bmiColor = Colur.black;
     }
   }
 
 
   @override
   Widget build(BuildContext context) {
-    var fullHeight = MediaQuery.of(context).size.height;
     var fullWidth = MediaQuery.of(context).size.width;
 
     return  Theme(
@@ -498,7 +497,7 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
                       width: 10,
                     ),
                     Text(
-                      BMI!.toStringAsFixed(2),
+                      bmi!.toStringAsFixed(2),
                       style: TextStyle(
                           fontWeight: FontWeight.w700, fontSize: 17.0),
                     )
@@ -516,7 +515,7 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
                     /*getWeightChartDataFromDatabase();
                     getWeightData();*/
                     setBmiCalculation();
-                    Preference.shared.setDouble(Preference.BMI, BMI!);
+                    Preference.shared.setDouble(Preference.BMI, bmi!);
                     bmiTextCategory();
                   });
                 }
@@ -528,7 +527,7 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
           ],
         ),
         Visibility(
-          visible: BMI != 0,
+          visible: bmi != 0,
           child: Stack(
             children: [
               Column(
@@ -599,7 +598,7 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
                   dx: bmiValuePosition(fullWidth),
                   child: Column(
                     children: [
-                      Text(BMI!.toStringAsFixed(2)),
+                      Text(bmi!.toStringAsFixed(2)),
                       Container(
                         //alignment: Alignment.center,
                         margin: const EdgeInsets.symmetric(
@@ -622,11 +621,11 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(BMICategory!,
+              Text(bmiCategory!,
                   overflow: TextOverflow.ellipsis,
                   //textAlign: TextAlign.center,
                   style: TextStyle(
-                      color: BMIColor,
+                      color: bmiColor,
                       fontSize: 14,
                       fontWeight: FontWeight.w500)),
             ],
@@ -653,72 +652,72 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
     var heightCM = Preference.shared.getDouble(Preference.HEIGHT_CM);
 
     if (lastWeight != 0 && heightCM != 0) {
-      BMI = double.parse(calculateBMI(lastWeight, heightCM!));
+      bmi = double.parse(calculateBMI(lastWeight, heightCM!));
 
       Debug.printLog(
-          "BMI=>>> ${BMI.toString()}   $lastWeight $lastFoot  $lastInch ");
+          "BMI=>>> ${bmi.toString()}   $lastWeight $lastFoot  $lastInch ");
     }
   }
 
   String calculateBMI(double weight, double height) {
-    BMI = weight / pow(height / 100, 2);
-    return BMI!.toStringAsFixed(1);
+    bmi = weight / pow(height / 100, 2);
+    return bmi!.toStringAsFixed(1);
   }
 
   bmiTextCategory() {
     setState(() {
-      if (BMI! < 15) {
-        BMICategory = Languages.of(context)!.txtSeverelyUnderweight;
-        BMIColor = Colur.black;
-        Preference.shared.setString(Preference.BMI_TEXT, BMICategory!);
-      } else if (BMI! >= 15 && BMI! < 16) {
-        BMICategory = Languages.of(context)!.txtVeryUnderweight;
-        BMIColor = Colur.colorFirst;
-        Preference.shared.setString(Preference.BMI_TEXT, BMICategory!);
-      } else if (BMI! >= 16 && BMI! < 18.5) {
-        BMICategory = Languages.of(context)!.txtUnderweight;
-        BMIColor = Colur.colorSecond;
-        Preference.shared.setString(Preference.BMI_TEXT, BMICategory!);
-      } else if (BMI! >= 18.5 && BMI! <= 25) {
-        BMICategory = Languages.of(context)!.txtHealthyWeight;
-        BMIColor = Colur.colorThird;
-        Preference.shared.setString(Preference.BMI_TEXT, BMICategory!);
-      } else if (BMI! > 25 && BMI! < 30) {
-        BMICategory = Languages.of(context)!.txtOverWeight;
-        BMIColor = Colur.colorFour;
-        Preference.shared.setString(Preference.BMI_TEXT, BMICategory!);
-      } else if (BMI! >= 30 && BMI! < 35) {
-        BMICategory = Languages.of(context)!.txtModeratelyObese;
-        BMIColor = Colur.colorFive;
-        Preference.shared.setString(Preference.BMI_TEXT, BMICategory!);
-      } else if (BMI! >= 35 && BMI! < 40) {
-        BMICategory = Languages.of(context)!.txtObese;
-        BMIColor = Colur.colorSix;
-        Preference.shared.setString(Preference.BMI_TEXT, BMICategory!);
-      } else if (BMI! >= 40) {
-        BMICategory = Languages.of(context)!.txtSeverelyObese;
-        BMIColor = Colur.black;
-        Preference.shared.setString(Preference.BMI_TEXT, BMICategory!);
+      if (bmi! < 15) {
+        bmiCategory = Languages.of(context)!.txtSeverelyUnderweight;
+        bmiColor = Colur.black;
+        Preference.shared.setString(Preference.BMI_TEXT, bmiCategory!);
+      } else if (bmi! >= 15 && bmi! < 16) {
+        bmiCategory = Languages.of(context)!.txtVeryUnderweight;
+        bmiColor = Colur.colorFirst;
+        Preference.shared.setString(Preference.BMI_TEXT, bmiCategory!);
+      } else if (bmi! >= 16 && bmi! < 18.5) {
+        bmiCategory = Languages.of(context)!.txtUnderweight;
+        bmiColor = Colur.colorSecond;
+        Preference.shared.setString(Preference.BMI_TEXT, bmiCategory!);
+      } else if (bmi! >= 18.5 && bmi! <= 25) {
+        bmiCategory = Languages.of(context)!.txtHealthyWeight;
+        bmiColor = Colur.colorThird;
+        Preference.shared.setString(Preference.BMI_TEXT, bmiCategory!);
+      } else if (bmi! > 25 && bmi! < 30) {
+        bmiCategory = Languages.of(context)!.txtOverWeight;
+        bmiColor = Colur.colorFour;
+        Preference.shared.setString(Preference.BMI_TEXT, bmiCategory!);
+      } else if (bmi! >= 30 && bmi! < 35) {
+        bmiCategory = Languages.of(context)!.txtModeratelyObese;
+        bmiColor = Colur.colorFive;
+        Preference.shared.setString(Preference.BMI_TEXT, bmiCategory!);
+      } else if (bmi! >= 35 && bmi! < 40) {
+        bmiCategory = Languages.of(context)!.txtObese;
+        bmiColor = Colur.colorSix;
+        Preference.shared.setString(Preference.BMI_TEXT, bmiCategory!);
+      } else if (bmi! >= 40) {
+        bmiCategory = Languages.of(context)!.txtSeverelyObese;
+        bmiColor = Colur.black;
+        Preference.shared.setString(Preference.BMI_TEXT, bmiCategory!);
       }
     });
   }
 
   double? bmiValuePosition(double fullWidth) {
-    if (BMI! <= 15) {
+    if (bmi! <= 15) {
       return fullWidth * -0.45;
-    } else if (BMI! > 15 && BMI! < 16) {
+    } else if (bmi! > 15 && bmi! < 16) {
       return _setBmiCalculationInLoop(fullWidth, 10, 0.09, -0.45, 0);
-    } else if (BMI! >= 16 && BMI! <= 18.5) {
+    } else if (bmi! >= 16 && bmi! <= 18.5) {
       return _setBmiCalculationInLoop(fullWidth, 25, 16.00, -0.36, 16.00);
-    } else if (BMI! >= 18.5 && BMI! < 25) {
+    } else if (bmi! >= 18.5 && bmi! < 25) {
       return _setBmiCalculationInLoop(fullWidth, 65, 18.00, -0.20, 24.00);
-    } else if (BMI! >= 25 && BMI! < 30) {
+    } else if (bmi! >= 25 && bmi! < 30) {
       return _setBmiCalculationInLoop(fullWidth, 50, 25.00, 0.04, 17.00);
-    } else if (BMI! >= 30 && BMI! < 35) {
+    } else if (bmi! >= 30 && bmi! < 35) {
       return _setBmiCalculationInLoop(fullWidth, 50, 30.00, 0.21, 11.00);
-    } else if (BMI! >= 35 && BMI! < 40) {
+    } else if (bmi! >= 35 && bmi! < 40) {
       return _setBmiCalculationInLoop(fullWidth, 50, 35.00, 0.32, 12.00);
-    } else if (BMI! >= 40) {
+    } else if (bmi! >= 40) {
       return fullWidth * 0.44;
     }
   }
@@ -728,9 +727,9 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
     var pos = 0;
 
     for (int i = 0; i < totalDiffInLoop; i++) {
-      if (BMI == startingPoint ||
-          (BMI! > startingPoint &&
-              BMI! <= (startingPoint + (0.10 * (i + 1))))) {
+      if (bmi == startingPoint ||
+          (bmi! > startingPoint &&
+              bmi! <= (startingPoint + (0.10 * (i + 1))))) {
         break;
       } else {
         pos++;

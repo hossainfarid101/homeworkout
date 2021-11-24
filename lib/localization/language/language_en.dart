@@ -430,5 +430,34 @@ class LanguageEn extends Languages {
   @override
   String get txtShare => "Share";
 
+  @override
+  String get txtWeek => "Week";
+
+  @override
+  String get txtBMI => "BMI";
+
+  @override
+  String get txtEasy => "Easy";
+
+  @override
+  String get txtExhausted => "Exhausted";
+
+  @override
+  String get txtIFeel => "IFeel";
+
+  @override
+  String get txtSkip => "Skip";
+
+  @override
+  String get txtRest => "Rest";
+
+  @override
+  String get txtDone => "Done";
+
+  @override
+  String get txtPrevious => "Previous";
+
+  @override
+  String get txtReadyToGo => "Ready To Go!";
 
 }

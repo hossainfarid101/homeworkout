@@ -61,6 +61,8 @@ dependencies:
   table_calendar: ^3.0.2
   date_format: ^2.0.4
   flutter_picker: ^2.0.2
+  circular_countdown_timer: ^0.2.0
+  audioplayers: ^0.20.1
 
 dev_dependencies:
   flutter_test:
@@ -110,6 +112,7 @@ flutter:
     - assets/icons/ic_setting_voice_guide.webp
     - assets/icons/ic_sound_options.png
     - assets/icons/ic_back.webp
+    - assets/icons/ic_edit.webp
     - assets/images/
     - assets/images/arm_intermediate.webp
     - assets/images/bg_set_week_goal.webp
@@ -118,6 +121,7 @@ flutter:
     - assets/images/bg_libray.webp
     - assets/images/abs_advanced.webp
     - assets/images/men_banner.webp
+    - assets/images/img_exercise.webp
 
 
   # The following line ensures that the Material Icons font is
