@@ -10,6 +10,7 @@ class CommonTopBar extends StatefulWidget {
   final bool isShowBack;
   final bool isMenu;
   final bool isHistory;
+  final Color iconColor;
 
   const CommonTopBar(
       this.headerName,
@@ -17,6 +18,7 @@ class CommonTopBar extends StatefulWidget {
         this.isShowBack = false,
         this.isMenu = false,
         this.isHistory = false,
+        this.iconColor = Colur.black,
         Key? key,
       }) : super(key: key);
 
@@ -45,7 +47,7 @@ class _CommonTopBarState extends State<CommonTopBar> {
                       top: 15.0, bottom: 15.0, left: 15.0, right: 25.0),
                   child: Image.asset(
                     'assets/icons/ic_back.webp',
-                    color: Colur.black,
+                    color: widget.iconColor,
                     width: 20,
                     height: 20,
                   ),

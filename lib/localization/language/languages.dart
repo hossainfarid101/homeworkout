@@ -306,4 +306,16 @@ abstract class Languages {
   String get txtPrevious;
 
   String get txtReadyToGo;
+
+  String get txtAnimation;
+
+  String get txtVideo;
+
+  String get txtPause;
+
+  String get txtRestartThisExercise;
+
+  String get txtQuit;
+
+  String get txtResume;
 }

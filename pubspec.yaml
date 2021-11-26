@@ -63,6 +63,7 @@ dependencies:
   flutter_picker: ^2.0.2
   circular_countdown_timer: ^0.2.0
   audioplayers: ^0.20.1
+  youtube_player_flutter: ^8.0.0
 
 dev_dependencies:
   flutter_test:
@@ -113,6 +114,7 @@ flutter:
     - assets/icons/ic_sound_options.png
     - assets/icons/ic_back.webp
     - assets/icons/ic_edit.webp
+    - assets/icons/cp_ic_animation.png
     - assets/images/
     - assets/images/arm_intermediate.webp
     - assets/images/bg_set_week_goal.webp

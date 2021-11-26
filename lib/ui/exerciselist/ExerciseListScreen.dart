@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:homeworkout_flutter/custom/dialogs/ExerciseDialog.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
+import 'package:homeworkout_flutter/ui/workout/workout_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 
 class ExerciseListScreen extends StatefulWidget {
@@ -302,7 +303,9 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
             fontSize: 20.0,
           ),
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => WorkoutScreen()));
+        },
       ),
     );
   }

@@ -831,7 +831,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                         children: [
                           InkWell(
                             onTap: () {
-                              //_sendFeedback();
+                              _sendFeedback();
                             },
                             child: Text(
                                 Languages.of(context)!

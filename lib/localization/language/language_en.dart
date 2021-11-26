@@ -460,4 +460,22 @@ class LanguageEn extends Languages {
   @override
   String get txtReadyToGo => "Ready To Go!";
 
+  @override
+  String get txtAnimation => "Animation";
+
+  @override
+  String get txtVideo => "Video";
+
+  @override
+  String get txtPause => "Pause";
+
+  @override
+  String get txtQuit => "Quit";
+
+  @override
+  String get txtRestartThisExercise => "Restart this exercise";
+
+  @override
+  String get txtResume => "Resume";
+
 }

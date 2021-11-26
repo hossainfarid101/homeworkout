@@ -438,67 +438,6 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                 ),
               ),
             ),
-            //Divider(color: Colur.grey.withOpacity(0.5),),
-
-            /*InkWell(
-              onTap: () async{
-                //await _restartProgressDialog();
-              },
-              child: Container(
-                margin: EdgeInsets.only(bottom: 10, top:10),
-                child: Row(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(right:10),
-                      child: Image.asset(
-                        "assets/icons/ic_restart_progress.png",
-                        scale: 2,
-                      ),
-                    ),
-                    Expanded(
-                        child: Text(
-                          Languages.of(context)!.txtRestartProgress,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              color: Colur.txtBlack,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w300),
-                        )
-                    )
-                  ],
-                ),
-              ),
-            ),*/
-
-            /*InkWell(
-              onTap: () {
-                //Navigator.push(context, MaterialPageRoute(builder: (context) => VoiceOptionsScreen()));
-              },
-              child: Container(
-                margin: EdgeInsets.only(bottom: 10, top:10),
-                child: Row(
-                  children: [
-                   Container(
-                      margin: EdgeInsets.only(right:10),
-                      child: Image.asset(
-                        "assets/icons/ic_voice.png",
-                        scale: 2,
-                      ),
-                    ),
-                    Expanded(
-                        child: Text(
-                          Languages.of(context)!.txtVoiceOptions,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              color: Colur.txtBlack,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w300),
-                        )
-                    )
-                  ],
-                ),
-              ),
-            ),*/
           ],
         ),
       ),
