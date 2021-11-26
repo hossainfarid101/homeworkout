@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:homeworkout_flutter/common/commonTopBar/commom_topbar.dart';
 import 'package:homeworkout_flutter/interfaces/topbar_clicklistener.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
@@ -40,28 +41,42 @@ class _MetricImperialUnitsScreenState extends State<MetricImperialUnitsScreen>
   @override
   Widget build(BuildContext context) {
     var fullHeight = MediaQuery.of(context).size.height;
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 5),
-                    child: CommonTopBar(
-                      Languages.of(context)!.txtMetricImperialUnit.toUpperCase(),
-                      this,
-                      isShowBack: true,
+    return Theme(
+      data: ThemeData(
+        appBarTheme: AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle.dark,
+        ),
+      ),
+      child: Scaffold(
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(0),
+            child: AppBar( // Here we create one to set status bar color
+              backgroundColor: Colur.white,
+              elevation: 0,
+            )
+        ),
+        body: SafeArea(
+          child: Column(
+            children: [
+              Expanded(
+                child: Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 5),
+                      child: CommonTopBar(
+                        Languages.of(context)!.txtMetricImperialUnit.toUpperCase(),
+                        this,
+                        isShowBack: true,
+                      ),
                     ),
-                  ),
 
-                  _metricScreenWidget(fullHeight)
-                ],
+                    _metricScreenWidget(fullHeight)
+                  ],
+                ),
               ),
-            ),
 
-          ],
+            ],
+          ),
         ),
       ),
     );

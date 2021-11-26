@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:homeworkout_flutter/common/commonTopBar/commom_topbar.dart';
 import 'package:homeworkout_flutter/database/DataBaseHelper.dart';
 import 'package:homeworkout_flutter/database/HistoryTable.dart';
@@ -74,20 +75,34 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
   @override
   Widget build(BuildContext context) {
     var fullWidth = MediaQuery.of(context).size.width;
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Container(
-              child: CommonTopBar(
-                Languages.of(context)!.txtHistory.toUpperCase(),
-                this,
-                isShowBack: true,
+    return Theme(
+      data: ThemeData(
+        appBarTheme: AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle.dark,
+        ), //
+      ),
+      child: Scaffold(
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(0),
+            child: AppBar( // Here we create one to set status bar color
+              backgroundColor: Colur.bg_white,
+              elevation: 0,
+            )
+        ),
+        body: SafeArea(
+          child: Column(
+            children: [
+              Container(
+                child: CommonTopBar(
+                  Languages.of(context)!.txtHistory.toUpperCase(),
+                  this,
+                  isShowBack: true,
+                ),
               ),
-            ),
-            //=======History screen========
-            historyScreenWidget(fullWidth)
-          ],
+              //=======History screen========
+              historyScreenWidget(fullWidth)
+            ],
+          ),
         ),
       ),
     );

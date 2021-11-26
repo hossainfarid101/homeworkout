@@ -24,6 +24,13 @@ class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
         ), //
       ),
       child: Scaffold(
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(0),
+            child: AppBar( // Here we create one to set status bar color
+              backgroundColor: Colur.white,
+              elevation: 0,
+            )
+        ),
         backgroundColor: Colur.white,
         drawer: DrawerMenu(),
         body: Column(

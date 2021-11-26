@@ -58,11 +58,17 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
     return Theme(
       data: ThemeData(
         appBarTheme: AppBarTheme(
-          systemOverlayStyle:
-              SystemUiOverlayStyle.light
+          systemOverlayStyle: SystemUiOverlayStyle.light
         ), //
       ),
       child: Scaffold(
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(0),
+            child: AppBar( // Here we create one to set status bar color
+              backgroundColor: Colur.black,
+              elevation: 0,
+            )
+        ),
         backgroundColor: Colur.iconGreyBg,
         body: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -72,7 +78,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
               return <Widget>[
                 SliverAppBar(
                   elevation: 2.0,
-                  expandedHeight: 330,
+                  expandedHeight: 350,
                   pinned: true,
                   backgroundColor: Colur.black,
                   leading: InkWell(
@@ -162,7 +168,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
               ),
               Expanded(
                 child: Container(
-                  margin: const EdgeInsets.only(top: 10),
+                  margin: const EdgeInsets.only(top: 10, bottom: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

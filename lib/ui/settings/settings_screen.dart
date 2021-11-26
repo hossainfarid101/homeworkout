@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:android_intent_plus/android_intent.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:group_radio_button/group_radio_button.dart';
 import 'package:homeworkout_flutter/common/commonTopBar/commom_topbar.dart';
@@ -53,22 +54,36 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
   Widget build(BuildContext context) {
     selectedEngine = Languages.of(context)!.txtGoogleSpeech;
     double fullWidth = MediaQuery.of(context).size.height;
-    return  Scaffold(
-      drawer: const DrawerMenu(),
-      backgroundColor: Colur.white,
-      body: Column(
-        children: [
-          CommonTopBar(
-            Languages.of(context)!.txtSettings.toUpperCase(),
-            this,
-            isMenu: true,
-          ),
-          const Divider(color: Colur.grey,),
-
-          _settingsScreenWidget(fullWidth)
-        ],
+    return  Theme(
+      data: ThemeData(
+        appBarTheme: AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle.dark,
+        ), //
       ),
+      child: Scaffold(
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(0),
+            child: AppBar( // Here we create one to set status bar color
+              backgroundColor: Colur.white,
+              elevation: 0,
+            )
+        ),
+        drawer: const DrawerMenu(),
+        backgroundColor: Colur.white,
+        body: Column(
+          children: [
+            CommonTopBar(
+              Languages.of(context)!.txtSettings.toUpperCase(),
+              this,
+              isMenu: true,
+            ),
+            const Divider(color: Colur.grey,),
 
+            _settingsScreenWidget(fullWidth)
+          ],
+        ),
+
+      ),
     );
   }
 

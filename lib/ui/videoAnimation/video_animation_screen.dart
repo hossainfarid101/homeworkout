@@ -1,4 +1,5 @@
  import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -34,17 +35,31 @@ class _VideoAnimationScreenState extends State<VideoAnimationScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colur.theme,
-      body: SafeArea(
-        child: Container(
-          child: Column(
-            children: [
-              _topListView(),
-              _topBar(),
-              _youtubeAndAnimationView(),
-              _descriptionOfExercise()
-            ],
+    return Theme(
+      data: ThemeData(
+        appBarTheme: AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle.dark,
+        ), //
+      ),
+      child: Scaffold(
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(0),
+            child: AppBar( // Here we create one to set status bar color
+              backgroundColor: Colur.theme,
+              elevation: 0,
+            )
+        ),
+        backgroundColor: Colur.theme,
+        body: SafeArea(
+          child: Container(
+            child: Column(
+              children: [
+                _topListView(),
+                _topBar(),
+                _youtubeAndAnimationView(),
+                _descriptionOfExercise()
+              ],
+            ),
           ),
         ),
       ),

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
@@ -81,16 +82,30 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colur.blueGradient1,
-      body: SafeArea(
-        child: Container(
-          child: Column(
-            children: [
-              _widgetCenterTimer(),
+    return Theme(
+      data: ThemeData(
+        appBarTheme: AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle.dark,
+        ), //
+      ),
+      child: Scaffold(
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(0),
+            child: AppBar( // Here we create one to set status bar color
+              backgroundColor: Colur.blueGradient1,
+              elevation: 0,
+            )
+        ),
+        backgroundColor: Colur.blueGradient1,
+        body: SafeArea(
+          child: Container(
+            child: Column(
+              children: [
+                _widgetCenterTimer(),
 
-              _widgetBottomExe(),
-            ],
+                _widgetBottomExe(),
+              ],
+            ),
           ),
         ),
       ),

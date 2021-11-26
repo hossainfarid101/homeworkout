@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:homeworkout_flutter/common/commonTopBar/commom_topbar.dart';
 import 'package:homeworkout_flutter/interfaces/topbar_clicklistener.dart';
@@ -18,30 +19,44 @@ class _PauseScreenState extends State<PauseScreen>
     implements TopBarClickListener {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colur.theme,
-      body: SafeArea(
-        child: Container(
-          child: Column(
-            children: [
-              CommonTopBar(
-                "",
-                this,
-                isShowBack: true,
-                iconColor: Colur.white,
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                child: Column(
-                  children: [
-                    _pauseHeader(context),
-                    _restartBtn(context),
-                    _quitBtn(context),
-                    _resumeBtn(context),
-                  ],
+    return Theme(
+      data: ThemeData(
+        appBarTheme: AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle.dark,
+        ), //
+      ),
+      child: Scaffold(
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(0),
+            child: AppBar( // Here we create one to set status bar color
+              backgroundColor: Colur.theme,
+              elevation: 0,
+            )
+        ),
+        backgroundColor: Colur.theme,
+        body: SafeArea(
+          child: Container(
+            child: Column(
+              children: [
+                CommonTopBar(
+                  "",
+                  this,
+                  isShowBack: true,
+                  iconColor: Colur.white,
                 ),
-              ),
-            ],
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                  child: Column(
+                    children: [
+                      _pauseHeader(context),
+                      _restartBtn(context),
+                      _quitBtn(context),
+                      _resumeBtn(context),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

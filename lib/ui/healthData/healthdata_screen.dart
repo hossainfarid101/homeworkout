@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 
@@ -39,25 +40,39 @@ class _HealthDataScreenState extends State<HealthDataScreen> implements TopBarCl
   @override
   Widget build(BuildContext context) {
     var fullHeight = MediaQuery.of(context).size.height;
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: Column(
-                children: [
-                  CommonTopBar(
-                    Languages.of(context)!.txtHealthData.toUpperCase(),
-                    this,
-                    isShowBack: true,
-                  ),
+    return Theme(
+      data: ThemeData(
+        appBarTheme: AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle.dark,
+        ), //
+      ),
+      child: Scaffold(
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(0),
+            child: AppBar( // Here we create one to set status bar color
+              backgroundColor: Colur.white,
+              elevation: 0,
+            )
+        ),
+        body: SafeArea(
+          child: Column(
+            children: [
+              Expanded(
+                child: Column(
+                  children: [
+                    CommonTopBar(
+                      Languages.of(context)!.txtHealthData.toUpperCase(),
+                      this,
+                      isShowBack: true,
+                    ),
 
-                  _healthDataWidget(fullHeight)
-                ],
+                    _healthDataWidget(fullHeight)
+                  ],
+                ),
               ),
-            ),
 
-          ],
+            ],
+          ),
         ),
       ),
     );

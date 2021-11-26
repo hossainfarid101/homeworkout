@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/pause/pause_screen.dart';
 import 'package:homeworkout_flutter/ui/skipExercise/skip_exercise_screen.dart';
@@ -63,19 +64,33 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Container(
-          child: Column(
-            children: [
-              _widgetExeImage(),
-              Expanded(
-                child: (isWidgetCountDown)
-                    ? _widgetStartCountDown()
-                    : _widgetStartWorkout(),
-              ),
+    return Theme(
+      data: ThemeData(
+        appBarTheme: AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle.dark,
+        ), //
+      ),
+      child: Scaffold(
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(0),
+            child: AppBar( // Here we create one to set status bar color
+              backgroundColor: Colur.commonBgColor,
+              elevation: 0,
+            )
+        ),
+        body: SafeArea(
+          child: Container(
+            child: Column(
+              children: [
+                _widgetExeImage(),
+                Expanded(
+                  child: (isWidgetCountDown)
+                      ? _widgetStartCountDown()
+                      : _widgetStartWorkout(),
+                ),
 
-            ],
+              ],
+            ),
           ),
         ),
       ),

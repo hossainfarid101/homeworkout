@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:homeworkout_flutter/common/commonTopBar/commom_topbar.dart';
@@ -73,170 +74,184 @@ class _SetReminderScreenState extends State<SetReminderScreen> implements TopBar
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colur.white,
-        body: SafeArea(
-          child: Column(
-            children: [
-              Expanded(
-                child: Container(
-                  child: Column(
-                    children: [
-                      Container(
-                        child: CommonTopBar(
-                          Languages.of(context)!.txtExerciseReminder,
-                          this,
-                          isShowBack: true,
-                        ),
-                      ),
-                      Expanded(
-                          child: Container(
-                            margin: EdgeInsets.symmetric(horizontal: 15),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    Expanded(
-                                        child: Text(
-                                          Languages.of(context)!.txtDailyReminder,
-                                          style: TextStyle(
-                                              color: Colur.black,
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w500),
-                                        )),
-                                    Switch(
-                                      onChanged: (bool value) async {
-                                        var status = await Permission.notification.status;
-                                        if (status.isDenied) {
-                                          await Permission.notification.request();
-                                        }
-
-                                        if (status.isPermanentlyDenied) {
-                                          openAppSettings();
-                                        }
-
-                                        if (isReminderOn == false) {
-                                          setState(() {
-                                            isReminderOn = true;
-                                          });
-                                        } else {
-                                          setState(() {
-                                            isReminderOn = false;
-                                          });
-                                        }
-                                      },
-                                      value: isReminderOn,
-                                      activeColor: Colur.theme,
-                                      inactiveTrackColor: Colur.txt_gray,
-                                    )
-                                  ],
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    showTimePickerDialog(context);
-                                  },
-                                  child: Container(
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          timeController.text,
-                                          style: TextStyle(
-                                              color: Colur.theme,
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                        Icon(
-                                          Icons.arrow_drop_down,
-                                          color: Colur.theme,
-                                          size: 25,
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                    margin: EdgeInsets.symmetric(vertical: 10),
-                                    child: Divider(
-                                      height: 1,
-                                      color: Colur.black,
-                                    )),
-                                Text(
-                                  Languages.of(context)!.txtRepeat,
-                                  style: TextStyle(
-                                      color: Colur.black,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    showDaySelectionDialog(context);
-                                  },
-                                  child: Container(
-                                    margin: EdgeInsets.only(top: 8),
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          child: Text(
-                                            repeatController.text,
-                                            style: TextStyle(
-                                                color: Colur.theme,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                        ),
-                                        Icon(
-                                          Icons.arrow_drop_down,
-                                          color: Colur.theme,
-                                          size: 20,
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                    margin: EdgeInsets.symmetric(vertical: 10),
-                                    child: Divider(
-                                      height: 1,
-                                      color: Colur.black,
-                                    )),
-                              ],
-                            ),
-                          )),
-
-                      InkWell(
-                        onTap: () {
-                          saveReminder();
-                        },
-                        child: Container(
-                          margin: const EdgeInsets.all(20.0),
-                          padding: const EdgeInsets.symmetric(vertical: 10.0),
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [Colur.blueGradientButton1, Colur.blueGradientButton2],
-                              ),
-                              borderRadius: BorderRadius.circular(30.0)),
-                          child: Text(
-                            Languages.of(context)!.txtSave,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                color: Colur.white,
-                                fontSize: 18.0),
-                            textAlign: TextAlign.center,
+    return Theme(
+      data: ThemeData(
+        appBarTheme: AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle.dark,
+        ),
+      ),
+      child: Scaffold(
+          appBar: PreferredSize(
+              preferredSize: Size.fromHeight(0),
+              child: AppBar( // Here we create one to set status bar color
+                backgroundColor: Colur.white,
+                elevation: 0,
+              )
+          ),
+          backgroundColor: Colur.white,
+          body: SafeArea(
+            child: Column(
+              children: [
+                Expanded(
+                  child: Container(
+                    child: Column(
+                      children: [
+                        Container(
+                          child: CommonTopBar(
+                            Languages.of(context)!.txtExerciseReminder,
+                            this,
+                            isShowBack: true,
                           ),
                         ),
-                      ),
-                    ],
+                        Expanded(
+                            child: Container(
+                              margin: EdgeInsets.symmetric(horizontal: 15),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                          child: Text(
+                                            Languages.of(context)!.txtDailyReminder,
+                                            style: TextStyle(
+                                                color: Colur.black,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w500),
+                                          )),
+                                      Switch(
+                                        onChanged: (bool value) async {
+                                          var status = await Permission.notification.status;
+                                          if (status.isDenied) {
+                                            await Permission.notification.request();
+                                          }
+
+                                          if (status.isPermanentlyDenied) {
+                                            openAppSettings();
+                                          }
+
+                                          if (isReminderOn == false) {
+                                            setState(() {
+                                              isReminderOn = true;
+                                            });
+                                          } else {
+                                            setState(() {
+                                              isReminderOn = false;
+                                            });
+                                          }
+                                        },
+                                        value: isReminderOn,
+                                        activeColor: Colur.theme,
+                                        inactiveTrackColor: Colur.txt_gray,
+                                      )
+                                    ],
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      showTimePickerDialog(context);
+                                    },
+                                    child: Container(
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            timeController.text,
+                                            style: TextStyle(
+                                                color: Colur.theme,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                          Icon(
+                                            Icons.arrow_drop_down,
+                                            color: Colur.theme,
+                                            size: 25,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                      margin: EdgeInsets.symmetric(vertical: 10),
+                                      child: Divider(
+                                        height: 1,
+                                        color: Colur.black,
+                                      )),
+                                  Text(
+                                    Languages.of(context)!.txtRepeat,
+                                    style: TextStyle(
+                                        color: Colur.black,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      showDaySelectionDialog(context);
+                                    },
+                                    child: Container(
+                                      margin: EdgeInsets.only(top: 8),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              repeatController.text,
+                                              style: TextStyle(
+                                                  color: Colur.theme,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w400),
+                                            ),
+                                          ),
+                                          Icon(
+                                            Icons.arrow_drop_down,
+                                            color: Colur.theme,
+                                            size: 20,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                      margin: EdgeInsets.symmetric(vertical: 10),
+                                      child: Divider(
+                                        height: 1,
+                                        color: Colur.black,
+                                      )),
+                                ],
+                              ),
+                            )),
+
+                        InkWell(
+                          onTap: () {
+                            saveReminder();
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.all(20.0),
+                            padding: const EdgeInsets.symmetric(vertical: 10.0),
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [Colur.blueGradientButton1, Colur.blueGradientButton2],
+                                ),
+                                borderRadius: BorderRadius.circular(30.0)),
+                            child: Text(
+                              Languages.of(context)!.txtSave,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  color: Colur.white,
+                                  fontSize: 18.0),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
 
-            ],
-          ),
-        ));
+              ],
+            ),
+          )),
+    );
   }
 
   showTimePickerDialog(BuildContext context) async {

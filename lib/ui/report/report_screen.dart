@@ -107,6 +107,13 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
           ),
       ),
       child: Scaffold(
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(0),
+            child: AppBar( // Here we create one to set status bar color
+              backgroundColor: Colur.commonBgColor,
+              elevation: 0,
+            )
+        ),
         drawer: const DrawerMenu(),
         backgroundColor: Colur.commonBgColor,
         body: Column(

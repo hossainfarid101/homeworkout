@@ -12,6 +12,7 @@ import 'package:homeworkout_flutter/ui/skipExercise/skip_exercise_screen.dart';
 import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
 import 'package:homeworkout_flutter/ui/videoanimation/video_animation_screen.dart';
 import 'package:homeworkout_flutter/ui/workout/workout_screen.dart';
+import 'package:homeworkout_flutter/ui/workoutComplete/workout_complete_screen.dart';
 import 'package:homeworkout_flutter/utils/Debug.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';

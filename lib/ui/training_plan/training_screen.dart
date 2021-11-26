@@ -59,7 +59,7 @@ class _TrainingScreenState extends State<TrainingScreen>
     return Theme(
       data: ThemeData(
         appBarTheme: AppBarTheme(
-          systemOverlayStyle: isShrink ? SystemUiOverlayStyle.dark:SystemUiOverlayStyle.light,
+          systemOverlayStyle: isShrink ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light,
         ),//
       ),
       child: Scaffold(
