@@ -10,7 +10,7 @@ class HomePlanTable {
   String? planWorkouts;
   String? planMinutes;
   String? shortDes;
-  bool? hasSubPlan;
+  String? hasSubPlan;
   String? parentPlanId;
   String? discoverCatName;
 

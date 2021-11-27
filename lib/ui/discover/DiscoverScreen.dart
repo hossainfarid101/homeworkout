@@ -10,6 +10,7 @@ import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/workoutHistory/workout_history_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
+import 'package:homeworkout_flutter/utils/debug.dart';
 
 class DiscoverScreen extends StatefulWidget {
   const DiscoverScreen({Key? key}) : super(key: key);
@@ -23,11 +24,13 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   PageController _pageController =
       PageController(initialPage: 0, viewportFraction: 0.9);
   List<HomePlanTable> picksForYouHomePlanList = [];
+  int? currentPicksForYouPage = 0;
   @override
   void initState() {
     _getPicksForYouPlanData();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Theme(
@@ -82,7 +85,10 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   }
 
   _getPicksForYouPlanData() async {
-    picksForYouHomePlanList = await DataBaseHelper.instance.getPlanDataCatWise(Constant.catPickForYou);
+      picksForYouHomePlanList = await DataBaseHelper().getPlanDataCatWise(Constant.catPickForYou);
+      picksForYouHomePlanList.forEach((element) {
+        Debug.printLog("picksForYouHomePlanList==>> "+element.planName.toString());
+      });
   }
 
   _topBar() {
@@ -171,13 +177,24 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   }
 
   _picksForYouList() {
+    var totalPage = 0;
+    if((picksForYouHomePlanList.length~/2) < picksForYouHomePlanList.length/2){
+      totalPage = (picksForYouHomePlanList.length~/2)+1;
+    }else{
+      totalPage = (picksForYouHomePlanList.length~/2);
+    }
     return Container(
       height: 195,
       margin: const EdgeInsets.only(top: 15.0),
       child: PageView.builder(
-        itemCount: 5,
+        itemCount: totalPage,
         padEnds: false,
         controller: _pageController,
+        onPageChanged: (value) {
+          setState(() {
+            currentPicksForYouPage = value;
+          });
+        },
         physics: AlwaysScrollableScrollPhysics(),
         itemBuilder: (BuildContext context, int index) {
           return _itemPicksForYouList(index);
@@ -187,11 +204,13 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   }
 
   _itemPicksForYouList(int index) {
+    var firstCardPos = 0+(2*currentPicksForYouPage!);
+    var secondCardPos = 1+(2*currentPicksForYouPage!);
     return Container(
       margin: const EdgeInsets.only(left: 20.0),
       child: Column(
         children: [
-          Expanded(
+          (picksForYouHomePlanList.length > (firstCardPos))?Expanded(
             child: Row(
               children: [
                 Card(
@@ -223,7 +242,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                               margin: const EdgeInsets.symmetric(
                                   horizontal: 20.0, vertical: 3.0),
                               child: Text(
-                                "Belly fat burner HIT",
+                                picksForYouHomePlanList[firstCardPos].planName.toString(),
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 17,
@@ -236,11 +255,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                               margin: const EdgeInsets.symmetric(
                                   horizontal: 20.0, vertical: 3.0),
                               child: Text(
-                                "14 " +
-                                    Languages.of(context)!
-                                        .txtMin
-                                        .toLowerCase() +
-                                    " • Beginner",
+                                picksForYouHomePlanList[firstCardPos].planText.toString(),
                                 style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 14,
@@ -260,80 +275,91 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                 ),
               ],
             ),
-          ),
+          ):Expanded(child: Container(
+            child: null,
+            height: 90,
+            width: 90,
+          )),
           Container(
             height: 15.0,
           ),
-          Expanded(
-            child: Row(
-              children: [
-                Card(
-                  elevation: 5.0,
-                  margin: const EdgeInsets.all(0.0),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0)),
-                  child: Container(
-                    width: 90.0,
-                    height: 90.0,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: Image.asset(
-                        'assets/images/abs_advanced.webp',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Column(
+          (picksForYouHomePlanList.length > (secondCardPos))
+              ? Expanded(
+                  child: Row(
                     children: [
+                      Card(
+                        elevation: 5.0,
+                        margin: const EdgeInsets.all(0.0),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0)),
+                        child: Container(
+                          width: 90.0,
+                          height: 90.0,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image.asset(
+                              'assets/images/abs_advanced.webp',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ),
                       Expanded(
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(
-                              width: double.infinity,
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 20.0, vertical: 3.0),
-                              child: Text(
-                                "Belly fat burner HIT",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 17,
-                                  color: Colur.txtBlack,
-                                ),
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    width: double.infinity,
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 20.0, vertical: 3.0),
+                                    child: Text(
+                                      picksForYouHomePlanList[secondCardPos]
+                                          .planName
+                                          .toString(),
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 17,
+                                        color: Colur.txtBlack,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: double.infinity,
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 20.0, vertical: 3.0),
+                                    child: Text(
+                                      picksForYouHomePlanList[secondCardPos]
+                                          .planText
+                                          .toString(),
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 14,
+                                        color: Colur.txt_gray,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                             Container(
-                              width: double.infinity,
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 20.0, vertical: 3.0),
-                              child: Text(
-                                "14 " +
-                                    Languages.of(context)!
-                                        .txtMin
-                                        .toLowerCase() +
-                                    " • Beginner",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14,
-                                  color: Colur.txt_gray,
-                                ),
-                              ),
+                              margin: const EdgeInsets.only(left: 8.0),
+                              child: _divider(thickness: 1.0),
                             ),
                           ],
                         ),
                       ),
-                      Container(
-                        margin: const EdgeInsets.only(left: 8.0),
-                        child: _divider(thickness: 1.0),
-                      ),
                     ],
                   ),
-                ),
-              ],
-            ),
-          ),
+                )
+              : Expanded(
+                  child: Container(
+                  child: null,
+                  height: 90,
+                  width: 90,
+                )),
         ],
       ),
     );

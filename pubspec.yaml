@@ -82,6 +82,7 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
   assets:
+    - assets/database/HomeWorkoutFlutter.db
     - assets/icons/
     - assets/icons/ic_challenge_complete_day.png
     - assets/icons/ic_menu.png
