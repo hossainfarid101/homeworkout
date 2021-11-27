@@ -14,6 +14,7 @@ class Colur {
   static const iconGrey = Color(0X61000000);
   static const iconGreyBg = Color(0XffF7F9FB);
   static const topBarIconColor = Color(0Xff656870);
+  static const iconBgColor = Color(0X50E9EBEB);
 
   static const blueGradient1 =  Color(0xff0A71FE);
   static const blueGradient2 =  Color(0xff0AEFFE);

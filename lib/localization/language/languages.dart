@@ -286,6 +286,7 @@ abstract class Languages {
   String get txtMonday;
 
   String get txtSaturday;
+  String get txtClose;
 
   String get txtWeek;
 

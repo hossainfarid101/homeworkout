@@ -431,6 +431,9 @@ class LanguageEn extends Languages {
   String get txtShare => "Share";
 
   @override
+  String get txtClose => "Close";
+
+  @override
   String get txtWeek => "Week";
 
   @override

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:homeworkout_flutter/custom/dialogs/ExerciseDialog.dart';
+import 'package:homeworkout_flutter/custom/dialogs/exercise_dialog.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/workout/workout_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
@@ -209,7 +209,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
           context: context,
           barrierDismissible: true,
           useSafeArea: true,
-          barrierColor: Colur.transparent,
+          barrierColor: Colur.transparent_black_50,
           builder: (BuildContext context) {
             return ExerciseDialog();
           },

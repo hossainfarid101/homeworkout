@@ -1,4 +1,5 @@
 import 'package:flutter/services.dart';
+import 'package:homeworkout_flutter/database/tables/home_plan_table.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' as path;
@@ -24,14 +25,14 @@ class DataBaseHelper {
     var dbPath = await getDatabasesPath();
     Debug.printLog("getDatabasesPath ===>" + dbPath.toString());
 
-    String dbPathHomeWorkout = path.join(dbPath, "HomeWorkout.db");
+    String dbPathHomeWorkout = path.join(dbPath, "HomeWorkoutFlutter.db");
     Debug.printLog("dbPathEnliven ===>" + dbPathHomeWorkout.toString());
 
     bool dbExistsEnliven = await io.File(dbPathHomeWorkout).exists();
 
     if (!dbExistsEnliven) {
       ByteData data = await rootBundle
-          .load(path.join("assets/database", "HomeWorkout.db"));
+          .load(path.join("assets/database", "HomeWorkoutFlutter.db"));
       List<int> bytes =
       data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
 
@@ -69,6 +70,22 @@ class DataBaseHelper {
   String weightTable = "tbl_Weight";
   String youtubeLinkTable = "tbl_youtube_link";
   String reminderTable = "tbl_reminder";
+  String homePlanTable = "HomePlanTable";
 
+
+
+  Future<List<HomePlanTable>> getPlanDataCatWise(String catName) async {
+    List<HomePlanTable> homePlanDataList = [];
+    var dbClient = await db;
+    List<Map<String, dynamic>> maps = await dbClient
+        .rawQuery("SELECT * FROM $homePlanTable where discoverCatName = '$catName' ");
+    if (maps.length > 0) {
+      for (var answer in maps) {
+        var homePlanData = HomePlanTable.fromJson(answer);
+        homePlanDataList.add(homePlanData);
+      }
+    }
+    return homePlanDataList;
+  }
 
 }

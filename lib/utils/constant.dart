@@ -9,6 +9,8 @@ class Constant {
   static const strHistory = "History";
   static const strExerciseReminder = " Exercise Reminder";
 
+  static const catPickForYou = "Picks for you";
+
 /*  static const minKG = 20.00;
   static const maxKG = 997.00;
 

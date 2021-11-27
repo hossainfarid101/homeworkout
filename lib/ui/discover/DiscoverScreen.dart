@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:homeworkout_flutter/common/commonTopBar/commom_topbar.dart';
 import 'package:homeworkout_flutter/custom/drawer/drawer_menu.dart';
+import 'package:homeworkout_flutter/database/database_helper.dart';
+import 'package:homeworkout_flutter/database/tables/home_plan_table.dart';
 import 'package:homeworkout_flutter/interfaces/topbar_clicklistener.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/workoutHistory/workout_history_screen.dart';
@@ -20,7 +22,12 @@ class _DiscoverScreenState extends State<DiscoverScreen>
     implements TopBarClickListener {
   PageController _pageController =
       PageController(initialPage: 0, viewportFraction: 0.9);
-
+  List<HomePlanTable> picksForYouHomePlanList = [];
+  @override
+  void initState() {
+    _getPicksForYouPlanData();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Theme(
@@ -72,6 +79,10 @@ class _DiscoverScreenState extends State<DiscoverScreen>
         ),
       ),
     );
+  }
+
+  _getPicksForYouPlanData() async {
+    picksForYouHomePlanList = await DataBaseHelper.instance.getPlanDataCatWise(Constant.catPickForYou);
   }
 
   _topBar() {
