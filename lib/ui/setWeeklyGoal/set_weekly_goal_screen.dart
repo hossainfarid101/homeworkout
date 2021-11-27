@@ -20,8 +20,11 @@ class _SetWeeklyGoalScreenState extends State<SetWeeklyGoalScreen> {
   List<Widget> _pickerDataTrainingDay = [];
   List<Widget> _pickerDataFirstDayWeek = [];
 
-  String selectTrainingDays = "";
-  String selectFirstDayOfWeek = "";
+  String? selectTrainingDays = "";
+  String? selectFirstDayOfWeek = "";
+
+  List<int>? initialTrainingDays = [];
+  List<int>? initialFirstDay = [];
 
   @override
   void initState() {
@@ -32,6 +35,15 @@ class _SetWeeklyGoalScreenState extends State<SetWeeklyGoalScreen> {
   _getPreference(){
     selectTrainingDays = Preference.shared.getString(Preference.PREF_TRAINING_DAY) ?? "4";
     selectFirstDayOfWeek = Preference.shared.getString(Preference.PREF_FIRST_DAY) ?? "Sunday";
+
+    initialTrainingDays!.add(int.parse(selectTrainingDays!) - 1);
+    if(selectFirstDayOfWeek == "Sunday") {
+      initialFirstDay!.add(0);
+    } else if(selectFirstDayOfWeek == "Monday") {
+      initialFirstDay!.add(1);
+    } else {
+      initialFirstDay!.add(2);
+    }
   }
 
   @override
@@ -144,7 +156,7 @@ class _SetWeeklyGoalScreenState extends State<SetWeeklyGoalScreen> {
                 children: [
                   Expanded(
                     child: Text(
-                      selectTrainingDays+" days",
+                      selectTrainingDays.toString()+" days",
                       style: TextStyle(
                         color: Colur.theme,
                         fontSize: 18,
@@ -192,7 +204,7 @@ class _SetWeeklyGoalScreenState extends State<SetWeeklyGoalScreen> {
                   children: [
                     Expanded(
                       child: Text(
-                        selectFirstDayOfWeek,
+                        selectFirstDayOfWeek!,
                         style: TextStyle(
                           color: Colur.theme,
                           fontSize: 18,
@@ -245,6 +257,8 @@ class _SetWeeklyGoalScreenState extends State<SetWeeklyGoalScreen> {
           ),
         ),
         onPressed: () {
+          Preference.shared.setString(Preference.PREF_TRAINING_DAY, selectTrainingDays!);
+          Preference.shared.setString(Preference.PREF_FIRST_DAY, selectFirstDayOfWeek!);
           Navigator.pop(context);
         },
       ),
@@ -256,28 +270,29 @@ class _SetWeeklyGoalScreenState extends State<SetWeeklyGoalScreen> {
     const PickerDataTraining = '''[[1,2,3,4,5,6,7]] ''';
     const PickerDataFirstDay = '''[["Sunday","Monday","Saturday"]]''';
       new Picker(
-          adapter: PickerDataAdapter<String>(
-            pickerdata: new JsonDecoder().convert((isTraining)?PickerDataTraining:PickerDataFirstDay),
-            isArray: true),
+        adapter: PickerDataAdapter<String>(
+          pickerdata: new JsonDecoder().convert((isTraining)?PickerDataTraining:PickerDataFirstDay),
+          isArray: true),
+        selecteds: isTraining ? initialTrainingDays! : initialFirstDay,
         hideHeader: true,
-          confirmText: Languages.of(context)!.txtOk.toUpperCase(),
-          cancelText: Languages.of(context)!.txtCancel.toUpperCase(),
-          itemExtent: 50,
-          looping: false,
-          backgroundColor: Colur.white,
-          onConfirm: (Picker picker, List value) {
-           setState(() {
-             for(int i=0;i<value.length;i++) {
-               if (isTraining) {
-                 selectTrainingDays = picker.getSelectedValues()[i];
-               } else {
-                 selectFirstDayOfWeek = picker.getSelectedValues()[i];
-               }
-               print(value[i].toString());
-               print(picker.getSelectedValues()[i]);
+        confirmText: Languages.of(context)!.txtOk.toUpperCase(),
+        cancelText: Languages.of(context)!.txtCancel.toUpperCase(),
+        itemExtent: 50,
+        looping: false,
+        backgroundColor: Colur.white,
+        onConfirm: (Picker picker, List value) {
+         setState(() {
+           for(int i=0;i<value.length;i++) {
+             if (isTraining) {
+               selectTrainingDays = picker.getSelectedValues()[i];
+             } else {
+               selectFirstDayOfWeek = picker.getSelectedValues()[i];
              }
-           });
-          }
+             print(value[i].toString());
+             print(picker.getSelectedValues()[i]);
+           }
+         });
+        }
       ).showDialog(context);
     }
 

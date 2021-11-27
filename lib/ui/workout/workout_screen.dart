@@ -9,6 +9,7 @@ import 'package:homeworkout_flutter/ui/skipExercise/skip_exercise_screen.dart';
 import 'package:homeworkout_flutter/ui/videoAnimation/video_animation_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 
@@ -33,7 +34,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
   bool? isCoachTips;
   bool? isVoiceGuide;
 
-  int? countDownDuration = 10;
+  int? countDownDuration;
 
   Timer? timerForCount;
 
@@ -54,6 +55,8 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
   Timer? _timer;
   int? _pointerValueInt;
   String exUnit = "s";
+
+  int? trainingRestTime;
 
   @override
   void initState() {
@@ -953,8 +956,8 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
   }
 
   _getPreference() {
-    //countdownTime = Preference.shared.getInt(Preference.countdownTime) ?? 10;
-    //trainingRestTime = Preference.shared.getInt(Preference.trainingRestTime) ?? 20;
+    countDownDuration = Preference.shared.getInt(Preference.countdownTime) ?? 10;
+
     isMute = Preference.shared.getBool(Preference.isMute) ?? false;
     isCoachTips = Preference.shared.getBool(Preference.isCoachTips) ?? true;
     isVoiceGuide = Preference.shared.getBool(Preference.isVoiceGuide) ?? true;

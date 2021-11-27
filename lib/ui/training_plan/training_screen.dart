@@ -10,6 +10,7 @@ import 'package:homeworkout_flutter/ui/quarantineathome/QuarantineAtHomeScreen.d
 import 'package:homeworkout_flutter/ui/setWeeklyGoal/set_weekly_goal_screen.dart';
 import 'package:homeworkout_flutter/ui/workoutHistory/workout_history_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
+import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 
 class TrainingScreen extends StatefulWidget {
@@ -26,6 +27,8 @@ class _TrainingScreenState extends State<TrainingScreen>
   ScrollController? _scrollController;
 
   bool lastStatus = true;
+
+  String? totalWeekTrainingDays;
 
   _scrollListener() {
     if (isShrink != lastStatus) {
@@ -44,6 +47,8 @@ class _TrainingScreenState extends State<TrainingScreen>
   void initState() {
     _scrollController = ScrollController();
     _scrollController!.addListener(_scrollListener);
+
+    _getPreference();
     super.initState();
   }
 
@@ -236,7 +241,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                                                     context,
                                                     MaterialPageRoute(
                                                         builder: (context) =>
-                                                            SetWeeklyGoalScreen()));
+                                                            SetWeeklyGoalScreen())).then((value) => _getPreference());
                                               },
                                               child: Container(
                                                 padding: const EdgeInsets.all(15),
@@ -276,7 +281,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              SetWeeklyGoalScreen()));
+                                                              SetWeeklyGoalScreen())).then((value) => _getPreference());
                                                 },
                                                 child: Row(
                                                   children: [
@@ -297,7 +302,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                                                       child: Container(
                                                         margin: const EdgeInsets.symmetric(horizontal: 10),
                                                         alignment: Alignment.centerRight,
-                                                        child: Text("0/4",style: TextStyle(fontSize: 14),),
+                                                        child: Text("0/" + totalWeekTrainingDays! ,style: TextStyle(fontSize: 14),),
                                                       ),
                                                     )
                                                   ],
@@ -354,8 +359,6 @@ class _TrainingScreenState extends State<TrainingScreen>
       ),
     );
   }
-
-
 
   _widgetListOfPlan() {
     return ListView.builder(
@@ -685,6 +688,10 @@ class _TrainingScreenState extends State<TrainingScreen>
         ),
       ),
     );
+  }
+
+  _getPreference() {
+    totalWeekTrainingDays = Preference.shared.getString(Preference.PREF_TRAINING_DAY) ?? "4";
   }
   @override
   void onTopBarClick(String name, {bool value = true}) {}

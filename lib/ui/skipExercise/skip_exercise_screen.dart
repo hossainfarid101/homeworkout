@@ -6,6 +6,7 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
+import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 
 class SkipExerciseScreen extends StatefulWidget {
@@ -18,7 +19,7 @@ class SkipExerciseScreen extends StatefulWidget {
 class _SkipExerciseScreenState extends State<SkipExerciseScreen>
     with TickerProviderStateMixin {
   int? lastPosition = 0;
-  int? totalSkipCount = 20;
+  int? trainingRestTime;
   bool isCountDownStart = true;
   Timer? _timer;
   int? _pointerValueInt;
@@ -31,10 +32,11 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
   AnimationController? listLifeGuideController ;
   int countOfImages = 0;
 
+
   @override
   void initState() {
-    //getPreference();
-    _pointerValueInt = totalSkipCount!;
+    _getPreference();
+    _pointerValueInt = trainingRestTime!;
     //_getLastPosition();
     _startTimer();
     super.initState();
@@ -112,8 +114,6 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
     );
   }
 
-
-
   _widgetCenterTimer() {
     return Expanded(
       child: Container(
@@ -147,9 +147,9 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
                   onTap: () {
                     setState(() {
                       _pointerValueInt = _pointerValueInt! + 20;
-                      totalSkipCount = totalSkipCount! + 20;
+                      trainingRestTime = trainingRestTime! + 20;
                       Debug.printLog(
-                          "totalSkipCount==>  " + totalSkipCount.toString());
+                          "totalSkipCount==>  " + trainingRestTime.toString());
                     });
                   },
                   child: Container(
@@ -300,8 +300,6 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
     );
   }
 
-
-
   /*_setImageRotation(int pos) async {
     await _getImageFromAssets(pos);
 
@@ -351,4 +349,8 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
     countOfImages = imagePaths.length;
 
   }*/
+
+  _getPreference() {
+    trainingRestTime = Preference.shared.getInt(Preference.trainingRestTime) ?? 20;
+  }
 }

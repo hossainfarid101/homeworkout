@@ -15,6 +15,7 @@ import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:lottie/lottie.dart';
 
 class WorkoutCompleteScreen extends StatefulWidget {
   const WorkoutCompleteScreen({Key? key}) : super(key: key);
@@ -27,7 +28,11 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
 
   @override
   void initState() {
-
+    Future.delayed(Duration(seconds: 3), (){
+      setState(() {
+        isAnimation = false;
+      });
+    });
     super.initState();
   }
 
@@ -51,6 +56,8 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
   String iFeelValue = "0";
   List<String>? iFeel = ["1", "2", "3", "4", "5"];
 
+  bool isAnimation = true;
+
   @override
   Widget build(BuildContext context) {
     bmiTextCategory();
@@ -70,58 +77,76 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
             )
         ),
         backgroundColor: Colur.iconGreyBg,
-        body: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: NestedScrollView(
-            headerSliverBuilder:
-                (BuildContext context, bool innerBoxIsScrolled) {
-              return <Widget>[
-                SliverAppBar(
-                  elevation: 2.0,
-                  expandedHeight: 350,
-                  pinned: true,
-                  backgroundColor: Colur.black,
-                  leading: InkWell(
-                    onTap: () {
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => WorkoutHistoryScreen()),
-                          (route) => false);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 15.0, bottom: 15.0, left: 15.0, right: 25.0),
-                      child: Image.asset(
-                        'assets/icons/ic_back.webp',
-                        color: Colur.white,
-                      ),
-                    ),
-                  ),
-                  flexibleSpace: _sliverHeader(context),
-                )
-              ];
-            },
-            body: Container(
-                color: Colur.grayDivider.withOpacity(0.5),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            _buildWeek(context),
-                            weightWidget(),
-                            bmiWidget(fullWidth),
-                            iFeelWidget(),
-                            nextButtonWidget(fullWidth)
-                          ],
+        body: Stack(
+          children: [
+            GestureDetector(
+              onTap: () => FocusScope.of(context).unfocus(),
+              child: NestedScrollView(
+                headerSliverBuilder:
+                    (BuildContext context, bool innerBoxIsScrolled) {
+                  return <Widget>[
+                    SliverAppBar(
+                      elevation: 2.0,
+                      expandedHeight: 350,
+                      pinned: true,
+                      backgroundColor: Colur.black,
+                      leading: InkWell(
+                        onTap: () {
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => WorkoutHistoryScreen()),
+                              (route) => false);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 15.0, bottom: 15.0, left: 15.0, right: 25.0),
+                          child: Image.asset(
+                            'assets/icons/ic_back.webp',
+                            color: Colur.white,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                )),
-          ),
+                      flexibleSpace: _sliverHeader(context),
+                    )
+                  ];
+                },
+                body: Container(
+                    color: Colur.grayDivider.withOpacity(0.5),
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                _buildWeek(context),
+                                weightWidget(),
+                                bmiWidget(fullWidth),
+                                iFeelWidget(),
+                                nextButtonWidget(fullWidth)
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    )),
+              ),
+            ),
+
+            Visibility(
+              visible: isAnimation,
+              child: SafeArea(
+                child: Container(
+                  margin: EdgeInsets.only(top: 55),
+                  child: Lottie.asset(
+                      'assets/animations/congrats3.json',
+                      repeat: false,
+                      alignment: Alignment.topCenter
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
