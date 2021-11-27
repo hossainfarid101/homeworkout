@@ -7,6 +7,7 @@ import 'package:homeworkout_flutter/database/database_helper.dart';
 import 'package:homeworkout_flutter/database/tables/home_plan_table.dart';
 import 'package:homeworkout_flutter/interfaces/topbar_clicklistener.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
+import 'package:homeworkout_flutter/ui/exercisePlan/exercise_plan_screen.dart';
 import 'package:homeworkout_flutter/ui/workoutHistory/workout_history_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
@@ -752,31 +753,34 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   }
 
   _cardWithEquipment() {
-    return Card(
-      elevation: 5.0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-      margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
-      child: Container(
-        height: 110,
-        width: double.infinity,
-        alignment: Alignment.centerRight,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/abs_advanced.webp'),
-            fit: BoxFit.cover,
-          ),
-          borderRadius: BorderRadius.circular(15.0),
-          shape: BoxShape.rectangle,
-        ),
-        child: UnconstrainedBox(
-          child: Container(
-            margin: const EdgeInsets.only(right: 50.0),
-            decoration: BoxDecoration(
-              color: Colur.theme,
-              borderRadius: BorderRadius.circular(50.0),
+    return InkWell(
+      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ExercisePlanScreen())),
+      child: Card(
+        elevation: 5.0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+        margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
+        child: Container(
+          height: 110,
+          width: double.infinity,
+          alignment: Alignment.centerRight,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/abs_advanced.webp'),
+              fit: BoxFit.cover,
             ),
-            child: Icon(Icons.navigate_next_rounded,
-                size: 40.0, color: Colur.white),
+            borderRadius: BorderRadius.circular(15.0),
+            shape: BoxShape.rectangle,
+          ),
+          child: UnconstrainedBox(
+            child: Container(
+              margin: const EdgeInsets.only(right: 50.0),
+              decoration: BoxDecoration(
+                color: Colur.theme,
+                borderRadius: BorderRadius.circular(50.0),
+              ),
+              child: Icon(Icons.navigate_next_rounded,
+                  size: 40.0, color: Colur.white),
+            ),
           ),
         ),
       ),

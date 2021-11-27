@@ -1,8 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.homeworkout_flutter">
    <application
-        android:label="homeworkout_flutter"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Home Workout"
+        android:icon="@mipmap/ic_launcher"
+        android:screenOrientation="portrait">
         <activity
             android:name=".MainActivity"
             android:exported="true"

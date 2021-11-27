@@ -4,6 +4,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:homeworkout_flutter/ui/discover/DiscoverScreen.dart';
+import 'package:homeworkout_flutter/ui/exercisePlan/exercise_plan_screen.dart';
 import 'package:homeworkout_flutter/ui/pause/pause_screen.dart';
 import 'package:homeworkout_flutter/ui/reminder/reminder_screen.dart';
 import 'package:homeworkout_flutter/ui/report/report_screen.dart';
@@ -189,7 +190,7 @@ class _MyAppState extends State<MyApp> {
           statusBarIconBrightness: Brightness.light,
           systemNavigationBarIconBrightness: Brightness.light,
         ),
-        child: TrainingScreen(),
+        child: ExercisePlanScreen(),
       ),
       routes: <String, WidgetBuilder>{
         '/training': (BuildContext context) => TrainingScreen(),
