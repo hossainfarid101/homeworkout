@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:homeworkout_flutter/custom/drawer/drawer_menu.dart';
+import 'package:homeworkout_flutter/database/database_helper.dart';
+import 'package:homeworkout_flutter/database/tables/home_plan_table.dart';
 import 'package:homeworkout_flutter/interfaces/topbar_clicklistener.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/discover/DiscoverScreen.dart';
-import 'package:homeworkout_flutter/ui/exerciseDays/exercisedaysscreen.dart';
+import 'package:homeworkout_flutter/ui/exerciseDays/exercise_days_status_screen.dart';
 import 'package:homeworkout_flutter/ui/exerciselist/ExerciseListScreen.dart';
 import 'package:homeworkout_flutter/ui/quarantineathome/QuarantineAtHomeScreen.dart';
 import 'package:homeworkout_flutter/ui/setWeeklyGoal/set_weekly_goal_screen.dart';
 import 'package:homeworkout_flutter/ui/workoutHistory/workout_history_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
+import 'package:homeworkout_flutter/utils/constant.dart';
+import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 
@@ -29,6 +33,8 @@ class _TrainingScreenState extends State<TrainingScreen>
   bool lastStatus = true;
 
   String? totalWeekTrainingDays;
+  List<HomePlanTable> allPlanDataList = [];
+  int? totalQuarantineWorkout = 0;
 
   _scrollListener() {
     if (isShrink != lastStatus) {
@@ -47,7 +53,7 @@ class _TrainingScreenState extends State<TrainingScreen>
   void initState() {
     _scrollController = ScrollController();
     _scrollController!.addListener(_scrollListener);
-
+    _getDataFromDatabase();
     _getPreference();
     super.initState();
   }
@@ -364,7 +370,7 @@ class _TrainingScreenState extends State<TrainingScreen>
     return ListView.builder(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      itemCount: 18,
+      itemCount: allPlanDataList.length,
       padding: const EdgeInsets.all(0),
       itemBuilder: (BuildContext context, int index) {
         return itemPlan(index);
@@ -379,11 +385,12 @@ class _TrainingScreenState extends State<TrainingScreen>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Visibility(
-            visible: (index == 0 || index == 2 || index == 3 || index == 8 || index == 13 || index == 18),
+            // visible: (index == 0 || index == 2 || index == 3 || index == 8 || index == 13 || index == 18),
+            visible: (allPlanDataList[index].catSubCategory == Constant.title)?true:false,
             child: Container(
               margin: const EdgeInsets.only(top: 10, bottom: 5,left: 5),
               child: Text(
-                Languages.of(context)!.txt7X4Challenge.toUpperCase(),
+                allPlanDataList[index].catName.toString().toUpperCase(),
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 14,
@@ -392,10 +399,10 @@ class _TrainingScreenState extends State<TrainingScreen>
               ),
             ),
           ),
-          Container(
-            height: 150,
-            child: Visibility(
-                visible: true,
+          Visibility(
+              visible: (allPlanDataList[index].catSubCategory != Constant.title)?true:false,
+              child: Container(
+                height: 150,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
                   child: Container(
@@ -412,11 +419,12 @@ class _TrainingScreenState extends State<TrainingScreen>
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Visibility(
-                            visible: (index == 0 || index == 1 )?true:false ,
+                            visible: (allPlanDataList[index].catSubCategory == Constant.txt_7_4_challenge &&
+                                allPlanDataList[index].catSubCategory != Constant.catQuarantineAtHome)?true:false ,
                             child: Expanded(
                               child: InkWell(
                                 onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ExerciseDaysScreen()));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ExerciseDaysStatusScreen()));
                                 },
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -429,13 +437,13 @@ class _TrainingScreenState extends State<TrainingScreen>
                                           Container(
                                             margin: const EdgeInsets.symmetric(horizontal: 15.0),
                                             child: Text(
-                                              Languages.of(context)!.txtFullBody,
+                                              allPlanDataList[index].catName!.toUpperCase(),
                                               maxLines: 1,
                                               softWrap: true,
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
                                                   fontWeight: FontWeight.w500,
-                                                  fontSize: 22,
+                                                  fontSize: 18,
                                                   color: Colur.white),
                                             ),
                                           ),
@@ -493,7 +501,8 @@ class _TrainingScreenState extends State<TrainingScreen>
                             ),
                           ),
                           Visibility(
-                            visible: (index == 2)?true:false,
+                            visible: (allPlanDataList[index].catSubCategory == Constant.titleQuarantineAtHome &&
+                                allPlanDataList[index].catSubCategory != Constant.txt_7_4_challenge)?true:false,
                             child: Expanded(
                               child: InkWell(
                                 onTap: () {
@@ -509,7 +518,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                                             width: double.infinity,
                                             margin: const EdgeInsets.symmetric(horizontal: 15.0),
                                             child: Text(
-                                              "Best Quarantine workout".toUpperCase(),
+                                              allPlanDataList[index].catName!.toUpperCase(),
                                               maxLines: 1,
                                               softWrap: true,
                                               overflow: TextOverflow.ellipsis,
@@ -522,7 +531,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                                           Container(
                                             width: double.infinity,
                                             margin: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 5),
-                                            child: Text( "5 Workout",
+                                            child: Text( "$totalQuarantineWorkout " + Languages.of(context)!.txtWorkouts.toLowerCase(),
                                                 style: TextStyle(color: Colur.white, fontSize: 16.0,fontWeight: FontWeight.w700)),
                                           ),
                                         ],
@@ -541,7 +550,8 @@ class _TrainingScreenState extends State<TrainingScreen>
                             ),
                           ),
                           Visibility(
-                            visible: (index == 0 || index == 1 || index == 2 )?false:true,
+                            visible: (allPlanDataList[index].catSubCategory != Constant.titleQuarantineAtHome &&
+                                allPlanDataList[index].catSubCategory != Constant.txt_7_4_challenge)?true:false,
                             child: Expanded(
                               child: InkWell(
                                 onTap: () {
@@ -555,7 +565,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                                           width: double.infinity,
                                           margin: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 15),
                                           child: Text(
-                                            Languages.of(context)!.txtAbsBeginner.toUpperCase(),
+                                            allPlanDataList[index].catName!.toUpperCase(),
                                             maxLines: 1,
                                             softWrap: true,
                                             overflow: TextOverflow.ellipsis,
@@ -587,8 +597,8 @@ class _TrainingScreenState extends State<TrainingScreen>
                       ),
                     ),
                   ),
-                )
-            ),
+                ),
+              )
           ),
         ],
       ),
@@ -695,5 +705,25 @@ class _TrainingScreenState extends State<TrainingScreen>
   }
   @override
   void onTopBarClick(String name, {bool value = true}) {}
+
+  _getDataFromDatabase(){
+    _getAllPlanList();
+    _getTotalQuarantineWorkout();
+  }
+
+  _getAllPlanList() async{
+    allPlanDataList = await DataBaseHelper().getHomePlanData();
+    allPlanDataList.forEach((element) {
+      Debug.printLog("_getAllPlanList==>> "+element.catName.toString());
+    });
+    setState(() {});
+  }
+
+  _getTotalQuarantineWorkout() async {
+    totalQuarantineWorkout = await DataBaseHelper().getTotalWorkoutQuarantineAtHome();
+    Debug.printLog(
+        "totalQuarantineWorkout==>> " + totalQuarantineWorkout.toString());
+    setState(() {});
+  }
 }
 

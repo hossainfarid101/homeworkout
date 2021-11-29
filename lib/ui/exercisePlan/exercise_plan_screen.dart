@@ -1,13 +1,18 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:homeworkout_flutter/custom/drawer/drawer_menu.dart';
+import 'package:homeworkout_flutter/database/database_helper.dart';
+import 'package:homeworkout_flutter/database/tables/discover_plan_table.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 
 class ExercisePlanScreen extends StatefulWidget {
-  const ExercisePlanScreen({Key? key}) : super(key: key);
 
+  DiscoverPlanTable? homePlanTable;
+
+  ExercisePlanScreen({required this.homePlanTable});
   @override
   _ExercisePlanScreenState createState() => _ExercisePlanScreenState();
 }
@@ -15,7 +20,7 @@ class ExercisePlanScreen extends StatefulWidget {
 class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
 
   ScrollController? _scrollController;
-
+  List<DiscoverPlanTable> discoverSubPlanList = [];
   bool lastStatus = true;
 
   _scrollListener() {
@@ -35,6 +40,7 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
   void initState() {
     _scrollController = ScrollController();
     _scrollController!.addListener(_scrollListener);
+    _getHomeSubPlanList();
     super.initState();
   }
 
@@ -82,7 +88,7 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
                   title: Padding(
                     padding: const EdgeInsets.all(0.0),
                     child: Text(
-                      isShrink ? "WITH EQUIPMENT" : "",
+                      isShrink ? widget.homePlanTable!.planName!.toUpperCase() : "",
                       style: TextStyle(
                         color: isShrink ? Colur.black : Colur.white,
                         fontSize: 16.0,
@@ -109,7 +115,7 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
                             Container(
                               margin: const EdgeInsets.only(bottom: 15),
                               child: Text(
-                                "WITH EQUIPMENT",
+                                  widget.homePlanTable!.planName!.toUpperCase(),
                                 style: TextStyle(
                                   color: Colur.white,
                                   fontSize: 24.0,
@@ -118,7 +124,7 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
                               ),
                             ),
                             AutoSizeText(
-                                "Workout more efficiently. Maximize your workout results with the help of equipment.",
+                                widget.homePlanTable!.shortDes!.toString(),
                                 style: TextStyle(
                                     color: Colur.white,
                                     fontSize: 16.0,
@@ -161,7 +167,7 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
                                 Container(
                                   margin: const EdgeInsets.symmetric(vertical: 3.0),
                                   child: Text(
-                                    "Build wider shoulders",
+                                      discoverSubPlanList[index].planName.toString(),
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                         color: Colur.black,
@@ -174,11 +180,7 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
                                 Container(
                                   margin: const EdgeInsets.symmetric(vertical: 3.0),
                                   child: Text(
-                                    "14 " +
-                                        Languages.of(context)!
-                                            .txtMin
-                                            .toLowerCase() +
-                                        " • Beginner",
+                                    discoverSubPlanList[index].planText.toString(),
                                     style: TextStyle(
                                       fontWeight: FontWeight.w400,
                                       fontSize: 14,
@@ -193,7 +195,7 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
                       ],
                     ),
                   );
-                }, itemCount: 7, 
+                }, itemCount: discoverSubPlanList.length,
                 separatorBuilder: (BuildContext context, int index) { 
                   return Container(
                     margin: const EdgeInsets.symmetric(horizontal: 15,),
@@ -207,5 +209,13 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
         ),
       ),
     );
+  }
+
+  _getHomeSubPlanList() async{
+    discoverSubPlanList = await DataBaseHelper().getHomeSubPlanList(widget.homePlanTable!.planId!);
+    discoverSubPlanList.forEach((element) {
+
+    });
+    setState(() {});
   }
 }

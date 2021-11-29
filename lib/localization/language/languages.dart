@@ -319,4 +319,5 @@ abstract class Languages {
   String get txtQuit;
 
   String get txtResume;
+  String get txtBestQuarantine;
 }

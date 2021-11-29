@@ -2,18 +2,23 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:homeworkout_flutter/custom/drawer/drawer_menu.dart';
+import 'package:homeworkout_flutter/database/database_helper.dart';
+import 'package:homeworkout_flutter/database/model/WeekDayData.dart';
+import 'package:homeworkout_flutter/database/model/WeeklyDayData.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/exerciselist/ExerciseListScreen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
+import 'package:homeworkout_flutter/utils/constant.dart';
+import 'package:homeworkout_flutter/utils/debug.dart';
 
-class ExerciseDaysScreen extends StatefulWidget {
+class ExerciseDaysStatusScreen extends StatefulWidget {
   @override
-  _ExerciseDaysScreenState createState() => _ExerciseDaysScreenState();
+  _ExerciseDaysStatusScreenState createState() => _ExerciseDaysStatusScreenState();
 }
 
-class _ExerciseDaysScreenState extends State<ExerciseDaysScreen> {
+class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
   ScrollController? _scrollController;
-
+  List<WeeklyDayData> weeklyDataList = [];
   bool lastStatus = true;
 
   _scrollListener() {
@@ -33,6 +38,7 @@ class _ExerciseDaysScreenState extends State<ExerciseDaysScreen> {
   void initState() {
     _scrollController = ScrollController();
     _scrollController!.addListener(_scrollListener);
+    _getDataFromDatabase();
     super.initState();
   }
 
@@ -204,17 +210,20 @@ class _ExerciseDaysScreenState extends State<ExerciseDaysScreen> {
       child: ListView.builder(
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount: 4,
+        itemCount: weeklyDataList.length,
         padding: const EdgeInsets.symmetric(vertical: 20),
         itemBuilder: (BuildContext context, int index) {
+
           return itemListDays(index);
         },
       ),
     );
   }
-
+  var isShow = false;
   itemListDays(int index) {
     var mainIndex = index;
+    var boolFlagWeekComplete = index == 0 || weeklyDataList[index -1].Is_completed == "1";
+
     return Container(
       margin: const EdgeInsets.only(left: 10.0, right: 10),
       child: Column(
@@ -225,7 +234,7 @@ class _ExerciseDaysScreenState extends State<ExerciseDaysScreen> {
               Container(
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Colur.theme,
+                  color: (boolFlagWeekComplete)?Colur.theme:Colur.gray,
                 ),
                 child: Icon(
                   Icons.bolt_rounded,
@@ -235,31 +244,55 @@ class _ExerciseDaysScreenState extends State<ExerciseDaysScreen> {
               Expanded(
                 child: Container(
                   margin: const EdgeInsets.symmetric(horizontal: 5),
-                  child: Text(Languages.of(context)!.txtweek +
-                      " " +
-                      (index + 1).toString()),
+                  child: Text(
+                    Languages.of(context)!.txtweek +
+                        " " +
+                        weeklyDataList[index]
+                            .Week_name
+                            .toString()
+                            .replaceAll("0", ""),
+                    style: TextStyle(
+                        color:
+                            (boolFlagWeekComplete) ? Colur.theme : Colur.gray),
+                  ),
                 ),
               ),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 5),
-                child: Text("1/7"),
+                child: Visibility(
+                  visible: boolFlagWeekComplete,
+                  // visible: index == 0 || weeklyDataList[index -1].Is_completed == "1",
+                  child: RichText(
+                    text: TextSpan(
+                      style: TextStyle(fontWeight: FontWeight.bold,color: Colur.black),
+                      children: const <TextSpan>[
+                        TextSpan(text: '1', style: TextStyle(color: Colur.theme)),
+                        TextSpan(text: '/7'),
+                      ],
+                    ),
+                  ),
+                ),
               ),
+
             ],
           ),
           Row(
             children: [
-              Container(
-                margin: const EdgeInsets.only(left: 10),
-                height: 130,
-                child: VerticalDivider(
-                  color: Colur.theme,
-                  width: 1,
-                  thickness: 1,
+              Visibility(
+                visible: weeklyDataList[index].Week_name != "04",
+                child: Container(
+                  margin: const EdgeInsets.only(left: 10),
+                  height: 130,
+                  child: VerticalDivider(
+                    color: (boolFlagWeekComplete)?Colur.theme:Colur.gray,
+                    width: 1,
+                    thickness: 1,
+                  ),
                 ),
               ),
               Expanded(
                 child: Container(
-                  margin: const EdgeInsets.only(left: 20, right: 5),
+                  margin:  EdgeInsets.only(left: (weeklyDataList[index].Week_name == "04")?30:20, right: 5),
                   alignment: Alignment.center,
                   color: Colur.white,
                   height: 125,
@@ -275,7 +308,7 @@ class _ExerciseDaysScreenState extends State<ExerciseDaysScreen> {
                       itemCount: 8,
                       shrinkWrap: true,
                       itemBuilder: (BuildContext ctx, index) {
-                        return _itemOfDays(index, mainIndex);
+                        return _itemOfDays(index, mainIndex,boolFlagWeekComplete);
                       }),
                 ),
               )
@@ -286,11 +319,15 @@ class _ExerciseDaysScreenState extends State<ExerciseDaysScreen> {
     );
   }
 
-  _itemOfDays(int index, mainIndex) {
+  _itemOfDays(int index,int mainIndex, bool boolFlagWeekComplete) {
+    var flagPrevDay = true;
+    if (flagPrevDay && mainIndex != 0) {
+      flagPrevDay = weeklyDataList[mainIndex - 1].Is_completed == "1";
+    }
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        if (index == 0) ...{
+        if (weeklyDataList[mainIndex].Is_completed == "1"  && index != 7) ...{
           Container(
             alignment: Alignment.center,
             height: 60,
@@ -303,7 +340,7 @@ class _ExerciseDaysScreenState extends State<ExerciseDaysScreen> {
               color: Colur.white,
             ),
           )
-        } else if (index != 1 && index != 7) ...{
+        } else if (index != 7) ...{
           Container(
             alignment: Alignment.center,
             height: 60,
@@ -318,7 +355,7 @@ class _ExerciseDaysScreenState extends State<ExerciseDaysScreen> {
               style: TextStyle(color: Colur.disableTxtColor, fontSize: 18),
             ),
           )
-        } else if (index == 7) ...{
+        } else if (index == 7 && index != 0) ...{
           Container(
             alignment: Alignment.center,
             width: 60,
@@ -326,16 +363,18 @@ class _ExerciseDaysScreenState extends State<ExerciseDaysScreen> {
             decoration: BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage(
-                        "assets/images/ic_challenge_uncomplete.webp"),
+                        (weeklyDataList[mainIndex].Is_completed == "1")
+                            ? "assets/images/ic_challenge_complete.png"
+                            : "assets/images/ic_challenge_uncomplete.webp"),
                     scale: 8)),
-            child: Container(
+            /*child: Container(
                 margin: const EdgeInsets.only(bottom: 5),
                 child: Text(
                   (mainIndex + 1).toString(),
                   style: TextStyle(fontSize: 18, color: Colur.disableTxtColor),
-                )),
+                )),*/
           )
-        } else ...{
+        } else if(index == 0)...{
           InkWell(
             onTap: () {
               Navigator.push(
@@ -366,12 +405,25 @@ class _ExerciseDaysScreenState extends State<ExerciseDaysScreen> {
             visible: ((index == 3) || (index == 7)) ? false : true,
             child: Icon(
               Icons.navigate_next_rounded,
-              color: (index != 0) ? Colur.disableTxtColor : Colur.theme,
+              color: (weeklyDataList[mainIndex].Is_completed == "1") ? Colur.theme : Colur.disableTxtColor,
               size: 20,
             ),
           ),
         ),
       ],
     );
+  }
+
+
+  _getDataFromDatabase(){
+    _getWeeklyData();
+  }
+
+  _getWeeklyData()async{
+    weeklyDataList = await DataBaseHelper().getWorkoutWeeklyData(Constant.Full_Body);
+    weeklyDataList.forEach((element) {
+      Debug.printLog("_getWeeklyData==>> "+element.Week_name.toString()+"  "+element.Day_name.toString());
+    });
+    setState(() {});
   }
 }

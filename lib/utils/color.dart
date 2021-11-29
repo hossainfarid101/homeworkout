@@ -93,6 +93,7 @@ class Colur {
   static const grey_icon = Color(0xff747474);
   static const grey_icon_50 = Color(0x50747474);
   static const orange = Color(0xffFF3900);
+  static const gray = Color(0XFFAEAEAE);
   static const common_boarder = Color(0x50807C8A);
   static const blue_Facebook = Color(0xff4167B2);
   static const lightBlue_Twitter = Color(0xff00ACEE);

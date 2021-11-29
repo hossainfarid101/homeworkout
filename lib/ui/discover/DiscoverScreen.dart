@@ -1,17 +1,23 @@
+import 'dart:convert';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:homeworkout_flutter/common/commonTopBar/commom_topbar.dart';
 import 'package:homeworkout_flutter/custom/drawer/drawer_menu.dart';
 import 'package:homeworkout_flutter/database/database_helper.dart';
-import 'package:homeworkout_flutter/database/tables/home_plan_table.dart';
+import 'package:homeworkout_flutter/database/tables/discover_plan_table.dart';
 import 'package:homeworkout_flutter/interfaces/topbar_clicklistener.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/exercisePlan/exercise_plan_screen.dart';
+import 'package:homeworkout_flutter/ui/quarantineathome/QuarantineAtHomeScreen.dart';
 import 'package:homeworkout_flutter/ui/workoutHistory/workout_history_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
+import 'package:homeworkout_flutter/utils/preference.dart';
+import 'package:homeworkout_flutter/utils/utils.dart';
+import 'package:sqflite/sqflite.dart';
 
 class DiscoverScreen extends StatefulWidget {
   const DiscoverScreen({Key? key}) : super(key: key);
@@ -24,11 +30,20 @@ class _DiscoverScreenState extends State<DiscoverScreen>
     implements TopBarClickListener {
   PageController _pageController =
       PageController(initialPage: 0, viewportFraction: 0.9);
-  List<HomePlanTable> picksForYouHomePlanList = [];
+  List<DiscoverPlanTable> picksForYouDiscoverPlanList = [];
+  List<DiscoverPlanTable> forBeginnerDiscoverPlanList = [];
+  List<DiscoverPlanTable> fastWorkoutDiscoverPlanList = [];
+  List<DiscoverPlanTable> challengeDiscoverPlanList = [];
+  List<DiscoverPlanTable> withEqipmentDiscoverPlanList = [];
+  List<DiscoverPlanTable> sleepDiscoverPlanList = [];
+  List<DiscoverPlanTable> bodyFocusDiscoverPlanList = [];
+  DiscoverPlanTable? randomPlanData;
   int? currentPicksForYouPage = 0;
+  int? currentFastWorkoutPage = 0;
+  int? totalQuarantineWorkout = 0;
   @override
   void initState() {
-    _getPicksForYouPlanData();
+    _getDataFromDatabase();
     super.initState();
   }
 
@@ -85,12 +100,105 @@ class _DiscoverScreenState extends State<DiscoverScreen>
     );
   }
 
-  _getPicksForYouPlanData() async {
-      picksForYouHomePlanList = await DataBaseHelper().getPlanDataCatWise(Constant.catPickForYou);
-      picksForYouHomePlanList.forEach((element) {
-        Debug.printLog("picksForYouHomePlanList==>> "+element.planName.toString());
-      });
+  _getDataFromDatabase(){
+    _getRandomPlanData();
+    _getPicksForYouPlanData();
+    _getTotalQuarantineWorkout();
+    _getForBeginnersPlanData();
+    _getFastWorkoutPlanData();
+    _getChallengePlanData();
+    _getWithEqipmentPlanData();
+    _getSleepPlanData();
+    _getBodyFocusPlanData();
   }
+
+  _getRandomPlanData() async{
+    var lastDate = Preference.shared.getString(Constant.PREF_RANDOM_DISCOVER_PLAN_DATE)??"";
+    var currDate = Utils.getCurrentDate();
+    var strPlan = Preference.shared.getString(Constant.PREF_RANDOM_DISCOVER_PLAN)??"";
+    Debug.printLog("strPlan=>>>  "+strPlan.toString());
+    if (lastDate.isNotEmpty && currDate == lastDate && strPlan.isNotEmpty) {
+      randomPlanData = DiscoverPlanTable.fromJson(jsonDecode(strPlan));
+    }else{
+      randomPlanData = await DataBaseHelper().getRandomDiscoverPlan();
+      Preference.shared.setString( Constant.PREF_RANDOM_DISCOVER_PLAN_DATE, currDate);
+      Preference.shared.setString( Constant.PREF_RANDOM_DISCOVER_PLAN, jsonEncode(randomPlanData!.toJson()));
+    }
+
+    setState(() {});
+  }
+
+  _getTotalQuarantineWorkout() async {
+    totalQuarantineWorkout = await DataBaseHelper().getTotalWorkoutQuarantineAtHome();
+    Debug.printLog(
+        "totalQuarantineWorkout==>> " + totalQuarantineWorkout.toString());
+    setState(() {});
+  }
+
+  _getPicksForYouPlanData() async {
+    picksForYouDiscoverPlanList =
+        await DataBaseHelper().getPlanDataCatWise(Constant.catPickForYou);
+    picksForYouDiscoverPlanList.forEach((element) {
+      Debug.printLog("picksForYouHomePlanList==>> " + element.planName.toString());
+    });
+    setState(() {});
+  }
+
+  _getForBeginnersPlanData() async {
+    forBeginnerDiscoverPlanList =
+        await DataBaseHelper().getPlanDataCatWise(Constant.catForBeginner);
+    forBeginnerDiscoverPlanList.forEach((element) {
+      Debug.printLog("_getForBeginnersPlanData==>> " + element.planName.toString());
+    });
+    setState(() {});
+  }
+
+  _getFastWorkoutPlanData() async {
+    fastWorkoutDiscoverPlanList =
+        await DataBaseHelper().getPlanDataCatWise(Constant.catFastWorkout);
+    fastWorkoutDiscoverPlanList.forEach((element) {
+      Debug.printLog("_getFastWorkoutPlanData==>> " + element.planName.toString());
+    });
+    setState(() {});
+  }
+
+  _getChallengePlanData() async {
+    challengeDiscoverPlanList =
+        await DataBaseHelper().getPlanDataCatWise(Constant.catChallenge);
+    challengeDiscoverPlanList.forEach((element) {
+      Debug.printLog("_getChallengePlanData==>> " + element.planName.toString());
+    });
+    setState(() {});
+  }
+
+  _getWithEqipmentPlanData() async {
+    withEqipmentDiscoverPlanList =
+        await DataBaseHelper().getPlanDataCatWise(Constant.catWithEqipment);
+    withEqipmentDiscoverPlanList.forEach((element) {
+      Debug.printLog("_getWithEqipmentPlanData==>> " + element.planName.toString());
+    });
+    setState(() {});
+  }
+
+  _getSleepPlanData() async {
+    sleepDiscoverPlanList =
+        await DataBaseHelper().getPlanDataCatWise(Constant.catSleep);
+    sleepDiscoverPlanList.forEach((element) {
+      Debug.printLog("_getSleepPlanData==>> " + element.planName.toString());
+    });
+    setState(() {});
+  }
+
+  _getBodyFocusPlanData() async {
+    bodyFocusDiscoverPlanList =
+        await DataBaseHelper().getPlanDataCatWise(Constant.catBodyFocus);
+    bodyFocusDiscoverPlanList.forEach((element) {
+      Debug.printLog("_getBodyFocusPlanData==>> " + element.planName.toString());
+    });
+    setState(() {});
+  }
+
+
 
   _topBar() {
     return CommonTopBar(Languages.of(context)!.txtDiscover.toUpperCase(), this,
@@ -132,7 +240,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                   margin: const EdgeInsets.only(
                       top: 15.0, bottom: 0.0, left: 15.0, right: 15.0),
                   child: Text(
-                    "ONLY 4 moves for \nabs",
+                    (randomPlanData != null)?randomPlanData!.planName!:"",
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                         fontWeight: FontWeight.w700,
@@ -145,7 +253,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                   margin: const EdgeInsets.only(
                       top: 12.0, bottom: 25.0, left: 15.0, right: 15.0),
                   child: AutoSizeText(
-                    "4 simple exercises only! Burn belly fat and firm your abs. Get a flat belly fast!",
+                    (randomPlanData != null && randomPlanData!.shortDes! != "")?randomPlanData!.shortDes!:randomPlanData!.introduction!,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                     style: TextStyle(
@@ -179,10 +287,10 @@ class _DiscoverScreenState extends State<DiscoverScreen>
 
   _picksForYouList() {
     var totalPage = 0;
-    if((picksForYouHomePlanList.length~/2) < picksForYouHomePlanList.length/2){
-      totalPage = (picksForYouHomePlanList.length~/2)+1;
+    if((picksForYouDiscoverPlanList.length~/2) < picksForYouDiscoverPlanList.length/2){
+      totalPage = (picksForYouDiscoverPlanList.length~/2)+1;
     }else{
-      totalPage = (picksForYouHomePlanList.length~/2);
+      totalPage = (picksForYouDiscoverPlanList.length~/2);
     }
     return Container(
       height: 195,
@@ -211,7 +319,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
       margin: const EdgeInsets.only(left: 20.0),
       child: Column(
         children: [
-          (picksForYouHomePlanList.length > (firstCardPos))?Expanded(
+          (picksForYouDiscoverPlanList.length > (firstCardPos))
+              ?Expanded(
             child: Row(
               children: [
                 Card(
@@ -243,7 +352,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                               margin: const EdgeInsets.symmetric(
                                   horizontal: 20.0, vertical: 3.0),
                               child: Text(
-                                picksForYouHomePlanList[firstCardPos].planName.toString(),
+                                picksForYouDiscoverPlanList[firstCardPos].planName.toString(),
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 17,
@@ -256,7 +365,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                               margin: const EdgeInsets.symmetric(
                                   horizontal: 20.0, vertical: 3.0),
                               child: Text(
-                                picksForYouHomePlanList[firstCardPos].planText.toString(),
+                                picksForYouDiscoverPlanList[firstCardPos].planText.toString(),
                                 style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 14,
@@ -276,15 +385,18 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                 ),
               ],
             ),
-          ):Expanded(child: Container(
-            child: null,
-            height: 90,
-            width: 90,
-          )),
+          )
+              : Expanded(
+                  child: Container(
+                  child: null,
+                  height: 90,
+                  width: 90,
+                ),
+          ),
           Container(
             height: 15.0,
           ),
-          (picksForYouHomePlanList.length > (secondCardPos))
+          (picksForYouDiscoverPlanList.length > (secondCardPos))
               ? Expanded(
                   child: Row(
                     children: [
@@ -317,7 +429,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                                     margin: const EdgeInsets.symmetric(
                                         horizontal: 20.0, vertical: 3.0),
                                     child: Text(
-                                      picksForYouHomePlanList[secondCardPos]
+                                      picksForYouDiscoverPlanList[secondCardPos]
                                           .planName
                                           .toString(),
                                       style: TextStyle(
@@ -332,7 +444,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                                     margin: const EdgeInsets.symmetric(
                                         horizontal: 20.0, vertical: 3.0),
                                     child: Text(
-                                      picksForYouHomePlanList[secondCardPos]
+                                      picksForYouDiscoverPlanList[secondCardPos]
                                           .planText
                                           .toString(),
                                       style: TextStyle(
@@ -367,52 +479,60 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   }
 
   _bestQuarantineWorkOut() {
-    return Card(
-      elevation: 5.0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-      margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 45.0),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(8.0),
-        child: Container(
-          height: 140,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/abs_advanced.webp'),
-              fit: BoxFit.cover,
-            ),
-            shape: BoxShape.rectangle,
-          ),
+    return InkWell(
+      onTap:() {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => QuarantineAtHomeScreen()));
+      },
+      child: Card(
+        elevation: 5.0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+        margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 45.0),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(8.0),
           child: Container(
-            color: Colur.transparent_black_50,
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: double.infinity,
-                  child: Text(
-                    "Best quarantine workout",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 22,
-                        color: Colur.white),
+            height: 140,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/abs_advanced.webp'),
+                fit: BoxFit.cover,
+              ),
+              shape: BoxShape.rectangle,
+            ),
+            child: Container(
+              color: Colur.transparent_black_50,
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: double.infinity,
+                    child: Text(
+                      "Best quarantine workout",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 22,
+                          color: Colur.white),
+                    ),
                   ),
-                ),
-                Container(
-                  width: double.infinity,
-                  margin: const EdgeInsets.only(top: 10.0),
-                  child: AutoSizeText(
-                    "5 " + Languages.of(context)!.txtWorkouts.toLowerCase(),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                        color: Colur.white),
+                  Container(
+                    width: double.infinity,
+                    margin: const EdgeInsets.only(top: 10.0),
+                    child: AutoSizeText(
+                      "$totalQuarantineWorkout " + Languages.of(context)!.txtWorkouts.toLowerCase(),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                          color: Colur.white),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -443,7 +563,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
       child: ListView.builder(
         physics: AlwaysScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount: 7,
+        itemCount: forBeginnerDiscoverPlanList.length,
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
         itemBuilder: (BuildContext context, int index) {
@@ -474,7 +594,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                 const EdgeInsets.symmetric(vertical: 18.0, horizontal: 18.0),
             alignment: Alignment.bottomLeft,
             child: Text(
-              "ONLY 4 moves for abs",
+              forBeginnerDiscoverPlanList[index].planName.toString(),
               style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 15,
@@ -502,13 +622,24 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   }
 
   _fastWorkoutList() {
+    var totalPage = 0;
+    if((fastWorkoutDiscoverPlanList.length~/2) < fastWorkoutDiscoverPlanList.length/2){
+      totalPage = (fastWorkoutDiscoverPlanList.length~/2)+1;
+    }else{
+      totalPage = (fastWorkoutDiscoverPlanList.length~/2);
+    }
     return Container(
       height: 195,
       margin: const EdgeInsets.only(top: 15.0),
       child: PageView.builder(
-        itemCount: 5,
+        itemCount: totalPage,
         padEnds: false,
         controller: _pageController,
+        onPageChanged: (value) {
+          setState(() {
+            currentFastWorkoutPage = value;
+          });
+        },
         physics: AlwaysScrollableScrollPhysics(),
         itemBuilder: (BuildContext context, int index) {
           return _itemFastWorkoutList(index);
@@ -518,153 +649,162 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   }
 
   _itemFastWorkoutList(int index) {
+    var firstCardPos = 0+(2*currentFastWorkoutPage!);
+    var secondCardPos = 1+(2*currentFastWorkoutPage!);
     return Container(
       margin: const EdgeInsets.only(left: 20.0),
       child: Column(
         children: [
-          Expanded(
-            child: Row(
-              children: [
-                Card(
-                  elevation: 5.0,
-                  margin: const EdgeInsets.all(0.0),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0)),
-                  child: Container(
-                    width: 90.0,
-                    height: 90.0,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: Image.asset(
-                        'assets/images/abs_advanced.webp',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Column(
+          (fastWorkoutDiscoverPlanList.length > (firstCardPos))
+              ? Expanded(
+                  child: Row(
                     children: [
+                      Card(
+                        elevation: 5.0,
+                        margin: const EdgeInsets.all(0.0),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0)),
+                        child: Container(
+                          width: 90.0,
+                          height: 90.0,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image.asset(
+                              'assets/images/abs_advanced.webp',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ),
                       Expanded(
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(
-                              width: double.infinity,
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 20.0, vertical: 3.0),
-                              child: Text(
-                                "4 MIN Tabata",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 17,
-                                  color: Colur.txtBlack,
-                                ),
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    width: double.infinity,
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 20.0, vertical: 3.0),
+                                    child: Text(
+                                      fastWorkoutDiscoverPlanList[firstCardPos].planName.toString(),
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 17,
+                                        color: Colur.txtBlack,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: double.infinity,
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 20.0, vertical: 3.0),
+                                    child: Text(
+                                      fastWorkoutDiscoverPlanList[firstCardPos].planText.toString(),
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 14,
+                                        color: Colur.txt_gray,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                             Container(
-                              width: double.infinity,
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 20.0, vertical: 3.0),
-                              child: Text(
-                                "4 " +
-                                    Languages.of(context)!
-                                        .txtMin
-                                        .toLowerCase() +
-                                    " • Intermediate",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14,
-                                  color: Colur.txt_gray,
-                                ),
-                              ),
+                              margin: const EdgeInsets.only(left: 8.0),
+                              child: _divider(thickness: 1.0),
                             ),
                           ],
                         ),
                       ),
-                      Container(
-                        margin: const EdgeInsets.only(left: 8.0),
-                        child: _divider(thickness: 1.0),
-                      ),
                     ],
                   ),
+                )
+              : Expanded(
+                  child: Container(
+                    child: null,
+                    height: 90,
+                    width: 90,
+                  ),
                 ),
-              ],
-            ),
-          ),
           Container(
             height: 15.0,
           ),
-          Expanded(
-            child: Row(
-              children: [
-                Card(
-                  elevation: 5.0,
-                  margin: const EdgeInsets.all(0.0),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0)),
-                  child: Container(
-                    width: 90.0,
-                    height: 90.0,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: Image.asset(
-                        'assets/images/abs_advanced.webp',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Column(
+          (fastWorkoutDiscoverPlanList.length > (secondCardPos))
+              ? Expanded(
+                  child: Row(
                     children: [
+                      Card(
+                        elevation: 5.0,
+                        margin: const EdgeInsets.all(0.0),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0)),
+                        child: Container(
+                          width: 90.0,
+                          height: 90.0,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image.asset(
+                              'assets/images/abs_advanced.webp',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ),
                       Expanded(
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(
-                              width: double.infinity,
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 20.0, vertical: 3.0),
-                              child: Text(
-                                "Belly fat burner HIT",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 17,
-                                  color: Colur.txtBlack,
-                                ),
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    width: double.infinity,
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 20.0, vertical: 3.0),
+                                    child: Text(
+                                      fastWorkoutDiscoverPlanList[secondCardPos].planName.toString(),
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 17,
+                                        color: Colur.txtBlack,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: double.infinity,
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 20.0, vertical: 3.0),
+                                    child: Text(
+                                      fastWorkoutDiscoverPlanList[secondCardPos].planText.toString(),
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 14,
+                                        color: Colur.txt_gray,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                             Container(
-                              width: double.infinity,
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 20.0, vertical: 3.0),
-                              child: Text(
-                                "14 " +
-                                    Languages.of(context)!
-                                        .txtMin
-                                        .toLowerCase() +
-                                    " • Beginner",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14,
-                                  color: Colur.txt_gray,
-                                ),
-                              ),
+                              margin: const EdgeInsets.only(left: 8.0),
+                              child: _divider(thickness: 1.0),
                             ),
                           ],
                         ),
                       ),
-                      Container(
-                        margin: const EdgeInsets.only(left: 8.0),
-                        child: _divider(thickness: 1.0),
-                      ),
                     ],
                   ),
-                ),
-              ],
-            ),
-          ),
+                )
+              : Expanded(
+                  child: Container(
+                  child: null,
+                  height: 90,
+                  width: 90,
+                )),
         ],
       ),
     );
@@ -693,7 +833,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
       child: ListView.builder(
         physics: AlwaysScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount: 7,
+        itemCount: challengeDiscoverPlanList.length,
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
         itemBuilder: (BuildContext context, int index) {
@@ -725,7 +865,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                 const EdgeInsets.symmetric(vertical: 18.0, horizontal: 18.0),
             alignment: Alignment.bottomLeft,
             child: Text(
-              "Plank Challenge",
+              challengeDiscoverPlanList[index].planName.toString(),
               style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 15,
@@ -754,7 +894,12 @@ class _DiscoverScreenState extends State<DiscoverScreen>
 
   _cardWithEquipment() {
     return InkWell(
-      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ExercisePlanScreen())),
+      onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ExercisePlanScreen(
+                    homePlanTable: withEqipmentDiscoverPlanList[0],
+                  ))),
       child: Card(
         elevation: 5.0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
@@ -810,7 +955,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
       child: GridView.builder(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         scrollDirection: Axis.horizontal,
-        itemCount: 10,
+        itemCount: sleepDiscoverPlanList.length,
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 160, crossAxisSpacing: 0, mainAxisSpacing: 12),
         itemBuilder: (BuildContext context, int index) {
@@ -844,9 +989,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
           alignment: Alignment.centerLeft,
           margin: const EdgeInsets.only(top: 5.0),
           child: Text(
-            index == 5
-                ? "Full body stretching Full body stretching"
-                : "Full body stretching",
+            sleepDiscoverPlanList[index].planName.toString(),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
@@ -886,7 +1029,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
             childAspectRatio: 3 / 2,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10),
-        itemCount: 4,
+        itemCount: bodyFocusDiscoverPlanList.length,
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         itemBuilder: (BuildContext context, int index) {
@@ -897,27 +1040,37 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   }
 
   _itemBodyFocusList(int index) {
-    return Card(
-      margin: const EdgeInsets.all(0.0),
-      elevation: 4.0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-      child: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/abs_advanced.webp'),
-            fit: BoxFit.cover,
-          ),
-          borderRadius: BorderRadius.circular(15.0),
-          shape: BoxShape.rectangle,
-        ),
+    return InkWell(
+      onTap:() {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ExercisePlanScreen(
+                  homePlanTable: bodyFocusDiscoverPlanList[index],
+                )));
+      },
+      child: Card(
+        margin: const EdgeInsets.all(0.0),
+        elevation: 4.0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
         child: Container(
-          width: double.infinity,
-          padding: const EdgeInsets.symmetric(vertical: 18.0, horizontal: 18.0),
-          alignment: Alignment.bottomLeft,
-          child: Text(
-            "Plank Challenge",
-            style: TextStyle(
-                fontWeight: FontWeight.w600, fontSize: 16, color: Colur.white),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/abs_advanced.webp'),
+              fit: BoxFit.cover,
+            ),
+            borderRadius: BorderRadius.circular(15.0),
+            shape: BoxShape.rectangle,
+          ),
+          child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(vertical: 18.0, horizontal: 18.0),
+            alignment: Alignment.bottomLeft,
+            child: Text(
+              bodyFocusDiscoverPlanList[index].planName.toString(),
+              style: TextStyle(
+                  fontWeight: FontWeight.w600, fontSize: 16, color: Colur.white),
+            ),
           ),
         ),
       ),

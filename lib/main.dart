@@ -190,7 +190,7 @@ class _MyAppState extends State<MyApp> {
           statusBarIconBrightness: Brightness.light,
           systemNavigationBarIconBrightness: Brightness.light,
         ),
-        child: ExercisePlanScreen(),
+        child: TrainingScreen(),
       ),
       routes: <String, WidgetBuilder>{
         '/training': (BuildContext context) => TrainingScreen(),

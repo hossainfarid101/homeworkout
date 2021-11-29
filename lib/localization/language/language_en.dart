@@ -481,4 +481,7 @@ class LanguageEn extends Languages {
   @override
   String get txtResume => "Resume";
 
+  @override
+  String get txtBestQuarantine => "Best Quarantine workout";
+
 }

@@ -3,7 +3,6 @@ import 'package:date_format/date_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:homeworkout_flutter/common/commonTopBar/commom_topbar.dart';
-import 'package:homeworkout_flutter/database/DataBaseHelper.dart';
 import 'package:homeworkout_flutter/database/HistoryTable.dart';
 import 'package:homeworkout_flutter/database/HistoryWeekData.dart';
 import 'package:homeworkout_flutter/interfaces/topbar_clicklistener.dart';
@@ -67,7 +66,7 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
         endDateOfCurrentWeek.toString().split(" ")[0]);
 
 
-    getDataFromDatabase();
+    // getDataFromDatabase();
     super.initState();
   }
 
@@ -326,12 +325,12 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
       itemBuilder: (context, index) {
         return InkWell(
           onTap: () async {
-              var planDaysTable = await DataBaseHelper.instance
+              /*var planDaysTable = await DataBaseHelper.instance
                   .getPlanDaysTableById(
                       arrHistoryDetail[index].HPlanId.toString(),
                       arrHistoryDetail[index].HDayName.toString());
               Debug.printLog("arrHistoryDetail[index].HDayName.toString()==>>  " +
-                  arrHistoryDetail[index].HDayName.toString());
+                  arrHistoryDetail[index].HDayName.toString());*/
               Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -506,7 +505,7 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
 
   List<DateTime> dates = [];
 
-  getDataFromDatabase() async {
+  /*getDataFromDatabase() async {
     historyData = await DataBaseHelper().getHistoryData();
     historyData.forEach((element) {
       dates.add(DateTime.parse(element.HCompletionDate!));
@@ -526,7 +525,7 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
     });
 
     Debug.printLog(calendarDates.toString());
-  }
+  }*/
 
   void _deleteExerciseDialog(int id) {
     Widget cancelButton = TextButton(
@@ -542,12 +541,12 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
         style: TextStyle(color: Colur.theme),
       ),
       onPressed: () {
-        DataBaseHelper()
+        /*DataBaseHelper()
             .deleteHistoryData(id)
             .then((value) {
           getDataFromDatabase();
           setState(() {});
-        });
+        });*/
         Navigator.pop(context);
       },
     );

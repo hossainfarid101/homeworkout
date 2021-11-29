@@ -4,12 +4,71 @@ import 'package:homeworkout_flutter/localization/locale_constant.dart';
 import 'package:intl/intl.dart';
 
 class Constant {
+
+  static const QUARANTINE_AT_HOME = "Quarantine at home";
+
   static const strMenu = "Menu";
   static const strBack = "Back";
   static const strHistory = "History";
   static const strExerciseReminder = " Exercise Reminder";
 
+  static const strBeginner = "Beginner";
+  static const strIntermediate = "Intermediate";
+  static const strAdvance = "Advance";
+
+  static const tbl_full_body_workouts_list = "tbl_full_body_workouts_list";
+  static const tbl_lower_body_list = "tbl_lower_body_list";
+  static const tbl_bw_exercise = "tbl_bw_exercise";
+
+  static const tbl_chest_advanced = "tbl_chest_advanced";
+  static const tbl_chest_beginner = "tbl_chest_beginner";
+  static const tbl_chest_intermediate = "tbl_chest_intermediate";
+
+  static const tbl_abs_advanced = "tbl_abs_advanced";
+  static const tbl_abs_beginner = "tbl_abs_beginner";
+  static const tbl_abs_intermediate = "tbl_abs_intermediate";
+
+  static const tbl_arm_advanced = "tbl_arm_advanced";
+  static const tbl_arm_beginner = "tbl_arm_beginner";
+  static const tbl_arm_intermediate = "tbl_arm_intermediate";
+
+  static const tbl_leg_advanced = "tbl_leg_advanced";
+  static const tbl_leg_beginner = "tbl_leg_beginner";
+  static const tbl_leg_intermediate = "tbl_leg_intermediate";
+
+  static const tbl_shoulder_back_advanced = "tbl_shoulder_back_advanced";
+  static const tbl_shoulder_back_beginner = "tbl_shoulder_back_beginner";
+  static const tbl_shoulder_back_intermediate = "tbl_shoulder_back_intermediate";
+
+  /* Todo home category static*/
+  static const titleQuarantineAtHome = "Quarantine At Home";
+  static const title = "title";
+  static const txt_7_4_challenge = "7 X 4 Challenge";
+  static const Build_wider = "Build Wider";
+  static const full_body = "full_data";
+  static const biginner = "biginner";
+  static const intermediate = "intermediate";
+  static const advance = "advance";
+  static const Full_Body = "Full Body";
+  static const Lower_Body = "Lower Body";
+  static const Chest = "Chest";
+  static const Abs = "Abs";
+  static const Arm = "Arm";
+  static const Shoulder_and_Back = "Shoulder & Back";
+  static const Leg = "Leg";
+  static const Library = "Library";
+
   static const catPickForYou = "Picks for you";
+  static const catForBeginner = "For beginner";
+  static const catFastWorkout = "Fast workout";
+  static const catChallenge = "Challenge";
+  static const catWithEqipment = "With eqipment";
+  static const catSleep = "Sleep";
+  static const catBodyFocus = "Body focus";
+  static const catQuarantineAtHome = "Quarantine at home";
+
+  static const PREF_RANDOM_DISCOVER_PLAN = "PREF_RANDOM_DISCOVER_PLAN";
+  static const PREF_RANDOM_DISCOVER_PLAN_DATE = "PREF_RANDOM_DISCOVER_PLAN_DATE";
 
 /*  static const minKG = 20.00;
   static const maxKG = 997.00;

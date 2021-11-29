@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:homeworkout_flutter/common/commonTopBar/commom_topbar.dart';
 import 'package:homeworkout_flutter/custom/drawer/drawer_menu.dart';
+import 'package:homeworkout_flutter/database/database_helper.dart';
+import 'package:homeworkout_flutter/database/tables/discover_plan_table.dart';
 import 'package:homeworkout_flutter/interfaces/topbar_clicklistener.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
+import 'package:homeworkout_flutter/utils/constant.dart';
+import 'package:sqflite/sqflite.dart';
 
 class QuarantineAtHomeScreen extends StatefulWidget {
   const QuarantineAtHomeScreen({Key? key}) : super(key: key);
@@ -15,6 +19,14 @@ class QuarantineAtHomeScreen extends StatefulWidget {
 
 class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
     implements TopBarClickListener {
+
+  List<DiscoverPlanTable> quarantinePlanList = [];
+
+  @override
+  void initState() {
+    _getDataFromQuarantine();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Theme(
@@ -62,7 +74,7 @@ class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
       child: ListView.builder(
         physics: AlwaysScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount: 20,
+        itemCount: quarantinePlanList.length,
         padding: const EdgeInsets.symmetric(vertical: 15.0),
         itemBuilder: (BuildContext context, int index) {
           return _itemQuarantineExerciseList(index);
@@ -96,7 +108,7 @@ class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
                     margin: const EdgeInsets.symmetric(
                         horizontal: 15.0, vertical: 15),
                     child: Text(
-                      Languages.of(context)!.txtAbsBeginner.toUpperCase(),
+                      quarantinePlanList[index].planName!.toUpperCase(),
                       maxLines: 1,
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
@@ -123,7 +135,7 @@ class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
                         color: Colur.grey_icon,
                         size: 18,
                       ),
-                      Icon(
+                      Icon (
                         Icons.bolt_rounded,
                         color: Colur.grey_icon,
                         size: 18,
@@ -141,4 +153,10 @@ class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
 
   @override
   void onTopBarClick(String name, {bool value = true}) {}
+
+
+  _getDataFromQuarantine() async{
+    quarantinePlanList = await DataBaseHelper().getPlanDataCatWise(Constant.catQuarantineAtHome);
+    setState(() {});
+  }
 }
