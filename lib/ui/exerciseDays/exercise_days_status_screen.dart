@@ -292,7 +292,7 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
               ),
               Expanded(
                 child: Container(
-                  margin:  EdgeInsets.only(left: (weeklyDataList[index].Week_name == "04")?30:20, right: 5),
+                  margin:  EdgeInsets.only(left: (weeklyDataList[index].Week_name == "04")?30:20, right:5),
                   alignment: Alignment.center,
                   color: Colur.white,
                   height: 125,
