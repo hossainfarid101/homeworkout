@@ -6,12 +6,12 @@ import 'package:homeworkout_flutter/database/database_helper.dart';
 import 'package:homeworkout_flutter/database/tables/discover_plan_table.dart';
 import 'package:homeworkout_flutter/interfaces/topbar_clicklistener.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
+import 'package:homeworkout_flutter/ui/exerciselist/ExerciseListScreen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:sqflite/sqflite.dart';
 
 class QuarantineAtHomeScreen extends StatefulWidget {
-  const QuarantineAtHomeScreen({Key? key}) : super(key: key);
 
   @override
   _QuarantineAtHomeScreenState createState() => _QuarantineAtHomeScreenState();
@@ -84,66 +84,75 @@ class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
   }
 
   _itemQuarantineExerciseList(int index) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 3.0),
-      height: 140,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(6.0),
-        child: Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/abs_advanced.webp'),
-              fit: BoxFit.cover,
-            ),
-            shape: BoxShape.rectangle,
-          ),
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    ExerciseListScreen(fromPage: Constant.PAGE_DISCOVER,discoverPlanTable: quarantinePlanList[index],)));
+      },
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 3.0),
+        height: 140,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(6.0),
           child: Container(
-            color: Colur.transparent_black_50,
-            child: Column(
-              children: [
-                Expanded(
-                  child: Container(
-                    width: double.infinity,
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 15.0, vertical: 15),
-                    child: Text(
-                      quarantinePlanList[index].planName!.toUpperCase(),
-                      maxLines: 1,
-                      softWrap: true,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 18,
-                          color: Colur.white),
+            width: double.infinity,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/abs_advanced.webp'),
+                fit: BoxFit.cover,
+              ),
+              shape: BoxShape.rectangle,
+            ),
+            child: Container(
+              color: Colur.transparent_black_50,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Container(
+                      width: double.infinity,
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 15.0, vertical: 15),
+                      child: Text(
+                        quarantinePlanList[index].planName!.toUpperCase(),
+                        maxLines: 1,
+                        softWrap: true,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 18,
+                            color: Colur.white),
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  width: double.infinity,
-                  margin: const EdgeInsets.symmetric(
-                      horizontal: 15.0, vertical: 10),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.bolt_rounded,
-                        color: Colur.blue,
-                        size: 18,
-                      ),
-                      Icon(
-                        Icons.bolt_rounded,
-                        color: Colur.grey_icon,
-                        size: 18,
-                      ),
-                      Icon (
-                        Icons.bolt_rounded,
-                        color: Colur.grey_icon,
-                        size: 18,
-                      ),
-                    ],
+                  Container(
+                    width: double.infinity,
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 15.0, vertical: 10),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.bolt_rounded,
+                          color: Colur.blue,
+                          size: 18,
+                        ),
+                        Icon(
+                          Icons.bolt_rounded,
+                          color: Colur.grey_icon,
+                          size: 18,
+                        ),
+                        Icon (
+                          Icons.bolt_rounded,
+                          color: Colur.grey_icon,
+                          size: 18,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

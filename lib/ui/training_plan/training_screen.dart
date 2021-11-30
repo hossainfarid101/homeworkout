@@ -555,7 +555,15 @@ class _TrainingScreenState extends State<TrainingScreen>
                             child: Expanded(
                               child: InkWell(
                                 onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ExerciseListScreen()));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ExerciseListScreen(
+                                                homePlanTable:
+                                                    allPlanDataList[index],
+                                                fromPage: Constant.PAGE_HOME,
+                                              )));
                                 },
                                 child: Container(
                                   child: Column(

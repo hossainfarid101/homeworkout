@@ -1,4 +1,6 @@
 import 'package:flutter/services.dart';
+import 'package:homeworkout_flutter/database/model/DiscoverSingleExerciseData.dart';
+import 'package:homeworkout_flutter/database/model/ExerciseListData.dart';
 import 'package:homeworkout_flutter/database/model/WeeklyDayData.dart';
 import 'package:homeworkout_flutter/database/tables/discover_plan_table.dart';
 import 'package:homeworkout_flutter/database/tables/home_plan_table.dart';
@@ -78,6 +80,8 @@ class DataBaseHelper {
   String reminderTable = "tbl_reminder";
   String discoverPlanTable = "DiscoverPlanTable";
   String homePlanTable = "HomePlanTable";
+  String homeExSingleTable = "HomeExSingleTable";
+  String exerciseTable = "ExerciseTable";
 
 
 
@@ -95,8 +99,6 @@ class DataBaseHelper {
     }
     return homePlanList;
   }
-
-
 
   /*For discover*/
   Future<List<DiscoverPlanTable>> getPlanDataCatWise(String catName) async {
@@ -157,6 +159,19 @@ class DataBaseHelper {
     return discoverPlanDataList.first;
   }
 
+  Future<List<DiscoverSingleExerciseData>> getDiscoverExercisePlanIdWise(String planId)async{
+    List<DiscoverSingleExerciseData> discoverPlanDataList = [];
+    var dbClient = await db;
+    List<Map<String, dynamic>> maps = await dbClient
+        .rawQuery("SELECT DX.PlanId,DX.IsCompleted,Dx.ExTime,Dx.ExId,EX.exDescription, EX.exVideo,EX.exPath,EX.exName,Ex.exUnit FROM $homeExSingleTable as DX INNER JOIN $exerciseTable as EX ON(CASE WHEN DX.ExId != ''THEN DX.ExId ELSE DX.ExId END) = EX.ExId WHERE DX.PlanId = '$planId'");
+    if (maps.length > 0) {
+      for (var answer in maps) {
+        var homePlanData = DiscoverSingleExerciseData.fromJson(answer);
+        discoverPlanDataList.add(homePlanData);
+      }
+    }
+    return discoverPlanDataList;
+  }
   /*For day status*/
   Future<List<WeeklyDayData>> getWorkoutWeeklyData(String strCategoryName) async {
     List<WeeklyDayData> weeklyDataList = [];
@@ -215,4 +230,21 @@ class DataBaseHelper {
     }
     return arrWeekDayData;
   }
+
+  /*For listing exercise*/
+  Future<List<ExerciseListData>> getExercisePlanNameWise(String tableName)async{
+    List<ExerciseListData> exerciseListData = [];
+    var dbClient = await db;
+    List<Map<String, dynamic>> maps = await dbClient.rawQuery("Select * from $tableName");
+    if (maps.length > 0) {
+      for (var answer in maps) {
+        var exerciseData = ExerciseListData.fromJson(answer);
+        exerciseListData.add(exerciseData);
+      }
+    }
+    return exerciseListData;
+  }
+
+
+
 }

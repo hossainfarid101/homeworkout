@@ -334,7 +334,7 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ExerciseListScreen()));
+                      builder: (context) => ExerciseListScreen(fromPage: Constant.PAGE_HISTORY,)));
 
           },
           child: Container(

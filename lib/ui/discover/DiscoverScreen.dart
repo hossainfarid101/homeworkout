@@ -10,6 +10,7 @@ import 'package:homeworkout_flutter/database/tables/discover_plan_table.dart';
 import 'package:homeworkout_flutter/interfaces/topbar_clicklistener.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/exercisePlan/exercise_plan_screen.dart';
+import 'package:homeworkout_flutter/ui/exerciselist/ExerciseListScreen.dart';
 import 'package:homeworkout_flutter/ui/quarantineathome/QuarantineAtHomeScreen.dart';
 import 'package:homeworkout_flutter/ui/workoutHistory/workout_history_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
@@ -320,84 +321,17 @@ class _DiscoverScreenState extends State<DiscoverScreen>
       child: Column(
         children: [
           (picksForYouDiscoverPlanList.length > (firstCardPos))
-              ?Expanded(
-            child: Row(
-              children: [
-                Card(
-                  elevation: 5.0,
-                  margin: const EdgeInsets.all(0.0),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0)),
-                  child: Container(
-                    width: 90.0,
-                    height: 90.0,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: Image.asset(
-                        'assets/images/abs_advanced.webp',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: double.infinity,
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 20.0, vertical: 3.0),
-                              child: Text(
-                                picksForYouDiscoverPlanList[firstCardPos].planName.toString(),
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 17,
-                                  color: Colur.txtBlack,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: double.infinity,
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 20.0, vertical: 3.0),
-                              child: Text(
-                                picksForYouDiscoverPlanList[firstCardPos].planText.toString(),
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14,
-                                  color: Colur.txt_gray,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(left: 8.0),
-                        child: _divider(thickness: 1.0),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          )
-              : Expanded(
-                  child: Container(
-                  child: null,
-                  height: 90,
-                  width: 90,
-                ),
-          ),
-          Container(
-            height: 15.0,
-          ),
-          (picksForYouDiscoverPlanList.length > (secondCardPos))
               ? Expanded(
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ExerciseListScreen(
+                                    fromPage: Constant.PAGE_DISCOVER,
+                                  discoverPlanTable: picksForYouDiscoverPlanList[firstCardPos]
+                                  )));
+                    },
                   child: Row(
                     children: [
                       Card(
@@ -429,7 +363,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                                     margin: const EdgeInsets.symmetric(
                                         horizontal: 20.0, vertical: 3.0),
                                     child: Text(
-                                      picksForYouDiscoverPlanList[secondCardPos]
+                                      picksForYouDiscoverPlanList[
+                                              firstCardPos]
                                           .planName
                                           .toString(),
                                       style: TextStyle(
@@ -444,7 +379,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                                     margin: const EdgeInsets.symmetric(
                                         horizontal: 20.0, vertical: 3.0),
                                     child: Text(
-                                      picksForYouDiscoverPlanList[secondCardPos]
+                                      picksForYouDiscoverPlanList[
+                                              firstCardPos]
                                           .planText
                                           .toString(),
                                       style: TextStyle(
@@ -465,6 +401,99 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                         ),
                       ),
                     ],
+                  ),
+                ),
+              )
+              : Expanded(
+                  child: Container(
+                  child: null,
+                  height: 90,
+                  width: 90,
+                ),
+          ),
+          Container(
+            height: 15.0,
+          ),
+          (picksForYouDiscoverPlanList.length > (secondCardPos))
+              ? Expanded(
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ExerciseListScreen(
+                                    fromPage: Constant.PAGE_DISCOVER,
+                                discoverPlanTable: picksForYouDiscoverPlanList[secondCardPos],
+                                  )));
+                    },
+                    child: Row(
+                      children: [
+                        Card(
+                          elevation: 5.0,
+                          margin: const EdgeInsets.all(0.0),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0)),
+                          child: Container(
+                            width: 90.0,
+                            height: 90.0,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.asset(
+                                'assets/images/abs_advanced.webp',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      width: double.infinity,
+                                      margin: const EdgeInsets.symmetric(
+                                          horizontal: 20.0, vertical: 3.0),
+                                      child: Text(
+                                        picksForYouDiscoverPlanList[secondCardPos]
+                                            .planName
+                                            .toString(),
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 17,
+                                          color: Colur.txtBlack,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: double.infinity,
+                                      margin: const EdgeInsets.symmetric(
+                                          horizontal: 20.0, vertical: 3.0),
+                                      child: Text(
+                                        picksForYouDiscoverPlanList[secondCardPos]
+                                            .planText
+                                            .toString(),
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 14,
+                                          color: Colur.txt_gray,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.only(left: 8.0),
+                                child: _divider(thickness: 1.0),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 )
               : Expanded(

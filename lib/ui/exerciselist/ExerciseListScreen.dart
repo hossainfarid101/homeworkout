@@ -1,12 +1,25 @@
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:homeworkout_flutter/custom/dialogs/exercise_dialog.dart';
+import 'package:homeworkout_flutter/database/database_helper.dart';
+import 'package:homeworkout_flutter/database/model/DiscoverSingleExerciseData.dart';
+import 'package:homeworkout_flutter/database/model/ExerciseListData.dart';
+import 'package:homeworkout_flutter/database/tables/discover_plan_table.dart';
+import 'package:homeworkout_flutter/database/tables/home_plan_table.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/workout/workout_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
+import 'package:homeworkout_flutter/utils/constant.dart';
+import 'package:homeworkout_flutter/utils/debug.dart';
 
 class ExerciseListScreen extends StatefulWidget {
-  const ExerciseListScreen();
+
+  HomePlanTable? homePlanTable;
+  String? fromPage;
+  DiscoverPlanTable? discoverPlanTable;
+
+  ExerciseListScreen({this.homePlanTable,required this.fromPage,this.discoverPlanTable});
 
   @override
   _ExerciseListScreenState createState() => _ExerciseListScreenState();
@@ -14,7 +27,8 @@ class ExerciseListScreen extends StatefulWidget {
 
 class _ExerciseListScreenState extends State<ExerciseListScreen> {
   ScrollController? _scrollController;
-
+  List<ExerciseListData> exerciseDataList = [];
+  List<DiscoverSingleExerciseData> discoverSingleExerciseList = [];
   bool lastStatus = true;
 
   _scrollListener() {
@@ -34,6 +48,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
   void initState() {
     _scrollController = ScrollController();
     _scrollController!.addListener(_scrollListener);
+    _getDataFromDatabase();
     super.initState();
   }
 
@@ -67,7 +82,9 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
                 automaticallyImplyLeading: false,
                 title: isShrink
                     ? Text(
-                        Languages.of(context)!.txtAbsBeginner.toUpperCase(),
+                  (widget.fromPage == Constant.PAGE_HOME)
+                            ? widget.homePlanTable!.catName!.toUpperCase()
+                            : widget.discoverPlanTable!.planName!.toUpperCase(),
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colur.black,
@@ -103,7 +120,9 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
                           fit: BoxFit.cover),
                     ),
                     child: Text(
-                      Languages.of(context)!.txtAbsBeginner.toUpperCase(),
+                      (widget.fromPage == Constant.PAGE_HOME)
+                          ? widget.homePlanTable!.catName!.toUpperCase()
+                          : widget.discoverPlanTable!.planName!.toUpperCase(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colur.white,
@@ -126,7 +145,9 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
                     children: [
                       _timesAndWorkoutsTitle(),
                       _divider(),
-                      _exerciseList(),
+                      (widget.fromPage == Constant.PAGE_HOME)
+                          ? _widgetExerciseListWithEdit()
+                          : __widgetExerciseListWithOutEdit(),
                     ],
                   ),
                 ),
@@ -154,10 +175,10 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Text(
-                "20 " +
-                    Languages.of(context)!.txtMins.toLowerCase() +
-                    " • 16 " +
+              child: Text((widget.fromPage == Constant.PAGE_HOME)
+                  ? exerciseDataList.length.toString()+" " +
+                  Languages.of(context)!.txtWorkouts.toLowerCase()
+                  : discoverSingleExerciseList.length.toString()+" " +
                     Languages.of(context)!.txtWorkouts.toLowerCase(),
                 textAlign: TextAlign.left,
                 style: TextStyle(
@@ -180,7 +201,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
     );
   }
 
-  _exerciseList() {
+  _widgetExerciseListWithEdit() {
     return Expanded(
       child: Theme(
         data: ThemeData(
@@ -189,10 +210,10 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
         ),
         child: ReorderableListView(
           children: <Widget>[
-            for (int index = 0; index < 20; index++)
+            for (int index = 0; index < exerciseDataList.length; index++)
               ListTile(
                 key: Key('$index'),
-                title: _listOfExercise(index),
+                title: _listOfExerciseWithEdit(index),
               ),
           ],
           onReorder: (int oldIndex, int newIndex) {},
@@ -201,7 +222,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
     );
   }
 
-  _listOfExercise(int index) {
+  _listOfExerciseWithEdit(int index) {
     return InkWell(
       onTap: (){
 
@@ -240,7 +261,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "JUMPING JACKS ${index.toString()}",
+                        exerciseDataList[index].title.toString(),
                         style: TextStyle(
                             color: Colur.black,
                             fontWeight: FontWeight.w700,
@@ -252,7 +273,9 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
                           children: [
                             Expanded(
                               child: Text(
-                                (index == 0) ? "00:20" : "x15",
+                                (exerciseDataList[index].timeType == "step")
+                                    ? "x${exerciseDataList[index].time.toString()}"
+                                    : exerciseDataList[index].time.toString(),
                                 style: TextStyle(
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.w400,
@@ -276,6 +299,96 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
       ),
     );
   }
+
+  __widgetExerciseListWithOutEdit(){
+    return Expanded(
+      child: Container(
+        child: ListView.builder(
+          shrinkWrap: false,
+          physics: NeverScrollableScrollPhysics(),
+          itemBuilder: (BuildContext context, int index) {
+            return _listOfExerciseWithOutEdit(index);
+          },
+          itemCount: discoverSingleExerciseList.length,
+        ),
+      ),
+    );
+  }
+
+  _listOfExerciseWithOutEdit(int index) {
+    return InkWell(
+      onTap: (){
+        showDialog(
+          context: context,
+          barrierDismissible: true,
+          useSafeArea: true,
+          barrierColor: Colur.transparent_black_50,
+          builder: (BuildContext context) {
+            return ExerciseDialog();
+          },
+        );
+      },
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Container(
+                height: 90.0,
+                width: 100.0,
+                margin: const EdgeInsets.only(top: 10,left: 30,right: 10,bottom: 10),
+                child: Image.asset(
+                  'assets/images/arm_advanced.webp',
+                  gaplessPlayback: true,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        discoverSingleExerciseList[index].exName.toString(),
+                        style: TextStyle(
+                            color: Colur.black,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 17.0),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 8.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                (discoverSingleExerciseList[index].exUnit == "s")
+                                    ? discoverSingleExerciseList[index].ExTime.toString()
+                                    : "x" + discoverSingleExerciseList[index].ExTime.toString(),
+                                style: TextStyle(
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colur.txt_gray),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+          Container(
+            margin: const EdgeInsets.only(left: 35.0),
+            child: _divider(),
+          )
+        ],
+      ),
+    );
+  }
+
+
 
   _startButton() {
     return Container(
@@ -308,5 +421,29 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
         },
       ),
     );
+  }
+
+  _getDataFromDatabase(){
+    _getAllExerciseList();
+  }
+
+  _getAllExerciseList() async{
+    if(widget.fromPage == Constant.PAGE_HOME) {
+      exerciseDataList = await DataBaseHelper().getExercisePlanNameWise(
+          widget.homePlanTable!.catTableName!);
+      Debug.printLog(
+          "_getAllExerciseList==>>>IF " + exerciseDataList.length.toString());
+    }else{
+      discoverSingleExerciseList = await DataBaseHelper()
+          .getDiscoverExercisePlanIdWise(
+              widget.discoverPlanTable!.planId.toString());
+
+
+      discoverSingleExerciseList.forEach((element) {
+        Debug.printLog(
+            "_getAllExerciseList==>>>ELSE " + discoverSingleExerciseList.length.toString()+" "+element.exName.toString());
+      });
+    }
+    setState(() {});
   }
 }

@@ -195,7 +195,7 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ExerciseListScreen()));
+                                  builder: (context) => ExerciseListScreen(fromPage: Constant.PAGE_DAYS_STATUS,)));
                         },
                       ),
                     ),
@@ -380,7 +380,7 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ExerciseListScreen()));
+                      builder: (context) => ExerciseListScreen(fromPage: Constant.PAGE_DAYS_STATUS,)));
             },
             child: DottedBorder(
               color: Colur.theme,

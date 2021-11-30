@@ -7,6 +7,12 @@ class Constant {
 
   static const QUARANTINE_AT_HOME = "Quarantine at home";
 
+  static const PAGE_HISTORY = "PAGE_HISTORY";
+  static const PAGE_DISCOVER = "PAGE_DISCOVER";
+  static const PAGE_HOME = "PAGE_HOME";
+  static const PAGE_QUARANTINE = "PAGE_QUARANTINE";
+  static const PAGE_DAYS_STATUS = "PAGE_DAYS_STATUS";
+
   static const strMenu = "Menu";
   static const strBack = "Back";
   static const strHistory = "History";
