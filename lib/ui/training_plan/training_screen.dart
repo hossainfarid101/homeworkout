@@ -107,7 +107,13 @@ class _TrainingScreenState extends State<TrainingScreen>
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
                   background: Container(
-                    color: Colur.theme,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage("assets/images/main_bg.webp"),
+                        fit: BoxFit.cover
+                      )
+                    ),
+                    // color: Colur.theme,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
@@ -379,6 +385,8 @@ class _TrainingScreenState extends State<TrainingScreen>
   }
 
   itemPlan(int index) {
+    var gender = Preference.shared.getString(Constant.SELECTED_GENDER)??Constant.GENDER_MEN;
+    Debug.printLog("allPlanDataList[index].catImage====>>  "+allPlanDataList[index].catImage.toString());
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
       child: Column(
@@ -409,7 +417,10 @@ class _TrainingScreenState extends State<TrainingScreen>
                     width: double.infinity,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage('assets/images/abs_advanced.webp'),
+                          // image: AssetImage('assets/exerciseImage/beginner/abs_beginner_men.webp'),
+                          image: AssetImage((allPlanDataList[index].catImage! != Constant.title)
+                              ?allPlanDataList[index].catImage!+"_$gender.webp"
+                              :'assets/exerciseImage/beginner/abs_beginner_men.webp'),
                           fit: BoxFit.cover),
                       shape: BoxShape.rectangle,
                     ),
@@ -424,7 +435,8 @@ class _TrainingScreenState extends State<TrainingScreen>
                             child: Expanded(
                               child: InkWell(
                                 onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ExerciseDaysStatusScreen()));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                                      ExerciseDaysStatusScreen(planName:allPlanDataList[index].catName ,)));
                                 },
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,

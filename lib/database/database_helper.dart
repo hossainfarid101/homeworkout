@@ -11,6 +11,7 @@ import 'package:path/path.dart' as path;
 import 'dart:io' as io;
 
 import 'model/WeekDayData.dart';
+import 'model/WorkoutDetailData.dart';
 
 class DataBaseHelper {
 
@@ -184,17 +185,19 @@ class DataBaseHelper {
     }
     List<Map<String, dynamic>> maps = await dbClient.rawQuery(query);
     if (maps.length > 0) {
+
       for (var answer in maps) {
         var weeklyData = WeeklyDayData.fromJson(answer);
-        var aClass = WeeklyDayData();
 
+        var aClass = WeeklyDayData();
         aClass.Workout_id = weeklyData.Workout_id;
         aClass.Day_name = weeklyData.Day_name;
         aClass.Week_name = weeklyData.Week_name;
         aClass.Is_completed = weeklyData.Is_completed;
         aClass.categoryName = strCategoryName;
+
         aClass.arrWeekDayData = [];
-        getWeekDaysData(weeklyData.Week_name!, strCategoryName).then((value) =>aClass.arrWeekDayData!.addAll(value));
+
         var aClass1 = WeekDayData();
 
         aClass1.Day_name = "Cup";
@@ -205,7 +208,19 @@ class DataBaseHelper {
           aClass1.Is_completed = "0";
         }
 
-        aClass.arrWeekDayData!.add(aClass1);
+
+        getWeekDaysData(weeklyData.Week_name!, strCategoryName)
+            .then((value) => {
+                  aClass.arrWeekDayData = value,
+                  aClass.arrWeekDayData!.add(aClass1),
+                  value.forEach((element) {
+                    Debug.printLog("getWeekDaysData==>> " +
+                        element.Is_completed.toString() +
+                        "  " +
+                        element.Day_name.toString());
+                  }),
+                });
+
         weeklyDataList.add(aClass);
       }
     }
@@ -231,6 +246,31 @@ class DataBaseHelper {
     return arrWeekDayData;
   }
 
+  Future<List<WorkoutDetail>> getWeekDayExerciseData(String strDayName,String strWeekName,String strTableName)async{
+    List<WorkoutDetail> exerciseListData = [];
+    var dbClient = await db;
+    List<Map<String, dynamic>> maps = await dbClient.rawQuery("SELECT * from $strTableName WHERE Day_name = '$strDayName' AND Week_name = '0$strWeekName'");
+    if (maps.length > 0) {
+      for (var answer in maps) {
+        var exerciseData = WorkoutDetail.fromJson(answer);
+        exerciseListData.add(exerciseData);
+      }
+    }
+    return exerciseListData;
+  }
+
+  Future<int> reorderExercise(int? workOutId,int sortValue,String tableName) async {
+    Map<String, dynamic> row = {
+      'sort': sortValue,
+    };
+    var dbClient = await db;
+    var result = await dbClient
+        .update(tableName, row, where: 'Workout_id = ?', whereArgs: [workOutId]);
+    //Debug.printLog("res:reorderExercise ::::::::  $result  $sortValue");
+    return result;
+  }
+
+
   /*For listing exercise*/
   Future<List<ExerciseListData>> getExercisePlanNameWise(String tableName)async{
     List<ExerciseListData> exerciseListData = [];
@@ -244,6 +284,7 @@ class DataBaseHelper {
     }
     return exerciseListData;
   }
+
 
 
 

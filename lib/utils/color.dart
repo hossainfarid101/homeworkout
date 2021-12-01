@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 class Colur {
 
 
-  static const theme = Color(0xff3384FF);
-  static const theme_trans = Color(0x503384FF);
+/*  static const theme = Color(0xff3384FF);
+  static const theme_trans = Color(0x503384FF);*/
+
+  static const theme = Color(0xffA855F7);
+  static const theme_trans = Color(0x50A855F7);
+
 
 
   static const transparent = Colors.transparent;
@@ -16,13 +20,17 @@ class Colur {
   static const topBarIconColor = Color(0Xff656870);
   static const iconBgColor = Color(0X50E9EBEB);
 
-  static const blueGradient1 =  Color(0xff0A71FE);
-  static const blueGradient2 =  Color(0xff0AEFFE);
+  static const blueGradient1 =  Color(0xffA855F7);
+  static const blueGradient2 =  Color(0xff6366F1);
 
-  static const blueGradientButton1 = Color(0xff046FF9);
-  static const blueGradientButton2 = Color(0xff004DF8);
+ /* static const blueGradientButton1 = Color(0xff046FF9);
+  static const blueGradientButton2 = Color(0xff004DF8);*/
 
-  static const blueDivider = Color(0xff004DF8);
+  static const blueGradientButton1 = Color(0xffA855F7);
+  static const blueGradientButton2 = Color(0xff6366F1);
+
+  // static const blueDivider = Color(0xff004DF8);
+  static const blueDivider = Color(0xff0AB897);
   static const grayDivider = Color(0xFFD6D6D6);
 
   static const purpleGradientShadow =  Color(0x908C3CFF);

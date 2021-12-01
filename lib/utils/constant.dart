@@ -5,6 +5,9 @@ import 'package:intl/intl.dart';
 
 class Constant {
 
+  static const SELECTED_GENDER = "SELECTED_GENDER";
+  static const GENDER_MEN = "men";
+  static const GENDER_WOMEN = "women";
   static const QUARANTINE_AT_HOME = "Quarantine at home";
 
   static const PAGE_HISTORY = "PAGE_HISTORY";
@@ -55,6 +58,8 @@ class Constant {
   static const biginner = "biginner";
   static const intermediate = "intermediate";
   static const advance = "advance";
+  static const Full_body_small = "Full body";
+  static const Lower_body_small = "Lower body";
   static const Full_Body = "Full Body";
   static const Lower_Body = "Lower Body";
   static const Chest = "Chest";

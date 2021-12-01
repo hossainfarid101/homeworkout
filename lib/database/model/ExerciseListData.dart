@@ -8,6 +8,8 @@ class ExerciseListData {
   String? time;
   String? timeType;
   String? image;
+  int? sort;
+  int? defaultSort;
 
   ExerciseListData({
     this.workoutId,
@@ -17,6 +19,8 @@ class ExerciseListData {
     this.time,
     this.timeType,
     this.image,
+    this.sort,
+    this.defaultSort,
 });
 
   factory ExerciseListData.fromRawJson(String str) =>
@@ -32,7 +36,8 @@ class ExerciseListData {
     time: json["Time"],
     timeType: json["time_type"],
     image: json["Image"],
-
+    sort: json["sort"],
+    defaultSort: json["defaultSort"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -43,6 +48,8 @@ class ExerciseListData {
     "Time": time,
     "time_type": timeType,
     "Image": image,
+    "sort": sort,
+    "defaultSort": defaultSort,
   };
 
 }

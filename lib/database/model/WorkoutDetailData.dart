@@ -1,37 +1,37 @@
 import 'dart:convert';
 
-class BwExerciseTable {
+class WorkoutDetail {
   int? workoutId;
   String? title;
   String? videoLink;
   String? description;
-  String? time;
+  String? Time_beginner;
   String? timeType;
   String? level;
   String? image;
 
-  BwExerciseTable({
+  WorkoutDetail({
     this.workoutId,
     this.title,
     this.videoLink,
     this.description,
-    this.time,
+    this.Time_beginner,
     this.timeType,
     this.level,
     this.image,
   });
 
-  factory BwExerciseTable.fromRawJson(String str) =>
-      BwExerciseTable.fromJson(json.decode(str));
+  factory WorkoutDetail.fromRawJson(String str) =>
+      WorkoutDetail.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory BwExerciseTable.fromJson(Map<String, dynamic> json) => BwExerciseTable(
+  factory WorkoutDetail.fromJson(Map<String, dynamic> json) => WorkoutDetail(
     workoutId: json["Workout_id"],
     title: json["Title"],
     videoLink: json["videoLink"],
     description: json["Description"],
-    time: json["Time"],
+    Time_beginner: json["Time_beginner"],
     timeType: json["time_type"],
     image: json["Image"],
 
@@ -42,7 +42,7 @@ class BwExerciseTable {
     "Title": title,
     "videoLink": videoLink,
     "Description": description,
-    "Time": time,
+    "Time_beginner": Time_beginner,
     "time_type": timeType,
     "Image": image,
   };

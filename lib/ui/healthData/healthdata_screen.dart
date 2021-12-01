@@ -208,9 +208,11 @@ class _HealthDataScreenState extends State<HealthDataScreen> implements TopBarCl
                   if(_gender == Gender.male) {
                     isMale = true;
                     Preference.shared.setBool(Preference.isMale, true);
+                    Preference.shared.setString(Constant.SELECTED_GENDER, Constant.GENDER_MEN);
                   } else {
                     isMale = false;
                     Preference.shared.setBool(Preference.isMale, false);
+                    Preference.shared.setString(Constant.SELECTED_GENDER, Constant.GENDER_WOMEN);
                   }
 
                   Navigator.pop(context);

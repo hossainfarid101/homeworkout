@@ -101,7 +101,8 @@ class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
             width: double.infinity,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/abs_advanced.webp'),
+                // image: AssetImage('assets/images/abs_advanced.webp'),
+                image: AssetImage(quarantinePlanList[index].planImage.toString()),
                 fit: BoxFit.cover,
               ),
               shape: BoxShape.rectangle,

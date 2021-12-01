@@ -226,7 +226,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
           width: double.infinity,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/abs_advanced.webp'),
+              // image: AssetImage('assets/images/abs_advanced.webp'),
+              image: AssetImage(randomPlanData!.planImage.toString()),
               fit: BoxFit.cover,
             ),
             shape: BoxShape.rectangle,
@@ -316,7 +317,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   _itemPicksForYouList(int index) {
     var firstCardPos = 0+(2*currentPicksForYouPage!);
     var secondCardPos = 1+(2*currentPicksForYouPage!);
-    return Container(
+     return Container(
       margin: const EdgeInsets.only(left: 20.0),
       child: Column(
         children: [
@@ -345,7 +346,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
                             child: Image.asset(
-                              'assets/images/abs_advanced.webp',
+                              // 'assets/images/abs_advanced.webp',
+                              picksForYouDiscoverPlanList[firstCardPos].planImage.toString(),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -439,7 +441,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(8.0),
                               child: Image.asset(
-                                'assets/images/abs_advanced.webp',
+                                // 'assets/images/abs_advanced.webp',
+                                picksForYouDiscoverPlanList[secondCardPos].planImage.toString(),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -508,6 +511,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   }
 
   _bestQuarantineWorkOut() {
+    var gender = Preference.shared.getString(Constant.SELECTED_GENDER)??Constant.GENDER_MEN;
     return InkWell(
       onTap:() {
         Navigator.push(
@@ -526,7 +530,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
             width: double.infinity,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/abs_advanced.webp'),
+                // image: AssetImage('assets/images/abs_advanced.webp'),
+                image: AssetImage('assets/exerciseImage/other/best_quarantine_$gender.webp'),
                 fit: BoxFit.cover,
               ),
               shape: BoxShape.rectangle,
@@ -611,7 +616,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/abs_advanced.webp'),
+              // image: AssetImage('assets/images/abs_advanced.webp'),
+              image: AssetImage(forBeginnerDiscoverPlanList[index].planImage.toString()),
               fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.circular(4.0),
@@ -699,7 +705,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
                             child: Image.asset(
-                              'assets/images/abs_advanced.webp',
+                              // 'assets/images/abs_advanced.webp',
+                              fastWorkoutDiscoverPlanList[firstCardPos].planImage.toString(),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -776,7 +783,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
                             child: Image.asset(
-                              'assets/images/abs_advanced.webp',
+                              // 'assets/images/abs_advanced.webp',
+                              fastWorkoutDiscoverPlanList[secondCardPos].planImage.toString(),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -882,7 +890,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/abs_advanced.webp'),
+              // image: AssetImage('assets/images/abs_advanced.webp'),
+              image: AssetImage(challengeDiscoverPlanList[index].planImage.toString()),
               fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.circular(4.0),
@@ -939,7 +948,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
           alignment: Alignment.centerRight,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/abs_advanced.webp'),
+              image: AssetImage('assets/exerciseImage/discover/equipment/with_equipment.webp'),
+              // image: AssetImage(withEqipmentDiscoverPlanList[0].planImage.toString()),
               fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.circular(15.0),
@@ -999,6 +1009,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
       children: [
         Container(
           height: 105,
+          width: 150,
           child: Card(
             elevation: 5.0,
             margin: const EdgeInsets.all(0.0),
@@ -1007,7 +1018,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10.0),
               child: Image.asset(
-                'assets/images/abs_advanced.webp',
+                // 'assets/images/abs_advanced.webp',
+                sleepDiscoverPlanList[index].planImage.toString(),
                 fit: BoxFit.cover,
               ),
             ),
@@ -1085,7 +1097,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/abs_advanced.webp'),
+              // image: AssetImage('assets/images/abs_advanced.webp'),
+              image: AssetImage(bodyFocusDiscoverPlanList[index].planImage.toString()),
               fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.circular(15.0),

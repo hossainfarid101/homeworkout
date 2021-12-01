@@ -118,6 +118,7 @@ flutter:
     - assets/icons/ic_edit.webp
     - assets/icons/cp_ic_animation.png
     - assets/images/
+    - assets/images/main_bg.webp
     - assets/images/arm_intermediate.webp
     - assets/images/bg_set_week_goal.webp
     - assets/images/ic_challenge_uncomplete.webp
@@ -126,6 +127,97 @@ flutter:
     - assets/images/abs_advanced.webp
     - assets/images/men_banner.webp
     - assets/images/img_exercise.webp
+    - assets/exerciseImage/discover/sleep/
+    - assets/exerciseImage/discover/sleep/back_streching.webp
+    - assets/exerciseImage/discover/sleep/lower_back_pain_relief.webp
+    - assets/exerciseImage/discover/sleep/knee_pain_relief.jpg
+    - assets/exerciseImage/discover/sleep/sleepy_time_stretching.webp
+    - assets/exerciseImage/discover/sleep/shoulder_tension_relief.webp
+    - assets/exerciseImage/discover/sleep/lower_body_stretching.webp
+    - assets/exerciseImage/discover/sleep/upper_body_stretcing.webp
+    - assets/exerciseImage/discover/sleep/neck_shoulder_tension_relief.webp
+    - assets/exerciseImage/discover/sleep/morning_warm_up.webp
+    - assets/exerciseImage/discover/sleep/full_body_stretching.webp
+    - assets/exerciseImage/discover/equipment/
+    - assets/exerciseImage/discover/equipment/with_equipment.webp
+    - assets/exerciseImage/discover/fastWorkout/
+    - assets/exerciseImage/discover/fastWorkout/7_min_abs_workout.webp
+    - assets/exerciseImage/discover/fastWorkout/7_min_hiit_fat_burning.webp
+    - assets/exerciseImage/discover/fastWorkout/7_min_classic.webp
+    - assets/exerciseImage/discover/fastWorkout/before_workout_warmup.webp
+    - assets/exerciseImage/discover/fastWorkout/3_exercises_lose_belly_fat.webp
+    - assets/exerciseImage/discover/fastWorkout/4_min_tabata.webp
+    - assets/exerciseImage/discover/quarantine/
+    - assets/exerciseImage/discover/quarantine/dumbbell_workout_home.webp
+    - assets/exerciseImage/discover/quarantine/band_workout_home.webp
+    - assets/exerciseImage/discover/quarantine/stay_shape_women.webp
+    - assets/exerciseImage/discover/quarantine/athletes_choice_home.webp
+    - assets/exerciseImage/discover/quarantine/immunity_booster_home.webp
+    - assets/exerciseImage/discover/picksForYou/
+    - assets/exerciseImage/discover/picksForYou/fat_burning_hiit.webp
+    - assets/exerciseImage/discover/picksForYou/hiit_intermediate.webp
+    - assets/exerciseImage/discover/picksForYou/build_wider_shoulder.webp
+    - assets/exerciseImage/discover/picksForYou/ripped_vcut_abs_sculpting.webp
+    - assets/exerciseImage/discover/picksForYou/last_longer_in_bed.webp
+    - assets/exerciseImage/discover/picksForYou/hiit_killer_core.webp
+    - assets/exerciseImage/discover/picksForYou/get_rid of man_boobs_hiit.webp
+    - assets/exerciseImage/discover/picksForYou/lose_fat_no_jump.webp
+    - assets/exerciseImage/discover/picksForYou/belly_fat_burner_hiit.webp
+    - assets/exerciseImage/intermediate/
+    - assets/exerciseImage/intermediate/shoulder_back_intermediate_women.webp
+    - assets/exerciseImage/intermediate/shoulder_back_intermediate_men.webp
+    - assets/exerciseImage/intermediate/leg_intermediate_women.webp
+    - assets/exerciseImage/intermediate/leg_intermediate_men.webp
+    - assets/exerciseImage/intermediate/chest_intermediate_men.webp
+    - assets/exerciseImage/intermediate/chest_intermediate_women.webp
+    - assets/exerciseImage/intermediate/arm_intermediate_women.webp
+    - assets/exerciseImage/intermediate/arm_intermediate_men.webp
+    - assets/exerciseImage/intermediate/abs_intermediate_women.webp
+    - assets/exerciseImage/intermediate/abs_intermediate_men.webp
+    - assets/exerciseImage/advance/
+    - assets/exerciseImage/advance/shoulder_back_advanced_women.webp
+    - assets/exerciseImage/advance/shoulder_back_advanced_men.webp
+    - assets/exerciseImage/advance/leg_advanced_women.webp
+    - assets/exerciseImage/advance/leg_advanced_men.webp
+    - assets/exerciseImage/advance/chest_advanced_women.webp
+    - assets/exerciseImage/advance/arm_advanced_men.webp
+    - assets/exerciseImage/advance/arm_advanced_women.webp
+    - assets/exerciseImage/advance/abs_advanced_women.webp
+    - assets/exerciseImage/advance/abs_advanced_men.webp
+    - assets/exerciseImage/beginner/
+    - assets/exerciseImage/beginner/shoulder_back_beginner_women.webp
+    - assets/exerciseImage/beginner/shoulder_back_beginner_men.webp
+    - assets/exerciseImage/beginner/leg_beginner_women.webp
+    - assets/exerciseImage/beginner/leg_beginner_men.webp
+    - assets/exerciseImage/beginner/chest_beginner_women.webp
+    - assets/exerciseImage/beginner/abs_beginner_women.webp
+    - assets/exerciseImage/beginner/abs_beginner_men.webp
+    - assets/exerciseImage/other/
+    - assets/exerciseImage/other/ic_six_pack.webp
+    - assets/exerciseImage/other/ic_butt_leg.webp
+    - assets/exerciseImage/other/ic_arm_shoulder.webp
+    - assets/exerciseImage/other/ic_chest.webp
+    - assets/exerciseImage/other/ic_burn_100_calories.webp
+    - assets/exerciseImage/other/ic_20_min_body.webp
+    - assets/exerciseImage/other/ic_belly_fat_burner.webp
+    - assets/exerciseImage/other/ic_build_wider_shoulder_challenge.webp
+    - assets/exerciseImage/other/ic_brutal_ladder_hiit.webp
+    - assets/exerciseImage/other/ic_hiit_killer_core.webp
+    - assets/exerciseImage/other/ic_killer_chest_workout.webp
+    - assets/exerciseImage/other/ic_plank_challenge.webp
+    - assets/exerciseImage/other/ic_beginner_core_workout.webp
+    - assets/exerciseImage/other/ic_beginner_push_up.webp
+    - assets/exerciseImage/other/ic_build_wider_shoulder_beginner.webp
+    - assets/exerciseImage/other/ic_abs_workout_no_crumch.webp
+    - assets/exerciseImage/other/ic_arm_workout_no_push_ups.webp
+    - assets/exerciseImage/other/ic_leg_workout_no_jumping.webp
+    - assets/exerciseImage/other/ic_only_4_moves_for_abs.webp
+    - assets/exerciseImage/other/lower_body_women.webp
+    - assets/exerciseImage/other/lower_body_men.webp
+    - assets/exerciseImage/other/full_body_men.webp
+    - assets/exerciseImage/other/full_body_women.webp
+    - assets/exerciseImage/other/best_quarantine_men.webp
+    - assets/exerciseImage/other/best_quarantine_women.webp
     - assets/animations/
     - assets/animations/congrats1.json
     - assets/animations/congrats2.json
