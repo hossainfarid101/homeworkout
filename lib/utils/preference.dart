@@ -2,6 +2,7 @@
 import 'dart:async';
 
 // Package imports:
+import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /* global class for handle all the preference activity into application */
@@ -252,5 +253,38 @@ class Preference {
       }
     });
     return Future.value(true);
+  }
+
+
+  setLastUnCompletedExPos(String tableName, int numLastPosition) {
+    _pref!.setInt(tableName, numLastPosition);
+    /*switch (strPlanId) {
+      case 1:
+        return _pref!.setInt(tableName + strLastDayName, numLastPosition);
+      case 2:
+        return _pref!.setInt(tableName + strLastDayName, numLastPosition);
+      case 3:
+        return _pref!.setInt(tableName + strLastDayName, numLastPosition);
+    }*/
+  }
+
+
+
+  int? getLastUnCompletedExPos(String tableName) {
+    return _pref!.getInt(tableName) ?? 0;
+    /*switch (strPlanId) {
+      case 1:
+        return _pref!.getInt(
+            tableName + strLastDayName) ??
+            0;
+      case 2:
+        return _pref!.getInt(tableName +
+            strLastDayName) ??
+            0;
+      case 3:
+        return _pref!.getInt(
+            tableName + strLastDayName) ??
+            0;
+    }*/
   }
 }

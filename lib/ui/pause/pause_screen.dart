@@ -65,7 +65,9 @@ class _PauseScreenState extends State<PauseScreen>
 
   _resumeBtn(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.pop(context, false);
+      },
       child: Container(
         height: 80,
         width: double.infinity,
@@ -192,7 +194,7 @@ class _PauseScreenState extends State<PauseScreen>
   @override
   void onTopBarClick(String name, {bool value = true}) {
     if(name == Constant.strBack) {
-      Navigator.pop(context);
+      Navigator.pop(context, false);
     }
   }
 }

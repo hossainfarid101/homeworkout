@@ -266,7 +266,7 @@ class DataBaseHelper {
     var dbClient = await db;
     var result = await dbClient
         .update(tableName, row, where: 'Workout_id = ?', whereArgs: [workOutId]);
-    //Debug.printLog("res:reorderExercise ::::::::  $result  $sortValue");
+    Debug.printLog("res:reorderExercise ::::::::  $result  $sortValue");
     return result;
   }
 

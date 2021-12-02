@@ -320,4 +320,7 @@ abstract class Languages {
 
   String get txtResume;
   String get txtBestQuarantine;
+  String get txtSeconds;
+  String get txtTimes;
+  String get txtNextExercise;
 }

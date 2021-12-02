@@ -234,11 +234,6 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
                         : discoverSingleExerciseList.length.toString() +
                             " " +
                             Languages.of(context)!.txtWorkouts.toLowerCase(),
-                /*(widget.fromPage == Constant.PAGE_HOME)
-                  ? exerciseDataList.length.toString()+" " +
-                  Languages.of(context)!.txtWorkouts.toLowerCase()
-                  : discoverSingleExerciseList.length.toString()+" " +
-                    Languages.of(context)!.txtWorkouts.toLowerCase(),*/
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   color: Colur.txtBlack,
@@ -282,17 +277,11 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
               ),
           ],
           onReorder: (int oldIndex, int newIndex) {
-            setState(() {
+            setState(()  {
               if (oldIndex < newIndex) {
                 newIndex -= 1;
               }
-              if(widget.fromPage == Constant.PAGE_HOME){
-                final ExerciseListData exerciseListData = exerciseDataList.removeAt(oldIndex);
-                exerciseDataList.insert(newIndex, exerciseListData);
-              }else{
-                WorkoutDetail workoutDetail = workoutDetailList.removeAt(oldIndex);
-                workoutDetailList.insert(newIndex, workoutDetail);
-              }
+              _reorderExercise(newIndex, oldIndex);
             });
           },
         ),
@@ -300,6 +289,29 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
     );
   }
 
+  _reorderExercise(int newIndex,int oldIndex) async {
+    if(widget.fromPage == Constant.PAGE_HOME) {
+      final ExerciseListData exerciseListData = exerciseDataList.removeAt(oldIndex);
+      exerciseDataList.insert(newIndex, exerciseListData);
+      for(int i=0;i<exerciseDataList.length;i++){
+        await DataBaseHelper().reorderExercise(exerciseDataList[i].workoutId,
+            i + 1, widget.homePlanTable!.catTableName.toString());
+      }
+    }else{
+      WorkoutDetail workoutDetail = workoutDetailList.removeAt(oldIndex);
+      workoutDetailList.insert(newIndex, workoutDetail);
+      var tableName = "";
+      if(widget.planName == Constant.Full_body_small){
+        tableName = Constant.tbl_full_body_workouts_list;
+      }else if(widget.planName == Constant.Lower_body_small){
+        tableName = Constant.tbl_lower_body_list;
+      }
+      for(int i=0;i<workoutDetailList.length;i++){
+        await DataBaseHelper().reorderExercise(workoutDetailList[i].workoutId,
+            i + 1,tableName);
+      }
+    }
+  }
   _listOfExerciseWithEdit(int index) {
     return InkWell(
       onTap: (){
@@ -507,7 +519,24 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
           ),
         ),
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => WorkoutScreen()));
+          var tableName = "";
+          if(widget.fromPage == Constant.PAGE_HOME){
+            tableName = widget.homePlanTable!.catTableName.toString();
+          }else if(widget.fromPage == Constant.PAGE_HOME && widget.planName != ""){
+            if(widget.planName == Constant.Full_body_small){
+              tableName = Constant.tbl_full_body_workouts_list;
+            }else if(widget.planName == Constant.Lower_body_small){
+              tableName = Constant.tbl_lower_body_list;
+            }
+          }
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => WorkoutScreen(
+                        fromPage: widget.fromPage,
+                        exerciseDataList: exerciseDataList,
+                    tableName: tableName,
+                      )));
         },
       ),
     );
@@ -519,12 +548,12 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
 
   _getAllExerciseList() async{
     if(widget.fromPage == Constant.PAGE_HOME) {
-      exerciseDataList = await DataBaseHelper().getExercisePlanNameWise(
-          widget.homePlanTable!.catTableName!);
+      exerciseDataList = await DataBaseHelper().getExercisePlanNameWise(widget.homePlanTable!.catTableName!);
+      exerciseDataList.sort((a, b) => a.sort!.compareTo(b.sort!));
+
     }else if(widget.fromPage == Constant.PAGE_DISCOVER){
-      discoverSingleExerciseList = await DataBaseHelper()
-          .getDiscoverExercisePlanIdWise(
-              widget.discoverPlanTable!.planId.toString());
+      discoverSingleExerciseList = await DataBaseHelper().getDiscoverExercisePlanIdWise(widget.discoverPlanTable!.planId.toString());
+
     }else if(widget.fromPage == Constant.PAGE_DAYS_STATUS){
       var tableName = "";
       if(widget.planName == Constant.Full_body_small){
@@ -534,6 +563,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
       }
       workoutDetailList = await DataBaseHelper().getWeekDayExerciseData(
           widget.dayName.toString(), widget.weekName.toString(),tableName);
+      // workoutDetailList.sort((a, b) => a.sort!.compareTo(b.sort!));
     }
     setState(() {});
   }

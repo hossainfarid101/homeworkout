@@ -222,6 +222,7 @@ flutter:
     - assets/animations/congrats1.json
     - assets/animations/congrats2.json
     - assets/animations/congrats3.json
+    - assets/sounds/whistle.wav
 
 
   # The following line ensures that the Material Icons font is

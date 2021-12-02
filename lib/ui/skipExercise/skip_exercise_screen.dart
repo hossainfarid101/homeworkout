@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:homeworkout_flutter/database/model/ExerciseListData.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
@@ -10,6 +11,12 @@ import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 
 class SkipExerciseScreen extends StatefulWidget {
+
+  List<ExerciseListData>? exerciseDataList;
+  String? fromPage = "";
+  String? tableName ="";
+
+  SkipExerciseScreen({this.exerciseDataList,this.fromPage,this.tableName});
 
 
   @override
@@ -37,12 +44,42 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
   void initState() {
     _getPreference();
     _pointerValueInt = trainingRestTime!;
-    //_getLastPosition();
+    _getLastPosition();
     _startTimer();
     super.initState();
   }
 
 
+  _getLastPosition() {
+    lastPosition = Preference.shared.getLastUnCompletedExPos(widget.tableName.toString());
+    // _setImageRotation(lastPosition!);
+    Future.delayed(Duration(milliseconds: 100), () {
+      String sec = widget.exerciseDataList![lastPosition!].timeType! == "time" ?
+      Languages.of(context)!.txtSeconds : Languages.of(context)!.txtTimes ;
+      if (isCountDownStart) {
+        if (!isMute! && isVoiceGuide!) {
+          Utils.textToSpeech(
+              Languages.of(context)!.txtNextExercise +
+                  " " +
+                  Languages.of(context)!.txtNext +
+                  "" +
+                  widget.exerciseDataList![lastPosition!].time.toString() +
+                  " " +
+                  sec +
+                  "" +
+                  widget.exerciseDataList![lastPosition!].title.toString(),
+              flutterTts);
+        }
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    // listLifeGuideController!.dispose();
+    _timer!.cancel();
+    super.dispose();
+  }
 
   void _startTimer() {
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
@@ -51,36 +88,12 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
           _pointerValueInt = _pointerValueInt! - 1;
         });
       } else {
-        //Navigator.pop(context, false);
+        Navigator.pop(context, false);
         _timer!.cancel();
       }
     });
   }
 
-  /*_getLastPosition() {
-    lastPosition = Preference.shared.getLastUnCompletedExPos(
-        int.parse(widget.listOfDayWiseExercise![0].planId!),
-        widget.listOfDayWiseExercise![0].dayId!);
-    _setImageRotation(lastPosition!);
-    Future.delayed(Duration(milliseconds: 100), () {
-      String sec = widget.listOfDayWiseExercise![lastPosition!].exUnit! == "s" ? Languages.of(context)!.txtSeconds : Languages.of(context)!.txtTimes ;
-      if (isCountDownStart) {
-        if (!isMute! && isVoiceGuide!) {
-          Utils.textToSpeech(
-              Languages.of(context)!.txtNextExercise +
-                  " " +
-                  Languages.of(context)!.txtNext +
-                  "" +
-                  widget.listOfDayWiseExercise![lastPosition!].exTime.toString() +
-                  " " +
-                  sec +
-                  "" +
-                  widget.listOfDayWiseExercise![lastPosition!].exName.toString(),
-              flutterTts);
-        }
-      }
-    });
-  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -223,7 +236,9 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
                           ),
                            ),
                         Text(
-                            " 2/5",
+                          (lastPosition! + 1).toString() +
+                              "/" +
+                              widget.exerciseDataList!.length.toString(),
                           style: TextStyle(
                             color: Colur.theme
                           ),
@@ -236,7 +251,7 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
                     child: Row(
                       children: [
                         Text(
-                          "Squats",
+                          widget.exerciseDataList![lastPosition!].title.toString(),
                           style: TextStyle(
                               fontSize: 18.0,
                               color: Colur.black,
@@ -258,7 +273,13 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
                   Container(
                     margin: const EdgeInsets.only(bottom: 10.0),
                     child: Text(
-                        "20 s",
+                      (widget.exerciseDataList![lastPosition!].timeType ==
+                          "time")
+                          ? widget.exerciseDataList![lastPosition!].time!.toString()
+                          : "X " +
+                          widget
+                              .exerciseDataList![lastPosition!].time
+                              .toString(),
                       style: TextStyle(
                           color: Colur.txt_gray
                       ),
