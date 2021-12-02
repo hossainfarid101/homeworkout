@@ -94,6 +94,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
   }
 
 
+
   setExerciseTime() {
     if (controller != null && controller!.lastElapsedDuration != null) {
       return durationOfExercise == null
