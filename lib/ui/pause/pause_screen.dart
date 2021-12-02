@@ -9,7 +9,6 @@ import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
 
 class PauseScreen extends StatefulWidget {
-  const PauseScreen({Key? key}) : super(key: key);
 
   @override
   _PauseScreenState createState() => _PauseScreenState();
@@ -19,43 +18,48 @@ class _PauseScreenState extends State<PauseScreen>
     implements TopBarClickListener {
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData(
-        appBarTheme: AppBarTheme(
-          systemOverlayStyle: SystemUiOverlayStyle.dark,
-        ), //
-      ),
-      child: Scaffold(
-        appBar: PreferredSize(
-            preferredSize: Size.fromHeight(0),
-            child: AppBar( // Here we create one to set status bar color
-              backgroundColor: Colur.theme,
-              elevation: 0,
-            )
+    return WillPopScope(
+      onWillPop: () async{
+        return false;
+      },
+      child: Theme(
+        data: ThemeData(
+          appBarTheme: AppBarTheme(
+            systemOverlayStyle: SystemUiOverlayStyle.dark,
+          ), //
         ),
-        backgroundColor: Colur.theme,
-        body: SafeArea(
-          child: Container(
-            child: Column(
-              children: [
-                CommonTopBar(
-                  "",
-                  this,
-                  isShowBack: true,
-                  iconColor: Colur.white,
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                  child: Column(
-                    children: [
-                      _pauseHeader(context),
-                      _restartBtn(context),
-                      _quitBtn(context),
-                      _resumeBtn(context),
-                    ],
+        child: Scaffold(
+          appBar: PreferredSize(
+              preferredSize: Size.fromHeight(0),
+              child: AppBar( // Here we create one to set status bar color
+                backgroundColor: Colur.theme,
+                elevation: 0,
+              )
+          ),
+          backgroundColor: Colur.theme,
+          body: SafeArea(
+            child: Container(
+              child: Column(
+                children: [
+                  CommonTopBar(
+                    "",
+                    this,
+                    isShowBack: true,
+                    iconColor: Colur.white,
                   ),
-                ),
-              ],
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                    child: Column(
+                      children: [
+                        _pauseHeader(context),
+                        _restartBtn(context),
+                        _quitBtn(context),
+                        _resumeBtn(context),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

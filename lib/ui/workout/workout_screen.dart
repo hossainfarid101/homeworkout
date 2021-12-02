@@ -141,32 +141,38 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData(
-        appBarTheme: AppBarTheme(
-          systemOverlayStyle: SystemUiOverlayStyle.dark,
-        ), //
-      ),
-      child: Scaffold(
-        appBar: PreferredSize(
-            preferredSize: Size.fromHeight(0),
-            child: AppBar( // Here we create one to set status bar color
-              backgroundColor: Colur.commonBgColor,
-              elevation: 0,
-            )
+    return WillPopScope(
+      onWillPop: () async {
+        _showBackDialogScreen();
+        return true;
+      },
+      child: Theme(
+        data: ThemeData(
+          appBarTheme: AppBarTheme(
+            systemOverlayStyle: SystemUiOverlayStyle.dark,
+          ), //
         ),
-        body: SafeArea(
-          child: Container(
-            child: Column(
-              children: [
-                _widgetExeImage(),
-                Expanded(
-                  child: (isWidgetCountDown)
-                      ? _widgetStartCountDown()
-                      : _widgetStartWorkout(),
-                ),
+        child: Scaffold(
+          appBar: PreferredSize(
+              preferredSize: Size.fromHeight(0),
+              child: AppBar( // Here we create one to set status bar color
+                backgroundColor: Colur.commonBgColor,
+                elevation: 0,
+              )
+          ),
+          body: SafeArea(
+            child: Container(
+              child: Column(
+                children: [
+                  _widgetExeImage(),
+                  Expanded(
+                    child: (isWidgetCountDown)
+                        ? _widgetStartCountDown()
+                        : _widgetStartWorkout(),
+                  ),
 
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -349,15 +355,8 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
                     visible: !isWidgetCountDown,
                     child: InkWell(
                       onTap: () {
-                        if (controller != null && controller!.lastElapsedDuration != null) {
-                          durationOfExercise = durationOfExercise == null
-                              ? controller!.duration!.inSeconds -
-                              controller!.lastElapsedDuration!.inSeconds
-                              : durationOfExercise! -
-                              controller!.lastElapsedDuration!.inSeconds;
-                          controller!.stop();
-                        }
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => PauseScreen()));
+
+                        _showBackDialogScreen();
                         /*showDialog(
                             context: context,
                             builder: (BuildContext context) {
@@ -411,25 +410,8 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
 
                   InkWell(
                     onTap: () {
-                      if (isWidgetCountDown) {
-                        countDownController.pause();
-                      } else {
-                        if (controller != null && controller!.lastElapsedDuration != null) {
-                          durationOfExercise = durationOfExercise == null
-                              ? controller!.duration!.inSeconds -
-                              controller!.lastElapsedDuration!.inSeconds
-                              : durationOfExercise! -
-                              controller!.lastElapsedDuration!.inSeconds;
-                          controller!.stop();
-                        }
-                      }
-                      Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => VideoAnimationScreen()))
-                          .then((value) => (isWidgetCountDown)
-                              ? countDownController.resume()
-                              : _controllerForward());
+
+                      _showVideoAnimationScreen();
 
                       /*if (isWidgetCountDown) {
                     countDownController.pause();
@@ -675,18 +657,15 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
             margin: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20),
             child: InkWell(
               onTap: () {
-                if (controller != null && controller!.lastElapsedDuration != null) {
+               /* if (controller != null && controller!.lastElapsedDuration != null) {
                   durationOfExercise = durationOfExercise == null
                       ? controller!.duration!.inSeconds -
                       controller!.lastElapsedDuration!.inSeconds
                       : durationOfExercise! -
                       controller!.lastElapsedDuration!.inSeconds;
                   controller!.stop();
-                }
-                Navigator.push(context, MaterialPageRoute(builder: (context) => VideoAnimationScreen()))
-                  ..then((value) => value == false
-                ? {_startExercise(), isWidgetCountDown = false}
-                : isWidgetCountDown = true);
+                }*/
+                _showVideoAnimationScreen();
                 /*if (controller != null && controller!.lastElapsedDuration != null) {
                       durationOfExercise = durationOfExercise == null
                           ? controller!.duration!.inSeconds -
@@ -750,19 +729,8 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
               child: InkWell(
                       onTap: () async {
                         // controller!.stop();
-                        if (controller != null) {
-                          durationOfExercise = durationOfExercise == null
-                              ? controller!.duration!.inSeconds - controller!.lastElapsedDuration!.inSeconds
-                              : durationOfExercise! - controller!.lastElapsedDuration!.inSeconds;
-                          controller!.stop();
-                        }
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => PauseScreen()))
-                          ..then((value) => value == false
-                              ? {_startExercise(), isWidgetCountDown = false}
-                              : isWidgetCountDown = true);
+
+                       _showBackDialogScreen();
                       },
                       child: Container(
                   width: double.infinity,
@@ -1200,4 +1168,55 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
     isCoachTips = Preference.shared.getBool(Preference.isCoachTips) ?? true;
     isVoiceGuide = Preference.shared.getBool(Preference.isVoiceGuide) ?? true;
   }
+
+  _showBackDialogScreen(){
+
+    if (isWidgetCountDown) {
+      countDownController.pause();
+    }else if (controller != null && controller!.lastElapsedDuration != null) {
+      durationOfExercise = durationOfExercise == null
+          ? controller!.duration!.inSeconds - controller!.lastElapsedDuration!.inSeconds
+          : durationOfExercise! - controller!.lastElapsedDuration!.inSeconds;
+      controller!.stop();
+    }
+
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => PauseScreen()))
+      ..then((value)=>(isWidgetCountDown)?countDownController.start(): {_startExercise(),isWidgetCountDown = false});
+      /*..then((value) => value == false
+          ? {_startExercise(), isWidgetCountDown = false}
+          : isWidgetCountDown = true);*/
+  }
+
+  _showVideoAnimationScreen(){
+    if (isWidgetCountDown) {
+      countDownController.pause();
+
+    } else {
+      if (controller != null && controller!.lastElapsedDuration != null) {
+        durationOfExercise = durationOfExercise == null
+            ? controller!.duration!.inSeconds -
+            controller!.lastElapsedDuration!.inSeconds
+            : durationOfExercise! -
+            controller!.lastElapsedDuration!.inSeconds;
+        controller!.stop();
+      }
+    }
+
+    /*Navigator.push(context,
+            MaterialPageRoute(builder: (context) => VideoAnimationScreen()))
+        .then((value) => (isWidgetCountDown)
+            ? countDownController.resume()
+            : _controllerForward());*/
+
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => VideoAnimationScreen()))
+      ..then((value)=>(isWidgetCountDown)?countDownController.start(): {_startExercise(),isWidgetCountDown = false});
+      /*..then((value) => value == false
+          ? {_startExercise(), isWidgetCountDown = false}
+          : isWidgetCountDown = true);*/
+  }
+
 }
