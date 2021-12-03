@@ -9,8 +9,6 @@ class Colur {
   static const theme = Color(0xffA855F7);
   static const theme_trans = Color(0x50A855F7);
 
-
-
   static const transparent = Colors.transparent;
   static const blue = Color(0xff3384FF);
   static const commonBgColor =  Color(0xffF7F8FA);
@@ -122,6 +120,10 @@ class Colur {
   static const colorFive = Color(0xffE09C55);
   static const colorSix = Color(0xffCF2E2E);
 
+  static const darkBlueColor = Color(0xff7562F3);
+  static const unSelectedProgressColor = Color(0xffF6F6F6);
+  static const txtLightBlue = Color(0xff0D85FC);
+  static const txtLightPink = Color(0xffFF40AC);
 
   static const gradientForWeightColors = [
    Color(0xff8A3CFF),

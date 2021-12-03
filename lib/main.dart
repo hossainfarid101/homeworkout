@@ -5,6 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:homeworkout_flutter/ui/discover/DiscoverScreen.dart';
 import 'package:homeworkout_flutter/ui/exercisePlan/exercise_plan_screen.dart';
+import 'package:homeworkout_flutter/ui/introduction/IntroductionScreen.dart';
 import 'package:homeworkout_flutter/ui/pause/pause_screen.dart';
 import 'package:homeworkout_flutter/ui/reminder/reminder_screen.dart';
 import 'package:homeworkout_flutter/ui/report/report_screen.dart';
@@ -182,15 +183,17 @@ class _MyAppState extends State<MyApp> {
       darkTheme: ThemeData(
         appBarTheme: const AppBarTheme(
             backgroundColor: Colur.transparent,
-            systemOverlayStyle: SystemUiOverlayStyle.light),
+            systemOverlayStyle: SystemUiOverlayStyle.dark),
       ),
       home: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle(
           statusBarColor: Colur.transparent,
-          statusBarIconBrightness: Brightness.light,
+          statusBarIconBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.dark,
           systemNavigationBarIconBrightness: Brightness.light,
         ),
-        child: TrainingScreen(),
+        // child: TrainingScreen(),
+        child: IntroductionScreen(),
       ),
       routes: <String, WidgetBuilder>{
         '/training': (BuildContext context) => TrainingScreen(),
@@ -198,7 +201,9 @@ class _MyAppState extends State<MyApp> {
         '/report': (BuildContext context) => ReportScreen(),
         '/settings': (BuildContext context) => SettingsScreen(),
         '/reminder': (BuildContext context) => ReminderScreen(),
-        '/workoutCompleteScreen': (BuildContext context) => WorkoutCompleteScreen()
+        '/workoutCompleteScreen': (BuildContext context) =>
+            WorkoutCompleteScreen(),
+        '/introductionScreen': (BuildContext context) => IntroductionScreen(),
       },
     );
   }

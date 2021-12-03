@@ -272,6 +272,7 @@ class LanguageEn extends Languages {
 
   @override
   String get txtQuarantineAtHome => "Quarantine at home";
+
   @override
   String get txtweek => "Week";
 
@@ -389,7 +390,8 @@ class LanguageEn extends Languages {
   String get txtSetWeeklyGoal => "Set your weekly goal";
 
   @override
-  String get txtSetGoalDesc => "We recommend training at least 3 days weekly for a better result.";
+  String get txtSetGoalDesc =>
+      "We recommend training at least 3 days weekly for a better result.";
 
   @override
   String get txtWeeklyTrainingDays => "Weekly training days";
@@ -493,4 +495,68 @@ class LanguageEn extends Languages {
   @override
   String get txtNextExercise => "Take a Rest";
 
+  @override
+  String get txtWhatsYourGender => "What's your gender?";
+
+  @override
+  String get txtLetUsKnowYouBetter => "Let us know you better";
+
+  @override
+  String get txtPleaseChooseYourFocusArea => "Please choose your focus area";
+
+  @override
+  String get txtWhatAreYourMainGoals => "What are your main goals?";
+
+  @override
+  String get txtWhatMotivatesYouTheMost => "What motivates you the most?";
+
+  @override
+  String get txtHowManyPushUpsCan =>
+      "How many push-ups can you do at one time?";
+
+  @override
+  String get txtWhatsYourActivityLevel => "What's your activity level?";
+
+  @override
+  String get txSetYourWeeklyGoal => "Set your weekly goal";
+
+  @override
+  String get txtWeRecommendTraining =>
+      "We recommend training at least 3 days weekly for a better result.";
+
+  @override
+  String get txtLetUsKnowYouBetterToHelp =>
+      "Let us know you better to help boost your workout results";
+
+  @override
+  String get txtGeneratingThePlan => "Generating the plan for you";
+
+  @override
+  String get txtPreparingYourPlan =>
+      "Preparing your plan based on your goal...";
+
+  @override
+  String get txtYourPlanIsReady => "Your plan is ready!";
+
+  @override
+  String get txtWeHaveSelectedThisPlan =>
+      "We have selected this plan that suits you best";
+
+  @override
+  String get txtGetMyPlan => "Get my plan";
+
+  @override
+  String get txtStartNow => "Start now";
+
+  @override
+  String get txtAbs => "Arm";
+
+  @override
+  String get txtArm => "Chest";
+
+  @override
+  String get txtChest => "Abs";
+
+  @override
+  String get txtLeg => "Leg";
 }

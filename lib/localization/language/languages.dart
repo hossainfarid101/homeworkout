@@ -5,6 +5,46 @@ abstract class Languages {
     return Localizations.of<Languages>(context, Languages);
   }
 
+  String get txtArm;
+
+  String get txtChest;
+
+  String get txtAbs;
+
+  String get txtLeg;
+
+  String get txtPleaseChooseYourFocusArea;
+
+  String get txtWhatAreYourMainGoals;
+
+  String get txtWhatMotivatesYouTheMost;
+
+  String get txtHowManyPushUpsCan;
+
+  String get txtWhatsYourActivityLevel;
+
+  String get txSetYourWeeklyGoal;
+
+  String get txtWeRecommendTraining;
+
+  String get txtLetUsKnowYouBetterToHelp;
+
+  String get txtGeneratingThePlan;
+
+  String get txtPreparingYourPlan;
+
+  String get txtYourPlanIsReady;
+
+  String get txtWeHaveSelectedThisPlan;
+
+  String get txtGetMyPlan;
+
+  String get txtStartNow;
+
+  String get txtLetUsKnowYouBetter;
+
+  String get txtWhatsYourGender;
+
   String get txtShare;
 
   String get txtNext;
@@ -286,6 +326,7 @@ abstract class Languages {
   String get txtMonday;
 
   String get txtSaturday;
+
   String get txtClose;
 
   String get txtWeek;
@@ -319,8 +360,12 @@ abstract class Languages {
   String get txtQuit;
 
   String get txtResume;
+
   String get txtBestQuarantine;
+
   String get txtSeconds;
+
   String get txtTimes;
+
   String get txtNextExercise;
 }
