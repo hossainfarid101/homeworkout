@@ -183,7 +183,7 @@ abstract class Languages {
 
   String get txtSettings;
 
-  String get txtRestartProgress;
+  String get txtResetProgress;
 
   String get txtWorkout;
 

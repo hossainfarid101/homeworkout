@@ -17,6 +17,7 @@ import 'package:homeworkout_flutter/ui/workout/workout_screen.dart';
 import 'package:homeworkout_flutter/ui/workoutComplete/workout_complete_screen.dart';
 import 'package:homeworkout_flutter/utils/Debug.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
+import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:timezone/data/latest.dart' as tz;
@@ -56,11 +57,10 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Preference().instance();
 
-  /* const AndroidInitializationSettings initializationSettingsAndroid =
-  AndroidInitializationSettings('app_icon');
+   const AndroidInitializationSettings initializationSettingsAndroid =
+  AndroidInitializationSettings('ic_notification');
 
-  /// Note: permissions aren't requested here just to demonstrate that can be
-  /// done later
+
   final IOSInitializationSettings initializationSettingsIOS =
   IOSInitializationSettings(
     requestAlertPermission: true,
@@ -84,11 +84,14 @@ Future<void> main() async {
           debugPrint('notification payload: $payload');
         }
 
-
-
+        if (payload != null && payload == Constant.strExerciseReminder) {
+          Future.delayed(Duration(seconds: 1)).then((value) => Navigator.push(
+              MyApp.navigatorKey.currentState!.overlay!.context,
+              MaterialPageRoute(builder: (context) => TrainingScreen())));
+        }
         selectedNotificationPayload = payload;
         selectNotificationSubject.add(payload);
-      });*/
+      });
 
   _configureLocalTimeZone();
 

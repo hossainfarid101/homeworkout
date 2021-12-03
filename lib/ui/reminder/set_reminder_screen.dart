@@ -261,7 +261,7 @@ class _SetReminderScreenState extends State<SetReminderScreen> implements TopBar
           ? selectedTime!
           : TimeOfDay.now(),
       theme: ThemeData(
-        //primarySwatch: Colors.teal,
+        primarySwatch: Colors.grey,
         primaryColor: Colur.theme,
         colorScheme: ColorScheme.fromSwatch().copyWith(
           primary:  Colur.theme,

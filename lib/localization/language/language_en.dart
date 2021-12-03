@@ -109,7 +109,7 @@ class LanguageEn extends Languages {
   String get txtReminder => "Reminder";
 
   @override
-  String get txtRestartProgress => "Restart Progress";
+  String get txtResetProgress => "Reset Progress";
 
   @override
   String get txtSettings => "Settings";

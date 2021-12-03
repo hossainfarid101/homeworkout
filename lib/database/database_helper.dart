@@ -4,6 +4,7 @@ import 'package:homeworkout_flutter/database/model/ExerciseListData.dart';
 import 'package:homeworkout_flutter/database/model/WeeklyDayData.dart';
 import 'package:homeworkout_flutter/database/tables/discover_plan_table.dart';
 import 'package:homeworkout_flutter/database/tables/home_plan_table.dart';
+import 'package:homeworkout_flutter/database/tables/weight_table.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:sqflite/sqflite.dart';
@@ -283,6 +284,80 @@ class DataBaseHelper {
       }
     }
     return exerciseListData;
+  }
+
+
+  Future<int> insertWeightData(WeightTable weightData) async {
+    var dbClient = await db;
+    var result = await dbClient.insert(weightTable, weightData.toJson());
+    Debug.printLog("res: $result");
+    return result;
+  }
+
+  Future<List<WeightTable>> getWeightData() async {
+    var dbClient = await db;
+    List<WeightTable> weightDataList = [];
+    List<Map<String, dynamic>> maps =
+    await dbClient.rawQuery("SELECT * FROM $weightTable");
+    if (maps.length > 0) {
+      for (var answer in maps) {
+        var weightData = WeightTable.fromJson(answer);
+        weightDataList.add(weightData);
+      }
+    }
+    return weightDataList;
+  }
+
+  Future<WeightTable?> getMaxWeight() async {
+    var dbClient = await db;
+    var weightDataList;
+    List<Map<String, dynamic>> result = await dbClient.rawQuery(
+        "SELECT *, IFNULL(MAX(WeightKG),0), IFNULL(MAX(WeightLB),0) FROM $weightTable");
+    if (result.length > 0) {
+      for (var answer in result) {
+        var weightData = WeightTable.fromJson(answer);
+        weightDataList = weightData;
+      }
+      return weightDataList;
+    }
+  }
+
+  Future<WeightTable?> getMinWeight() async {
+    var dbClient = await db;
+    var weightDataList;
+    List<Map<String, dynamic>> result = await dbClient.rawQuery(
+        "SELECT *, IFNULL(MIN(WeightKG),0), IFNULL(MIN(WeightLB),0) FROM $weightTable");
+    if (result.length > 0) {
+      for (var answer in result) {
+        var weightData = WeightTable.fromJson(answer);
+        weightDataList = weightData;
+      }
+      return weightDataList;
+    }
+  }
+
+  Future<WeightTable?> getCurrentWeight(String? date) async {
+    Debug.printLog("$date");
+    var dbClient = await db;
+    var weightDataList;
+    List<Map<String, dynamic>> result = await dbClient
+        .rawQuery("SELECT * FROM $weightTable WHERE Date = '$date'");
+    if (result.length > 0) {
+      for (var answer in result) {
+        var weightData = WeightTable.fromJson(answer);
+        weightDataList = weightData;
+      }
+      return weightDataList;
+    }
+  }
+
+  Future<int?> updateWeight(
+      {String? date, double? weightKG, double? weightLBS}) async {
+    var dbClient = await db;
+    var result = await dbClient.rawUpdate(
+        " UPDATE $weightTable SET WeightKG = $weightKG, WeightLB = $weightLBS where Date = '$date' ");
+    Debug.printLog("res: $result");
+    return result;
   }
 
 

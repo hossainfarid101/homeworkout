@@ -116,6 +116,18 @@ flutter:
     - assets/icons/ic_sound_options.png
     - assets/icons/ic_back.webp
     - assets/icons/ic_edit.webp
+    - assets/icons/drawer/
+    - assets/icons/drawer/ic_discover_selected.webp
+    - assets/icons/drawer/ic_discover_unselected.webp
+    - assets/icons/drawer/ic_reminder_selected.webp
+    - assets/icons/drawer/ic_reminder_unselected.webp
+    - assets/icons/drawer/ic_report_selected.webp
+    - assets/icons/drawer/ic_report_unselected.webp
+    - assets/icons/drawer/ic_reset_progress.webp
+    - assets/icons/drawer/ic_setting_selected.webp
+    - assets/icons/drawer/ic_setting_unselected.webp
+    - assets/icons/drawer/ic_training_selected.webp
+    - assets/icons/drawer/ic_training_unselected.webp
     - assets/icons/cp_ic_animation.png
     - assets/images/
     - assets/images/main_bg.webp
@@ -127,6 +139,7 @@ flutter:
     - assets/images/abs_advanced.webp
     - assets/images/men_banner.webp
     - assets/images/img_exercise.webp
+    - assets/images/drawer_img.webp
     - assets/exerciseImage/discover/sleep/
     - assets/exerciseImage/discover/sleep/back_streching.webp
     - assets/exerciseImage/discover/sleep/lower_back_pain_relief.webp

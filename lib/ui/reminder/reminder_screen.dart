@@ -103,6 +103,7 @@ class _ReminderScreenState extends State<ReminderScreen> implements TopBarClickL
                                 contentPadding: EdgeInsets.all(0.0),
                                 trailing: Switch(
                                   value: isExerciseReminder,
+                                  activeColor: Colur.theme,
 
                                   onChanged: (bool value) {
                                     /*setState(() {

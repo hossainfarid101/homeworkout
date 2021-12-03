@@ -23,7 +23,7 @@ class CustomCircleSymbolRenderer extends CircleSymbolRenderer {
 
     //canvas.
     canvas.drawRRect(
-      Rectangle(bounds.left-8, bounds.top - 30, bounds.width + 30,
+      Rectangle(bounds.left-8, bounds.top - 30, bounds.width + 40,
           bounds.height + 10),
       fill: Color.white,
       radius: 10,

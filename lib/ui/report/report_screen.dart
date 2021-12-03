@@ -8,14 +8,18 @@ import 'package:homeworkout_flutter/custom/chart/custom_circle_symbol_renderer.d
 import 'package:homeworkout_flutter/custom/dialogs/add_bmi_dialog.dart';
 import 'package:homeworkout_flutter/custom/dialogs/add_weight_dialog.dart';
 import 'package:homeworkout_flutter/custom/drawer/drawer_menu.dart';
+import 'package:homeworkout_flutter/database/database_helper.dart';
+import 'package:homeworkout_flutter/database/tables/weight_table.dart';
 import 'package:homeworkout_flutter/interfaces/topbar_clicklistener.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/workoutHistory/workout_history_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
+import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:intl/intl.dart';
 
 class ReportScreen extends StatefulWidget {
   const ReportScreen({Key? key}) : super(key: key);
@@ -40,6 +44,17 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
   double? heightBMI;
   double? bmi;
 
+
+  List<WeightTable> weightDataList = [];
+
+  int minWeight = Constant.MIN_KG.toInt();
+  int maxWeight = Constant.MAX_KG.toInt();
+
+  WeightTable? minWeightData;
+  WeightTable? maxWeightData;
+  WeightTable? currentWeightData;
+
+
   bool? isKg;
 
   String? bmiCategory;
@@ -47,6 +62,8 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
   int? totalWorkout;
   double? totalKcal;
   int? totalMin;
+
+  String? date = DateFormat.yMd().format(DateTime.now());
 
 
   @override
@@ -62,9 +79,9 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
 
     // _getDataFromDatabase();
     getPreference();
-    /*getWeightChartDataFromDatabase();
+    getWeightChartDataFromDatabase();
     getWeightData();
-    getHistory();*/
+    //getHistory();
     setBmiCalculation();
     super.initState();
   }
@@ -334,8 +351,8 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
                 if (res != 0) {
                   setState(() {
                     getPreference();
-                    /*getWeightChartDataFromDatabase();
-                    getWeightData();*/
+                    getWeightChartDataFromDatabase();
+                    getWeightData();
                   });
                 }
               },
@@ -359,7 +376,13 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
                   Expanded(
                       child: Text(Languages.of(context)!.txtCurrent + ":")),
                   Text(
-                    "0.0 KG",
+                    isKg!
+                        ? currentWeightKg != null ? currentWeightKg.toString() +
+                        " " +
+                        Languages.of(context)!.txtKG.toUpperCase() : "0.0 KG"
+                        : currentWeightLb != null ? currentWeightLb.toString() +
+                        " " +
+                        Languages.of(context)!.txtLB.toUpperCase() : "0.0 LB",
                     style: TextStyle(fontSize: 16.0, color: Colur.black),
                   )
                 ],
@@ -372,7 +395,13 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
                   Expanded(
                       child: Text(Languages.of(context)!.txtHeaviest + ":")),
                   Text(
-                    "0.0 KG",
+                    isKg!
+                        ? maxWeightKg != null ? maxWeightKg.toString() +
+                        " " +
+                        Languages.of(context)!.txtKG.toUpperCase() : "0.0 KG"
+                        : maxWeightKg != null ? maxWeightLb.toString() +
+                        " " +
+                        Languages.of(context)!.txtLB.toUpperCase() : "0.0 LB",
                     style: TextStyle(fontSize: 16.0, color: Colur.black),
                   )
                 ],
@@ -386,7 +415,13 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
                   Expanded(
                       child: Text(Languages.of(context)!.txtLightest + ":")),
                   Text(
-                    "0.0 KG",
+                    isKg!
+                        ? minWeightKg != null ? minWeightKg.toString() +
+                        " " +
+                        Languages.of(context)!.txtKG.toUpperCase() : "0.0 KG"
+                        : minWeightLb != null ? minWeightLb.toString() +
+                        " " +
+                        Languages.of(context)!.txtLB.toUpperCase() : "0.0 LB",
                     style: TextStyle(fontSize: 16.0, color: Colur.black),
                   )
                 ],
@@ -647,6 +682,7 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
 
     );
   }
+
   @override
   void onTopBarClick(String name, {bool value = true}) {
 
@@ -749,6 +785,93 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
     bmiVal = ((pos * totalDiffForTwoPoint) / totalDiffInLoop) / 100;
     Debug.printLog("bmiVal===>>  " + bmiVal.toString() + "  " + pos.toString());
     return fullWidth * (totalWidth + bmiVal);
+  }
+
+  getWeightChartDataFromDatabase() async {
+    weightDataList = await DataBaseHelper().getWeightData();
+
+    if (isKg!) {
+      if (weightDataList.isNotEmpty) {
+        minWeight = weightDataList[0].weightKG!.toInt();
+        maxWeight = weightDataList[0].weightKG!.toInt();
+      }
+
+      weightDataList.forEach((element) {
+        if (minWeight > element.weightKG!.toInt())
+          minWeight = element.weightKG!.toInt();
+
+        if (maxWeight < element.weightKG!.toInt())
+          maxWeight = element.weightKG!.toInt();
+
+        DateTime date = DateFormat.yMd().parse(element.date!);
+        var index =
+        data.indexWhere((element) => element.date.isAtSameMomentAs(date));
+        if (index > 0) {
+          data[index].sales = element.weightKG!;
+        }
+      });
+    } else {
+      if (weightDataList.isNotEmpty) {
+        minWeight = weightDataList[0].weightLB!.toInt();
+        maxWeight = weightDataList[0].weightLB!.toInt();
+      }
+
+      weightDataList.forEach((element) {
+        if (minWeight > element.weightLB!.toInt())
+          minWeight = element.weightLB!.toInt();
+
+        if (maxWeight < element.weightLB!.toInt())
+          maxWeight = element.weightLB!.toInt();
+
+        DateTime date = DateFormat.yMd().parse(element.date!);
+        var index =
+        data.indexWhere((element) => element.date.isAtSameMomentAs(date));
+        if (index > 0) {
+          data[index].sales = element.weightLB!;
+        }
+      });
+    }
+
+    setState(() {});
+  }
+
+  getWeightData() async {
+    minWeightData = await DataBaseHelper().getMinWeight();
+    if (minWeightData != null) {
+      setState(() {
+        minWeightKg = minWeightData!.weightKG ?? 0;
+        minWeightLb = minWeightData!.weightLB ?? 0;
+      });
+    } else {
+      setState(() {
+        minWeightKg = 0;
+        minWeightLb = 0;
+      });
+    }
+    maxWeightData = await DataBaseHelper().getMaxWeight();
+    if (maxWeightData != null) {
+      setState(() {
+        maxWeightKg = maxWeightData!.weightKG ?? 0;
+        maxWeightLb = maxWeightData!.weightLB ?? 0;
+      });
+    } else {
+      setState(() {
+        maxWeightKg = 0;
+        maxWeightLb = 0;
+      });
+    }
+    currentWeightData = await DataBaseHelper().getCurrentWeight(date!);
+    if (currentWeightData != null) {
+      setState(() {
+        currentWeightKg = currentWeightData!.weightKG ?? 0;
+        currentWeightLb = currentWeightData!.weightLB ?? 0;
+      });
+    } else {
+      setState(() {
+        currentWeightKg = 0;
+        currentWeightLb = 0;
+      });
+    }
   }
 
 

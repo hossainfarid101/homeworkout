@@ -24,19 +24,102 @@ class _DrawerMenuState extends State<DrawerMenu> {
       margin: EdgeInsets.only(right: MediaQuery.of(context).size.width / 3),
       child: Column(
         children: [
-          Image.asset(
-            'assets/images/arm_intermediate.webp',
-            width: double.infinity,
-            height: 150.0,
-            fit: BoxFit.cover,
+          Stack(
+            alignment: Alignment.bottomCenter,
+            children: [
+              Image.asset(
+                'assets/images/drawer_img.webp',
+                height: MediaQuery.of(context).size.height * 0.3,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25), ),
+                  gradient: LinearGradient(
+                      colors: [Colur.blueGradient1, Colur.blueGradient2]
+                  ),
+                ),
+                width: double.infinity,
+                padding: const EdgeInsets.only(top: 15, bottom: 15),
+                child: Text(
+                  Languages.of(context)!.txtHomeWorkout,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 20,
+                      color: Colur.white
+                  ),
+                ),
+              ),
+            ],
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: drawerDataList.length,
-              scrollDirection: Axis.vertical,
-              itemBuilder: (BuildContext context, int index) {
-                return _itemDrawer(index);
-              },
+            child: Container(
+              decoration: BoxDecoration(
+                //borderRadius: BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25), ),
+                gradient: LinearGradient(
+                  colors: [Colur.blueGradient1, Colur.blueGradient2]
+                ),
+              ),
+              child: Column(
+                children: [
+                  ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: drawerDataList.length,
+                    scrollDirection: Axis.vertical,
+                    padding: EdgeInsets.zero,
+                    itemBuilder: (BuildContext context, int index) {
+                      return _itemDrawer(index);
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          InkWell(
+            onTap: () async{
+              Navigator.pop(context);
+              await _restartDialog();
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                //borderRadius: BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25), ),
+                gradient: LinearGradient(
+                    colors: [Colur.blueGradient1, Colur.blueGradient2]
+                ),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    height: 40,
+                    width: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(14.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Image.asset(
+                        "assets/icons/drawer/ic_reset_progress.webp",
+                        scale: 1,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Text(
+                      Languages.of(context)!.txtResetProgress,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                          fontSize: 18,
+                          color: Colur.white,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
 
@@ -48,16 +131,11 @@ class _DrawerMenuState extends State<DrawerMenu> {
   _itemDrawer(int index) {
     return InkWell(
       onTap: () {
-        if (drawerDataList[index].navPath != null) {
           Navigator.popAndPushNamed(context, drawerDataList[index].navPath!);
-        } else {
-          Navigator.pop(context);
-          _restartDialog();
-        }
-        //Navigator.pop(context);
+
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 5.0),
+        padding: const EdgeInsets.symmetric(vertical: 12.0),
         child: Row(
           children: [
             Container(
@@ -68,7 +146,10 @@ class _DrawerMenuState extends State<DrawerMenu> {
                   ),
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Image.asset(drawerDataList[index].icon!,scale: 1,),
+                child: Image.asset(
+                  drawerDataList[index].icon!,
+                  scale: 1,
+                ),
               ),
             ),
             Container(
@@ -77,9 +158,9 @@ class _DrawerMenuState extends State<DrawerMenu> {
                 drawerDataList[index].text!,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
-                    fontSize: 14,
-                    color: Colur.txtBlack,
-                    fontWeight: FontWeight.w500),
+                    fontSize: 18,
+                    color: Colur.white,
+                    fontWeight: FontWeight.w400),
               ),
             ),
           ],
@@ -92,45 +173,45 @@ class _DrawerMenuState extends State<DrawerMenu> {
     drawerDataList.clear();
     drawerDataList.add(
       DrawerData(
-        icon: "assets/icons/ic_training_plan.webp",
+        icon: "assets/icons/drawer/ic_training_unselected.webp",
         text: Languages.of(context)!.txtTrainingPlans,
         navPath: '/training'
       ),
     );
     drawerDataList.add(
       DrawerData(
-        icon: "assets/icons/ic_menu_library.png",
+        icon: "assets/icons/drawer/ic_discover_unselected.webp",
         text: Languages.of(context)!.txtDiscover,
         navPath: '/discover'
       ),
     );
     drawerDataList.add(
       DrawerData(
-        icon: "assets/icons/ic_menu_report.png",
+        icon: "assets/icons/drawer/ic_report_unselected.webp",
         text: Languages.of(context)!.txtReport,
         navPath: '/report'
       ),
     );
     drawerDataList.add(
       DrawerData(
-        icon: "assets/icons/ic_menu_setting.webp",
+        icon: "assets/icons/drawer/ic_setting_unselected.webp",
         text: Languages.of(context)!.txtSettings,
         navPath: '/settings'
       ),
     );
     drawerDataList.add(
       DrawerData(
-        icon: "assets/icons/ic_menu_reminder.webp",
+        icon: "assets/icons/drawer/ic_reminder_unselected.webp",
         text: Languages.of(context)!.txtReminder,
         navPath: '/reminder'
       ),
     );
-    drawerDataList.add(
+    /*drawerDataList.add(
       DrawerData(
         icon: "assets/icons/ic_menu_restart_progress.webp",
-        text: Languages.of(context)!.txtRestartProgress,
+        text: Languages.of(context)!.txtResetProgress,
       ),
-    );
+    );*/
 
   }
 
@@ -142,7 +223,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
             builder: (context, setState) {
               return AlertDialog(
                 title: Text(
-                  Languages.of(context)!.txtRestartProgress,
+                  Languages.of(context)!.txtResetProgress,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     color: Colur.txtBlack,

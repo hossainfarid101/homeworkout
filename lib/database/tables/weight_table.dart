@@ -2,8 +2,8 @@ import 'dart:convert';
 
 class WeightTable {
   int? id;
-  String? weightKG;
-  String? weightLB;
+  double? weightKG;
+  double? weightLB;
   String? date;
   String? currentTimeStamp;
 
