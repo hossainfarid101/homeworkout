@@ -14,6 +14,7 @@ import 'package:homeworkout_flutter/ui/workout/workout_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
+import 'package:homeworkout_flutter/utils/utils.dart';
 
 class ExerciseListScreen extends StatefulWidget {
 
@@ -322,7 +323,13 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
           useSafeArea: true,
           barrierColor: Colur.transparent_black_50,
           builder: (BuildContext context) {
-            return ExerciseDialog();
+            return ExerciseDialog(
+              fromPage: widget.fromPage,
+              workoutDetailList: workoutDetailList,
+              discoverSingleExerciseDataList: discoverSingleExerciseList,
+              exerciseListDataList: exerciseDataList,
+              index: index,
+            );
           },
         );
 
@@ -369,15 +376,13 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
                                     ? ((exerciseDataList[index].timeType ==
                                             "step")
                                         ? "x${exerciseDataList[index].time.toString()}"
-                                        : exerciseDataList[index]
-                                            .time
-                                            .toString())
+                                        : Utils.secondToMMSSFormat(int.parse(exerciseDataList[index].time.toString())))
                                     : ((workoutDetailList[index].timeType ==
                                             "step")
                                         ? "x${workoutDetailList[index].Time_beginner.toString()}"
-                                        : workoutDetailList[index]
+                                        : Utils.secondToMMSSFormat(int.parse(workoutDetailList[index]
                                             .Time_beginner
-                                            .toString()),
+                                            .toString()))),
                                 style: TextStyle(
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.w400,
@@ -426,7 +431,13 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
           useSafeArea: true,
           barrierColor: Colur.transparent_black_50,
           builder: (BuildContext context) {
-            return ExerciseDialog();
+            return ExerciseDialog(
+              fromPage: widget.fromPage,
+              workoutDetailList: workoutDetailList,
+              discoverSingleExerciseDataList: discoverSingleExerciseList,
+              exerciseListDataList: exerciseDataList,
+              index: index,
+            );
           },
         );
       },
@@ -464,7 +475,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
                             Expanded(
                               child: Text(
                                 (discoverSingleExerciseList[index].exUnit == "s")
-                                    ? discoverSingleExerciseList[index].ExTime.toString()
+                                    ? Utils.secondToMMSSFormat(int.parse(discoverSingleExerciseList[index].ExTime.toString()))
                                     : "x" + discoverSingleExerciseList[index].ExTime.toString(),
                                 style: TextStyle(
                                     fontSize: 16.0,
@@ -534,8 +545,11 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
               MaterialPageRoute(
                   builder: (context) => WorkoutScreen(
                         fromPage: widget.fromPage,
+                        dayStatusDetailList: workoutDetailList,
                         exerciseDataList: exerciseDataList,
-                    tableName: tableName,
+                        tableName: tableName,
+                        dayName: widget.dayName,
+                        weekName: widget.weekName,
                       )));
         },
       ),
@@ -563,7 +577,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
       }
       workoutDetailList = await DataBaseHelper().getWeekDayExerciseData(
           widget.dayName.toString(), widget.weekName.toString(),tableName);
-      // workoutDetailList.sort((a, b) => a.sort!.compareTo(b.sort!));
+      workoutDetailList.sort((a, b) => a.sort!.compareTo(b.sort!));
     }
     setState(() {});
   }

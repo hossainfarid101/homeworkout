@@ -258,33 +258,18 @@ class Preference {
 
   setLastUnCompletedExPos(String tableName, int numLastPosition) {
     _pref!.setInt(tableName, numLastPosition);
-    /*switch (strPlanId) {
-      case 1:
-        return _pref!.setInt(tableName + strLastDayName, numLastPosition);
-      case 2:
-        return _pref!.setInt(tableName + strLastDayName, numLastPosition);
-      case 3:
-        return _pref!.setInt(tableName + strLastDayName, numLastPosition);
-    }*/
   }
-
-
 
   int? getLastUnCompletedExPos(String tableName) {
     return _pref!.getInt(tableName) ?? 0;
-    /*switch (strPlanId) {
-      case 1:
-        return _pref!.getInt(
-            tableName + strLastDayName) ??
-            0;
-      case 2:
-        return _pref!.getInt(tableName +
-            strLastDayName) ??
-            0;
-      case 3:
-        return _pref!.getInt(
-            tableName + strLastDayName) ??
-            0;
-    }*/
+  }
+
+
+  setLastUnCompletedExPosForDays(String tableName,String weekName,String dayName, int numLastPosition) {
+    _pref!.setInt(tableName+weekName+dayName, numLastPosition);
+  }
+
+  int? getLastUnCompletedExPosForDays(String tableName,String weekName,String dayName) {
+    return _pref!.getInt(tableName+weekName+dayName) ?? 0;
   }
 }

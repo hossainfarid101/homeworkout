@@ -9,6 +9,8 @@ class WorkoutDetail {
   String? timeType;
   String? level;
   String? image;
+  int? sort;
+  int? defaultSort;
 
   WorkoutDetail({
     this.workoutId,
@@ -19,6 +21,8 @@ class WorkoutDetail {
     this.timeType,
     this.level,
     this.image,
+    this.sort,
+    this.defaultSort,
   });
 
   factory WorkoutDetail.fromRawJson(String str) =>
@@ -34,7 +38,8 @@ class WorkoutDetail {
     Time_beginner: json["Time_beginner"],
     timeType: json["time_type"],
     image: json["Image"],
-
+    sort: json["sort"],
+    defaultSort: json["defaultSort"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -45,5 +50,7 @@ class WorkoutDetail {
     "Time_beginner": Time_beginner,
     "time_type": timeType,
     "Image": image,
+    "sort": sort,
+    "defaultSort": defaultSort,
   };
 }

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:homeworkout_flutter/common/commonTopBar/commom_topbar.dart';
+import 'package:homeworkout_flutter/database/model/DiscoverSingleExerciseData.dart';
+import 'package:homeworkout_flutter/database/model/ExerciseListData.dart';
+import 'package:homeworkout_flutter/database/model/WorkoutDetailData.dart';
 import 'package:homeworkout_flutter/interfaces/topbar_clicklistener.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/videoAnimation/video_animation_screen.dart';
@@ -9,6 +12,22 @@ import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
 
 class PauseScreen extends StatefulWidget {
+
+  List<WorkoutDetail>? workoutDetailList;
+  List<ExerciseListData>? exerciseListDataList;
+  String? fromPage;
+  List<DiscoverSingleExerciseData>? discoverSingleExerciseDataList;
+  int? index;
+
+
+  PauseScreen({
+    this.workoutDetailList,
+    this.fromPage,
+    this.exerciseListDataList,
+    this.discoverSingleExerciseDataList,
+    this.index,
+  });
+
 
   @override
   _PauseScreenState createState() => _PauseScreenState();
@@ -93,7 +112,10 @@ class _PauseScreenState extends State<PauseScreen>
 
   _quitBtn(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.pop(context);
+        Navigator.pop(context);
+      },
       child: Container(
         height: 80,
         width: double.infinity,
@@ -154,29 +176,34 @@ class _PauseScreenState extends State<PauseScreen>
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.6,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => VideoAnimationScreen()));
-                  },
-                  child: RichText(
-                    text: TextSpan(
-                        text: "DOWNWARD DOG FACING THE WALL",
-                        style: TextStyle(
-                            color: Colur.white.withOpacity(0.5),
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.w500),
-                        children: [
-                          WidgetSpan(
-                           child: Container(
-                             margin: const EdgeInsets.symmetric(horizontal: 10),
-                             child: Icon(
-                               Icons.help,
-                               size: 20.0,
-                               color: Colur.white.withOpacity(0.5),
-                             ),
-                          )),
-                        ]),
-                  ),
+                child: RichText(
+                  text: TextSpan(
+                      text: (widget.fromPage == Constant.PAGE_HOME)
+                          ? widget.exerciseListDataList![widget.index!].title
+                              .toString()
+                          : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
+                              ? widget.workoutDetailList![widget.index!].title
+                                  .toString()
+                              : widget
+                                  .discoverSingleExerciseDataList![
+                                      widget.index!]
+                                  .exName
+                                  .toString(),
+                      style: TextStyle(
+                          color: Colur.white.withOpacity(0.5),
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w500),
+                      children: [
+                        WidgetSpan(
+                         child: Container(
+                           margin: const EdgeInsets.symmetric(horizontal: 10),
+                           child: Icon(
+                             Icons.help,
+                             size: 20.0,
+                             color: Colur.white.withOpacity(0.5),
+                           ),
+                        )),
+                      ]),
                 ),
               ),
             ],

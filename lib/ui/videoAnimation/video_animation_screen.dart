@@ -1,12 +1,29 @@
  import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:homeworkout_flutter/database/model/DiscoverSingleExerciseData.dart';
+import 'package:homeworkout_flutter/database/model/ExerciseListData.dart';
+import 'package:homeworkout_flutter/database/model/WorkoutDetailData.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
+import 'package:homeworkout_flutter/utils/constant.dart';
+import 'package:homeworkout_flutter/utils/utils.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoAnimationScreen extends StatefulWidget {
 
-  VideoAnimationScreen();
+  List<WorkoutDetail>? workoutDetailList;
+  List<ExerciseListData>? exerciseListDataList;
+  String? fromPage;
+  List<DiscoverSingleExerciseData>? discoverSingleExerciseDataList;
+  int? index;
+
+  VideoAnimationScreen({
+    this.workoutDetailList,
+    this.fromPage,
+    this.exerciseListDataList,
+    this.discoverSingleExerciseDataList,
+    this.index,
+  });
 
   @override
   _VideoAnimationScreenState createState() => _VideoAnimationScreenState();
@@ -44,7 +61,7 @@ class _VideoAnimationScreenState extends State<VideoAnimationScreen>
       child: Scaffold(
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(0),
-            child: AppBar( // Here we create one to set status bar color
+            child: AppBar(
               backgroundColor: Colur.theme,
               elevation: 0,
             )
@@ -75,11 +92,9 @@ class _VideoAnimationScreenState extends State<VideoAnimationScreen>
           return Container(
             margin: const EdgeInsets.symmetric(horizontal: 3.0),
             height: 5,
-            width: MediaQuery.of(context).size.width /
-                10 -
-                6,
+            width: MediaQuery.of(context).size.width / 10 - 6,
             child: Divider(
-              color: /*(lastPosition! > index) ? CColor.theme : */Colur.txt_gray,
+              color: Colur.white,
               height: 2,
               thickness: 5,
             ),
@@ -207,19 +222,48 @@ class _VideoAnimationScreenState extends State<VideoAnimationScreen>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-               "SINGLE BICYCLE CRUNCHES",
+                (widget.fromPage == Constant.PAGE_HOME)
+                    ? widget.exerciseListDataList![widget.index!].title.toString()
+                    : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
+                    ? widget.workoutDetailList![widget.index!].title.toString()
+                    : widget.discoverSingleExerciseDataList![widget.index!].exName.toString(),
                 style: TextStyle(fontWeight: FontWeight.w700, fontSize: 26.0, color: Colur.white),
               ),
               SizedBox(height: 15,),
               Text(
-                "x30",
+                (widget.fromPage == Constant.PAGE_HOME)
+                    ? (widget.exerciseListDataList![widget.index!].timeType ==
+                            "time")
+                        ? Utils.secondToMMSSFormat(int.parse(widget
+                            .exerciseListDataList![widget.index!].time
+                            .toString()))
+                        : "X ${widget.exerciseListDataList![widget.index!].time}"
+                    : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
+                        ? (widget.workoutDetailList![widget.index!].timeType ==
+                                "time")
+                            ? Utils.secondToMMSSFormat(int.parse(widget
+                                .workoutDetailList![widget.index!].Time_beginner
+                                .toString()))
+                            : "X ${widget.workoutDetailList![widget.index!].Time_beginner}"
+                        : (widget.discoverSingleExerciseDataList![widget.index!]
+                                    .exUnit ==
+                                "s")
+                            ? Utils.secondToMMSSFormat(int.parse(widget
+                                .discoverSingleExerciseDataList![widget.index!]
+                                .ExTime
+                                .toString()))
+                            : "X ${widget.discoverSingleExerciseDataList![widget.index!].ExTime}",
                 style: TextStyle(fontWeight: FontWeight.w700, fontSize: 22.0, color: Colur.white),
               ),
               SizedBox(height: 15,),
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: Text(
-                  'One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. \n\nHe lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections. The bedding was hardly able to cover it and seemed ready to slide off any moment. ',
+                    (widget.fromPage == Constant.PAGE_HOME)
+                        ? widget.exerciseListDataList![widget.index!].description.toString()
+                        : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
+                        ? widget.workoutDetailList![widget.index!].description.toString()
+                        : widget.discoverSingleExerciseDataList![widget.index!].exDescription.toString(),
                   style: TextStyle(fontSize: 16.0, color: Colur.white),
                 ),
               ),
@@ -232,6 +276,15 @@ class _VideoAnimationScreenState extends State<VideoAnimationScreen>
 
   _getYoutubeVideo() async {
     //await _getImageFromAssets();
+
+    String? youTubeId = "";
+    if(widget.fromPage == Constant.PAGE_HOME){
+      youTubeId=widget.exerciseListDataList![widget.index!].videoLink!.split("=")[1].toString();
+    }else if(widget.fromPage == Constant.PAGE_DAYS_STATUS){
+      youTubeId=widget.workoutDetailList![widget.index!].videoLink!.split("=")[1].toString();
+    }else if(widget.fromPage == Constant.PAGE_DISCOVER){
+      youTubeId=widget.discoverSingleExerciseDataList![widget.index!].exVideo!.split("=")[1].toString();
+    }
 
     int duration = 0;
     if(countOfImages > 2 && countOfImages<=4){
@@ -259,7 +312,7 @@ class _VideoAnimationScreenState extends State<VideoAnimationScreen>
 
     setState(() {
       _controllerYoutubeView = YoutubePlayerController(
-        initialVideoId: "iLnmTe5Q2Qw",
+        initialVideoId: youTubeId!,
         flags: YoutubePlayerFlags(
           autoPlay: true,
           mute: true,

@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:homeworkout_flutter/database/model/ExerciseListData.dart';
+import 'package:homeworkout_flutter/database/model/WorkoutDetailData.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
+import 'package:homeworkout_flutter/ui/pause/pause_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
+import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
@@ -15,9 +18,14 @@ class SkipExerciseScreen extends StatefulWidget {
   List<ExerciseListData>? exerciseDataList;
   String? fromPage = "";
   String? tableName ="";
+  List<WorkoutDetail>? dayStatusDetailList;
+  String? dayName = "";
+  String? weekName = "";
 
-  SkipExerciseScreen({this.exerciseDataList,this.fromPage,this.tableName});
+  // SkipExerciseScreen({this.exerciseDataList,this.fromPage,this.tableName});
 
+  SkipExerciseScreen({this.fromPage,this.exerciseDataList,this.tableName,this.dayStatusDetailList,this.dayName,
+    this.weekName});
 
   @override
   _SkipExerciseScreenState createState() => _SkipExerciseScreenState();
@@ -51,11 +59,41 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
 
 
   _getLastPosition() {
-    lastPosition = Preference.shared.getLastUnCompletedExPos(widget.tableName.toString());
+    // lastPosition = Preference.shared.getLastUnCompletedExPos(widget.tableName.toString());
+    if(widget.fromPage == Constant.PAGE_HOME){
+      lastPosition = Preference.shared
+          .getLastUnCompletedExPos(widget.tableName.toString());
+    }else if(widget.fromPage == Constant.PAGE_DAYS_STATUS){
+      lastPosition = Preference.shared.getLastUnCompletedExPosForDays(
+          widget.tableName.toString(),
+          widget.weekName.toString(),
+          widget.dayName.toString());
+    }
     // _setImageRotation(lastPosition!);
     Future.delayed(Duration(milliseconds: 100), () {
-      String sec = widget.exerciseDataList![lastPosition!].timeType! == "time" ?
-      Languages.of(context)!.txtSeconds : Languages.of(context)!.txtTimes ;
+   /*   String sec = widget.exerciseDataList![lastPosition!].timeType! == "time"
+          ? Languages.of(context)!.txtSeconds
+          : Languages.of(context)!.txtTimes;
+*/
+
+      String sec = "";
+      String time = "";
+      String title = "";
+      if (widget.fromPage == Constant.PAGE_HOME) {
+        sec = widget.exerciseDataList![lastPosition!].timeType! == "time"
+            ? Languages.of(context)!.txtSeconds
+            : Languages.of(context)!.txtTimes;
+        time = widget.exerciseDataList![lastPosition!].time.toString();
+        title = widget.exerciseDataList![lastPosition!].title.toString();
+      } else if (widget.fromPage == Constant.PAGE_DAYS_STATUS) {
+        sec = widget.dayStatusDetailList![lastPosition!].timeType! == "time"
+            ? Languages.of(context)!.txtSeconds
+            : Languages.of(context)!.txtTimes;
+        time = widget.dayStatusDetailList![lastPosition!].Time_beginner.toString();
+        title = widget.dayStatusDetailList![lastPosition!].title.toString();
+      }
+
+
       if (isCountDownStart) {
         if (!isMute! && isVoiceGuide!) {
           Utils.textToSpeech(
@@ -63,11 +101,11 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
                   " " +
                   Languages.of(context)!.txtNext +
                   "" +
-                  widget.exerciseDataList![lastPosition!].time.toString() +
+                  time +
                   " " +
                   sec +
                   "" +
-                  widget.exerciseDataList![lastPosition!].title.toString(),
+                  title,
               flutterTts);
         }
       }
@@ -97,29 +135,43 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData(
-        appBarTheme: AppBarTheme(
-          systemOverlayStyle: SystemUiOverlayStyle.dark,
-        ), //
-      ),
-      child: Scaffold(
-        appBar: PreferredSize(
-            preferredSize: Size.fromHeight(0),
-            child: AppBar( // Here we create one to set status bar color
-              backgroundColor: Colur.blueGradient1,
-              elevation: 0,
-            )
+    return WillPopScope(
+      onWillPop: () async{
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => PauseScreen(
+                  fromPage: widget.fromPage,
+                  index: lastPosition,
+                  exerciseListDataList: widget.exerciseDataList,
+                  workoutDetailList: widget.dayStatusDetailList,
+                )));
+        return false;
+      },
+      child: Theme(
+        data: ThemeData(
+          appBarTheme: AppBarTheme(
+            systemOverlayStyle: SystemUiOverlayStyle.dark,
+          ), //
         ),
-        backgroundColor: Colur.blueGradient1,
-        body: SafeArea(
-          child: Container(
-            child: Column(
-              children: [
-                _widgetCenterTimer(),
+        child: Scaffold(
+          appBar: PreferredSize(
+              preferredSize: Size.fromHeight(0),
+              child: AppBar( // Here we create one to set status bar color
+                backgroundColor: Colur.blueGradient1,
+                elevation: 0,
+              )
+          ),
+          backgroundColor: Colur.blueGradient1,
+          body: SafeArea(
+            child: Container(
+              child: Column(
+                children: [
+                  _widgetCenterTimer(),
 
-                _widgetBottomExe(),
-              ],
+                  _widgetBottomExe(),
+                ],
+              ),
             ),
           ),
         ),
@@ -238,7 +290,9 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
                         Text(
                           (lastPosition! + 1).toString() +
                               "/" +
-                              widget.exerciseDataList!.length.toString(),
+                              ((widget.fromPage == Constant.PAGE_HOME)
+                                  ? widget.exerciseDataList!.length
+                                  : widget.dayStatusDetailList!.length).toString(),
                           style: TextStyle(
                             color: Colur.theme
                           ),
@@ -251,7 +305,9 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
                     child: Row(
                       children: [
                         Text(
-                          widget.exerciseDataList![lastPosition!].title.toString(),
+                          ((widget.fromPage == Constant.PAGE_HOME)
+                              ? widget.exerciseDataList![lastPosition!].title.toString()
+                              : widget.dayStatusDetailList![lastPosition!].title.toString()),
                           style: TextStyle(
                               fontSize: 18.0,
                               color: Colur.black,
@@ -273,14 +329,29 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
                   Container(
                     margin: const EdgeInsets.only(bottom: 10.0),
                     child: Text(
-                      (widget.exerciseDataList![lastPosition!].timeType ==
-                          "time")
-                          ? widget.exerciseDataList![lastPosition!].time!.toString()
-                          : "X " +
-                          widget
-                              .exerciseDataList![lastPosition!].time
-                              .toString(),
-                      style: TextStyle(
+                      (((widget.fromPage == Constant.PAGE_HOME)
+                                    ? widget.exerciseDataList![lastPosition!]
+                                        .timeType
+                                        .toString()
+                                    : widget.dayStatusDetailList![lastPosition!]
+                                        .timeType
+                                        .toString()) ==
+                                "time")
+                            ? ((widget.fromPage == Constant.PAGE_HOME)
+                                ? widget.exerciseDataList![lastPosition!].time
+                                    .toString()
+                                : widget.dayStatusDetailList![lastPosition!]
+                                    .Time_beginner
+                                    .toString())
+                            : "X " +
+                                ((widget.fromPage == Constant.PAGE_HOME)
+                                    ? widget
+                                        .exerciseDataList![lastPosition!].time
+                                        .toString()
+                                    : widget.dayStatusDetailList![lastPosition!]
+                                        .Time_beginner
+                                        .toString()),
+                        style: TextStyle(
                           color: Colur.txt_gray
                       ),
                     )
