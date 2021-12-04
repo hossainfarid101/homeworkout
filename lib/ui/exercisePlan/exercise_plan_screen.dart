@@ -6,7 +6,9 @@ import 'package:homeworkout_flutter/custom/drawer/drawer_menu.dart';
 import 'package:homeworkout_flutter/database/database_helper.dart';
 import 'package:homeworkout_flutter/database/tables/discover_plan_table.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
+import 'package:homeworkout_flutter/ui/exerciselist/ExerciseListScreen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
+import 'package:homeworkout_flutter/utils/constant.dart';
 
 class ExercisePlanScreen extends StatefulWidget {
 
@@ -144,58 +146,71 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
               child: ListView.separated(
                 padding: EdgeInsets.only(top: 10),
                 itemBuilder: (context, index) {
-                  return Container(
-                    margin: const EdgeInsets.all(20),
-                    child: Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          child: Image.asset(
-                            "assets/images/abs_advanced.webp",
-                            width: 55,
-                            height: 55,
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            margin: const EdgeInsets.only(left: 15),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  margin: const EdgeInsets.symmetric(vertical: 3.0),
-                                  child: Text(
-                                      discoverSubPlanList[index].planName.toString(),
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        color: Colur.black,
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.w600
-                                    )
-                                  ),
-                                ),
-
-                                Container(
-                                  margin: const EdgeInsets.symmetric(vertical: 3.0),
-                                  child: Text(
-                                    discoverSubPlanList[index].planText.toString(),
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 14,
-                                      color: Colur.txt_gray,
-                                    ),
-                                  ),
-                                ),
-                              ],
+                  return InkWell(
+                    onTap:() {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ExerciseListScreen(
+                                  fromPage: Constant.PAGE_DISCOVER,
+                                  planName: discoverSubPlanList[index].planName,
+                                  discoverPlanTable: discoverSubPlanList[index]
+                              )));
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.all(20),
+                      child: Row(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            child: Image.asset(
+                              "assets/images/abs_advanced.webp",
+                              width: 55,
+                              height: 55,
+                              fit: BoxFit.fill,
                             ),
                           ),
-                        )
-                      ],
+                          Expanded(
+                            child: Container(
+                              margin: const EdgeInsets.only(left: 15),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    margin: const EdgeInsets.symmetric(vertical: 3.0),
+                                    child: Text(
+                                        discoverSubPlanList[index].planName.toString(),
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          color: Colur.black,
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.w600
+                                      )
+                                    ),
+                                  ),
+
+                                  Container(
+                                    margin: const EdgeInsets.symmetric(vertical: 3.0),
+                                    child: Text(
+                                      discoverSubPlanList[index].planText.toString(),
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 14,
+                                        color: Colur.txt_gray,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   );
-                }, itemCount: discoverSubPlanList.length,
+                },
+                itemCount: discoverSubPlanList.length,
                 separatorBuilder: (BuildContext context, int index) { 
                   return Container(
                     margin: const EdgeInsets.symmetric(horizontal: 15,),
@@ -204,6 +219,7 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
                     ),
                   );
                 },
+
               )
             )
         ),

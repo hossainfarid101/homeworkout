@@ -71,7 +71,7 @@ class _VideoAnimationScreenState extends State<VideoAnimationScreen>
           child: Container(
             child: Column(
               children: [
-                _topListView(),
+                // _topListView(),
                 _topBar(),
                 _youtubeAndAnimationView(),
                 _descriptionOfExercise()
@@ -152,7 +152,8 @@ class _VideoAnimationScreenState extends State<VideoAnimationScreen>
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: Text(
-                      (isAnimation)  ? Languages.of(context)!.txtAnimation.toUpperCase() : Languages.of(context)!.txtVideo.toUpperCase(),
+                      (isAnimation)  ? Languages.of(context)!.txtAnimation.toUpperCase() :
+                      Languages.of(context)!.txtVideo.toUpperCase(),
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w700,
@@ -222,48 +223,19 @@ class _VideoAnimationScreenState extends State<VideoAnimationScreen>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                (widget.fromPage == Constant.PAGE_HOME)
-                    ? widget.exerciseListDataList![widget.index!].title.toString()
-                    : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
-                    ? widget.workoutDetailList![widget.index!].title.toString()
-                    : widget.discoverSingleExerciseDataList![widget.index!].exName.toString(),
+                _getExerciseNameFromList(),
                 style: TextStyle(fontWeight: FontWeight.w700, fontSize: 26.0, color: Colur.white),
               ),
               SizedBox(height: 15,),
               Text(
-                (widget.fromPage == Constant.PAGE_HOME)
-                    ? (widget.exerciseListDataList![widget.index!].timeType ==
-                            "time")
-                        ? Utils.secondToMMSSFormat(int.parse(widget
-                            .exerciseListDataList![widget.index!].time
-                            .toString()))
-                        : "X ${widget.exerciseListDataList![widget.index!].time}"
-                    : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
-                        ? (widget.workoutDetailList![widget.index!].timeType ==
-                                "time")
-                            ? Utils.secondToMMSSFormat(int.parse(widget
-                                .workoutDetailList![widget.index!].Time_beginner
-                                .toString()))
-                            : "X ${widget.workoutDetailList![widget.index!].Time_beginner}"
-                        : (widget.discoverSingleExerciseDataList![widget.index!]
-                                    .exUnit ==
-                                "s")
-                            ? Utils.secondToMMSSFormat(int.parse(widget
-                                .discoverSingleExerciseDataList![widget.index!]
-                                .ExTime
-                                .toString()))
-                            : "X ${widget.discoverSingleExerciseDataList![widget.index!].ExTime}",
+                _getTimeAndCheckTimeType(),
                 style: TextStyle(fontWeight: FontWeight.w700, fontSize: 22.0, color: Colur.white),
               ),
               SizedBox(height: 15,),
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: Text(
-                    (widget.fromPage == Constant.PAGE_HOME)
-                        ? widget.exerciseListDataList![widget.index!].description.toString()
-                        : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
-                        ? widget.workoutDetailList![widget.index!].description.toString()
-                        : widget.discoverSingleExerciseDataList![widget.index!].exDescription.toString(),
+                  _getExerciseDescriptionFromList(),
                   style: TextStyle(fontSize: 16.0, color: Colur.white),
                 ),
               ),
@@ -321,18 +293,46 @@ class _VideoAnimationScreenState extends State<VideoAnimationScreen>
     });
   }
 
-  /*_getImageFromAssets() async {
-    final manifestContent = await rootBundle.loadString('AssetManifest.json');
+  String _getTimeAndCheckTimeType() {
+    return (widget.fromPage == Constant.PAGE_HOME)
+        ? (widget.exerciseListDataList![widget.index!].timeType == "time")
+        ? Utils.secondToMMSSFormat(
+        int.parse(widget.exerciseListDataList![widget.index!].time.toString()))
+        : "X ${widget.exerciseListDataList![widget.index!].time}"
+        : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
+        ? (widget.workoutDetailList![widget.index!].timeType == "time")
+        ? Utils.secondToMMSSFormat(int.parse(
+        widget.workoutDetailList![widget.index!].Time_beginner.toString()))
+        : "X ${widget.workoutDetailList![widget.index!].Time_beginner}"
+        : (widget.discoverSingleExerciseDataList![widget.index!].exUnit == "s")
+        ? Utils.secondToMMSSFormat(int.parse(
+        widget.discoverSingleExerciseDataList![widget.index!].ExTime
+            .toString()))
+        : "X ${widget.discoverSingleExerciseDataList![widget.index!].ExTime}";
+  }
 
-    final Map<String, dynamic> manifestMap = json.decode(manifestContent);
+  String _getExerciseDescriptionFromList() {
+    return (widget.fromPage == Constant.PAGE_HOME)
+        ? widget.exerciseListDataList![widget.index!].description.toString()
+        : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
+        ? widget.workoutDetailList![widget.index!].description.toString()
+        : widget.discoverSingleExerciseDataList![widget.index!].exDescription.toString();
+  }
 
-    final imagePaths = manifestMap.keys
-        .where((String key) =>
-            key.contains(widget.exerciseTable!.exPath.toString()))
-        .where((String key) => key.contains('.webp'))
-        .toList();
+  int _getLengthFromList(){
+    return ((widget.fromPage == Constant.PAGE_HOME)
+        ? widget.exerciseListDataList!.length
+        : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
+        ? widget.workoutDetailList!.length
+        : widget.discoverSingleExerciseDataList!.length);
+  }
 
-    countOfImages = imagePaths.length;
 
-  }*/
+  String _getExerciseNameFromList(){
+    return ((widget.fromPage == Constant.PAGE_HOME)
+        ? widget.exerciseListDataList![widget.index!].title!
+        : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
+        ? widget.workoutDetailList![widget.index!].title
+        : widget.discoverSingleExerciseDataList![widget.index!].exName).toString();
+  }
 }

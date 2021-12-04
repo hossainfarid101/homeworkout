@@ -215,56 +215,68 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   }
 
   _discoverCard() {
-    return Card(
-      elevation: 5.0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-      margin: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(10.0),
-        child: Container(
-          height: 195,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              // image: AssetImage('assets/images/abs_advanced.webp'),
-              image: AssetImage(randomPlanData!.planImage.toString()),
-              fit: BoxFit.cover,
-            ),
-            shape: BoxShape.rectangle,
-          ),
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ExerciseListScreen(
+                    fromPage: Constant.PAGE_DISCOVER,
+                    planName: randomPlanData!.planName,
+                    discoverPlanTable: randomPlanData
+                )));
+      },
+      child: Card(
+        elevation: 5.0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+        margin: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10.0),
           child: Container(
-            color: Colur.transparent_black_50,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Container(
-                  width: double.infinity,
-                  margin: const EdgeInsets.only(
-                      top: 15.0, bottom: 0.0, left: 15.0, right: 15.0),
-                  child: Text(
-                    (randomPlanData != null)?randomPlanData!.planName!:"",
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 24,
-                        color: Colur.white),
+            height: 195,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                // image: AssetImage('assets/images/abs_advanced.webp'),
+                image: AssetImage(randomPlanData!.planImage.toString()),
+                fit: BoxFit.cover,
+              ),
+              shape: BoxShape.rectangle,
+            ),
+            child: Container(
+              color: Colur.transparent_black_50,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                    width: double.infinity,
+                    margin: const EdgeInsets.only(
+                        top: 15.0, bottom: 0.0, left: 15.0, right: 15.0),
+                    child: Text(
+                      (randomPlanData != null)?randomPlanData!.planName!:"",
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 24,
+                          color: Colur.white),
+                    ),
                   ),
-                ),
-                Container(
-                  width: double.infinity,
-                  margin: const EdgeInsets.only(
-                      top: 12.0, bottom: 25.0, left: 15.0, right: 15.0),
-                  child: AutoSizeText(
-                    (randomPlanData != null && randomPlanData!.shortDes! != "")?randomPlanData!.shortDes!:randomPlanData!.introduction!,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 15,
-                        color: Colur.white),
+                  Container(
+                    width: double.infinity,
+                    margin: const EdgeInsets.only(
+                        top: 12.0, bottom: 25.0, left: 15.0, right: 15.0),
+                    child: AutoSizeText(
+                      (randomPlanData != null && randomPlanData!.shortDes! != "")?randomPlanData!.shortDes!:randomPlanData!.introduction!,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15,
+                          color: Colur.white),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -330,6 +342,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                           MaterialPageRoute(
                               builder: (context) => ExerciseListScreen(
                                     fromPage: Constant.PAGE_DISCOVER,
+                                  planName: picksForYouDiscoverPlanList[firstCardPos].planName,
                                   discoverPlanTable: picksForYouDiscoverPlanList[firstCardPos]
                                   )));
                     },
@@ -425,6 +438,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                           MaterialPageRoute(
                               builder: (context) => ExerciseListScreen(
                                     fromPage: Constant.PAGE_DISCOVER,
+                                planName: picksForYouDiscoverPlanList[secondCardPos].planName,
                                 discoverPlanTable: picksForYouDiscoverPlanList[secondCardPos],
                                   )));
                     },
@@ -610,30 +624,42 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   _itemForBeginnersList(int index) {
     return AspectRatio(
       aspectRatio: 16 / 13.8,
-      child: Card(
-        margin: const EdgeInsets.symmetric(horizontal: 8.0),
-        elevation: 3.0,
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              // image: AssetImage('assets/images/abs_advanced.webp'),
-              image: AssetImage(forBeginnerDiscoverPlanList[index].planImage.toString()),
-              fit: BoxFit.cover,
-            ),
-            borderRadius: BorderRadius.circular(4.0),
-            shape: BoxShape.rectangle,
-          ),
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ExerciseListScreen(
+                      fromPage: Constant.PAGE_DISCOVER,
+                      planName: forBeginnerDiscoverPlanList[index].planName,
+                      discoverPlanTable: forBeginnerDiscoverPlanList[index]
+                  )));
+        },
+        child: Card(
+          margin: const EdgeInsets.symmetric(horizontal: 8.0),
+          elevation: 3.0,
           child: Container(
-            width: double.infinity,
-            padding:
-                const EdgeInsets.symmetric(vertical: 18.0, horizontal: 18.0),
-            alignment: Alignment.bottomLeft,
-            child: Text(
-              forBeginnerDiscoverPlanList[index].planName.toString(),
-              style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 15,
-                  color: Colur.white),
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                // image: AssetImage('assets/images/abs_advanced.webp'),
+                image: AssetImage(forBeginnerDiscoverPlanList[index].planImage.toString()),
+                fit: BoxFit.cover,
+              ),
+              borderRadius: BorderRadius.circular(4.0),
+              shape: BoxShape.rectangle,
+            ),
+            child: Container(
+              width: double.infinity,
+              padding:
+                  const EdgeInsets.symmetric(vertical: 18.0, horizontal: 18.0),
+              alignment: Alignment.bottomLeft,
+              child: Text(
+                forBeginnerDiscoverPlanList[index].planName.toString(),
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 15,
+                    color: Colur.white),
+              ),
             ),
           ),
         ),
@@ -692,70 +718,82 @@ class _DiscoverScreenState extends State<DiscoverScreen>
         children: [
           (fastWorkoutDiscoverPlanList.length > (firstCardPos))
               ? Expanded(
-                  child: Row(
-                    children: [
-                      Card(
-                        elevation: 5.0,
-                        margin: const EdgeInsets.all(0.0),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0)),
-                        child: Container(
-                          width: 90.0,
-                          height: 90.0,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: Image.asset(
-                              // 'assets/images/abs_advanced.webp',
-                              fastWorkoutDiscoverPlanList[firstCardPos].planImage.toString(),
-                              fit: BoxFit.cover,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ExerciseListScreen(
+                                  fromPage: Constant.PAGE_DISCOVER,
+                                  planName: fastWorkoutDiscoverPlanList[firstCardPos].planName,
+                                  discoverPlanTable: fastWorkoutDiscoverPlanList[firstCardPos]
+                              )));
+                    },
+                    child: Row(
+                      children: [
+                        Card(
+                          elevation: 5.0,
+                          margin: const EdgeInsets.all(0.0),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0)),
+                          child: Container(
+                            width: 90.0,
+                            height: 90.0,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.asset(
+                                // 'assets/images/abs_advanced.webp',
+                                fastWorkoutDiscoverPlanList[firstCardPos].planImage.toString(),
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    width: double.infinity,
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 20.0, vertical: 3.0),
-                                    child: Text(
-                                      fastWorkoutDiscoverPlanList[firstCardPos].planName.toString(),
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 17,
-                                        color: Colur.txtBlack,
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      width: double.infinity,
+                                      margin: const EdgeInsets.symmetric(
+                                          horizontal: 20.0, vertical: 3.0),
+                                      child: Text(
+                                        fastWorkoutDiscoverPlanList[firstCardPos].planName.toString(),
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 17,
+                                          color: Colur.txtBlack,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Container(
-                                    width: double.infinity,
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 20.0, vertical: 3.0),
-                                    child: Text(
-                                      fastWorkoutDiscoverPlanList[firstCardPos].planText.toString(),
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14,
-                                        color: Colur.txt_gray,
+                                    Container(
+                                      width: double.infinity,
+                                      margin: const EdgeInsets.symmetric(
+                                          horizontal: 20.0, vertical: 3.0),
+                                      child: Text(
+                                        fastWorkoutDiscoverPlanList[firstCardPos].planText.toString(),
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 14,
+                                          color: Colur.txt_gray,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.only(left: 8.0),
-                              child: _divider(thickness: 1.0),
-                            ),
-                          ],
+                              Container(
+                                margin: const EdgeInsets.only(left: 8.0),
+                                child: _divider(thickness: 1.0),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 )
               : Expanded(
@@ -770,70 +808,82 @@ class _DiscoverScreenState extends State<DiscoverScreen>
           ),
           (fastWorkoutDiscoverPlanList.length > (secondCardPos))
               ? Expanded(
-                  child: Row(
-                    children: [
-                      Card(
-                        elevation: 5.0,
-                        margin: const EdgeInsets.all(0.0),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0)),
-                        child: Container(
-                          width: 90.0,
-                          height: 90.0,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: Image.asset(
-                              // 'assets/images/abs_advanced.webp',
-                              fastWorkoutDiscoverPlanList[secondCardPos].planImage.toString(),
-                              fit: BoxFit.cover,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ExerciseListScreen(
+                                  fromPage: Constant.PAGE_DISCOVER,
+                                  planName: fastWorkoutDiscoverPlanList[secondCardPos].planName,
+                                  discoverPlanTable: fastWorkoutDiscoverPlanList[secondCardPos]
+                              )));
+                    },
+                    child: Row(
+                      children: [
+                        Card(
+                          elevation: 5.0,
+                          margin: const EdgeInsets.all(0.0),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0)),
+                          child: Container(
+                            width: 90.0,
+                            height: 90.0,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.asset(
+                                // 'assets/images/abs_advanced.webp',
+                                fastWorkoutDiscoverPlanList[secondCardPos].planImage.toString(),
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    width: double.infinity,
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 20.0, vertical: 3.0),
-                                    child: Text(
-                                      fastWorkoutDiscoverPlanList[secondCardPos].planName.toString(),
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 17,
-                                        color: Colur.txtBlack,
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      width: double.infinity,
+                                      margin: const EdgeInsets.symmetric(
+                                          horizontal: 20.0, vertical: 3.0),
+                                      child: Text(
+                                        fastWorkoutDiscoverPlanList[secondCardPos].planName.toString(),
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 17,
+                                          color: Colur.txtBlack,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Container(
-                                    width: double.infinity,
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 20.0, vertical: 3.0),
-                                    child: Text(
-                                      fastWorkoutDiscoverPlanList[secondCardPos].planText.toString(),
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14,
-                                        color: Colur.txt_gray,
+                                    Container(
+                                      width: double.infinity,
+                                      margin: const EdgeInsets.symmetric(
+                                          horizontal: 20.0, vertical: 3.0),
+                                      child: Text(
+                                        fastWorkoutDiscoverPlanList[secondCardPos].planText.toString(),
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 14,
+                                          color: Colur.txt_gray,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.only(left: 8.0),
-                              child: _divider(thickness: 1.0),
-                            ),
-                          ],
+                              Container(
+                                margin: const EdgeInsets.only(left: 8.0),
+                                child: _divider(thickness: 1.0),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 )
               : Expanded(
@@ -883,31 +933,43 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   _itemChallengeList(int index) {
     return AspectRatio(
       aspectRatio: 16 / 13.8,
-      child: Card(
-        margin: const EdgeInsets.symmetric(horizontal: 8.0),
-        elevation: 3.0,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              // image: AssetImage('assets/images/abs_advanced.webp'),
-              image: AssetImage(challengeDiscoverPlanList[index].planImage.toString()),
-              fit: BoxFit.cover,
-            ),
-            borderRadius: BorderRadius.circular(4.0),
-            shape: BoxShape.rectangle,
-          ),
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ExerciseListScreen(
+                      fromPage: Constant.PAGE_DISCOVER,
+                      planName: challengeDiscoverPlanList[index].planName,
+                      discoverPlanTable: challengeDiscoverPlanList[index]
+                  )));
+        },
+        child: Card(
+          margin: const EdgeInsets.symmetric(horizontal: 8.0),
+          elevation: 3.0,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
           child: Container(
-            width: double.infinity,
-            padding:
-                const EdgeInsets.symmetric(vertical: 18.0, horizontal: 18.0),
-            alignment: Alignment.bottomLeft,
-            child: Text(
-              challengeDiscoverPlanList[index].planName.toString(),
-              style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 15,
-                  color: Colur.white),
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                // image: AssetImage('assets/images/abs_advanced.webp'),
+                image: AssetImage(challengeDiscoverPlanList[index].planImage.toString()),
+                fit: BoxFit.cover,
+              ),
+              borderRadius: BorderRadius.circular(4.0),
+              shape: BoxShape.rectangle,
+            ),
+            child: Container(
+              width: double.infinity,
+              padding:
+                  const EdgeInsets.symmetric(vertical: 18.0, horizontal: 18.0),
+              alignment: Alignment.bottomLeft,
+              child: Text(
+                challengeDiscoverPlanList[index].planName.toString(),
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 15,
+                    color: Colur.white),
+              ),
             ),
           ),
         ),
@@ -1005,42 +1067,54 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   }
 
   _itemSleepList(int index) {
-    return Column(
-      children: [
-        Container(
-          height: 105,
-          width: 150,
-          child: Card(
-            elevation: 5.0,
-            margin: const EdgeInsets.all(0.0),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0)),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10.0),
-              child: Image.asset(
-                // 'assets/images/abs_advanced.webp',
-                sleepDiscoverPlanList[index].planImage.toString(),
-                fit: BoxFit.cover,
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ExerciseListScreen(
+                    fromPage: Constant.PAGE_DISCOVER,
+                    planName: sleepDiscoverPlanList[index].planName,
+                    discoverPlanTable: sleepDiscoverPlanList[index]
+                )));
+      },
+      child: Column(
+        children: [
+          Container(
+            height: 105,
+            width: 150,
+            child: Card(
+              elevation: 5.0,
+              margin: const EdgeInsets.all(0.0),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0)),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10.0),
+                child: Image.asset(
+                  // 'assets/images/abs_advanced.webp',
+                  sleepDiscoverPlanList[index].planImage.toString(),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
-        ),
-        Container(
-          width: double.infinity,
-          alignment: Alignment.centerLeft,
-          margin: const EdgeInsets.only(top: 5.0),
-          child: Text(
-            sleepDiscoverPlanList[index].planName.toString(),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 16.0,
-              color: Colur.txtBlack,
+          Container(
+            width: double.infinity,
+            alignment: Alignment.centerLeft,
+            margin: const EdgeInsets.only(top: 5.0),
+            child: Text(
+              sleepDiscoverPlanList[index].planName.toString(),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 16.0,
+                color: Colur.txtBlack,
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

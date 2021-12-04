@@ -14,6 +14,7 @@ import 'package:homeworkout_flutter/ui/workout/workout_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
+import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 
 class ExerciseListScreen extends StatefulWidget {
@@ -126,7 +127,8 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
                     decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage(
-                            'assets/images/abs_advanced.webp',
+                            // 'assets/images/abs_advanced.webp',
+                            _getTopImageNameFromList(),
                           ),
                           fit: BoxFit.cover),
                     ),
@@ -302,9 +304,9 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
       WorkoutDetail workoutDetail = workoutDetailList.removeAt(oldIndex);
       workoutDetailList.insert(newIndex, workoutDetail);
       var tableName = "";
-      if(widget.planName == Constant.Full_body_small){
+      if(widget.planName!.toUpperCase() == Constant.Full_body_small.toUpperCase()){
         tableName = Constant.tbl_full_body_workouts_list;
-      }else if(widget.planName == Constant.Lower_body_small){
+      }else if(widget.planName!.toUpperCase() == Constant.Lower_body_small.toUpperCase()){
         tableName = Constant.tbl_lower_body_list;
       }
       for(int i=0;i<workoutDetailList.length;i++){
@@ -531,14 +533,17 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
         ),
         onPressed: () {
           var tableName = "";
+          var planName = "";
           if(widget.fromPage == Constant.PAGE_HOME){
             tableName = widget.homePlanTable!.catTableName.toString();
-          }else if(widget.fromPage == Constant.PAGE_HOME && widget.planName != ""){
+          }else if(widget.fromPage == Constant.PAGE_DAYS_STATUS && widget.planName != ""){
             if(widget.planName == Constant.Full_body_small){
               tableName = Constant.tbl_full_body_workouts_list;
             }else if(widget.planName == Constant.Lower_body_small){
               tableName = Constant.tbl_lower_body_list;
             }
+          }else if(widget.fromPage == Constant.PAGE_DISCOVER){
+            planName = widget.discoverPlanTable!.planName.toString();
           }
           Navigator.push(
               context,
@@ -550,6 +555,8 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
                         tableName: tableName,
                         dayName: widget.dayName,
                         weekName: widget.weekName,
+                        discoverSingleExerciseData: discoverSingleExerciseList,
+                        planName: planName,
                       )));
         },
       ),
@@ -580,5 +587,22 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
       workoutDetailList.sort((a, b) => a.sort!.compareTo(b.sort!));
     }
     setState(() {});
+  }
+
+  String _getTopImageNameFromList(){
+    var imageName = "";
+    var gender = Preference.shared.getString(Constant.SELECTED_GENDER)??Constant.GENDER_MEN;
+    if(widget.fromPage == Constant.PAGE_HOME) {
+      imageName = widget.homePlanTable!.catImage.toString()+"_"+gender.toString()+".webp";
+    }else if(widget.fromPage == Constant.PAGE_DAYS_STATUS){
+      if(widget.planName!.toUpperCase() == Constant.Full_body_small.toUpperCase()){
+        imageName = "assets/exerciseImage/other/full_body_$gender.webp";
+      }else if(widget.planName!.toUpperCase() == Constant.Lower_body_small.toUpperCase()){
+        imageName = "assets/exerciseImage/other/lower_body_$gender.webp";
+      }
+    }else if(widget.fromPage == Constant.PAGE_DISCOVER){
+      imageName = widget.discoverPlanTable!.planImage.toString();
+    }
+    return imageName;
   }
 }

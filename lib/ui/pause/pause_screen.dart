@@ -115,6 +115,7 @@ class _PauseScreenState extends State<PauseScreen>
       onTap: () {
         Navigator.pop(context);
         Navigator.pop(context);
+        Navigator.pop(context);
       },
       child: Container(
         height: 80,
@@ -178,17 +179,7 @@ class _PauseScreenState extends State<PauseScreen>
                 width: MediaQuery.of(context).size.width * 0.6,
                 child: RichText(
                   text: TextSpan(
-                      text: (widget.fromPage == Constant.PAGE_HOME)
-                          ? widget.exerciseListDataList![widget.index!].title
-                              .toString()
-                          : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
-                              ? widget.workoutDetailList![widget.index!].title
-                                  .toString()
-                              : widget
-                                  .discoverSingleExerciseDataList![
-                                      widget.index!]
-                                  .exName
-                                  .toString(),
+                      text: _getExerciseNameFromList(),
                       style: TextStyle(
                           color: Colur.white.withOpacity(0.5),
                           fontSize: 16.0,
@@ -227,5 +218,39 @@ class _PauseScreenState extends State<PauseScreen>
     if(name == Constant.strBack) {
       Navigator.pop(context, false);
     }
+  }
+
+  bool _timeTypeCheck() {
+    return ((widget.fromPage == Constant.PAGE_HOME)
+        ? widget.exerciseListDataList![widget.index!].timeType!
+        : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
+        ? widget.workoutDetailList![widget.index!].timeType!
+        : widget.discoverSingleExerciseDataList![widget.index!].exUnit!) ==
+        ((widget.fromPage != Constant.PAGE_DISCOVER) ? "time" : "s");
+  }
+
+  String _getExerciseTimeFromList() {
+    return ((widget.fromPage == Constant.PAGE_HOME)
+        ? widget.exerciseListDataList![widget.index!].time!
+        : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
+        ? widget.workoutDetailList![widget.index!].Time_beginner
+        : widget.discoverSingleExerciseDataList![widget.index!].ExTime).toString();
+  }
+
+  int _getLengthFromList(){
+    return ((widget.fromPage == Constant.PAGE_HOME)
+        ? widget.exerciseListDataList!.length
+        : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
+        ? widget.workoutDetailList!.length
+        : widget.discoverSingleExerciseDataList!.length);
+  }
+
+
+  String _getExerciseNameFromList(){
+    return ((widget.fromPage == Constant.PAGE_HOME)
+        ? widget.exerciseListDataList![widget.index!].title!
+        : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
+        ? widget.workoutDetailList![widget.index!].title
+        : widget.discoverSingleExerciseDataList![widget.index!].exName).toString();
   }
 }

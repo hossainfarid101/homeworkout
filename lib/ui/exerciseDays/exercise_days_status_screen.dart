@@ -12,6 +12,7 @@ import 'package:homeworkout_flutter/ui/exerciselist/ExerciseListScreen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
+import 'package:homeworkout_flutter/utils/preference.dart';
 
 class ExerciseDaysStatusScreen extends StatefulWidget {
 
@@ -114,7 +115,11 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
                       decoration: BoxDecoration(
                           image: DecorationImage(
                               image: AssetImage(
-                                'assets/images/abs_advanced.webp',
+                                // 'assets/images/abs_advanced.webp',
+                                (widget.planName!.toUpperCase() ==
+                                        Constant.Full_body_small.toUpperCase())
+                                    ? "assets/exerciseImage/other/full_body_${Preference.shared.getString(Constant.SELECTED_GENDER)??Constant.GENDER_MEN}.webp"
+                                    : "assets/exerciseImage/other/lower_body_${Preference.shared.getString(Constant.SELECTED_GENDER)??Constant.GENDER_MEN}.webp",
                               ),
                               fit: BoxFit.cover)),
                       child: Column(

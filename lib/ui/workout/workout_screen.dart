@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:homeworkout_flutter/database/database_helper.dart';
+import 'package:homeworkout_flutter/database/model/DiscoverSingleExerciseData.dart';
 import 'package:homeworkout_flutter/database/model/ExerciseListData.dart';
 import 'package:homeworkout_flutter/database/model/WorkoutDetailData.dart';
+import 'package:homeworkout_flutter/database/tables/discover_plan_table.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/pause/pause_screen.dart';
 import 'package:homeworkout_flutter/ui/skipExercise/skip_exercise_screen.dart';
@@ -27,18 +29,19 @@ class WorkoutScreen extends StatefulWidget {
   List<ExerciseListData>? exerciseDataList;
   String? tableName = "";
   List<WorkoutDetail>? dayStatusDetailList;
+  List<DiscoverSingleExerciseData>? discoverSingleExerciseData;
   String? dayName = "";
   String? weekName = "";
+  String? planName = "";
 
   WorkoutScreen({this.fromPage,this.exerciseDataList,this.tableName,this.dayStatusDetailList,this.dayName,
-    this.weekName});
+    this.weekName,this.discoverSingleExerciseData,this.planName});
 
   @override
   _WorkoutScreenState createState() => _WorkoutScreenState();
 }
 
 class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateMixin, WidgetsBindingObserver{
-  int listLength = 7;
 
   bool isWidgetCountDown = true;
   CountDownController countDownController = CountDownController();
@@ -115,6 +118,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
 
 
   _getLastPosition() async {
+    Debug.printLog("_getLastPosition==>tblName>"+widget.tableName.toString());
 
     if(widget.fromPage == Constant.PAGE_HOME){
       lastPosition = Preference.shared
@@ -124,18 +128,23 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
           widget.tableName.toString(),
           widget.weekName.toString(),
           widget.dayName.toString());
+    }else if(widget.fromPage == Constant.PAGE_DISCOVER){
+      lastPosition = Preference.shared.getLastUnCompletedExPos(widget.planName.toString());
     }
 
     // _setImageRotation(lastPosition!);
     Future.delayed(Duration(milliseconds: 100), () {
       if (isCountDownStart) {
         if (!isMute! && isVoiceGuide!) {
-          Utils.textToSpeech(
-              Languages.of(context)!.txtReadyToGo +
-                  " " +
-                  widget.exerciseDataList![lastPosition!].title
-                      .toString(),
-              flutterTts);
+          /*String title = "";
+          if(widget.fromPage == Constant.PAGE_HOME){
+            title = widget.exerciseDataList![lastPosition!].title.toString();
+          }else if(widget.fromPage == Constant.PAGE_DAYS_STATUS){
+            title = widget.dayStatusDetailList![lastPosition!].title.toString();
+          }else if(widget.fromPage == Constant.PAGE_DISCOVER){
+            title = widget.discoverSingleExerciseData![lastPosition!].exName.toString();
+          }*/
+          Utils.textToSpeech(Languages.of(context)!.txtReadyToGo + " " + _getExerciseNameFromList().toString(), flutterTts);
         }
       }
     });
@@ -152,6 +161,9 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
           widget.weekName.toString(),
           widget.dayName.toString(),
           pos);
+    }else if(widget.fromPage == Constant.PAGE_DISCOVER){
+      Preference.shared.setLastUnCompletedExPos(
+          widget.planName.toString(), pos);
     }
   }
 
@@ -238,16 +250,18 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
   }
 
   _controllerForward() {
-    var length = 0;
+    /*var length = 0;
     if(widget.fromPage == Constant.PAGE_HOME){
       length = widget.exerciseDataList!.length;
     }else if(widget.fromPage == Constant.PAGE_DAYS_STATUS){
       length = widget.dayStatusDetailList!.length;
-    }
+    }else if(widget.fromPage == Constant.PAGE_DISCOVER){
+      length = widget.discoverSingleExerciseData!.length;
+    }*/
 
     controller!.forward().whenComplete(() async => {
 
-      if ((lastPosition! + 1) >= length)
+      if ((lastPosition! + 1) >= _getLengthFromList())
         {
           _setLastFinishExe(lastPosition! + 1),
           _startWellDoneScreen(),
@@ -263,10 +277,12 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
                       builder: (context) => SkipExerciseScreen(
                             exerciseDataList: widget.exerciseDataList,
                             fromPage: widget.fromPage,
-                        tableName: widget.tableName,
-                        dayStatusDetailList: widget.dayStatusDetailList,
-                        weekName: widget.weekName,
-                        dayName: widget.dayName,
+                            tableName: widget.tableName,
+                            dayStatusDetailList: widget.dayStatusDetailList,
+                            weekName: widget.weekName,
+                            dayName: widget.dayName,
+                            discoverSingleExerciseData: widget.discoverSingleExerciseData,
+                            planName: widget.planName,
                           ))).then((value) => value == false
                   ? {
                       _getLastPosition(),
@@ -274,8 +290,8 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
                       isWidgetCountDown = false
                     }
                   : isWidgetCountDown = true),
-          controller!.stop()
-        }
+              controller!.stop()
+            }
     });
   }
 
@@ -307,6 +323,18 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
           sec +
           " " +
           widget.dayStatusDetailList![lastPosition!].title!;
+    }else if (widget.fromPage == Constant.PAGE_DISCOVER) {
+      sec = widget.discoverSingleExerciseData![lastPosition!].exUnit! == "s"
+          ? Languages.of(context)!.txtSeconds
+          : Languages.of(context)!.txtTimes;
+
+      speechText = Languages.of(context)!.txtStart +
+          " " +
+          widget.discoverSingleExerciseData![lastPosition!].ExTime! +
+          " " +
+          sec +
+          " " +
+          widget.discoverSingleExerciseData![lastPosition!].exName!;
     }
 
 
@@ -353,6 +381,18 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
           });
         _controllerForward();
       }
+    }else if (widget.fromPage == Constant.PAGE_DISCOVER) {
+      if (widget.discoverSingleExerciseData![lastPosition!].exUnit! == "s") {
+        controller = AnimationController(
+          vsync: this,
+          duration: Duration(seconds: int.parse(
+              widget.discoverSingleExerciseData![lastPosition!].ExTime!)),
+        )
+          ..addListener(() {
+            setState(() {});
+          });
+        _controllerForward();
+      }
     }
   }
 
@@ -382,6 +422,8 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
           widget.weekName.toString(),
           widget.dayName.toString(),
           0);
+    }else if(widget.fromPage == Constant.PAGE_DISCOVER) {
+      Preference.shared.setLastUnCompletedExPos(widget.planName.toString(), 0);
     }
 
     Navigator.pushAndRemoveUntil(
@@ -613,9 +655,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
               child: RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
-                    text: (widget.fromPage == Constant.PAGE_HOME)
-                        ? widget.exerciseDataList![lastPosition!].title!
-                        : widget.dayStatusDetailList![lastPosition!].title,
+                    text: _getExerciseNameFromList(),
                     style: TextStyle(
                         color: Colur.black,
                         fontSize: 21.0,
@@ -689,13 +729,15 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
                           isWidgetCountDown = false;
                         });
                         // _startTimer();
-                        var length = 0;
+                        /*var length = 0;
                         if(widget.fromPage == Constant.PAGE_HOME){
                           length = widget.exerciseDataList!.length;
                         }else if(widget.fromPage == Constant.PAGE_DAYS_STATUS){
                           length = widget.dayStatusDetailList!.length;
-                        }
-                        if (lastPosition! >= length) {
+                        }else if(widget.fromPage == Constant.PAGE_DISCOVER){
+                          length = widget.discoverSingleExerciseData!.length;
+                        }*/
+                        if (lastPosition! >= _getLengthFromList()) {
                           _startWellDoneScreen();
                         } else {
                           setState(() {
@@ -732,44 +774,46 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
     );
   }
 
+  _topListView() {
+    return Container(
+      margin: const EdgeInsets.only(top: 0),
+      height: 10,
+      child: ListView.builder(
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            // width: MediaQuery.of(context).size.width / 10-6,
+            width: MediaQuery.of(context).size.width / _getLengthFromList(),
+            child: Divider(
+              color:(lastPosition! > index) ? Colur.theme : Colur.white,
+              thickness: 5,
+            ),
+          );
+        },
+        physics: NeverScrollableScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        itemCount: _getLengthFromList(),
+      ),
+    );
+  }
+
   _widgetStartWorkout() {
     return Container(
-      margin: EdgeInsets.only(left: 9),
+      // margin: EdgeInsets.only(left: 9),
       child: Column(
         children: [
+          Container(
+            child: _topListView(),
+          ),
           Container(
             margin: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20),
             child: InkWell(
               onTap: () {
-               /* if (controller != null && controller!.lastElapsedDuration != null) {
-                  durationOfExercise = durationOfExercise == null
-                      ? controller!.duration!.inSeconds -
-                      controller!.lastElapsedDuration!.inSeconds
-                      : durationOfExercise! -
-                      controller!.lastElapsedDuration!.inSeconds;
-                  controller!.stop();
-                }*/
                 _showVideoAnimationScreen();
-                /*if (controller != null && controller!.lastElapsedDuration != null) {
-                      durationOfExercise = durationOfExercise == null
-                          ? controller!.duration!.inSeconds -
-                          controller!.lastElapsedDuration!.inSeconds
-                          : durationOfExercise! -
-                          controller!.lastElapsedDuration!.inSeconds;
-                      controller!.stop();
-                    }
-                    showBottomSheetDialog().then((value) {
-                      if (controller != null) {
-                        _controllerForward();
-                      }
-                    });*/
               },
               child: RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
-                    text: (widget.fromPage == Constant.PAGE_HOME)
-                        ? widget.exerciseDataList![lastPosition!].title!
-                        : widget.dayStatusDetailList![lastPosition!].title,
+                    text: _getExerciseNameFromList(),
                     style: TextStyle(
                         color: Colur.black,
                         fontSize: 21.0,
@@ -792,28 +836,15 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
             ),
           ),
           Container(
-            child: Text(
-              (((widget.fromPage == Constant.PAGE_HOME)
-                          ? widget.exerciseDataList![lastPosition!].timeType!
-                          : widget
-                              .dayStatusDetailList![lastPosition!].timeType!) ==
-                      "time")
-                  ? setExerciseTime()
-                  : "X " +
-                      ((widget.fromPage == Constant.PAGE_HOME)
-                          ? widget.exerciseDataList![lastPosition!].time!
-                          : widget.dayStatusDetailList![lastPosition!]
-                              .Time_beginner!),
+            child:
+            Text((_timeTypeCheck()) ? setExerciseTime() : "X " + (_getExerciseTimeFromList()),
               style: TextStyle(
                   color: Colur.black,
                   fontSize: 42.0,
                   fontWeight: FontWeight.w800),
             ),
           ),
-          (((widget.fromPage == Constant.PAGE_HOME)
-                      ? widget.exerciseDataList![lastPosition!].timeType!
-                      : widget.dayStatusDetailList![lastPosition!].timeType!) ==
-                  "time")
+          (_timeTypeCheck())
               ? Expanded(
             child: Container(
               width: MediaQuery.of(context).size.width * 0.7,
@@ -868,9 +899,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
                 children: [
                   InkWell(
                     onTap: () async {
-                      if ((lastPosition! + 1) == ((widget.fromPage == Constant.PAGE_HOME)
-                          ? widget.exerciseDataList!.length
-                          : widget.dayStatusDetailList!.length)) {
+                      if ((lastPosition! + 1) == (_getLengthFromList())) {
                         /*await DataBaseHelper.instance.updateExerciseWise(
                             widget.listOfDayWiseExercise![lastPosition!]
                                 .dayExId);*/
@@ -893,9 +922,11 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
                                   exerciseDataList: widget.exerciseDataList,
                                   fromPage: widget.fromPage,
                                   tableName: widget.tableName,
+                                  discoverSingleExerciseData: widget.discoverSingleExerciseData,
                                   dayStatusDetailList: widget.dayStatusDetailList,
                                   dayName: widget.dayName,
                                   weekName: widget.weekName,
+                                  planName: widget.planName,
                                 ))).then((value) => value == false
                             ? {
                           _getLastPosition(),
@@ -991,9 +1022,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
                     child: InkWell(
                       onTap: () async {
                         flutterTts.stop();
-                        if ((lastPosition! + 1) == ((widget.fromPage == Constant.PAGE_HOME)
-                            ? widget.exerciseDataList!.length
-                            : widget.dayStatusDetailList!.length)) {
+                        if ((lastPosition! + 1) == (_getLengthFromList())) {
                          /* await DataBaseHelper.instance.updateExerciseWise(
                               widget.listOfDayWiseExercise![lastPosition!].dayExId);*/
                           if (controller != null) {
@@ -1018,7 +1047,9 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
                                     tableName: widget.tableName,
                                     dayStatusDetailList: widget.dayStatusDetailList,
                                     dayName: widget.dayName,
+                                    discoverSingleExerciseData: widget.discoverSingleExerciseData,
                                     weekName: widget.weekName,
+                                    planName: widget.planName,
                                   ))).then((value) => value == false
                               ? {
                             _getLastPosition(),
@@ -1054,26 +1085,6 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
     );
   }
 
-  /*void _startTimer() {
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      if (_pointerValueInt! > 0) {
-        setState(() {
-          _pointerValueInt = _pointerValueInt! - 1;
-        });
-      } else {
-        Navigator.pop(context, false);
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => SkipExerciseScreen(
-                      exerciseDataList: widget.exerciseDataList,
-                      fromPage: widget.fromPage,
-                      tableName: widget.tableName,
-                    )));
-        _timer!.cancel();
-      }
-    });
-  }*/
 
   Future<void> _soundOptionsDialog() {
     return showDialog(
@@ -1272,21 +1283,6 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
 
   _showBackDialogScreen(){
 
- /*   if (isWidgetCountDown) {
-      countDownController.pause();
-    }else if (controller != null && controller!.lastElapsedDuration != null) {
-      durationOfExercise = durationOfExercise == null
-          ? controller!.duration!.inSeconds - controller!.lastElapsedDuration!.inSeconds
-          : durationOfExercise! - controller!.lastElapsedDuration!.inSeconds;
-      controller!.stop();
-    }
-
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => PauseScreen()))
-      ..then((value)=>(isWidgetCountDown)?countDownController.start(): {_startExercise(),isWidgetCountDown = false});*/
-
     if (isCountDownStart) {
       setState(() {
         countDownController.pause();
@@ -1310,6 +1306,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
                   index: lastPosition,
                   exerciseListDataList: widget.exerciseDataList,
                   workoutDetailList: widget.dayStatusDetailList,
+              discoverSingleExerciseDataList: widget.discoverSingleExerciseData,
                 ))).then((value) {
       if (!isCountDownStart && controller!.isAnimating) {
         controller!.stop();
@@ -1346,10 +1343,44 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
           workoutDetailList: widget.dayStatusDetailList,
           index: lastPosition,
           exerciseListDataList: widget.exerciseDataList,
+          discoverSingleExerciseDataList: widget.discoverSingleExerciseData,
         )))
         .then((value) => (!value) ? _controllerForward() : null);
-    /*..then((value)=>(isWidgetCountDown)?countDownController.start(): {_startExercise(),isWidgetCountDown = false});*/
 
   }
 
+
+  bool _timeTypeCheck() {
+    return ((widget.fromPage == Constant.PAGE_HOME)
+        ? widget.exerciseDataList![lastPosition!].timeType!
+        : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
+        ? widget.dayStatusDetailList![lastPosition!].timeType!
+        : widget.discoverSingleExerciseData![lastPosition!].exUnit!) ==
+        ((widget.fromPage != Constant.PAGE_DISCOVER) ? "time" : "s");
+  }
+
+  String _getExerciseTimeFromList() {
+    return ((widget.fromPage == Constant.PAGE_HOME)
+        ? widget.exerciseDataList![lastPosition!].time!
+        : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
+        ? widget.dayStatusDetailList![lastPosition!].Time_beginner
+        : widget.discoverSingleExerciseData![lastPosition!].ExTime).toString();
+  }
+
+  int _getLengthFromList(){
+    return ((widget.fromPage == Constant.PAGE_HOME)
+        ? widget.exerciseDataList!.length
+        : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
+        ? widget.dayStatusDetailList!.length
+        : widget.discoverSingleExerciseData!.length);
+  }
+
+
+  String _getExerciseNameFromList(){
+    return ((widget.fromPage == Constant.PAGE_HOME)
+        ? widget.exerciseDataList![lastPosition!].title!
+        : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
+        ? widget.dayStatusDetailList![lastPosition!].title
+        : widget.discoverSingleExerciseData![lastPosition!].exName).toString();
+  }
 }

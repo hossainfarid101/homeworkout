@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:homeworkout_flutter/custom/drawer/drawer_menu.dart';
@@ -76,217 +78,180 @@ class _TrainingScreenState extends State<TrainingScreen>
       child: Scaffold(
         drawer: DrawerMenu(),
         backgroundColor: Colur.iconGreyBg,
-        body: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return <Widget>[
-              SliverAppBar(
-                elevation: 2,
-                expandedHeight: 280.0,
-                floating: false,
-                pinned: true,
-                titleSpacing:-5,
-                leading: InkWell(
-                    onTap: () {
-                      Scaffold.of(context).openDrawer();
-                    },
-                    child: Icon(
-                      Icons.menu,
-                      color: isShrink ? Colur.black : Colur.white,
-                    )),
-                automaticallyImplyLeading: false,
-                title: Padding(
-                  padding: const EdgeInsets.all(0.0),
-                  child: Text(Languages.of(context)!.txtHomeWorkout.toUpperCase(),
-                      style: TextStyle(
+        body: SafeArea(
+          top: false,
+          bottom: Platform.isIOS ? false : true,
+          child: NestedScrollView(
+            headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+              return <Widget>[
+                SliverAppBar(
+                  elevation: 2,
+                  expandedHeight: 280.0,
+                  floating: false,
+                  pinned: true,
+                  titleSpacing:-5,
+                  leading: InkWell(
+                      onTap: () {
+                        Scaffold.of(context).openDrawer();
+                      },
+                      child: Icon(
+                        Icons.menu,
                         color: isShrink ? Colur.black : Colur.white,
-                        fontSize: 16.0,
                       )),
-                ),
-                backgroundColor: Colors.white,
-                centerTitle: false,
-                flexibleSpace: FlexibleSpaceBar(
-                  centerTitle: true,
-                  background: Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage("assets/images/main_bg.webp"),
-                        fit: BoxFit.cover
-                      )
-                    ),
-                    // color: Colur.theme,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Container(
-                          height: 250,
-                          child: Stack(
-                            children: [
-                              Column(
-                                children: [
-                                  Container(
-                                    height: 180,
-                                    child: Container(
-                                      margin: EdgeInsets.only(top: 30),
-                                      child: InkWell(
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      WorkoutHistoryScreen()));
-                                        },
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Column(
-                                              children: [
-                                                const Text("6",
-                                                    overflow: TextOverflow.ellipsis,
-                                                    style: TextStyle(
-                                                        color: Colur.white,
-                                                        fontSize: 18,
-                                                        fontWeight: FontWeight.w500)),
-                                                Text(Languages.of(context)!.txtWorkout
-                                                    .toUpperCase(),
-                                                    overflow: TextOverflow.ellipsis,
-                                                    style: TextStyle(
-                                                        color: Colur.white.withOpacity(0.6),
-                                                        fontSize: 14,
-                                                        fontWeight: FontWeight.w500)),
-                                              ],
-                                            ),
-                                            Column(
-                                              children: [
-                                                const Text("3",
-                                                    overflow: TextOverflow.ellipsis,
-                                                    style: TextStyle(
-                                                        color: Colur.white,
-                                                        fontSize: 18,
-                                                        fontWeight: FontWeight.w500)),
-                                                Text(Languages.of(context)!.txtKcal
-                                                    .toUpperCase(),
-                                                    overflow: TextOverflow.ellipsis,
-                                                    style: TextStyle(
-                                                        color: Colur.white.withOpacity(0.6),
-                                                        fontSize: 14,
-                                                        fontWeight: FontWeight.w500)),
-                                              ],
-                                            ),
-                                            Column(
-                                              children: [
-                                                Text(Utils.secondToMMSSFormat(95),
-                                                    overflow: TextOverflow.ellipsis,
-                                                    style: const TextStyle(
-                                                        color: Colur.white,
-                                                        fontSize: 18,
-                                                        fontWeight: FontWeight.w500)),
-                                                Text(Languages.of(context)!.txtDuration
-                                                    .toUpperCase(),
-                                                    overflow: TextOverflow.ellipsis,
-                                                    style: TextStyle(
-                                                        color: Colur.white.withOpacity(0.6),
-                                                        fontSize: 14,
-                                                        fontWeight: FontWeight.w500)),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    height: 70,
-                                    color: Colur.iconGreyBg,
-                                  ),
-                                ],
-                              ),
-
-                              Container(
-                                margin: const EdgeInsets.only(
-                                    top: 90.0, right: 20, left: 20,bottom: 10),
-                                decoration: const BoxDecoration(
-                                  color: Colur.white,
-                                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colur.transparent_black_30,
-                                      offset: Offset(0.0, 1.0), //(x,y)
-                                      blurRadius: 5.0,
-                                    ),
-                                  ],
-                                ),
-                                child: Column(
-                                  //crossAxisAlignment: CrossAxisAlignment.start,
+                  automaticallyImplyLeading: false,
+                  title: Padding(
+                    padding: const EdgeInsets.all(0.0),
+                    child: Text(Languages.of(context)!.txtHomeWorkout.toUpperCase(),
+                        style: TextStyle(
+                          color: isShrink ? Colur.black : Colur.white,
+                          fontSize: 16.0,
+                        )),
+                  ),
+                  backgroundColor: Colors.white,
+                  centerTitle: false,
+                  flexibleSpace: FlexibleSpaceBar(
+                    centerTitle: true,
+                    background: Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage("assets/images/main_bg.webp"),
+                          fit: BoxFit.cover
+                        )
+                      ),
+                      // color: Colur.theme,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Container(
+                            height: 250,
+                            child: Stack(
+                              children: [
+                                Column(
                                   children: [
-                                    Visibility(
-                                        visible: false,
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              alignment: Alignment.topLeft,
-                                              margin: const EdgeInsets.all(10),
-                                              child: Text(
-                                                  Languages.of(context)!.txtWeekGoal
+                                    Container(
+                                      height: 180,
+                                      child: Container(
+                                        margin: EdgeInsets.only(top: 30),
+                                        child: InkWell(
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        WorkoutHistoryScreen()));
+                                          },
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Column(
+                                                children: [
+                                                  const Text("6",
+                                                      overflow: TextOverflow.ellipsis,
+                                                      style: TextStyle(
+                                                          color: Colur.white,
+                                                          fontSize: 18,
+                                                          fontWeight: FontWeight.w500)),
+                                                  Text(Languages.of(context)!.txtWorkout
                                                       .toUpperCase(),
-                                                  overflow: TextOverflow.ellipsis,
-                                                  style: const TextStyle(
-                                                      color: Colur.txtBlack,
-                                                      fontSize: 16,
-                                                      fontWeight: FontWeight.w500)),
-                                            ),
-                                            Container(
-                                              margin:
-                                              const EdgeInsets.only(top: 10),
-                                              child: Text(
-                                                  Languages.of(context)!
-                                                      .txtWeekGoalDesc,
-                                                  textAlign: TextAlign.center,
-                                                  overflow: TextOverflow.ellipsis,
-                                                  style: const TextStyle(
-                                                      color: Colur.grey,
-                                                      fontSize: 14,
-                                                      fontWeight: FontWeight.w400)),
-                                            ),
-                                            InkWell(
-                                              onTap: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            SetWeeklyGoalScreen())).then((value) => _getPreference());
-                                              },
-                                              child: Container(
-                                                padding: const EdgeInsets.all(15),
-                                                decoration: const BoxDecoration(
-                                                  color: Colur.blue,
-                                                  borderRadius: BorderRadius.all(
-                                                      Radius.circular(30)),
-                                                ),
-                                                margin: const EdgeInsets.symmetric(
-                                                    vertical: 15, horizontal: 20),
-                                                child: Center(
-                                                  child: Text(
-                                                      Languages.of(context)!
-                                                          .txtSetAGoal
-                                                          .toUpperCase(),
-                                                      textAlign: TextAlign.center,
+                                                      overflow: TextOverflow.ellipsis,
+                                                      style: TextStyle(
+                                                          color: Colur.white.withOpacity(0.6),
+                                                          fontSize: 14,
+                                                          fontWeight: FontWeight.w500)),
+                                                ],
+                                              ),
+                                              Column(
+                                                children: [
+                                                  const Text("3",
+                                                      overflow: TextOverflow.ellipsis,
+                                                      style: TextStyle(
+                                                          color: Colur.white,
+                                                          fontSize: 18,
+                                                          fontWeight: FontWeight.w500)),
+                                                  Text(Languages.of(context)!.txtKcal
+                                                      .toUpperCase(),
+                                                      overflow: TextOverflow.ellipsis,
+                                                      style: TextStyle(
+                                                          color: Colur.white.withOpacity(0.6),
+                                                          fontSize: 14,
+                                                          fontWeight: FontWeight.w500)),
+                                                ],
+                                              ),
+                                              Column(
+                                                children: [
+                                                  Text(Utils.secondToMMSSFormat(95),
                                                       overflow: TextOverflow.ellipsis,
                                                       style: const TextStyle(
                                                           color: Colur.white,
                                                           fontSize: 18,
-                                                          fontWeight:
-                                                          FontWeight.w500)),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        )),
-                                    Visibility(
-                                        visible: true,
-                                        child: Expanded(
+                                                          fontWeight: FontWeight.w500)),
+                                                  Text(Languages.of(context)!.txtDuration
+                                                      .toUpperCase(),
+                                                      overflow: TextOverflow.ellipsis,
+                                                      style: TextStyle(
+                                                          color: Colur.white.withOpacity(0.6),
+                                                          fontSize: 14,
+                                                          fontWeight: FontWeight.w500)),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      height: 70,
+                                      color: Colur.iconGreyBg,
+                                    ),
+                                  ],
+                                ),
+
+                                Container(
+                                  margin: const EdgeInsets.only(
+                                      top: 90.0, right: 20, left: 20,bottom: 10),
+                                  decoration: const BoxDecoration(
+                                    color: Colur.white,
+                                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colur.transparent_black_30,
+                                        offset: Offset(0.0, 1.0), //(x,y)
+                                        blurRadius: 5.0,
+                                      ),
+                                    ],
+                                  ),
+                                  child: Column(
+                                    //crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Visibility(
+                                          visible: false,
                                           child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
+                                              Container(
+                                                alignment: Alignment.topLeft,
+                                                margin: const EdgeInsets.all(10),
+                                                child: Text(
+                                                    Languages.of(context)!.txtWeekGoal
+                                                        .toUpperCase(),
+                                                    overflow: TextOverflow.ellipsis,
+                                                    style: const TextStyle(
+                                                        color: Colur.txtBlack,
+                                                        fontSize: 16,
+                                                        fontWeight: FontWeight.w500)),
+                                              ),
+                                              Container(
+                                                margin:
+                                                const EdgeInsets.only(top: 10),
+                                                child: Text(
+                                                    Languages.of(context)!
+                                                        .txtWeekGoalDesc,
+                                                    textAlign: TextAlign.center,
+                                                    overflow: TextOverflow.ellipsis,
+                                                    style: const TextStyle(
+                                                        color: Colur.grey,
+                                                        fontSize: 14,
+                                                        fontWeight: FontWeight.w400)),
+                                              ),
                                               InkWell(
                                                 onTap: () {
                                                   Navigator.push(
@@ -295,76 +260,117 @@ class _TrainingScreenState extends State<TrainingScreen>
                                                           builder: (context) =>
                                                               SetWeeklyGoalScreen())).then((value) => _getPreference());
                                                 },
-                                                child: Row(
-                                                  children: [
-                                                    Container(
-                                                      alignment: Alignment.topLeft,
-                                                      margin: const EdgeInsets.all(10),
-                                                      child: Text(
-                                                          Languages.of(context)!.txtWeekGoal
-                                                              .toUpperCase(),
-                                                          overflow: TextOverflow.ellipsis,
-                                                          style: const TextStyle(
-                                                              color: Colur.txtBlack,
-                                                              fontSize: 16,
-                                                              fontWeight: FontWeight.w500)),
-                                                    ),
-                                                    Icon(Icons.edit_rounded,size: 15),
-                                                    Expanded(
-                                                      child: Container(
-                                                        margin: const EdgeInsets.symmetric(horizontal: 10),
-                                                        alignment: Alignment.centerRight,
-                                                        child: Text("0/" + totalWeekTrainingDays! ,style: TextStyle(fontSize: 14),),
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                              Container(
-                                                margin: const EdgeInsets.only(top: 15.0,bottom: 10),
-                                                alignment: Alignment.center,
-                                                height: 40,
-                                                child: ListView.builder(
-                                                  scrollDirection: Axis.horizontal,
-                                                  shrinkWrap: true,
-                                                  physics: NeverScrollableScrollPhysics(),
-                                                  itemBuilder: (BuildContext context, int index) {
-                                                    return _itemOfWeekGoal(index);
-                                                  },
-                                                  itemCount: 7,
+                                                child: Container(
+                                                  padding: const EdgeInsets.all(15),
+                                                  decoration: const BoxDecoration(
+                                                    color: Colur.blue,
+                                                    borderRadius: BorderRadius.all(
+                                                        Radius.circular(30)),
+                                                  ),
+                                                  margin: const EdgeInsets.symmetric(
+                                                      vertical: 15, horizontal: 20),
+                                                  child: Center(
+                                                    child: Text(
+                                                        Languages.of(context)!
+                                                            .txtSetAGoal
+                                                            .toUpperCase(),
+                                                        textAlign: TextAlign.center,
+                                                        overflow: TextOverflow.ellipsis,
+                                                        style: const TextStyle(
+                                                            color: Colur.white,
+                                                            fontSize: 18,
+                                                            fontWeight:
+                                                            FontWeight.w500)),
+                                                  ),
                                                 ),
                                               ),
                                             ],
-                                          ),
-                                        ))
-                                  ],
+                                          )),
+                                      Visibility(
+                                          visible: true,
+                                          child: Expanded(
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                InkWell(
+                                                  onTap: () {
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                SetWeeklyGoalScreen())).then((value) => _getPreference());
+                                                  },
+                                                  child: Row(
+                                                    children: [
+                                                      Container(
+                                                        alignment: Alignment.topLeft,
+                                                        margin: const EdgeInsets.all(10),
+                                                        child: Text(
+                                                            Languages.of(context)!.txtWeekGoal
+                                                                .toUpperCase(),
+                                                            overflow: TextOverflow.ellipsis,
+                                                            style: const TextStyle(
+                                                                color: Colur.txtBlack,
+                                                                fontSize: 16,
+                                                                fontWeight: FontWeight.w500)),
+                                                      ),
+                                                      Icon(Icons.edit_rounded,size: 15),
+                                                      Expanded(
+                                                        child: Container(
+                                                          margin: const EdgeInsets.symmetric(horizontal: 10),
+                                                          alignment: Alignment.centerRight,
+                                                          child: Text("0/" + totalWeekTrainingDays! ,style: TextStyle(fontSize: 14),),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                                Container(
+                                                  margin: const EdgeInsets.only(top: 15.0,bottom: 10),
+                                                  alignment: Alignment.center,
+                                                  height: 40,
+                                                  child: ListView.builder(
+                                                    scrollDirection: Axis.horizontal,
+                                                    shrinkWrap: true,
+                                                    physics: NeverScrollableScrollPhysics(),
+                                                    itemBuilder: (BuildContext context, int index) {
+                                                      return _itemOfWeekGoal(index);
+                                                    },
+                                                    itemCount: 7,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ))
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ];
-          },
-          controller: _scrollController,
-          body: Container(
-            child: Column(
-              children: [
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        _widgetListOfPlan(),
-                        _widgetDiscover(),
-                      ],
+              ];
+            },
+            controller: _scrollController,
+            body: Container(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          _widgetListOfPlan(),
+                          _widgetDiscover(),
+                        ],
+                      ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
         ),
