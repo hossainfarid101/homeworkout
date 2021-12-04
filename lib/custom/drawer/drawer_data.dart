@@ -1,11 +1,13 @@
 class DrawerData {
 
-  final String? icon;
+  final String? unselectedIcon;
+  final String? selectedIcon;
   final String? text;
   final String? navPath;
 
   DrawerData({
-    this.icon,
+    this.unselectedIcon,
+    this.selectedIcon,
     this.text,
     this.navPath
   });

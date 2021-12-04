@@ -157,24 +157,24 @@ class _HealthDataScreenState extends State<HealthDataScreen> implements TopBarCl
       lastDate: DateTime.now(),
       borderRadius: 16,
       theme: ThemeData(
-        primaryColor: Colur.blue,
+        primaryColor: Colur.theme,
       ),
       styleYearPicker: MaterialRoundedYearPickerStyle(
         textStyleYear: const TextStyle(color: Colur.txtBlack),
-        textStyleYearSelected: const TextStyle(color: Colur.blue),
+        textStyleYearSelected: const TextStyle(color: Colur.theme),
         heightYearRow: 50,
       ),
       styleDatePicker: MaterialRoundedDatePickerStyle(
         decorationDateSelected: const BoxDecoration(
-          color: Colur.blue,
+          color: Colur.theme,
           shape: BoxShape.circle,
         ),
         paddingDatePicker: const EdgeInsets.only(bottom: 0, left: 10, right: 10),
         paddingActionBar: const EdgeInsets.only(top: 0),
         paddingMonthHeader: const EdgeInsets.only(top: 10),
-        textStyleCurrentDayOnCalendar: const TextStyle(color: Colur.blue),
+        textStyleCurrentDayOnCalendar: const TextStyle(color: Colur.theme),
         textStyleButtonNegative: const TextStyle(color: Colur.txtBlack),
-        textStyleButtonPositive: const TextStyle(color: Colur.blue),
+        textStyleButtonPositive: const TextStyle(color: Colur.theme),
         textStyleDayHeader: const TextStyle(color: Colur.txtBlack),
       ),
       textNegativeButton: Languages.of(context)!.txtCancel.toUpperCase(),
@@ -200,7 +200,7 @@ class _HealthDataScreenState extends State<HealthDataScreen> implements TopBarCl
               height: 60,
               width: 300,
               child: RadioGroup<Gender>.builder(
-                activeColor: Colur.blue,
+                activeColor: Colur.theme,
                 groupValue: _gender!,
                 onChanged: (value) => setState(() {
                   _gender = value;

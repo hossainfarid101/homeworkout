@@ -196,7 +196,7 @@ class _MyAppState extends State<MyApp> {
           systemNavigationBarIconBrightness: Brightness.light,
         ),
         // child: TrainingScreen(),
-        child: IntroductionScreen(),
+        child: TrainingScreen(),
       ),
       routes: <String, WidgetBuilder>{
         '/training': (BuildContext context) => TrainingScreen(),

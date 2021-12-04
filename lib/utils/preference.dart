@@ -89,6 +89,8 @@ class Preference {
   static const String IS_DAILY_REMINDER_ON = "IS_DAILY_REMINDER_ON";
   static const String DAILY_REMINDER_REPEAT_DAY = "DAILY_REMINDER_REPEAT_DAY";
 
+  static const String DRAWER_INDEX = "DRAWER_INDEX";
+
 
 
   // ------------------ SINGLETON -----------------------

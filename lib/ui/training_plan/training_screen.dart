@@ -53,6 +53,7 @@ class _TrainingScreenState extends State<TrainingScreen>
 
   @override
   void initState() {
+    Preference.shared.setInt(Preference.DRAWER_INDEX, 0);
     _scrollController = ScrollController();
     _scrollController!.addListener(_scrollListener);
     _getDataFromDatabase();

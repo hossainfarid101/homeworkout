@@ -63,24 +63,28 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
       child: Scaffold(
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(0),
-            child: AppBar( // Here we create one to set status bar color
+            child: AppBar(
               backgroundColor: Colur.white,
               elevation: 0,
             )
         ),
         drawer: const DrawerMenu(),
         backgroundColor: Colur.white,
-        body: Column(
-          children: [
-            CommonTopBar(
-              Languages.of(context)!.txtSettings.toUpperCase(),
-              this,
-              isMenu: true,
-            ),
-            const Divider(color: Colur.grey,),
+        body: SafeArea(
+          top: false,
+          bottom: Platform.isIOS ? false : true,
+          child: Column(
+            children: [
+              CommonTopBar(
+                Languages.of(context)!.txtSettings.toUpperCase(),
+                this,
+                isMenu: true,
+              ),
+              const Divider(color: Colur.grey,),
 
-            _settingsScreenWidget(fullWidth)
-          ],
+              _settingsScreenWidget(fullWidth)
+            ],
+          ),
         ),
 
       ),
@@ -93,7 +97,6 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
         child: Column(
           children: [
             _workoutSettings(fullWidth),
-            //_waterTrackerSettings(),
             _voiceOptions(),
             _generalSettings(),
             _community(),
@@ -122,7 +125,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
               child: Text(
                 Languages.of(context)!.txtWorkout.toUpperCase(),
                 style: const TextStyle(
-                    color: Colur.blue,
+                    color: Colur.theme,
                     fontSize: 16,
                     fontWeight: FontWeight.w500),
               ),
@@ -190,7 +193,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                         height: 35,
                         width: 75,
                         decoration: BoxDecoration(
-                            color: Colur.blue,
+                            color: Colur.theme,
                             borderRadius: BorderRadius.all(Radius.circular(5))
                         ),
                         child: Center(
@@ -240,13 +243,13 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                         Text(
                           countdownTime!.toString() + " " + Languages.of(context)!.txtSecs,
                           style: const TextStyle(
-                              color: Colur.blue,
+                              color: Colur.theme,
                               fontSize: 16,
                               fontWeight: FontWeight.w500),
                         ),
                         const Icon(
                           Icons.arrow_drop_down,
-                          color: Colur.blue,
+                          color: Colur.theme,
                           size: 20,
                         )
                       ],
@@ -288,13 +291,13 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                         Text(
                           trainingRestTime!.toString() + " " + Languages.of(context)!.txtSecs,
                           style: const TextStyle(
-                              color: Colur.blue,
+                              color: Colur.theme,
                               fontSize: 16,
                               fontWeight: FontWeight.w500),
                         ),
                         const Icon(
                           Icons.arrow_drop_down,
-                          color: Colur.blue,
+                          color: Colur.theme,
                           size: 20,
                         )
                       ],
@@ -360,7 +363,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                 Languages.of(context)!.txtGeneralSettings.toUpperCase(),
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
-                    color: Colur.blue,
+                    color: Colur.theme,
                     fontSize: 16,
                     fontWeight: FontWeight.w500),
               ),
@@ -404,13 +407,13 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                           Text(
                             "20:00",
                             style: TextStyle(
-                                color: Colur.blue,
+                                color: Colur.theme,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500),
                           ),
                           Icon(
                             Icons.add,
-                            color: Colur.blue,
+                            color: Colur.theme,
                             size: 20,
                           )
                         ],
@@ -477,7 +480,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                 Languages.of(context)!.txtVoiceOptions.toUpperCase(),
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
-                    color: Colur.blue,
+                    color: Colur.theme,
                     fontSize: 16,
                     fontWeight: FontWeight.w500),
               ),
@@ -642,7 +645,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                 Languages.of(context)!.txtCommunity.toUpperCase(),
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
-                    color: Colur.blue,
+                    color: Colur.theme,
                     fontSize: 16,
                     fontWeight: FontWeight.w500),
               ),
@@ -706,7 +709,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                 Languages.of(context)!.txtSupportUs.toUpperCase(),
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
-                    color: Colur.blue,
+                    color: Colur.theme,
                     fontSize: 16,
                     fontWeight: FontWeight.w500),
               ),
@@ -836,7 +839,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                 ),
               ),
             ),
-            //Divider(color: Colur.grey.withOpacity(0.5),),
+
 
           ],
         ),
@@ -936,7 +939,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                     child: Text(
                       Languages.of(context)!.txtSet.toUpperCase(),
                       style: const TextStyle(
-                        color: Colur.blue,
+                        color: Colur.theme,
                       ),
                     ),
                     onPressed: ()  {
@@ -1039,7 +1042,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                     child: Text(
                       Languages.of(context)!.txtSet.toUpperCase(),
                       style: const TextStyle(
-                        color: Colur.blue,
+                        color: Colur.theme,
                       ),
                     ),
                     onPressed: ()  {
@@ -1109,7 +1112,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                                   }
                                 });
                               },
-                              activeColor: Colur.blue,
+                              activeColor: Colur.theme,
                               //activeTrackColor: Colur.bg_txtBlack,
                               // inactiveThumbColor: Colur.switch_grey,
                               // inactiveTrackColor: Colur.bg_grey,
@@ -1150,7 +1153,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                                   }
                                 });
                               },
-                              activeColor: Colur.blue,
+                              activeColor: Colur.theme,
                               // activeTrackColor: Colur.bg_txtBlack,
                               // inactiveThumbColor: Colur.switch_grey,
                               // inactiveTrackColor: Colur.bg_grey,
@@ -1191,10 +1194,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                                   }
                                 });
                               },
-                              activeColor: Colur.blue,
-                              // activeTrackColor: Colur.bg_txtBlack,
-                              // inactiveThumbColor: Colur.switch_grey,
-                              // inactiveTrackColor: Colur.bg_grey,
+                              activeColor: Colur.theme,
                             ),
                           ],
                         ),
@@ -1225,7 +1225,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                     child: Text(
                       Languages.of(context)!.txtOk.toUpperCase(),
                       style: const TextStyle(
-                        color: Colur.blue,
+                        color: Colur.theme,
                       ),
                     ),
                     onPressed: () {
@@ -1297,7 +1297,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                     child: Text(
                       Languages.of(context)!.txtNo.toUpperCase(),
                       style: const TextStyle(
-                        color: Colur.blue,
+                        color: Colur.theme,
                       ),
                     ),
                     onPressed: () async {
@@ -1309,7 +1309,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                     child: Text(
                       Languages.of(context)!.txtYes.toUpperCase(),
                       style: const TextStyle(
-                        color: Colur.blue,
+                        color: Colur.theme,
                       ),
                     ),
                     onPressed: () {
@@ -1402,7 +1402,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                 content: SizedBox(
                   height: 50,
                   child: RadioButton<String>(
-                    activeColor: Colur.blue,
+                    activeColor: Colur.theme,
                     description: Languages.of(context)!.txtGoogleSpeech,
                     value: " ",
                     groupValue: selectedEngine!,

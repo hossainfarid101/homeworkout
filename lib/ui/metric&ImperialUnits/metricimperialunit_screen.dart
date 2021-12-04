@@ -169,7 +169,7 @@ class _MetricImperialUnitsScreenState extends State<MetricImperialUnitsScreen>
               height: 60,
               width: 300,
               child: RadioGroup<WeightUnit>.builder(
-                activeColor: Colur.blue,
+                activeColor: Colur.theme,
                 groupValue: _weightUnit!,
                 onChanged: (value) {
                   setState(() {
@@ -217,7 +217,7 @@ class _MetricImperialUnitsScreenState extends State<MetricImperialUnitsScreen>
               height: 60,
               width: 300,
               child: RadioGroup<HeightUnit>.builder(
-                activeColor: Colur.blue,
+                activeColor: Colur.theme,
                 groupValue: _heightUnit!,
                 onChanged: (value) => setState(() {
                   _heightUnit = value;
