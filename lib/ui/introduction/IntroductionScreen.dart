@@ -4,7 +4,7 @@ import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 
 import 'ChooseYourFocusAreaScreen.dart';
-import 'GenderSelectionSCreen.dart';
+import 'GenderSelectionScreen.dart';
 
 class IntroductionScreen extends StatefulWidget {
   const IntroductionScreen({Key? key}) : super(key: key);
