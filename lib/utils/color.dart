@@ -127,6 +127,7 @@ class Colur {
   static const unSelectedProgressColor = Color(0xffF6F6F6);
   static const txtLightBlue = Color(0xff0D85FC);
   static const txtLightPink = Color(0xffFF40AC);
+  static const borderGray = Color(0xffE0E0E0);
 
   static const gradientForWeightColors = [
    Color(0xff8A3CFF),

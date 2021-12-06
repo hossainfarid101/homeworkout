@@ -1,14 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
+import 'package:homeworkout_flutter/utils/constant.dart';
+import 'package:homeworkout_flutter/utils/preference.dart';
 
 import 'ChooseYourFocusAreaScreen.dart';
 import 'GenderSelectionScreen.dart';
 import 'GeneratingThePlanScreen.dart';
 import 'MainGoalsScreen.dart';
 import 'MotivatesYouScreen.dart';
-import 'PlanIsReadyScreen.dart';
 import 'PushUpsCanYouDoScreen.dart';
 import 'SetYourWeeklyGoalScreen.dart';
 import 'WeightHeightSelectionScreen.dart';
@@ -30,10 +33,18 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
   double? updateValue;
   int currentPageIndex = 0;
 
+  List<dynamic> prefChooseYourFocusAreaList = [];
+
   @override
   void initState() {
     updateValue = 0.1;
+    _getPrefData();
     super.initState();
+  }
+
+  _getPrefData() {
+    prefChooseYourFocusAreaList.clear();
+    prefChooseYourFocusAreaList = json.decode(Preference.shared.getString(Constant.SELECTED_YOUR_FOCUS_AREA)!);
   }
 
   @override
@@ -112,42 +123,37 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                         mainTitle = Languages.of(context)!
                             .txtSetWeeklyGoal
                             .toUpperCase();
-                        subTitle = Languages.of(context)!
-                            .txtWeRecommendTraining
-                            .toUpperCase();
+                        subTitle =
+                            Languages.of(context)!.txtWeRecommendTraining;
                       });
                     } else if (index == 7) {
                       setState(() {
                         mainTitle = Languages.of(context)!
                             .txtLetUsKnowYouBetter
                             .toUpperCase();
-                        subTitle = Languages.of(context)!
-                            .txtLetUsKnowYouBetterToHelp
-                            .toUpperCase();
+                        subTitle =
+                            Languages.of(context)!.txtLetUsKnowYouBetterToHelp;
                       });
                     } else if (index == 8) {
                       setState(() {
                         mainTitle = Languages.of(context)!
                             .txtGeneratingThePlan
                             .toUpperCase();
-                        subTitle = Languages.of(context)!
-                            .txtPreparingYourPlan
-                            .toUpperCase();
+                        subTitle = Languages.of(context)!.txtPreparingYourPlan;
                       });
                     } else if (index == 9) {
                       setState(() {
                         mainTitle = Languages.of(context)!
                             .txtYourPlanIsReady
                             .toUpperCase();
-                        subTitle = Languages.of(context)!
-                            .txtWeHaveSelectedThisPlan
-                            .toUpperCase();
+                        subTitle =
+                            Languages.of(context)!.txtWeHaveSelectedThisPlan;
                       });
                     }
                   },
                   children: <Widget>[
                     GenderSelectionScreen(),
-                    ChooseYourFocusAreaScreen(),
+                    ChooseYourFocusAreaScreen(prefChooseYourFocusAreaList),
                     MainGoalsScreen(),
                     MotivatesYouScreen(),
                     PushUpsCanYouDoScreen(),
@@ -155,7 +161,6 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                     SetYourWeeklyGoalScreen(),
                     WeightHeightSelectionScreen(),
                     GeneratingThePlanScreen(),
-                    PlanIsReadyScreen(),
                   ],
                 ),
               ),
@@ -197,13 +202,8 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
             if (currentPageIndex != 9) ...{
               InkWell(
                 onTap: () {
-                  pageController.nextPage(
-                    duration: const Duration(milliseconds: 200),
-                    curve: Curves.easeInOut,
-                  );
-                  setState(() {
-                    updateValue = updateValue! + 0.1;
-                  });
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, "/training", (route) => false);
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(11.5),
@@ -273,42 +273,60 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
   }
 
   _nextButton() {
-    return Container(
-      width: double.infinity,
-      alignment: Alignment.center,
-      margin: const EdgeInsets.symmetric(horizontal: 60.0, vertical: 30.0),
-      padding: const EdgeInsets.symmetric(vertical: 18.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(100.0),
-        gradient: LinearGradient(
-            colors: [
-              Colur.blueGradient1,
-              Colur.blueGradient2,
-            ],
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-            stops: [0.0, 1.0],
-            tileMode: TileMode.clamp),
-      ),
-      child: Stack(
+    return InkWell(
+      onTap: () {
+        pageController.nextPage(
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.easeInOut,
+        );
+        setState(() {
+          updateValue = updateValue! + 0.1;
+        });
+
+        if (currentPageIndex == 1) {
+          Preference.shared.setString(Constant.SELECTED_YOUR_FOCUS_AREA,
+              json.encode(prefChooseYourFocusAreaList));
+        }
+      },
+      child: Container(
+        width: double.infinity,
         alignment: Alignment.center,
-        children: [
-          Text(
-            Languages.of(context)!.txtNext.toUpperCase(),
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-                fontWeight: FontWeight.w600, fontSize: 20, color: Colur.white),
-          ),
-          Container(
-            alignment: Alignment.centerRight,
-            margin: const EdgeInsets.only(right: 20.0),
-            child: Icon(
-              Icons.arrow_forward_ios_outlined,
-              size: 22,
-              color: Colur.white,
+        margin: const EdgeInsets.symmetric(horizontal: 60.0, vertical: 30.0),
+        padding: const EdgeInsets.symmetric(vertical: 18.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(100.0),
+          gradient: LinearGradient(
+              colors: [
+                Colur.blueGradient1,
+                Colur.blueGradient2,
+              ],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              stops: [0.0, 1.0],
+              tileMode: TileMode.clamp),
+        ),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Text(
+              Languages.of(context)!.txtNext.toUpperCase(),
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 20,
+                  color: Colur.white),
             ),
-          ),
-        ],
+            Container(
+              alignment: Alignment.centerRight,
+              margin: const EdgeInsets.only(right: 20.0),
+              child: Icon(
+                Icons.arrow_forward_ios_outlined,
+                size: 22,
+                color: Colur.white,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

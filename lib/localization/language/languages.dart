@@ -5,6 +5,42 @@ abstract class Languages {
     return Localizations.of<Languages>(context, Languages);
   }
 
+  String get txtSedentary;
+
+  String get txtDesSedentary;
+
+  String get txtLightlyActive;
+
+  String get txtDesLightlyActive;
+
+  String get txtModeratelyActive;
+
+  String get txtDesModeratelyActive;
+
+  String get txtVeryActive;
+
+  String get txtDesVeryActive;
+
+  String get txt3to5PushUps;
+
+  String get txt5to10PushUps;
+
+  String get txtAtLeast10;
+
+  String get txtFeelConfident;
+
+  String get txtReleaseStress;
+
+  String get txtImproveHealth;
+
+  String get txtBoostEnergy;
+
+  String get txtLoseWeight;
+
+  String get txtBuildMuscle;
+
+  String get txtKeepFit;
+
   String get txtArm;
 
   String get txtChest;

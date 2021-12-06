@@ -1,11 +1,11 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 
 class ChooseYourFocusAreaScreen extends StatefulWidget {
-  const ChooseYourFocusAreaScreen({Key? key}) : super(key: key);
+  final List<dynamic>? prefChooseYourFocusAreaList;
+
+  ChooseYourFocusAreaScreen(this.prefChooseYourFocusAreaList);
 
   @override
   _ChooseYourFocusAreaScreenState createState() =>
@@ -13,17 +13,28 @@ class ChooseYourFocusAreaScreen extends StatefulWidget {
 }
 
 class _ChooseYourFocusAreaScreenState extends State<ChooseYourFocusAreaScreen> {
-  List<ChooseYourFocusAreaData> chooseYourFocusArea = [];
-  bool isSelected = false;
+  List<ChooseYourFocusAreaData> chooseYourFocusAreaList = [];
+
+  @override
+  void initState() {
+    Future.delayed(Duration(milliseconds: 50), () {
+      _setDataChooseYourFocusArea();
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    _setDataChooseYourFocusArea();
     return ListView.builder(
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
-      itemCount: chooseYourFocusArea.length,
+      itemCount: chooseYourFocusAreaList.length,
       itemBuilder: (context, int index) {
+        for (int i = 0; i < widget.prefChooseYourFocusAreaList!.length; i++) {
+          chooseYourFocusAreaList[
+                  int.parse(widget.prefChooseYourFocusAreaList![i].toString())]
+              .isSelected = true;
+        }
         return _itemChooseYourFocusArea(index);
       },
     );
@@ -35,15 +46,22 @@ class _ChooseYourFocusAreaScreenState extends State<ChooseYourFocusAreaScreen> {
       highlightColor: Colors.transparent,
       onTap: () {
         setState(() {
-          isSelected = !isSelected;
+          chooseYourFocusAreaList[index].isSelected =
+              !chooseYourFocusAreaList[index].isSelected;
         });
+
+        if (chooseYourFocusAreaList[index].isSelected) {
+          widget.prefChooseYourFocusAreaList!.add(index);
+        } else {
+          widget.prefChooseYourFocusAreaList!.remove(index);
+        }
       },
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(22),
           boxShadow: <BoxShadow>[
             BoxShadow(
-              color: (isSelected)
+              color: (chooseYourFocusAreaList[index].isSelected)
                   ? Colors.grey.withOpacity(0.4)
                   : Colur.transparent,
               spreadRadius: 0.8,
@@ -52,15 +70,15 @@ class _ChooseYourFocusAreaScreenState extends State<ChooseYourFocusAreaScreen> {
             ),
           ],
           gradient: LinearGradient(
-              colors: (!isSelected)
+              colors: (!chooseYourFocusAreaList[index].isSelected)
                   ? [
-                Colur.unSelectedProgressColor,
-                Colur.unSelectedProgressColor,
-              ]
+                      Colur.unSelectedProgressColor,
+                      Colur.unSelectedProgressColor,
+                    ]
                   : [
-                Colur.blueGradient1,
-                Colur.blueGradient2,
-              ],
+                      Colur.blueGradient1,
+                      Colur.blueGradient2,
+                    ],
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
               stops: [0.0, 1.0],
@@ -71,21 +89,23 @@ class _ChooseYourFocusAreaScreenState extends State<ChooseYourFocusAreaScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(chooseYourFocusArea[index].image!,
+            Image.asset(chooseYourFocusAreaList[index].image!,
                 height: MediaQuery.of(context).size.height * 0.1),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
-                  chooseYourFocusArea[index].exName!.toUpperCase(),
+                  chooseYourFocusAreaList[index].exName!,
                   style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 22,
-                      color: (isSelected) ? Colur.white : Colur.txtBlack),
+                      color: (chooseYourFocusAreaList[index].isSelected)
+                          ? Colur.white
+                          : Colur.txtBlack),
                 ),
               ),
             ),
-            if (isSelected) ...{
+            if (chooseYourFocusAreaList[index].isSelected) ...{
               Image.asset(
                 "assets/icons/ic_round_true.webp",
                 height: 32,
@@ -99,8 +119,8 @@ class _ChooseYourFocusAreaScreenState extends State<ChooseYourFocusAreaScreen> {
   }
 
   _setDataChooseYourFocusArea() {
-    chooseYourFocusArea.clear();
-    chooseYourFocusArea = [
+    chooseYourFocusAreaList.clear();
+    chooseYourFocusAreaList = [
       ChooseYourFocusAreaData(
           image: 'assets/exerciseImage/other/img_fullbody_round.webp',
           exName: Languages.of(context)!.txtFullBody.toUpperCase()),
@@ -117,12 +137,14 @@ class _ChooseYourFocusAreaScreenState extends State<ChooseYourFocusAreaScreen> {
           image: 'assets/exerciseImage/other/img_leg_round.webp',
           exName: Languages.of(context)!.txtLeg.toUpperCase()),
     ];
+    setState(() {});
   }
 }
 
 class ChooseYourFocusAreaData {
   String? image;
   String? exName;
+  bool isSelected;
 
-  ChooseYourFocusAreaData({this.image, this.exName});
+  ChooseYourFocusAreaData({this.image, this.exName, this.isSelected = false});
 }

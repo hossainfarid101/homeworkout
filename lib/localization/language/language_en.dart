@@ -561,5 +561,59 @@ class LanguageEn extends Languages {
   String get txtLeg => "Leg";
 
   @override
+  String get txtBuildMuscle => "Build Muscle";
+
+  @override
+  String get txtKeepFit => "Keep Fit";
+
+  @override
+  String get txtLoseWeight => "Lose Weight";
+
+  @override
+  String get txtBoostEnergy => "Boost Energy";
+
+  @override
+  String get txtFeelConfident => "Feel Confident";
+
+  @override
+  String get txtImproveHealth => "Improve Health";
+
+  @override
+  String get txtReleaseStress => "Release Stress";
+
+  @override
+  String get txt3to5PushUps => "3-5 push-ups";
+
+  @override
+  String get txt5to10PushUps => "5-10 push-ups";
+
+  @override
+  String get txtAtLeast10 => "At least 10";
+
+  @override
+  String get txtDesLightlyActive => "I occasionally exercise or walk for 30 minutes";
+
+  @override
+  String get txtDesModeratelyActive => "You moving fast enough or strenuously enough to burn off three to six times as much energy per minute.";
+
+  @override
+  String get txtDesSedentary => "You do at least 30 minutes per day of intentional exercise, you are considered sedentary.";
+
+  @override
+  String get txtDesVeryActive => "Activities of daily living, such as shopping, cleaning, watering plants, taking out the trash, walking the dog, mowing the lawn, and gardening.";
+
+  @override
+  String get txtLightlyActive => "Lightly Active";
+
+  @override
+  String get txtModeratelyActive => "Moderately Active";
+
+  @override
+  String get txtSedentary => "Sedentary";
+
+  @override
+  String get txtVeryActive => "Very Active";
+
+  @override
   String get txtSelectingTargetedWorkoutsForYou =>  "Selecting Targeted Workouts For You";
 }

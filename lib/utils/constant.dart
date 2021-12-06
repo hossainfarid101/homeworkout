@@ -5,6 +5,8 @@ import 'package:intl/intl.dart';
 
 class Constant {
 
+  static const SELECTED_YOUR_FOCUS_AREA = "SELECTED_YOUR_FOCUS_AREA";
+
   static const SELECTED_GENDER = "SELECTED_GENDER";
   static const GENDER_MEN = "men";
   static const GENDER_WOMEN = "women";

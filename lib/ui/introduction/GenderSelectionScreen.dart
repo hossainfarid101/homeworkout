@@ -1,7 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
+import 'package:homeworkout_flutter/utils/constant.dart';
+import 'package:homeworkout_flutter/utils/preference.dart';
 
 class GenderSelectionScreen extends StatefulWidget {
   const GenderSelectionScreen({Key? key}) : super(key: key);
@@ -11,7 +12,20 @@ class GenderSelectionScreen extends StatefulWidget {
 }
 
 class _GenderSelectionScreenState extends State<GenderSelectionScreen> {
-  bool isSelected = true;
+  bool? isSelected;
+
+  var gender = Preference.shared.getString(Constant.SELECTED_GENDER) ??
+      Constant.GENDER_MEN;
+
+  @override
+  void initState() {
+    if (gender == Constant.GENDER_MEN) {
+      isSelected = true;
+    } else {
+      isSelected = false;
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +39,8 @@ class _GenderSelectionScreenState extends State<GenderSelectionScreen> {
             setState(() {
               isSelected = true;
             });
+            Preference.shared
+                .setString(Constant.SELECTED_GENDER, Constant.GENDER_MEN);
           },
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
@@ -33,11 +49,11 @@ class _GenderSelectionScreenState extends State<GenderSelectionScreen> {
               color: Colur.unSelectedProgressColor,
               borderRadius: BorderRadius.circular(100),
               border: Border.all(
-                  color: (isSelected) ? Colur.txtLightBlue : Colur.transparent,
+                  color: (isSelected!) ? Colur.txtLightBlue : Colur.transparent,
                   width: 2.5),
               boxShadow: <BoxShadow>[
                 BoxShadow(
-                  color: (isSelected)
+                  color: (isSelected!)
                       ? Colors.grey.withOpacity(0.8)
                       : Colur.transparent,
                   spreadRadius: 0.8,
@@ -64,7 +80,7 @@ class _GenderSelectionScreenState extends State<GenderSelectionScreen> {
                     ),
                   ),
                 ),
-                if (isSelected) ...{
+                if (isSelected!) ...{
                   Icon(
                     Icons.done_outlined,
                     size: 24,
@@ -85,6 +101,8 @@ class _GenderSelectionScreenState extends State<GenderSelectionScreen> {
             setState(() {
               isSelected = false;
             });
+            Preference.shared
+                .setString(Constant.SELECTED_GENDER, Constant.GENDER_WOMEN);
           },
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
@@ -93,11 +111,12 @@ class _GenderSelectionScreenState extends State<GenderSelectionScreen> {
               color: Colur.unSelectedProgressColor,
               borderRadius: BorderRadius.circular(100),
               border: Border.all(
-                  color: (!isSelected) ? Colur.txtLightPink : Colur.transparent,
+                  color:
+                      (!isSelected!) ? Colur.txtLightPink : Colur.transparent,
                   width: 2.5),
               boxShadow: <BoxShadow>[
                 BoxShadow(
-                  color: (!isSelected)
+                  color: (!isSelected!)
                       ? Colors.grey.withOpacity(0.8)
                       : Colur.transparent,
                   spreadRadius: 0.8,
@@ -125,7 +144,7 @@ class _GenderSelectionScreenState extends State<GenderSelectionScreen> {
                     ),
                   ),
                 ),
-                if (!isSelected) ...{
+                if (!isSelected!) ...{
                   Icon(
                     Icons.done_outlined,
                     size: 24,
