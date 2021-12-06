@@ -368,4 +368,6 @@ abstract class Languages {
   String get txtTimes;
 
   String get txtNextExercise;
+
+  String get txtSelectingTargetedWorkoutsForYou;
 }

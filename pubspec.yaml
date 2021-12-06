@@ -65,6 +65,8 @@ dependencies:
   audioplayers: ^0.20.1
   youtube_player_flutter: ^8.0.0
   lottie: ^1.2.1
+  syncfusion_flutter_gauges: ^19.3.56
+  percent_indicator: ^3.4.0
 
 dev_dependencies:
   flutter_test:
@@ -84,6 +86,7 @@ flutter:
   assets:
     - assets/database/HomeWorkoutFlutter.db
     - assets/icons/
+    - assets/icons/ic_select_pointer.webp
     - assets/icons/ic_challenge_complete_day.png
     - assets/icons/ic_menu.png
     - assets/icons/ic_menu_library.png
@@ -140,6 +143,7 @@ flutter:
     - assets/images/men_banner.webp
     - assets/images/img_exercise.webp
     - assets/images/drawer_img.webp
+    - assets/images/plan_ready.webp
     - assets/exerciseImage/discover/sleep/
     - assets/exerciseImage/discover/sleep/back_streching.webp
     - assets/exerciseImage/discover/sleep/lower_back_pain_relief.webp

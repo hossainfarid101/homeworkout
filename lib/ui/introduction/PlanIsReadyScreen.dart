@@ -10,6 +10,12 @@ class PlanIsReadyScreen extends StatefulWidget {
 class _PlanIsReadyScreenState extends State<PlanIsReadyScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Center(
+      child: Image.asset(
+        "assets/images/plan_ready.webp",
+        height: 240,
+        width: 240,
+      ),
+    );
   }
 }
