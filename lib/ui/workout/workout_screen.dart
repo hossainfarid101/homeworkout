@@ -33,9 +33,11 @@ class WorkoutScreen extends StatefulWidget {
   String? dayName = "";
   String? weekName = "";
   String? planName = "";
+  String? planId= "";
+  int? totalMin = 0;
 
   WorkoutScreen({this.fromPage,this.exerciseDataList,this.tableName,this.dayStatusDetailList,this.dayName,
-    this.weekName,this.discoverSingleExerciseData,this.planName});
+    this.weekName,this.discoverSingleExerciseData,this.planName,this.planId,this.totalMin});
 
   @override
   _WorkoutScreenState createState() => _WorkoutScreenState();
@@ -400,17 +402,17 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
     controller!.dispose();
 
 
-/*    endTime = DateTime.now();
+    endTime = DateTime.now();
     print("====${endTime!.difference(startTime!).inSeconds}");
-    print("===${widget.totalTime!}====");
-    diffsec = endTime!.difference(startTime!).inSeconds + widget.totalTime!;
+    print("===${widget.totalMin!}====");
+    diffsec = endTime!.difference(startTime!).inSeconds + widget.totalMin!;
 
     calories = diffsec! * 0.08;
 
     Preference.shared.setString(Preference.END_TIME, endTime!.toString());
 
-    Preference.shared.setInt(Preference.DURATION, diffsec!);
-    Preference.shared.setDouble(Preference.CALORIES, calories!);*/
+    Preference.shared.setInt(Preference.duration, diffsec!);
+    Preference.shared.setDouble(Preference.calories, calories!);
 
 
     WidgetsBinding.instance!.removeObserver(this);
@@ -429,7 +431,18 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
-            builder: (context) => WorkoutCompleteScreen()),
+            builder: (context) => WorkoutCompleteScreen(
+              fromPage: widget.fromPage,
+              dayStatusDetailList: widget.dayStatusDetailList,
+              exerciseDataList: widget.exerciseDataList,
+              tableName: widget.tableName,
+              dayName: widget.dayName,
+              weekName: widget.weekName,
+              discoverSingleExerciseData: widget.discoverSingleExerciseData,
+              planName: widget.planName,
+              planId: widget.planId,
+              totalMin: widget.totalMin,
+            )),
         ModalRoute.withName("/workoutCompleteScreen"));
 
 

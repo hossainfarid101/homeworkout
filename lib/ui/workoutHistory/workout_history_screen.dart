@@ -3,12 +3,14 @@ import 'package:date_format/date_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:homeworkout_flutter/common/commonTopBar/commom_topbar.dart';
-import 'package:homeworkout_flutter/database/HistoryTable.dart';
-import 'package:homeworkout_flutter/database/HistoryWeekData.dart';
+import 'package:homeworkout_flutter/database/tables/history_table.dart';
+import 'package:homeworkout_flutter/database/tables/history_week_data.dart';
+import 'package:homeworkout_flutter/database/database_helper.dart';
 import 'package:homeworkout_flutter/interfaces/topbar_clicklistener.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/localization/locale_constant.dart';
 import 'package:homeworkout_flutter/ui/exerciselist/ExerciseListScreen.dart';
+import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
@@ -52,6 +54,7 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
 
   @override
   void initState() {
+    getDataFromDatabase();
     startDateOfCurrentWeek =
         getDate(currentDate.subtract(Duration(days: currentDate.weekday - 1)));
     endDateOfCurrentWeek = getDate(currentDate
@@ -80,27 +83,33 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
           systemOverlayStyle: SystemUiOverlayStyle.dark,
         ), //
       ),
-      child: Scaffold(
-        appBar: PreferredSize(
-            preferredSize: Size.fromHeight(0),
-            child: AppBar( // Here we create one to set status bar color
-              backgroundColor: Colur.bg_white,
-              elevation: 0,
-            )
-        ),
-        body: SafeArea(
-          child: Column(
-            children: [
-              Container(
-                child: CommonTopBar(
-                  Languages.of(context)!.txtHistory.toUpperCase(),
-                  this,
-                  isShowBack: true,
+      child: WillPopScope(
+        onWillPop:() async{
+          _backToTrainingScreen();
+          return false;
+        },
+        child: Scaffold(
+          appBar: PreferredSize(
+              preferredSize: Size.fromHeight(0),
+              child: AppBar( // Here we create one to set status bar color
+                backgroundColor: Colur.bg_white,
+                elevation: 0,
+              )
+          ),
+          body: SafeArea(
+            child: Column(
+              children: [
+                Container(
+                  child: CommonTopBar(
+                    Languages.of(context)!.txtHistory.toUpperCase(),
+                    this,
+                    isShowBack: true,
+                  ),
                 ),
-              ),
-              //=======History screen========
-              historyScreenWidget(fullWidth)
-            ],
+                //=======History screen========
+                historyScreenWidget(fullWidth)
+              ],
+            ),
           ),
         ),
       ),
@@ -360,17 +369,9 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
                           children: [
                             //=======date and time==========
                             Text(
-                                /*DateFormat.MMMd(getLocale().languageCode)
-                                    .format(DateTime.parse(currentWeekHistoryData[index].HCompletionDate!))
-                                    +", " + currentWeekHistoryData[index].HCompletionTime!*/
-
-                                /*convertStringFromDateWithTime(
-                                    arrHistoryDetail[index]
-                                        .HDateTime
-                                        .toString()),*/
                                 DateFormat.MMMd(getLocale().languageCode)
-                                    .format(DateTime.parse(arrHistoryDetail[index].HCompletionDate!))
-                                    +", " + arrHistoryDetail[index].HCompletionTime!,
+                                    .format(DateTime.parse(arrHistoryDetail[index].dateTime!))
+                                    +", " + arrHistoryDetail[index].completionTime!,
 
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
@@ -378,74 +379,70 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
                                   fontSize: 14,
                                 )),
                             //=========exercise name======
-                            Text(
-                                /*currentWeekHistoryData[index].HLvlName! + " " +
-                                  Languages.of(context)!.txtDay + " " + currentWeekHistoryData[index].HDayName!*/
-                                Utils.getPlanName(
-                                            arrHistoryDetail[index]
-                                                .HPlanName
-                                                .toString(),
-                                            context)
-                                        .toUpperCase() +
-                                    arrHistoryDetail[index].HDayName.toString(),
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  color: Colur.black,
-                                  fontSize: 16,
-                                )),
-                            //calorie and duration
                             Container(
-                              margin: EdgeInsets.only(top: 5),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  //========duration=======
-                                  Image.asset(
-                                    "assets/icons/ic_workout_time.png",
-                                    scale: 1.2,
-                                    color: Colur.blue,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                      /*calculateDuration(currentWeekHistoryData[index].HDuration!)*/
-                                      Utils.secondToMMSSFormat(int.parse(
-                                          arrHistoryDetail[index]
-                                              .HDuration
-                                              .toString())),
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        color: Colur.black,
-                                        fontSize: 13,
-                                      )),
-                                  SizedBox(
-                                    width: 15,
-                                  ),
-                                  //=========calories=========
-                                  Image.asset(
-                                    "assets/icons/ic_workout_calories.png",
-                                    scale: 1.2,
-                                    color: Colur.orange,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                      /*currentWeekHistoryData[index].HBurnKcal! + " " + Languages.of(context)!.txtKcal*/
-                                      arrHistoryDetail[index]
-                                              .HBurnKcal
-                                              .toString() +
-                                          " " +
-                                          Languages.of(context)!.txtKcal,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        color: Colur.black,
-                                        fontSize: 13,
-                                      )),
-                                ],
-                              ),
+                              margin: const EdgeInsets.symmetric(vertical: 5),
+                              child: Text(
+                                  /*currentWeekHistoryData[index].HLvlName! + " " +
+                                    Languages.of(context)!.txtDay + " " + currentWeekHistoryData[index].HDayName!*/
+                                  arrHistoryDetail[index]
+                                      .planName
+                                      .toString().toUpperCase(),
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    color: Colur.black,
+                                    fontSize: 16,
+                                  )),
+                            ),
+                            //calorie and duration
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                //========duration=======
+                                Image.asset(
+                                  "assets/icons/ic_workout_time.png",
+                                  scale: 1.2,
+                                  color: Colur.blue,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                    /*calculateDuration(currentWeekHistoryData[index].HDuration!)*/
+                                    Utils.secondToMMSSFormat(int.parse(
+                                        arrHistoryDetail[index]
+                                            .duration
+                                            .toString())),
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      color: Colur.black,
+                                      fontSize: 13,
+                                    )),
+                                SizedBox(
+                                  width: 15,
+                                ),
+                                //=========calories=========
+                                Image.asset(
+                                  "assets/icons/ic_workout_calories.png",
+                                  scale: 1.2,
+                                  color: Colur.orange,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                    /*currentWeekHistoryData[index].HBurnKcal! + " " + Languages.of(context)!.txtKcal*/
+                                    arrHistoryDetail[index]
+                                            .burnKcal
+                                            .toString() +
+                                        " " +
+                                        Languages.of(context)!.txtKcal,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      color: Colur.black,
+                                      fontSize: 13,
+                                    )),
+                              ],
                             ),
                           ],
                         ),
@@ -473,7 +470,7 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
                       ],
                       onSelected: (value) {
                         if (value == 0 && value != null) {
-                          _deleteExerciseDialog(arrHistoryDetail[index].HId!);
+                          _deleteExerciseDialog(arrHistoryDetail[index].id!);
                         }
                       },
                     )
@@ -492,11 +489,11 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
 
   String setPlanImage(List<HistoryTable> arrHistoryDetail, int index) {
 
-    if (Utils.getPlanName(arrHistoryDetail[index].HPlanName.toString(), context) == Languages.of(context)!.txtBeginnerDay) {
+    if (Utils.getPlanName(arrHistoryDetail[index].planName.toString(), context) == Languages.of(context)!.txtBeginnerDay) {
       return "assets/icons/ic_history_normal.png";
-    } else if (Utils.getPlanName(arrHistoryDetail[index].HPlanName.toString(), context) == Languages.of(context)!.txtIntermediateDay) {
+    } else if (Utils.getPlanName(arrHistoryDetail[index].planName.toString(), context) == Languages.of(context)!.txtIntermediateDay) {
       return "assets/icons/ic_history_intermediate.png";
-    } else if (Utils.getPlanName(arrHistoryDetail[index].HPlanName.toString(), context) == Languages.of(context)!.txtAdvanceDay) {
+    } else if (Utils.getPlanName(arrHistoryDetail[index].planName.toString(), context) == Languages.of(context)!.txtAdvanceDay) {
       return "assets/icons/ic_history_advanced.png";
     } else {
       return "assets/icons/ic_history_training_plan.png";
@@ -505,10 +502,10 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
 
   List<DateTime> dates = [];
 
-  /*getDataFromDatabase() async {
+  getDataFromDatabase() async {
     historyData = await DataBaseHelper().getHistoryData();
     historyData.forEach((element) {
-      dates.add(DateTime.parse(element.HCompletionDate!));
+      dates.add(DateTime.parse(element.dateTime!));
     });
     historyWeekData = await DataBaseHelper.instance.getHistoryWeekData();
 
@@ -516,16 +513,16 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
     historyWeekData.forEach((element) {
       element.arrHistoryDetail!.forEach((element1) {
         Debug.printLog("History::Plan::==>  " +
-            element1.HPlanId.toString() +
+            element1.id.toString() +
             "  " +
-            element1.HDayName.toString());
+            element1.dayName.toString());
 
-        calendarDates.add(DateTime.parse(DateTime.parse(element1.HDateTime!.split(" ")[0]).toString() + "Z"));
+        calendarDates.add(DateTime.parse(DateTime.parse(element1.dateTime!.split(" ")[0]).toString() + "Z"));
       });
     });
 
     Debug.printLog(calendarDates.toString());
-  }*/
+  }
 
   void _deleteExerciseDialog(int id) {
     Widget cancelButton = TextButton(
@@ -541,12 +538,12 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
         style: TextStyle(color: Colur.theme),
       ),
       onPressed: () {
-        /*DataBaseHelper()
+        DataBaseHelper()
             .deleteHistoryData(id)
             .then((value) {
           getDataFromDatabase();
           setState(() {});
-        });*/
+        });
         Navigator.pop(context);
       },
     );
@@ -564,7 +561,15 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
   @override
   void onTopBarClick(String name, {bool value = true}) {
     if(name == Constant.strBack){
-      Navigator.pop(context);
+      _backToTrainingScreen();
     }
+  }
+
+  _backToTrainingScreen(){
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+            builder: (context) => TrainingScreen()),
+        ModalRoute.withName("/training"));
   }
 }

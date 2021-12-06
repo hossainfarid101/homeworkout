@@ -2,30 +2,34 @@ import 'dart:convert';
 
 class HistoryTable {
   int? id;
-  String? levelName;
+  int? planId;
+  String? fromPage;
+  String? tableName;
   String? planName;
+  String? duration;
   String? dateTime;
   String? completionTime;
   String? burnKcal;
   String? totalWorkout;
   String? kg;
-  String? feet;
-  String? inch;
+  String? cm;
   String? feelRate;
   String? dayName;
   String? weekName;
 
   HistoryTable({
     this.id,
-    this.levelName,
+    this.planId,
+    this.fromPage,
+    this.tableName,
+    this.duration,
     this.planName,
     this.dateTime,
     this.completionTime,
     this.burnKcal,
     this.kg,
     this.totalWorkout,
-    this.feet,
-    this.inch,
+    this.cm,
     this.feelRate,
     this.dayName,
     this.weekName,
@@ -37,35 +41,38 @@ class HistoryTable {
   String toRawJson() => json.encode(toJson());
 
   factory HistoryTable.fromJson(Map<String, dynamic> json) => HistoryTable(
-      id: json["Id"],
-      levelName: json["LevelName"],
-      planName: json["PlanName"],
-      dateTime: json["DateTime"],
-      completionTime: json["CompletionTime"],
-      burnKcal: json["BurnKcal"],
-      kg: json["Kg"],
-      totalWorkout: json["TotalWorkout"],
-      feet: json["Feet"],
-      inch: json["Inch"],
-      feelRate: json["FeelRate"],
-      dayName: json["Day_name"],
-      weekName: json["Week_name"],
-
-  );
+        id: json["Id"],
+        planId: json["planId"],
+        fromPage: json["fromPage"],
+        tableName: json["tableName"],
+        duration: json["duration"],
+        planName: json["PlanName"],
+        dateTime: json["DateTime"],
+        completionTime: json["CompletionTime"],
+        burnKcal: json["BurnKcal"],
+        kg: json["Kg"],
+        totalWorkout: json["TotalWorkout"],
+        cm: json["Cm"],
+        feelRate: json["FeelRate"],
+        dayName: json["Day_name"],
+        weekName: json["Week_name"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "Id": id,
-    "LevelName": levelName,
-    "PlanName": planName,
-    "DateTime": dateTime,
-    "CompletionTime": completionTime,
-    "BurnKcal": burnKcal,
-    "Kg": kg,
-    "TotalWorkout": totalWorkout,
-    "Feet": feet,
-    "Inch": inch,
-    "FeelRate": feelRate,
-    "Day_name": dayName,
-    "Week_name": weekName,
-  };
+        "Id": id,
+        "planId": planId,
+        "fromPage": fromPage,
+        "tableName": tableName,
+        "PlanName": planName,
+        "duration": duration,
+        "DateTime": dateTime,
+        "CompletionTime": completionTime,
+        "BurnKcal": burnKcal,
+        "Kg": kg,
+        "TotalWorkout": totalWorkout,
+        "Cm": cm,
+        "FeelRate": feelRate,
+        "Day_name": dayName,
+        "Week_name": weekName,
+      };
 }

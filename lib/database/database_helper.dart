@@ -3,6 +3,9 @@ import 'package:homeworkout_flutter/database/model/DiscoverSingleExerciseData.da
 import 'package:homeworkout_flutter/database/model/ExerciseListData.dart';
 import 'package:homeworkout_flutter/database/model/WeeklyDayData.dart';
 import 'package:homeworkout_flutter/database/tables/discover_plan_table.dart';
+import 'package:homeworkout_flutter/database/tables/fullbody_workout_table.dart';
+import 'package:homeworkout_flutter/database/tables/history_table.dart';
+import 'package:homeworkout_flutter/database/tables/history_week_data.dart';
 import 'package:homeworkout_flutter/database/tables/home_plan_table.dart';
 import 'package:homeworkout_flutter/database/tables/weight_table.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
@@ -127,6 +130,8 @@ class DataBaseHelper {
     }
   }
 
+
+
   Future<List<DiscoverPlanTable>> getHomeSubPlanList(int parentPlanId) async {
     List<DiscoverPlanTable> discoverPlanDataList = [];
     var dbClient = await db;
@@ -151,7 +156,7 @@ class DataBaseHelper {
     List<DiscoverPlanTable> discoverPlanDataList = [];
     var dbClient = await db;
     List<Map<String, dynamic>> maps = await dbClient
-        .rawQuery("SELECT * FROM  $discoverPlanTable WHERE discoverCatName != '' AND hasSubPlan = 'false' ORDER BY RANDOM() LIMIT 1");
+        .rawQuery("SELECT * FROM  $discoverPlanTable WHERE discoverCatName != '' AND hasSubPlan = 'false' AND planImage != '' AND shortDes != '' ORDER BY RANDOM() LIMIT 1");
     if (maps.length > 0) {
       for (var answer in maps) {
         var homePlanData = DiscoverPlanTable.fromJson(answer);
@@ -179,9 +184,9 @@ class DataBaseHelper {
     List<WeeklyDayData> weeklyDataList = [];
     var dbClient = await db;
     var query = "";
-    if (strCategoryName == Constant.Full_Body) {
+    if (strCategoryName == Constant.Full_body_small) {
       query = "SELECT  max(Workout_id) as Workout_id, Workout_id, group_concat(DISTINCT(CAST(Day_name as INTEGER))) as Day_name, Week_name, Is_completed from $fullBodyWorkoutTable GROUP BY CAST(Week_name as INTEGER)";
-    }else if (strCategoryName == Constant.Lower_Body){
+    }else if (strCategoryName == Constant.Lower_body_small){
       query = "SELECT  max(Workout_id) as Workout_id, Workout_id, group_concat(DISTINCT(CAST(Day_name as INTEGER))) as Day_name, Week_name, Is_completed from $lowerBodyTable GROUP BY CAST(Week_name as INTEGER)";
     }
     List<Map<String, dynamic>> maps = await dbClient.rawQuery(query);
@@ -232,9 +237,9 @@ class DataBaseHelper {
     List<WeekDayData> arrWeekDayData = [];
     var dbClient = await db;
     var query = "";
-    if (strCategoryName == Constant.Full_Body) {
+    if (strCategoryName == Constant.Full_body_small) {
       query = "select Day_name,Is_completed FROM $fullBodyWorkoutTable WHERE Day_name IN ('01','02','03','04','05','06','07') AND Week_name = '$strWeekName' GROUP by Day_name";
-    }else if (strCategoryName == Constant.Lower_Body){
+    }else if (strCategoryName == Constant.Lower_body_small){
       query = "select Day_name,Is_completed FROM $lowerBodyTable WHERE Day_name IN ('01','02','03','04','05','06','07') AND Week_name = '$strWeekName' GROUP by Day_name";
     }
     List<Map<String, dynamic>> maps = await dbClient.rawQuery(query);
@@ -273,6 +278,9 @@ class DataBaseHelper {
 
 
   /*For listing exercise*/
+
+
+
   Future<List<ExerciseListData>> getExercisePlanNameWise(String tableName)async{
     List<ExerciseListData> exerciseListData = [];
     var dbClient = await db;
@@ -361,6 +369,205 @@ class DataBaseHelper {
   }
 
 
+  Future<int?> updateDayStatusWeekWise(String weekName,String dayName)async{
+    var dbClient = await db;
+    var result = await dbClient.rawDelete("update $fullBodyWorkoutTable set Is_completed ='1' where Week_name = '0$weekName' and Day_name = '$dayName'");
+    Debug.printLog("updateDayStatusWeekWise::::: $result");
+    return result;
+  }
 
 
+
+  /*For history data */
+
+  Future<int>? insertHistoryData(HistoryTable historyData) async {
+    var dbClient = await db;
+    var result = await dbClient.insert(historyTable, historyData.toJson());
+    Debug.printLog("insertHistoryData:::::: $result  ${historyData.toJson()}");
+    return result;
+  }
+
+  Future<List<HistoryTable>> getHistoryData() async {
+    var dbClient = await db;
+    List<HistoryTable> historyDataList = [];
+    List<Map<String, dynamic>> maps =
+    await dbClient.rawQuery("SELECT * FROM $historyTable");
+    if (maps.length > 0) {
+      for (var answer in maps) {
+        var historyData = HistoryTable.fromJson(answer);
+        historyDataList.add(historyData);
+      }
+    }
+    return historyDataList;
+  }
+
+
+  Future<int?> getTotalWorkoutMinutesForHome(String tableName) async {
+    var dbClient = await db;
+    List<Map> res = await dbClient.rawQuery("Select sum(Time) from $tableName");
+    if (res.length > 0) {
+      return res.first.values.first;
+    } else {
+      return 0;
+    }
+  }
+
+  Future<int?> getTotalWorkoutMinutesForDaysStatus(String dayName,String weekName,String tableName)async{
+    var dbClient = await db;
+    List<Map> res = await dbClient.rawQuery("select sum(Time_beginner) from $tableName where Day_name ='$dayName' and Week_name = '0$weekName'");
+    if (res.length > 0) {
+      return res.first.values.first;
+    } else {
+      return 0;
+    }
+  }
+
+
+  Future<int?> getTotalWorkoutMinutesForDiscover(String planId)async{
+    var dbClient = await db;
+    List<Map> res = await dbClient.rawQuery("select sum(ExTime) from $homeExSingleTable where PlanId = '$planId'");
+    if (res.length > 0) {
+      return res.first.values.first;
+    } else {
+      return 0;
+    }
+  }
+
+  Future<List<HistoryWeekData>> getHistoryWeekData() async {
+    var dbClient = await db;
+    List<HistoryWeekData> historyDataList = [];
+    List<Map<String, dynamic>> maps = await dbClient.rawQuery(
+        "select strftime('%W', DateTime) as weekNumber, max(date(DateTime, 'weekday 0' ,'-6 day')) as weekStart, max(date(DateTime, 'weekday 0', '-0 day')) as weekEnd from $historyTable GROUP BY weekNumber");
+    if (maps.length > 0) {
+      for (var answer in maps) {
+        var historyWeekData = HistoryWeekData();
+        var historyData = HistoryWeekData.fromJson(answer);
+
+        historyWeekData.weekNumber = historyData.weekNumber;
+        historyWeekData.weekStart = historyData.weekStart;
+        historyWeekData.weekEnd = historyData.weekEnd;
+
+        historyWeekData.totKcal = await getTotBurnWeekKcal(
+            historyData.weekStart!, historyData.weekEnd!);
+
+        historyWeekData.totTime = await getTotWeekWorkoutTime(
+            historyData.weekStart!, historyData.weekEnd!);
+
+        historyWeekData.arrHistoryDetail = await getWeekHistoryData(
+            historyData.weekStart!, historyData.weekEnd!);
+
+        historyWeekData.totWorkout = historyWeekData.arrHistoryDetail!.length;
+        historyDataList.add(historyWeekData);
+      }
+    }
+
+    return historyDataList;
+  }
+
+
+  Future<int?> getTotBurnWeekKcal(
+      String strWeekStart, String strWeekEnd) async {
+    var dbClient = await db;
+    List<Map> res = await dbClient.rawQuery(
+        "SELECT sum(BurnKcal) as HBurnKcalTotal from $historyTable WHERE date('$strWeekStart') <= date(DateTime) AND date('$strWeekEnd') >= date(DateTime)");
+    if (res.length > 0) {
+      return res.first.values.first;
+    } else {
+      return 0;
+    }
+  }
+
+  Future<double?> getTotWeekWorkoutTime(
+      String strWeekStart, String strWeekEnd) async {
+    var dbClient = await db;
+    List<Map> res = await dbClient.rawQuery(
+        "SELECT sum(CAST(duration AS DOUBLE)) as HDuration from $historyTable WHERE date('$strWeekStart') <= date(DateTime) AND date('$strWeekEnd') >= date(DateTime)");
+    if (res.length > 0) {
+      return res.first.values.first;
+    } else {
+      return 0;
+    }
+  }
+
+  Future<List<HistoryTable>?> getWeekHistoryData(
+      String strWeekStart, String strWeekEnd) async {
+    var dbClient = await db;
+    List<HistoryTable> historyData = [];
+    List<Map<String, dynamic>> res = await dbClient.rawQuery(
+        "SELECT * FROM $historyTable WHERE date('$strWeekStart') <= date(DateTime) AND date('$strWeekEnd') >= date(DateTime) Order by Id Desc");
+    if (res.length > 0) {
+      for (var answer in res) {
+        var waterData = HistoryTable.fromJson(answer);
+        historyData.add(waterData);
+      }
+    }
+    return historyData;
+  }
+
+  Future<int> deleteHistoryData(int id) async {
+    var dbClient = await db;
+    return await dbClient.delete(
+      historyTable,
+      where: "Id = ?",
+      whereArgs: [id],
+    );
+  }
+
+  Future<int?> getHistoryTotalWorkout() async {
+    var dbClient = await db;
+    List<Map> res = await dbClient.rawQuery(
+        "SELECT SUM(CAST(TotalWorkout as INTEGER)) as totWorkout FROM $historyTable");
+    if (res.length > 0) {
+      return res.first.values.first;
+    } else {
+      return 0;
+    }
+  }
+
+  Future<int?> getHistoryTotalMinutes() async {
+    var dbClient = await db;
+    List<Map> res = await dbClient.rawQuery(
+        "SELECT SUM(CAST(duration as INTEGER)) as HDuration FROM $historyTable");
+    if (res.length > 0) {
+      return res.first.values.first;
+    } else {
+      return 0;
+    }
+  }
+
+  Future<double?> getHistoryTotalKCal() async {
+    var dbClient = await db;
+    List<Map> res = await dbClient.rawQuery(
+        "SELECT SUM(CAST(BurnKcal as Float)) as HBurnKcal FROM $historyTable");
+    if (res.length > 0) {
+      return res.first.values.first;
+    } else {
+      return 0.0;
+    }
+  }
+
+  Future<bool?> isHistoryAvailableDateWise(String date) async {
+    var dbClient = await db;
+    List<Map> res = await dbClient.rawQuery(
+        "SELECT Id FROM $historyTable WHERE DateTime(strftime('%Y-%m-%d', DateTime(DateTime) ) ) = DateTime(strftime('%Y-%m-%d', DateTime('$date')))");
+    if (res.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<List<FullBodyWorkoutTable>> getCompleteDayCountByTableName(String tableName) async {
+    var dbClient = await db;
+    List<FullBodyWorkoutTable> daysList = [];
+    List<Map<String, dynamic>> res = await dbClient.rawQuery(
+        "Select * From $tableName where Is_completed = 1");
+    if (res.length > 0) {
+      for (var answer in res) {
+        var daysData = FullBodyWorkoutTable.fromJson(answer);
+        daysList.add(daysData);
+      }
+    }
+    return daysList;
+  }
 }

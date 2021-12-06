@@ -90,7 +90,8 @@ class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
             context,
             MaterialPageRoute(
                 builder: (context) =>
-                    ExerciseListScreen(fromPage: Constant.PAGE_DISCOVER,discoverPlanTable: quarantinePlanList[index],)));
+                    ExerciseListScreen(fromPage: Constant.PAGE_DISCOVER,discoverPlanTable: quarantinePlanList[index],
+                    planName: quarantinePlanList[index].planName,)));
       },
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 3.0),

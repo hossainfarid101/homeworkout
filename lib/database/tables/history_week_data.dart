@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'HistoryTable.dart';
+import 'package:homeworkout_flutter/database/tables/history_table.dart';
 
 
 class HistoryWeekData{

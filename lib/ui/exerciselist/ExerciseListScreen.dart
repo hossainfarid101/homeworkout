@@ -16,6 +16,7 @@ import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
+import 'package:sqflite/sqflite.dart';
 
 class ExerciseListScreen extends StatefulWidget {
 
@@ -41,6 +42,8 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
   List<DiscoverSingleExerciseData> discoverSingleExerciseList = [];
   List<WorkoutDetail> workoutDetailList = [];
   bool lastStatus = true;
+  int? totalSeconds = 0;
+  int? totalMinutes = 0;
 
   _scrollListener() {
     if (isShrink != lastStatus) {
@@ -71,6 +74,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // totalMin();
     return Theme(
       data: ThemeData(
         appBarTheme: AppBarTheme(
@@ -226,17 +230,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Text(
-                (widget.fromPage == Constant.PAGE_HOME)
-                    ? exerciseDataList.length.toString() +
-                        " " +
-                        Languages.of(context)!.txtWorkouts.toLowerCase()
-                    : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
-                        ? workoutDetailList.length.toString() +
-                            " " +
-                            Languages.of(context)!.txtWorkouts.toLowerCase()
-                        : discoverSingleExerciseList.length.toString() +
-                            " " +
-                            Languages.of(context)!.txtWorkouts.toLowerCase(),
+                _getTotalMinAndWorkoutTime(),
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   color: Colur.txtBlack,
@@ -249,6 +243,32 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
         ],
       ),
     );
+  }
+
+  _getTotalMinAndWorkoutTime() {
+    return (widget.fromPage == Constant.PAGE_HOME)
+        ? totalMinutes.toString() +
+            " " +
+            Languages.of(context)!.txtMin.toLowerCase() +
+            " - " +
+            exerciseDataList.length.toString() +
+            " " +
+            Languages.of(context)!.txtWorkouts.toLowerCase()
+        : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
+            ? totalMinutes.toString() +
+                " " +
+                Languages.of(context)!.txtMin.toLowerCase() +
+                " - " +
+                workoutDetailList.length.toString() +
+                " " +
+                Languages.of(context)!.txtWorkouts.toLowerCase()
+            : totalMinutes.toString() +
+                " " +
+                Languages.of(context)!.txtMin.toLowerCase() +
+                " - " +
+                discoverSingleExerciseList.length.toString() +
+                " " +
+                Languages.of(context)!.txtWorkouts.toLowerCase();
   }
 
   _divider() {
@@ -534,6 +554,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
         onPressed: () {
           var tableName = "";
           var planName = "";
+          var planId = "";
           if(widget.fromPage == Constant.PAGE_HOME){
             tableName = widget.homePlanTable!.catTableName.toString();
           }else if(widget.fromPage == Constant.PAGE_DAYS_STATUS && widget.planName != ""){
@@ -544,6 +565,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
             }
           }else if(widget.fromPage == Constant.PAGE_DISCOVER){
             planName = widget.discoverPlanTable!.planName.toString();
+            planId = widget.discoverPlanTable!.planId.toString();
           }
           Navigator.push(
               context,
@@ -556,7 +578,9 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
                         dayName: widget.dayName,
                         weekName: widget.weekName,
                         discoverSingleExerciseData: discoverSingleExerciseList,
-                        planName: planName,
+                        planName: widget.planName,
+                        planId: planId,
+                        totalMin: totalMinutes,
                       )));
         },
       ),
@@ -565,6 +589,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
 
   _getDataFromDatabase(){
     _getAllExerciseList();
+    totalMin();
   }
 
   _getAllExerciseList() async{
@@ -573,7 +598,8 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
       exerciseDataList.sort((a, b) => a.sort!.compareTo(b.sort!));
 
     }else if(widget.fromPage == Constant.PAGE_DISCOVER){
-      discoverSingleExerciseList = await DataBaseHelper().getDiscoverExercisePlanIdWise(widget.discoverPlanTable!.planId.toString());
+      discoverSingleExerciseList = await DataBaseHelper().getDiscoverExercisePlanIdWise(widget.discoverPlanTable!.
+      planId.toString());
 
     }else if(widget.fromPage == Constant.PAGE_DAYS_STATUS){
       var tableName = "";
@@ -604,5 +630,23 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
       imageName = widget.discoverPlanTable!.planImage.toString();
     }
     return imageName;
+  }
+
+  totalMin() async{
+    if(widget.fromPage == Constant.PAGE_HOME) {
+      totalSeconds = await DataBaseHelper().getTotalWorkoutMinutesForHome(widget.homePlanTable!.catTableName.toString());
+    }else if(widget.fromPage == Constant.PAGE_DAYS_STATUS){
+      var tableName = "";
+      if(widget.planName == Constant.Full_body_small){
+        tableName = Constant.tbl_full_body_workouts_list;
+      }else{
+        tableName = Constant.tbl_lower_body_list;
+      }
+      totalSeconds = await DataBaseHelper().getTotalWorkoutMinutesForDaysStatus(widget.dayName.toString(),
+          widget.weekName.toString(), tableName);
+    }else if(widget.fromPage == Constant.PAGE_DISCOVER){
+      totalSeconds = await DataBaseHelper().getTotalWorkoutMinutesForDiscover(widget.discoverPlanTable!.planId.toString());
+    }
+    totalMinutes =  Duration(seconds: totalSeconds!).inMinutes;
   }
 }

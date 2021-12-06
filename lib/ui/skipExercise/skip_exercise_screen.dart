@@ -50,8 +50,8 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
   int? _pointerValueInt;
   FlutterTts flutterTts = FlutterTts();
 
-  bool? isMute;
-  bool? isVoiceGuide;
+  bool? isMute =false;
+  bool? isVoiceGuide = false;
 
   Animation<int>? listLifeGuideAnimation ;
   AnimationController? listLifeGuideController ;
@@ -319,33 +319,23 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
                     ),
                   ),
                   Container(
-                    margin: const EdgeInsets.only(top: 10.0, bottom: 10),
-                    child: Row(
-                      children: [
-                        Text(
-                          (_getExerciseNameFromList()),
-                          style: TextStyle(
-                              fontSize: 18.0,
-                              color: Colur.black,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        //SizedBox(width: 5,),
-                        InkWell(
-                          onTap: () {
-                          },
-                          child: Icon(
-                            Icons.help_outline_rounded,
-                            size: 20.0,
-                            color: Colur.txt_gray,
-                          ),
-                        )
-                      ],
+                    margin: const EdgeInsets.only(top: 10.0, bottom: 10,right: 5),
+                    child: Expanded(
+                      child: Text(
+                        (_getExerciseNameFromList()),
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontSize: 18.0,
+                            color: Colur.black,
+                            fontWeight: FontWeight.w600),
+
+                      ),
                     ),
                   ),
                   Container(
                     margin: const EdgeInsets.only(bottom: 10.0),
                     child: Text(
-                      (_getExerciseTimeFromList()),
+                      (_getTimeAndCheckTimeType()),
                         style: TextStyle(
                           color: Colur.txt_gray
                       ),
@@ -382,6 +372,24 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
         ? widget.dayStatusDetailList![lastPosition!].timeType!
         : widget.discoverSingleExerciseData![lastPosition!].exUnit!) ==
         ((widget.fromPage != Constant.PAGE_DISCOVER) ? "time" : "s");
+  }
+
+  String _getTimeAndCheckTimeType() {
+    return (widget.fromPage == Constant.PAGE_HOME)
+        ? (widget.exerciseDataList![lastPosition!].timeType == "time")
+        ? Utils.secondToMMSSFormat(
+        int.parse(widget.exerciseDataList![lastPosition!].time.toString()))
+        : "X ${widget.exerciseDataList![lastPosition!].time}"
+        : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
+        ? (widget.dayStatusDetailList![lastPosition!].timeType == "time")
+        ? Utils.secondToMMSSFormat(int.parse(
+        widget.dayStatusDetailList![lastPosition!].Time_beginner.toString()))
+        : "X ${widget.dayStatusDetailList![lastPosition!].Time_beginner}"
+        : (widget.discoverSingleExerciseData![lastPosition!].exUnit == "s")
+        ? Utils.secondToMMSSFormat(int.parse(
+        widget.discoverSingleExerciseData![lastPosition!].ExTime
+            .toString()))
+        : "X ${widget.discoverSingleExerciseData![lastPosition!].ExTime}";
   }
 
   String _getExerciseTimeFromList() {

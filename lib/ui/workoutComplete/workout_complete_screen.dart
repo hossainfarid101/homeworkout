@@ -6,7 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:group_radio_button/group_radio_button.dart';
 import 'package:homeworkout_flutter/custom/dialogs/add_bmi_dialog.dart';
+import 'package:homeworkout_flutter/database/database_helper.dart';
+import 'package:homeworkout_flutter/database/model/DiscoverSingleExerciseData.dart';
+import 'package:homeworkout_flutter/database/model/ExerciseListData.dart';
+import 'package:homeworkout_flutter/database/model/WorkoutDetailData.dart';
+import 'package:homeworkout_flutter/database/tables/history_table.dart';
+import 'package:homeworkout_flutter/database/tables/weight_table.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
+import 'package:homeworkout_flutter/localization/locale_constant.dart';
 import 'package:homeworkout_flutter/ui/reminder/set_reminder_screen.dart';
 import 'package:homeworkout_flutter/ui/workoutHistory/workout_history_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
@@ -14,11 +21,25 @@ import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
+import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:lottie/lottie.dart';
 
 class WorkoutCompleteScreen extends StatefulWidget {
-  const WorkoutCompleteScreen({Key? key}) : super(key: key);
+
+  String? fromPage = "";
+  List<ExerciseListData>? exerciseDataList;
+  String? tableName = "";
+  List<WorkoutDetail>? dayStatusDetailList;
+  List<DiscoverSingleExerciseData>? discoverSingleExerciseData;
+  String? dayName = "";
+  String? weekName = "";
+  String? planName = "";
+  String? planId = "";
+  int? totalMin = 0;
+
+  WorkoutCompleteScreen({this.fromPage,this.exerciseDataList,this.tableName,this.dayStatusDetailList,this.dayName,
+    this.weekName,this.discoverSingleExerciseData,this.planName,this.planId,this.totalMin});
 
   @override
   _WorkoutCompleteScreenState createState() => _WorkoutCompleteScreenState();
@@ -26,15 +47,7 @@ class WorkoutCompleteScreen extends StatefulWidget {
 
 class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
 
-  @override
-  void initState() {
-    Future.delayed(Duration(seconds: 3), (){
-      setState(() {
-        isAnimation = false;
-      });
-    });
-    super.initState();
-  }
+
 
   int? dayCompleted = 4;
   int? currentWeek = 1;
@@ -57,6 +70,24 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
   List<String>? iFeel = ["1", "2", "3", "4", "5"];
 
   bool isAnimation = true;
+  DateTime? endTime;
+  double? calories;
+
+  List<WeightTable> weightDataList = [];
+
+  @override
+  void initState() {
+    getPreference();
+    getDataFromDatabase();
+    setBmiCalculation();
+    Future.delayed(Duration(seconds: 3), (){
+      setState(() {
+        isAnimation = false;
+      });
+    });
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -68,85 +99,89 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
           systemOverlayStyle: SystemUiOverlayStyle.light
         ), //
       ),
-      child: Scaffold(
-        appBar: PreferredSize(
-            preferredSize: Size.fromHeight(0),
-            child: AppBar( // Here we create one to set status bar color
-              backgroundColor: Colur.black,
-              elevation: 0,
-            )
-        ),
-        backgroundColor: Colur.iconGreyBg,
-        body: Stack(
-          children: [
-            GestureDetector(
-              onTap: () => FocusScope.of(context).unfocus(),
-              child: NestedScrollView(
-                headerSliverBuilder:
-                    (BuildContext context, bool innerBoxIsScrolled) {
-                  return <Widget>[
-                    SliverAppBar(
-                      elevation: 2.0,
-                      expandedHeight: 350,
-                      pinned: true,
-                      backgroundColor: Colur.black,
-                      leading: InkWell(
-                        onTap: () {
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => WorkoutHistoryScreen()),
-                              (route) => false);
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              top: 15.0, bottom: 15.0, left: 15.0, right: 25.0),
-                          child: Image.asset(
-                            'assets/icons/ic_back.webp',
-                            color: Colur.white,
-                          ),
-                        ),
-                      ),
-                      flexibleSpace: _sliverHeader(context),
-                    )
-                  ];
-                },
-                body: Container(
-                    color: Colur.grayDivider.withOpacity(0.5),
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                _buildWeek(context),
-                                weightWidget(),
-                                bmiWidget(fullWidth),
-                                iFeelWidget(),
-                                nextButtonWidget(fullWidth)
-                              ],
+      child: WillPopScope(
+        onWillPop: () async{
+          return Future.delayed(Duration(milliseconds: 5), (){
+            _moverWorkoutHistoryScreen();
+            return false;
+          });
+        },
+        child: Scaffold(
+          appBar: PreferredSize(
+              preferredSize: Size.fromHeight(0),
+              child: AppBar( // Here we create one to set status bar color
+                backgroundColor: Colur.black,
+                elevation: 0,
+              )
+          ),
+          backgroundColor: Colur.iconGreyBg,
+          body: Stack(
+            children: [
+              GestureDetector(
+                onTap: () => FocusScope.of(context).unfocus(),
+                child: NestedScrollView(
+                  headerSliverBuilder:
+                      (BuildContext context, bool innerBoxIsScrolled) {
+                    return <Widget>[
+                      SliverAppBar(
+                        elevation: 2.0,
+                        expandedHeight: 350,
+                        pinned: true,
+                        backgroundColor: Colur.black,
+                        leading: InkWell(
+                          onTap: () {
+                            _moverWorkoutHistoryScreen();
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                top: 15.0, bottom: 15.0, left: 15.0, right: 25.0),
+                            child: Image.asset(
+                              'assets/icons/ic_back.webp',
+                              color: Colur.white,
                             ),
                           ),
                         ),
-                      ],
-                    )),
+                        flexibleSpace: _sliverHeader(context),
+                      )
+                    ];
+                  },
+                  body: Container(
+                      color: Colur.grayDivider.withOpacity(0.5),
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  _buildWeek(context),
+                                  weightWidget(),
+                                  bmiWidget(fullWidth),
+                                  iFeelWidget(),
+                                  nextButtonWidget(fullWidth)
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
+                ),
               ),
-            ),
 
-            Visibility(
-              visible: isAnimation,
-              child: SafeArea(
-                child: Container(
-                  margin: EdgeInsets.only(top: 55),
-                  child: Lottie.asset(
-                      'assets/animations/congrats3.json',
-                      repeat: false,
-                      alignment: Alignment.topCenter
+              Visibility(
+                visible: isAnimation,
+                child: SafeArea(
+                  child: Container(
+                    margin: EdgeInsets.only(top: 55),
+                    child: Lottie.asset(
+                        'assets/animations/congrats3.json',
+                        repeat: false,
+                        alignment: Alignment.topCenter
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -273,11 +308,12 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                     ),
                     InkWell(
                         onTap: () {
-                          Navigator.pushAndRemoveUntil(
+                          /*Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => WorkoutHistoryScreen()),
-                              (route) => false);
+                              (route) => false);*/
+                          _moverWorkoutHistoryScreen();
                         },
                         child: Text(
                           Languages.of(context)!.txtNext.toUpperCase(),
@@ -717,7 +753,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                     var res = await showDialog(
                         context: context, builder: (context) => AddBmiDialog());
                     if (res != 0) {
-                      //getPreference();
+                      getPreference();
                       setBmiCalculation();
                       setState(() {
                         Preference.shared.setDouble(Preference.BMI, bmi!);
@@ -893,27 +929,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(primary: Colur.theme),
         onPressed: () {
-          /*if (weightController.text != "") {
-            if (isKg!) {
-              if (double.parse(weightController.text) > Constant.MIN_KG && double.parse(weightController.text) < Constant.MAX_KG) {
-                saveWeightDataToGraph();
-              }
-            } else {
-              if (double.parse(weightController.text) > Constant.MIN_LBS && double.parse(weightController.text) < Constant.MAX_LBS) {
-                saveWeightDataToGraph();
-              }
-            }
-          }
-
-          _insertExerciseHistoryData();
-          Debug.printLog(
-              "getCurrentDateTime===>>   ${Utils.getCurrentDateTime()}");
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => WorkoutHistoryScreen(
-                    isFromWorkOut: true,
-                  ))).then((value) => Navigator.pop(context));*/
+          _moverWorkoutHistoryScreen();
         },
         child: Text(Languages.of(context)!.txtNext.toUpperCase(),
             overflow: TextOverflow.ellipsis,
@@ -982,5 +998,109 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
         .map((e) =>
             '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
         .join('&');
+  }
+
+  getPreference() {
+    weightBMI = Preference.shared.getDouble(Preference.WEIGHT) ?? 0;
+    heightBMI = Preference.shared.getDouble(Preference.HEIGHT_CM) ?? 0;
+    bmi = Preference.shared.getDouble(Preference.BMI) ?? 0;
+    isKg = Preference.shared.getBool(Preference.IS_KG) ?? true;
+    isLbs = !isKg!;
+    bmiCategory = Preference.shared.getString(Preference.BMI_TEXT) ?? "";
+
+    calories = Preference.shared.getDouble(Preference.calories) ?? 0;
+    duration = Preference.shared.getInt(Preference.duration) ?? 0;
+    var time = Preference.shared.getString(Preference.END_TIME) ?? DateTime.now().toString();
+    endTime = DateTime.parse(time);
+
+    if (bmi! < 15) {
+      bmiColor = Colur.black;
+    } else if (bmi! >= 15 && bmi! < 16) {
+      bmiColor = Colur.colorFirst;
+    } else if (bmi! >= 16 && bmi! < 18.5) {
+      bmiColor = Colur.colorSecond;
+    } else if (bmi! >= 18.5 && bmi! <= 25) {
+      bmiColor = Colur.colorThird;
+    } else if (bmi! > 25 && bmi! < 30) {
+      bmiColor = Colur.colorFour;
+    } else if (bmi! >= 30 && bmi! < 35) {
+      bmiColor = Colur.colorFive;
+    } else if (bmi! >= 35 && bmi! < 40) {
+      bmiColor = Colur.colorSix;
+    } else if (bmi! >= 40) {
+      bmiColor = Colur.black;
+    }
+  }
+
+
+  _moverWorkoutHistoryScreen(){
+    if (weightController.text != "") {
+      if (isKg!) {
+        if (double.parse(weightController.text) > Constant.MIN_KG && double.parse(weightController.text) < Constant.MAX_KG) {
+          // saveWeightDataToGraph();
+        }
+      } else {
+        if (double.parse(weightController.text) > Constant.MIN_LBS && double.parse(weightController.text) < Constant.MAX_LBS) {
+          // saveWeightDataToGraph();
+        }
+      }
+    }
+
+    _insertExerciseHistoryData();
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => WorkoutHistoryScreen(
+              isFromWorkOut: true,
+            ))).then((value) => Navigator.pop(context));
+  }
+  void _insertExerciseHistoryData() async{
+
+    int totalEx = 0;
+    int planId = 0;
+    if(widget.fromPage == Constant.PAGE_HOME){
+      planId=0;
+      totalEx = widget.exerciseDataList!.length;
+    }if(widget.fromPage == Constant.PAGE_DAYS_STATUS){
+      totalEx = widget.dayStatusDetailList!.length;
+      planId=0;
+      await DataBaseHelper().updateDayStatusWeekWise(widget.weekName.toString(), widget.dayName.toString());
+    }if(widget.fromPage == Constant.PAGE_DISCOVER){
+      totalEx = widget.discoverSingleExerciseData!.length;
+      planId=int.parse(widget.planId.toString());
+    }
+
+    await DataBaseHelper().insertHistoryData(HistoryTable(
+        id: null,
+        planId: planId,
+        fromPage: widget.fromPage,
+        tableName: widget.tableName,
+        planName: widget.planName,
+        dateTime: Utils.getCurrentDateWithTime(),
+        completionTime: DateFormat.jm(getLocale().languageCode).format(endTime!),
+        burnKcal: calories!.toStringAsFixed(0),
+        kg: "",
+        cm: "",
+        duration: duration.toString(),
+        weekName: widget.weekName,
+        dayName: widget.dayName,
+        feelRate: iFeelValue,
+        totalWorkout: totalEx.toString()));
+  }
+
+  getDataFromDatabase() async {
+    weightDataList = await DataBaseHelper().getWeightData();
+    if (weightDataList.isNotEmpty) {
+      weightDataList.forEach((element) {
+        if (element.date == DateFormat.yMd().format(DateTime.now())) {
+          if (isKg!) {
+            weightController.text = element.weightKG!.toStringAsFixed(1);
+          } else {
+            weightController.text = element.weightLB!.toStringAsFixed(1);
+          }
+        }
+      });
+    }
+    setState(() {});
   }
 }

@@ -132,6 +132,12 @@ flutter:
     - assets/icons/drawer/ic_training_selected.webp
     - assets/icons/drawer/ic_training_unselected.webp
     - assets/icons/cp_ic_animation.png
+    - assets/icons/ic_workout_time.png
+    - assets/icons/ic_workout_calories.png
+    - assets/icons/ic_history_training_plan.png
+    - assets/icons/ic_history_advanced.png
+    - assets/icons/ic_history_intermediate.png
+    - assets/icons/ic_history_normal.png
     - assets/images/
     - assets/images/main_bg.webp
     - assets/images/arm_intermediate.webp

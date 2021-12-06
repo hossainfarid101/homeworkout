@@ -476,7 +476,7 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
   }
 
   _getWeeklyData()async{
-    weeklyDataList = await DataBaseHelper().getWorkoutWeeklyData(Constant.Full_Body);
+    weeklyDataList = await DataBaseHelper().getWorkoutWeeklyData(widget.planName.toString());
     weeklyDataList.forEach((element) {
       Debug.printLog("_getWeeklyData==>> "+element.Week_name.toString()+"  "+element.Day_name.toString());
       element.arrWeekDayData!.forEach((element1) {

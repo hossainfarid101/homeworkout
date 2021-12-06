@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:homeworkout_flutter/custom/drawer/drawer_menu.dart';
 import 'package:homeworkout_flutter/database/database_helper.dart';
+import 'package:homeworkout_flutter/database/tables/fullbody_workout_table.dart';
 import 'package:homeworkout_flutter/database/tables/home_plan_table.dart';
 import 'package:homeworkout_flutter/interfaces/topbar_clicklistener.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
@@ -37,6 +38,15 @@ class _TrainingScreenState extends State<TrainingScreen>
   String? totalWeekTrainingDays;
   List<HomePlanTable> allPlanDataList = [];
   int? totalQuarantineWorkout = 0;
+  int? totalWorkout = 0;
+  double? totalKcal = 0.0;
+  int? totalMin = 0;
+  List<bool> isAvailableHistory = [];
+  int dayInRow = 0;
+  String progress = "";
+  int? intProgress = 0;
+  String leftDays = "";
+
 
   _scrollListener() {
     if (isShrink != lastStatus) {
@@ -146,7 +156,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                                             children: [
                                               Column(
                                                 children: [
-                                                  const Text("6",
+                                                   Text((totalWorkout != 0) ? totalWorkout.toString() : "0",
                                                       overflow: TextOverflow.ellipsis,
                                                       style: TextStyle(
                                                           color: Colur.white,
@@ -163,7 +173,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                                               ),
                                               Column(
                                                 children: [
-                                                  const Text("3",
+                                                  Text((totalKcal != 0) ? totalKcal.toString() : "0",
                                                       overflow: TextOverflow.ellipsis,
                                                       style: TextStyle(
                                                           color: Colur.white,
@@ -180,7 +190,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                                               ),
                                               Column(
                                                 children: [
-                                                  Text(Utils.secondToMMSSFormat(95),
+                                                  Text(Utils.secondToMMSSFormat((totalMin != 0) ?totalMin!:0),
                                                       overflow: TextOverflow.ellipsis,
                                                       style: const TextStyle(
                                                           color: Colur.white,
@@ -337,7 +347,8 @@ class _TrainingScreenState extends State<TrainingScreen>
                                                     itemBuilder: (BuildContext context, int index) {
                                                       return _itemOfWeekGoal(index);
                                                     },
-                                                    itemCount: 7,
+                                                    itemCount: isAvailableHistory.length,
+                                                    // itemCount: 7,
                                                   ),
                                                 ),
                                               ],
@@ -392,6 +403,7 @@ class _TrainingScreenState extends State<TrainingScreen>
   }
 
   itemPlan(int index) {
+
     var gender = Preference.shared.getString(Constant.SELECTED_GENDER)??Constant.GENDER_MEN;
     Debug.printLog("allPlanDataList[index].catImage====>>  "+allPlanDataList[index].catImage.toString());
     return Container(
@@ -437,8 +449,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Visibility(
-                            visible: (allPlanDataList[index].catSubCategory == Constant.txt_7_4_challenge &&
-                                allPlanDataList[index].catSubCategory != Constant.catQuarantineAtHome)?true:false ,
+                            visible: _isDayStatusPlan(index)?true:false ,
                             child: Expanded(
                               child: InkWell(
                                 onTap: () {
@@ -467,9 +478,14 @@ class _TrainingScreenState extends State<TrainingScreen>
                                             ),
                                           ),
                                           Container(
-                                            margin: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 5),
-                                            child: Text( Languages.of(context)!.txt7X4Challenge,
-                                                style: TextStyle(color: Colur.white, fontSize: 16.0)),
+                                            margin: const EdgeInsets.symmetric(
+                                                horizontal: 15.0, vertical: 5),
+                                            child: Text(
+                                                Languages.of(context)!
+                                                    .txt7X4Challenge,
+                                                style: TextStyle(
+                                                    color: Colur.white,
+                                                    fontSize: 16.0)),
                                           ),
                                         ],
                                       ),
@@ -481,37 +497,73 @@ class _TrainingScreenState extends State<TrainingScreen>
                                         Container(
                                           child: Row(
                                             children: [
-                                              Container(
-                                                margin: const EdgeInsets.symmetric(horizontal: 15.0),
-                                                child: Text("28 ${Languages.of(context)!.txtDaysLeft}",
-                                                    style: TextStyle(
-                                                        color: Colur.white, fontSize: 14.0)),
+                                              FutureBuilder(
+                                                future: _setLeftDayProgressDataByPlan(allPlanDataList[index].catTableName.toString()),
+                                                builder: (BuildContext context,
+                                                    AsyncSnapshot<dynamic> snapshot) {
+                                                  if (snapshot.hasData) {
+                                                    return
+                                                      Container(
+                                                        margin: const EdgeInsets.symmetric(horizontal: 15.0),
+                                                        child: Text(snapshot.data.toString(),
+                                                            style: TextStyle(
+                                                                color: Colur.white,
+                                                                fontSize: 14.0)),
+                                                      );
+                                                  }else {
+                                                    return Container();
+                                                  }
+                                                },
                                               ),
                                               Expanded(
-                                                child: Container(
-                                                  alignment: Alignment.centerRight,
-                                                  margin:
-                                                  const EdgeInsets.symmetric(horizontal: 15.0),
-                                                  child: Text("10%",
-                                                      style: TextStyle(
-                                                          color: Colur.white, fontSize: 14.0)),
+                                                child: FutureBuilder(
+                                                  future: _setDayProgressPercentagePlan(allPlanDataList[index].catTableName.toString()),
+                                                  builder: (BuildContext context,
+                                                      AsyncSnapshot<dynamic> snapshot) {
+                                                    if (snapshot.hasData) {
+                                                      return
+                                                        Container(
+                                                          alignment: Alignment.centerRight,
+                                                          margin:
+                                                          const EdgeInsets.symmetric(horizontal: 15.0),
+                                                          child: Text(snapshot.data.toString(),
+                                                              style: TextStyle(
+                                                                  color: Colur.white, fontSize: 14.0)),
+                                                        );
+                                                    }else {
+                                                      return Container();
+                                                    }
+                                                  },
                                                 ),
                                               ),
                                             ],
                                           ),
                                         ),
-                                        Container(
-                                          margin: const EdgeInsets.only(right: 10,left: 10,top: 10,bottom: 20),
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(10.0),
-                                            child: LinearProgressIndicator(
-                                              value: (10 / 100).toDouble(),
-                                              valueColor: AlwaysStoppedAnimation<Color>(Colur.theme),
-                                              backgroundColor: Colur.transparent_50,
-                                              minHeight: 5,
-                                            ),
-                                          ),
-                                        )
+
+                                        FutureBuilder(
+                                          future: _setDayProgressDataByPlan(allPlanDataList[index].catTableName.toString()),
+                                          builder: (BuildContext context,
+                                              AsyncSnapshot<dynamic> snapshot) {
+                                            if (snapshot.hasData) {
+                                              return
+                                                Container(
+                                                  margin: const EdgeInsets.only(right: 10,left: 10,top: 10,bottom: 20),
+                                                  child: ClipRRect(
+                                                    borderRadius: BorderRadius.circular(10.0),
+                                                    child: LinearProgressIndicator(
+                                                      value: (snapshot.data / 100).toDouble(),
+                                                      valueColor: AlwaysStoppedAnimation<Color>(Colur.theme),
+                                                      backgroundColor: Colur.transparent_50,
+                                                      minHeight: 5,
+                                                    ),
+                                                  ),
+                                                );
+                                            }else {
+                                              return Container();
+                                            }
+                                          },
+                                        ),
+
                                       ],
                                     )
                                   ],
@@ -582,6 +634,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                                                 homePlanTable:
                                                     allPlanDataList[index],
                                                 fromPage: Constant.PAGE_HOME,
+                                                planName: allPlanDataList[index].catName,
                                               )));
                                 },
                                 child: Container(
@@ -632,25 +685,34 @@ class _TrainingScreenState extends State<TrainingScreen>
     );
   }
 
+  bool _isDayStatusPlan(int index){
+    return (allPlanDataList[index].catSubCategory == Constant.txt_7_4_challenge &&
+        allPlanDataList[index].catSubCategory != Constant.catQuarantineAtHome);
+  }
+
   _itemOfWeekGoal(int index) {
     return Container(
       width: MediaQuery.of(context).size.width / 8,
       child: Column(
         children: [
-          Container(
-            width: 30,
-            height: 30,
-            decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(width: 0.5, color: Colors.black)),
-            child:
-            Container(
-                alignment: Alignment.center,
-                child: Text(
-                  Utils.getDaysDateOfWeek()[index].toString(),
-                  textAlign: TextAlign.center,
-                )),
-          )
+          (isAvailableHistory.isNotEmpty && !isAvailableHistory[index])
+              ? Container(
+                  width: 30,
+                  height: 30,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(width: 0.5, color: Colors.black)),
+                  child: Container(
+                      alignment: Alignment.center,
+                      child: Text(
+                        Utils.getDaysDateOfWeek()[index].toString(),
+                        textAlign: TextAlign.center,
+                      )),
+                )
+              : Container(
+                  alignment: Alignment.center,
+                  child:
+                      Image.asset("assets/icons/ic_challenge_complete_day.png",scale: 3,))
         ],
       ),
     );
@@ -736,6 +798,22 @@ class _TrainingScreenState extends State<TrainingScreen>
   _getDataFromDatabase(){
     _getAllPlanList();
     _getTotalQuarantineWorkout();
+    _getTotalWorkoutDetail();
+    _getTotalQuarantineWorkout();
+    _getHistoryWeekWise();
+    /*_setDayProgressDataByPlan(Constant.tbl_full_body_workouts_list);
+    _setLeftDayProgressDataByPlan(Constant.tbl_lower_body_list);*/
+  }
+
+
+
+  _getTotalWorkoutDetail()async{
+    totalWorkout = await DataBaseHelper().getHistoryTotalWorkout() ?? 0;
+    totalKcal = await DataBaseHelper().getHistoryTotalKCal() ?? 0;
+    totalMin = await DataBaseHelper().getHistoryTotalMinutes() ?? 0;
+    setState(() {
+
+    });
   }
 
   _getAllPlanList() async{
@@ -751,6 +829,44 @@ class _TrainingScreenState extends State<TrainingScreen>
     Debug.printLog(
         "totalQuarantineWorkout==>> " + totalQuarantineWorkout.toString());
     setState(() {});
+  }
+
+
+  _getHistoryWeekWise() {
+    Utils.getDaysDateForHistoryOfWeek().forEach((element) async {
+      bool? isAvailable = await DataBaseHelper().isHistoryAvailableDateWise(element.toString());
+      isAvailableHistory.add(isAvailable!);
+      Debug.printLog("getDaysDateForHistoryOfWeek==>> "+element.toString());
+    });
+    isAvailableHistory.forEach((element) {
+      Debug.printLog("isAvailableHistory==>> "+element.toString());
+    });
+    setState(() {});
+  }
+
+
+  Future<int?> _setDayProgressDataByPlan(String strTableName) async {
+    List<FullBodyWorkoutTable> compDay =
+    await DataBaseHelper().getCompleteDayCountByTableName(strTableName);
+    String proPercentage =
+    (compDay.length.toDouble() * 100 / 30).toDouble().toStringAsFixed(0);
+    progress = proPercentage + "%";
+    return double.parse(proPercentage).toInt();
+  }
+
+  Future<String?> _setLeftDayProgressDataByPlan(String strTableName) async {
+    List<FullBodyWorkoutTable> compDay =
+    await DataBaseHelper().getCompleteDayCountByTableName(strTableName);
+    String daysLeft = (30 - compDay.length).toString();
+    return daysLeft + " " + Languages.of(context)!.txtDayLeft;
+  }
+
+  Future<String?> _setDayProgressPercentagePlan(String strTableName) async {
+    List<FullBodyWorkoutTable> compDay =
+    await DataBaseHelper().getCompleteDayCountByTableName(strTableName);
+    String proPercentage =
+    (compDay.length.toDouble() * 100 / 30).toDouble().toStringAsFixed(0);
+    return proPercentage + "%";
   }
 }
 

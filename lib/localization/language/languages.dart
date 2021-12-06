@@ -404,6 +404,7 @@ abstract class Languages {
   String get txtTimes;
 
   String get txtNextExercise;
+  String get txtDayLeft;
 
   String get txtSelectingTargetedWorkoutsForYou;
 }

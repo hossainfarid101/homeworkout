@@ -93,6 +93,8 @@ class Preference {
 
 
 
+  static const String END_TIME = "END_TIME";
+
   // ------------------ SINGLETON -----------------------
   static final Preference _preference = Preference._internal();
 

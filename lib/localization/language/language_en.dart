@@ -561,6 +561,9 @@ class LanguageEn extends Languages {
   String get txtLeg => "Leg";
 
   @override
+  String get txtDayLeft => "day left";
+
+  @override
   String get txtBuildMuscle => "Build Muscle";
 
   @override
