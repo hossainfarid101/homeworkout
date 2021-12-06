@@ -5,6 +5,14 @@ import 'package:homeworkout_flutter/utils/color.dart';
 
 import 'ChooseYourFocusAreaScreen.dart';
 import 'GenderSelectionScreen.dart';
+import 'GeneratingThePlanScreen.dart';
+import 'MainGoalsScreen.dart';
+import 'MotivatesYouScreen.dart';
+import 'PlanIsReadyScreen.dart';
+import 'PushUpsCanYouDoScreen.dart';
+import 'SetYourWeeklyGoalScreen.dart';
+import 'WeightHeightSelectionScreen.dart';
+import 'YourActivityLevelScreen.dart';
 
 class IntroductionScreen extends StatefulWidget {
   const IntroductionScreen({Key? key}) : super(key: key);
@@ -140,6 +148,14 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                   children: <Widget>[
                     GenderSelectionScreen(),
                     ChooseYourFocusAreaScreen(),
+                    MainGoalsScreen(),
+                    MotivatesYouScreen(),
+                    PushUpsCanYouDoScreen(),
+                    YourActivityLevelScreen(),
+                    SetYourWeeklyGoalScreen(),
+                    WeightHeightSelectionScreen(),
+                    GeneratingThePlanScreen(),
+                    PlanIsReadyScreen(),
                   ],
                 ),
               ),
@@ -297,5 +313,3 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
     );
   }
 }
-
-
