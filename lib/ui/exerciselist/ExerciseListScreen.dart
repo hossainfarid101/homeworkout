@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -36,7 +39,7 @@ class ExerciseListScreen extends StatefulWidget {
   _ExerciseListScreenState createState() => _ExerciseListScreenState();
 }
 
-class _ExerciseListScreenState extends State<ExerciseListScreen> {
+class _ExerciseListScreenState extends State<ExerciseListScreen> with TickerProviderStateMixin{
   ScrollController? _scrollController;
   List<ExerciseListData> exerciseDataList = [];
   List<DiscoverSingleExerciseData> discoverSingleExerciseList = [];
@@ -45,12 +48,22 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
   int? totalSeconds = 0;
   int? totalMinutes = 0;
 
+
   _scrollListener() {
     if (isShrink != lastStatus) {
       setState(() {
         lastStatus = isShrink;
       });
     }
+  }
+
+  @override
+  void dispose() {
+    _scrollController!.removeListener(_scrollListener);
+    for(int j = 0 ; j < listLifeGuideController.length;j++){
+      listLifeGuideController[j].dispose();
+    }
+    super.dispose();
   }
 
   bool get isShrink {
@@ -67,12 +80,6 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
   }
 
   @override
-  void dispose() {
-    _scrollController!.removeListener(_scrollListener);
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     // totalMin();
     return Theme(
@@ -83,131 +90,135 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
         ), //
       ),
       child: Scaffold(
-        body: NestedScrollView(
-          controller: _scrollController,
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return <Widget>[
-              SliverAppBar(
-                elevation: 0,
-                expandedHeight: 150.0,
-                floating: false,
-                pinned: true,
-                backgroundColor: Colur.white,
-                centerTitle: false,
-                automaticallyImplyLeading: false,
-                title: isShrink
-                    ? Text(
-                  (widget.fromPage == Constant.PAGE_HOME)
-                            ? widget.homePlanTable!.catName!.toUpperCase()
-                            : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
-                                ? Languages.of(context)!.txtDay+" "+widget.dayName.toString().replaceAll("0", "")
-                                : widget.discoverPlanTable!.planName!.toUpperCase(),
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colur.black,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 20.0,
-                        ),
-                      )
-                    : Container(),
-                leading: InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(0.0),
-                    child: Icon(
-                      Icons.arrow_back_sharp,
-                      color: isShrink ? Colur.black : Colur.white,
-                      size: 25.0,
+        body: SafeArea(
+          top: false,
+          bottom: Platform.isIOS ? false : true,
+          child: NestedScrollView(
+            controller: _scrollController,
+            headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+              return <Widget>[
+                SliverAppBar(
+                  elevation: 0,
+                  expandedHeight: 150.0,
+                  floating: false,
+                  pinned: true,
+                  backgroundColor: Colur.bg_white,
+                  centerTitle: false,
+                  automaticallyImplyLeading: false,
+                  title: isShrink
+                      ? Text(
+                    (widget.fromPage == Constant.PAGE_HOME)
+                              ? widget.homePlanTable!.catName!.toUpperCase()
+                              : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
+                                  ? Languages.of(context)!.txtDay+" "+widget.dayName.toString().replaceAll("0", "")
+                                  : widget.discoverPlanTable!.planName!.toUpperCase(),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colur.black,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 20.0,
+                          ),
+                        )
+                      : Container(),
+                  leading: InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(0.0),
+                      child: Icon(
+                        Icons.arrow_back_sharp,
+                        color: isShrink ? Colur.black : Colur.white,
+                        size: 25.0,
+                      ),
                     ),
                   ),
-                ),
-                flexibleSpace: FlexibleSpaceBar(
-                  centerTitle: false,
-                  background: Container(
-                    alignment: Alignment.bottomLeft,
-                    padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 0.0),
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage(
-                            // 'assets/images/abs_advanced.webp',
-                            _getTopImageNameFromList(),
-                          ),
-                          fit: BoxFit.cover),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.symmetric(
-                              vertical:
-                                  (widget.fromPage != Constant.PAGE_DAYS_STATUS)
-                                      ? 30
-                                      : 0),
-                          child: Text(
-                            (widget.fromPage == Constant.PAGE_HOME)
-                                ? widget.homePlanTable!.catName!.toUpperCase()
-                                : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
-                                ? Languages.of(context)!.txtDay+" "+widget.dayName.toString().replaceAll("0", "")
-                                : widget.discoverPlanTable!.planName!.toUpperCase(),
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colur.white,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 20.0,
+                  flexibleSpace: FlexibleSpaceBar(
+                    centerTitle: false,
+                    background: Container(
+                      alignment: Alignment.bottomLeft,
+                      padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 0.0),
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage(
+                              // 'assets/images/abs_advanced.webp',
+                              _getTopImageNameFromList(),
                             ),
-                          ),
-                        ),
-                        Visibility(
-                          visible: widget.fromPage == Constant.PAGE_DAYS_STATUS,
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(vertical: 20),
+                            fit: BoxFit.cover),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.symmetric(
+                                vertical:
+                                    (widget.fromPage != Constant.PAGE_DAYS_STATUS)
+                                        ? 30
+                                        : 0),
                             child: Text(
-                              (widget.fromPage == Constant.PAGE_DAYS_STATUS)
-                                  ? widget.planName.toString().toUpperCase()
-                                  : "",
+                              (widget.fromPage == Constant.PAGE_HOME)
+                                  ? widget.homePlanTable!.catName!.toUpperCase()
+                                  : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
+                                  ? Languages.of(context)!.txtDay+" "+widget.dayName.toString().replaceAll("0", "")
+                                  : widget.discoverPlanTable!.planName!.toUpperCase(),
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: Colur.white,
                                 fontWeight: FontWeight.w700,
-                                fontSize: 14.0,
+                                fontSize: 20.0,
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                          Visibility(
+                            visible: widget.fromPage == Constant.PAGE_DAYS_STATUS,
+                            child: Container(
+                              margin: const EdgeInsets.symmetric(vertical: 20),
+                              child: Text(
+                                (widget.fromPage == Constant.PAGE_DAYS_STATUS)
+                                    ? widget.planName.toString().toUpperCase()
+                                    : "",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colur.white,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 14.0,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ];
-          },
-          body: Container(
-            color: Colur.white,
-            margin: const EdgeInsets.only(top: 5.0),
-            child: Column(
-              children: [
-                Expanded(
-                  child: Column(
-                    children: [
-                      _timesAndWorkoutsTitle(),
-                      _divider(),
+              ];
+            },
+            body: Container(
+              color: Colur.bg_white,
+              margin: const EdgeInsets.only(top: 5.0),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Column(
+                      children: [
+                        _timesAndWorkoutsTitle(),
+                        _divider(),
 
-                      /*(widget.fromPage == Constant.PAGE_HOME)
-                          ? _widgetExerciseListWithEdit()
-                          : __widgetExerciseListWithOutEdit(),*/
+                        /*(widget.fromPage == Constant.PAGE_HOME)
+                            ? _widgetExerciseListWithEdit()
+                            : __widgetExerciseListWithOutEdit(),*/
 
-                      (widget.fromPage == Constant.PAGE_HOME || widget.fromPage == Constant.PAGE_DAYS_STATUS)
-                          ? _widgetExerciseListWithEdit()
-                          : __widgetExerciseListWithOutEdit(),
-                    ],
+                        (widget.fromPage == Constant.PAGE_HOME || widget.fromPage == Constant.PAGE_DAYS_STATUS)
+                            ? _widgetExerciseListWithEdit()
+                            : __widgetExerciseListWithOutEdit(),
+                      ],
+                    ),
                   ),
-                ),
-                _divider(),
-                _startButton(),
-              ],
+                  _divider(),
+                  _startButton(),
+                ],
+              ),
             ),
           ),
         ),
@@ -335,6 +346,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
       }
     }
   }
+
   _listOfExerciseWithEdit(int index) {
     return InkWell(
       onTap: (){
@@ -356,75 +368,108 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
         );
 
       },
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Container(
-                child: Icon(Icons.menu_rounded, color: Colur.iconGrey),
-              ),
-              Container(
-                height: 90.0,
-                width: 100.0,
-                margin: const EdgeInsets.all(10),
-                child: Image.asset(
-                  'assets/images/arm_advanced.webp',
-                  gaplessPlayback: true,
-                  fit: BoxFit.cover,
+      child: Container(
+        // color: Colur.black,
+        margin: const EdgeInsets.symmetric(vertical: 5),
+        child: Column(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  child: Icon(Icons.menu_rounded, color: Colur.iconGrey),
                 ),
-              ),
-              Expanded(
-                child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        (widget.fromPage == Constant.PAGE_HOME)
-                            ? exerciseDataList[index].title.toString()
-                            : workoutDetailList[index].title.toString(),
-                        style: TextStyle(
-                            color: Colur.black,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 17.0),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(top: 8.0),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                (widget.fromPage == Constant.PAGE_HOME)
-                                    ? ((exerciseDataList[index].timeType ==
-                                            "step")
-                                        ? "x${exerciseDataList[index].time.toString()}"
-                                        : Utils.secondToMMSSFormat(int.parse(exerciseDataList[index].time.toString())))
-                                    : ((workoutDetailList[index].timeType ==
-                                            "step")
-                                        ? "x${workoutDetailList[index].Time_beginner.toString()}"
-                                        : Utils.secondToMMSSFormat(int.parse(workoutDetailList[index]
-                                            .Time_beginner
-                                            .toString()))),
-                                style: TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colur.txt_gray),
-                              ),
-                            ),
-                          ],
+                /*Container(
+                  height: 90.0,
+                  width: 100.0,
+                  margin: const EdgeInsets.all(10),
+                  child: Image.asset(
+                    'assets/images/arm_advanced.webp',
+                    gaplessPlayback: true,
+                    fit: BoxFit.cover,
+                  ),
+                ),*/
+
+                (listOfImagesCount.isEmpty)
+                    ? Container(
+                        height: MediaQuery.of(context).size.height*0.2,
+                        width: MediaQuery.of(context).size.height*0.1,
+                        margin: const EdgeInsets.all(10),
+                        child: Image.asset(
+                          'assets/images/arm_advanced.webp',
+                          gaplessPlayback: true,
+                          fit: BoxFit.cover,
                         ),
                       )
-                    ],
+                    : Container(
+                        height: MediaQuery.of(context).size.height * 0.1,
+                        width: MediaQuery.of(context).size.height * 0.1,
+                        child: AnimatedBuilder(
+                          animation: listLifeGuideAnimation[index],
+                          builder: (BuildContext context, Widget? child) {
+                            String frame =
+                                listLifeGuideAnimation[index].value.toString();
+                            return new Image.asset(
+                              'assets/${_getImagePathFromList(index)}/$frame${Constant.EXERCISE_EXTENSION}',
+                              gaplessPlayback: true,
+                            );
+                          },
+                        ),
+                      ),
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          (widget.fromPage == Constant.PAGE_HOME)
+                              ? exerciseDataList[index].title.toString()
+                              : workoutDetailList[index].title.toString(),
+                          style: TextStyle(
+                              color: Colur.black,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 17.0),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(top: 8.0),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  (widget.fromPage == Constant.PAGE_HOME)
+                                      ? ((exerciseDataList[index].timeType ==
+                                              "step")
+                                          ? "x${exerciseDataList[index].time.toString()}"
+                                          : Utils.secondToMMSSFormat(int.parse(exerciseDataList[index].time.toString())))
+                                      : ((workoutDetailList[index].timeType ==
+                                              "step")
+                                          ? "x${workoutDetailList[index].Time_beginner.toString()}"
+                                          : Utils.secondToMMSSFormat(int.parse(workoutDetailList[index]
+                                              .Time_beginner
+                                              .toString()))),
+                                  style: TextStyle(
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colur.txt_gray),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              )
-            ],
-          ),
-          Container(
-            margin: const EdgeInsets.only(left: 35.0),
-            child: _divider(),
-          )
-        ],
+                )
+              ],
+            ),
+            Container(
+              margin: const EdgeInsets.only(left: 35.0),
+              child: _divider(),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -467,7 +512,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
         children: [
           Row(
             children: [
-              Container(
+              /*Container(
                 height: 90.0,
                 width: 100.0,
                 margin: const EdgeInsets.only(top: 10,left: 30,right: 10,bottom: 10),
@@ -475,6 +520,33 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
                   'assets/images/arm_advanced.webp',
                   gaplessPlayback: true,
                   fit: BoxFit.cover,
+                ),
+              ),*/
+
+              (listOfImagesCount.isEmpty)
+                  ? Container(
+                height: MediaQuery.of(context).size.height*0.2,
+                width: MediaQuery.of(context).size.height*0.1,
+                margin: const EdgeInsets.all(10),
+                child: Image.asset(
+                  'assets/images/arm_advanced.webp',
+                  gaplessPlayback: true,
+                  fit: BoxFit.cover,
+                ),
+              )
+                  : Container(
+                height: MediaQuery.of(context).size.height * 0.1,
+                width: MediaQuery.of(context).size.height * 0.1,
+                child: AnimatedBuilder(
+                  animation: listLifeGuideAnimation[index],
+                  builder: (BuildContext context, Widget? child) {
+                    String frame =
+                    listLifeGuideAnimation[index].value.toString();
+                    return new Image.asset(
+                      'assets/${_getImagePathFromList(index)}/$frame${Constant.EXERCISE_EXTENSION}',
+                      gaplessPlayback: true,
+                    );
+                  },
                 ),
               ),
               Expanded(
@@ -522,8 +594,6 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
       ),
     );
   }
-
-
 
   _startButton() {
     return Container(
@@ -587,33 +657,12 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
     );
   }
 
-  _getDataFromDatabase(){
+
+  _getDataFromDatabase()async{
     _getAllExerciseList();
     totalMin();
   }
 
-  _getAllExerciseList() async{
-    if(widget.fromPage == Constant.PAGE_HOME) {
-      exerciseDataList = await DataBaseHelper().getExercisePlanNameWise(widget.homePlanTable!.catTableName!);
-      exerciseDataList.sort((a, b) => a.sort!.compareTo(b.sort!));
-
-    }else if(widget.fromPage == Constant.PAGE_DISCOVER){
-      discoverSingleExerciseList = await DataBaseHelper().getDiscoverExercisePlanIdWise(widget.discoverPlanTable!.
-      planId.toString());
-
-    }else if(widget.fromPage == Constant.PAGE_DAYS_STATUS){
-      var tableName = "";
-      if(widget.planName == Constant.Full_body_small){
-        tableName = Constant.tbl_full_body_workouts_list;
-      }else{
-        tableName = Constant.tbl_lower_body_list;
-      }
-      workoutDetailList = await DataBaseHelper().getWeekDayExerciseData(
-          widget.dayName.toString(), widget.weekName.toString(),tableName);
-      workoutDetailList.sort((a, b) => a.sort!.compareTo(b.sort!));
-    }
-    setState(() {});
-  }
 
   String _getTopImageNameFromList(){
     var imageName = "";
@@ -648,5 +697,97 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
       totalSeconds = await DataBaseHelper().getTotalWorkoutMinutesForDiscover(widget.discoverPlanTable!.planId.toString());
     }
     totalMinutes =  Duration(seconds: totalSeconds!).inMinutes;
+  }
+
+
+  _getAllExerciseList() async{
+    if(widget.fromPage == Constant.PAGE_HOME) {
+      exerciseDataList = await DataBaseHelper().getExercisePlanNameWise(widget.homePlanTable!.catTableName!);
+      exerciseDataList.sort((a, b) => a.sort!.compareTo(b.sort!));
+
+    }else if(widget.fromPage == Constant.PAGE_DISCOVER){
+      discoverSingleExerciseList = await DataBaseHelper().getDiscoverExercisePlanIdWise(widget.discoverPlanTable!.
+      planId.toString());
+
+    }else if(widget.fromPage == Constant.PAGE_DAYS_STATUS){
+      var tableName = "";
+      if(widget.planName == Constant.Full_body_small){
+        tableName = Constant.tbl_full_body_workouts_list;
+      }else{
+        tableName = Constant.tbl_lower_body_list;
+      }
+      workoutDetailList = await DataBaseHelper().getWeekDayExerciseData(
+          widget.dayName.toString(), widget.weekName.toString(),tableName);
+      workoutDetailList.sort((a, b) => a.sort!.compareTo(b.sort!));
+    }
+    _imageCount();
+    setState(() {});
+  }
+
+  List<Animation<int>> listLifeGuideAnimation = [];
+  List<AnimationController> listLifeGuideController = [];
+  List<int> listOfImagesCount = [];
+  _imageCount() async {
+    for(int i =0;i < _getTotalLength()!;i++){
+      await _getImageFromAssets(i);
+      int duration = 0;
+      if(listOfImagesCount[i] > 2 && listOfImagesCount[i]<=4){
+        duration = 3000;
+      } else if(listOfImagesCount[i] > 4 && listOfImagesCount[i]<=6){
+        duration = 4500;
+      } else if(listOfImagesCount[i] > 6 && listOfImagesCount[i]<=8){
+        duration = 6000;
+      } else if(listOfImagesCount[i] > 8 && listOfImagesCount[i]<=10){
+        duration = 7500;
+      } else if(listOfImagesCount[i] > 10 && listOfImagesCount[i]<=12){
+        duration = 9000;
+      } else if(listOfImagesCount[i] > 12 && listOfImagesCount[i]<=14){
+        duration = 10500;
+      }else{
+        duration = 1500;
+      }
+
+      listLifeGuideController.add(new AnimationController(
+          vsync: this, duration:  Duration(milliseconds: duration))
+        ..repeat());
+
+      listLifeGuideAnimation.add(new IntTween(begin: 1, end: listOfImagesCount[i]).animate(listLifeGuideController[i]));
+    }
+  }
+  int? _getTotalLength(){
+    var totalLength = 0;
+    if(widget.fromPage == Constant.PAGE_HOME){
+      totalLength = exerciseDataList.length;
+    }else if(widget.fromPage == Constant.PAGE_DAYS_STATUS){
+      totalLength = workoutDetailList.length;
+    }else if(widget.fromPage == Constant.PAGE_DISCOVER){
+      totalLength = discoverSingleExerciseList.length;
+    }
+    return totalLength;
+  }
+  String? _getImagePathFromList(int index){
+    var exPath = "";
+    if(widget.fromPage == Constant.PAGE_HOME){
+      exPath = exerciseDataList[index].image.toString();
+    }else if(widget.fromPage == Constant.PAGE_DAYS_STATUS){
+      exPath = workoutDetailList[index].image.toString();
+    }else if(widget.fromPage == Constant.PAGE_DISCOVER){
+      exPath = discoverSingleExerciseList[index].exPath.toString();
+    }
+    return exPath;
+  }
+  _getImageFromAssets(int index) async {
+
+    final manifestContent = await rootBundle.loadString('AssetManifest.json');
+
+    final Map<String, dynamic> manifestMap = json.decode(manifestContent);
+
+    final imagePaths = manifestMap.keys
+        .where((String key) => key.contains(_getImagePathFromList(index)!))
+        .where((String key) => key.contains(Constant.EXERCISE_EXTENSION))
+        .toList();
+
+    listOfImagesCount.add(imagePaths.length);
+
   }
 }

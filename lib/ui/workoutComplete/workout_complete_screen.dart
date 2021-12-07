@@ -9,6 +9,8 @@ import 'package:homeworkout_flutter/custom/dialogs/add_bmi_dialog.dart';
 import 'package:homeworkout_flutter/database/database_helper.dart';
 import 'package:homeworkout_flutter/database/model/DiscoverSingleExerciseData.dart';
 import 'package:homeworkout_flutter/database/model/ExerciseListData.dart';
+import 'package:homeworkout_flutter/database/model/WeekDayData.dart';
+import 'package:homeworkout_flutter/database/model/WeeklyDayData.dart';
 import 'package:homeworkout_flutter/database/model/WorkoutDetailData.dart';
 import 'package:homeworkout_flutter/database/tables/history_table.dart';
 import 'package:homeworkout_flutter/database/tables/weight_table.dart';
@@ -26,7 +28,6 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:lottie/lottie.dart';
 
 class WorkoutCompleteScreen extends StatefulWidget {
-
   String? fromPage = "";
   List<ExerciseListData>? exerciseDataList;
   String? tableName = "";
@@ -38,22 +39,28 @@ class WorkoutCompleteScreen extends StatefulWidget {
   String? planId = "";
   int? totalMin = 0;
 
-  WorkoutCompleteScreen({this.fromPage,this.exerciseDataList,this.tableName,this.dayStatusDetailList,this.dayName,
-    this.weekName,this.discoverSingleExerciseData,this.planName,this.planId,this.totalMin});
+  WorkoutCompleteScreen(
+      {this.fromPage,
+      this.exerciseDataList,
+      this.tableName,
+      this.dayStatusDetailList,
+      this.dayName,
+      this.weekName,
+      this.discoverSingleExerciseData,
+      this.planName,
+      this.planId,
+      this.totalMin});
 
   @override
   _WorkoutCompleteScreenState createState() => _WorkoutCompleteScreenState();
 }
 
 class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
-
-
-
-  int? dayCompleted = 4;
-  int? currentWeek = 1;
-  int? exercises = 17;
-  double? kcal = 3.9;
-  int? duration = 95;
+  int? dayCompleted = 0;
+  int? currentWeek = 0;
+  int? exercises = 0;
+  double? kcal = 0.0;
+  int? duration = 0;
 
   TextEditingController weightController = TextEditingController();
   bool? isKg = true;
@@ -74,13 +81,19 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
   double? calories;
 
   List<WeightTable> weightDataList = [];
+  List<WeekDayData>? weeklyDataList = [];
+  var totalCompleteDays = 0;
 
   @override
   void initState() {
+    if(widget.fromPage == Constant.PAGE_DAYS_STATUS) {
+      currentWeek = int.parse(widget.weekName!.replaceAll("0", ""));
+      dayCompleted = int.parse(widget.dayName!.replaceAll("0", ""));
+    }
     getPreference();
     getDataFromDatabase();
     setBmiCalculation();
-    Future.delayed(Duration(seconds: 3), (){
+    Future.delayed(Duration(seconds: 3), () {
       setState(() {
         isAnimation = false;
       });
@@ -88,20 +101,18 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     bmiTextCategory();
     double fullWidth = MediaQuery.of(context).size.width;
     return Theme(
       data: ThemeData(
-        appBarTheme: AppBarTheme(
-          systemOverlayStyle: SystemUiOverlayStyle.light
-        ), //
+        appBarTheme:
+            AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.light), //
       ),
       child: WillPopScope(
-        onWillPop: () async{
-          return Future.delayed(Duration(milliseconds: 5), (){
+        onWillPop: () async {
+          return Future.delayed(Duration(milliseconds: 5), () {
             _moverWorkoutHistoryScreen();
             return false;
           });
@@ -109,11 +120,11 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
         child: Scaffold(
           appBar: PreferredSize(
               preferredSize: Size.fromHeight(0),
-              child: AppBar( // Here we create one to set status bar color
+              child: AppBar(
+                // Here we create one to set status bar color
                 backgroundColor: Colur.black,
                 elevation: 0,
-              )
-          ),
+              )),
           backgroundColor: Colur.iconGreyBg,
           body: Stack(
             children: [
@@ -134,7 +145,10 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                           },
                           child: Padding(
                             padding: const EdgeInsets.only(
-                                top: 15.0, bottom: 15.0, left: 15.0, right: 25.0),
+                                top: 15.0,
+                                bottom: 15.0,
+                                left: 15.0,
+                                right: 25.0),
                             child: Image.asset(
                               'assets/icons/ic_back.webp',
                               color: Colur.white,
@@ -153,7 +167,10 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                             child: SingleChildScrollView(
                               child: Column(
                                 children: [
-                                  _buildWeek(context),
+                                  Visibility(
+                                    visible: widget.fromPage == Constant.PAGE_DAYS_STATUS,
+                                    child: _buildWeek(context),
+                                  ),
                                   weightWidget(),
                                   bmiWidget(fullWidth),
                                   iFeelWidget(),
@@ -166,17 +183,13 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                       )),
                 ),
               ),
-
               Visibility(
                 visible: isAnimation,
                 child: SafeArea(
                   child: Container(
                     margin: EdgeInsets.only(top: 55),
-                    child: Lottie.asset(
-                        'assets/animations/congrats3.json',
-                        repeat: false,
-                        alignment: Alignment.topCenter
-                    ),
+                    child: Lottie.asset('assets/animations/congrats3.json',
+                        repeat: false, alignment: Alignment.topCenter),
                   ),
                 ),
               ),
@@ -204,27 +217,34 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                         "assets/images/ic_challenge_complete.png",
                         scale: 1.3,
                       )),
-                  Positioned(
-                    left: 55,
-                    top: 90,
-                    child: Text(
-                      dayCompleted!.toString(),
-                      style: TextStyle(
-                          fontSize: 38,
-                          color: Colur.transparent.withOpacity(0.2),
-                          fontWeight: FontWeight.w700),
+                  Visibility(
+                    visible: widget.fromPage == Constant.PAGE_DAYS_STATUS,
+                    child: Positioned(
+                      left: 55,
+                      top: 90,
+                      child: Text(
+                        dayCompleted.toString(),
+                        style: TextStyle(
+                            fontSize: 38,
+                            color: Colur.transparent.withOpacity(0.2),
+                            fontWeight: FontWeight.w700),
+                      ),
                     ),
                   ),
                 ],
               ),
-              Text(
-                Languages.of(context)!.txtDay +
-                    " ${dayCompleted!.toString()} " +
-                    Languages.of(context)!.txtCompleted + "!",
-                style: TextStyle(
-                    color: Colur.white,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 20),
+              Visibility(
+                visible: widget.fromPage == Constant.PAGE_DAYS_STATUS,
+                child: Text(
+                  Languages.of(context)!.txtDay +
+                      " $dayCompleted " +
+                      Languages.of(context)!.txtCompleted +
+                      "!",
+                  style: TextStyle(
+                      color: Colur.white,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 20),
+                ),
               ),
               Expanded(
                 child: Container(
@@ -234,7 +254,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                     children: [
                       Column(
                         children: [
-                          Text(exercises!.toString(),
+                          Text(_totalExerciseFromList()!,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                   color: Colur.white,
@@ -250,7 +270,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                       ),
                       Column(
                         children: [
-                          Text(kcal!.toStringAsFixed(1),
+                          Text(calories!.toStringAsFixed(1),
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                   color: Colur.white,
@@ -361,7 +381,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
               children: [
                 Expanded(
                   child: Text(
-                      Languages.of(context)!.txtWeek +
+                      Languages.of(context)!.txtWeek.toUpperCase() +
                           " ${currentWeek!} - " +
                           Languages.of(context)!.txtDay.toUpperCase() +
                           " ${dayCompleted!}",
@@ -405,7 +425,10 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                     ),
                   ),
                 ),
-                Image.asset("assets/images/ic_challenge_uncomplete.webp",
+                Image.asset(
+                    (dayCompleted == 7)
+                        ? "assets/images/ic_challenge_complete.png"
+                        : "assets/images/ic_challenge_uncomplete.webp",
                     scale: 5)
               ],
             ),
@@ -418,8 +441,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
   _buildWeekItem(int index) {
     return Row(
       children: [
-        index == 0
-            ? Container(
+        if (weeklyDataList!.isNotEmpty && weeklyDataList![index].Is_completed == "1" || weeklyDataList![index].Day_name == "0${dayCompleted.toString()}") Container(
                 padding: const EdgeInsets.all(5),
                 //height: 50,
                 decoration: BoxDecoration(
@@ -429,8 +451,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                   color: Colur.white,
                   size: 20,
                 ),
-              )
-            : Container(
+              ) else Container(
                 padding: const EdgeInsets.all(10),
                 //height: 50,
                 decoration: BoxDecoration(
@@ -445,10 +466,13 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                           fontWeight: FontWeight.w400)),
                 ),
               ),
-        Container(
-          margin: const EdgeInsets.only(top: 24, bottom: 24),
-          width: 20,
-          color: index == 0 ? Colur.blueGradient1 : Colur.grey.withOpacity(0.7),
+        Visibility(
+          visible: (weeklyDataList!.length-1 != index),
+          child: Container(
+            margin: const EdgeInsets.only(top: 24, bottom: 24),
+            width: 18,
+            color: index == 0 ? Colur.blueGradient1 : Colur.grey.withOpacity(0.7),
+          ),
         ),
       ],
     );
@@ -1010,7 +1034,8 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
 
     calories = Preference.shared.getDouble(Preference.calories) ?? 0;
     duration = Preference.shared.getInt(Preference.duration) ?? 0;
-    var time = Preference.shared.getString(Preference.END_TIME) ?? DateTime.now().toString();
+    var time = Preference.shared.getString(Preference.END_TIME) ??
+        DateTime.now().toString();
     endTime = DateTime.parse(time);
 
     if (bmi! < 15) {
@@ -1032,15 +1057,16 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
     }
   }
 
-
-  _moverWorkoutHistoryScreen(){
+  _moverWorkoutHistoryScreen() {
     if (weightController.text != "") {
       if (isKg!) {
-        if (double.parse(weightController.text) > Constant.MIN_KG && double.parse(weightController.text) < Constant.MAX_KG) {
+        if (double.parse(weightController.text) > Constant.MIN_KG &&
+            double.parse(weightController.text) < Constant.MAX_KG) {
           // saveWeightDataToGraph();
         }
       } else {
-        if (double.parse(weightController.text) > Constant.MIN_LBS && double.parse(weightController.text) < Constant.MAX_LBS) {
+        if (double.parse(weightController.text) > Constant.MIN_LBS &&
+            double.parse(weightController.text) < Constant.MAX_LBS) {
           // saveWeightDataToGraph();
         }
       }
@@ -1051,23 +1077,26 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
         context,
         MaterialPageRoute(
             builder: (context) => WorkoutHistoryScreen(
-              isFromWorkOut: true,
-            ))).then((value) => Navigator.pop(context));
+                  isFromWorkOut: true,
+                ))).then((value) => Navigator.pop(context));
   }
-  void _insertExerciseHistoryData() async{
 
+  void _insertExerciseHistoryData() async {
     int totalEx = 0;
     int planId = 0;
-    if(widget.fromPage == Constant.PAGE_HOME){
-      planId=0;
+    if (widget.fromPage == Constant.PAGE_HOME) {
+      planId = 0;
       totalEx = widget.exerciseDataList!.length;
-    }if(widget.fromPage == Constant.PAGE_DAYS_STATUS){
+    }
+    if (widget.fromPage == Constant.PAGE_DAYS_STATUS) {
       totalEx = widget.dayStatusDetailList!.length;
-      planId=0;
-      await DataBaseHelper().updateDayStatusWeekWise(widget.weekName.toString(), widget.dayName.toString());
-    }if(widget.fromPage == Constant.PAGE_DISCOVER){
+      planId = 0;
+      await DataBaseHelper().updateDayStatusWeekWise(
+          widget.weekName.toString(), widget.dayName.toString());
+    }
+    if (widget.fromPage == Constant.PAGE_DISCOVER) {
       totalEx = widget.discoverSingleExerciseData!.length;
-      planId=int.parse(widget.planId.toString());
+      planId = int.parse(widget.planId.toString());
     }
 
     await DataBaseHelper().insertHistoryData(HistoryTable(
@@ -1077,7 +1106,8 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
         tableName: widget.tableName,
         planName: widget.planName,
         dateTime: Utils.getCurrentDateWithTime(),
-        completionTime: DateFormat.jm(getLocale().languageCode).format(endTime!),
+        completionTime:
+            DateFormat.jm(getLocale().languageCode).format(endTime!),
         burnKcal: calories!.toStringAsFixed(0),
         kg: "",
         cm: "",
@@ -1085,10 +1115,13 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
         weekName: widget.weekName,
         dayName: widget.dayName,
         feelRate: iFeelValue,
-        totalWorkout: totalEx.toString()));
+        totalWorkout: _totalExerciseFromList()));
   }
 
   getDataFromDatabase() async {
+    if(widget.fromPage == Constant.PAGE_DAYS_STATUS) {
+      _getWeeklyData();
+    }
     weightDataList = await DataBaseHelper().getWeightData();
     if (weightDataList.isNotEmpty) {
       weightDataList.forEach((element) {
@@ -1102,5 +1135,31 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
       });
     }
     setState(() {});
+  }
+
+  String? _totalExerciseFromList() {
+    int totalEx = 0;
+    if (widget.fromPage == Constant.PAGE_HOME) {
+      totalEx = widget.exerciseDataList!.length;
+    }
+    if (widget.fromPage == Constant.PAGE_DAYS_STATUS) {
+      totalEx = widget.dayStatusDetailList!.length;
+    }
+    if (widget.fromPage == Constant.PAGE_DISCOVER) {
+      totalEx = widget.discoverSingleExerciseData!.length;
+    }
+    return totalEx.toString();
+  }
+
+
+  _getWeeklyData()async{
+    weeklyDataList = await DataBaseHelper().getWeekDaysData("0"+widget.weekName.toString(),widget.planName.toString());
+
+    for (int i=0; i < weeklyDataList!.length;i++) {
+      if (weeklyDataList![i].Is_completed == "1") {
+        totalCompleteDays++;
+      }
+    }
+    Debug.printLog("_getWeeklyData===>> "+weeklyDataList!.length.toString());
   }
 }

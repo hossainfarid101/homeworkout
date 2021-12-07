@@ -561,7 +561,7 @@ class DataBaseHelper {
     var dbClient = await db;
     List<FullBodyWorkoutTable> daysList = [];
     List<Map<String, dynamic>> res = await dbClient.rawQuery(
-        "Select * From $tableName where Is_completed = 1");
+        "Select * From $tableName where Is_completed = 1 Group by Day_name");
     if (res.length > 0) {
       for (var answer in res) {
         var daysData = FullBodyWorkoutTable.fromJson(answer);

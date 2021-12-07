@@ -1,4 +1,6 @@
- import 'package:flutter/material.dart';
+ import 'dart:convert';
+
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:homeworkout_flutter/database/model/DiscoverSingleExerciseData.dart';
 import 'package:homeworkout_flutter/database/model/ExerciseListData.dart';
@@ -6,6 +8,7 @@ import 'package:homeworkout_flutter/database/model/WorkoutDetailData.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
+import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -199,9 +202,8 @@ class _VideoAnimationScreenState extends State<VideoAnimationScreen>
                       .value
                       .toString();
                   return new Image.asset(
-                    'assets/images/img_exercise.webp',
+                    'assets/${_getImagePathFromList(widget.index!)}/$frame${Constant.EXERCISE_EXTENSION}',
                     gaplessPlayback: true,
-                    fit: BoxFit.fill,
                   );
                 },
               ),
@@ -247,7 +249,7 @@ class _VideoAnimationScreenState extends State<VideoAnimationScreen>
   }
 
   _getYoutubeVideo() async {
-    //await _getImageFromAssets();
+    await _getImageFromAssets(widget.index!);
 
     String? youTubeId = "";
     if(widget.fromPage == Constant.PAGE_HOME){
@@ -327,12 +329,37 @@ class _VideoAnimationScreenState extends State<VideoAnimationScreen>
         : widget.discoverSingleExerciseDataList!.length);
   }
 
-
   String _getExerciseNameFromList(){
     return ((widget.fromPage == Constant.PAGE_HOME)
         ? widget.exerciseListDataList![widget.index!].title!
         : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
         ? widget.workoutDetailList![widget.index!].title
         : widget.discoverSingleExerciseDataList![widget.index!].exName).toString();
+  }
+
+
+  String? _getImagePathFromList(int index){
+    var exPath = "";
+    if(widget.fromPage == Constant.PAGE_HOME){
+      exPath = widget.exerciseListDataList![index].image.toString();
+    }else if(widget.fromPage == Constant.PAGE_DAYS_STATUS){
+      exPath = widget.workoutDetailList![index].image.toString();
+    }else if(widget.fromPage == Constant.PAGE_DISCOVER){
+      exPath = widget.discoverSingleExerciseDataList![index].exPath.toString();
+    }
+    return exPath;
+  }
+
+  _getImageFromAssets(int index) async {
+
+    final manifestContent = await rootBundle.loadString('AssetManifest.json');
+    final Map<String, dynamic> manifestMap = json.decode(manifestContent);
+    final imagePaths = manifestMap.keys
+        .where((String key) => key.contains(_getImagePathFromList(index)!))
+        .where((String key) => key.contains(Constant.EXERCISE_EXTENSION))
+        .toList();
+    countOfImages = imagePaths.length;
+    setState(() {});
+
   }
 }

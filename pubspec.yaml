@@ -85,6 +85,23 @@ dev_dependencies:
 flutter:
   assets:
     - assets/database/HomeWorkoutFlutter.db
+    - assets/img_exercise/
+    - assets/img_exercise/CROSSOVERCRUNCH/
+    - assets/img_exercise/JUMPINGJACKS/
+    - assets/img_exercise/PUSHUPROTATION/
+    - assets/img_exercise/RUSSIANTWIST/
+    - assets/img_exercise/SIDEBRIDGESLEFT/
+    - assets/img_exercise/SIDEBRIDGESRIGHT/
+    - assets/img_exercise/SIDEPLANKLEFT/
+    - assets/img_exercise/SIDEPLANKRIGHT/
+    - assets/img_exercise/SITUPS/
+    - assets/img_exercise/SPINELUMBARTWISTSTRETCHLEFT/
+    - assets/img_exercise/SPINELUMBARTWISTSTRETCHRIGHT/
+    - assets/img_exercise/VUP/
+    - assets/img_exercise/CHESTSTRETCH/
+    - assets/img_exercise/KNEEPUSHUPS/
+    - assets/img_exercise/PUSHUPS/
+    - assets/img_exercise/WIDEARMPUSHUPS/
     - assets/icons/
     - assets/icons/ic_select_pointer.webp
     - assets/icons/ic_challenge_complete_day.png

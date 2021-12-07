@@ -82,6 +82,7 @@ class Constant {
 
   static const PREF_RANDOM_DISCOVER_PLAN = "PREF_RANDOM_DISCOVER_PLAN";
   static const PREF_RANDOM_DISCOVER_PLAN_DATE = "PREF_RANDOM_DISCOVER_PLAN_DATE";
+  static const EXERCISE_EXTENSION = ".png";
 
 /*  static const minKG = 20.00;
   static const maxKG = 997.00;

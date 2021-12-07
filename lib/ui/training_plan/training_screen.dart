@@ -846,27 +846,40 @@ class _TrainingScreenState extends State<TrainingScreen>
 
 
   Future<int?> _setDayProgressDataByPlan(String strTableName) async {
-    List<FullBodyWorkoutTable> compDay =
-    await DataBaseHelper().getCompleteDayCountByTableName(strTableName);
-    String proPercentage =
-    (compDay.length.toDouble() * 100 / 30).toDouble().toStringAsFixed(0);
-    progress = proPercentage + "%";
-    return double.parse(proPercentage).toInt();
+    if(strTableName == Constant.tbl_full_body_workouts_list || strTableName == Constant.tbl_lower_body_list) {
+      List<FullBodyWorkoutTable> compDay =
+      await DataBaseHelper().getCompleteDayCountByTableName(strTableName);
+      String proPercentage =
+      (compDay.length.toDouble() * 100 / 30).toDouble().toStringAsFixed(0);
+      progress = proPercentage + "%";
+      return double.parse(proPercentage).toInt();
+    }else{
+      return 0;
+    }
   }
 
   Future<String?> _setLeftDayProgressDataByPlan(String strTableName) async {
-    List<FullBodyWorkoutTable> compDay =
-    await DataBaseHelper().getCompleteDayCountByTableName(strTableName);
-    String daysLeft = (30 - compDay.length).toString();
-    return daysLeft + " " + Languages.of(context)!.txtDayLeft;
+    if(strTableName == Constant.tbl_full_body_workouts_list || strTableName == Constant.tbl_lower_body_list) {
+      List<FullBodyWorkoutTable> compDay =
+      await DataBaseHelper().getCompleteDayCountByTableName(strTableName);
+      String daysLeft = (30 - compDay.length).toString();
+      return daysLeft + " " + Languages.of(context)!.txtDayLeft;
+    }else{
+      return "";
+    }
   }
 
   Future<String?> _setDayProgressPercentagePlan(String strTableName) async {
-    List<FullBodyWorkoutTable> compDay =
-    await DataBaseHelper().getCompleteDayCountByTableName(strTableName);
-    String proPercentage =
-    (compDay.length.toDouble() * 100 / 30).toDouble().toStringAsFixed(0);
-    return proPercentage + "%";
+    if (strTableName == Constant.tbl_full_body_workouts_list ||
+        strTableName == Constant.tbl_lower_body_list) {
+      List<FullBodyWorkoutTable> compDay =
+          await DataBaseHelper().getCompleteDayCountByTableName(strTableName);
+      String proPercentage =
+          (compDay.length.toDouble() * 100 / 30).toDouble().toStringAsFixed(0);
+      return proPercentage + "%";
+    } else {
+      return "";
+    }
   }
 }
 
