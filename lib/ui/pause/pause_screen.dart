@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -33,8 +35,19 @@ class PauseScreen extends StatefulWidget {
   _PauseScreenState createState() => _PauseScreenState();
 }
 
-class _PauseScreenState extends State<PauseScreen>
+class _PauseScreenState extends State<PauseScreen>  with TickerProviderStateMixin
     implements TopBarClickListener {
+
+
+  Animation<int>? listLifeGuideAnimation ;
+  AnimationController? listLifeGuideController ;
+  int countOfImages = 0;
+
+  @override
+  void initState() {
+    _setImageRotation(widget.index!);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -201,11 +214,33 @@ class _PauseScreenState extends State<PauseScreen>
           ),
           ClipRRect(
             borderRadius: BorderRadius.all(Radius.circular(10)),
-            child: Image.asset(
+           /* child: Image.asset(
               'assets/images/img_exercise.webp',
               height: 100,
               width: 100,
               fit: BoxFit.fill,
+            ),*/
+            child: (listLifeGuideAnimation != null)
+                ? Container(
+              color: Colur.theme_trans,
+              width: 100.0,
+              height: 100.0,
+              child: AnimatedBuilder(
+                animation: listLifeGuideAnimation!,
+                builder: (BuildContext context, Widget? child) {
+                  String frame = listLifeGuideAnimation!.value.toString();
+                  return new Image.asset(
+                    'assets/${_getExercisePathFromList()}/$frame${Constant.EXERCISE_EXTENSION}',
+                    gaplessPlayback: true,
+                    fit: BoxFit.cover,
+                  );
+                },
+              ),
+            )
+                : Container(
+              color: Colur.theme_trans,
+              width: 100.0,
+              height: 100.0,
             ),
           ),
         ],
@@ -252,5 +287,58 @@ class _PauseScreenState extends State<PauseScreen>
         : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
         ? widget.workoutDetailList![widget.index!].title
         : widget.discoverSingleExerciseDataList![widget.index!].exName).toString();
+  }
+
+  String _getExercisePathFromList() {
+    return ((widget.fromPage == Constant.PAGE_HOME)
+        ? widget.exerciseListDataList![widget.index!].image!
+        : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
+        ? widget.workoutDetailList![widget.index!].image
+        : widget.discoverSingleExerciseDataList![widget.index!].exPath)
+        .toString();
+  }
+
+  _setImageRotation(int pos) async {
+    await _getImageFromAssets(pos);
+
+    int duration = 0;
+    if (countOfImages > 2 && countOfImages <= 4) {
+      duration = 3000;
+    } else if (countOfImages > 4 && countOfImages <= 6) {
+      duration = 4500;
+    } else if (countOfImages > 6 && countOfImages <= 8) {
+      duration = 6000;
+    } else if (countOfImages > 8 && countOfImages <= 10) {
+      duration = 8500;
+    } else if (countOfImages > 10 && countOfImages <= 12) {
+      duration = 9000;
+    } else if (countOfImages > 12 && countOfImages <= 14) {
+      duration = 14000;
+    } else {
+      duration = 1500;
+    }
+
+    listLifeGuideController = AnimationController(
+        vsync: this, duration: Duration(milliseconds: duration))
+      ..repeat();
+
+    listLifeGuideAnimation = new IntTween(begin: 1, end: countOfImages)
+        .animate(listLifeGuideController!);
+    setState(() {});
+  }
+
+  _getImageFromAssets(int index) async {
+    final manifestContent = await rootBundle.loadString('AssetManifest.json');
+
+    final Map<String, dynamic> manifestMap = json.decode(manifestContent);
+
+    final imagePaths = manifestMap.keys
+        .where((String key) => key
+        .contains(_getExercisePathFromList().toString()))
+        .where((String key) => key.contains(Constant.EXERCISE_EXTENSION))
+        .toList();
+
+    countOfImages = imagePaths.length;
+
   }
 }

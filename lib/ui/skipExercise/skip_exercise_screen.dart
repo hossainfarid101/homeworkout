@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -81,7 +82,7 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
     }else if(widget.fromPage == Constant.PAGE_DISCOVER){
       lastPosition = Preference.shared.getLastUnCompletedExPos(widget.planName.toString());
     }
-    // _setImageRotation(lastPosition!);
+    _setImageRotation(lastPosition!);
     Future.delayed(Duration(milliseconds: 100), () {
    /*   String sec = widget.exerciseDataList![lastPosition!].timeType! == "time"
           ? Languages.of(context)!.txtSeconds
@@ -133,7 +134,7 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
 
   @override
   void dispose() {
-    // listLifeGuideController!.dispose();
+    listLifeGuideController!.dispose();
     _timer!.cancel();
     super.dispose();
   }
@@ -288,7 +289,7 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
 
   _widgetBottomExe() {
     return Container(
-      color: Colur.white,
+      color: Colur.bg_white,
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 15.0),
         child: Row(
@@ -320,16 +321,14 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
                   ),
                   Container(
                     margin: const EdgeInsets.only(top: 10.0, bottom: 10,right: 5),
-                    child: Expanded(
-                      child: Text(
-                        (_getExerciseNameFromList()),
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            fontSize: 18.0,
-                            color: Colur.black,
-                            fontWeight: FontWeight.w600),
+                    child: Text(
+                      (_getExerciseNameFromList()),
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontSize: 18.0,
+                          color: Colur.black,
+                          fontWeight: FontWeight.w600),
 
-                      ),
                     ),
                   ),
                   Container(
@@ -344,7 +343,7 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
                 ],
               ),
             ),
-            Container(
+            /*Container(
               color: Colur.theme_trans,
               width: 70.0,
               height: 70.0,
@@ -353,7 +352,30 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
                 gaplessPlayback: true,
                 fit: BoxFit.cover,
               ),
-            ),
+            ),*/
+
+            (listLifeGuideAnimation != null)
+                ? Container(
+                    color: Colur.theme_trans,
+                    width: 70.0,
+                    height: 70.0,
+                    child: AnimatedBuilder(
+                      animation: listLifeGuideAnimation!,
+                      builder: (BuildContext context, Widget? child) {
+                        String frame = listLifeGuideAnimation!.value.toString();
+                        return new Image.asset(
+                          'assets/${_getExercisePathFromList()}/$frame${Constant.EXERCISE_EXTENSION}',
+                          gaplessPlayback: true,
+                          fit: BoxFit.cover,
+                        );
+                      },
+                    ),
+                  )
+                : Container(
+                    color: Colur.theme_trans,
+                    width: 70.0,
+                    height: 70.0,
+                  ),
           ],
         ),
       ),
@@ -415,5 +437,57 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
         : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
         ? widget.dayStatusDetailList![lastPosition!].title
         : widget.discoverSingleExerciseData![lastPosition!].exName).toString();
+  }
+
+  String _getExercisePathFromList(){
+    return ((widget.fromPage == Constant.PAGE_HOME)
+        ? widget.exerciseDataList![lastPosition!].image!
+        : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
+        ? widget.dayStatusDetailList![lastPosition!].image
+        : widget.discoverSingleExerciseData![lastPosition!].exPath).toString();
+  }
+
+  _setImageRotation(int pos) async {
+    await _getImageFromAssets(pos);
+
+    int duration = 0;
+    if (countOfImages > 2 && countOfImages <= 4) {
+      duration = 3000;
+    } else if (countOfImages > 4 && countOfImages <= 6) {
+      duration = 4500;
+    } else if (countOfImages > 6 && countOfImages <= 8) {
+      duration = 6000;
+    } else if (countOfImages > 8 && countOfImages <= 10) {
+      duration = 8500;
+    } else if (countOfImages > 10 && countOfImages <= 12) {
+      duration = 9000;
+    } else if (countOfImages > 12 && countOfImages <= 14) {
+      duration = 14000;
+    } else {
+      duration = 1500;
+    }
+
+    listLifeGuideController = AnimationController(
+        vsync: this, duration: Duration(milliseconds: duration))
+      ..repeat();
+
+    listLifeGuideAnimation = new IntTween(begin: 1, end: countOfImages)
+        .animate(listLifeGuideController!);
+    setState(() {});
+  }
+
+  _getImageFromAssets(int index) async {
+    final manifestContent = await rootBundle.loadString('AssetManifest.json');
+
+    final Map<String, dynamic> manifestMap = json.decode(manifestContent);
+
+    final imagePaths = manifestMap.keys
+        .where((String key) => key
+        .contains(_getExercisePathFromList().toString()))
+        .where((String key) => key.contains(Constant.EXERCISE_EXTENSION))
+        .toList();
+
+    countOfImages = imagePaths.length;
+
   }
 }

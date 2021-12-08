@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:date_format/date_format.dart';
@@ -65,9 +66,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
   final timerFinishedAudio2 = "sounds/whistle.wav";
 
   Animation<int>? listLifeGuideAnimation;
-
   AnimationController? listLifeGuideController;
-
   int countOfImages = 0;
 
   int? durationOfExercise;
@@ -100,7 +99,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
     if (controller != null) {
       controller!.dispose();
     }
-    // listLifeGuideController!.dispose();
+    listLifeGuideController!.dispose();
     super.dispose();
 
   }
@@ -134,18 +133,11 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
       lastPosition = Preference.shared.getLastUnCompletedExPos(widget.planName.toString());
     }
 
-    // _setImageRotation(lastPosition!);
+    _setImageRotation(lastPosition!);
+
     Future.delayed(Duration(milliseconds: 100), () {
       if (isCountDownStart) {
         if (!isMute! && isVoiceGuide!) {
-          /*String title = "";
-          if(widget.fromPage == Constant.PAGE_HOME){
-            title = widget.exerciseDataList![lastPosition!].title.toString();
-          }else if(widget.fromPage == Constant.PAGE_DAYS_STATUS){
-            title = widget.dayStatusDetailList![lastPosition!].title.toString();
-          }else if(widget.fromPage == Constant.PAGE_DISCOVER){
-            title = widget.discoverSingleExerciseData![lastPosition!].exName.toString();
-          }*/
           Utils.textToSpeech(Languages.of(context)!.txtReadyToGo + " " + _getExerciseNameFromList().toString(), flutterTts);
         }
       }
@@ -267,7 +259,6 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
         {
           _setLastFinishExe(lastPosition! + 1),
           _startWellDoneScreen(),
-          controller!.stop(),
         }
       else
         {
@@ -451,24 +442,33 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
   _widgetExeImage() {
     return Stack(
       children: [
-        /*listLifeGuideAnimation != null
+        listLifeGuideAnimation != null
             ? Container(
           color: Colur.theme_trans,
           width: double.infinity,
+          height: MediaQuery
+              .of(context)
+              .size
+              .height * 0.5,
           child: AnimatedBuilder(
             animation: listLifeGuideAnimation!,
             builder: (BuildContext context, Widget? child) {
               String frame = listLifeGuideAnimation!.value.toString();
               return new Image.asset(
-                'assets/${widget.listOfDayWiseExercise![lastPosition!].exPath}/$frame.webp',
+                'assets/${_getExercisePathFromList()}/$frame${Constant
+                    .EXERCISE_EXTENSION}',
                 gaplessPlayback: true,
                 fit: BoxFit.cover,
               );
             },
           ),
-        )
-            : */
-        Container(
+        ) : Container(
+                color: Colur.theme_trans,
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height * 0.5,
+              ),
+
+        /*Container(
           height: MediaQuery.of(context).size.height * 0.5,
           color: Colur.theme_trans,
           width: double.infinity,
@@ -476,7 +476,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
             "assets/images/img_exercise.webp",
             fit: BoxFit.fill,
           ),
-        ),
+        ),*/
         Container(
           margin:
           const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
@@ -1395,5 +1395,57 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
         : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
         ? widget.dayStatusDetailList![lastPosition!].title
         : widget.discoverSingleExerciseData![lastPosition!].exName).toString();
+  }
+
+  String _getExercisePathFromList(){
+    return ((widget.fromPage == Constant.PAGE_HOME)
+        ? widget.exerciseDataList![lastPosition!].image!
+        : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
+        ? widget.dayStatusDetailList![lastPosition!].image
+        : widget.discoverSingleExerciseData![lastPosition!].exPath).toString();
+  }
+
+  _setImageRotation(int pos) async {
+    await _getImageFromAssets(pos);
+
+    int duration = 0;
+    if (countOfImages > 2 && countOfImages <= 4) {
+      duration = 3000;
+    } else if (countOfImages > 4 && countOfImages <= 6) {
+      duration = 4500;
+    } else if (countOfImages > 6 && countOfImages <= 8) {
+      duration = 6000;
+    } else if (countOfImages > 8 && countOfImages <= 10) {
+      duration = 8500;
+    } else if (countOfImages > 10 && countOfImages <= 12) {
+      duration = 9000;
+    } else if (countOfImages > 12 && countOfImages <= 14) {
+      duration = 14000;
+    } else {
+      duration = 1500;
+    }
+
+    listLifeGuideController = AnimationController(
+        vsync: this, duration: Duration(milliseconds: duration))
+      ..repeat();
+
+    listLifeGuideAnimation = new IntTween(begin: 1, end: countOfImages)
+        .animate(listLifeGuideController!);
+    setState(() {});
+  }
+
+  _getImageFromAssets(int index) async {
+    final manifestContent = await rootBundle.loadString('AssetManifest.json');
+
+    final Map<String, dynamic> manifestMap = json.decode(manifestContent);
+
+    final imagePaths = manifestMap.keys
+        .where((String key) => key
+        .contains(_getExercisePathFromList().toString()))
+        .where((String key) => key.contains(Constant.EXERCISE_EXTENSION))
+        .toList();
+
+    countOfImages = imagePaths.length;
+
   }
 }

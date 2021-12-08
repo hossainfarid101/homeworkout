@@ -393,7 +393,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> with TickerProv
 
                 (listOfImagesCount.isEmpty)
                     ? Container(
-                        height: MediaQuery.of(context).size.height*0.2,
+                        height: MediaQuery.of(context).size.height*0.1,
                         width: MediaQuery.of(context).size.height*0.1,
                         margin: const EdgeInsets.all(10),
                         child: Image.asset(
