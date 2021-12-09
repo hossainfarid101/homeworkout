@@ -454,7 +454,7 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                                               BorderRadius.circular(5.0),
                                         ),
                                   child: Text(
-                                    Languages.of(context)!.txtCm.toUpperCase(),
+                                    Languages.of(context)!.txtCM.toUpperCase(),
                                     style: TextStyle(
                                         color: (isCm!)
                                             ? Colur.white

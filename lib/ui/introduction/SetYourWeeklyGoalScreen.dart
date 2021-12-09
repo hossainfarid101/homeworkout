@@ -27,13 +27,30 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourWeeklyGoalScreen> {
   List<Widget> _pickerDataFirstDayWeek = [];
   String? selectFirstDayOfWeek = "";
   List<int>? initialFirstDay = [];
+  String? selectTrainingDays = "";
 
   @override
   void initState() {
+    selectTrainingDays = Preference.shared.getString(Preference.SELECTED_TRAINING_DAY) ?? "4";
     selectFirstDayOfWeek =
         Preference.shared.getString(Preference.PREF_FIRST_DAY) ?? "Sunday";
 
-    super.initState();
+    if(selectTrainingDays == "1") {
+      selectedOne = true;
+    } else if(selectTrainingDays == "2") {
+      selectedTwo = true;
+    } else if(selectTrainingDays == "3") {
+      selectedThree = true;
+    } else if(selectTrainingDays == "4") {
+      selectedFour = true;
+    } else if(selectTrainingDays == "5") {
+      selectedFive = true;
+    } else if(selectTrainingDays == "6") {
+      selectedSix = true;
+    } else {
+      selectedSeven = true;
+    }
+   super.initState();
   }
 
   @override
@@ -101,6 +118,7 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourWeeklyGoalScreen> {
                             selectedSix = false;
                             selectedSeven = false;
                           });
+                          Preference.shared.setString(Preference.SELECTED_TRAINING_DAY, "1");
                         },
                         child: _itemWeeklyTrainingDays(
                             isSelected: selectedOne, day: 1.toString()),
@@ -120,6 +138,7 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourWeeklyGoalScreen> {
                             selectedSix = false;
                             selectedSeven = false;
                           });
+                          Preference.shared.setString(Preference.SELECTED_TRAINING_DAY, "2");
                         },
                         child: _itemWeeklyTrainingDays(
                             isSelected: selectedTwo, day: 2.toString()),
@@ -139,6 +158,7 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourWeeklyGoalScreen> {
                             selectedSix = false;
                             selectedSeven = false;
                           });
+                          Preference.shared.setString(Preference.SELECTED_TRAINING_DAY, "3");
                         },
                         child: _itemWeeklyTrainingDays(
                             isSelected: selectedThree, day: 3.toString()),
@@ -162,6 +182,7 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourWeeklyGoalScreen> {
                             selectedSix = false;
                             selectedSeven = false;
                           });
+                          Preference.shared.setString(Preference.SELECTED_TRAINING_DAY, "4");
                         },
                         child: _itemWeeklyTrainingDays(
                             isSelected: selectedFour, day: 4.toString()),
@@ -181,6 +202,7 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourWeeklyGoalScreen> {
                             selectedSix = false;
                             selectedSeven = false;
                           });
+                          Preference.shared.setString(Preference.SELECTED_TRAINING_DAY, "5");
                         },
                         child: _itemWeeklyTrainingDays(
                             isSelected: selectedFive, day: 5.toString()),
@@ -200,6 +222,7 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourWeeklyGoalScreen> {
                             selectedSix = true;
                             selectedSeven = false;
                           });
+                          Preference.shared.setString(Preference.SELECTED_TRAINING_DAY, "6");
                         },
                         child: _itemWeeklyTrainingDays(
                             isSelected: selectedSix, day: 6.toString()),
@@ -226,6 +249,7 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourWeeklyGoalScreen> {
                             selectedSix = false;
                             selectedSeven = true;
                           });
+                          Preference.shared.setString(Preference.SELECTED_TRAINING_DAY, "7");
                         },
                         child: _itemWeeklyTrainingDays(
                             isSelected: selectedSeven, day: 7.toString()),
@@ -383,6 +407,8 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourWeeklyGoalScreen> {
           setState(() {
             for (int i = 0; i < value.length; i++) {
               selectFirstDayOfWeek = picker.getSelectedValues()[i];
+              Preference.shared.setString(Preference.PREF_FIRST_DAY, selectFirstDayOfWeek!);
+
 
               print(value[i].toString());
               print(picker.getSelectedValues()[i]);

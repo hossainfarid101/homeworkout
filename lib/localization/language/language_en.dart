@@ -241,7 +241,7 @@ class LanguageEn extends Languages {
   String get txtHeight => "Height";
 
   @override
-  String get txtCM => "Cm";
+  String get txtCM => "cm";
 
   @override
   String get txtHeightUnit => "Height unit";
@@ -323,9 +323,6 @@ class LanguageEn extends Languages {
 
   @override
   String get txtheight => "Height";
-
-  @override
-  String get txtCm => "Cm";
 
   @override
   String get txtIn => "In";
@@ -622,4 +619,7 @@ class LanguageEn extends Languages {
 
   @override
   String get txtInstruction => "Instruction";
+
+  @override
+  String get txtFT => "ft.in";
 }

@@ -3,7 +3,9 @@ import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 
 class YourActivityLevelScreen extends StatefulWidget {
-  const YourActivityLevelScreen({Key? key}) : super(key: key);
+  String? prefActivityLevel;
+  Function onValueChange;
+  YourActivityLevelScreen(this.prefActivityLevel, this.onValueChange);
 
   @override
   _YourActivityLevelScreenState createState() =>
@@ -28,6 +30,7 @@ class _YourActivityLevelScreenState extends State<YourActivityLevelScreen> {
       shrinkWrap: true,
       itemCount: yourActivityLevelList.length,
       itemBuilder: (context, int index) {
+
         return _itemYourActivityLevel(index);
       },
     );
@@ -38,10 +41,18 @@ class _YourActivityLevelScreenState extends State<YourActivityLevelScreen> {
       splashColor: Colur.transparent,
       highlightColor: Colors.transparent,
       onTap: () {
-        setState(() {
-          yourActivityLevelList[index].isSelected =
-              !yourActivityLevelList[index].isSelected;
-        });
+        for(int i = 0; i < yourActivityLevelList.length; i++) {
+          if( i == index){
+            setState(() {
+              yourActivityLevelList[index].isSelected = true;
+            });
+          }else {
+            setState(() {
+              yourActivityLevelList[i].isSelected = false;
+            });
+          }
+        }
+        widget.onValueChange(yourActivityLevelList[index].exName);
       },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
@@ -161,6 +172,13 @@ class _YourActivityLevelScreenState extends State<YourActivityLevelScreen> {
           exName: Languages.of(context)!.txtVeryActive,
           description: Languages.of(context)!.txtDesVeryActive),
     ];
+    yourActivityLevelList.forEach((element) {
+      if(element.exName == widget.prefActivityLevel) {
+        setState(() {
+          element.isSelected = true;
+        });
+      }
+    });
     setState(() {});
   }
 }

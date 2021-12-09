@@ -6,6 +6,10 @@ import 'package:intl/intl.dart';
 class Constant {
 
   static const SELECTED_YOUR_FOCUS_AREA = "SELECTED_YOUR_FOCUS_AREA";
+  static const SELECTED_MAIN_GOALS = "SELECTED_MAIN_GOALS";
+  static const SELECTED_MOTIVATES_YOU = "SELECTED_MOTIVATES_YOU";
+  static const SELECTED_HOW_MANY_PUSH_UPS = "SELECTED_HOW_MANY_PUSH_UPS";
+  static const SELECTED_ACTIVITY_LEVEL = "SELECTED_ACTIVITY_LEVEL";
 
   static const SELECTED_GENDER = "SELECTED_GENDER";
   static const GENDER_MEN = "men";

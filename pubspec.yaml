@@ -67,6 +67,7 @@ dependencies:
   lottie: ^1.2.1
   syncfusion_flutter_gauges: ^19.3.56
   percent_indicator: ^3.4.0
+  numberpicker: ^2.1.1
 
 dev_dependencies:
   flutter_test:
@@ -302,7 +303,7 @@ flutter:
     - assets/img_exercise/SIDEPLANKRIGHT/
     - assets/img_exercise/SIDETOSIDETILTS/
     - assets/img_exercise/SIDETOSIDETURNS/
-    - assets/img_exercise/SINGLELEGCALFHOP RIGHT/
+    - assets/img_exercise/SINGLELEGCALFHOPRIGHT/
     - assets/img_exercise/SINGLELEGCALFHOPLEFT/
     - assets/img_exercise/SINGLELEGDEADLIFTLEFT/
     - assets/img_exercise/SINGLELEGDEADLIFTRIGHT/

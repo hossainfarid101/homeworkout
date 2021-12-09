@@ -8,7 +8,9 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class GeneratingThePlanScreen extends StatefulWidget {
-  const GeneratingThePlanScreen({Key? key}) : super(key: key);
+  bool? isPlanReady;
+  Function onValueChanged;
+  GeneratingThePlanScreen(this.isPlanReady, this.onValueChanged);
 
   @override
   _GeneratingThePlanScreenState createState() => _GeneratingThePlanScreenState();
@@ -18,7 +20,7 @@ class _GeneratingThePlanScreenState extends State<GeneratingThePlanScreen> with 
 
   Timer? periodicTimer;
   double? percent = 0.0;
-  bool? isPlanReady = false;
+
 
   @override
   void initState() {
@@ -30,7 +32,7 @@ class _GeneratingThePlanScreenState extends State<GeneratingThePlanScreen> with 
             percent = (timer.tick)/5;
           }
           if(timer.tick == 6) {
-            isPlanReady = true;
+            widget.onValueChanged(true);
           }
 
         });
@@ -49,7 +51,7 @@ class _GeneratingThePlanScreenState extends State<GeneratingThePlanScreen> with 
 
   @override
   Widget build(BuildContext context) {
-    return isPlanReady == false ? Center(
+    return widget.isPlanReady == false ? Center(
       child: CircularPercentIndicator(
         backgroundColor: Colur.track_gray,
         radius: 245,

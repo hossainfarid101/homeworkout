@@ -22,8 +22,8 @@ class _SetWeeklyGoalScreenState extends State<SetWeeklyGoalScreen> {
   List<Widget> _pickerDataTrainingDay = [];
   List<Widget> _pickerDataFirstDayWeek = [];
 
-  String? selectTrainingDays = "";
-  String? selectFirstDayOfWeek = "";
+  String? selectTrainingDays;
+  String? selectFirstDayOfWeek;
 
   List<int>? initialTrainingDays = [];
   List<int>? initialFirstDay = [];

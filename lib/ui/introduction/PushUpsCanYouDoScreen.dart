@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
+import 'package:homeworkout_flutter/utils/constant.dart';
+import 'package:homeworkout_flutter/utils/debug.dart';
+import 'package:homeworkout_flutter/utils/preference.dart';
 
 class PushUpsCanYouDoScreen extends StatefulWidget {
-  const PushUpsCanYouDoScreen({Key? key}) : super(key: key);
+  String? prefHowManyPushUps;
+  Function onValueChange;
+  PushUpsCanYouDoScreen(this.prefHowManyPushUps, this.onValueChange);
 
   @override
   _PushUpsCanYouDoScreenState createState() => _PushUpsCanYouDoScreenState();
@@ -37,9 +42,22 @@ class _PushUpsCanYouDoScreenState extends State<PushUpsCanYouDoScreen> {
       splashColor: Colur.transparent,
       highlightColor: Colors.transparent,
       onTap: () {
-        setState(() {
-          pushUpsList[index].isSelected = !pushUpsList[index].isSelected;
-        });
+        for(int i = 0; i < pushUpsList.length; i++) {
+          if( i == index){
+            setState(() {
+              pushUpsList[index].isSelected = true;
+            });
+          }else {
+            setState(() {
+              pushUpsList[i].isSelected = false;
+            });
+          }
+        }
+        widget.onValueChange(pushUpsList[index].exName);
+       /* setState(() {
+          widget.prefHowManyPushUps = pushUpsList[index].exName;
+          Debug.printLog(widget.prefHowManyPushUps!);
+        });*/
       },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
@@ -142,6 +160,14 @@ class _PushUpsCanYouDoScreenState extends State<PushUpsCanYouDoScreen> {
           exName: Languages.of(context)!.txtAdvance,
           description: Languages.of(context)!.txtAtLeast10),
     ];
+    Debug.printLog("${widget.prefHowManyPushUps}");
+    pushUpsList.forEach((element) {
+      if(element.exName == widget.prefHowManyPushUps) {
+        setState(() {
+          element.isSelected = true;
+        });
+      }
+    });
     setState(() {});
   }
 }

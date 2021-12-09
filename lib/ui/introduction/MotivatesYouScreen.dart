@@ -3,7 +3,8 @@ import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 
 class MotivatesYouScreen extends StatefulWidget {
-  const MotivatesYouScreen({Key? key}) : super(key: key);
+  final List<dynamic>? prefMotivatesYouMostList;
+  const MotivatesYouScreen(this.prefMotivatesYouMostList);
 
   @override
   _MotivatesYouScreenState createState() => _MotivatesYouScreenState();
@@ -27,6 +28,11 @@ class _MotivatesYouScreenState extends State<MotivatesYouScreen> {
       shrinkWrap: true,
       itemCount: motivatesList.length,
       itemBuilder: (context, int index) {
+        for (int i = 0; i < widget.prefMotivatesYouMostList!.length; i++) {
+          motivatesList[
+          int.parse(widget.prefMotivatesYouMostList![i].toString())]
+              .isSelected = true;
+        }
         return _itemMotivates(index);
       },
     );
@@ -40,6 +46,12 @@ class _MotivatesYouScreenState extends State<MotivatesYouScreen> {
         setState(() {
           motivatesList[index].isSelected = !motivatesList[index].isSelected;
         });
+
+        if (motivatesList[index].isSelected) {
+          widget.prefMotivatesYouMostList!.add(index);
+        } else {
+          widget.prefMotivatesYouMostList!.remove(index);
+        }
       },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),

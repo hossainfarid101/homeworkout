@@ -3,8 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
+import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
+import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 
 import 'ChooseYourFocusAreaScreen.dart';
@@ -34,17 +36,36 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
   int currentPageIndex = 0;
 
   List<dynamic> prefChooseYourFocusAreaList = [];
+  List<dynamic> prefMainGoalsList =[];
+  List<dynamic> prefMotivatesYouMostList = [];
+  String? prefHowManyPushUps;
+  String?  prefActivityLevel;
+  bool? isPlanReady = false;
 
   @override
   void initState() {
-    updateValue = 0.1;
+    updateValue = 0.1111111111;
     _getPrefData();
     super.initState();
   }
 
   _getPrefData() {
     prefChooseYourFocusAreaList.clear();
-    prefChooseYourFocusAreaList = json.decode(Preference.shared.getString(Constant.SELECTED_YOUR_FOCUS_AREA)!);
+    var prefChooseYourFocusAreaValue = Preference.shared.getString(Constant.SELECTED_YOUR_FOCUS_AREA) ?? [].toString();
+    prefChooseYourFocusAreaList = json.decode(prefChooseYourFocusAreaValue);
+
+    prefMainGoalsList.clear();
+    var prefMainGoalsValue = Preference.shared.getString(Constant.SELECTED_MAIN_GOALS) ?? [].toString();
+    prefMainGoalsList = json.decode(prefMainGoalsValue);
+
+    prefMotivatesYouMostList.clear();
+    var prefMotivatesYouMostValue = Preference.shared.getString(Constant.SELECTED_MOTIVATES_YOU) ?? [].toString();
+    prefMotivatesYouMostList = json.decode(prefMotivatesYouMostValue);
+
+     prefActivityLevel = Preference.shared.getString(Constant.SELECTED_ACTIVITY_LEVEL) ?? "Sedentary";
+
+
+    prefHowManyPushUps = Preference.shared.getString(Constant.SELECTED_HOW_MANY_PUSH_UPS) ?? "Beginner";
   }
 
   @override
@@ -154,13 +175,22 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                   children: <Widget>[
                     GenderSelectionScreen(),
                     ChooseYourFocusAreaScreen(prefChooseYourFocusAreaList),
-                    MainGoalsScreen(),
-                    MotivatesYouScreen(),
-                    PushUpsCanYouDoScreen(),
-                    YourActivityLevelScreen(),
+                    MainGoalsScreen(prefMainGoalsList),
+                    MotivatesYouScreen(prefMotivatesYouMostList),
+                    PushUpsCanYouDoScreen(prefHowManyPushUps,(value){
+                      prefHowManyPushUps = value;
+                      setState(() { });
+                    }),
+                    YourActivityLevelScreen(prefActivityLevel, (value){
+                      prefActivityLevel = value;
+                      setState(() { });
+                    }),
                     SetYourWeeklyGoalScreen(),
                     WeightHeightSelectionScreen(),
-                    GeneratingThePlanScreen(),
+                    GeneratingThePlanScreen(isPlanReady, (value) {
+                      isPlanReady = value;
+                      setState(() { });
+                    }),
                   ],
                 ),
               ),
@@ -177,7 +207,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
       children: [
         Row(
           children: [
-            if (currentPageIndex != 0) ...{
+            if (currentPageIndex != 0 && currentPageIndex != 8) ...{
               InkWell(
                 onTap: () {
                   pageController.previousPage(
@@ -185,7 +215,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                     curve: Curves.easeInOut,
                   );
                   setState(() {
-                    updateValue = updateValue! - 0.1;
+                    updateValue = updateValue! - 0.1111111111;
                   });
                 },
                 child: Padding(
@@ -199,7 +229,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
               ),
             },
             Expanded(child: Container()),
-            if (currentPageIndex != 9) ...{
+            if (currentPageIndex != 8) ...{
               InkWell(
                 onTap: () {
                   Navigator.pushNamedAndRemoveUntil(
@@ -273,61 +303,80 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
   }
 
   _nextButton() {
-    return InkWell(
-      onTap: () {
-        pageController.nextPage(
-          duration: const Duration(milliseconds: 200),
-          curve: Curves.easeInOut,
-        );
-        setState(() {
-          updateValue = updateValue! + 0.1;
-        });
+    return Visibility(
+      visible: currentPageIndex == 8 ? isPlanReady! : true,
+      child: InkWell(
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        onTap: () {
+          pageController.nextPage(
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeInOut,
+          );
+          setState(() {
+            updateValue = updateValue! + 0.1111111111;
+          });
 
-        if (currentPageIndex == 1) {
-          Preference.shared.setString(Constant.SELECTED_YOUR_FOCUS_AREA,
-              json.encode(prefChooseYourFocusAreaList));
-        }
-      },
-      child: Container(
-        width: double.infinity,
-        alignment: Alignment.center,
-        margin: const EdgeInsets.symmetric(horizontal: 60.0, vertical: 30.0),
-        padding: const EdgeInsets.symmetric(vertical: 18.0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(100.0),
-          gradient: LinearGradient(
-              colors: [
-                Colur.blueGradient1,
-                Colur.blueGradient2,
-              ],
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              stops: [0.0, 1.0],
-              tileMode: TileMode.clamp),
-        ),
-        child: Stack(
+          if (currentPageIndex == 1) {
+            Preference.shared.setString(Constant.SELECTED_YOUR_FOCUS_AREA,
+                json.encode(prefChooseYourFocusAreaList));
+          } else if (currentPageIndex == 2) {
+            Preference.shared.setString(Constant.SELECTED_MAIN_GOALS,
+                json.encode(prefMainGoalsList));
+          }else if (currentPageIndex == 3) {
+            Preference.shared.setString(Constant.SELECTED_MOTIVATES_YOU,
+                json.encode(prefMotivatesYouMostList));
+          }else if (currentPageIndex == 4) {
+            Debug.printLog(prefHowManyPushUps!);
+            Preference.shared.setString(Constant.SELECTED_HOW_MANY_PUSH_UPS, prefHowManyPushUps!);
+          }else if (currentPageIndex == 5) {
+            Preference.shared.setString(Constant.SELECTED_ACTIVITY_LEVEL, prefActivityLevel!);
+          } else if (currentPageIndex == 8) {
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TrainingScreen()), (route) => false);
+          }
+        },
+        child: Container(
+          width: double.infinity,
           alignment: Alignment.center,
-          children: [
-            Text(
-              Languages.of(context)!.txtNext.toUpperCase(),
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 20,
-                  color: Colur.white),
-            ),
-            Container(
-              alignment: Alignment.centerRight,
-              margin: const EdgeInsets.only(right: 20.0),
-              child: Icon(
-                Icons.arrow_forward_ios_outlined,
-                size: 22,
-                color: Colur.white,
+          margin: const EdgeInsets.symmetric(horizontal: 60.0, vertical: 30.0),
+          padding: const EdgeInsets.symmetric(vertical: 18.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(100.0),
+            gradient: LinearGradient(
+                colors: [
+                  Colur.blueGradient1,
+                  Colur.blueGradient2,
+                ],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                stops: [0.0, 1.0],
+                tileMode: TileMode.clamp),
+          ),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Text(
+                Languages.of(context)!.txtNext.toUpperCase(),
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 20,
+                    color: Colur.white),
               ),
-            ),
-          ],
+              Container(
+                alignment: Alignment.centerRight,
+                margin: const EdgeInsets.only(right: 20.0),
+                child: Icon(
+                  Icons.arrow_forward_ios_outlined,
+                  size: 22,
+                  color: Colur.white,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
+
 }

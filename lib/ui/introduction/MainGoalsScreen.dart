@@ -3,7 +3,8 @@ import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 
 class MainGoalsScreen extends StatefulWidget {
-  const MainGoalsScreen({Key? key}) : super(key: key);
+  final List<dynamic>? prefMainGoalsList;
+  const MainGoalsScreen(this.prefMainGoalsList);
 
   @override
   _MainGoalsScreenState createState() => _MainGoalsScreenState();
@@ -27,6 +28,11 @@ class _MainGoalsScreenState extends State<MainGoalsScreen> {
       shrinkWrap: true,
       itemCount: yourMainGoalList.length,
       itemBuilder: (context, int index) {
+        for (int i = 0; i < widget.prefMainGoalsList!.length; i++) {
+          yourMainGoalList[
+          int.parse(widget.prefMainGoalsList![i].toString())]
+              .isSelected = true;
+        }
         return _itemYourMainGoal(index);
       },
     );
@@ -41,6 +47,12 @@ class _MainGoalsScreenState extends State<MainGoalsScreen> {
           yourMainGoalList[index].isSelected =
               !yourMainGoalList[index].isSelected;
         });
+
+        if (yourMainGoalList[index].isSelected) {
+          widget.prefMainGoalsList!.add(index);
+        } else {
+          widget.prefMainGoalsList!.remove(index);
+        }
       },
       child: Container(
         decoration: BoxDecoration(
