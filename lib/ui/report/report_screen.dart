@@ -64,7 +64,7 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
   int? totalMin;
 
   String? date = DateFormat.yMd().format(DateTime.now());
-
+  List<bool> isAvailableHistory = [];
 
   @override
   void initState() {
@@ -81,10 +81,16 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
     getPreference();
     getWeightChartDataFromDatabase();
     getWeightData();
-    //getHistory();
+    _getDataFromDatabase();
     setBmiCalculation();
     super.initState();
   }
+
+  _getDataFromDatabase(){
+    _getHistoryWeekWise();
+    _getTotalWorkoutDetail();
+  }
+
 
   getPreference() {
     weightBMI = Preference.shared.getDouble(Preference.WEIGHT) ?? 0;
@@ -176,7 +182,7 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
                 child: Column(
                   children: [
                     Text(
-                      "0",
+                      (totalWorkout != 0) ? totalWorkout.toString() : "0",
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
@@ -193,7 +199,7 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
                 child: Column(
                   children: [
                     Text(
-                      "0",
+                      (totalKcal != 0) ? totalKcal.toString() : "0",
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
@@ -210,7 +216,7 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
                 child: Column(
                   children: [
                     Text(
-                      "00:00",
+                      Utils.secondToMMSSFormat((totalMin != 0) ?totalMin!:0),
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
@@ -269,9 +275,9 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
             itemBuilder: (BuildContext context, int index) {
-              return _itemOfHistory(index);
+              return _itemOfHistory(index,isAvailableHistory);
             },
-            itemCount: 7,
+            itemCount: isAvailableHistory.length,
           ),
         ),
         Container(
@@ -287,7 +293,7 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
     );
   }
 
-  _itemOfHistory(int index) {
+  _itemOfHistory(int index, List<bool> isAvailableHistory) {
     return Container(
       width: MediaQuery.of(context).size.width / 7.3,
       child: Column(
@@ -297,7 +303,7 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
             width: 20,
             height: 20,
             margin: const EdgeInsets.symmetric(vertical: 10),
-            child: (index != 3)
+           /* child: (index != 3)
                 ? Container(
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
@@ -316,12 +322,26 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
                         alignment: Alignment.center,
                         child: Image.asset(
                           "assets/icons/ic_challenge_complete_day.png",
-                        )),
+                        )),*/
+            child: (!isAvailableHistory[index])
+                ? Container(
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        border:
+                            Border.all(color: Colur.disableTxtColor, width: 5),
+                        shape: BoxShape.circle),
+                  )
+                : Container(
+                    alignment: Alignment.center,
+                    child: Image.asset(
+                      "assets/icons/ic_challenge_complete_day.png",
+                    )),
           ),
           Container(
               alignment: Alignment.center,
               child: Text(
-                Utils.getDaysDateOfWeek()[index].toString(),
+                Utils.getDaysDateOfWeek(Preference.shared.getInt(
+                    Preference.SELECTED_FIRST_DAY_OF_WEEK)??0)[index].toString(),
                 textAlign: TextAlign.center,
               ))
         ],
@@ -875,6 +895,26 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
   }
 
 
+  _getHistoryWeekWise() {
+    Utils.getDaysDateForHistoryOfWeek().forEach((element) async {
+      bool? isAvailable = await DataBaseHelper().isHistoryAvailableDateWise(element.toString());
+      isAvailableHistory.add(isAvailable!);
+      Debug.printLog("getDaysDateForHistoryOfWeek==>> "+element.toString());
+    });
+    isAvailableHistory.forEach((element) {
+      Debug.printLog("isAvailableHistory==>> "+element.toString());
+    });
+    setState(() {});
+  }
+
+  _getTotalWorkoutDetail()async{
+    totalWorkout = await DataBaseHelper().getHistoryTotalWorkout() ?? 0;
+    totalKcal = await DataBaseHelper().getHistoryTotalKCal() ?? 0;
+    totalMin = await DataBaseHelper().getHistoryTotalMinutes() ?? 0;
+    setState(() {
+
+    });
+  }
 }
 
 class LinearSales {

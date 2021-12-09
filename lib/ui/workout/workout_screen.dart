@@ -1295,7 +1295,6 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
   }
 
   _showBackDialogScreen(){
-
     if (isCountDownStart) {
       setState(() {
         countDownController.pause();
@@ -1305,9 +1304,8 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
       setState(() {
         durationOfExercise = durationOfExercise == null
             ? controller!.duration!.inSeconds -
-            controller!.lastElapsedDuration!.inSeconds
-            : durationOfExercise! -
-            controller!.lastElapsedDuration!.inSeconds;
+                controller!.lastElapsedDuration!.inSeconds
+            : durationOfExercise! - controller!.lastElapsedDuration!.inSeconds;
         controller!.stop();
       });
     }
@@ -1319,8 +1317,13 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
                   index: lastPosition,
                   exerciseListDataList: widget.exerciseDataList,
                   workoutDetailList: widget.dayStatusDetailList,
-              discoverSingleExerciseDataList: widget.discoverSingleExerciseData,
+                  discoverSingleExerciseDataList:
+                      widget.discoverSingleExerciseData,
                 ))).then((value) {
+      if (value) {
+        controller!.reset();
+        durationOfExercise = int.parse(_getExerciseTimeFromList());
+      }
       if (!isCountDownStart && controller!.isAnimating) {
         controller!.stop();
       } else if (!isCountDownStart) {
@@ -1441,8 +1444,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
 
     final imagePaths = manifestMap.keys
         .where((String key) => key
-        .contains(_getExercisePathFromList().toString()))
-        .where((String key) => key.contains(Constant.EXERCISE_EXTENSION))
+        .contains(_getExercisePathFromList().toString()+"/"))
         .toList();
 
     countOfImages = imagePaths.length;

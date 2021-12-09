@@ -18,6 +18,7 @@ class Preference {
   static const String isNotificationAllowed = "IS_NOTIFICATION_ALLOWED";
   static const String percentage = "PERCENTAGE";
   static const String needToSync = "NEED_TO_SYNC";
+  static const SELECTED_FIRST_DAY_OF_WEEK = "SELECTED_FIRST_DAY_OF_WEEK";
 
 
 
@@ -82,7 +83,7 @@ class Preference {
   static const String BMI = "BMI";
   static const String BMI_TEXT = "BMI_TEXT";
 
-  static const String PREF_TRAINING_DAY = "PREF_TRAINING_DAY";
+  static const String SELECTED_TRAINING_DAY = "SELECTED_TRAINING_DAY";
   static const String PREF_FIRST_DAY = "PREF_FIRST_DAY";
 
   static const String DAILY_REMINDER_TIME = "DAILY_REMINDER_TIME";

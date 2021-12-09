@@ -339,8 +339,7 @@ class _ExerciseDialogState extends State<ExerciseDialog>  with TickerProviderSta
     final manifestContent = await rootBundle.loadString('AssetManifest.json');
     final Map<String, dynamic> manifestMap = json.decode(manifestContent);
     final imagePaths = manifestMap.keys
-        .where((String key) => key.contains(_getImagePathFromList(index)!))
-        .where((String key) => key.contains(Constant.EXERCISE_EXTENSION))
+        .where((String key) => key.contains(_getImagePathFromList(index)!+"/"))
         .toList();
     Debug.printLog("_getImageFromAssets==>>  "+_getImagePathFromList(index)!.toString()+"  "+imagePaths.length.toString());
     countOfImages = imagePaths.length;

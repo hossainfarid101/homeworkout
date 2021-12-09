@@ -150,7 +150,9 @@ class _PauseScreenState extends State<PauseScreen>  with TickerProviderStateMixi
 
   _restartBtn(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.pop(context, true);
+      },
       child: Container(
         height: 80,
         width: double.infinity,
@@ -334,8 +336,7 @@ class _PauseScreenState extends State<PauseScreen>  with TickerProviderStateMixi
 
     final imagePaths = manifestMap.keys
         .where((String key) => key
-        .contains(_getExercisePathFromList().toString()))
-        .where((String key) => key.contains(Constant.EXERCISE_EXTENSION))
+        .contains(_getExercisePathFromList().toString()+"/"))
         .toList();
 
     countOfImages = imagePaths.length;

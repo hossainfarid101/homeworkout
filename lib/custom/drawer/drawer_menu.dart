@@ -48,9 +48,12 @@ class _DrawerMenuState extends State<DrawerMenu> {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25), ),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(25),
+                        topRight: Radius.circular(25),
+                      ),
                       gradient: LinearGradient(
-                          colors: [Colur.blueGradient1, Colur.blueGradient2]
+                        colors: [Colur.blueGradient1, Colur.blueGradient2],
                       ),
                     ),
                     width: double.infinity,

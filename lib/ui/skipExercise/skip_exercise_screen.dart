@@ -483,8 +483,7 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
 
     final imagePaths = manifestMap.keys
         .where((String key) => key
-        .contains(_getExercisePathFromList().toString()))
-        .where((String key) => key.contains(Constant.EXERCISE_EXTENSION))
+        .contains(_getExercisePathFromList().toString()+"/"))
         .toList();
 
     countOfImages = imagePaths.length;

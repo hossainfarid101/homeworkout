@@ -46,7 +46,9 @@ class _TrainingScreenState extends State<TrainingScreen>
   String progress = "";
   int? intProgress = 0;
   String leftDays = "";
-
+  String? selectedTrainingDay = "";
+  int? selectedFirstDayOfWeek = 0;
+  int? totalDayOfWeekGoal = 0;
 
   _scrollListener() {
     if (isShrink != lastStatus) {
@@ -64,6 +66,8 @@ class _TrainingScreenState extends State<TrainingScreen>
   @override
   void initState() {
     Preference.shared.setInt(Preference.DRAWER_INDEX, 0);
+    selectedFirstDayOfWeek = Preference.shared.getInt(Preference.SELECTED_FIRST_DAY_OF_WEEK)??0;
+    selectedTrainingDay = Preference.shared.getString(Preference.SELECTED_TRAINING_DAY)??"";
     _scrollController = ScrollController();
     _scrollController!.addListener(_scrollListener);
     _getDataFromDatabase();
@@ -235,7 +239,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                                     //crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Visibility(
-                                          visible: false,
+                                          visible: (selectedTrainingDay == ""),
                                           child: Column(
                                             children: [
                                               Container(
@@ -274,7 +278,15 @@ class _TrainingScreenState extends State<TrainingScreen>
                                                 child: Container(
                                                   padding: const EdgeInsets.all(15),
                                                   decoration: const BoxDecoration(
-                                                    color: Colur.blue,
+                                                      gradient: LinearGradient(
+                                                          colors: [
+                                                            Colur.blueGradientButton1,
+                                                            Colur.blueGradientButton2,
+                                                          ],
+                                                          begin: Alignment.centerLeft,
+                                                          end: Alignment.centerRight,
+                                                          stops: [0.0, 1.0],
+                                                          tileMode: TileMode.clamp),
                                                     borderRadius: BorderRadius.all(
                                                         Radius.circular(30)),
                                                   ),
@@ -298,7 +310,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                                             ],
                                           )),
                                       Visibility(
-                                          visible: true,
+                                          visible: (selectedTrainingDay != ""),
                                           child: Expanded(
                                             child: Column(
                                               mainAxisAlignment: MainAxisAlignment.center,
@@ -330,7 +342,12 @@ class _TrainingScreenState extends State<TrainingScreen>
                                                         child: Container(
                                                           margin: const EdgeInsets.symmetric(horizontal: 10),
                                                           alignment: Alignment.centerRight,
-                                                          child: Text("0/" + totalWeekTrainingDays! ,style: TextStyle(fontSize: 14),),
+                                                          child: Text(
+                                                            "${totalDayOfWeekGoal.toString()}/" +
+                                                                totalWeekTrainingDays!,
+                                                            style: TextStyle(
+                                                                fontSize: 14),
+                                                          ),
                                                         ),
                                                       )
                                                     ],
@@ -705,7 +722,9 @@ class _TrainingScreenState extends State<TrainingScreen>
                   child: Container(
                       alignment: Alignment.center,
                       child: Text(
-                        Utils.getDaysDateOfWeek()[index].toString(),
+                        Utils.getDaysDateOfWeek(Preference.shared.getInt(
+                            Preference.SELECTED_FIRST_DAY_OF_WEEK)??0)[index]
+                            .toString(),
                         textAlign: TextAlign.center,
                       )),
                 )
@@ -790,7 +809,7 @@ class _TrainingScreenState extends State<TrainingScreen>
   }
 
   _getPreference() {
-    totalWeekTrainingDays = Preference.shared.getString(Preference.PREF_TRAINING_DAY) ?? "4";
+    totalWeekTrainingDays = Preference.shared.getString(Preference.SELECTED_TRAINING_DAY) ?? "4";
   }
   @override
   void onTopBarClick(String name, {bool value = true}) {}
@@ -801,8 +820,6 @@ class _TrainingScreenState extends State<TrainingScreen>
     _getTotalWorkoutDetail();
     _getTotalQuarantineWorkout();
     _getHistoryWeekWise();
-    /*_setDayProgressDataByPlan(Constant.tbl_full_body_workouts_list);
-    _setLeftDayProgressDataByPlan(Constant.tbl_lower_body_list);*/
   }
 
 
@@ -833,9 +850,16 @@ class _TrainingScreenState extends State<TrainingScreen>
 
 
   _getHistoryWeekWise() {
+    int? tempInt= 0;
     Utils.getDaysDateForHistoryOfWeek().forEach((element) async {
       bool? isAvailable = await DataBaseHelper().isHistoryAvailableDateWise(element.toString());
       isAvailableHistory.add(isAvailable!);
+      if(isAvailable){
+        tempInt = tempInt!+1;
+        if(int.parse(Preference.shared.getString(Preference.SELECTED_TRAINING_DAY)!) >= tempInt!) {
+          totalDayOfWeekGoal = totalDayOfWeekGoal! + 1;
+        }
+      }
       Debug.printLog("getDaysDateForHistoryOfWeek==>> "+element.toString());
     });
     isAvailableHistory.forEach((element) {

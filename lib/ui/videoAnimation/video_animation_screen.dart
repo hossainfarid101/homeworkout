@@ -355,8 +355,7 @@ class _VideoAnimationScreenState extends State<VideoAnimationScreen>
     final manifestContent = await rootBundle.loadString('AssetManifest.json');
     final Map<String, dynamic> manifestMap = json.decode(manifestContent);
     final imagePaths = manifestMap.keys
-        .where((String key) => key.contains(_getImagePathFromList(index)!))
-        .where((String key) => key.contains(Constant.EXERCISE_EXTENSION))
+        .where((String key) => key.contains(_getImagePathFromList(index)!+"/"))
         .toList();
     countOfImages = imagePaths.length;
     setState(() {});

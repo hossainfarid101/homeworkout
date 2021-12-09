@@ -183,10 +183,10 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
           ),
           selectedDecoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Colur.selectedDay
+            color: Colur.theme
           ),
           selectedTextStyle:
-              TextStyle(fontWeight: FontWeight.w400, color: Colur.txt_gray),
+              TextStyle(fontWeight: FontWeight.w400, color: Colur.white),
           todayTextStyle:
               TextStyle(fontWeight: FontWeight.w400, color: Colur.theme)),
       headerVisible: true,
@@ -384,9 +384,10 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
                               child: Text(
                                   /*currentWeekHistoryData[index].HLvlName! + " " +
                                     Languages.of(context)!.txtDay + " " + currentWeekHistoryData[index].HDayName!*/
-                                  arrHistoryDetail[index]
+                                  /*arrHistoryDetail[index]
                                       .planName
-                                      .toString().toUpperCase(),
+                                      .toString().toUpperCase(),*/
+                                getPlanNameFromList(arrHistoryDetail[index])!,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                     fontWeight: FontWeight.w400,
@@ -485,6 +486,22 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
         );
       },
     );
+  }
+
+
+  String? getPlanNameFromList(HistoryTable arrHistoryDetail){
+    String? planName = "";
+    if(arrHistoryDetail.tableName == Constant.tbl_full_body_workouts_list ||
+        arrHistoryDetail.tableName == Constant.tbl_full_body_workouts_list){
+      planName = arrHistoryDetail.planName.toString() +
+          " - " +
+          Languages.of(context)!.txtDay +
+          " " +
+          arrHistoryDetail.dayName!.replaceAll("0", "");
+    }else{
+      planName = arrHistoryDetail.planName.toString();
+    }
+    return planName.toUpperCase();
   }
 
   String setPlanImage(List<HistoryTable> arrHistoryDetail, int index) {

@@ -213,9 +213,9 @@ class Utils {
         .toList();
   }
 
-  static List<String> getDaysDateOfWeek() {
+  static List<String> getDaysDateOfWeek(int? firstDay) {
     final now = DateTime.now();
-    final firstDayOfWeek = now.subtract(Duration(days: now.weekday));
+    final firstDayOfWeek = now.subtract(Duration(days: now.weekday - firstDay!));
     return List.generate(7, (index) => index)
         .map((value) => DateFormat(DateFormat.DAY)
         .format(firstDayOfWeek.add(Duration(days: value))))
@@ -253,4 +253,16 @@ class Utils {
     return output;
   }
 
+
+  static String getFirstDayOfWeek(BuildContext context,int? selectedDay){
+    String day="";
+    if(selectedDay == 0){
+      day = Languages.of(context)!.txtSunday;
+    }else if(selectedDay == 1){
+      day = Languages.of(context)!.txtMonday;
+    }else if(selectedDay == -1){
+      day = Languages.of(context)!.txtSaturday;
+    }
+    return day;
+  }
 }

@@ -619,4 +619,7 @@ class LanguageEn extends Languages {
 
   @override
   String get txtSelectingTargetedWorkoutsForYou =>  "Selecting Targeted Workouts For You";
+
+  @override
+  String get txtInstruction => "Instruction";
 }
