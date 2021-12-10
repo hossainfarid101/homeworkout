@@ -250,9 +250,9 @@ class _DrawerMenuState extends State<DrawerMenu> {
 
                   TextButton(
                     child: Text(
-                      Languages.of(context)!.txtCancel.toUpperCase(),
+                      Languages.of(context)!.txtNo.toUpperCase(),
                       style: const TextStyle(
-                        color:Colur.blue,
+                        color:Colur.theme,
                       ),
                     ),
                     onPressed: () {
@@ -262,9 +262,9 @@ class _DrawerMenuState extends State<DrawerMenu> {
 
                   TextButton(
                     child: Text(
-                      Languages.of(context)!.txtOk.toUpperCase(),
+                      Languages.of(context)!.txtYes.toUpperCase(),
                       style: const TextStyle(
-                        color:Colur.blue,
+                        color:Colur.theme,
                       ),
                     ),
                     onPressed: ()  {

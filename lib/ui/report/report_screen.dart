@@ -61,7 +61,7 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
   Color? bmiColor;
   int? totalWorkout;
   double? totalKcal;
-  int? totalMin;
+  int? totalMin = 0;
 
   String? date = DateFormat.yMd().format(DateTime.now());
   List<bool> isAvailableHistory = [];
@@ -216,7 +216,7 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
                 child: Column(
                   children: [
                     Text(
-                      Utils.secondToMMSSFormat((totalMin != 0) ?totalMin!:0),
+                      Utils.secondToMMSSFormat((totalMin != 0) ? totalMin! : 0),
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,

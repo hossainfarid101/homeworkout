@@ -244,6 +244,7 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
                     decoration: BoxDecoration(
                       color: Colur.theme,
                       borderRadius: BorderRadius.circular(30.0),
+                      border: Border.all(color: Colur.white)
                     ),
                     child: Center(
                       child: Text(

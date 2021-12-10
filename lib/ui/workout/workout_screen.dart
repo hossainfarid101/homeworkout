@@ -94,12 +94,22 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
 
 
   @override
-  void dispose() {
+  dispose() {
     timerForCount!.cancel();
+
+
+
     if (controller != null) {
       controller!.dispose();
     }
-    listLifeGuideController!.dispose();
+
+    WidgetsBinding.instance!.removeObserver(this);
+
+    if (listLifeGuideController != null) {
+      listLifeGuideController!.dispose();
+    }
+
+
     super.dispose();
 
   }
@@ -390,7 +400,14 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
   }
 
   _startWellDoneScreen() async {
-    controller!.dispose();
+    /*if (controller != null) {
+      controller!.dispose();
+    }
+    controller = null;
+    if (listLifeGuideController != null) {
+      listLifeGuideController!.dispose();
+    }
+    listLifeGuideController = null;*/
 
 
     endTime = DateTime.now();
@@ -1149,10 +1166,8 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
                                   }
                                 });
                               },
-                              activeColor: Colur.blue,
-                              //activeTrackColor: Colur.bg_txtBlack,
-                              // inactiveThumbColor: Colur.switch_grey,
-                              // inactiveTrackColor: Colur.bg_grey,
+                              activeColor: Colur.theme,
+
                             ),
                           ],
                         ),
@@ -1190,7 +1205,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
                                   }
                                 });
                               },
-                              activeColor: Colur.blue,
+                              activeColor: Colur.theme,
                               // activeTrackColor: Colur.bg_txtBlack,
                               // inactiveThumbColor: Colur.switch_grey,
                               // inactiveTrackColor: Colur.bg_grey,
@@ -1231,7 +1246,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
                                   }
                                 });
                               },
-                              activeColor: Colur.blue,
+                              activeColor: Colur.theme,
                               // activeTrackColor: Colur.bg_txtBlack,
                               // inactiveThumbColor: Colur.switch_grey,
                               // inactiveTrackColor: Colur.bg_grey,
@@ -1265,7 +1280,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
                     child: Text(
                       Languages.of(context)!.txtOk.toUpperCase(),
                       style: const TextStyle(
-                        color: Colur.blue,
+                        color: Colur.theme,
                       ),
                     ),
                     onPressed: () {
@@ -1361,7 +1376,12 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
           exerciseListDataList: widget.exerciseDataList,
           discoverSingleExerciseDataList: widget.discoverSingleExerciseData,
         )))
-        .then((value) => (!value) ? _controllerForward() : null);
+        .then((value) {
+          Debug.printLog(value.toString());
+          if(value) {
+            _controllerForward();
+          }
+        });
 
   }
 

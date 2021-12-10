@@ -35,7 +35,6 @@ class _TrainingScreenState extends State<TrainingScreen>
 
   bool lastStatus = true;
 
-  String? totalWeekTrainingDays;
   List<HomePlanTable> allPlanDataList = [];
   int? totalQuarantineWorkout = 0;
   int? totalWorkout = 0;
@@ -46,7 +45,7 @@ class _TrainingScreenState extends State<TrainingScreen>
   String progress = "";
   int? intProgress = 0;
   String leftDays = "";
-  String? selectedTrainingDay = "";
+  String? selectedTrainingDay = "0";
   int? selectedFirstDayOfWeek = 0;
   int? totalDayOfWeekGoal = 0;
 
@@ -66,12 +65,10 @@ class _TrainingScreenState extends State<TrainingScreen>
   @override
   void initState() {
     Preference.shared.setInt(Preference.DRAWER_INDEX, 0);
-    selectedFirstDayOfWeek = Preference.shared.getInt(Preference.SELECTED_FIRST_DAY_OF_WEEK)??0;
-    selectedTrainingDay = Preference.shared.getString(Preference.SELECTED_TRAINING_DAY)??"";
+    _getPreference();
     _scrollController = ScrollController();
     _scrollController!.addListener(_scrollListener);
     _getDataFromDatabase();
-    _getPreference();
     super.initState();
   }
 
@@ -244,7 +241,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                                       //crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Visibility(
-                                            visible: (selectedTrainingDay == ""),
+                                            visible: (selectedTrainingDay == "0"),
                                             child: Column(
                                               children: [
                                                 Container(
@@ -315,7 +312,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                                               ],
                                             )),
                                         Visibility(
-                                            visible: (selectedTrainingDay != ""),
+                                            visible: (selectedTrainingDay != "0"),
                                             child: Expanded(
                                               child: Column(
                                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -349,7 +346,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                                                             alignment: Alignment.centerRight,
                                                             child: Text(
                                                               "${totalDayOfWeekGoal.toString()}/" +
-                                                                  totalWeekTrainingDays!,
+                                                                  selectedTrainingDay!,
                                                               style: TextStyle(
                                                                   fontSize: 14),
                                                             ),
@@ -406,7 +403,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                   ],
                 ),
               ),
-            ),
+            )
           ),
         ),
       ),
@@ -815,7 +812,8 @@ class _TrainingScreenState extends State<TrainingScreen>
   }
 
   _getPreference() {
-    totalWeekTrainingDays = Preference.shared.getString(Preference.SELECTED_TRAINING_DAY) ?? "4";
+    selectedFirstDayOfWeek = Preference.shared.getInt(Preference.SELECTED_FIRST_DAY_OF_WEEK) ?? 0;
+    selectedTrainingDay = Preference.shared.getString(Preference.SELECTED_TRAINING_DAY) ?? "0";
   }
   @override
   void onTopBarClick(String name, {bool value = true}) {}
@@ -862,7 +860,7 @@ class _TrainingScreenState extends State<TrainingScreen>
       isAvailableHistory.add(isAvailable!);
       if(isAvailable){
         tempInt = tempInt!+1;
-        if(int.parse(Preference.shared.getString(Preference.SELECTED_TRAINING_DAY)!) >= tempInt!) {
+        if(int.parse(selectedTrainingDay!) >= tempInt!) {
           totalDayOfWeekGoal = totalDayOfWeekGoal! + 1;
         }
       }

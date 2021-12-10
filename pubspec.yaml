@@ -561,8 +561,6 @@ flutter:
     - assets/exerciseImage/other/best_quarantine_men.webp
     - assets/exerciseImage/other/best_quarantine_women.webp
     - assets/animations/
-    - assets/animations/congrats1.json
-    - assets/animations/congrats2.json
     - assets/animations/congrats3.json
     - assets/sounds/whistle.wav
 

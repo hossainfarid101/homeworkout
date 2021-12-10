@@ -112,7 +112,6 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
       margin: const EdgeInsets.only(left: 8, right: 8, bottom: 8, top: 8),
       width: fullWidth,
       decoration: const BoxDecoration(
-          //color: Colur.white,
           borderRadius: BorderRadius.all(Radius.circular(10))
       ),
       child: Container(
@@ -154,7 +153,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                           style: const TextStyle(
                               color: Colur.txtBlack,
                               fontSize: 18,
-                              fontWeight: FontWeight.w300),
+                              fontWeight: FontWeight.w400),
                         )
                     )
                   ],
@@ -164,53 +163,6 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
             Divider(color: Colur.grey.withOpacity(0.5),),
 
 
-            /*Visibility(
-              visible: isNotPremium!,
-              child: InkWell(
-                onTap: () {},
-                child: Container(
-                  margin: EdgeInsets.only(bottom: 10, top: 10),
-                  child: Row(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(right:10),
-                        child: Image.asset(
-                          "assets/icons/ic_remove_ads.png",
-                          scale: 2,
-                        ),
-                      ),
-                      Expanded(
-                          child: Text(
-                            Languages.of(context)!.txtRemoveAds,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                color: Colur.txtBlack,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w300),
-                          )
-                      ),
-                      Container(
-                        height: 35,
-                        width: 75,
-                        decoration: BoxDecoration(
-                            color: Colur.theme,
-                            borderRadius: BorderRadius.all(Radius.circular(5))
-                        ),
-                        child: Center(
-                          child: Text(
-                            "\$400.00",
-                            style: TextStyle(
-                                color: Colur.txtBlack,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w300),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),*/
 
             //====Countdown time========
             InkWell(
@@ -235,7 +187,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                           style: const TextStyle(
                               color: Colur.txtBlack,
                               fontSize: 18,
-                              fontWeight: FontWeight.w300),
+                              fontWeight: FontWeight.w400),
                         )
                     ),
                     Row(
@@ -283,7 +235,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                           style: const TextStyle(
                               color: Colur.txtBlack,
                               fontSize: 18,
-                              fontWeight: FontWeight.w300),
+                              fontWeight: FontWeight.w400),
                         )
                     ),
                     Row(
@@ -331,7 +283,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                           style: const TextStyle(
                               color: Colur.txtBlack,
                               fontSize: 18,
-                              fontWeight: FontWeight.w300),
+                              fontWeight: FontWeight.w400),
                         )
                     )
                   ],
@@ -397,7 +349,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                           style: const TextStyle(
                               color: Colur.txtBlack,
                               fontSize: 18,
-                              fontWeight: FontWeight.w300),
+                              fontWeight: FontWeight.w400),
                         )
                     ),
                     Visibility(
@@ -449,7 +401,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                           style: const TextStyle(
                               color: Colur.txtBlack,
                               fontSize: 18,
-                              fontWeight: FontWeight.w300),
+                              fontWeight: FontWeight.w400),
                         )
                     )
                   ],
@@ -510,7 +462,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                           style: const TextStyle(
                               color: Colur.txtBlack,
                               fontSize: 18,
-                              fontWeight: FontWeight.w300),
+                              fontWeight: FontWeight.w400),
                         )
                     )
                   ],
@@ -543,7 +495,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                           style: const TextStyle(
                               color: Colur.txtBlack,
                               fontSize: 18,
-                              fontWeight: FontWeight.w300),
+                              fontWeight: FontWeight.w400),
                         )
                     )
                   ],
@@ -576,7 +528,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                           style: const TextStyle(
                               color: Colur.txtBlack,
                               fontSize: 18,
-                              fontWeight: FontWeight.w300),
+                              fontWeight: FontWeight.w400),
                         )
                     )
                   ],
@@ -613,7 +565,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                           style: const TextStyle(
                               color: Colur.txtBlack,
                               fontSize: 18,
-                              fontWeight: FontWeight.w300),
+                              fontWeight: FontWeight.w400),
                         )
                     )
                   ],
@@ -677,7 +629,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                           style: const TextStyle(
                               color: Colur.txtBlack,
                               fontSize: 18,
-                              fontWeight: FontWeight.w300),
+                              fontWeight: FontWeight.w400),
                         )
                     )
                   ],
@@ -738,7 +690,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                           style: const TextStyle(
                               color: Colur.txtBlack,
                               fontSize: 18,
-                              fontWeight: FontWeight.w300),
+                              fontWeight: FontWeight.w400),
                         )
                     )
                   ],
@@ -747,35 +699,6 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
             ),
             Divider(color: Colur.grey.withOpacity(0.5),),
 
-            /*InkWell(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => CommonQuestionsScreen()));
-              },
-              child: Container(
-                margin: EdgeInsets.only(bottom: 10, top:10),
-                child: Row(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(right:10),
-                      child: Image.asset(
-                        "assets/icons/ic_set_faq.png",
-                        scale: 2,
-                      ),
-                    ),
-                    Expanded(
-                        child: Text(
-                          Languages.of(context)!.txtCommonQuestions,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              color: Colur.txtBlack,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w300),
-                        )
-                    )
-                  ],
-                ),
-              ),
-            ),*/
 
             InkWell(
               onTap: () {
@@ -800,7 +723,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                           style: const TextStyle(
                               color: Colur.txtBlack,
                               fontSize: 18,
-                              fontWeight: FontWeight.w300),
+                              fontWeight: FontWeight.w400),
                         )
                     )
                   ],
@@ -832,7 +755,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                           style: const TextStyle(
                               color: Colur.txtBlack,
                               fontSize: 18,
-                              fontWeight: FontWeight.w300),
+                              fontWeight: FontWeight.w400),
                         )
                     )
                   ],

@@ -9,6 +9,7 @@ import 'package:homeworkout_flutter/database/model/ExerciseListData.dart';
 import 'package:homeworkout_flutter/database/model/WorkoutDetailData.dart';
 import 'package:homeworkout_flutter/interfaces/topbar_clicklistener.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
+import 'package:homeworkout_flutter/ui/exerciseDays/exercise_days_status_screen.dart';
 import 'package:homeworkout_flutter/ui/videoAnimation/video_animation_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
@@ -47,6 +48,11 @@ class _PauseScreenState extends State<PauseScreen>  with TickerProviderStateMixi
   void initState() {
     _setImageRotation(widget.index!);
     super.initState();
+  }
+  @override
+  void dispose() {
+    listLifeGuideController!.dispose();
+    super.dispose();
   }
   @override
   Widget build(BuildContext context) {
@@ -126,7 +132,8 @@ class _PauseScreenState extends State<PauseScreen>  with TickerProviderStateMixi
   _quitBtn(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pop(context);
+
+        Navigator.pop(context, false);
         Navigator.pop(context);
         Navigator.pop(context);
       },

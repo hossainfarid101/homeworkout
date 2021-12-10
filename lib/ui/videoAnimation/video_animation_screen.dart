@@ -117,7 +117,7 @@ class _VideoAnimationScreenState extends State<VideoAnimationScreen>
         children: [
           InkWell(
               onTap: () {
-                Navigator.pop(context,false);
+                Navigator.pop(context,_isTimeOrNotFromList());
               },
               child: Icon(
                 Icons.arrow_back_rounded,
@@ -178,17 +178,17 @@ class _VideoAnimationScreenState extends State<VideoAnimationScreen>
       children: [
         Visibility(
           visible: isAnimation,
-          child: Container(
+          child: _controllerYoutubeView != null ? Container(
             height: 250,
             child: YoutubePlayer(
               controller: _controllerYoutubeView!,
               showVideoProgressIndicator: true,
             ),
-          ),
+          ) : Container(),
         ),
         Visibility(
           visible: !isAnimation,
-          child:  Container(
+          child:  listLifeGuideAnimation != null ? Container(
             margin: const EdgeInsets.symmetric(horizontal: 15),
             height: 250,
             width: double.infinity,
@@ -208,7 +208,7 @@ class _VideoAnimationScreenState extends State<VideoAnimationScreen>
                 },
               ),
             ),
-          ),
+          ) : Container(),
         ),
       ],
     );
@@ -293,6 +293,15 @@ class _VideoAnimationScreenState extends State<VideoAnimationScreen>
         ),
       );
     });
+  }
+
+  bool _isTimeOrNotFromList() {
+    return (widget.fromPage == Constant.PAGE_HOME) ? (widget.exerciseListDataList![widget.index!].timeType == "time")
+        ? true:false
+        : (widget.fromPage == Constant.PAGE_DAYS_STATUS) ? (widget.workoutDetailList![widget.index!].timeType == "time")
+        ? true:false
+        : (widget.discoverSingleExerciseDataList![widget.index!].exUnit == "s")
+        ? true:false;
   }
 
   String _getTimeAndCheckTimeType() {

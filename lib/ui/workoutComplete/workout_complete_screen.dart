@@ -441,17 +441,21 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
   _buildWeekItem(int index) {
     return Row(
       children: [
-        if (weeklyDataList!.isNotEmpty && weeklyDataList![index].Is_completed == "1" || weeklyDataList![index].Day_name == "0${dayCompleted.toString()}") Container(
-                padding: const EdgeInsets.all(5),
-                //height: 50,
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle, color: Colur.blueGradient1),
-                child: Icon(
-                  Icons.check,
-                  color: Colur.white,
-                  size: 20,
-                ),
-              ) else Container(
+        if (weeklyDataList!.isNotEmpty) if (
+                weeklyDataList![index].Is_completed == "1" ||
+            weeklyDataList![index].Day_name == "0${dayCompleted.toString()}")
+             Container(
+              padding: const EdgeInsets.all(5),
+              //height: 50,
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle, color: Colur.blueGradient1),
+              child: Icon(
+                Icons.check,
+                color: Colur.white,
+                size: 20,
+              ),
+            )
+           else Container(
                 padding: const EdgeInsets.all(10),
                 //height: 50,
                 decoration: BoxDecoration(

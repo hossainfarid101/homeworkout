@@ -460,12 +460,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
                     ? Container(
                         height: MediaQuery.of(context).size.height * 0.1,
                         width: MediaQuery.of(context).size.height * 0.1,
-                        margin: const EdgeInsets.all(10),
-                        child: Image.asset(
-                          'assets/images/arm_advanced.webp',
-                          gaplessPlayback: true,
-                          fit: BoxFit.cover,
-                        ),
+                        color: Colur.transparent,
                       )
                     : Container(
                         height: MediaQuery.of(context).size.height * 0.1,
@@ -587,12 +582,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
                     ? Container(
                         height: MediaQuery.of(context).size.height * 0.1,
                         width: MediaQuery.of(context).size.height * 0.1,
-                        margin: const EdgeInsets.all(10),
-                        child: Image.asset(
-                          'assets/images/arm_advanced.webp',
-                          gaplessPlayback: true,
-                          fit: BoxFit.cover,
-                        ),
+                        color: Colur.white,
                       )
                     : Container(
                         height: MediaQuery.of(context).size.height * 0.1,
@@ -829,6 +819,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
       listLifeGuideAnimation.add(
           new IntTween(begin: 1, end: listOfImagesCount[i])
               .animate(listLifeGuideController[i]));
+      setState(() {  });
     }
   }
 
