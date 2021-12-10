@@ -411,4 +411,5 @@ abstract class Languages {
   String get txtFT;
 
   String get txtInstruction;
+  String get txtGotoHomePage;
 }

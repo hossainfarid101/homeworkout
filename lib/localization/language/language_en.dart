@@ -622,4 +622,7 @@ class LanguageEn extends Languages {
 
   @override
   String get txtFT => "ft.in";
+
+  @override
+  String get txtGotoHomePage => "Go to home page";
 }

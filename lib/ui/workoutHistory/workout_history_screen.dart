@@ -492,7 +492,7 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
   String? getPlanNameFromList(HistoryTable arrHistoryDetail){
     String? planName = "";
     if(arrHistoryDetail.tableName == Constant.tbl_full_body_workouts_list ||
-        arrHistoryDetail.tableName == Constant.tbl_full_body_workouts_list){
+        arrHistoryDetail.tableName == Constant.tbl_lower_body_list){
       planName = arrHistoryDetail.planName.toString() +
           " - " +
           Languages.of(context)!.txtDay +

@@ -105,7 +105,8 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
                       decoration: BoxDecoration(
                           image: DecorationImage(
                               image: AssetImage(
-                                'assets/images/abs_advanced.webp',
+                                // 'assets/images/abs_advanced.webp',
+                                widget.homePlanTable!.planImageSub.toString(),
                               ),
                               fit: BoxFit.cover)),
                       child: Container(
@@ -164,7 +165,8 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
                           ClipRRect(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                             child: Image.asset(
-                              "assets/images/abs_advanced.webp",
+                              // "assets/images/abs_advanced.webp",
+                              discoverSubPlanList[index].planImageSub.toString(),
                               width: 55,
                               height: 55,
                               fit: BoxFit.fill,

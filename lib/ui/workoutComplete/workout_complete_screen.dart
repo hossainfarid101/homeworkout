@@ -1092,7 +1092,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
       totalEx = widget.dayStatusDetailList!.length;
       planId = 0;
       await DataBaseHelper().updateDayStatusWeekWise(
-          widget.weekName.toString(), widget.dayName.toString());
+          widget.weekName.toString(), widget.dayName.toString(),widget.tableName.toString(),"1");
     }
     if (widget.fromPage == Constant.PAGE_DISCOVER) {
       totalEx = widget.discoverSingleExerciseData!.length;

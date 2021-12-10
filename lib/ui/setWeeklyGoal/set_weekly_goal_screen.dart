@@ -274,8 +274,8 @@ class _SetWeeklyGoalScreenState extends State<SetWeeklyGoalScreen> {
         onPressed: () {
           Preference.shared
               .setString(Preference.SELECTED_TRAINING_DAY, selectTrainingDays!);
-          Preference.shared
-              .setString(Preference.PREF_FIRST_DAY, selectFirstDayOfWeek!);
+          /*Preference.shared
+              .setString(Preference.PREF_FIRST_DAY, selectFirstDayOfWeek!);*/
 
           if (selectFirstDayOfWeek == Languages.of(context)!.txtSunday) {
             Preference.shared.setInt(Preference.SELECTED_FIRST_DAY_OF_WEEK, 0);

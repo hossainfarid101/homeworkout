@@ -6,6 +6,7 @@ class DiscoverPlanTable {
   String? planText;
   String? planLvl;
   String? planImage;
+  String? planImageSub;
   String? planType;
   String? planWorkouts;
   String? planMinutes;
@@ -21,6 +22,7 @@ class DiscoverPlanTable {
     this.planText,
     this.planLvl,
     this.planImage,
+    this.planImageSub,
     this.planType,
     this.planWorkouts,
     this.planMinutes,
@@ -42,6 +44,7 @@ class DiscoverPlanTable {
     planText: json["planText"],
     planLvl: json["planLvl"],
     planImage: json["planImage"],
+    planImageSub: json["planImageSub"],
     planType: json["planType"],
     planWorkouts: json["planWorkouts"],
     planMinutes: json["planMinutes"],
@@ -58,6 +61,7 @@ class DiscoverPlanTable {
     "planText": planText,
     "planLvl": planLvl,
     "planImage": planImage,
+    "planImageSub": planImageSub,
     "planType": planType,
     "planWorkouts": planWorkouts,
     "planMinutes": planMinutes,

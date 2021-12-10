@@ -369,13 +369,20 @@ class DataBaseHelper {
   }
 
 
-  Future<int?> updateDayStatusWeekWise(String weekName,String dayName)async{
+  Future<int?> updateDayStatusWeekWise(String weekName,String dayName,String tableName,String status)async{
     var dbClient = await db;
-    var result = await dbClient.rawDelete("update $fullBodyWorkoutTable set Is_completed ='1' where Week_name = '0$weekName' and Day_name = '$dayName'");
+    var result = await dbClient.rawUpdate("update $tableName set Is_completed ='$status' where Week_name = '0$weekName' and Day_name = '$dayName'");
     Debug.printLog("updateDayStatusWeekWise::::: $result");
     return result;
   }
 
+  Future<int?> resetProgress()async{
+    var dbClient = await db;
+    var result = await dbClient.rawUpdate("update $fullBodyWorkoutTable set Is_completed ='0'");
+    var result1 = await dbClient.rawUpdate("update $lowerBodyTable set Is_completed ='0'");
+    Debug.printLog("updateDayStatusWeekWise::::: $result  $result1");
+    return result;
+  }
 
 
   /*For history data */

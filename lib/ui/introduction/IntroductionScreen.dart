@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:homeworkout_flutter/database/tables/discover_plan_table.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
+import 'package:homeworkout_flutter/ui/exerciselist/ExerciseListScreen.dart';
 import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
@@ -15,7 +17,7 @@ import 'GeneratingThePlanScreen.dart';
 import 'MainGoalsScreen.dart';
 import 'MotivatesYouScreen.dart';
 import 'PushUpsCanYouDoScreen.dart';
-import 'SetYourWeeklyGoalScreen.dart';
+import 'SetYourIntroWeeklyGoalScreen.dart';
 import 'WeightHeightSelectionScreen.dart';
 import 'YourActivityLevelScreen.dart';
 
@@ -41,6 +43,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
   String? prefHowManyPushUps;
   String?  prefActivityLevel;
   bool? isPlanReady = false;
+  DiscoverPlanTable? randomPlanData;
 
   @override
   void initState() {
@@ -185,11 +188,29 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                       prefActivityLevel = value;
                       setState(() { });
                     }),
-                    SetYourWeeklyGoalScreen(),
+                    SetYourIntroWeeklyGoalScreen(),
                     WeightHeightSelectionScreen(),
                     GeneratingThePlanScreen(isPlanReady, (value) {
-                      isPlanReady = value;
-                      setState(() { });
+                      setState(() {
+                        isPlanReady = value;
+                        if(!isPlanReady!) {
+                          mainTitle = Languages.of(context)!
+                              .txtGeneratingThePlan
+                              .toUpperCase();
+                          subTitle =
+                              Languages.of(context)!.txtPreparingYourPlan;
+                        }else{
+                          mainTitle = Languages.of(context)!
+                              .txtYourPlanIsReady
+                              .toUpperCase();
+                          subTitle =
+                              Languages.of(context)!.txtWeHaveSelectedThisPlan;
+                        }
+                      });
+                    },(value){
+                      setState(() {
+                        randomPlanData = value;
+                      });
                     }),
                   ],
                 ),
@@ -232,6 +253,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
             if (currentPageIndex != 8) ...{
               InkWell(
                 onTap: () {
+                  Preference.shared.setBool(Constant.PREF_INTRODUCTION_FINISH, true);
                   Navigator.pushNamedAndRemoveUntil(
                       context, "/training", (route) => false);
                 },
@@ -250,19 +272,21 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
             },
           ],
         ),
-        Container(
-          alignment: Alignment.center,
-          child: ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(30.0)),
-            child: LinearProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colur.darkBlueColor),
-              value: updateValue,
-              backgroundColor: Colur.unSelectedProgressColor,
-              minHeight: 4,
-              semanticsValue: '10',
+        if (currentPageIndex != 8) ...{
+          Container(
+            alignment: Alignment.center,
+            child: ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(30.0)),
+              child: LinearProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colur.darkBlueColor),
+                value: updateValue,
+                backgroundColor: Colur.unSelectedProgressColor,
+                minHeight: 4,
+                semanticsValue: '10',
+              ),
             ),
           ),
-        ),
+        }
       ],
     );
   }
@@ -303,79 +327,112 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
   }
 
   _nextButton() {
-    return Visibility(
-      visible: currentPageIndex == 8 ? isPlanReady! : true,
-      child: InkWell(
-        splashColor: Colors.transparent,
-        highlightColor: Colors.transparent,
-        onTap: () {
-          pageController.nextPage(
-            duration: const Duration(milliseconds: 200),
-            curve: Curves.easeInOut,
-          );
-          setState(() {
-            updateValue = updateValue! + 0.1111111111;
-          });
+    return Column(
+      children: [
+        Visibility(
+          visible: currentPageIndex == 8 ? isPlanReady! : true,
+          child: InkWell(
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onTap: () {
+              pageController.nextPage(
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.easeInOut,
+              );
+              setState(() {
+                updateValue = updateValue! + 0.1111111111;
+              });
 
-          if (currentPageIndex == 1) {
-            Preference.shared.setString(Constant.SELECTED_YOUR_FOCUS_AREA,
-                json.encode(prefChooseYourFocusAreaList));
-          } else if (currentPageIndex == 2) {
-            Preference.shared.setString(Constant.SELECTED_MAIN_GOALS,
-                json.encode(prefMainGoalsList));
-          }else if (currentPageIndex == 3) {
-            Preference.shared.setString(Constant.SELECTED_MOTIVATES_YOU,
-                json.encode(prefMotivatesYouMostList));
-          }else if (currentPageIndex == 4) {
-            Debug.printLog(prefHowManyPushUps!);
-            Preference.shared.setString(Constant.SELECTED_HOW_MANY_PUSH_UPS, prefHowManyPushUps!);
-          }else if (currentPageIndex == 5) {
-            Preference.shared.setString(Constant.SELECTED_ACTIVITY_LEVEL, prefActivityLevel!);
-          } else if (currentPageIndex == 8) {
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TrainingScreen()), (route) => false);
-          }
-        },
-        child: Container(
-          width: double.infinity,
-          alignment: Alignment.center,
-          margin: const EdgeInsets.symmetric(horizontal: 60.0, vertical: 30.0),
-          padding: const EdgeInsets.symmetric(vertical: 18.0),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(100.0),
-            gradient: LinearGradient(
-                colors: [
-                  Colur.blueGradient1,
-                  Colur.blueGradient2,
+              if (currentPageIndex == 1) {
+                Preference.shared.setString(Constant.SELECTED_YOUR_FOCUS_AREA,
+                    json.encode(prefChooseYourFocusAreaList));
+              } else if (currentPageIndex == 2) {
+                Preference.shared.setString(Constant.SELECTED_MAIN_GOALS,
+                    json.encode(prefMainGoalsList));
+              }else if (currentPageIndex == 3) {
+                Preference.shared.setString(Constant.SELECTED_MOTIVATES_YOU,
+                    json.encode(prefMotivatesYouMostList));
+              }else if (currentPageIndex == 4) {
+                Debug.printLog(prefHowManyPushUps!);
+                Preference.shared.setString(Constant.SELECTED_HOW_MANY_PUSH_UPS, prefHowManyPushUps!);
+              }else if (currentPageIndex == 5) {
+                Preference.shared.setString(Constant.SELECTED_ACTIVITY_LEVEL, prefActivityLevel!);
+              } else if (currentPageIndex == 8) {
+                Preference.shared.setBool(Constant.PREF_INTRODUCTION_FINISH, true);
+                // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TrainingScreen()), (route) => false);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ExerciseListScreen(
+                            fromPage: Constant.PAGE_DISCOVER,
+                            planName: randomPlanData!.planName,
+                            discoverPlanTable: randomPlanData
+                        )));
+              }
+            },
+            child: Container(
+              width: double.infinity,
+              alignment: Alignment.center,
+              margin: EdgeInsets.symmetric(horizontal: 60.0, vertical: (isPlanReady!)?0.0:30.0),
+              padding: const EdgeInsets.symmetric(vertical: 18.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100.0),
+                gradient: LinearGradient(
+                    colors: [
+                      Colur.blueGradient1,
+                      Colur.blueGradient2,
+                    ],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    stops: [0.0, 1.0],
+                    tileMode: TileMode.clamp),
+              ),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Text(
+                  (currentPageIndex == 8 && isPlanReady!)?Languages.of(context)!.txtStartNow.toUpperCase():
+                  Languages.of(context)!.txtNext.toUpperCase(),
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 20,
+                        color: Colur.white),
+                  ),
+                  Container(
+                    alignment: Alignment.centerRight,
+                    margin: const EdgeInsets.only(right: 20.0),
+                    child: Icon(
+                      Icons.arrow_forward_ios_outlined,
+                      size: 22,
+                      color: Colur.white,
+                    ),
+                  ),
                 ],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                stops: [0.0, 1.0],
-                tileMode: TileMode.clamp),
-          ),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Text(
-                Languages.of(context)!.txtNext.toUpperCase(),
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 20,
-                    color: Colur.white),
               ),
-              Container(
-                alignment: Alignment.centerRight,
-                margin: const EdgeInsets.only(right: 20.0),
-                child: Icon(
-                  Icons.arrow_forward_ios_outlined,
-                  size: 22,
-                  color: Colur.white,
-                ),
-              ),
-            ],
+            ),
           ),
         ),
-      ),
+        Visibility(
+          visible: isPlanReady!,
+          child: InkWell(
+            onTap:() {
+              Preference.shared.setBool(Constant.PREF_INTRODUCTION_FINISH, true);
+              Navigator.pushNamedAndRemoveUntil(
+                  context, "/training", (route) => false);
+            },
+            child: Container(
+              margin: const EdgeInsets.symmetric(vertical: 20.0),
+              child: Text(
+                Languages.of(context)!.txtGotoHomePage,
+                style: TextStyle(
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 

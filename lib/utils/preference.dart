@@ -84,7 +84,7 @@ class Preference {
   static const String BMI_TEXT = "BMI_TEXT";
 
   static const String SELECTED_TRAINING_DAY = "SELECTED_TRAINING_DAY";
-  static const String PREF_FIRST_DAY = "PREF_FIRST_DAY";
+  // static const String PREF_FIRST_DAY = "PREF_FIRST_DAY";
 
   static const String DAILY_REMINDER_TIME = "DAILY_REMINDER_TIME";
   static const String IS_DAILY_REMINDER_ON = "IS_DAILY_REMINDER_ON";

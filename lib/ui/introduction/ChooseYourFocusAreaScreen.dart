@@ -137,6 +137,7 @@ class _ChooseYourFocusAreaScreenState extends State<ChooseYourFocusAreaScreen> {
           image: 'assets/exerciseImage/other/img_leg_round.webp',
           exName: Languages.of(context)!.txtLeg.toUpperCase()),
     ];
+
     setState(() {});
   }
 }

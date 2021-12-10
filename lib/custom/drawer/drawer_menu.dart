@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:homeworkout_flutter/custom/drawer/drawer_data.dart';
+import 'package:homeworkout_flutter/database/database_helper.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
@@ -261,13 +262,13 @@ class _DrawerMenuState extends State<DrawerMenu> {
 
                   TextButton(
                     child: Text(
-                      Languages.of(context)!.txtSave.toUpperCase(),
+                      Languages.of(context)!.txtOk.toUpperCase(),
                       style: const TextStyle(
                         color:Colur.blue,
                       ),
                     ),
                     onPressed: ()  {
-                      Navigator.of(context).pop();
+                      _resetProgress(context);
                     },
                   ),
                 ],
@@ -275,5 +276,10 @@ class _DrawerMenuState extends State<DrawerMenu> {
             },
           );
         });
+  }
+
+  _resetProgress(BuildContext context)async{
+    await DataBaseHelper().resetProgress();
+    Navigator.of(context).pop();
   }
 }

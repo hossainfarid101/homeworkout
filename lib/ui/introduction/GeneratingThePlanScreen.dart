@@ -1,16 +1,26 @@
 import 'dart:async';
+import 'dart:convert';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:homeworkout_flutter/database/database_helper.dart';
+import 'package:homeworkout_flutter/database/tables/discover_plan_table.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
+import 'package:homeworkout_flutter/ui/exerciselist/ExerciseListScreen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
+import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
+import 'package:homeworkout_flutter/utils/preference.dart';
+import 'package:homeworkout_flutter/utils/utils.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class GeneratingThePlanScreen extends StatefulWidget {
   bool? isPlanReady;
   Function onValueChanged;
-  GeneratingThePlanScreen(this.isPlanReady, this.onValueChanged);
+  Function onValueChangeRandomPlanData;
+
+  GeneratingThePlanScreen(this.isPlanReady, this.onValueChanged,this.onValueChangeRandomPlanData);
 
   @override
   _GeneratingThePlanScreenState createState() => _GeneratingThePlanScreenState();
@@ -20,10 +30,11 @@ class _GeneratingThePlanScreenState extends State<GeneratingThePlanScreen> with 
 
   Timer? periodicTimer;
   double? percent = 0.0;
-
+  DiscoverPlanTable? randomPlanData;
 
   @override
   void initState() {
+    _getRandomPlanData();
     periodicTimer = Timer.periodic(
       const Duration(seconds: 1),
           (timer) {
@@ -33,6 +44,7 @@ class _GeneratingThePlanScreenState extends State<GeneratingThePlanScreen> with 
           }
           if(timer.tick == 6) {
             widget.onValueChanged(true);
+            widget.onValueChangeRandomPlanData(randomPlanData);
           }
 
         });
@@ -83,11 +95,98 @@ class _GeneratingThePlanScreenState extends State<GeneratingThePlanScreen> with 
         ),
       ),
     ) : Center(
-      child: Image.asset(
+      /*child: Image.asset(
         "assets/images/plan_ready.webp",
         height: 240,
         width: 240,
+      ),*/
+      child: _discoverCard()
+    );
+  }
+
+  _discoverCard() {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ExerciseListScreen(
+                    fromPage: Constant.PAGE_DISCOVER,
+                    planName: randomPlanData!.planName,
+                    discoverPlanTable: randomPlanData
+                )));
+      },
+      child: Card(
+        elevation: 5.0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+        margin: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10.0),
+          child: Container(
+            height: 195,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                // image: AssetImage('assets/images/abs_advanced.webp'),
+                image: AssetImage(randomPlanData!.planImage.toString()),
+                fit: BoxFit.cover,
+              ),
+              shape: BoxShape.rectangle,
+            ),
+            child: Container(
+              color: Colur.transparent_black_50,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                    width: double.infinity,
+                    margin: const EdgeInsets.only(
+                        top: 15.0, bottom: 0.0, left: 15.0, right: 15.0),
+                    child: Text(
+                      (randomPlanData != null)?randomPlanData!.planName!:"",
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 24,
+                          color: Colur.white),
+                    ),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    margin: const EdgeInsets.only(
+                        top: 12.0, bottom: 25.0, left: 15.0, right: 15.0),
+                    child: AutoSizeText(
+                      (randomPlanData != null && randomPlanData!.shortDes! != "")?randomPlanData!.shortDes!:randomPlanData!.introduction!,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15,
+                          color: Colur.white),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
     );
+  }
+
+  _getRandomPlanData() async{
+    var lastDate = Preference.shared.getString(Constant.PREF_RANDOM_DISCOVER_PLAN_DATE)??"";
+    var currDate = Utils.getCurrentDate();
+    var strPlan = Preference.shared.getString(Constant.PREF_RANDOM_DISCOVER_PLAN)??"";
+    Debug.printLog("strPlan=>>>  "+strPlan.toString());
+    if (lastDate.isNotEmpty && currDate == lastDate && strPlan.isNotEmpty) {
+      randomPlanData = DiscoverPlanTable.fromJson(jsonDecode(strPlan));
+    }else{
+      randomPlanData = await DataBaseHelper().getRandomDiscoverPlan();
+      Preference.shared.setString( Constant.PREF_RANDOM_DISCOVER_PLAN_DATE, currDate);
+      Preference.shared.setString( Constant.PREF_RANDOM_DISCOVER_PLAN, jsonEncode(randomPlanData!.toJson()));
+    }
+
+    setState(() {});
   }
 }

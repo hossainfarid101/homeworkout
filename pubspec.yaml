@@ -451,10 +451,26 @@ flutter:
     - assets/images/img_exercise.webp
     - assets/images/drawer_img.webp
     - assets/images/plan_ready.webp
+    - assets/exerciseImage/discover/subPlan/
+    - assets/exerciseImage/discover/subPlan/ic_butt_blaster.webp
+    - assets/exerciseImage/discover/subPlan/ic_intense_inner.webp
+    - assets/exerciseImage/discover/subPlan/ic_7_min_butt_workout.webp
+    - assets/exerciseImage/discover/subPlan/ic_7_min_lose_arm_fat.webp
+    - assets/exerciseImage/discover/subPlan/ic_arm_workout_no_push_up.webp
+    - assets/exerciseImage/discover/subPlan/ic_belly_fat_burner_hiit.webp
+    - assets/exerciseImage/discover/subPlan/ic_build_wider_shoulder.webp
+    - assets/exerciseImage/discover/subPlan/ic_get_rid_of_man_boobs.webp
+    - assets/exerciseImage/discover/subPlan/ic_killer_chest_workout.webp
+    - assets/exerciseImage/discover/subPlan/ic_killer_core_hiit.webp
+    - assets/exerciseImage/discover/subPlan/ic_leg_workout_no_jumping.webp
+    - assets/exerciseImage/discover/subPlan/ic_legs_butt_workout.webp
+    - assets/exerciseImage/discover/subPlan/ic_only_4_move_for_abs.webp
+    - assets/exerciseImage/discover/subPlan/ic_plank_challenge.webp
+    - assets/exerciseImage/discover/subPlan/ic_ripped_vcut_abs_sculpting.webp
     - assets/exerciseImage/discover/sleep/
     - assets/exerciseImage/discover/sleep/back_streching.webp
     - assets/exerciseImage/discover/sleep/lower_back_pain_relief.webp
-    - assets/exerciseImage/discover/sleep/knee_pain_relief.jpg
+    - assets/exerciseImage/discover/sleep/knee_pain_relief.webp
     - assets/exerciseImage/discover/sleep/sleepy_time_stretching.webp
     - assets/exerciseImage/discover/sleep/shoulder_tension_relief.webp
     - assets/exerciseImage/discover/sleep/lower_body_stretching.webp
@@ -504,6 +520,7 @@ flutter:
     - assets/exerciseImage/advance/leg_advanced_women.webp
     - assets/exerciseImage/advance/leg_advanced_men.webp
     - assets/exerciseImage/advance/chest_advanced_women.webp
+    - assets/exerciseImage/advance/chest_advanced_men.webp
     - assets/exerciseImage/advance/arm_advanced_men.webp
     - assets/exerciseImage/advance/arm_advanced_women.webp
     - assets/exerciseImage/advance/abs_advanced_women.webp
@@ -514,6 +531,7 @@ flutter:
     - assets/exerciseImage/beginner/leg_beginner_women.webp
     - assets/exerciseImage/beginner/leg_beginner_men.webp
     - assets/exerciseImage/beginner/chest_beginner_women.webp
+    - assets/exerciseImage/beginner/chest_beginner_men.webp
     - assets/exerciseImage/beginner/abs_beginner_women.webp
     - assets/exerciseImage/beginner/abs_beginner_men.webp
     - assets/exerciseImage/other/

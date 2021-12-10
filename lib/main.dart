@@ -196,7 +196,10 @@ class _MyAppState extends State<MyApp> {
           systemNavigationBarIconBrightness: Brightness.light,
         ),
         // child: TrainingScreen(),
-        child: IntroductionScreen(),
+        child: (Preference.shared.getBool(Constant.PREF_INTRODUCTION_FINISH) ??
+                false)
+            ? TrainingScreen()
+            : IntroductionScreen(),
       ),
       routes: <String, WidgetBuilder>{
         '/training': (BuildContext context) => TrainingScreen(),

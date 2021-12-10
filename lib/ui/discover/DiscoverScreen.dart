@@ -238,7 +238,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
             decoration: BoxDecoration(
               image: DecorationImage(
                 // image: AssetImage('assets/images/abs_advanced.webp'),
-                image: AssetImage(randomPlanData!.planImage.toString()),
+                image: AssetImage((randomPlanData != null)?randomPlanData!.planImage.toString():""),
                 fit: BoxFit.cover,
               ),
               shape: BoxShape.rectangle,
@@ -266,7 +266,12 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                     margin: const EdgeInsets.only(
                         top: 12.0, bottom: 25.0, left: 15.0, right: 15.0),
                     child: AutoSizeText(
-                      (randomPlanData != null && randomPlanData!.shortDes! != "")?randomPlanData!.shortDes!:randomPlanData!.introduction!,
+                      (randomPlanData != null)
+                          ? (randomPlanData != null &&
+                                  randomPlanData!.shortDes! != "")
+                              ? randomPlanData!.shortDes!
+                              : randomPlanData!.introduction!
+                          : "",
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                       style: TextStyle(

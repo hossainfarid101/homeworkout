@@ -578,7 +578,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
         );
       },
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10),
+        margin: const EdgeInsets.symmetric(vertical: 10,horizontal: 10),
         child: Column(
           children: [
             Row(

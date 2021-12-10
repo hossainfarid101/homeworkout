@@ -7,15 +7,15 @@ import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 
-class SetYourWeeklyGoalScreen extends StatefulWidget {
-  const SetYourWeeklyGoalScreen({Key? key}) : super(key: key);
+class SetYourIntroWeeklyGoalScreen extends StatefulWidget {
+  const SetYourIntroWeeklyGoalScreen({Key? key}) : super(key: key);
 
   @override
   _SetYourWeeklyGoalScreenState createState() =>
       _SetYourWeeklyGoalScreenState();
 }
 
-class _SetYourWeeklyGoalScreenState extends State<SetYourWeeklyGoalScreen> {
+class _SetYourWeeklyGoalScreenState extends State<SetYourIntroWeeklyGoalScreen> {
   bool selectedOne = false;
   bool selectedTwo = false;
   bool selectedThree = false;
@@ -32,8 +32,7 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourWeeklyGoalScreen> {
   @override
   void initState() {
     selectTrainingDays = Preference.shared.getString(Preference.SELECTED_TRAINING_DAY) ?? "4";
-    selectFirstDayOfWeek =
-        Preference.shared.getString(Preference.PREF_FIRST_DAY) ?? "Sunday";
+    selectFirstDayOfWeek = Preference.shared.getString(Preference.SELECTED_FIRST_DAY_OF_WEEK) ?? "Sunday";
 
     if(selectTrainingDays == "1") {
       selectedOne = true;
@@ -407,9 +406,16 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourWeeklyGoalScreen> {
           setState(() {
             for (int i = 0; i < value.length; i++) {
               selectFirstDayOfWeek = picker.getSelectedValues()[i];
-              Preference.shared.setString(Preference.PREF_FIRST_DAY, selectFirstDayOfWeek!);
+              // Preference.shared.setString(Preference.PREF_FIRST_DAY, selectFirstDayOfWeek!);
 
-
+              if (selectFirstDayOfWeek == Languages.of(context)!.txtSunday) {
+                Preference.shared.setInt(Preference.SELECTED_FIRST_DAY_OF_WEEK, 0);
+              } else if (selectFirstDayOfWeek == Languages.of(context)!.txtMonday) {
+                Preference.shared.setInt(Preference.SELECTED_FIRST_DAY_OF_WEEK, 1);
+              } else if (selectFirstDayOfWeek ==
+                  Languages.of(context)!.txtSaturday) {
+                Preference.shared.setInt(Preference.SELECTED_FIRST_DAY_OF_WEEK, -1);
+              }
               print(value[i].toString());
               print(picker.getSelectedValues()[i]);
             }

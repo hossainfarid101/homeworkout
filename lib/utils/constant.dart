@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 
 class Constant {
 
+  static const PREF_INTRODUCTION_FINISH = "PREF_INTRODUCTION_FINISH";
   static const SELECTED_YOUR_FOCUS_AREA = "SELECTED_YOUR_FOCUS_AREA";
   static const SELECTED_MAIN_GOALS = "SELECTED_MAIN_GOALS";
   static const SELECTED_MOTIVATES_YOU = "SELECTED_MOTIVATES_YOU";
