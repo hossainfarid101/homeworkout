@@ -5,6 +5,25 @@ import 'package:intl/intl.dart';
 
 class Constant {
 
+  static const PLAN_7_MIN_BUTT_WORKOUT = "7 min butt workout";
+  static const PLAN_7_MIN_LOSE_ARM_FAT = "7 min lose arm fat";
+  static const PLAN_ARM_WORKOUT_NO_PUSH_UPS = "Arm workout (NO PUSH-UPS!)";
+  static const PLAN_BELLY_FAT_BURNER_HIIT_INTERMEDIATE = "Belly fat burner HIIT intermediate";
+  static const PLAN_BUILD_WIDER_SHOULDERS = "Build wider shoulders";
+  static const PLAN_BUTT_BLASTER_CHALLENGE = "Butt blaster challenge";
+  static const PLAN_GET_RID_OF_MAN_BOOBS_HIIT = "Get rid of man boobs HIIT";
+  static const PLAN_INTENSE_INNER_THIGH_CHALLENGE = "Intense inner thigh challenge";
+  static const PLAN_KILLER_CHEST_WORKOUT = "Killer chest workout";
+  static const PLAN_HIIT_KILLER_CORE = "HIIT Killer core";
+  static const PLAN_LEGS_BUTT_WORKOUT = "Legs & butt workout";
+  static const PLAN_LEG_WORKOUT_NO_JUMPING = "Leg workout (NO JUMPING)";
+  static const PLAN_ONLY_4_MOVES_FOR_ABS = "ONLY 4 moves for abs";
+  static const PLAN_PLANK_CHALLENGE = "Plank Challenge";
+  static const PLAN_RIPPED_V_CUT_ABS_SCULPTING = "Ripped v-cut abs sculpting";
+  static const PLAN_BELLY_FAT_BURNER_HIIT = "Belly fat burner HIIT";
+  static const PLAN_7_MIN_ABS_WORKOUT = "7 min abs workout";
+
+
   static const PREF_INTRODUCTION_FINISH = "PREF_INTRODUCTION_FINISH";
   static const SELECTED_YOUR_FOCUS_AREA = "SELECTED_YOUR_FOCUS_AREA";
   static const SELECTED_MAIN_GOALS = "SELECTED_MAIN_GOALS";
@@ -19,6 +38,7 @@ class Constant {
 
   static const PAGE_HISTORY = "PAGE_HISTORY";
   static const PAGE_DISCOVER = "PAGE_DISCOVER";
+  static const PAGE_DISCOVER_SUB_PLAN = "PAGE_DISCOVER_SUB_PLAN";
   static const PAGE_HOME = "PAGE_HOME";
   static const PAGE_QUARANTINE = "PAGE_QUARANTINE";
   static const PAGE_DAYS_STATUS = "PAGE_DAYS_STATUS";

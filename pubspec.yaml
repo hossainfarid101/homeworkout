@@ -451,6 +451,22 @@ flutter:
     - assets/images/img_exercise.webp
     - assets/images/drawer_img.webp
     - assets/images/plan_ready.webp
+    - assets/exerciseImage/discover/subPlanBanner/
+    - assets/exerciseImage/discover/subPlanBanner/ic_belly_fat_burner_banner.webp
+    - assets/exerciseImage/discover/subPlanBanner/ic_build_wider_banner.webp
+    - assets/exerciseImage/discover/subPlanBanner/ic_butt_blaster_banner.webp
+    - assets/exerciseImage/discover/subPlanBanner/ic_get_rid_of_man_banner.webp
+    - assets/exerciseImage/discover/subPlanBanner/ic_intense_inner_banner.webp
+    - assets/exerciseImage/discover/subPlanBanner/ic_killeR_chest_banner.webp
+    - assets/exerciseImage/discover/subPlanBanner/ic_killer_core_hiit_banner.webp
+    - assets/exerciseImage/discover/subPlanBanner/ic_leg_butt_workout_banner.webp
+    - assets/exerciseImage/discover/subPlanBanner/ic_leg_workout_no_jump_banner.webp
+    - assets/exerciseImage/discover/subPlanBanner/ic_only_4_move_banner.webp
+    - assets/exerciseImage/discover/subPlanBanner/ic_plank_banner.webp
+    - assets/exerciseImage/discover/subPlanBanner/ic_ripped_vcut_banner.webp
+    - assets/exerciseImage/discover/subPlanBanner/ic_arm_workout_no_push_banner.webp
+    - assets/exerciseImage/discover/subPlanBanner/ic_7_min_lose_arm_banner.webp
+    - assets/exerciseImage/discover/subPlanBanner/ic_7_min_butt_banner.webp
     - assets/exerciseImage/discover/subPlan/
     - assets/exerciseImage/discover/subPlan/ic_butt_blaster.webp
     - assets/exerciseImage/discover/subPlan/ic_intense_inner.webp

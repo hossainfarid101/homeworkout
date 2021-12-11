@@ -1,7 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
-import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:homeworkout_flutter/custom/dialogs/exercise_dialog.dart';
@@ -16,10 +14,8 @@ import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/workout/workout_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
-import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
-import 'package:sqflite/sqflite.dart';
 
 class ExerciseListScreen extends StatefulWidget {
   HomePlanTable? homePlanTable;
@@ -29,6 +25,7 @@ class ExerciseListScreen extends StatefulWidget {
   String? dayName = "";
   String? weekName = "";
   String? planName = "";
+  bool? isSubPlan = false;
 
   ExerciseListScreen(
       {this.homePlanTable,
@@ -37,6 +34,7 @@ class ExerciseListScreen extends StatefulWidget {
       this.weeklyDayData,
       this.dayName,
       this.weekName,
+      this.isSubPlan=false,
       this.planName});
 
   @override
@@ -67,6 +65,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
     for (int j = 0; j < listLifeGuideController.length; j++) {
       listLifeGuideController[j].dispose();
     }
+
     super.dispose();
   }
 
@@ -380,6 +379,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
                 newIndex -= 1;
               }
               _reorderExercise(newIndex, oldIndex);
+              _imageCount();
             });
           },
         ),
@@ -412,9 +412,11 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
             .reorderExercise(workoutDetailList[i].workoutId, i + 1, tableName);
       }
     }
+
   }
 
   _listOfExerciseWithEdit(int index) {
+
     return InkWell(
       onTap: () {
         showDialog(
@@ -445,17 +447,6 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
                 Container(
                   child: Icon(Icons.menu_rounded, color: Colur.iconGrey),
                 ),
-                /*Container(
-                  height: 90.0,
-                  width: 100.0,
-                  margin: const EdgeInsets.all(10),
-                  child: Image.asset(
-                    'assets/images/arm_advanced.webp',
-                    gaplessPlayback: true,
-                    fit: BoxFit.cover,
-                  ),
-                ),*/
-
                 (listOfImagesCount.isEmpty)
                     ? Container(
                         height: MediaQuery.of(context).size.height * 0.1,
@@ -681,7 +672,6 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
         ),
         onPressed: () {
           var tableName = "";
-          var planName = "";
           var planId = "";
           if (widget.fromPage == Constant.PAGE_HOME) {
             tableName = widget.homePlanTable!.catTableName.toString();
@@ -693,7 +683,6 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
               tableName = Constant.tbl_lower_body_list;
             }
           } else if (widget.fromPage == Constant.PAGE_DISCOVER) {
-            planName = widget.discoverPlanTable!.planName.toString();
             planId = widget.discoverPlanTable!.planId.toString();
           }
           Navigator.push(
@@ -739,7 +728,11 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
         imageName = "assets/exerciseImage/other/lower_body_$gender.webp";
       }
     } else if (widget.fromPage == Constant.PAGE_DISCOVER) {
-      imageName = widget.discoverPlanTable!.planImage.toString();
+      if(!widget.isSubPlan!) {
+        imageName = widget.discoverPlanTable!.planImage.toString();
+      }else{
+        imageName  = Utils.getImageBannerForBodyFocusSubPlan(widget.discoverPlanTable!.planName.toString());
+      }
     }
     return imageName;
   }
@@ -793,6 +786,10 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
   List<int> listOfImagesCount = [];
 
   _imageCount() async {
+    listLifeGuideController.clear();
+    listLifeGuideAnimation.clear();
+    listOfImagesCount.clear();
+
     for (int i = 0; i < _getTotalLength()!; i++) {
       await _getImageFromAssets(i);
       int duration = 0;
@@ -848,15 +845,15 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
   }
 
   _getImageFromAssets(int index) async {
+
     final manifestContent = await rootBundle.loadString('AssetManifest.json');
 
     final Map<String, dynamic> manifestMap = json.decode(manifestContent);
 
     final imagePaths = manifestMap.keys
-        .where(
-            (String key) => key.contains(_getImagePathFromList(index)! + "/"))
+        .where((String key) => key.contains(_getImagePathFromList(index)! + "/"))
         .toList();
-
     listOfImagesCount.add(imagePaths.length);
+
   }
 }

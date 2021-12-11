@@ -7,9 +7,12 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
+import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'constant.dart';
 
 class Utils {
   static showToast(BuildContext context, String msg,
@@ -264,5 +267,43 @@ class Utils {
       day = Languages.of(context)!.txtSaturday;
     }
     return day;
+  }
+
+  static String getImageBannerForBodyFocusSubPlan(String planName){
+    Debug.printLog("getImageBannerForBodyFocusSubPlan==>> $planName");
+    String imageName = "";
+    if(planName == Constant.PLAN_7_MIN_BUTT_WORKOUT || planName == Constant.PLAN_7_MIN_ABS_WORKOUT){
+      imageName = "ic_7_min_butt_banner.webp";
+    }else if(planName == Constant.PLAN_7_MIN_LOSE_ARM_FAT){
+      imageName = "ic_7_min_lose_arm_banner.webp";
+    }else if(planName == Constant.PLAN_ARM_WORKOUT_NO_PUSH_UPS){
+      imageName = "ic_arm_workout_no_push_banner.webp";
+    }else if(planName == Constant.PLAN_BELLY_FAT_BURNER_HIIT_INTERMEDIATE ||
+        planName == Constant.PLAN_BELLY_FAT_BURNER_HIIT){
+      imageName = "ic_belly_fat_burner_banner.webp";
+    }else if(planName == Constant.PLAN_BUILD_WIDER_SHOULDERS){
+      imageName = "ic_build_wider_banner.webp";
+    }else if(planName == Constant.PLAN_BUTT_BLASTER_CHALLENGE){
+      imageName = "ic_butt_blaster_banner.webp";
+    }else if(planName == Constant.PLAN_GET_RID_OF_MAN_BOOBS_HIIT){
+      imageName = "ic_get_rid_of_man_banner.webp";
+    }else if(planName == Constant.PLAN_INTENSE_INNER_THIGH_CHALLENGE){
+      imageName = "ic_intense_inner_banner.webp";
+    }else if(planName == Constant.PLAN_KILLER_CHEST_WORKOUT){
+      imageName = "ic_killeR_chest_banner.webp";
+    }else if(planName == Constant.PLAN_HIIT_KILLER_CORE){
+      imageName = "ic_killer_core_hiit_banner.webp";
+    }else if(planName == Constant.PLAN_LEGS_BUTT_WORKOUT){
+      imageName = "ic_leg_butt_workout_banner.webp";
+    }else if(planName == Constant.PLAN_LEG_WORKOUT_NO_JUMPING){
+      imageName = "ic_leg_workout_no_jump_banner.webp";
+    }else if(planName == Constant.PLAN_ONLY_4_MOVES_FOR_ABS){
+      imageName = "ic_only_4_move_banner.webp";
+    }else if(planName == Constant.PLAN_PLANK_CHALLENGE){
+      imageName = "ic_plank_banner.webp";
+    }else if(planName == Constant.PLAN_RIPPED_V_CUT_ABS_SCULPTING){
+      imageName = "ic_ripped_vcut_banner.webp";
+    }
+    return "assets/exerciseImage/discover/subPlanBanner/"+imageName;
   }
 }

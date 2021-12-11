@@ -155,7 +155,8 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
                               builder: (context) => ExerciseListScreen(
                                   fromPage: Constant.PAGE_DISCOVER,
                                   planName: discoverSubPlanList[index].planName,
-                                  discoverPlanTable: discoverSubPlanList[index]
+                                  discoverPlanTable: discoverSubPlanList[index],
+                                isSubPlan: true,
                               )));
                     },
                     child: Container(
