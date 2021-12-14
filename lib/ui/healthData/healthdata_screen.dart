@@ -27,6 +27,7 @@ class _HealthDataScreenState extends State<HealthDataScreen> implements TopBarCl
 
   Gender? _gender;
   String? _birthDate;
+  String? strGender;
   bool? isMale;
 
 
@@ -112,7 +113,7 @@ class _HealthDataScreenState extends State<HealthDataScreen> implements TopBarCl
                 fontSize: 16,)
           ),
           Text(
-              isMale! ? Languages.of(context)!.txtMale : Languages.of(context)!.txtFemale,
+              (strGender == Constant.GENDER_MEN) ? Languages.of(context)!.txtMale : Languages.of(context)!.txtFemale,
               style: const TextStyle(
                 color: Colur.txtBlack,
                 fontSize: 12,)
@@ -206,11 +207,9 @@ class _HealthDataScreenState extends State<HealthDataScreen> implements TopBarCl
                   _gender = value;
                   Debug.printLog(_gender.toString());
                   if(_gender == Gender.male) {
-                    isMale = true;
                     Preference.shared.setBool(Preference.isMale, true);
                     Preference.shared.setString(Constant.SELECTED_GENDER, Constant.GENDER_MEN);
                   } else {
-                    isMale = false;
                     Preference.shared.setBool(Preference.isMale, false);
                     Preference.shared.setString(Constant.SELECTED_GENDER, Constant.GENDER_WOMEN);
                   }
@@ -234,10 +233,16 @@ class _HealthDataScreenState extends State<HealthDataScreen> implements TopBarCl
   }
 
   _getPreference() {
-    isMale = Preference.shared.getBool(Preference.isMale) ?? true;
+    strGender = Preference.shared.getString(Constant.SELECTED_GENDER) ?? Constant.GENDER_MEN;
+    /*isMale = Preference.shared.getBool(Preference.isMale) ?? true;
     if(isMale!){
       _gender = Gender.male;
     }else{
+      _gender = Gender.female;
+    }*/
+    if (strGender == Constant.GENDER_MEN) {
+      _gender = Gender.male;
+    } else {
       _gender = Gender.female;
     }
 

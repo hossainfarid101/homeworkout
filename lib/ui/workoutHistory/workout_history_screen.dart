@@ -352,12 +352,11 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
               children: [
                 Row(
                   children: [
-                    //=========exercise type icon==========
                     ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(70)),
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
                       child: Image.asset(
                         setPlanImage(arrHistoryDetail, index),
-                        scale: 2.5,
+                        scale: 3.5,
                       ),
                     ),
                     //======workout details======
@@ -506,14 +505,24 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
 
   String setPlanImage(List<HistoryTable> arrHistoryDetail, int index) {
 
-    if (Utils.getPlanName(arrHistoryDetail[index].planName.toString(), context) == Languages.of(context)!.txtBeginnerDay) {
-      return "assets/icons/ic_history_normal.png";
-    } else if (Utils.getPlanName(arrHistoryDetail[index].planName.toString(), context) == Languages.of(context)!.txtIntermediateDay) {
-      return "assets/icons/ic_history_intermediate.png";
-    } else if (Utils.getPlanName(arrHistoryDetail[index].planName.toString(), context) == Languages.of(context)!.txtAdvanceDay) {
-      return "assets/icons/ic_history_advanced.png";
-    } else {
-      return "assets/icons/ic_history_training_plan.png";
+    if (arrHistoryDetail[index].fromPage.toString() == Constant.PAGE_DISCOVER) {
+      return "assets/icons/history/ic_history_discover.webp";
+    } else if (arrHistoryDetail[index].tableName.toString()== Constant.tbl_full_body_workouts_list) {
+      return "assets/icons/history/ic_history_full_body.webp";
+    } else if (arrHistoryDetail[index].tableName.toString()== Constant.tbl_lower_body_list) {
+      return "assets/icons/history/ic_history_lower.webp";
+    }else if (arrHistoryDetail[index].tableName.toString()== Constant.tbl_abs_beginner || arrHistoryDetail[index].tableName.toString()== Constant.tbl_abs_intermediate || arrHistoryDetail[index].tableName.toString()== Constant.tbl_abs_advanced) {
+      return "assets/icons/history/ic_history_abs.webp";
+    }else if (arrHistoryDetail[index].tableName.toString()== Constant.tbl_chest_beginner || arrHistoryDetail[index].tableName.toString()== Constant.tbl_chest_intermediate || arrHistoryDetail[index].tableName.toString()== Constant.tbl_chest_advanced) {
+      return "assets/icons/history/ic_history_chest.webp";
+    }else if (arrHistoryDetail[index].tableName.toString()== Constant.tbl_arm_beginner || arrHistoryDetail[index].tableName.toString()== Constant.tbl_arm_intermediate || arrHistoryDetail[index].tableName.toString()== Constant.tbl_arm_advanced) {
+      return "assets/icons/history/ic_history_arm.webp";
+    }else if (arrHistoryDetail[index].tableName.toString()== Constant.tbl_leg_beginner || arrHistoryDetail[index].tableName.toString()== Constant.tbl_leg_intermediate || arrHistoryDetail[index].tableName.toString()== Constant.tbl_leg_advanced) {
+      return "assets/icons/history/ic_history_leg.webp";
+    }else if (arrHistoryDetail[index].tableName.toString()== Constant.tbl_shoulder_back_beginner || arrHistoryDetail[index].tableName.toString()== Constant.tbl_shoulder_back_intermediate || arrHistoryDetail[index].tableName.toString()== Constant.tbl_shoulder_back_advanced) {
+      return "assets/icons/history/ic_history_shoulder.webp";
+    } else{
+      return "assets/icons/history/ic_history_discover.webp";
     }
   }
 

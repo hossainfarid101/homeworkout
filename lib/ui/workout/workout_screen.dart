@@ -174,6 +174,8 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
   _setSoundCountDown() async {
     if (int.parse(countDownController.getTime()) < 4) {
       if (!isMute! && isVoiceGuide!) {
+        Debug.printLog("_setSoundCountDown==>> "+countDownController.getTime().toString()+"  "+
+        timerForCount!.tick.toString());
         Utils.textToSpeech(countDownController.getTime(), flutterTts);
       }
     }
@@ -563,7 +565,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
                     onTap: () {
 
                       _showVideoAnimationScreen();
-
+                      timerForCount!.cancel();
                       /*if (isWidgetCountDown) {
                     countDownController.pause();
                   } else {
@@ -959,6 +961,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
                                   planName: widget.planName,
                                 ))).then((value) => value == false
                             ? {
+                                  Debug.printLog("From where:::Done "+isWidgetCountDown.toString()),
                           _getLastPosition(),
                           _startExercise(),
                           isWidgetCountDown = false
@@ -1318,8 +1321,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
     if (controller != null && controller!.lastElapsedDuration != null) {
       setState(() {
         durationOfExercise = durationOfExercise == null
-            ? controller!.duration!.inSeconds -
-                controller!.lastElapsedDuration!.inSeconds
+            ? controller!.duration!.inSeconds - controller!.lastElapsedDuration!.inSeconds
             : durationOfExercise! - controller!.lastElapsedDuration!.inSeconds;
         controller!.stop();
       });
@@ -1355,7 +1357,6 @@ class _WorkoutScreenState extends State<WorkoutScreen> with TickerProviderStateM
   _showVideoAnimationScreen(){
     if (isWidgetCountDown) {
       countDownController.pause();
-
     } else {
       if (controller != null && controller!.lastElapsedDuration != null) {
         durationOfExercise = durationOfExercise == null

@@ -88,6 +88,9 @@ class Colur {
   static const transparent_black_30 = Color(0x30000000);
   static const transparent_black_40 = Color(0x40000000);
   static const transparent_black_50 = Color(0x50000000);
+  static const transparent_black_60 = Color(0x60000000);
+  static const transparent_black_70 = Color(0x70000000);
+  static const transparent_black_80 = Color(0x80000000);
   static const transparent_grey_10 = Color(0x10F2F2F2);
   static const transparent_grey_20 = Color(0x20F2F2F2);
   static const transparent_grey_30 = Color(0x30F2F2F2);
@@ -110,6 +113,7 @@ class Colur {
   static const brand_orange = Color(0xffFFA904);
 
   static const gray_light = Color(0xffeeeeee);
+  static const gray_unlock = Color(0xff4b4e55);
   static const gray_light_50 = Color(0x50eeeeee);
   static const bg_white = Color(0xfffafafa);
   static const bg_well_done = Color(0xff263143);

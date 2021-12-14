@@ -677,16 +677,13 @@ class _TrainingScreenState extends State<TrainingScreen>
                                         ),
                                       ),
                                       Container(
+                                        alignment: Alignment.bottomLeft,
                                         width: double.infinity,
                                         margin: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 10),
-                                        child: Row(
-                                          children: [
-                                            Icon(Icons.bolt_rounded, color: Colur.blue,size: 18,),
-                                            Icon(Icons.bolt_rounded, color: Colur.grey_icon,size: 18,),
-                                            Icon(Icons.bolt_rounded, color: Colur.grey_icon,size: 18,),
-                                          ],
-                                        ),
-                                      ),
+                                          child: Image.asset(
+                                            _getLevelImage(allPlanDataList[index].catSubCategory.toString())!,
+                                            scale: 3.5,
+                                          )),
                                     ],
                                   ),
                                 ),
@@ -703,6 +700,22 @@ class _TrainingScreenState extends State<TrainingScreen>
         ],
       ),
     );
+  }
+
+  String? _getLevelImage(String planLevel){
+    String? levelName = "";
+    if(planLevel != Constant.titleQuarantineAtHome && planLevel != Constant.txt_7_4_challenge && planLevel !=Constant.title ) {
+      if (planLevel == Constant.strBeginner) {
+        levelName = "assets/icons/ic_1_star.png";
+      } else if (planLevel == Constant.strIntermediate) {
+        levelName = "assets/icons/ic_2_star.png";
+      } else if (planLevel == Constant.strAdvance) {
+        levelName = "assets/icons/ic_3_star.png";
+      } else {
+        levelName = "assets/icons/ic_3_star.png";
+      }
+    }
+    return levelName;
   }
 
   bool _isDayStatusPlan(int index){

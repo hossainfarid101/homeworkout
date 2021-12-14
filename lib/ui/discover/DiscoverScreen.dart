@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:homeworkout_flutter/common/commonTopBar/commom_topbar.dart';
 import 'package:homeworkout_flutter/custom/drawer/drawer_menu.dart';
 import 'package:homeworkout_flutter/database/database_helper.dart';
@@ -12,6 +13,7 @@ import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/exercisePlan/exercise_plan_screen.dart';
 import 'package:homeworkout_flutter/ui/exerciselist/ExerciseListScreen.dart';
 import 'package:homeworkout_flutter/ui/quarantineathome/QuarantineAtHomeScreen.dart';
+import 'package:homeworkout_flutter/ui/unlockPremium/unlock_premium_screen.dart';
 import 'package:homeworkout_flutter/ui/workoutHistory/workout_history_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
@@ -42,11 +44,155 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   int? currentPicksForYouPage = 0;
   int? currentFastWorkoutPage = 0;
   int? totalQuarantineWorkout = 0;
+
+  String testDevice = 'YOUR_DEVICE_ID';
+  int maxFailedLoadAttempts = 3;
+
+  RewardedAd? _rewardedAd;
+  int _numRewardedLoadAttempts = 0;
+  String? selectedCategory = "";
+  int? selectedCategoryIndex = 0;
+
+  static final AdRequest request = AdRequest(
+    nonPersonalizedAds: true,
+  );
   @override
   void initState() {
     _getDataFromDatabase();
+    _createRewardedAd();
     super.initState();
   }
+
+  void _createRewardedAd() {
+    RewardedAd.load(
+        adUnitId: RewardedAd.testAdUnitId,
+        request: request,
+        rewardedAdLoadCallback: RewardedAdLoadCallback(
+          onAdLoaded: (RewardedAd ad) {
+            print('$ad loaded.');
+            _rewardedAd = ad;
+            _numRewardedLoadAttempts = 0;
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            print('RewardedAd failed to load: $error');
+            _rewardedAd = null;
+            _numRewardedLoadAttempts += 1;
+            if (_numRewardedLoadAttempts <= maxFailedLoadAttempts) {
+              _createRewardedAd();
+            }
+          },
+        ));
+  }
+
+  void _showRewardedAd() {
+    if (_rewardedAd == null) {
+      _startNextScreen();
+      print('Warning: attempt to show rewarded before loaded.');
+      return;
+    }
+    _rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (RewardedAd ad) =>
+          print('ad onAdShowedFullScreenContent.'),
+      onAdDismissedFullScreenContent: (RewardedAd ad) {
+        print('$ad onAdDismissedFullScreenContent.');
+        ad.dispose();
+        _startNextScreen();
+        _createRewardedAd();
+      },
+      onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error) {
+        print('$ad onAdFailedToShowFullScreenContent: $error');
+        ad.dispose();
+        _startNextScreen();
+        _createRewardedAd();
+      },
+    );
+
+    _rewardedAd!.setImmersiveMode(true);
+    _rewardedAd!.show(onUserEarnedReward: (RewardedAd ad, RewardItem reward) {
+      print('$ad with reward $RewardItem(${reward.amount}, ${reward.type}');
+    });
+    _rewardedAd = null;
+  }
+
+  _startNextScreen() {
+    if (selectedCategory == Constant.catDiscoverCard) {
+      Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ExerciseListScreen(
+                      fromPage: Constant.PAGE_DISCOVER,
+                      planName: randomPlanData!.planName,
+                      discoverPlanTable: randomPlanData)))
+          .then((value) => Navigator.pop(context));
+    } else if (selectedCategory == Constant.catPickForYou) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ExerciseListScreen(
+                    fromPage: Constant.PAGE_DISCOVER,
+                    planName:
+                        picksForYouDiscoverPlanList[selectedCategoryIndex!]
+                            .planName,
+                    discoverPlanTable:
+                        picksForYouDiscoverPlanList[selectedCategoryIndex!],
+                  ))).then((value) => Navigator.pop(context));
+    } else if (selectedCategory == Constant.catForBeginner) {
+      Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ExerciseListScreen(
+                      fromPage: Constant.PAGE_DISCOVER,
+                      planName:
+                          forBeginnerDiscoverPlanList[selectedCategoryIndex!]
+                              .planName,
+                      discoverPlanTable:
+                          forBeginnerDiscoverPlanList[selectedCategoryIndex!])))
+          .then((value) => Navigator.pop(context));
+    } else if (selectedCategory == Constant.catFastWorkout) {
+      Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ExerciseListScreen(
+                      fromPage: Constant.PAGE_DISCOVER,
+                      planName:
+                          fastWorkoutDiscoverPlanList[selectedCategoryIndex!]
+                              .planName,
+                      discoverPlanTable:
+                          fastWorkoutDiscoverPlanList[selectedCategoryIndex!])))
+          .then((value) => Navigator.pop(context));
+    } else if (selectedCategory == Constant.catChallenge) {
+      Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ExerciseListScreen(
+                      fromPage: Constant.PAGE_DISCOVER,
+                      planName:
+                          challengeDiscoverPlanList[selectedCategoryIndex!]
+                              .planName,
+                      discoverPlanTable:
+                          challengeDiscoverPlanList[selectedCategoryIndex!])))
+          .then((value) => Navigator.pop(context));
+    } else if (selectedCategory == Constant.catSleep) {
+      Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ExerciseListScreen(
+                      fromPage: Constant.PAGE_DISCOVER,
+                      planName: sleepDiscoverPlanList[selectedCategoryIndex!]
+                          .planName,
+                      discoverPlanTable:
+                          sleepDiscoverPlanList[selectedCategoryIndex!])))
+          .then((value) => Navigator.pop(context));
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _rewardedAd?.dispose();
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -217,14 +363,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   _discoverCard() {
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ExerciseListScreen(
-                    fromPage: Constant.PAGE_DISCOVER,
-                    planName: randomPlanData!.planName,
-                    discoverPlanTable: randomPlanData
-                )));
+        _showDialogForWatchVideoUnlock(Constant.catDiscoverCard,0);
       },
       child: Card(
         elevation: 5.0,
@@ -342,14 +481,17 @@ class _DiscoverScreenState extends State<DiscoverScreen>
               ? Expanded(
                 child: InkWell(
                   onTap: () {
-                    Navigator.push(
+
+                    _showDialogForWatchVideoUnlock(Constant.catPickForYou,firstCardPos);
+
+                    /*Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => ExerciseListScreen(
                                     fromPage: Constant.PAGE_DISCOVER,
                                   planName: picksForYouDiscoverPlanList[firstCardPos].planName,
                                   discoverPlanTable: picksForYouDiscoverPlanList[firstCardPos]
-                                  )));
+                                  )));*/
                     },
                   child: Row(
                     children: [
@@ -438,14 +580,17 @@ class _DiscoverScreenState extends State<DiscoverScreen>
               ? Expanded(
                   child: InkWell(
                     onTap: () {
-                      Navigator.push(
+
+                      _showDialogForWatchVideoUnlock(Constant.catPickForYou,secondCardPos);
+
+                     /* Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => ExerciseListScreen(
                                     fromPage: Constant.PAGE_DISCOVER,
                                 planName: picksForYouDiscoverPlanList[secondCardPos].planName,
                                 discoverPlanTable: picksForYouDiscoverPlanList[secondCardPos],
-                                  )));
+                                  )));*/
                     },
                     child: Row(
                       children: [
@@ -631,14 +776,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
       aspectRatio: 16 / 13.8,
       child: InkWell(
         onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => ExerciseListScreen(
-                      fromPage: Constant.PAGE_DISCOVER,
-                      planName: forBeginnerDiscoverPlanList[index].planName,
-                      discoverPlanTable: forBeginnerDiscoverPlanList[index]
-                  )));
+          _showDialogForWatchVideoUnlock(Constant.catForBeginner, index);
+
         },
         child: Card(
           margin: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -725,14 +864,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
               ? Expanded(
                   child: InkWell(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ExerciseListScreen(
-                                  fromPage: Constant.PAGE_DISCOVER,
-                                  planName: fastWorkoutDiscoverPlanList[firstCardPos].planName,
-                                  discoverPlanTable: fastWorkoutDiscoverPlanList[firstCardPos]
-                              )));
+                      _showDialogForWatchVideoUnlock(Constant.catFastWorkout, firstCardPos);
                     },
                     child: Row(
                       children: [
@@ -815,14 +947,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
               ? Expanded(
                   child: InkWell(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ExerciseListScreen(
-                                  fromPage: Constant.PAGE_DISCOVER,
-                                  planName: fastWorkoutDiscoverPlanList[secondCardPos].planName,
-                                  discoverPlanTable: fastWorkoutDiscoverPlanList[secondCardPos]
-                              )));
+                      _showDialogForWatchVideoUnlock(Constant.catFastWorkout, secondCardPos);
                     },
                     child: Row(
                       children: [
@@ -940,14 +1065,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
       aspectRatio: 16 / 13.8,
       child: InkWell(
         onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => ExerciseListScreen(
-                      fromPage: Constant.PAGE_DISCOVER,
-                      planName: challengeDiscoverPlanList[index].planName,
-                      discoverPlanTable: challengeDiscoverPlanList[index]
-                  )));
+          _showDialogForWatchVideoUnlock(Constant.catChallenge, index);
+
         },
         child: Card(
           margin: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -1074,14 +1193,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   _itemSleepList(int index) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ExerciseListScreen(
-                    fromPage: Constant.PAGE_DISCOVER,
-                    planName: sleepDiscoverPlanList[index].planName,
-                    discoverPlanTable: sleepDiscoverPlanList[index]
-                )));
+        _showDialogForWatchVideoUnlock(Constant.catSleep, index);
+
       },
       child: Column(
         children: [
@@ -1203,5 +1316,157 @@ class _DiscoverScreenState extends State<DiscoverScreen>
     if(name == Constant.strHistory) {
       Navigator.push(context, MaterialPageRoute(builder: (context) => WorkoutHistoryScreen()));
     }
+  }
+
+  _showDialogForWatchVideoUnlock(String catName, int index) {
+    selectedCategory = catName;
+    selectedCategoryIndex = index;
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Scaffold(
+            backgroundColor: Colur.transparent_black_80,
+            body: Container(
+              width: double.infinity,
+              height: double.infinity,
+              child: Stack(
+                // crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.all(10),
+                      child: Icon(
+                        Icons.arrow_back_rounded,
+                        color: Colur.white,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.lock_open_rounded,
+                          color: Colur.white,
+                        ),
+                        Container(
+                          margin: const EdgeInsets.symmetric(vertical: 10),
+                          child: Text(
+                            Languages.of(context)!
+                                .txtWatchVideoToUnlock
+                                .toUpperCase(),
+                            style: TextStyle(
+                                color: Colur.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 17),
+                          ),
+                        ),
+                        Container(
+                          child: Text(
+                            Languages.of(context)!.txtWatchVideoToUnlockDesc,
+                            style: TextStyle(
+                                color: Colur.white,
+                                fontWeight: FontWeight.w300,
+                                fontSize: 15),
+                          ),
+                        ),
+                        Container(
+                          width: double.infinity,
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 40.0, vertical: 13.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                            gradient: LinearGradient(
+                              colors: [
+                                Colur.blueGradientButton1,
+                                Colur.blueGradientButton2,
+                              ],
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                              tileMode: TileMode.clamp,
+                            ),
+                          ),
+                          child: TextButton(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.play_circle_fill_rounded,
+                                  color: Colur.white,
+                                  size: 16,
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  child: Text(
+                                    Languages.of(context)!
+                                        .txtUnlockOnce
+                                        .toUpperCase(),
+                                    style: TextStyle(
+                                      color: Colur.white,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 16.0,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            onPressed: () {
+                              _showRewardedAd();
+                            },
+                          ),
+                        ),
+                        Container(
+                          width: double.infinity,
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 40.0, vertical: 5.0),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              color: Colur.gray_unlock),
+                          child: TextButton(
+                            child: Container(
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Text(
+                                Languages.of(context)!
+                                    .txtFree7DaysTrial
+                                    .toUpperCase(),
+                                style: TextStyle(
+                                  color: Colur.white,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              UnlockPremiumScreen()))
+                                  .then((value) => Navigator.pop(context));
+                            },
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.symmetric(vertical: 10),
+                          child: Text(
+                            Languages.of(context)!.txtFreeTrialDesc,
+                            style: TextStyle(color: Colur.white, fontSize: 12),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          );
+        });
   }
 }

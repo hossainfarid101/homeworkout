@@ -96,6 +96,7 @@ class Constant {
   static const Leg = "Leg";
   static const Library = "Library";
 
+  static const catDiscoverCard = "Discover card";
   static const catPickForYou = "Picks for you";
   static const catForBeginner = "For beginner";
   static const catFastWorkout = "Fast workout";
@@ -108,6 +109,7 @@ class Constant {
   static const PREF_RANDOM_DISCOVER_PLAN = "PREF_RANDOM_DISCOVER_PLAN";
   static const PREF_RANDOM_DISCOVER_PLAN_DATE = "PREF_RANDOM_DISCOVER_PLAN_DATE";
   static const EXERCISE_EXTENSION = ".webp";
+
 
 /*  static const minKG = 20.00;
   static const maxKG = 997.00;

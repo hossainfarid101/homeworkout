@@ -68,6 +68,7 @@ dependencies:
   syncfusion_flutter_gauges: ^19.3.56
   percent_indicator: ^3.4.0
   numberpicker: ^2.1.1
+  google_mobile_ads: ^1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -227,7 +228,6 @@ flutter:
     - assets/img_exercise/MILITARYPRESS/
     - assets/img_exercise/MILITARYPUSHUPS/
     - assets/img_exercise/MODIFIEDBURPEES/
-    - assets/img_exercise/MODIFIEDPUSHUPLOWHOLD/
     - assets/img_exercise/MOUNTAINCLIMBERSQUATTHRUST/
     - assets/img_exercise/OBLIQUEVUPSLEFT/
     - assets/img_exercise/OBLIQUEVUPSRIGHT/
@@ -387,6 +387,18 @@ flutter:
     - assets/img_exercise/TOYSOLDIERS/
     - assets/img_exercise/TRICEPSDIPS/
     - assets/icons/
+    - assets/icons/history/
+    - assets/icons/history/ic_history_abs.webp
+    - assets/icons/history/ic_history_arm.webp
+    - assets/icons/history/ic_history_chest.webp
+    - assets/icons/history/ic_history_discover.webp
+    - assets/icons/history/ic_history_full_body.webp
+    - assets/icons/history/ic_history_leg.webp
+    - assets/icons/history/ic_history_lower.webp
+    - assets/icons/history/ic_history_shoulder.webp
+    - assets/icons/ic_1_star.png
+    - assets/icons/ic_2_star.png
+    - assets/icons/ic_3_star.png
     - assets/icons/ic_select_pointer.webp
     - assets/icons/ic_challenge_complete_day.png
     - assets/icons/ic_menu.png
@@ -433,6 +445,7 @@ flutter:
     - assets/icons/drawer/ic_training_selected.webp
     - assets/icons/drawer/ic_training_unselected.webp
     - assets/icons/cp_ic_animation.png
+    - assets/icons/ic_done_purchase.webp
     - assets/icons/ic_workout_time.png
     - assets/icons/ic_workout_calories.png
     - assets/icons/ic_history_training_plan.png
@@ -440,6 +453,7 @@ flutter:
     - assets/icons/ic_history_intermediate.png
     - assets/icons/ic_history_normal.png
     - assets/images/
+    - assets/images/ic_7_day_free_trial.webp
     - assets/images/main_bg.webp
     - assets/images/arm_intermediate.webp
     - assets/images/bg_set_week_goal.webp

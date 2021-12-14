@@ -625,4 +625,34 @@ class LanguageEn extends Languages {
 
   @override
   String get txtGotoHomePage => "Go to home page";
+
+  @override
+  String get txtWatchVideoToUnlock => "Watch video to unlock";
+
+  @override
+  String get txtWatchVideoToUnlockDesc => "Watch the video to use training plan once";
+
+  @override
+  String get txtUnlockOnce => "Unlock once";
+
+  @override
+  String get txtFreeTrialDesc => "Free 7Days Trial,then ₹3500.00/year. \nCancel anything during the trial.";
+
+  @override
+  String get txtFree7DaysTrial => "Free 7 days trial";
+
+  @override
+  String get txt1month => "1 Month";
+
+  @override
+  String get txtRemoveAds => "Remove ads";
+
+  @override
+  String get txt300PlusWorkout => "300+ workout for fat burning";
+
+  @override
+  String get txtAddNewWorkoutConstant => "Add new workouts constantly";
+
+  @override
+  String get txtUnlimitedWorkout => "Unlimited Wokrout plans";
 }
