@@ -10,7 +10,7 @@ import 'package:homeworkout_flutter/interfaces/topbar_clicklistener.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/localization/locale_constant.dart';
 import 'package:homeworkout_flutter/ui/exerciselist/ExerciseListScreen.dart';
-import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
+import 'package:homeworkout_flutter/ui/report/report_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
@@ -85,7 +85,7 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
       ),
       child: WillPopScope(
         onWillPop:() async{
-          _backToTrainingScreen();
+          _backToReportScreen();
           return false;
         },
         child: Scaffold(
@@ -587,15 +587,13 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
   @override
   void onTopBarClick(String name, {bool value = true}) {
     if(name == Constant.strBack){
-      _backToTrainingScreen();
+      _backToReportScreen();
     }
   }
 
-  _backToTrainingScreen(){
+  _backToReportScreen() {
     Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-            builder: (context) => TrainingScreen()),
-        ModalRoute.withName("/training"));
+        context, MaterialPageRoute(builder: (context) => ReportScreen()), (
+        route) => false);
   }
 }

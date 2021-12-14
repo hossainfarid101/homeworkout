@@ -10,7 +10,6 @@ import 'package:homeworkout_flutter/database/database_helper.dart';
 import 'package:homeworkout_flutter/database/model/DiscoverSingleExerciseData.dart';
 import 'package:homeworkout_flutter/database/model/ExerciseListData.dart';
 import 'package:homeworkout_flutter/database/model/WeekDayData.dart';
-import 'package:homeworkout_flutter/database/model/WeeklyDayData.dart';
 import 'package:homeworkout_flutter/database/model/WorkoutDetailData.dart';
 import 'package:homeworkout_flutter/database/tables/history_table.dart';
 import 'package:homeworkout_flutter/database/tables/weight_table.dart';
@@ -28,28 +27,28 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:lottie/lottie.dart';
 
 class WorkoutCompleteScreen extends StatefulWidget {
-  String? fromPage = "";
-  List<ExerciseListData>? exerciseDataList;
-  String? tableName = "";
-  List<WorkoutDetail>? dayStatusDetailList;
-  List<DiscoverSingleExerciseData>? discoverSingleExerciseData;
-  String? dayName = "";
-  String? weekName = "";
-  String? planName = "";
-  String? planId = "";
-  int? totalMin = 0;
+  final String? fromPage;
+  final List<ExerciseListData>? exerciseDataList;
+  final String? tableName;
+  final List<WorkoutDetail>? dayStatusDetailList;
+  final List<DiscoverSingleExerciseData>? discoverSingleExerciseData;
+  final String? dayName;
+  final String? weekName;
+  final String? planName;
+  final String? planId;
+  final int? totalMin;
 
   WorkoutCompleteScreen(
-      {this.fromPage,
+      {this.fromPage = "",
       this.exerciseDataList,
-      this.tableName,
+      this.tableName = "",
       this.dayStatusDetailList,
-      this.dayName,
-      this.weekName,
+      this.dayName = "",
+      this.weekName = "",
       this.discoverSingleExerciseData,
-      this.planName,
-      this.planId,
-      this.totalMin});
+      this.planName = "",
+      this.planId = "",
+      this.totalMin = 0});
 
   @override
   _WorkoutCompleteScreenState createState() => _WorkoutCompleteScreenState();
@@ -793,7 +792,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                       margin: EdgeInsets.all(15),
                       child: Image.asset(
                         "assets/icons/ic_edit.webp",
-                        color: Colur.blue,
+                        color: Colur.theme,
                       )),
                 ),
               ],
@@ -1060,18 +1059,125 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
       bmiColor = Colur.black;
     }
   }
+  saveWeightDataToGraph() {
+    if (isKg! && !isLbs!) {
+      if (double.parse(weightController.text) >= Constant.MIN_KG &&
+          double.parse(weightController.text) <= Constant.MAX_KG) {
+        setState(() {
+
+          if (weightDataList.isNotEmpty) {
+            weightDataList.forEach((element) {
+              if (element.date ==
+                  DateFormat.yMd().format(DateTime.now())) {
+                DataBaseHelper().updateWeight(
+                    date: DateFormat.yMd().format(DateTime.now()),
+                    weightKG: (isKg! && !isLbs!)
+                        ? double.parse(weightController.text)
+                        : Utils.lbToKg(double.parse(weightController.text)),
+                    weightLBS: (!isKg! && isLbs!)
+                        ? double.parse(weightController.text)
+                        : Utils.kgToLb(double.parse(weightController.text)));
+              } else {
+                DataBaseHelper().insertWeightData(WeightTable(
+                    id: null,
+                    weightKG: (isKg! && !isLbs!)
+                        ? double.parse(weightController.text)
+                        : Utils.lbToKg(double.parse(weightController.text)),
+                    weightLB: (!isKg! && isLbs!)
+                        ? double.parse(weightController.text)
+                        : Utils.kgToLb(double.parse(weightController.text)),
+                    date: DateFormat.yMd().format(DateTime.now()),
+                    currentTimeStamp: Utils.getCurrentDateTime()));
+              }
+            });
+          } else {
+            DataBaseHelper().insertWeightData(WeightTable(
+                id: null,
+                weightKG: (isKg! && !isLbs!)
+                    ? double.parse(weightController.text)
+                    : Utils.lbToKg(double.parse(weightController.text)),
+                weightLB: (!isKg! && isLbs!)
+                    ? double.parse(weightController.text)
+                    : Utils.kgToLb(double.parse(weightController.text)),
+                date: DateFormat.yMd().format(DateTime.now()),
+                currentTimeStamp: Utils.getCurrentDateTime()));
+          }
+
+        });
+      } else {
+        Utils.showToast(context, Languages.of(context)!.txtWarningForKg);
+      }
+    } else {
+      if (double.parse(weightController.text) >= Constant.MIN_LBS &&
+          double.parse(weightController.text) <= Constant.MAX_LBS) {
+        setState(() {
+
+
+          if (weightDataList.isNotEmpty) {
+            weightDataList.forEach((element) {
+              if (element.date ==
+                  DateFormat.yMd().format(DateTime.now())) {
+                DataBaseHelper().updateWeight(
+                    date: DateFormat.yMd().format(DateTime.now()),
+                    weightKG: (isKg! && !isLbs!)
+                        ? double.parse(weightController.text)
+                        : Utils.lbToKg(double.parse(weightController.text)),
+                    weightLBS: (!isKg! && isLbs!)
+                        ? double.parse(weightController.text)
+                        : Utils.kgToLb(double.parse(weightController.text)));
+              } else {
+                DataBaseHelper().insertWeightData(WeightTable(
+                    id: null,
+                    weightKG: (isKg! && !isLbs!)
+                        ? double.parse(weightController.text)
+                        : Utils.lbToKg(double.parse(weightController.text)),
+                    weightLB: (!isKg! && isLbs!)
+                        ? double.parse(weightController.text)
+                        : Utils.kgToLb(double.parse(weightController.text)),
+                    date: DateFormat.yMd().format(DateTime.now()),
+                    currentTimeStamp: Utils.getCurrentDateTime()));
+              }
+            });
+          } else {
+            DataBaseHelper().insertWeightData(WeightTable(
+                id: null,
+                weightKG: (isKg! && !isLbs!)
+                    ? double.parse(weightController.text)
+                    : Utils.lbToKg(double.parse(weightController.text)),
+                weightLB: (!isKg! && isLbs!)
+                    ? double.parse(weightController.text)
+                    : Utils.kgToLb(double.parse(weightController.text)),
+                date: DateFormat.yMd().format(DateTime.now()),
+                currentTimeStamp: Utils.getCurrentDateTime()));
+          }
+
+          if (isKg!) {
+            double wKg = double.parse(weightController.text);
+            Preference.shared.setDouble(Preference.WEIGHT, wKg);
+          } else {
+            double wKg = Utils.lbToKg(double.parse(weightController.text));
+            Preference.shared.setDouble(Preference.WEIGHT, wKg);
+          }
+
+
+        });
+      } else {
+        Utils.showToast(context, Languages.of(context)!.txtWarningForLbs);
+      }
+    }
+  }
 
   _moverWorkoutHistoryScreen() {
     if (weightController.text != "") {
       if (isKg!) {
         if (double.parse(weightController.text) > Constant.MIN_KG &&
             double.parse(weightController.text) < Constant.MAX_KG) {
-          // saveWeightDataToGraph();
+           saveWeightDataToGraph();
         }
       } else {
         if (double.parse(weightController.text) > Constant.MIN_LBS &&
             double.parse(weightController.text) < Constant.MAX_LBS) {
-          // saveWeightDataToGraph();
+           saveWeightDataToGraph();
         }
       }
     }

@@ -411,6 +411,7 @@ abstract class Languages {
   String get txtFT;
 
   String get txtInstruction;
+
   String get txtGotoHomePage;
   String get txtWatchVideoToUnlock;
   String get txtWatchVideoToUnlockDesc;
@@ -422,4 +423,7 @@ abstract class Languages {
   String get txtUnlimitedWorkout;
   String get txt300PlusWorkout;
   String get txtAddNewWorkoutConstant;
+
+  String get txtGoPremium;
+
 }

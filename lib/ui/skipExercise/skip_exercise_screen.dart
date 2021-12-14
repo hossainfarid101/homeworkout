@@ -17,26 +17,24 @@ import 'package:homeworkout_flutter/utils/utils.dart';
 
 class SkipExerciseScreen extends StatefulWidget {
 
-  List<ExerciseListData>? exerciseDataList;
-  String? fromPage = "";
-  String? tableName ="";
-  List<WorkoutDetail>? dayStatusDetailList;
-  String? dayName = "";
-  String? weekName = "";
-  List<DiscoverSingleExerciseData>? discoverSingleExerciseData;
-  String? planName = "";
-
-  // SkipExerciseScreen({this.exerciseDataList,this.fromPage,this.tableName});
+  final List<ExerciseListData>? exerciseDataList;
+  final String? fromPage;
+  final String? tableName;
+  final List<WorkoutDetail>? dayStatusDetailList;
+  final String? dayName;
+  final String? weekName;
+  final List<DiscoverSingleExerciseData>? discoverSingleExerciseData;
+  final String? planName;
 
   SkipExerciseScreen(
-      {this.fromPage,
+      {this.fromPage = "",
       this.exerciseDataList,
-      this.tableName,
+      this.tableName = "",
       this.dayStatusDetailList,
-      this.dayName,
-      this.weekName,
+      this.dayName = "",
+      this.weekName = "",
       this.discoverSingleExerciseData,
-      this.planName});
+      this.planName = ""});
 
   @override
   _SkipExerciseScreenState createState() => _SkipExerciseScreenState();
@@ -109,7 +107,7 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
             ? Languages.of(context)!.txtSeconds
             : Languages.of(context)!.txtTimes;
 
-        time = widget.discoverSingleExerciseData![lastPosition!].ExTime.toString();
+        time = widget.discoverSingleExerciseData![lastPosition!].exTime.toString();
         title = widget.discoverSingleExerciseData![lastPosition!].exName.toString();
       }
 
@@ -166,6 +164,7 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
                   exerciseListDataList: widget.exerciseDataList,
                   workoutDetailList: widget.dayStatusDetailList,
                   discoverSingleExerciseDataList: widget.discoverSingleExerciseData,
+                  isForQuit: true,
                 )));
         return false;
       },
@@ -388,14 +387,14 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
   }
 
 
-  bool _timeTypeCheck() {
+  /*bool _timeTypeCheck() {
     return ((widget.fromPage == Constant.PAGE_HOME)
         ? widget.exerciseDataList![lastPosition!].timeType!
         : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
         ? widget.dayStatusDetailList![lastPosition!].timeType!
         : widget.discoverSingleExerciseData![lastPosition!].exUnit!) ==
         ((widget.fromPage != Constant.PAGE_DISCOVER) ? "time" : "s");
-  }
+  }*/
 
   String _getTimeAndCheckTimeType() {
     return (widget.fromPage == Constant.PAGE_HOME)
@@ -410,18 +409,18 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
         : "X ${widget.dayStatusDetailList![lastPosition!].Time_beginner}"
         : (widget.discoverSingleExerciseData![lastPosition!].exUnit == "s")
         ? Utils.secondToMMSSFormat(int.parse(
-        widget.discoverSingleExerciseData![lastPosition!].ExTime
+        widget.discoverSingleExerciseData![lastPosition!].exTime
             .toString()))
-        : "X ${widget.discoverSingleExerciseData![lastPosition!].ExTime}";
+        : "X ${widget.discoverSingleExerciseData![lastPosition!].exTime}";
   }
 
-  String _getExerciseTimeFromList() {
+  /*String _getExerciseTimeFromList() {
     return ((widget.fromPage == Constant.PAGE_HOME)
         ? widget.exerciseDataList![lastPosition!].time!
         : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
         ? widget.dayStatusDetailList![lastPosition!].Time_beginner
-        : widget.discoverSingleExerciseData![lastPosition!].ExTime).toString();
-  }
+        : widget.discoverSingleExerciseData![lastPosition!].exTime).toString();
+  }*/
 
   int _getLengthFromList(){
     return ((widget.fromPage == Constant.PAGE_HOME)

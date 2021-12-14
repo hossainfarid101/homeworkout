@@ -13,12 +13,11 @@ import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class GeneratingThePlanScreen extends StatefulWidget {
-  bool? isPlanReady;
-  Function onValueChanged;
-  Function onValueChangeRandomPlanData;
+  final bool? isPlanReady;
+  final Function onValueChanged;
+  final Function onValueChangeRandomPlanData;
 
   GeneratingThePlanScreen(this.isPlanReady, this.onValueChanged,this.onValueChangeRandomPlanData);
 

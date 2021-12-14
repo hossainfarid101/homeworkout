@@ -18,7 +18,6 @@ class SetWeeklyGoalScreen extends StatefulWidget {
 }
 
 class _SetWeeklyGoalScreenState extends State<SetWeeklyGoalScreen> {
-  FixedExtentScrollController _scrollController = FixedExtentScrollController();
   List<Widget> _pickerDataTrainingDay = [];
   List<Widget> _pickerDataFirstDayWeek = [];
 
@@ -305,7 +304,13 @@ class _SetWeeklyGoalScreenState extends State<SetWeeklyGoalScreen> {
         selecteds: isTraining ? initialTrainingDays! : initialFirstDay,
         hideHeader: true,
         confirmText: Languages.of(context)!.txtOk.toUpperCase(),
+        confirmTextStyle: TextStyle(
+          color: Colur.theme
+        ),
         cancelText: Languages.of(context)!.txtCancel.toUpperCase(),
+        cancelTextStyle: TextStyle(
+            color: Colur.theme
+        ),
         itemExtent: 50,
         looping: false,
         backgroundColor: Colur.white,

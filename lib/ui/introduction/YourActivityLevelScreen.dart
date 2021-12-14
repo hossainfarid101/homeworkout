@@ -3,8 +3,8 @@ import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 
 class YourActivityLevelScreen extends StatefulWidget {
-  String? prefActivityLevel;
-  Function onValueChange;
+  final String? prefActivityLevel;
+  final Function onValueChange;
   YourActivityLevelScreen(this.prefActivityLevel, this.onValueChange);
 
   @override

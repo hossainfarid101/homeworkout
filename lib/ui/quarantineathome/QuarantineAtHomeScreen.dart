@@ -11,7 +11,6 @@ import 'package:homeworkout_flutter/ui/exerciselist/ExerciseListScreen.dart';
 import 'package:homeworkout_flutter/ui/unlockPremium/unlock_premium_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
-import 'package:sqflite/sqflite.dart';
 
 class QuarantineAtHomeScreen extends StatefulWidget {
 

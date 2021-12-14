@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:homeworkout_flutter/database/tables/discover_plan_table.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/exerciselist/ExerciseListScreen.dart';
-import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
@@ -47,7 +46,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
 
   @override
   void initState() {
-    updateValue = 0.1111111111;
+    updateValue = 0.125;
     _getPrefData();
     super.initState();
   }
@@ -236,7 +235,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                     curve: Curves.easeInOut,
                   );
                   setState(() {
-                    updateValue = updateValue! - 0.1111111111;
+                    updateValue = updateValue! - 0.125;
                   });
                 },
                 child: Padding(
@@ -340,7 +339,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                 curve: Curves.easeInOut,
               );
               setState(() {
-                updateValue = updateValue! + 0.1111111111;
+                updateValue = updateValue! + 0.125;
               });
 
               if (currentPageIndex == 1) {
@@ -359,14 +358,14 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                 Preference.shared.setString(Constant.SELECTED_ACTIVITY_LEVEL, prefActivityLevel!);
               } else if (currentPageIndex == 8) {
                 Preference.shared.setBool(Constant.PREF_INTRODUCTION_FINISH, true);
-                // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TrainingScreen()), (route) => false);
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => ExerciseListScreen(
-                            fromPage: Constant.PAGE_DISCOVER,
-                            planName: randomPlanData!.planName,
-                            discoverPlanTable: randomPlanData
+                          fromPage: Constant.PAGE_DISCOVER,
+                          planName: randomPlanData!.planName,
+                          discoverPlanTable: randomPlanData,
+                          isFromOnboarding: true,
                         )));
               }
             },

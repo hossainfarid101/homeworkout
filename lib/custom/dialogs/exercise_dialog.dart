@@ -5,8 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:homeworkout_flutter/database/model/DiscoverSingleExerciseData.dart';
 import 'package:homeworkout_flutter/database/model/ExerciseListData.dart';
 import 'package:homeworkout_flutter/database/model/WorkoutDetailData.dart';
-import 'package:homeworkout_flutter/database/tables/discover_plan_table.dart';
-import 'package:homeworkout_flutter/database/tables/home_plan_table.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/videoAnimation/video_animation_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
@@ -15,12 +13,11 @@ import 'package:homeworkout_flutter/utils/debug.dart';
 
 class ExerciseDialog extends StatefulWidget {
 
-
-  List<WorkoutDetail>? workoutDetailList;
-  List<ExerciseListData>? exerciseListDataList;
-  String? fromPage;
-  List<DiscoverSingleExerciseData>? discoverSingleExerciseDataList;
-  int? index;
+  final List<WorkoutDetail>? workoutDetailList;
+  final List<ExerciseListData>? exerciseListDataList;
+  final String? fromPage;
+  final List<DiscoverSingleExerciseData>? discoverSingleExerciseDataList;
+  final int? index;
 
   ExerciseDialog(
       {this.workoutDetailList,
@@ -143,7 +140,7 @@ class _ExerciseDialogState extends State<ExerciseDialog>  with TickerProviderSta
                     ),
                   ),*/
 
-            Container(
+            listLifeGuideAnimation != null ? Container(
               height: 120.0,
               width: double.infinity,
               child: AnimatedBuilder(
@@ -158,7 +155,7 @@ class _ExerciseDialogState extends State<ExerciseDialog>  with TickerProviderSta
                   );
                 },
               ),
-            ),
+            ) : Container(),
             Positioned(
               right: 0,
               child: InkWell(

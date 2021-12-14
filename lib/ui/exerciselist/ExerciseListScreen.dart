@@ -11,6 +11,7 @@ import 'package:homeworkout_flutter/database/model/WorkoutDetailData.dart';
 import 'package:homeworkout_flutter/database/tables/discover_plan_table.dart';
 import 'package:homeworkout_flutter/database/tables/home_plan_table.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
+import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
 import 'package:homeworkout_flutter/ui/workout/workout_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
@@ -18,24 +19,26 @@ import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 
 class ExerciseListScreen extends StatefulWidget {
-  HomePlanTable? homePlanTable;
-  String? fromPage;
-  DiscoverPlanTable? discoverPlanTable;
-  WeeklyDayData? weeklyDayData;
-  String? dayName = "";
-  String? weekName = "";
-  String? planName = "";
-  bool? isSubPlan = false;
+  final HomePlanTable? homePlanTable;
+  final String? fromPage;
+  final DiscoverPlanTable? discoverPlanTable;
+  final WeeklyDayData? weeklyDayData;
+  final String? dayName;
+  final String? weekName;
+  final String? planName;
+  final bool? isSubPlan;
+  final bool? isFromOnboarding;
 
   ExerciseListScreen(
       {this.homePlanTable,
       required this.fromPage,
       this.discoverPlanTable,
       this.weeklyDayData,
-      this.dayName,
-      this.weekName,
+      this.dayName= "",
+      this.weekName= "",
       this.isSubPlan=false,
-      this.planName});
+      this.planName= "",
+      this.isFromOnboarding = false});
 
   @override
   _ExerciseListScreenState createState() => _ExerciseListScreenState();
@@ -91,150 +94,171 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
               isShrink ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light,
         ), //
       ),
-      child: Scaffold(
-        body: SafeArea(
-          top: false,
-          bottom: Platform.isIOS ? false : true,
-          child: NestedScrollView(
-            controller: _scrollController,
-            headerSliverBuilder:
-                (BuildContext context, bool innerBoxIsScrolled) {
-              return <Widget>[
-                SliverAppBar(
-                  elevation: 0,
-                  expandedHeight: 150.0,
-                  floating: false,
-                  pinned: true,
-                  backgroundColor: Colur.bg_white,
-                  centerTitle: false,
-                  automaticallyImplyLeading: false,
-                  title: isShrink
-                      ? Text(
-                          (widget.fromPage == Constant.PAGE_HOME)
-                              ? widget.homePlanTable!.catName!.toUpperCase()
-                              : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
-                                  ? Languages.of(context)!.txtDay +
-                                      " " +
-                                      widget.dayName
-                                          .toString()
-                                          .replaceAll("0", "")
-                                  : widget.discoverPlanTable!.planName!
-                                      .toUpperCase(),
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colur.black,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 20.0,
+      child: WillPopScope(
+        onWillPop: () {
+          if(widget.isFromOnboarding!) {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => TrainingScreen()));
+            return Future.value(true);
+          }else {
+            return Future.value(true);
+            //Navigator.pop(context);
+          }
+        },
+        child: Scaffold(
+          body: SafeArea(
+            top: false,
+            bottom: Platform.isIOS ? false : true,
+            child: NestedScrollView(
+              controller: _scrollController,
+              headerSliverBuilder:
+                  (BuildContext context, bool innerBoxIsScrolled) {
+                return <Widget>[
+                  SliverAppBar(
+                    elevation: 0,
+                    expandedHeight: 150.0,
+                    floating: false,
+                    pinned: true,
+                    backgroundColor: Colur.bg_white,
+                    centerTitle: false,
+                    automaticallyImplyLeading: false,
+                    title: isShrink
+                        ? Text(
+                            (widget.fromPage == Constant.PAGE_HOME)
+                                ? widget.homePlanTable!.catName!.toUpperCase()
+                                : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
+                                    ? Languages.of(context)!.txtDay +
+                                        " " +
+                                        widget.dayName
+                                            .toString()
+                                            .replaceAll("0", "")
+                                    : widget.discoverPlanTable!.planName!
+                                        .toUpperCase(),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colur.black,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 20.0,
+                            ),
+                          )
+                        : Container(),
+                    leading: InkWell(
+                      onTap: () {
+                        if(widget.isFromOnboarding!) {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => TrainingScreen()));
+                        }else {
+                          Navigator.pop(context);
+                        }
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(0.0),
+                        child: Icon(
+                          Icons.arrow_back_sharp,
+                          color: isShrink ? Colur.black : Colur.white,
+                          size: 25.0,
+                        ),
+                      ),
+                    ),
+                    flexibleSpace: FlexibleSpaceBar(
+                      centerTitle: false,
+                      background:
+
+                      Container(
+                        alignment: Alignment.bottomLeft,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage(
+                                // 'assets/images/abs_advanced.webp',
+                                _getTopImageNameFromList(),
+                              ),
+                              fit: BoxFit.cover),
+                        ),
+                        child: Container(
+                          width: double.infinity,
+                          color: Colur.transparent_black_50,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 30.0, vertical: 0.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                margin: EdgeInsets.symmetric(
+                                    vertical: (widget.fromPage !=
+                                            Constant.PAGE_DAYS_STATUS)
+                                        ? 30
+                                        : 0),
+                                child: Text(
+                                  (widget.fromPage == Constant.PAGE_HOME)
+                                      ? widget.homePlanTable!.catName!.toUpperCase()
+                                      : (widget.fromPage ==
+                                              Constant.PAGE_DAYS_STATUS)
+                                          ? Languages.of(context)!.txtDay +
+                                              " " +
+                                              widget.dayName
+                                                  .toString()
+                                                  .replaceAll("0", "")
+                                          : widget.discoverPlanTable!.planName!
+                                              .toUpperCase(),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colur.white,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 20.0,
+                                  ),
+                                ),
+                              ),
+                              Visibility(
+                                visible:
+                                    widget.fromPage == Constant.PAGE_DAYS_STATUS,
+                                child: Container(
+                                  margin: const EdgeInsets.symmetric(vertical: 20),
+                                  child: Text(
+                                    (widget.fromPage == Constant.PAGE_DAYS_STATUS)
+                                        ? widget.planName.toString().toUpperCase()
+                                        : "",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colur.white,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 14.0,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        )
-                      : Container(),
-                  leading: InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(0.0),
-                      child: Icon(
-                        Icons.arrow_back_sharp,
-                        color: isShrink ? Colur.black : Colur.white,
-                        size: 25.0,
+                        ),
                       ),
                     ),
                   ),
-                  flexibleSpace: FlexibleSpaceBar(
-                    centerTitle: false,
-                    background: Container(
-                      alignment: Alignment.bottomLeft,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 30.0, vertical: 0.0),
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage(
-                              // 'assets/images/abs_advanced.webp',
-                              _getTopImageNameFromList(),
-                            ),
-                            fit: BoxFit.cover),
-                      ),
+                ];
+              },
+              body: Container(
+                color: Colur.bg_white,
+                margin: const EdgeInsets.only(top: 5.0),
+                child: Column(
+                  children: [
+                    Expanded(
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            margin: EdgeInsets.symmetric(
-                                vertical: (widget.fromPage !=
-                                        Constant.PAGE_DAYS_STATUS)
-                                    ? 30
-                                    : 0),
-                            child: Text(
-                              (widget.fromPage == Constant.PAGE_HOME)
-                                  ? widget.homePlanTable!.catName!.toUpperCase()
-                                  : (widget.fromPage ==
-                                          Constant.PAGE_DAYS_STATUS)
-                                      ? Languages.of(context)!.txtDay +
-                                          " " +
-                                          widget.dayName
-                                              .toString()
-                                              .replaceAll("0", "")
-                                      : widget.discoverPlanTable!.planName!
-                                          .toUpperCase(),
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colur.white,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 20.0,
-                              ),
-                            ),
-                          ),
                           Visibility(
-                            visible:
-                                widget.fromPage == Constant.PAGE_DAYS_STATUS,
-                            child: Container(
-                              margin: const EdgeInsets.symmetric(vertical: 20),
-                              child: Text(
-                                (widget.fromPage == Constant.PAGE_DAYS_STATUS)
-                                    ? widget.planName.toString().toUpperCase()
-                                    : "",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colur.white,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 14.0,
-                                ),
-                              ),
-                            ),
+                            visible: (widget.fromPage == Constant.PAGE_DISCOVER &&
+                                widget.discoverPlanTable!.introduction != null),
+                            child: _instructionWidget(),
                           ),
+                          _timesAndWorkoutsTitle(),
+                          _divider(),
+                          (widget.fromPage == Constant.PAGE_HOME ||
+                                  widget.fromPage == Constant.PAGE_DAYS_STATUS)
+                              ? _widgetExerciseListWithEdit()
+                              : _widgetExerciseListWithOutEdit(),
                         ],
                       ),
                     ),
-                  ),
+                    _divider(),
+                    _startButton(),
+                  ],
                 ),
-              ];
-            },
-            body: Container(
-              color: Colur.bg_white,
-              margin: const EdgeInsets.only(top: 5.0),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Column(
-                      children: [
-                        Visibility(
-                          visible: (widget.fromPage == Constant.PAGE_DISCOVER &&
-                              widget.discoverPlanTable!.introduction != null),
-                          child: _instructionWidget(),
-                        ),
-                        _timesAndWorkoutsTitle(),
-                        _divider(),
-                        (widget.fromPage == Constant.PAGE_HOME ||
-                                widget.fromPage == Constant.PAGE_DAYS_STATUS)
-                            ? _widgetExerciseListWithEdit()
-                            : _widgetExerciseListWithOutEdit(),
-                      ],
-                    ),
-                  ),
-                  _divider(),
-                  _startButton(),
-                ],
               ),
             ),
           ),
@@ -534,6 +558,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
       child: Container(
         child: ListView.builder(
           shrinkWrap: false,
+          padding: EdgeInsets.zero,
           physics: NeverScrollableScrollPhysics(),
           itemBuilder: (BuildContext context, int index) {
             return _listOfExerciseWithOutEdit(index);
@@ -613,11 +638,11 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
                                           "s")
                                       ? Utils.secondToMMSSFormat(int.parse(
                                           discoverSingleExerciseList[index]
-                                              .ExTime
+                                              .exTime
                                               .toString()))
                                       : "x" +
                                           discoverSingleExerciseList[index]
-                                              .ExTime
+                                              .exTime
                                               .toString(),
                                   style: TextStyle(
                                       fontSize: 16.0,

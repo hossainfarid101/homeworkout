@@ -432,6 +432,7 @@ flutter:
     - assets/icons/ic_sound_options.png
     - assets/icons/ic_back.webp
     - assets/icons/ic_edit.webp
+    - assets/icons/ic_setting_remove_ads.webp
     - assets/icons/drawer/
     - assets/icons/drawer/ic_discover_selected.webp
     - assets/icons/drawer/ic_discover_unselected.webp

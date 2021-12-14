@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -14,7 +13,7 @@ import 'package:homeworkout_flutter/utils/constant.dart';
 
 class ExercisePlanScreen extends StatefulWidget {
 
-  DiscoverPlanTable? homePlanTable;
+  final DiscoverPlanTable? homePlanTable;
 
   ExercisePlanScreen({required this.homePlanTable});
   @override
@@ -266,35 +265,35 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
                                     ),
                                   ),
 
-                                  Container(
-                                    margin: const EdgeInsets.symmetric(vertical: 3.0),
-                                    child: Text(
-                                      discoverSubPlanList[index].planText.toString(),
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14,
-                                        color: Colur.txt_gray,
+                                    Container(
+                                      margin: const EdgeInsets.symmetric(vertical: 3.0),
+                                      child: Text(
+                                        discoverSubPlanList[index].planText.toString(),
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 14,
+                                          color: Colur.txt_gray,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                          )
-                        ],
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-                },
-                itemCount: discoverSubPlanList.length,
-                separatorBuilder: (BuildContext context, int index) { 
-                  return Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 15,),
-                    child: Divider(
-                      thickness: 1.3,
-                    ),
-                  );
-                },
+                    );
+                  },
+                  itemCount: discoverSubPlanList.length,
+                  separatorBuilder: (BuildContext context, int index) {
+                    return Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 15,),
+                      child: Divider(
+                        thickness: 1.3,
+                      ),
+                    );
+                  },
 
               )
             )

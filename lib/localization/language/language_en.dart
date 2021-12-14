@@ -627,6 +627,9 @@ class LanguageEn extends Languages {
   String get txtGotoHomePage => "Go to home page";
 
   @override
+  String get txtGoPremium => "Go Premium";
+
+  @override
   String get txtWatchVideoToUnlock => "Watch video to unlock";
 
   @override

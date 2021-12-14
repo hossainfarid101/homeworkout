@@ -6,7 +6,6 @@ import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
-import 'package:numberpicker/numberpicker.dart';
 
 class WeightHeightSelectionScreen extends StatefulWidget {
   const WeightHeightSelectionScreen({Key? key}) : super(key: key);
@@ -17,10 +16,10 @@ class WeightHeightSelectionScreen extends StatefulWidget {
 
 class _WeightHeightSelectionScreenState extends State<WeightHeightSelectionScreen> {
 
-  double? heightCM = 20;
-  double heightFT = 1;
+  double? heightCM = 0;
+  double heightFT = 0;
   double heightIN = 0;
-  double? weight = 20;
+  double? weight = 0;
 
 
   bool? kgSelected = true;
@@ -28,8 +27,6 @@ class _WeightHeightSelectionScreenState extends State<WeightHeightSelectionScree
 
   @override
   Widget build(BuildContext context) {
-    double fullHeight = MediaQuery.of(context).size.height;
-    double fullWidth = MediaQuery.of(context).size.width;
     return Container(
       margin: EdgeInsets.only(left: 15, right: 15),
       child: Column(

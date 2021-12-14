@@ -97,6 +97,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
         child: Column(
           children: [
             _workoutSettings(fullWidth),
+            _goPremiumBtn(),
             _voiceOptions(),
             _generalSettings(),
             _community(),
@@ -290,7 +291,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                 ),
               ),
             ),
-            //Divider(color: Colur.grey.withOpacity(0.5),),
+            Divider(color: Colur.grey.withOpacity(0.5),),
           ],
         ),
       ),
@@ -1341,6 +1342,49 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
             },
           );
         });
+  }
+
+  _goPremiumBtn() {
+    return InkWell(
+      onTap: () {
+        //todo
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 15.0),
+        margin: const EdgeInsets.symmetric(horizontal: 20),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(100.0),
+          gradient: LinearGradient(
+              colors: [
+                Colur.blueGradient1,
+                Colur.blueGradient2,
+              ],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              stops: [0.0, 1.0],
+              tileMode: TileMode.clamp),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              "assets/icons/ic_setting_remove_ads.webp",
+              height: 28,
+              width: 28,
+            ),
+            SizedBox(width: 15,),
+            Text(
+              Languages.of(context)!.txtGoPremium.toUpperCase(),
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 20,
+                  color: Colur.white),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   @override

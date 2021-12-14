@@ -2,10 +2,10 @@ import 'dart:convert';
 
 class DiscoverSingleExerciseData {
   DiscoverSingleExerciseData({
-    this.PlanId,
-    this.IsCompleted,
-    this.ExTime,
-    this.ExId,
+    this.planId,
+    this.isCompleted,
+    this.exTime,
+    this.exId,
     this.exDescription,
     this.exVideo,
     this.exPath,
@@ -13,10 +13,10 @@ class DiscoverSingleExerciseData {
     this.exUnit,
   });
 
-  String? PlanId;
-  String? IsCompleted;
-  String? ExTime;
-  String? ExId;
+  String? planId;
+  String? isCompleted;
+  String? exTime;
+  String? exId;
   String? exDescription;
   String? exVideo;
   String? exPath;
@@ -29,10 +29,10 @@ class DiscoverSingleExerciseData {
   String toRawJson() => json.encode(toJson());
 
   factory DiscoverSingleExerciseData.fromJson(Map<String, dynamic> json) => DiscoverSingleExerciseData(
-    PlanId: json["PlanId"],
-    IsCompleted: json["IsCompleted"],
-    ExTime: json["ExTime"],
-    ExId: json["ExId"],
+    planId: json["PlanId"],
+    isCompleted: json["IsCompleted"],
+    exTime: json["ExTime"],
+    exId: json["ExId"],
     exDescription: json["exDescription"],
     exVideo: json["exVideo"],
     exPath: json["exPath"],
@@ -41,10 +41,10 @@ class DiscoverSingleExerciseData {
   );
 
   Map<String, dynamic> toJson() => {
-    "PlanId": PlanId,
-    "IsCompleted": IsCompleted,
-    "ExTime": ExTime,
-    "ExId": ExId,
+    "PlanId": planId,
+    "IsCompleted": isCompleted,
+    "ExTime": exTime,
+    "ExId": exId,
     "exDescription": exDescription,
     "exVideo": exVideo,
     "exPath": exPath,

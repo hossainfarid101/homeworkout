@@ -27,11 +27,11 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourIntroWeeklyGoalScreen> 
   List<Widget> _pickerDataFirstDayWeek = [];
   String? selectFirstDayOfWeek = "";
   List<int>? initialFirstDay = [];
-  String? selectTrainingDays = "";
+  String? selectTrainingDays;
 
   @override
   void initState() {
-    selectTrainingDays = Preference.shared.getString(Preference.SELECTED_TRAINING_DAY) ?? "4";
+    selectTrainingDays = Preference.shared.getString(Preference.SELECTED_TRAINING_DAY) ?? "0";
     selectFirstDayOfWeek = Preference.shared.getString(Preference.SELECTED_FIRST_DAY_OF_WEEK) ?? "Sunday";
 
     if(selectTrainingDays == "1") {
@@ -46,7 +46,7 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourIntroWeeklyGoalScreen> 
       selectedFive = true;
     } else if(selectTrainingDays == "6") {
       selectedSix = true;
-    } else {
+    } else if(selectTrainingDays == "7") {
       selectedSeven = true;
     }
    super.initState();

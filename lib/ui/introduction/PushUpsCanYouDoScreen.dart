@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
-import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
-import 'package:homeworkout_flutter/utils/preference.dart';
 
 class PushUpsCanYouDoScreen extends StatefulWidget {
-  String? prefHowManyPushUps;
-  Function onValueChange;
+  final String? prefHowManyPushUps;
+  final Function onValueChange;
   PushUpsCanYouDoScreen(this.prefHowManyPushUps, this.onValueChange);
 
   @override
@@ -54,10 +52,6 @@ class _PushUpsCanYouDoScreenState extends State<PushUpsCanYouDoScreen> {
           }
         }
         widget.onValueChange(pushUpsList[index].exName);
-       /* setState(() {
-          widget.prefHowManyPushUps = pushUpsList[index].exName;
-          Debug.printLog(widget.prefHowManyPushUps!);
-        });*/
       },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),

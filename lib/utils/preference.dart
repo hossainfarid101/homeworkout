@@ -2,7 +2,6 @@
 import 'dart:async';
 
 // Package imports:
-import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /* global class for handle all the preference activity into application */

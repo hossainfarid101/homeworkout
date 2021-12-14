@@ -8,17 +8,16 @@ import 'package:homeworkout_flutter/database/model/WorkoutDetailData.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
-import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoAnimationScreen extends StatefulWidget {
 
-  List<WorkoutDetail>? workoutDetailList;
-  List<ExerciseListData>? exerciseListDataList;
-  String? fromPage;
-  List<DiscoverSingleExerciseData>? discoverSingleExerciseDataList;
-  int? index;
+  final List<WorkoutDetail>? workoutDetailList;
+  final List<ExerciseListData>? exerciseListDataList;
+  final String? fromPage;
+  final List<DiscoverSingleExerciseData>? discoverSingleExerciseDataList;
+  final int? index;
 
   VideoAnimationScreen({
     this.workoutDetailList,
@@ -55,57 +54,39 @@ class _VideoAnimationScreenState extends State<VideoAnimationScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData(
-        appBarTheme: AppBarTheme(
-          systemOverlayStyle: SystemUiOverlayStyle.dark,
-        ), //
-      ),
-      child: Scaffold(
-        appBar: PreferredSize(
-            preferredSize: Size.fromHeight(0),
-            child: AppBar(
-              backgroundColor: Colur.theme,
-              elevation: 0,
-            )
+    return WillPopScope(
+      onWillPop: () {
+        Navigator.pop(context, true);
+        return Future.value(true);
+      },
+      child: Theme(
+        data: ThemeData(
+          appBarTheme: AppBarTheme(
+            systemOverlayStyle: SystemUiOverlayStyle.dark,
+          ), //
         ),
-        backgroundColor: Colur.theme,
-        body: SafeArea(
-          child: Container(
-            child: Column(
-              children: [
-                // _topListView(),
-                _topBar(),
-                _youtubeAndAnimationView(),
-                _descriptionOfExercise()
-              ],
+        child: Scaffold(
+          appBar: PreferredSize(
+              preferredSize: Size.fromHeight(0),
+              child: AppBar(
+                backgroundColor: Colur.theme,
+                elevation: 0,
+              )
+          ),
+          backgroundColor: Colur.theme,
+          body: SafeArea(
+            child: Container(
+              child: Column(
+                children: [
+                  // _topListView(),
+                  _topBar(),
+                  _youtubeAndAnimationView(),
+                  _descriptionOfExercise()
+                ],
+              ),
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  _topListView() {
-    return Container(
-      margin: const EdgeInsets.only(top: 15),
-      height: 10,
-      child: ListView.builder(
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
-            margin: const EdgeInsets.symmetric(horizontal: 3.0),
-            height: 5,
-            width: MediaQuery.of(context).size.width / 10 - 6,
-            child: Divider(
-              color: Colur.white,
-              height: 2,
-              thickness: 5,
-            ),
-          );
-        },
-        physics: NeverScrollableScrollPhysics(),
-        scrollDirection: Axis.horizontal,
-        itemCount: 10,
       ),
     );
   }
@@ -317,9 +298,9 @@ class _VideoAnimationScreenState extends State<VideoAnimationScreen>
         : "X ${widget.workoutDetailList![widget.index!].Time_beginner}"
         : (widget.discoverSingleExerciseDataList![widget.index!].exUnit == "s")
         ? Utils.secondToMMSSFormat(int.parse(
-        widget.discoverSingleExerciseDataList![widget.index!].ExTime
+        widget.discoverSingleExerciseDataList![widget.index!].exTime
             .toString()))
-        : "X ${widget.discoverSingleExerciseDataList![widget.index!].ExTime}";
+        : "X ${widget.discoverSingleExerciseDataList![widget.index!].exTime}";
   }
 
   String _getExerciseDescriptionFromList() {
@@ -328,14 +309,6 @@ class _VideoAnimationScreenState extends State<VideoAnimationScreen>
         : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
         ? widget.workoutDetailList![widget.index!].description.toString()
         : widget.discoverSingleExerciseDataList![widget.index!].exDescription.toString();
-  }
-
-  int _getLengthFromList(){
-    return ((widget.fromPage == Constant.PAGE_HOME)
-        ? widget.exerciseListDataList!.length
-        : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
-        ? widget.workoutDetailList!.length
-        : widget.discoverSingleExerciseDataList!.length);
   }
 
   String _getExerciseNameFromList(){

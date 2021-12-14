@@ -237,7 +237,136 @@ class _TrainingScreenState extends State<TrainingScreen>
                                         ),
                                       ],
                                     ),
-                                    child: Column(
+                                    child: (selectedTrainingDay == "0") ? Column(
+                                      children: [
+                                        Container(
+                                          alignment: Alignment.topLeft,
+                                          margin: const EdgeInsets.all(10),
+                                          child: Text(
+                                              Languages.of(context)!.txtWeekGoal
+                                                  .toUpperCase(),
+                                              overflow: TextOverflow.ellipsis,
+                                              style: const TextStyle(
+                                                  color: Colur.txtBlack,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w500)),
+                                        ),
+                                        Container(
+                                          margin:
+                                          const EdgeInsets.only(top: 10),
+                                          child: Text(
+                                              Languages.of(context)!
+                                                  .txtWeekGoalDesc,
+                                              textAlign: TextAlign.center,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: const TextStyle(
+                                                  color: Colur.grey,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w400)),
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        SetWeeklyGoalScreen())).then((value) => _getPreference());
+                                          },
+                                          child: Container(
+                                            padding: const EdgeInsets.all(15),
+                                            decoration: const BoxDecoration(
+                                              gradient: LinearGradient(
+                                                  colors: [
+                                                    Colur.blueGradientButton1,
+                                                    Colur.blueGradientButton2,
+                                                  ],
+                                                  begin: Alignment.centerLeft,
+                                                  end: Alignment.centerRight,
+                                                  stops: [0.0, 1.0],
+                                                  tileMode: TileMode.clamp),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(30)),
+                                            ),
+                                            margin: const EdgeInsets.symmetric(
+                                                vertical: 15, horizontal: 20),
+                                            child: Center(
+                                              child: Text(
+                                                  Languages.of(context)!
+                                                      .txtSetAGoal
+                                                      .toUpperCase(),
+                                                  textAlign: TextAlign.center,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  style: const TextStyle(
+                                                      color: Colur.white,
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                      FontWeight.w500)),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ) : Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        SetWeeklyGoalScreen())).then((value) => _getPreference());
+                                          },
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                alignment: Alignment.topLeft,
+                                                margin: const EdgeInsets.only(left: 10, bottom: 10),                                                          child: Text(
+                                                  Languages.of(context)!.txtWeekGoal
+                                                      .toUpperCase(),
+                                                  overflow: TextOverflow.ellipsis,
+                                                  style: const TextStyle(
+                                                      color: Colur.txtBlack,
+                                                      fontSize: 16,
+                                                      fontWeight: FontWeight.w500)),
+                                              ),
+                                              Container(
+                                                  margin: const EdgeInsets.only(left: 10, bottom: 10),
+                                                  child: Icon(Icons.edit_rounded,size: 15)
+                                              ),
+                                              Expanded(
+                                                child: Container(
+                                                  margin: const EdgeInsets.only(right: 10, bottom: 10),
+                                                  alignment: Alignment.centerRight,
+                                                  child: Text(
+                                                    "${totalDayOfWeekGoal.toString()}/" +
+                                                        selectedTrainingDay!,
+                                                    style: TextStyle(
+                                                        fontSize: 14),
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          margin: const EdgeInsets.only(top: 15.0,bottom: 0),
+                                          alignment: Alignment.center,
+                                          height: 40,
+                                          child: ListView.builder(
+                                            scrollDirection: Axis.horizontal,
+                                            shrinkWrap: true,
+                                            physics: NeverScrollableScrollPhysics(),
+                                            itemBuilder: (BuildContext context, int index) {
+                                              return _itemOfWeekGoal(index);
+                                            },
+                                            itemCount: isAvailableHistory.length,
+                                            // itemCount: 7,
+                                          ),
+                                        ),
+                                      ],
+                                    )
+
+                                    /*Column(
                                       //crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Visibility(
@@ -329,8 +458,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                                                       children: [
                                                         Container(
                                                           alignment: Alignment.topLeft,
-                                                          margin: const EdgeInsets.all(10),
-                                                          child: Text(
+                                                          margin: const EdgeInsets.only(left: 10, bottom: 10),                                                          child: Text(
                                                               Languages.of(context)!.txtWeekGoal
                                                                   .toUpperCase(),
                                                               overflow: TextOverflow.ellipsis,
@@ -339,10 +467,13 @@ class _TrainingScreenState extends State<TrainingScreen>
                                                                   fontSize: 16,
                                                                   fontWeight: FontWeight.w500)),
                                                         ),
-                                                        Icon(Icons.edit_rounded,size: 15),
+                                                        Container(
+                                                            margin: const EdgeInsets.only(left: 10, bottom: 10),
+                                                            child: Icon(Icons.edit_rounded,size: 15)
+                                                        ),
                                                         Expanded(
                                                           child: Container(
-                                                            margin: const EdgeInsets.symmetric(horizontal: 10),
+                                                            margin: const EdgeInsets.only(right: 10, bottom: 10),
                                                             alignment: Alignment.centerRight,
                                                             child: Text(
                                                               "${totalDayOfWeekGoal.toString()}/" +
@@ -356,7 +487,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                                                     ),
                                                   ),
                                                   Container(
-                                                    margin: const EdgeInsets.only(top: 15.0,bottom: 10),
+                                                    margin: const EdgeInsets.only(top: 15.0,bottom: 0),
                                                     alignment: Alignment.center,
                                                     height: 40,
                                                     child: ListView.builder(
@@ -374,7 +505,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                                               ),
                                             ))
                                       ],
-                                    ),
+                                    ),*/
                                   ),
                                 ],
                               ),

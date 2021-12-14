@@ -9,18 +9,18 @@ import 'package:homeworkout_flutter/database/model/ExerciseListData.dart';
 import 'package:homeworkout_flutter/database/model/WorkoutDetailData.dart';
 import 'package:homeworkout_flutter/interfaces/topbar_clicklistener.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
-import 'package:homeworkout_flutter/ui/exerciseDays/exercise_days_status_screen.dart';
 import 'package:homeworkout_flutter/ui/videoAnimation/video_animation_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
 
 class PauseScreen extends StatefulWidget {
 
-  List<WorkoutDetail>? workoutDetailList;
-  List<ExerciseListData>? exerciseListDataList;
-  String? fromPage;
-  List<DiscoverSingleExerciseData>? discoverSingleExerciseDataList;
-  int? index;
+  final List<WorkoutDetail>? workoutDetailList;
+  final List<ExerciseListData>? exerciseListDataList;
+  final String? fromPage;
+  final List<DiscoverSingleExerciseData>? discoverSingleExerciseDataList;
+  final int? index;
+  final bool? isForQuit;
 
 
   PauseScreen({
@@ -29,6 +29,7 @@ class PauseScreen extends StatefulWidget {
     this.exerciseListDataList,
     this.discoverSingleExerciseDataList,
     this.index,
+    this.isForQuit,
   });
 
 
@@ -58,7 +59,8 @@ class _PauseScreenState extends State<PauseScreen>  with TickerProviderStateMixi
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async{
-        return false;
+        Navigator.pop(context, true);
+        return Future.value(true);
       },
       child: Theme(
         data: ThemeData(
@@ -108,7 +110,7 @@ class _PauseScreenState extends State<PauseScreen>  with TickerProviderStateMixi
   _resumeBtn(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pop(context, false);
+        Navigator.pop(context, true);
       },
       child: Container(
         height: 80,
@@ -158,7 +160,7 @@ class _PauseScreenState extends State<PauseScreen>  with TickerProviderStateMixi
   _restartBtn(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pop(context, true);
+        Navigator.pop(context, false);
       },
       child: Container(
         height: 80,
@@ -190,45 +192,51 @@ class _PauseScreenState extends State<PauseScreen>  with TickerProviderStateMixi
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                Languages.of(context)!.txtPause,
+                widget.isForQuit! ? Languages.of(context)!.txtQuit : Languages.of(context)!.txtPause,
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.w700,
                   color: Colur.white,
                 ),
               ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.6,
-                child: RichText(
-                  text: TextSpan(
-                      text: _getExerciseNameFromList(),
-                      style: TextStyle(
-                          color: Colur.white.withOpacity(0.5),
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w500),
-                      children: [
-                        WidgetSpan(
-                         child: Container(
-                           margin: const EdgeInsets.symmetric(horizontal: 10),
-                           child: Icon(
-                             Icons.help,
-                             size: 20.0,
-                             color: Colur.white.withOpacity(0.5),
-                           ),
-                        )),
-                      ]),
+              InkWell(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => VideoAnimationScreen(
+                        fromPage: widget.fromPage,
+                        workoutDetailList: widget.workoutDetailList,
+                        index: widget.index,
+                        exerciseListDataList: widget.exerciseListDataList,
+                        discoverSingleExerciseDataList: widget.discoverSingleExerciseDataList,
+                      )));
+                },
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.6,
+                  child: RichText(
+                    text: TextSpan(
+                        text: _getExerciseNameFromList(),
+                        style: TextStyle(
+                            color: Colur.white.withOpacity(0.5),
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w500),
+                        children: [
+                          WidgetSpan(
+                           child: Container(
+                             margin: const EdgeInsets.symmetric(horizontal: 10),
+                             child: Icon(
+                               Icons.help,
+                               size: 20.0,
+                               color: Colur.white.withOpacity(0.5),
+                             ),
+                          )),
+                        ]),
+                  ),
                 ),
               ),
             ],
           ),
           ClipRRect(
             borderRadius: BorderRadius.all(Radius.circular(10)),
-           /* child: Image.asset(
-              'assets/images/img_exercise.webp',
-              height: 100,
-              width: 100,
-              fit: BoxFit.fill,
-            ),*/
             child: (listLifeGuideAnimation != null)
                 ? Container(
               color: Colur.theme_trans,
@@ -260,11 +268,11 @@ class _PauseScreenState extends State<PauseScreen>  with TickerProviderStateMixi
   @override
   void onTopBarClick(String name, {bool value = true}) {
     if(name == Constant.strBack) {
-      Navigator.pop(context, false);
+      Navigator.pop(context, true);
     }
   }
 
-  bool _timeTypeCheck() {
+  /*bool _timeTypeCheck() {
     return ((widget.fromPage == Constant.PAGE_HOME)
         ? widget.exerciseListDataList![widget.index!].timeType!
         : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
@@ -278,7 +286,7 @@ class _PauseScreenState extends State<PauseScreen>  with TickerProviderStateMixi
         ? widget.exerciseListDataList![widget.index!].time!
         : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
         ? widget.workoutDetailList![widget.index!].Time_beginner
-        : widget.discoverSingleExerciseDataList![widget.index!].ExTime).toString();
+        : widget.discoverSingleExerciseDataList![widget.index!].exTime).toString();
   }
 
   int _getLengthFromList(){
@@ -287,7 +295,7 @@ class _PauseScreenState extends State<PauseScreen>  with TickerProviderStateMixi
         : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
         ? widget.workoutDetailList!.length
         : widget.discoverSingleExerciseDataList!.length);
-  }
+  }*/
 
 
   String _getExerciseNameFromList(){

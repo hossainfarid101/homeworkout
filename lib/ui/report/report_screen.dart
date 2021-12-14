@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:align_positioned/align_positioned.dart';
@@ -99,22 +100,10 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
     isKg = Preference.shared.getBool(Preference.IS_KG) ?? true;
     bmiCategory = Preference.shared.getString(Preference.BMI_TEXT) ?? "";
 
-    if (bmi! < 15) {
-      bmiColor = Colur.black;
-    } else if (bmi! >= 15 && bmi! < 16) {
-      bmiColor = Colur.colorFirst;
-    } else if (bmi! >= 16 && bmi! < 18.5) {
-      bmiColor = Colur.colorSecond;
-    } else if (bmi! >= 18.5 && bmi! <= 25) {
-      bmiColor = Colur.colorThird;
-    } else if (bmi! > 25 && bmi! < 30) {
-      bmiColor = Colur.colorFour;
-    } else if (bmi! >= 30 && bmi! < 35) {
-      bmiColor = Colur.colorFive;
-    } else if (bmi! >= 35 && bmi! < 40) {
-      bmiColor = Colur.colorSix;
-    } else if (bmi! >= 40) {
-      bmiColor = Colur.black;
+    if(weightBMI != 0 && heightBMI != 0) {
+      setBmiCalculation();
+      Preference.shared.setDouble(Preference.BMI, bmi!);
+
     }
   }
 
@@ -122,7 +111,7 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
   @override
   Widget build(BuildContext context) {
     var fullWidth = MediaQuery.of(context).size.width;
-
+    bmiTextCategory();
     return  Theme(
       data: ThemeData(
           appBarTheme: AppBarTheme(
@@ -139,31 +128,34 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
         ),
         drawer: const DrawerMenu(),
         backgroundColor: Colur.commonBgColor,
-        body: Column(
-          children: [
-            CommonTopBar(
-              Languages.of(context)!.txtReport.toUpperCase(),
-              this,
-              isMenu: true,
-            ),
-            const Divider(color: Colur.grey,),
+        body: SafeArea(
+          top: false,
+          bottom: Platform.isIOS ? false : true,
+          child: Column(
+            children: [
+              CommonTopBar(
+                Languages.of(context)!.txtReport.toUpperCase(),
+                this,
+                isMenu: true,
+              ),
+              const Divider(color: Colur.grey,),
 
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _widgetTotalWorkout(),
-                    _widgetDayHistory(),
-                    _widgetWeightChart(),
-                    _widgetBmiChart(fullWidth),
-                    _widgetHeight()
-                  ],
-                ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _widgetTotalWorkout(),
+                      _widgetDayHistory(),
+                      _widgetWeightChart(),
+                      _widgetBmiChart(fullWidth),
+                    ],
+                  ),
+                )
               )
-            )
 
-          ],
+            ],
+          ),
         ),
 
       ),
@@ -543,53 +535,56 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Expanded(
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 15.0),
-                child: Row(
-                  children: [
-                    Text(
-                      Languages.of(context)!.txtBmiKg,
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600, fontSize: 16.0),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      bmi!.toStringAsFixed(2),
-                      style: TextStyle(
-                          fontWeight: FontWeight.w700, fontSize: 17.0),
-                    )
-                  ],
+        Container(
+          margin: EdgeInsets.only(bottom: 15),
+          child: Row(
+            children: [
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 15.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        Languages.of(context)!.txtBmiKg,
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600, fontSize: 16.0),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        bmi!.toStringAsFixed(2),
+                        style: TextStyle(
+                            fontWeight: FontWeight.w700, fontSize: 17.0),
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
-            InkWell(
-              onTap: () async {
-                var res = await showDialog(
-                    context: context, builder: (context) => AddBmiDialog());
-                if (res != 0) {
-                  setState(() {
-                    getPreference();
-                    /*getWeightChartDataFromDatabase();
-                    getWeightData();*/
-                    setBmiCalculation();
-                    Preference.shared.setDouble(Preference.BMI, bmi!);
-                    bmiTextCategory();
-                  });
-                }
-              },
-              child: Container(
-                  margin: const EdgeInsets.only(right: 15.0),
-                  child: Icon(Icons.add_rounded)),
-            )
-          ],
+              InkWell(
+                onTap: () async {
+                  var res = await showDialog(
+                      context: context, builder: (context) => AddBmiDialog());
+                  if (res != 0) {
+                    setState(() {
+                      getPreference();
+                      /*getWeightChartDataFromDatabase();
+                      getWeightData();*/
+                      setBmiCalculation();
+                      Preference.shared.setDouble(Preference.BMI, bmi!);
+                      bmiTextCategory();
+                    });
+                  }
+                },
+                child: Container(
+                    margin: const EdgeInsets.only(right: 15.0),
+                    child: Icon(Icons.add_rounded)),
+              )
+            ],
+          ),
         ),
         Visibility(
-          visible: bmi != 0,
+          visible:  bmi! > 0,
           child: Stack(
             children: [
               Column(
@@ -597,7 +592,7 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
                   Container(
                     // margin: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 30.0),
                     margin: const EdgeInsets.only(
-                        left: 15.0, right: 15.0, top: 30.0, bottom: 5),
+                        left: 15.0, right: 15.0, top: 15.0, bottom: 5),
                     height: 45,
                     child: Row(
                       children: [
@@ -664,7 +659,7 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
                       Container(
                         //alignment: Alignment.center,
                         margin: const EdgeInsets.symmetric(
-                            horizontal: 15.0, vertical: 5.0),
+                            horizontal: 15.0, vertical: 0),
                         height: 50,
                         child: VerticalDivider(
                           thickness: 5,
@@ -678,30 +673,28 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
             ],
           ),
         ),
-        Container(
-          margin: EdgeInsets.only(bottom: 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(bmiCategory!,
-                  overflow: TextOverflow.ellipsis,
-                  //textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: bmiColor,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500)),
-            ],
+        Visibility(
+          visible: bmi! > 0,
+          child: Container(
+            margin: EdgeInsets.only(bottom: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(bmiCategory!,
+                    overflow: TextOverflow.ellipsis,
+                    //textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: bmiColor,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500)),
+              ],
+            ),
           ),
         )
       ],
     );
   }
 
-  _widgetHeight(){
-    return Container(
-
-    );
-  }
 
   @override
   void onTopBarClick(String name, {bool value = true}) {
