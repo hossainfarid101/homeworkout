@@ -20,24 +20,24 @@ import 'package:homeworkout_flutter/utils/utils.dart';
 
 class ExerciseListScreen extends StatefulWidget {
   final HomePlanTable? homePlanTable;
-  final String? fromPage;
   final DiscoverPlanTable? discoverPlanTable;
   final WeeklyDayData? weeklyDayData;
+  final bool? isSubPlan;
   final String? dayName;
   final String? weekName;
   final String? planName;
-  final bool? isSubPlan;
+  final String? fromPage;
   final bool? isFromOnboarding;
 
   ExerciseListScreen(
       {this.homePlanTable,
-      required this.fromPage,
+      this.isSubPlan=false,
       this.discoverPlanTable,
       this.weeklyDayData,
       this.dayName= "",
       this.weekName= "",
-      this.isSubPlan=false,
       this.planName= "",
+      required this.fromPage,
       this.isFromOnboarding = false});
 
   @override
@@ -523,10 +523,10 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
                                                   .toString())))
                                       : ((workoutDetailList[index].timeType ==
                                               "step")
-                                          ? "x${workoutDetailList[index].Time_beginner.toString()}"
+                                          ? "x${workoutDetailList[index].timeBeginner.toString()}"
                                           : Utils.secondToMMSSFormat(int.parse(
                                               workoutDetailList[index]
-                                                  .Time_beginner
+                                                  .timeBeginner
                                                   .toString()))),
                                   style: TextStyle(
                                       fontSize: 16.0,
@@ -714,17 +714,25 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
               context,
               MaterialPageRoute(
                   builder: (context) => WorkoutScreen(
-                        fromPage: widget.fromPage,
-                        dayStatusDetailList: workoutDetailList,
-                        exerciseDataList: exerciseDataList,
-                        tableName: tableName,
-                        dayName: widget.dayName,
-                        weekName: widget.weekName,
-                        discoverSingleExerciseData: discoverSingleExerciseList,
-                        planName: widget.planName,
-                        planId: planId,
-                        totalMin: totalMinutes,
-                      )));
+                    fromPage: widget.fromPage,
+                    dayStatusDetailList: workoutDetailList,
+                    exerciseDataList: exerciseDataList,
+                    tableName: tableName,
+                    dayName: widget.dayName,
+                    weekName: widget.weekName,
+                    discoverSingleExerciseData: discoverSingleExerciseList,
+                    planName: widget.planName,
+                    planId: planId,
+                    totalMin: totalMinutes,
+                    homePlanTable: widget.homePlanTable,
+                    isSubPlan: widget.isSubPlan,
+                    weeklyDayData: widget.weeklyDayData,
+                    discoverPlanTable: widget.discoverPlanTable,
+                    ))).then((value) {
+                      setState(() {
+                        _getDataFromDatabase();
+                      });
+                    });
         },
       ),
     );

@@ -12,6 +12,7 @@ import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/healthData/healthdata_screen.dart';
 import 'package:homeworkout_flutter/ui/metric&ImperialUnits/metricimperialunit_screen.dart';
 import 'package:homeworkout_flutter/ui/reminder/reminder_screen.dart';
+import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
@@ -60,33 +61,42 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
           systemOverlayStyle: SystemUiOverlayStyle.dark,
         ), //
       ),
-      child: Scaffold(
-        appBar: PreferredSize(
-            preferredSize: Size.fromHeight(0),
-            child: AppBar(
-              backgroundColor: Colur.white,
-              elevation: 0,
-            )
-        ),
-        drawer: const DrawerMenu(),
-        backgroundColor: Colur.white,
-        body: SafeArea(
-          top: false,
-          bottom: Platform.isIOS ? false : true,
-          child: Column(
-            children: [
-              CommonTopBar(
-                Languages.of(context)!.txtSettings.toUpperCase(),
-                this,
-                isMenu: true,
-              ),
-              const Divider(color: Colur.grey,),
-
-              _settingsScreenWidget(fullWidth)
-            ],
+      child: WillPopScope(
+        onWillPop: () {
+          Preference.shared.setInt(Preference.DRAWER_INDEX, 0);
+          Navigator.pushAndRemoveUntil(
+              context, MaterialPageRoute(builder: (context) => TrainingScreen()), (
+              route) => false);
+          return Future.value(true);
+        },
+        child: Scaffold(
+          appBar: PreferredSize(
+              preferredSize: Size.fromHeight(0),
+              child: AppBar(
+                backgroundColor: Colur.white,
+                elevation: 0,
+              )
           ),
-        ),
+          drawer: const DrawerMenu(),
+          backgroundColor: Colur.white,
+          body: SafeArea(
+            top: false,
+            bottom: Platform.isIOS ? false : true,
+            child: Column(
+              children: [
+                CommonTopBar(
+                  Languages.of(context)!.txtSettings.toUpperCase(),
+                  this,
+                  isMenu: true,
+                ),
+                const Divider(color: Colur.grey,),
 
+                _settingsScreenWidget(fullWidth)
+              ],
+            ),
+          ),
+
+        ),
       ),
     );
   }
@@ -177,7 +187,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                     Container(
                       margin: const EdgeInsets.only(right:10),
                       child: Image.asset(
-                        "assets/icons/ic_setting_countdown_time.png",
+                        "assets/icons/ic_setting_countdown_time.webp",
                         scale: 1.5,
                         color: Colur.iconGrey,
                       ),
@@ -517,7 +527,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                     Container(
                       margin: const EdgeInsets.only(right:10),
                       child: Image.asset(
-                        "assets/icons/ic_setting_download_tts_engine.png",
+                        "assets/icons/ic_setting_download_tts_engine.webp",
                         scale: 1.5,
                         color: Colur.iconGrey,
                       ),
@@ -618,7 +628,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                     Container(
                       margin: const EdgeInsets.only(right:10),
                       child: Image.asset(
-                        "assets/icons/ic_setting_share.png",
+                        "assets/icons/ic_setting_share.webp",
                         scale: 1.5,
                         color: Colur.iconGrey,
                       ),
@@ -744,7 +754,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                     Container(
                       margin: const EdgeInsets.only(right:10),
                       child: Image.asset(
-                        "assets/icons/ic_setting_privacy_policy.png",
+                        "assets/icons/ic_setting_privacy_policy.webp",
                         scale: 1.5,
                         color: Colur.iconGrey,
                       ),
@@ -1010,7 +1020,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                             Container(
                               margin: const EdgeInsets.only(right:10),
                               child: Image.asset(
-                                "assets/icons/ic_sound_options.png",
+                                "assets/icons/ic_sound_options.webp",
                                 color: Colur.iconGrey,
                                 scale: 1.7,
                               ),

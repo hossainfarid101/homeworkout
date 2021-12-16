@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:homeworkout_flutter/custom/drawer/drawer_data.dart';
 import 'package:homeworkout_flutter/database/database_helper.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
+import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 
@@ -280,6 +281,6 @@ class _DrawerMenuState extends State<DrawerMenu> {
 
   _resetProgress(BuildContext context)async{
     await DataBaseHelper().resetProgress();
-    Navigator.of(context).pop();
+    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TrainingScreen()), (route) => false);
   }
 }

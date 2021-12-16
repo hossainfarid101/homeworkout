@@ -13,6 +13,7 @@ import 'package:homeworkout_flutter/database/database_helper.dart';
 import 'package:homeworkout_flutter/database/tables/weight_table.dart';
 import 'package:homeworkout_flutter/interfaces/topbar_clicklistener.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
+import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
 import 'package:homeworkout_flutter/ui/workoutHistory/workout_history_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
@@ -118,46 +119,55 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
             systemOverlayStyle: SystemUiOverlayStyle.dark,
           ),
       ),
-      child: Scaffold(
-        appBar: PreferredSize(
-            preferredSize: Size.fromHeight(0),
-            child: AppBar( // Here we create one to set status bar color
-              backgroundColor: Colur.commonBgColor,
-              elevation: 0,
-            )
-        ),
-        drawer: const DrawerMenu(),
-        backgroundColor: Colur.commonBgColor,
-        body: SafeArea(
-          top: false,
-          bottom: Platform.isIOS ? false : true,
-          child: Column(
-            children: [
-              CommonTopBar(
-                Languages.of(context)!.txtReport.toUpperCase(),
-                this,
-                isMenu: true,
-              ),
-              const Divider(color: Colur.grey,),
-
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _widgetTotalWorkout(),
-                      _widgetDayHistory(),
-                      _widgetWeightChart(),
-                      _widgetBmiChart(fullWidth),
-                    ],
-                  ),
-                )
+      child: WillPopScope(
+        onWillPop: () {
+          Preference.shared.setInt(Preference.DRAWER_INDEX, 0);
+          Navigator.pushAndRemoveUntil(
+              context, MaterialPageRoute(builder: (context) => TrainingScreen()), (
+              route) => false);
+          return Future.value(true);
+        },
+        child: Scaffold(
+          appBar: PreferredSize(
+              preferredSize: Size.fromHeight(0),
+              child: AppBar( // Here we create one to set status bar color
+                backgroundColor: Colur.commonBgColor,
+                elevation: 0,
               )
-
-            ],
           ),
-        ),
+          drawer: const DrawerMenu(),
+          backgroundColor: Colur.commonBgColor,
+          body: SafeArea(
+            top: false,
+            bottom: Platform.isIOS ? false : true,
+            child: Column(
+              children: [
+                CommonTopBar(
+                  Languages.of(context)!.txtReport.toUpperCase(),
+                  this,
+                  isMenu: true,
+                ),
+                const Divider(color: Colur.grey,),
 
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _widgetTotalWorkout(),
+                        _widgetDayHistory(),
+                        _widgetWeightChart(),
+                        _widgetBmiChart(fullWidth),
+                      ],
+                    ),
+                  )
+                )
+
+              ],
+            ),
+          ),
+
+        ),
       ),
     );
   }
@@ -174,14 +184,14 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
                 child: Column(
                   children: [
                     Text(
-                      (totalWorkout != 0) ? totalWorkout.toString() : "0",
+                      (totalWorkout != 0 && totalWorkout != null) ? totalWorkout.toString() : "0",
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
                           color: Colur.theme),
                     ),
                     Text(
-                      Languages.of(context)!.txtWorkout.toUpperCase(),
+                      Languages.of(context)!.txtExercises.toUpperCase(),
                       style: TextStyle(fontSize: 14.0, color: Colur.txt_gray),
                     ),
                   ],
@@ -191,7 +201,7 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
                 child: Column(
                   children: [
                     Text(
-                      (totalKcal != 0) ? totalKcal.toString() : "0",
+                      (totalKcal != 0 && totalKcal != null) ? totalKcal.toString() : "0",
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
@@ -208,7 +218,7 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
                 child: Column(
                   children: [
                     Text(
-                      Utils.secondToMMSSFormat((totalMin != 0) ? totalMin! : 0),
+                      totalMin != null ? Utils.secondToMMSSFormat((totalMin != 0) ? totalMin! : 0) : "00:00",
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
@@ -326,7 +336,7 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
                 : Container(
                     alignment: Alignment.center,
                     child: Image.asset(
-                      "assets/icons/ic_challenge_complete_day.png",
+                      "assets/icons/ic_challenge_complete_day.webp",
                     )),
           ),
           Container(

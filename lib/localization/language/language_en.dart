@@ -657,5 +657,8 @@ class LanguageEn extends Languages {
   String get txtAddNewWorkoutConstant => "Add new workouts constantly";
 
   @override
-  String get txtUnlimitedWorkout => "Unlimited Wokrout plans";
+  String get txtUnlimitedWorkout => "Unlimited Workout plans";
+
+  @override
+  String get txtExitMessage => "Press back twice to exit";
 }

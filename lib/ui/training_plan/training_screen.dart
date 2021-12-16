@@ -49,6 +49,8 @@ class _TrainingScreenState extends State<TrainingScreen>
   int? selectedFirstDayOfWeek = 0;
   int? totalDayOfWeekGoal = 0;
 
+  DateTime? currentBackPressTime;
+
   _scrollListener() {
     if (isShrink != lastStatus) {
       setState(() {
@@ -88,10 +90,7 @@ class _TrainingScreenState extends State<TrainingScreen>
         ),//
       ),
       child: WillPopScope(
-        onWillPop: () async{
-          SystemChannels.platform.invokeMethod('SystemNavigator.pop');
-          return false;
-        },
+        onWillPop: onWillPop,
         child: Scaffold(
           drawer: DrawerMenu(),
           backgroundColor: Colur.iconGreyBg,
@@ -168,7 +167,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                                                             color: Colur.white,
                                                             fontSize: 18,
                                                             fontWeight: FontWeight.w500)),
-                                                    Text(Languages.of(context)!.txtWorkout
+                                                    Text(Languages.of(context)!.txtExercises
                                                         .toUpperCase(),
                                                         overflow: TextOverflow.ellipsis,
                                                         style: TextStyle(
@@ -365,147 +364,6 @@ class _TrainingScreenState extends State<TrainingScreen>
                                         ),
                                       ],
                                     )
-
-                                    /*Column(
-                                      //crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Visibility(
-                                            visible: (selectedTrainingDay == "0"),
-                                            child: Column(
-                                              children: [
-                                                Container(
-                                                  alignment: Alignment.topLeft,
-                                                  margin: const EdgeInsets.all(10),
-                                                  child: Text(
-                                                      Languages.of(context)!.txtWeekGoal
-                                                          .toUpperCase(),
-                                                      overflow: TextOverflow.ellipsis,
-                                                      style: const TextStyle(
-                                                          color: Colur.txtBlack,
-                                                          fontSize: 16,
-                                                          fontWeight: FontWeight.w500)),
-                                                ),
-                                                Container(
-                                                  margin:
-                                                  const EdgeInsets.only(top: 10),
-                                                  child: Text(
-                                                      Languages.of(context)!
-                                                          .txtWeekGoalDesc,
-                                                      textAlign: TextAlign.center,
-                                                      overflow: TextOverflow.ellipsis,
-                                                      style: const TextStyle(
-                                                          color: Colur.grey,
-                                                          fontSize: 14,
-                                                          fontWeight: FontWeight.w400)),
-                                                ),
-                                                InkWell(
-                                                  onTap: () {
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                SetWeeklyGoalScreen())).then((value) => _getPreference());
-                                                  },
-                                                  child: Container(
-                                                    padding: const EdgeInsets.all(15),
-                                                    decoration: const BoxDecoration(
-                                                        gradient: LinearGradient(
-                                                            colors: [
-                                                              Colur.blueGradientButton1,
-                                                              Colur.blueGradientButton2,
-                                                            ],
-                                                            begin: Alignment.centerLeft,
-                                                            end: Alignment.centerRight,
-                                                            stops: [0.0, 1.0],
-                                                            tileMode: TileMode.clamp),
-                                                      borderRadius: BorderRadius.all(
-                                                          Radius.circular(30)),
-                                                    ),
-                                                    margin: const EdgeInsets.symmetric(
-                                                        vertical: 15, horizontal: 20),
-                                                    child: Center(
-                                                      child: Text(
-                                                          Languages.of(context)!
-                                                              .txtSetAGoal
-                                                              .toUpperCase(),
-                                                          textAlign: TextAlign.center,
-                                                          overflow: TextOverflow.ellipsis,
-                                                          style: const TextStyle(
-                                                              color: Colur.white,
-                                                              fontSize: 18,
-                                                              fontWeight:
-                                                              FontWeight.w500)),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            )),
-                                        Visibility(
-                                            visible: (selectedTrainingDay != "0"),
-                                            child: Expanded(
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                children: [
-                                                  InkWell(
-                                                    onTap: () {
-                                                      Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  SetWeeklyGoalScreen())).then((value) => _getPreference());
-                                                    },
-                                                    child: Row(
-                                                      children: [
-                                                        Container(
-                                                          alignment: Alignment.topLeft,
-                                                          margin: const EdgeInsets.only(left: 10, bottom: 10),                                                          child: Text(
-                                                              Languages.of(context)!.txtWeekGoal
-                                                                  .toUpperCase(),
-                                                              overflow: TextOverflow.ellipsis,
-                                                              style: const TextStyle(
-                                                                  color: Colur.txtBlack,
-                                                                  fontSize: 16,
-                                                                  fontWeight: FontWeight.w500)),
-                                                        ),
-                                                        Container(
-                                                            margin: const EdgeInsets.only(left: 10, bottom: 10),
-                                                            child: Icon(Icons.edit_rounded,size: 15)
-                                                        ),
-                                                        Expanded(
-                                                          child: Container(
-                                                            margin: const EdgeInsets.only(right: 10, bottom: 10),
-                                                            alignment: Alignment.centerRight,
-                                                            child: Text(
-                                                              "${totalDayOfWeekGoal.toString()}/" +
-                                                                  selectedTrainingDay!,
-                                                              style: TextStyle(
-                                                                  fontSize: 14),
-                                                            ),
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    margin: const EdgeInsets.only(top: 15.0,bottom: 0),
-                                                    alignment: Alignment.center,
-                                                    height: 40,
-                                                    child: ListView.builder(
-                                                      scrollDirection: Axis.horizontal,
-                                                      shrinkWrap: true,
-                                                      physics: NeverScrollableScrollPhysics(),
-                                                      itemBuilder: (BuildContext context, int index) {
-                                                        return _itemOfWeekGoal(index);
-                                                      },
-                                                      itemCount: isAvailableHistory.length,
-                                                      // itemCount: 7,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ))
-                                      ],
-                                    ),*/
                                   ),
                                 ],
                               ),
@@ -837,13 +695,13 @@ class _TrainingScreenState extends State<TrainingScreen>
     String? levelName = "";
     if(planLevel != Constant.titleQuarantineAtHome && planLevel != Constant.txt_7_4_challenge && planLevel !=Constant.title ) {
       if (planLevel == Constant.strBeginner) {
-        levelName = "assets/icons/ic_1_star.png";
+        levelName = "assets/icons/ic_1_star.webp";
       } else if (planLevel == Constant.strIntermediate) {
-        levelName = "assets/icons/ic_2_star.png";
+        levelName = "assets/icons/ic_2_star.webp";
       } else if (planLevel == Constant.strAdvance) {
-        levelName = "assets/icons/ic_3_star.png";
+        levelName = "assets/icons/ic_3_star.webp";
       } else {
-        levelName = "assets/icons/ic_3_star.png";
+        levelName = "assets/icons/ic_3_star.webp";
       }
     }
     return levelName;
@@ -878,7 +736,11 @@ class _TrainingScreenState extends State<TrainingScreen>
               : Container(
                   alignment: Alignment.center,
                   child:
-                      Image.asset("assets/icons/ic_challenge_complete_day.png",scale: 3,))
+                      Image.asset(
+                        "assets/icons/ic_challenge_complete_day.webp",
+                        height: 33,
+                        width: 33,
+                      ))
         ],
       ),
     );
@@ -887,6 +749,7 @@ class _TrainingScreenState extends State<TrainingScreen>
   _widgetDiscover(){
     return InkWell(
       onTap: () {
+        Preference.shared.setInt(Preference.DRAWER_INDEX, 1);
         Navigator.push(context, MaterialPageRoute(builder: (context)=>DiscoverScreen()));
       },
       child: Container(
@@ -1051,6 +914,17 @@ class _TrainingScreenState extends State<TrainingScreen>
     } else {
       return "";
     }
+  }
+
+  Future<bool> onWillPop() {
+    DateTime now = DateTime.now();
+    if (currentBackPressTime == null ||
+        now.difference(currentBackPressTime!) > Duration(seconds: 3)) {
+      currentBackPressTime = now;
+      Utils.showToast(context, Languages.of(context)!.txtExitMessage, duration: 3);
+      return Future.value(false);
+    }
+    return Future.value(true);
   }
 }
 

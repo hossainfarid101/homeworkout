@@ -90,7 +90,8 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
                             Icons.menu,
                             color: isShrink ? Colur.black : Colur.white,
                           ),
-                        )),
+                        )
+                    ),
                     automaticallyImplyLeading: false,
                     title: Padding(
                       padding: const EdgeInsets.all(0.0),
@@ -103,14 +104,6 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
                       ),
                     ),
                     backgroundColor: Colors.white,
-                    /*flexibleSpace: FlexibleSpaceBar(
-                    centerTitle: true,
-                    background: Image.asset(
-                      'assets/images/abs_advanced.webp',
-                      fit: BoxFit.cover,
-                    ),
-
-                  ),*/
                     centerTitle: false,
                     flexibleSpace: FlexibleSpaceBar(
                       centerTitle: true,
@@ -274,7 +267,7 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
                                       weeklyDayData: weeklyDataList[weekPosition],
                                       dayName: weeklyDataList[weekPosition]
                                           .arrWeekDayData![weekDaysPosition]
-                                          .Day_name,
+                                          .dayName,
                                       weekName: (weekPosition + 1).toString(),
                                       planName:widget.planName ,))).then((value) {
                                         _getDataFromDatabase();
@@ -308,18 +301,17 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
   var isShow = false;
   itemListDays(int index) {
     var mainIndex = index;
-    var boolFlagWeekComplete = index == 0 || weeklyDataList[index-1].Is_completed == "1" ;
+    var boolFlagWeekComplete = index == 0 || weeklyDataList[index-1].isCompleted == "1" ;
     if(boolFlagWeekComplete){
       weekPosition = index;
     }
     var count = 0;
-    for (int i=0; i < weeklyDataList[mainIndex].arrWeekDayData!.length;i++) {
-      if (weeklyDataList[index].arrWeekDayData![i].Is_completed == "1") {
+    for (int i=0; i < weeklyDataList[mainIndex].arrWeekDayData!.length-1;i++) {
+      if (weeklyDataList[index].arrWeekDayData![i].isCompleted == "1") {
         count++;
       }
     }
     return Container(
-
       margin: const EdgeInsets.only(left: 10.0, right: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -343,7 +335,7 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
                     Languages.of(context)!.txtweek +
                         " " +
                         weeklyDataList[index]
-                            .Week_name
+                            .weekName
                             .toString()
                             .replaceAll("0", ""),
                     style: TextStyle(
@@ -374,7 +366,7 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
           Row(
             children: [
               Visibility(
-                visible: weeklyDataList[index].Week_name != "04",
+                visible: weeklyDataList[index].weekName != "04",
                 child: Container(
                   margin: const EdgeInsets.only(left: 10),
                   height: 130,
@@ -387,7 +379,7 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
               ),
               Expanded(
                 child: Container(
-                  margin:  EdgeInsets.only(left: (weeklyDataList[index].Week_name == "04")?30:20, right:5),
+                  margin:  EdgeInsets.only(left: (weeklyDataList[index].weekName == "04")?30:20, right:5),
                   alignment: Alignment.center,
                   color: Colur.white,
                   height: 125,
@@ -419,12 +411,12 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
 
 
     var flagPrevDay = weeklyDataList[mainIndex].arrWeekDayData!.isNotEmpty && index != 7 && index != 0 &&
-        weeklyDataList[mainIndex].arrWeekDayData![index-1].Is_completed == "1" &&
-        weeklyDataList[mainIndex].arrWeekDayData![index+1].Is_completed == "0";
+        weeklyDataList[mainIndex].arrWeekDayData![index-1].isCompleted == "1" &&
+        weeklyDataList[mainIndex].arrWeekDayData![index+1].isCompleted == "0";
     Debug.printLog("flagPrevDay==>>  "+flagPrevDay.toString()+"  "+index.toString());
 
     if((weeklyDataList[mainIndex].arrWeekDayData!.isNotEmpty &&
-        weeklyDataList[mainIndex].arrWeekDayData![index].Is_completed != "1" && flagPrevDay) ||
+        weeklyDataList[mainIndex].arrWeekDayData![index].isCompleted != "1" && flagPrevDay) ||
         (index == 0 && boolFlagWeekComplete)){
       weekDaysPosition = index;
     }
@@ -433,13 +425,13 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         if (weeklyDataList[mainIndex].arrWeekDayData!.isNotEmpty &&
-            weeklyDataList[mainIndex].arrWeekDayData![index].Is_completed == "1" && index != 7) ...{
+            weeklyDataList[mainIndex].arrWeekDayData![index].isCompleted == "1" && index != 7) ...{
           Container(
             alignment: Alignment.center,
             height: 60,
             width: 60,
             decoration:
-                BoxDecoration(shape: BoxShape.circle, color: Colur.theme),
+            BoxDecoration(shape: BoxShape.circle, color: Colur.theme),
             child: Icon(
               Icons.done_rounded,
               size: 20,
@@ -455,79 +447,80 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
             decoration: BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage(
-                        (weeklyDataList[mainIndex].Is_completed == "1")
+                        (weeklyDataList[mainIndex].isCompleted == "1")
                             ? "assets/images/ic_challenge_complete.png"
                             : "assets/images/ic_challenge_uncomplete.webp"),
                     scale: 5)),
             /*child: Container(
-                margin: const EdgeInsets.only(bottom: 5),
-                child: Text(
-                  (mainIndex + 1).toString(),
-                  style: TextStyle(fontSize: 18, color: Colur.disableTxtColor),
-                )),*/
+        margin: const EdgeInsets.only(bottom: 5),
+        child: Text(
+          (mainIndex + 1).toString(),
+          style: TextStyle(fontSize: 18, color: Colur.disableTxtColor),
+        )),*/
           )
         }
         else if ((weeklyDataList[mainIndex].arrWeekDayData!.isNotEmpty &&
-              weeklyDataList[mainIndex].arrWeekDayData![index].Is_completed != "1" && flagPrevDay) ||
+              weeklyDataList[mainIndex].arrWeekDayData![index].isCompleted != "1" && flagPrevDay) ||
               (index == 0 && boolFlagWeekComplete)) ...{
 
-          InkWell(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ExerciseListScreen(
-                            fromPage: Constant.PAGE_DAYS_STATUS,
-                            weeklyDayData: weeklyDataList[mainIndex],
-                            dayName: weeklyDataList[mainIndex]
-                                .arrWeekDayData![index]
-                                .Day_name,
-                            weekName: (mainIndex + 1).toString(),
-                        planName:widget.planName ,
-                          )));
-            },
-            child: DottedBorder(
-              color: Colur.theme,
-              borderType: BorderType.Circle,
-              strokeWidth: 1.5,
-              strokeCap: StrokeCap.butt,
-              dashPattern: [5, 3, 5, 3, 5, 3],
-              child: Container(
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ExerciseListScreen(
+                          fromPage: Constant.PAGE_DAYS_STATUS,
+                          weeklyDayData: weeklyDataList[mainIndex],
+                          dayName: weeklyDataList[mainIndex]
+                              .arrWeekDayData![index]
+                              .dayName,
+                          weekName: (mainIndex + 1).toString(),
+                          planName:widget.planName ,
+                        )));
+              },
+              child: DottedBorder(
+                color: Colur.theme,
+                borderType: BorderType.Circle,
+                strokeWidth: 1.5,
+                strokeCap: StrokeCap.butt,
+                dashPattern: [5, 3, 5, 3, 5, 3],
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 60,
+                  width: 60,
+                  child: Text(
+                    (index + 1).toString(),
+                    style: TextStyle(color: Colur.theme, fontSize: 18),
+                  ),
+                ),
+              ),
+            )
+
+          }
+          else ...{
+              Container(
                 alignment: Alignment.center,
                 height: 60,
                 width: 60,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  // border: Border.all(color: Colur.grey_icon),
+                  border: Border.all(color: Colur.disableTxtColor),
+                ),
                 child: Text(
                   (index + 1).toString(),
-                  style: TextStyle(color: Colur.theme, fontSize: 18),
+                  style: TextStyle(color: Colur.disableTxtColor, fontSize: 18),
                 ),
-              ),
-            ),
-          )
+              )
+            },
 
-        }
-        else ...{
-          Container(
-            alignment: Alignment.center,
-            height: 60,
-            width: 60,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              // border: Border.all(color: Colur.grey_icon),
-              border: Border.all(color: Colur.disableTxtColor),
-            ),
-            child: Text(
-              (index + 1).toString(),
-              style: TextStyle(color: Colur.disableTxtColor, fontSize: 18),
-            ),
-          )
-        },
         Expanded(
           child: Visibility(
             visible: ((index == 3) || (index == 7)) ? false : true,
             child: Icon(
               Icons.navigate_next_rounded,
               color: (weeklyDataList[mainIndex].arrWeekDayData!.isNotEmpty &&
-                  weeklyDataList[mainIndex].arrWeekDayData![index].Is_completed == "1"
+                  weeklyDataList[mainIndex].arrWeekDayData![index].isCompleted == "1"
                   )
                   ? Colur.theme : Colur.disableTxtColor,
               size: 20,
@@ -542,9 +535,9 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
   _getDataFromDatabase()async{
     weeklyDataList = await DataBaseHelper().getWorkoutWeeklyData(widget.planName.toString());
     weeklyDataList.forEach((element) {
-      Debug.printLog("_getWeeklyData==>> "+element.Week_name.toString()+"  "+element.Day_name.toString());
+      Debug.printLog("_getWeeklyData==>> "+element.weekName.toString()+"  "+element.dayName.toString());
       element.arrWeekDayData!.forEach((element1) {
-        Debug.printLog("arrWeekDayData==>>  "+element1.Day_name.toString()+"  "+element1.Is_completed.toString());
+        Debug.printLog("arrWeekDayData==>>  "+element1.dayName.toString()+"  "+element1.isCompleted.toString());
       });
     });
     setState(() {});

@@ -2,12 +2,12 @@ import 'dart:convert';
 
 class WeekDayData {
   WeekDayData({
-    this.Day_name,
-    this.Is_completed,
+    this.dayName,
+    this.isCompleted,
   });
 
-  String? Day_name;
-  String? Is_completed;
+  String? dayName;
+  String? isCompleted;
 
   factory WeekDayData.fromRawJson(String str) =>
       WeekDayData.fromJson(json.decode(str));
@@ -15,12 +15,12 @@ class WeekDayData {
   String toRawJson() => json.encode(toJson());
 
   factory WeekDayData.fromJson(Map<String, dynamic> json) => WeekDayData(
-    Day_name: json["Day_name"],
-    Is_completed: json["Is_completed"],
+    dayName: json["Day_name"],
+    isCompleted: json["Is_completed"],
   );
 
   Map<String, dynamic> toJson() => {
-    "Day_name": Day_name,
-    "Is_completed": Is_completed,
+    "Day_name": dayName,
+    "Is_completed": isCompleted,
   };
 }

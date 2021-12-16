@@ -13,6 +13,7 @@ import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/exercisePlan/exercise_plan_screen.dart';
 import 'package:homeworkout_flutter/ui/exerciselist/ExerciseListScreen.dart';
 import 'package:homeworkout_flutter/ui/quarantineathome/QuarantineAtHomeScreen.dart';
+import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
 import 'package:homeworkout_flutter/ui/unlockPremium/unlock_premium_screen.dart';
 import 'package:homeworkout_flutter/ui/workoutHistory/workout_history_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
@@ -201,46 +202,55 @@ class _DiscoverScreenState extends State<DiscoverScreen>
           systemOverlayStyle: SystemUiOverlayStyle.dark,
         ), //
       ),
-      child: Scaffold(
-        appBar: PreferredSize(
-            preferredSize: Size.fromHeight(0),
-            child: AppBar( // Here we create one to set status bar color
-              backgroundColor: Colur.white,
-              elevation: 0,
-            )
-        ),
-        backgroundColor: Colur.white,
-        drawer: DrawerMenu(),
-        body: Column(
-          children: [
-            _topBar(),
-            _divider(),
-            Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.only(top: 25.0, bottom: 50.0),
-                child: Column(
-                  children: [
-                    _discoverCard(),
-                    _textPicksForYou(),
-                    _picksForYouList(),
-                    _bestQuarantineWorkOut(),
-                    _textForBeginners(),
-                    _forBeginnersList(),
-                    _textFastWorkout(),
-                    _fastWorkoutList(),
-                    _textChallenge(),
-                    _challengeList(),
-                    _textWithEquipment(),
-                    _cardWithEquipment(),
-                    _textSleep(),
-                    _sleepList(),
-                    _textBodyFocus(),
-                    _bodyFocusList(),
-                  ],
+      child: WillPopScope(
+        onWillPop: () {
+          Preference.shared.setInt(Preference.DRAWER_INDEX, 0);
+          Navigator.pushAndRemoveUntil(
+              context, MaterialPageRoute(builder: (context) => TrainingScreen()), (
+              route) => false);
+          return Future.value(true);
+        },
+        child: Scaffold(
+          appBar: PreferredSize(
+              preferredSize: Size.fromHeight(0),
+              child: AppBar( // Here we create one to set status bar color
+                backgroundColor: Colur.white,
+                elevation: 0,
+              )
+          ),
+          backgroundColor: Colur.white,
+          drawer: DrawerMenu(),
+          body: Column(
+            children: [
+              _topBar(),
+              _divider(),
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.only(top: 25.0, bottom: 50.0),
+                  child: Column(
+                    children: [
+                      _discoverCard(),
+                      _textPicksForYou(),
+                      _picksForYouList(),
+                      _bestQuarantineWorkOut(),
+                      _textForBeginners(),
+                      _forBeginnersList(),
+                      _textFastWorkout(),
+                      _fastWorkoutList(),
+                      _textChallenge(),
+                      _challengeList(),
+                      _textWithEquipment(),
+                      _cardWithEquipment(),
+                      _textSleep(),
+                      _sleepList(),
+                      _textBodyFocus(),
+                      _bodyFocusList(),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

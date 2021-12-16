@@ -23,6 +23,7 @@ import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 import 'package:intl/intl.dart';
+import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:lottie/lottie.dart';
 
@@ -345,7 +346,12 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                       width: 20,
                     ),
                     InkWell(
-                        onTap: () {},
+                        onTap: () async{
+                          await Share.share(
+                            Languages.of(context)!.txtShareDesc + Constant.shareLink,
+                            subject: Languages.of(context)!.txtHomeWorkout,
+                          );
+                        },
                         child: Text(
                           Languages.of(context)!.txtShare.toUpperCase(),
                           style: TextStyle(
@@ -441,8 +447,8 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
     return Row(
       children: [
         if (weeklyDataList!.isNotEmpty) if (
-                weeklyDataList![index].Is_completed == "1" ||
-            weeklyDataList![index].Day_name == "0${dayCompleted.toString()}")
+                weeklyDataList![index].isCompleted == "1" ||
+            weeklyDataList![index].dayName == "0${dayCompleted.toString()}")
              Container(
               padding: const EdgeInsets.all(5),
               //height: 50,
@@ -474,7 +480,8 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
           child: Container(
             margin: const EdgeInsets.only(top: 24, bottom: 24),
             width: 18,
-            color: index == 0 ? Colur.blueGradient1 : Colur.grey.withOpacity(0.7),
+            color: weeklyDataList!.isNotEmpty ? (weeklyDataList![index].isCompleted == "1" ||
+                weeklyDataList![index].dayName == "0${dayCompleted.toString()}") ? Colur.blueGradient1 : Colur.grey.withOpacity(0.7)  : Colur.grey.withOpacity(0.7),
           ),
         ),
       ],
@@ -1192,20 +1199,20 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
   }
 
   void _insertExerciseHistoryData() async {
-    int totalEx = 0;
+    //int totalEx = 0;
     int planId = 0;
     if (widget.fromPage == Constant.PAGE_HOME) {
       planId = 0;
-      totalEx = widget.exerciseDataList!.length;
+     // totalEx = widget.exerciseDataList!.length;
     }
     if (widget.fromPage == Constant.PAGE_DAYS_STATUS) {
-      totalEx = widget.dayStatusDetailList!.length;
+      //totalEx = widget.dayStatusDetailList!.length;
       planId = 0;
       await DataBaseHelper().updateDayStatusWeekWise(
           widget.weekName.toString(), widget.dayName.toString(),widget.tableName.toString(),"1");
     }
     if (widget.fromPage == Constant.PAGE_DISCOVER) {
-      totalEx = widget.discoverSingleExerciseData!.length;
+      //totalEx = widget.discoverSingleExerciseData!.length;
       planId = int.parse(widget.planId.toString());
     }
 
@@ -1266,7 +1273,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
     weeklyDataList = await DataBaseHelper().getWeekDaysData("0"+widget.weekName.toString(),widget.planName.toString());
 
     for (int i=0; i < weeklyDataList!.length;i++) {
-      if (weeklyDataList![i].Is_completed == "1") {
+      if (weeklyDataList![i].isCompleted == "1") {
         totalCompleteDays++;
       }
     }

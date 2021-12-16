@@ -4,18 +4,18 @@ import 'package:homeworkout_flutter/database/model/WeekDayData.dart';
 
 class WeeklyDayData {
   WeeklyDayData({
-    this.Workout_id,
-    this.Day_name,
-    this.Week_name,
-    this.Is_completed,
+    this.workoutId,
+    this.dayName,
+    this.weekName,
+    this.isCompleted,
     this.categoryName,
     this.arrWeekDayData,
   });
 
-  int? Workout_id;
-  String? Day_name;
-  String? Week_name;
-  String? Is_completed;
+  int? workoutId;
+  String? dayName;
+  String? weekName;
+  String? isCompleted;
   String? categoryName;
   List<WeekDayData>? arrWeekDayData = [];
   bool isShow = false;
@@ -26,19 +26,19 @@ class WeeklyDayData {
   String toRawJson() => json.encode(toJson());
 
   factory WeeklyDayData.fromJson(Map<String, dynamic> json) => WeeklyDayData(
-      Workout_id: json["Workout_id"],
-      Day_name: json["Day_name"],
-      Week_name: json["Week_name"],
-      Is_completed: json["Is_completed"],
+      workoutId: json["Workout_id"],
+      dayName: json["Day_name"],
+      weekName: json["Week_name"],
+      isCompleted: json["Is_completed"],
       categoryName: json["categoryName"],
       arrWeekDayData: json["arrWeekDayData"],
   );
 
   Map<String, dynamic> toJson() => {
-    "Workout_id": Workout_id,
-    "Day_name": Day_name,
-    "Week_name": Week_name,
-    "Is_completed": Is_completed,
+    "Workout_id": workoutId,
+    "Day_name": dayName,
+    "Week_name": weekName,
+    "Is_completed": isCompleted,
     "categoryName": categoryName,
     "arrWeekDayData": arrWeekDayData,
   };

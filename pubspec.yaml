@@ -396,40 +396,38 @@ flutter:
     - assets/icons/history/ic_history_leg.webp
     - assets/icons/history/ic_history_lower.webp
     - assets/icons/history/ic_history_shoulder.webp
-    - assets/icons/ic_1_star.png
-    - assets/icons/ic_2_star.png
-    - assets/icons/ic_3_star.png
+    - assets/icons/ic_1_star.webp
+    - assets/icons/ic_2_star.webp
+    - assets/icons/ic_3_star.webp
     - assets/icons/ic_select_pointer.webp
-    - assets/icons/ic_challenge_complete_day.png
+    - assets/icons/ic_challenge_complete_day.webp
     - assets/icons/ic_menu.png
-    - assets/icons/ic_menu_library.png
+    - assets/icons/ic_menu_library.webp
     - assets/icons/ic_menu_reminder.webp
     - assets/icons/ic_menu_report.png
     - assets/icons/ic_menu_restart_progress.webp
     - assets/icons/ic_menu_setting.webp
     - assets/icons/ic_training_plan.webp
     - assets/icons/ic_setting_coach_tips.webp
-    - assets/icons/ic_setting_countdown_time.png
+    - assets/icons/ic_setting_countdown_time.webp
     - assets/icons/ic_setting_device_tts_setting.png
-    - assets/icons/ic_setting_download_more_tts_langu.png
-    - assets/icons/ic_setting_download_tts_engine.png
+    - assets/icons/ic_setting_download_more_tts_langu.webp
+    - assets/icons/ic_setting_download_tts_engine.webp
     - assets/icons/ic_setting_feedback.png
     - assets/icons/ic_setting_health_data.png
-    - assets/icons/ic_setting_keep__screen.png
     - assets/icons/ic_setting_lang.webp
     - assets/icons/ic_setting_metric.png
     - assets/icons/ic_setting_navigat_pre.png
     - assets/icons/ic_setting_navigat_right.png
-    - assets/icons/ic_setting_privacy_policy.png
+    - assets/icons/ic_setting_privacy_policy.webp
     - assets/icons/ic_setting_rate_us.webp
     - assets/icons/ic_setting_reminder.webp
     - assets/icons/ic_setting_rest_set.png
-    - assets/icons/ic_setting_sec_arrow.png
-    - assets/icons/ic_setting_share.png
+    - assets/icons/ic_setting_share.webp
     - assets/icons/ic_setting_test_voice.webp
     - assets/icons/ic_setting_tts_engine.webp
     - assets/icons/ic_setting_voice_guide.webp
-    - assets/icons/ic_sound_options.png
+    - assets/icons/ic_sound_options.webp
     - assets/icons/ic_back.webp
     - assets/icons/ic_edit.webp
     - assets/icons/ic_setting_remove_ads.webp
@@ -445,14 +443,14 @@ flutter:
     - assets/icons/drawer/ic_setting_unselected.webp
     - assets/icons/drawer/ic_training_selected.webp
     - assets/icons/drawer/ic_training_unselected.webp
-    - assets/icons/cp_ic_animation.png
+    - assets/icons/cp_ic_animation.webp
     - assets/icons/ic_done_purchase.webp
-    - assets/icons/ic_workout_time.png
-    - assets/icons/ic_workout_calories.png
-    - assets/icons/ic_history_training_plan.png
-    - assets/icons/ic_history_advanced.png
-    - assets/icons/ic_history_intermediate.png
-    - assets/icons/ic_history_normal.png
+    - assets/icons/ic_workout_time.webp
+    - assets/icons/ic_workout_calories.webp
+    - assets/icons/ic_history_training_plan.webp
+    - assets/icons/ic_history_advanced.webp
+    - assets/icons/ic_history_intermediate.webp
+    - assets/icons/ic_history_normal.webp
     - assets/images/
     - assets/images/ic_7_day_free_trial.webp
     - assets/images/main_bg.webp

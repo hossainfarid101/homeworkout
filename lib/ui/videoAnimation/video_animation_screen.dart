@@ -125,7 +125,7 @@ class _VideoAnimationScreenState extends State<VideoAnimationScreen>
                 children: [
                   (isAnimation)
                       ? Image.asset(
-                          "assets/icons/cp_ic_animation.png",
+                          "assets/icons/cp_ic_animation.webp",
                           scale: 1.5,
                           color: Colur.white,
                         )
@@ -294,8 +294,8 @@ class _VideoAnimationScreenState extends State<VideoAnimationScreen>
         : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
         ? (widget.workoutDetailList![widget.index!].timeType == "time")
         ? Utils.secondToMMSSFormat(int.parse(
-        widget.workoutDetailList![widget.index!].Time_beginner.toString()))
-        : "X ${widget.workoutDetailList![widget.index!].Time_beginner}"
+        widget.workoutDetailList![widget.index!].timeBeginner.toString()))
+        : "X ${widget.workoutDetailList![widget.index!].timeBeginner}"
         : (widget.discoverSingleExerciseDataList![widget.index!].exUnit == "s")
         ? Utils.secondToMMSSFormat(int.parse(
         widget.discoverSingleExerciseDataList![widget.index!].exTime

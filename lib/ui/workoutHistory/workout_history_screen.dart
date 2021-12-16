@@ -14,6 +14,7 @@ import 'package:homeworkout_flutter/ui/report/report_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
+import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,8 @@ import 'package:table_calendar/table_calendar.dart';
 class WorkoutHistoryScreen extends StatefulWidget {
   final bool? isFromWorkOut;
 
-  const WorkoutHistoryScreen({Key? key, this.isFromWorkOut}) : super(key: key);
+
+  const WorkoutHistoryScreen({Key? key, this.isFromWorkOut = false}) : super(key: key);
 
   @override
   _WorkoutHistoryScreenState createState() => _WorkoutHistoryScreenState();
@@ -277,7 +279,7 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
               Row(
                 children: [
                   Image.asset(
-                    "assets/icons/ic_workout_time.png",
+                    "assets/icons/ic_workout_time.webp",
                     scale: 1.2,
                     color: Colur.blue,
                   ),
@@ -301,7 +303,7 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
               Row(
                 children: [
                   Image.asset(
-                    "assets/icons/ic_workout_calories.png",
+                    "assets/icons/ic_workout_calories.webp",
                     scale: 1.2,
                     color: Colur.orange,
                   ),
@@ -400,7 +402,7 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
                               children: [
                                 //========duration=======
                                 Image.asset(
-                                  "assets/icons/ic_workout_time.png",
+                                  "assets/icons/ic_workout_time.webp",
                                   scale: 1.2,
                                   color: Colur.blue,
                                 ),
@@ -423,7 +425,7 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
                                 ),
                                 //=========calories=========
                                 Image.asset(
-                                  "assets/icons/ic_workout_calories.png",
+                                  "assets/icons/ic_workout_calories.webp",
                                   scale: 1.2,
                                   color: Colur.orange,
                                 ),
@@ -592,8 +594,13 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
   }
 
   _backToReportScreen() {
-    Navigator.pushAndRemoveUntil(
-        context, MaterialPageRoute(builder: (context) => ReportScreen()), (
-        route) => false);
+    if (widget.isFromWorkOut!) {
+      Preference.shared.setInt(Preference.DRAWER_INDEX, 2);
+      Navigator.pushAndRemoveUntil(
+          context, MaterialPageRoute(builder: (context) => ReportScreen()), (
+          route) => false);
+    } else {
+      Navigator.pop(context);
+    }
   }
 }

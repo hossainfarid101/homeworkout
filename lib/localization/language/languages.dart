@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 abstract class Languages {
-
   static Languages? of(BuildContext context) {
     return Localizations.of<Languages>(context, Languages);
   }
@@ -413,17 +412,28 @@ abstract class Languages {
   String get txtInstruction;
 
   String get txtGotoHomePage;
+
   String get txtWatchVideoToUnlock;
+
   String get txtWatchVideoToUnlockDesc;
+
   String get txtUnlockOnce;
+
   String get txtFreeTrialDesc;
+
   String get txtFree7DaysTrial;
+
   String get txt1month;
+
   String get txtRemoveAds;
+
   String get txtUnlimitedWorkout;
+
   String get txt300PlusWorkout;
+
   String get txtAddNewWorkoutConstant;
 
   String get txtGoPremium;
 
+  String get txtExitMessage;
 }

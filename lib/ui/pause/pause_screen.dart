@@ -6,22 +6,31 @@ import 'package:flutter/widgets.dart';
 import 'package:homeworkout_flutter/common/commonTopBar/commom_topbar.dart';
 import 'package:homeworkout_flutter/database/model/DiscoverSingleExerciseData.dart';
 import 'package:homeworkout_flutter/database/model/ExerciseListData.dart';
+import 'package:homeworkout_flutter/database/model/WeeklyDayData.dart';
 import 'package:homeworkout_flutter/database/model/WorkoutDetailData.dart';
+import 'package:homeworkout_flutter/database/tables/discover_plan_table.dart';
+import 'package:homeworkout_flutter/database/tables/home_plan_table.dart';
 import 'package:homeworkout_flutter/interfaces/topbar_clicklistener.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
+import 'package:homeworkout_flutter/ui/exerciselist/ExerciseListScreen.dart';
 import 'package:homeworkout_flutter/ui/videoAnimation/video_animation_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
 
 class PauseScreen extends StatefulWidget {
-
   final List<WorkoutDetail>? workoutDetailList;
   final List<ExerciseListData>? exerciseListDataList;
   final String? fromPage;
   final List<DiscoverSingleExerciseData>? discoverSingleExerciseDataList;
   final int? index;
   final bool? isForQuit;
-
+  final String? dayName;
+  final String? weekName;
+  final String? planName;
+  final HomePlanTable? homePlanTable;
+  final DiscoverPlanTable? discoverPlanTable;
+  final WeeklyDayData? weeklyDayData;
+  final bool? isSubPlan;
 
   PauseScreen({
     this.workoutDetailList,
@@ -30,19 +39,26 @@ class PauseScreen extends StatefulWidget {
     this.discoverSingleExerciseDataList,
     this.index,
     this.isForQuit,
+    this.planName = "",
+    this.dayName = "",
+    this.weekName = "",
+    this.homePlanTable,
+    this.isSubPlan=false,
+    this.discoverPlanTable,
+    this.weeklyDayData,
   });
-
 
   @override
   _PauseScreenState createState() => _PauseScreenState();
 }
 
-class _PauseScreenState extends State<PauseScreen>  with TickerProviderStateMixin
+class _PauseScreenState extends State<PauseScreen>
+    with TickerProviderStateMixin
     implements TopBarClickListener {
+  Animation<int>? listLifeGuideAnimation;
 
+  AnimationController? listLifeGuideController;
 
-  Animation<int>? listLifeGuideAnimation ;
-  AnimationController? listLifeGuideController ;
   int countOfImages = 0;
 
   @override
@@ -50,15 +66,17 @@ class _PauseScreenState extends State<PauseScreen>  with TickerProviderStateMixi
     _setImageRotation(widget.index!);
     super.initState();
   }
+
   @override
   void dispose() {
     listLifeGuideController!.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async{
+      onWillPop: () async {
         Navigator.pop(context, true);
         return Future.value(true);
       },
@@ -71,11 +89,11 @@ class _PauseScreenState extends State<PauseScreen>  with TickerProviderStateMixi
         child: Scaffold(
           appBar: PreferredSize(
               preferredSize: Size.fromHeight(0),
-              child: AppBar( // Here we create one to set status bar color
+              child: AppBar(
+                // Here we create one to set status bar color
                 backgroundColor: Colur.theme,
                 elevation: 0,
-              )
-          ),
+              )),
           backgroundColor: Colur.theme,
           body: SafeArea(
             child: Container(
@@ -88,7 +106,8 @@ class _PauseScreenState extends State<PauseScreen>  with TickerProviderStateMixi
                     iconColor: Colur.white,
                   ),
                   Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                     child: Column(
                       children: [
                         _pauseHeader(context),
@@ -134,10 +153,23 @@ class _PauseScreenState extends State<PauseScreen>  with TickerProviderStateMixi
   _quitBtn(BuildContext context) {
     return InkWell(
       onTap: () {
-
-        Navigator.pop(context, false);
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ExerciseListScreen(
+                  fromPage: widget.fromPage,
+                  planName: widget.planName,
+                  dayName: widget.dayName,
+                  weekName: widget.weekName,
+                  discoverPlanTable: widget.discoverPlanTable,
+                  homePlanTable: widget.homePlanTable,
+                  weeklyDayData: widget.weeklyDayData,
+                  isSubPlan: widget.isSubPlan,
+                )),
+            (route) => false);
+        /*Navigator.pop(context, false);
         Navigator.pop(context);
-        Navigator.pop(context);
+        Navigator.pop(context);*/
       },
       child: Container(
         height: 80,
@@ -192,7 +224,9 @@ class _PauseScreenState extends State<PauseScreen>  with TickerProviderStateMixi
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                widget.isForQuit! ? Languages.of(context)!.txtQuit : Languages.of(context)!.txtPause,
+                widget.isForQuit!
+                    ? Languages.of(context)!.txtQuit
+                    : Languages.of(context)!.txtPause,
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.w700,
@@ -201,14 +235,18 @@ class _PauseScreenState extends State<PauseScreen>  with TickerProviderStateMixi
               ),
               InkWell(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => VideoAnimationScreen(
-                        fromPage: widget.fromPage,
-                        workoutDetailList: widget.workoutDetailList,
-                        index: widget.index,
-                        exerciseListDataList: widget.exerciseListDataList,
-                        discoverSingleExerciseDataList: widget.discoverSingleExerciseDataList,
-                      )));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => VideoAnimationScreen(
+                                fromPage: widget.fromPage,
+                                workoutDetailList: widget.workoutDetailList,
+                                index: widget.index,
+                                exerciseListDataList:
+                                    widget.exerciseListDataList,
+                                discoverSingleExerciseDataList:
+                                    widget.discoverSingleExerciseDataList,
+                              )));
                 },
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width * 0.6,
@@ -221,13 +259,13 @@ class _PauseScreenState extends State<PauseScreen>  with TickerProviderStateMixi
                             fontWeight: FontWeight.w500),
                         children: [
                           WidgetSpan(
-                           child: Container(
-                             margin: const EdgeInsets.symmetric(horizontal: 10),
-                             child: Icon(
-                               Icons.help,
-                               size: 20.0,
-                               color: Colur.white.withOpacity(0.5),
-                             ),
+                              child: Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Icon(
+                              Icons.help,
+                              size: 20.0,
+                              color: Colur.white.withOpacity(0.5),
+                            ),
                           )),
                         ]),
                   ),
@@ -239,26 +277,26 @@ class _PauseScreenState extends State<PauseScreen>  with TickerProviderStateMixi
             borderRadius: BorderRadius.all(Radius.circular(10)),
             child: (listLifeGuideAnimation != null)
                 ? Container(
-              color: Colur.theme_trans,
-              width: 100.0,
-              height: 100.0,
-              child: AnimatedBuilder(
-                animation: listLifeGuideAnimation!,
-                builder: (BuildContext context, Widget? child) {
-                  String frame = listLifeGuideAnimation!.value.toString();
-                  return new Image.asset(
-                    'assets/${_getExercisePathFromList()}/$frame${Constant.EXERCISE_EXTENSION}',
-                    gaplessPlayback: true,
-                    fit: BoxFit.cover,
-                  );
-                },
-              ),
-            )
+                    color: Colur.theme_trans,
+                    width: 100.0,
+                    height: 100.0,
+                    child: AnimatedBuilder(
+                      animation: listLifeGuideAnimation!,
+                      builder: (BuildContext context, Widget? child) {
+                        String frame = listLifeGuideAnimation!.value.toString();
+                        return new Image.asset(
+                          'assets/${_getExercisePathFromList()}/$frame${Constant.EXERCISE_EXTENSION}',
+                          gaplessPlayback: true,
+                          fit: BoxFit.cover,
+                        );
+                      },
+                    ),
+                  )
                 : Container(
-              color: Colur.theme_trans,
-              width: 100.0,
-              height: 100.0,
-            ),
+                    color: Colur.theme_trans,
+                    width: 100.0,
+                    height: 100.0,
+                  ),
           ),
         ],
       ),
@@ -267,7 +305,7 @@ class _PauseScreenState extends State<PauseScreen>  with TickerProviderStateMixi
 
   @override
   void onTopBarClick(String name, {bool value = true}) {
-    if(name == Constant.strBack) {
+    if (name == Constant.strBack) {
       Navigator.pop(context, true);
     }
   }
@@ -297,21 +335,21 @@ class _PauseScreenState extends State<PauseScreen>  with TickerProviderStateMixi
         : widget.discoverSingleExerciseDataList!.length);
   }*/
 
-
-  String _getExerciseNameFromList(){
+  String _getExerciseNameFromList() {
     return ((widget.fromPage == Constant.PAGE_HOME)
-        ? widget.exerciseListDataList![widget.index!].title!
-        : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
-        ? widget.workoutDetailList![widget.index!].title
-        : widget.discoverSingleExerciseDataList![widget.index!].exName).toString();
+            ? widget.exerciseListDataList![widget.index!].title!
+            : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
+                ? widget.workoutDetailList![widget.index!].title
+                : widget.discoverSingleExerciseDataList![widget.index!].exName)
+        .toString();
   }
 
   String _getExercisePathFromList() {
     return ((widget.fromPage == Constant.PAGE_HOME)
-        ? widget.exerciseListDataList![widget.index!].image!
-        : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
-        ? widget.workoutDetailList![widget.index!].image
-        : widget.discoverSingleExerciseDataList![widget.index!].exPath)
+            ? widget.exerciseListDataList![widget.index!].image!
+            : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
+                ? widget.workoutDetailList![widget.index!].image
+                : widget.discoverSingleExerciseDataList![widget.index!].exPath)
         .toString();
   }
 
@@ -350,11 +388,10 @@ class _PauseScreenState extends State<PauseScreen>  with TickerProviderStateMixi
     final Map<String, dynamic> manifestMap = json.decode(manifestContent);
 
     final imagePaths = manifestMap.keys
-        .where((String key) => key
-        .contains(_getExercisePathFromList().toString()+"/"))
+        .where((String key) =>
+            key.contains(_getExercisePathFromList().toString() + "/"))
         .toList();
 
     countOfImages = imagePaths.length;
-
   }
 }

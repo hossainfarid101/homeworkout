@@ -5,7 +5,7 @@ class WorkoutDetail {
   String? title;
   String? videoLink;
   String? description;
-  String? Time_beginner;
+  String? timeBeginner;
   String? timeType;
   String? level;
   String? image;
@@ -17,7 +17,7 @@ class WorkoutDetail {
     this.title,
     this.videoLink,
     this.description,
-    this.Time_beginner,
+    this.timeBeginner,
     this.timeType,
     this.level,
     this.image,
@@ -35,7 +35,7 @@ class WorkoutDetail {
     title: json["Title"],
     videoLink: json["videoLink"],
     description: json["Description"],
-    Time_beginner: json["Time_beginner"],
+    timeBeginner: json["Time_beginner"],
     timeType: json["time_type"],
     image: json["Image"],
     sort: json["sort"],
@@ -47,7 +47,7 @@ class WorkoutDetail {
     "Title": title,
     "videoLink": videoLink,
     "Description": description,
-    "Time_beginner": Time_beginner,
+    "Time_beginner": timeBeginner,
     "time_type": timeType,
     "Image": image,
     "sort": sort,

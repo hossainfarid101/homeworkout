@@ -100,7 +100,7 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
         sec = widget.dayStatusDetailList![lastPosition!].timeType! == "time"
             ? Languages.of(context)!.txtSeconds
             : Languages.of(context)!.txtTimes;
-        time = widget.dayStatusDetailList![lastPosition!].Time_beginner.toString();
+        time = widget.dayStatusDetailList![lastPosition!].timeBeginner.toString();
         title = widget.dayStatusDetailList![lastPosition!].title.toString();
       }else if (widget.fromPage == Constant.PAGE_DISCOVER) {
         sec = widget.discoverSingleExerciseData![lastPosition!].exUnit! == "s"
@@ -405,8 +405,8 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
         : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
         ? (widget.dayStatusDetailList![lastPosition!].timeType == "time")
         ? Utils.secondToMMSSFormat(int.parse(
-        widget.dayStatusDetailList![lastPosition!].Time_beginner.toString()))
-        : "X ${widget.dayStatusDetailList![lastPosition!].Time_beginner}"
+        widget.dayStatusDetailList![lastPosition!].timeBeginner.toString()))
+        : "X ${widget.dayStatusDetailList![lastPosition!].timeBeginner}"
         : (widget.discoverSingleExerciseData![lastPosition!].exUnit == "s")
         ? Utils.secondToMMSSFormat(int.parse(
         widget.discoverSingleExerciseData![lastPosition!].exTime

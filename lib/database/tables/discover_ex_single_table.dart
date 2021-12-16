@@ -2,18 +2,18 @@ import 'dart:convert';
 
 class DiscoverExSingleTable {
   DiscoverExSingleTable({
-      this.Id,
-      this.PlanId,
-      this.ExId,
-      this.ExTime,
-      this.IsCompleted,
+      this.id,
+      this.planId,
+      this.exId,
+      this.exTime,
+      this.isCompleted,
       });
 
-  int? Id;
-  String? PlanId;
-  String? ExId;
-  String? ExTime;
-  String? IsCompleted;
+  int? id;
+  String? planId;
+  String? exId;
+  String? exTime;
+  String? isCompleted;
 
   factory DiscoverExSingleTable.fromRawJson(String str) =>
       DiscoverExSingleTable.fromJson(json.decode(str));
@@ -21,18 +21,18 @@ class DiscoverExSingleTable {
   String toRawJson() => json.encode(toJson());
 
   factory DiscoverExSingleTable.fromJson(Map<String, dynamic> json) => DiscoverExSingleTable(
-      Id: json["Id"],
-      PlanId: json["PlanId"],
-      ExId: json["ExId"],
-      ExTime: json["ExTime"],
-      IsCompleted: json["IsCompleted"],
+      id: json["Id"],
+      planId: json["PlanId"],
+      exId: json["ExId"],
+      exTime: json["ExTime"],
+      isCompleted: json["IsCompleted"],
   );
 
   Map<String, dynamic> toJson() => {
-    "Id": Id,
-    "PlanId": PlanId,
-    "ExId": ExId,
-    "ExTime": ExTime,
-    "IsCompleted": IsCompleted,
+    "Id": id,
+    "PlanId": planId,
+    "ExId": exId,
+    "ExTime": exTime,
+    "IsCompleted": isCompleted,
   };
 }

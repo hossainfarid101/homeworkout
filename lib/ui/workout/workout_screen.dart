@@ -7,7 +7,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:homeworkout_flutter/database/model/DiscoverSingleExerciseData.dart';
 import 'package:homeworkout_flutter/database/model/ExerciseListData.dart';
+import 'package:homeworkout_flutter/database/model/WeeklyDayData.dart';
 import 'package:homeworkout_flutter/database/model/WorkoutDetailData.dart';
+import 'package:homeworkout_flutter/database/tables/discover_plan_table.dart';
+import 'package:homeworkout_flutter/database/tables/home_plan_table.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/pause/pause_screen.dart';
 import 'package:homeworkout_flutter/ui/skipExercise/skip_exercise_screen.dart';
@@ -31,6 +34,10 @@ class WorkoutScreen extends StatefulWidget {
   final String? planName;
   final String? planId;
   final int? totalMin;
+  final HomePlanTable? homePlanTable;
+  final DiscoverPlanTable? discoverPlanTable;
+  final WeeklyDayData? weeklyDayData;
+  final bool? isSubPlan;
 
   WorkoutScreen(
       {this.fromPage = "",
@@ -42,7 +49,11 @@ class WorkoutScreen extends StatefulWidget {
       this.discoverSingleExerciseData,
       this.planName = "",
       this.planId = "",
-      this.totalMin = 0});
+      this.totalMin = 0,
+      this.homePlanTable,
+      this.isSubPlan=false,
+      this.discoverPlanTable,
+      this.weeklyDayData,});
 
   @override
   _WorkoutScreenState createState() => _WorkoutScreenState();
@@ -321,7 +332,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
 
       speechText = Languages.of(context)!.txtStart +
           " " +
-          widget.dayStatusDetailList![lastPosition!].Time_beginner! +
+          widget.dayStatusDetailList![lastPosition!].timeBeginner! +
           " " +
           sec +
           " " +
@@ -377,7 +388,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
           vsync: this,
           duration: Duration(
               seconds: int.parse(
-                  widget.dayStatusDetailList![lastPosition!].Time_beginner!)),
+                  widget.dayStatusDetailList![lastPosition!].timeBeginner!)),
         )..addListener(() {
             setState(() {});
           });
@@ -509,7 +520,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                   InkWell(
                     onTap: () {
                       _showVideoAnimationScreen();
-                      timerForCount!.cancel();
+                      //timerForCount!.cancel();
                       /*if (isWidgetCountDown) {
                     countDownController.pause();
                   } else {
@@ -552,6 +563,12 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                     onTap: () async {
                       if (isWidgetCountDown) {
                         countDownController.pause();
+                        if (int.parse(countDownController.getTime()) < 4) {
+                          if (!isMute! && isVoiceGuide!) {
+                            timerForCount!.cancel();
+                          }
+                        }
+
                       } else {
                         if (controller != null) {
                           controller!.stop();
@@ -560,6 +577,9 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                       await _soundOptionsDialog().then((value) {
                         if (isWidgetCountDown) {
                           countDownController.resume();
+
+                          timerForCount =
+                              Timer.periodic(Duration(seconds: 1), (Timer t) => _setSoundCountDown());
                         } else {
                           if (controller != null) {
                             _controllerForward();
@@ -846,6 +866,13 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                                   discoverSingleExerciseDataList:
                                   widget.discoverSingleExerciseData,
                                   isForQuit: false,
+                                  discoverPlanTable: widget.discoverPlanTable,
+                                  weeklyDayData: widget.weeklyDayData,
+                                  isSubPlan: widget.isSubPlan,
+                                  homePlanTable: widget.homePlanTable,
+                                  weekName: widget.weekName,
+                                  planName: widget.planName,
+                                  dayName: widget.dayName,
                                 ))).then((value) {
                           if (!value) {
                             controller!.reset();
@@ -1115,7 +1142,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                             Container(
                               margin: const EdgeInsets.only(right: 10),
                               child: Image.asset(
-                                "assets/icons/ic_sound_options.png",
+                                "assets/icons/ic_sound_options.webp",
                                 color: Colur.iconGrey,
                                 scale: 1.7,
                               ),
@@ -1347,6 +1374,9 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                       widget.discoverSingleExerciseData,
                 ))).then((value) {
       Debug.printLog(value.toString());
+      if (isWidgetCountDown) {
+        countDownController.resume();
+      }
       if (value) {
         _controllerForward();
       }
@@ -1366,7 +1396,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
     return ((widget.fromPage == Constant.PAGE_HOME)
             ? widget.exerciseDataList![lastPosition!].time!
             : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
-                ? widget.dayStatusDetailList![lastPosition!].Time_beginner
+                ? widget.dayStatusDetailList![lastPosition!].timeBeginner
                 : widget.discoverSingleExerciseData![lastPosition!].exTime)
         .toString();
   }
