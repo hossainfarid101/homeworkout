@@ -6,7 +6,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:homeworkout_flutter/database/model/DiscoverSingleExerciseData.dart';
 import 'package:homeworkout_flutter/database/model/ExerciseListData.dart';
+import 'package:homeworkout_flutter/database/model/WeeklyDayData.dart';
 import 'package:homeworkout_flutter/database/model/WorkoutDetailData.dart';
+import 'package:homeworkout_flutter/database/tables/discover_plan_table.dart';
+import 'package:homeworkout_flutter/database/tables/home_plan_table.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/pause/pause_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
@@ -25,6 +28,12 @@ class SkipExerciseScreen extends StatefulWidget {
   final String? weekName;
   final List<DiscoverSingleExerciseData>? discoverSingleExerciseData;
   final String? planName;
+  final HomePlanTable? homePlanTable;
+  final DiscoverPlanTable? discoverPlanTable;
+  final WeeklyDayData? weeklyDayData;
+  final bool? isSubPlan;
+  final bool? isFromOnboarding;
+
 
   SkipExerciseScreen(
       {this.fromPage = "",
@@ -34,6 +43,11 @@ class SkipExerciseScreen extends StatefulWidget {
       this.dayName = "",
       this.weekName = "",
       this.discoverSingleExerciseData,
+      this.homePlanTable,
+      this.isSubPlan=false,
+      this.discoverPlanTable,
+      this.weeklyDayData,
+      this.isFromOnboarding,
       this.planName = ""});
 
   @override
@@ -165,8 +179,16 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
                   workoutDetailList: widget.dayStatusDetailList,
                   discoverSingleExerciseDataList: widget.discoverSingleExerciseData,
                   isForQuit: true,
+                  dayName: widget.dayName,
+                  weekName: widget.weekName,
+                  planName: widget.planName,
+                  discoverPlanTable: widget.discoverPlanTable,
+                  weeklyDayData: widget.weeklyDayData,
+                  isSubPlan: widget.isSubPlan,
+                  homePlanTable: widget.homePlanTable,
+                  isFromOnboarding: widget.isFromOnboarding,
                 )));
-        return false;
+        return true;
       },
       child: Theme(
         data: ThemeData(

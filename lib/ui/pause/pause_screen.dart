@@ -31,6 +31,7 @@ class PauseScreen extends StatefulWidget {
   final DiscoverPlanTable? discoverPlanTable;
   final WeeklyDayData? weeklyDayData;
   final bool? isSubPlan;
+  final bool? isFromOnboarding;
 
   PauseScreen({
     this.workoutDetailList,
@@ -46,6 +47,7 @@ class PauseScreen extends StatefulWidget {
     this.isSubPlan=false,
     this.discoverPlanTable,
     this.weeklyDayData,
+    this.isFromOnboarding
   });
 
   @override
@@ -165,6 +167,7 @@ class _PauseScreenState extends State<PauseScreen>
                   homePlanTable: widget.homePlanTable,
                   weeklyDayData: widget.weeklyDayData,
                   isSubPlan: widget.isSubPlan,
+                  isFromOnboarding: widget.isFromOnboarding
                 )),
             (route) => false);
         /*Navigator.pop(context, false);

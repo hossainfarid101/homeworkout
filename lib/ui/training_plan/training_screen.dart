@@ -847,7 +847,7 @@ class _TrainingScreenState extends State<TrainingScreen>
   _getAllPlanList() async{
     allPlanDataList = await DataBaseHelper().getHomePlanData();
     allPlanDataList.forEach((element) {
-      Debug.printLog("_getAllPlanList==>> "+element.catName.toString());
+      Debug.printLog("_getAllPlanList==>> "+element.catId!.toString()+ "\t" +element.catTableName.toString());
     });
     setState(() {});
   }

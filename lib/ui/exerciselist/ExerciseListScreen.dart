@@ -11,8 +11,13 @@ import 'package:homeworkout_flutter/database/model/WorkoutDetailData.dart';
 import 'package:homeworkout_flutter/database/tables/discover_plan_table.dart';
 import 'package:homeworkout_flutter/database/tables/home_plan_table.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
+import 'package:homeworkout_flutter/ui/discover/DiscoverScreen.dart';
+import 'package:homeworkout_flutter/ui/exerciseDays/exercise_days_status_screen.dart';
+import 'package:homeworkout_flutter/ui/exercisePlan/exercise_plan_screen.dart';
+import 'package:homeworkout_flutter/ui/quarantineathome/QuarantineAtHomeScreen.dart';
 import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
 import 'package:homeworkout_flutter/ui/workout/workout_screen.dart';
+import 'package:homeworkout_flutter/ui/workoutHistory/workout_history_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
@@ -28,6 +33,7 @@ class ExerciseListScreen extends StatefulWidget {
   final String? planName;
   final String? fromPage;
   final bool? isFromOnboarding;
+  final bool? isFromHistory;
 
   ExerciseListScreen(
       {this.homePlanTable,
@@ -38,6 +44,7 @@ class ExerciseListScreen extends StatefulWidget {
       this.weekName= "",
       this.planName= "",
       required this.fromPage,
+      this.isFromHistory = false,
       this.isFromOnboarding = false});
 
   @override
@@ -96,12 +103,30 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
       ),
       child: WillPopScope(
         onWillPop: () {
-          if(widget.isFromOnboarding!) {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => TrainingScreen()));
+          if(widget.isFromHistory!) {
+            Navigator.pop(context);
             return Future.value(true);
-          }else {
+          } else if(widget.isFromOnboarding! || widget.fromPage == Constant.PAGE_HOME) {
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TrainingScreen()), (route) => false);
             return Future.value(true);
-            //Navigator.pop(context);
+          } /*else if(widget.isSubPlan!) {
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => ExercisePlanScreen(homePlanTable: widget.discoverPlanTable)), (route) => false);
+            return Future.value(true);
+          } */else if(widget.fromPage == Constant.PAGE_DISCOVER){
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => DiscoverScreen()), (route) => false);
+            return Future.value(true);
+          } else if(widget.fromPage == Constant.PAGE_DAYS_STATUS){
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => ExerciseDaysStatusScreen(planName: widget.planName)), (route) => false);
+            return Future.value(true);
+          } else if(widget.fromPage == Constant.PAGE_QUARANTINE){
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => QuarantineAtHomeScreen()), (route) => false);
+            return Future.value(true);
+          } else if(widget.fromPage == Constant.PAGE_HISTORY){
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => WorkoutHistoryScreen()), (route) => false);
+            return Future.value(true);
+          } else {
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TrainingScreen()), (route) => false);
+            return Future.value(true);
           }
         },
         child: Scaffold(
@@ -143,10 +168,20 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
                         : Container(),
                     leading: InkWell(
                       onTap: () {
-                        if(widget.isFromOnboarding!) {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => TrainingScreen()));
-                        }else {
+                        if(widget.isFromHistory!) {
                           Navigator.pop(context);
+                        } else if(widget.isFromOnboarding! || widget.fromPage == Constant.PAGE_HOME) {
+                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TrainingScreen()), (route) => false);
+                        }else if(widget.fromPage == Constant.PAGE_DISCOVER){
+                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => DiscoverScreen()), (route) => false);
+                        } else if(widget.fromPage == Constant.PAGE_DAYS_STATUS){
+                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => ExerciseDaysStatusScreen(planName: widget.planName)), (route) => false);
+                        } else if(widget.fromPage == Constant.PAGE_QUARANTINE){
+                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => QuarantineAtHomeScreen()), (route) => false);
+                        } else if(widget.fromPage == Constant.PAGE_HISTORY){
+                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => WorkoutHistoryScreen()), (route) => false);
+                        } else {
+                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TrainingScreen()), (route) => false);
                         }
                       },
                       child: Padding(
@@ -728,6 +763,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
                     isSubPlan: widget.isSubPlan,
                     weeklyDayData: widget.weeklyDayData,
                     discoverPlanTable: widget.discoverPlanTable,
+                    isFromOnboarding: widget.isFromOnboarding!
                     ))).then((value) {
                       setState(() {
                         _getDataFromDatabase();

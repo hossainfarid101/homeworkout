@@ -192,8 +192,6 @@ class _DiscoverScreenState extends State<DiscoverScreen>
     _rewardedAd?.dispose();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Theme(
@@ -353,8 +351,6 @@ class _DiscoverScreenState extends State<DiscoverScreen>
     });
     setState(() {});
   }
-
-
 
   _topBar() {
     return CommonTopBar(Languages.of(context)!.txtDiscover.toUpperCase(), this,

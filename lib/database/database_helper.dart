@@ -577,4 +577,32 @@ class DataBaseHelper {
     }
     return daysList;
   }
+
+  Future<HomePlanTable> getHomePlanDataForHistory(String tableName) async {
+    List<HomePlanTable> homePlanList = [];
+    var dbClient = await db;
+    List<Map<String, dynamic>> maps = await dbClient
+        .rawQuery("SELECT * FROM $homePlanTable WHERE catTableName = '$tableName'");
+    if (maps.length > 0) {
+      for (var answer in maps) {
+        var homePlanData = HomePlanTable.fromJson(answer);
+        homePlanList.add(homePlanData);
+      }
+    }
+    return homePlanList.first;
+  }
+
+  Future<DiscoverPlanTable> getDiscoverPlanDataForHistory(int planId) async {
+    List<DiscoverPlanTable>homePlanList = [];
+    var dbClient = await db;
+    List<Map<String, dynamic>> maps = await dbClient
+        .rawQuery("SELECT * FROM $discoverPlanTable WHERE planId = $planId");
+    if (maps.length > 0) {
+      for (var answer in maps) {
+        var homePlanData = DiscoverPlanTable.fromJson(answer);
+        homePlanList.add(homePlanData);
+      }
+    }
+    return homePlanList.first;
+  }
 }

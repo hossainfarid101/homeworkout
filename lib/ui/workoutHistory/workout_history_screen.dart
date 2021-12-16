@@ -336,16 +336,28 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
       itemBuilder: (context, index) {
         return InkWell(
           onTap: () async {
-              /*var planDaysTable = await DataBaseHelper.instance
-                  .getPlanDaysTableById(
-                      arrHistoryDetail[index].HPlanId.toString(),
-                      arrHistoryDetail[index].HDayName.toString());
-              Debug.printLog("arrHistoryDetail[index].HDayName.toString()==>>  " +
-                  arrHistoryDetail[index].HDayName.toString());*/
+            var homePlanTable;
+            var discoverPlanTable;
+            if(arrHistoryDetail[index].fromPage == Constant.PAGE_HOME) {
+               homePlanTable =  await DataBaseHelper().getHomePlanDataForHistory(arrHistoryDetail[index].tableName!);
+            } else if(arrHistoryDetail[index].fromPage == Constant.PAGE_DISCOVER) {
+              discoverPlanTable = await DataBaseHelper().getDiscoverPlanDataForHistory(arrHistoryDetail[index].planId!);
+            }
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ExerciseListScreen(fromPage: Constant.PAGE_HISTORY,)));
+                      builder: (context) => ExerciseListScreen(
+                        fromPage: arrHistoryDetail[index].fromPage,
+                        planName: arrHistoryDetail[index].planName,
+                        discoverPlanTable: discoverPlanTable,
+                        //weeklyDayData: ,
+                        isSubPlan: false,
+                        homePlanTable: homePlanTable,
+                        dayName: arrHistoryDetail[index].dayName,
+                        weekName: arrHistoryDetail[index].weekName,
+                        isFromOnboarding: false,
+                        isFromHistory: true,
+                      )));
 
           },
           child: Container(
@@ -541,9 +553,9 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
     historyWeekData.forEach((element) {
       element.arrHistoryDetail!.forEach((element1) {
         Debug.printLog("History::Plan::==>  " +
-            element1.id.toString() +
-            "  " +
-            element1.dayName.toString());
+            "id: "+element1.id.toString() +
+            "\t-\t"+
+            "day name: " +element1.dayName.toString() + "\t-\t" + "table name: "+element1.tableName! + "\t-\t" + "plan name: " +element1.planName! + "\t-\t" + "plan id: " +element1.planId!.toString());
 
         calendarDates.add(DateTime.parse(DateTime.parse(element1.dateTime!.split(" ")[0]).toString() + "Z"));
       });
@@ -594,13 +606,10 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
   }
 
   _backToReportScreen() {
-    if (widget.isFromWorkOut!) {
       Preference.shared.setInt(Preference.DRAWER_INDEX, 2);
       Navigator.pushAndRemoveUntil(
           context, MaterialPageRoute(builder: (context) => ReportScreen()), (
           route) => false);
-    } else {
-      Navigator.pop(context);
-    }
+
   }
 }

@@ -38,6 +38,7 @@ class WorkoutScreen extends StatefulWidget {
   final DiscoverPlanTable? discoverPlanTable;
   final WeeklyDayData? weeklyDayData;
   final bool? isSubPlan;
+  final bool? isFromOnboarding;
 
   WorkoutScreen(
       {this.fromPage = "",
@@ -53,7 +54,8 @@ class WorkoutScreen extends StatefulWidget {
       this.homePlanTable,
       this.isSubPlan=false,
       this.discoverPlanTable,
-      this.weeklyDayData,});
+      this.weeklyDayData,
+      this.isFromOnboarding});
 
   @override
   _WorkoutScreenState createState() => _WorkoutScreenState();
@@ -288,16 +290,21 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                   context,
                   MaterialPageRoute(
                       builder: (context) => SkipExerciseScreen(
-                            exerciseDataList: widget.exerciseDataList,
-                            fromPage: widget.fromPage,
-                            tableName: widget.tableName,
-                            dayStatusDetailList: widget.dayStatusDetailList,
-                            weekName: widget.weekName,
-                            dayName: widget.dayName,
-                            discoverSingleExerciseData:
-                                widget.discoverSingleExerciseData,
-                            planName: widget.planName,
-                          ))).then((value) => value == false
+                        exerciseDataList: widget.exerciseDataList,
+                        fromPage: widget.fromPage,
+                        tableName: widget.tableName,
+                        dayStatusDetailList: widget.dayStatusDetailList,
+                        weekName: widget.weekName,
+                        dayName: widget.dayName,
+                        discoverSingleExerciseData:
+                            widget.discoverSingleExerciseData,
+                        planName: widget.planName,
+                        discoverPlanTable: widget.discoverPlanTable,
+                        weeklyDayData: widget.weeklyDayData,
+                        isSubPlan: widget.isSubPlan,
+                        homePlanTable: widget.homePlanTable,
+                        isFromOnboarding: widget.isFromOnboarding,
+                      ))).then((value) => value == false
                   ? {
                       _getLastPosition(),
                       _startExercise(),
@@ -873,6 +880,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                                   weekName: widget.weekName,
                                   planName: widget.planName,
                                   dayName: widget.dayName,
+                                  isFromOnboarding: widget.isFromOnboarding,
                                 ))).then((value) {
                           if (!value) {
                             controller!.reset();
@@ -960,6 +968,11 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                                   dayName: widget.dayName,
                                   weekName: widget.weekName,
                                   planName: widget.planName,
+                                  discoverPlanTable: widget.discoverPlanTable,
+                                  weeklyDayData: widget.weeklyDayData,
+                                  isSubPlan: widget.isSubPlan,
+                                  homePlanTable: widget.homePlanTable,
+                                  isFromOnboarding: widget.isFromOnboarding,
                                 ))).then((value) => value == false
                             ? {
                                   Debug.printLog("From where:::Done "+isWidgetCountDown.toString()),
@@ -1076,17 +1089,22 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                           context,
                           MaterialPageRoute(
                               builder: (context) => SkipExerciseScreen(
-                                    exerciseDataList: widget.exerciseDataList,
-                                    fromPage: widget.fromPage,
-                                    tableName: widget.tableName,
-                                    dayStatusDetailList:
-                                        widget.dayStatusDetailList,
-                                    dayName: widget.dayName,
-                                    discoverSingleExerciseData:
-                                        widget.discoverSingleExerciseData,
-                                    weekName: widget.weekName,
-                                    planName: widget.planName,
-                                  ))).then((value) => value == false
+                                exerciseDataList: widget.exerciseDataList,
+                                fromPage: widget.fromPage,
+                                tableName: widget.tableName,
+                                dayStatusDetailList:
+                                    widget.dayStatusDetailList,
+                                dayName: widget.dayName,
+                                discoverSingleExerciseData:
+                                    widget.discoverSingleExerciseData,
+                                weekName: widget.weekName,
+                                planName: widget.planName,
+                                discoverPlanTable: widget.discoverPlanTable,
+                                weeklyDayData: widget.weeklyDayData,
+                                isSubPlan: widget.isSubPlan,
+                                homePlanTable: widget.homePlanTable,
+                                isFromOnboarding: widget.isFromOnboarding,
+                              ))).then((value) => value == false
                           ? {
                               _getLastPosition(),
                               _startExercise(),
@@ -1324,14 +1342,22 @@ class _WorkoutScreenState extends State<WorkoutScreen>
         context,
         MaterialPageRoute(
             builder: (context) => PauseScreen(
-                  fromPage: widget.fromPage,
-                  index: lastPosition,
-                  exerciseListDataList: widget.exerciseDataList,
-                  workoutDetailList: widget.dayStatusDetailList,
-                  discoverSingleExerciseDataList:
-                      widget.discoverSingleExerciseData,
-                  isForQuit: true,
-                ))).then((value) {
+              fromPage: widget.fromPage,
+              index: lastPosition,
+              exerciseListDataList: widget.exerciseDataList,
+              workoutDetailList: widget.dayStatusDetailList,
+              discoverSingleExerciseDataList:
+                  widget.discoverSingleExerciseData,
+              isForQuit: true,
+              discoverPlanTable: widget.discoverPlanTable,
+              weeklyDayData: widget.weeklyDayData,
+              isSubPlan: widget.isSubPlan,
+              homePlanTable: widget.homePlanTable,
+              weekName: widget.weekName,
+              planName: widget.planName,
+              dayName: widget.dayName,
+              isFromOnboarding: widget.isFromOnboarding,
+            ))).then((value) {
       if (!value) {
         controller!.reset();
         durationOfExercise = int.parse(_getExerciseTimeFromList());
