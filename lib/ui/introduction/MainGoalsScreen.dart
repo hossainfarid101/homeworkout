@@ -23,18 +23,40 @@ class _MainGoalsScreenState extends State<MainGoalsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      scrollDirection: Axis.vertical,
-      shrinkWrap: true,
-      itemCount: yourMainGoalList.length,
-      itemBuilder: (context, int index) {
-        for (int i = 0; i < widget.prefMainGoalsList!.length; i++) {
-          yourMainGoalList[
-          int.parse(widget.prefMainGoalsList![i].toString())]
-              .isSelected = true;
-        }
-        return _itemYourMainGoal(index);
-      },
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            margin: const EdgeInsets.only(top: 30.0, bottom: 30.0),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40.0),
+              child: Text(
+                Languages.of(context)!.txtWhatAreYourMainGoals.toUpperCase(),
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 20,
+                  color: Colur.txtBlack,
+                ),
+              ),
+            ),
+          ),
+          ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            itemCount: yourMainGoalList.length,
+            itemBuilder: (context, int index) {
+              for (int i = 0; i < widget.prefMainGoalsList!.length; i++) {
+                yourMainGoalList[
+                int.parse(widget.prefMainGoalsList![i].toString())]
+                    .isSelected = true;
+              }
+              return _itemYourMainGoal(index);
+            },
+          ),
+        ],
+      ),
     );
   }
 
@@ -82,7 +104,7 @@ class _MainGoalsScreenState extends State<MainGoalsScreen> {
               stops: [0.0, 1.0],
               tileMode: TileMode.clamp),
         ),
-        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
         padding: const EdgeInsets.only(right: 20.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -96,7 +118,7 @@ class _MainGoalsScreenState extends State<MainGoalsScreen> {
                   yourMainGoalList[index].exName!,
                   style: TextStyle(
                       fontWeight: FontWeight.w600,
-                      fontSize: 22,
+                      fontSize: 20,
                       color: (yourMainGoalList[index].isSelected)
                           ? Colur.white
                           : Colur.txtBlack),

@@ -25,13 +25,35 @@ class _PushUpsCanYouDoScreenState extends State<PushUpsCanYouDoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      scrollDirection: Axis.vertical,
-      shrinkWrap: true,
-      itemCount: pushUpsList.length,
-      itemBuilder: (context, int index) {
-        return _itemPushUps(index);
-      },
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            margin: const EdgeInsets.only(top: 30.0, bottom: 30.0),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40.0),
+              child: Text(
+                Languages.of(context)!.txtHowManyPushUpsCan.toUpperCase(),
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 20,
+                  color: Colur.txtBlack,
+                ),
+              ),
+            ),
+          ),
+          ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            itemCount: pushUpsList.length,
+            itemBuilder: (context, int index) {
+              return _itemPushUps(index);
+            },
+          ),
+        ],
+      ),
     );
   }
 
@@ -54,7 +76,7 @@ class _PushUpsCanYouDoScreenState extends State<PushUpsCanYouDoScreen> {
         widget.onValueChange(pushUpsList[index].exName);
       },
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
         padding: const EdgeInsets.all(2.5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(22),
@@ -99,7 +121,7 @@ class _PushUpsCanYouDoScreenState extends State<PushUpsCanYouDoScreen> {
               Expanded(
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
+                      const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -107,7 +129,7 @@ class _PushUpsCanYouDoScreenState extends State<PushUpsCanYouDoScreen> {
                         pushUpsList[index].exName!,
                         style: TextStyle(
                             fontWeight: FontWeight.w700,
-                            fontSize: 22,
+                            fontSize: 20,
                             color: Colur.white),
                       ),
                       Container(
@@ -117,7 +139,7 @@ class _PushUpsCanYouDoScreenState extends State<PushUpsCanYouDoScreen> {
                         pushUpsList[index].description!,
                         style: TextStyle(
                             fontWeight: FontWeight.w500,
-                            fontSize: 20,
+                            fontSize: 18,
                             color: Colur.white),
                       ),
                     ],

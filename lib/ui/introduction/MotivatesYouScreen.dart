@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
@@ -23,18 +24,40 @@ class _MotivatesYouScreenState extends State<MotivatesYouScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      scrollDirection: Axis.vertical,
-      shrinkWrap: true,
-      itemCount: motivatesList.length,
-      itemBuilder: (context, int index) {
-        for (int i = 0; i < widget.prefMotivatesYouMostList!.length; i++) {
-          motivatesList[
-          int.parse(widget.prefMotivatesYouMostList![i].toString())]
-              .isSelected = true;
-        }
-        return _itemMotivates(index);
-      },
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            margin: const EdgeInsets.only(top: 30.0, bottom: 30.0),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40.0),
+              child: Text(
+                Languages.of(context)!.txtWhatMotivatesYouTheMost.toUpperCase(),
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 20,
+                  color: Colur.txtBlack,
+                ),
+              ),
+            ),
+          ),
+          ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            itemCount: motivatesList.length,
+            itemBuilder: (context, int index) {
+              for (int i = 0; i < widget.prefMotivatesYouMostList!.length; i++) {
+                motivatesList[
+                int.parse(widget.prefMotivatesYouMostList![i].toString())]
+                    .isSelected = true;
+              }
+              return _itemMotivates(index);
+            },
+          ),
+        ],
+      ),
     );
   }
 
@@ -54,7 +77,7 @@ class _MotivatesYouScreenState extends State<MotivatesYouScreen> {
         }
       },
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
         padding: const EdgeInsets.all(2.5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(22),
@@ -101,11 +124,12 @@ class _MotivatesYouScreenState extends State<MotivatesYouScreen> {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Text(
+                  child: AutoSizeText(
                     motivatesList[index].exName!,
+                    maxLines: 1,
                     style: TextStyle(
                         fontWeight: FontWeight.w600,
-                        fontSize: 22,
+                        fontSize: 20,
                         color: Colur.txtBlack),
                   ),
                 ),

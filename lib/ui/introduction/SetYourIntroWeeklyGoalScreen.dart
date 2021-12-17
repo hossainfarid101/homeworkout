@@ -66,273 +66,309 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourIntroWeeklyGoalScreen> 
       child: Column(
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
-            decoration: BoxDecoration(
-              color: Colur.white,
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(
-                color: Colur.borderGray,
-                width: 2,
-              ),
-            ),
+            margin: const EdgeInsets.only(top: 30.0, bottom: 30.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        Utils.totTitle(
-                            Languages.of(context)!.txtWeeklyTrainingDays),
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18,
-                            color: Colur.txtBlack),
-                      ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                  child: Text(
+                    Languages.of(context)!.txtSetWeeklyGoal.toUpperCase(),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20,
+                      color: Colur.txtBlack,
                     ),
-                    Image.asset(
-                      "assets/exerciseImage/other/img_dart_board.webp",
-                      height: MediaQuery.of(context).size.height * 0.06,
-                      width: MediaQuery.of(context).size.height * 0.06,
-                    ),
-                  ],
+                  ),
                 ),
                 Container(
-                  height: 15,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: InkWell(
-                        splashColor: Colur.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () {
-                          setState(() {
-                            selectedOne = true;
-                            selectedTwo = false;
-                            selectedThree = false;
-                            selectedFour = false;
-                            selectedFive = false;
-                            selectedSix = false;
-                            selectedSeven = false;
-                          });
-                          Preference.shared.setString(Preference.SELECTED_TRAINING_DAY, "1");
-                        },
-                        child: _itemWeeklyTrainingDays(
-                            isSelected: selectedOne, day: 1.toString()),
-                      ),
+                  margin: const EdgeInsets.only(top: 8.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                  child: Text(
+                    Languages.of(context)!.txtWeRecommendTraining,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14,
+                      color: Colur.txtBlack,
                     ),
-                    Expanded(
-                      child: InkWell(
-                        splashColor: Colur.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () {
-                          setState(() {
-                            selectedOne = false;
-                            selectedTwo = true;
-                            selectedThree = false;
-                            selectedFour = false;
-                            selectedFive = false;
-                            selectedSix = false;
-                            selectedSeven = false;
-                          });
-                          Preference.shared.setString(Preference.SELECTED_TRAINING_DAY, "2");
-                        },
-                        child: _itemWeeklyTrainingDays(
-                            isSelected: selectedTwo, day: 2.toString()),
-                      ),
-                    ),
-                    Expanded(
-                      child: InkWell(
-                        splashColor: Colur.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () {
-                          setState(() {
-                            selectedOne = false;
-                            selectedTwo = false;
-                            selectedThree = true;
-                            selectedFour = false;
-                            selectedFive = false;
-                            selectedSix = false;
-                            selectedSeven = false;
-                          });
-                          Preference.shared.setString(Preference.SELECTED_TRAINING_DAY, "3");
-                        },
-                        child: _itemWeeklyTrainingDays(
-                            isSelected: selectedThree, day: 3.toString()),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: InkWell(
-                        splashColor: Colur.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () {
-                          setState(() {
-                            selectedOne = false;
-                            selectedTwo = false;
-                            selectedThree = false;
-                            selectedFour = true;
-                            selectedFive = false;
-                            selectedSix = false;
-                            selectedSeven = false;
-                          });
-                          Preference.shared.setString(Preference.SELECTED_TRAINING_DAY, "4");
-                        },
-                        child: _itemWeeklyTrainingDays(
-                            isSelected: selectedFour, day: 4.toString()),
-                      ),
-                    ),
-                    Expanded(
-                      child: InkWell(
-                        splashColor: Colur.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () {
-                          setState(() {
-                            selectedOne = false;
-                            selectedTwo = false;
-                            selectedThree = false;
-                            selectedFour = false;
-                            selectedFive = true;
-                            selectedSix = false;
-                            selectedSeven = false;
-                          });
-                          Preference.shared.setString(Preference.SELECTED_TRAINING_DAY, "5");
-                        },
-                        child: _itemWeeklyTrainingDays(
-                            isSelected: selectedFive, day: 5.toString()),
-                      ),
-                    ),
-                    Expanded(
-                      child: InkWell(
-                        splashColor: Colur.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () {
-                          setState(() {
-                            selectedOne = false;
-                            selectedTwo = false;
-                            selectedThree = false;
-                            selectedFour = false;
-                            selectedFive = false;
-                            selectedSix = true;
-                            selectedSeven = false;
-                          });
-                          Preference.shared.setString(Preference.SELECTED_TRAINING_DAY, "6");
-                        },
-                        child: _itemWeeklyTrainingDays(
-                            isSelected: selectedSix, day: 6.toString()),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Container(),
-                    ),
-                    Expanded(
-                      child: InkWell(
-                        splashColor: Colur.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () {
-                          setState(() {
-                            selectedOne = false;
-                            selectedTwo = false;
-                            selectedThree = false;
-                            selectedFour = false;
-                            selectedFive = false;
-                            selectedSix = false;
-                            selectedSeven = true;
-                          });
-                          Preference.shared.setString(Preference.SELECTED_TRAINING_DAY, "7");
-                        },
-                        child: _itemWeeklyTrainingDays(
-                            isSelected: selectedSeven, day: 7.toString()),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(),
-                    ),
-                  ],
+                  ),
                 ),
               ],
             ),
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
-            decoration: BoxDecoration(
-              color: Colur.white,
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(
-                color: Colur.borderGray,
-                width: 2,
-              ),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
+          Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
+                decoration: BoxDecoration(
+                  color: Colur.white,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    color: Colur.borderGray,
+                    width: 2,
+                  ),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Expanded(
-                      child: Text(
-                        Utils.totTitle(
-                            Languages.of(context)!.txtFirstDayOfWeek),
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18,
-                            color: Colur.txtBlack),
-                      ),
-                    ),
-                    Image.asset(
-                      "assets/exerciseImage/other/img_calender.webp",
-                      height: MediaQuery.of(context).size.height * 0.06,
-                      width: MediaQuery.of(context).size.height * 0.06,
-                    ),
-                  ],
-                ),
-                Container(
-                  height: 10,
-                ),
-                InkWell(
-                  onTap: () {
-                    _showDialogPicker();
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colur.unSelectedProgressColor,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                    Row(
                       children: [
                         Expanded(
                           child: Text(
-                            selectFirstDayOfWeek.toString(),
+                            Utils.totTitle(
+                                Languages.of(context)!.txtWeeklyTrainingDays),
                             style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 18,
                                 color: Colur.txtBlack),
                           ),
                         ),
-                        Icon(
-                          Icons.keyboard_arrow_down_sharp,
-                          size: 35,
-                          color: Colur.black,
+                        Image.asset(
+                          "assets/exerciseImage/other/img_dart_board.webp",
+                          height: MediaQuery.of(context).size.height * 0.06,
+                          width: MediaQuery.of(context).size.height * 0.06,
                         ),
                       ],
                     ),
+                    Container(
+                      height: 15,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: InkWell(
+                            splashColor: Colur.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () {
+                              setState(() {
+                                selectedOne = true;
+                                selectedTwo = false;
+                                selectedThree = false;
+                                selectedFour = false;
+                                selectedFive = false;
+                                selectedSix = false;
+                                selectedSeven = false;
+                              });
+                              Preference.shared.setString(Preference.SELECTED_TRAINING_DAY, "1");
+                            },
+                            child: _itemWeeklyTrainingDays(
+                                isSelected: selectedOne, day: 1.toString()),
+                          ),
+                        ),
+                        Expanded(
+                          child: InkWell(
+                            splashColor: Colur.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () {
+                              setState(() {
+                                selectedOne = false;
+                                selectedTwo = true;
+                                selectedThree = false;
+                                selectedFour = false;
+                                selectedFive = false;
+                                selectedSix = false;
+                                selectedSeven = false;
+                              });
+                              Preference.shared.setString(Preference.SELECTED_TRAINING_DAY, "2");
+                            },
+                            child: _itemWeeklyTrainingDays(
+                                isSelected: selectedTwo, day: 2.toString()),
+                          ),
+                        ),
+                        Expanded(
+                          child: InkWell(
+                            splashColor: Colur.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () {
+                              setState(() {
+                                selectedOne = false;
+                                selectedTwo = false;
+                                selectedThree = true;
+                                selectedFour = false;
+                                selectedFive = false;
+                                selectedSix = false;
+                                selectedSeven = false;
+                              });
+                              Preference.shared.setString(Preference.SELECTED_TRAINING_DAY, "3");
+                            },
+                            child: _itemWeeklyTrainingDays(
+                                isSelected: selectedThree, day: 3.toString()),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: InkWell(
+                            splashColor: Colur.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () {
+                              setState(() {
+                                selectedOne = false;
+                                selectedTwo = false;
+                                selectedThree = false;
+                                selectedFour = true;
+                                selectedFive = false;
+                                selectedSix = false;
+                                selectedSeven = false;
+                              });
+                              Preference.shared.setString(Preference.SELECTED_TRAINING_DAY, "4");
+                            },
+                            child: _itemWeeklyTrainingDays(
+                                isSelected: selectedFour, day: 4.toString()),
+                          ),
+                        ),
+                        Expanded(
+                          child: InkWell(
+                            splashColor: Colur.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () {
+                              setState(() {
+                                selectedOne = false;
+                                selectedTwo = false;
+                                selectedThree = false;
+                                selectedFour = false;
+                                selectedFive = true;
+                                selectedSix = false;
+                                selectedSeven = false;
+                              });
+                              Preference.shared.setString(Preference.SELECTED_TRAINING_DAY, "5");
+                            },
+                            child: _itemWeeklyTrainingDays(
+                                isSelected: selectedFive, day: 5.toString()),
+                          ),
+                        ),
+                        Expanded(
+                          child: InkWell(
+                            splashColor: Colur.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () {
+                              setState(() {
+                                selectedOne = false;
+                                selectedTwo = false;
+                                selectedThree = false;
+                                selectedFour = false;
+                                selectedFive = false;
+                                selectedSix = true;
+                                selectedSeven = false;
+                              });
+                              Preference.shared.setString(Preference.SELECTED_TRAINING_DAY, "6");
+                            },
+                            child: _itemWeeklyTrainingDays(
+                                isSelected: selectedSix, day: 6.toString()),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Container(),
+                        ),
+                        Expanded(
+                          child: InkWell(
+                            splashColor: Colur.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () {
+                              setState(() {
+                                selectedOne = false;
+                                selectedTwo = false;
+                                selectedThree = false;
+                                selectedFour = false;
+                                selectedFive = false;
+                                selectedSix = false;
+                                selectedSeven = true;
+                              });
+                              Preference.shared.setString(Preference.SELECTED_TRAINING_DAY, "7");
+                            },
+                            child: _itemWeeklyTrainingDays(
+                                isSelected: selectedSeven, day: 7.toString()),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
+                decoration: BoxDecoration(
+                  color: Colur.white,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    color: Colur.borderGray,
+                    width: 2,
                   ),
                 ),
-              ],
-            ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            Utils.totTitle(
+                                Languages.of(context)!.txtFirstDayOfWeek),
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 18,
+                                color: Colur.txtBlack),
+                          ),
+                        ),
+                        Image.asset(
+                          "assets/exerciseImage/other/img_calender.webp",
+                          height: MediaQuery.of(context).size.height * 0.06,
+                          width: MediaQuery.of(context).size.height * 0.06,
+                        ),
+                      ],
+                    ),
+                    Container(
+                      height: 10,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        _showDialogPicker();
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colur.unSelectedProgressColor,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                selectFirstDayOfWeek.toString(),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 18,
+                                    color: Colur.txtBlack),
+                              ),
+                            ),
+                            Icon(
+                              Icons.keyboard_arrow_down_sharp,
+                              size: 35,
+                              color: Colur.black,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -399,6 +435,12 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourIntroWeeklyGoalScreen> 
         hideHeader: true,
         confirmText: Languages.of(context)!.txtOk.toUpperCase(),
         cancelText: Languages.of(context)!.txtCancel.toUpperCase(),
+        confirmTextStyle: TextStyle(
+          color: Colur.theme,
+        ),
+        cancelTextStyle: TextStyle(
+          color: Colur.theme,
+        ),
         itemExtent: 50,
         looping: false,
         backgroundColor: Colur.white,

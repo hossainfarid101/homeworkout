@@ -218,7 +218,7 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
                 child: Column(
                   children: [
                     Text(
-                      totalMin != null ? Utils.secondToMMSSFormat((totalMin != 0) ? totalMin! : 0) : "00:00",
+                      totalMin != null ? (totalMin != 0) ? totalMin!.toString() : "0" : "0",
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,

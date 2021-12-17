@@ -99,7 +99,21 @@ class _GeneratingThePlanScreenState extends State<GeneratingThePlanScreen> with 
         height: 240,
         width: 240,
       ),*/
-      child: _discoverCard()
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            Languages.of(context)!.txtYourPlanIsReady.toUpperCase(),
+            style: TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              color: Colur.txtBlack
+            ),
+          ),
+          SizedBox(height: 30,),
+          _discoverCard()
+        ],
+      )
     );
   }
 

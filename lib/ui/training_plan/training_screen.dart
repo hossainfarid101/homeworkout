@@ -110,8 +110,11 @@ class _TrainingScreenState extends State<TrainingScreen>
                         onTap: () {
                           Scaffold.of(context).openDrawer();
                         },
-                        child: Icon(
-                          Icons.menu,
+                        child: Image.asset(
+                          'assets/icons/ic_menu.png',
+                          scale: 1.3,
+                          width: 28,
+                          height: 28,
                           color: isShrink ? Colur.black : Colur.white,
                         )),
                     automaticallyImplyLeading: false,
@@ -120,7 +123,8 @@ class _TrainingScreenState extends State<TrainingScreen>
                       child: Text(Languages.of(context)!.txtHomeWorkout.toUpperCase(),
                           style: TextStyle(
                             color: isShrink ? Colur.black : Colur.white,
-                            fontSize: 16.0,
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.w700,
                           )),
                     ),
                     backgroundColor: Colors.white,
@@ -134,7 +138,6 @@ class _TrainingScreenState extends State<TrainingScreen>
                             fit: BoxFit.cover
                           )
                         ),
-                        // color: Colur.theme,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
@@ -154,7 +157,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          WorkoutHistoryScreen()));
+                                                          WorkoutHistoryScreen(isFromTraining: true,)));
                                             },
                                             child: Row(
                                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -195,13 +198,13 @@ class _TrainingScreenState extends State<TrainingScreen>
                                                 ),
                                                 Column(
                                                   children: [
-                                                    Text(Utils.secondToMMSSFormat((totalMin != 0) ?totalMin!:0),
+                                                    Text((totalMin != 0) ?totalMin!.toString():"0",
                                                         overflow: TextOverflow.ellipsis,
                                                         style: const TextStyle(
                                                             color: Colur.white,
                                                             fontSize: 18,
                                                             fontWeight: FontWeight.w500)),
-                                                    Text(Languages.of(context)!.txtDuration
+                                                    Text(Languages.of(context)!.txtMinute
                                                         .toUpperCase(),
                                                         overflow: TextOverflow.ellipsis,
                                                         style: TextStyle(
@@ -318,7 +321,6 @@ class _TrainingScreenState extends State<TrainingScreen>
                                           child: Row(
                                             children: [
                                               Container(
-                                                alignment: Alignment.topLeft,
                                                 margin: const EdgeInsets.only(left: 10, bottom: 10),                                                          child: Text(
                                                   Languages.of(context)!.txtWeekGoal
                                                       .toUpperCase(),
@@ -348,7 +350,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                                           ),
                                         ),
                                         Container(
-                                          margin: const EdgeInsets.only(top: 15.0,bottom: 0),
+                                          margin: const EdgeInsets.only(top: 15.0),
                                           alignment: Alignment.center,
                                           height: 40,
                                           child: ListView.builder(
@@ -428,8 +430,8 @@ class _TrainingScreenState extends State<TrainingScreen>
               child: Text(
                 allPlanDataList[index].catName.toString().toUpperCase(),
                 style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 14,
+                  fontWeight: FontWeight.w900,
+                  fontSize: 18,
                   color: Colur.black,
                 ),
               ),
@@ -482,7 +484,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
                                                   fontWeight: FontWeight.w500,
-                                                  fontSize: 18,
+                                                  fontSize: 20,
                                                   color: Colur.white),
                                             ),
                                           ),
@@ -494,7 +496,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                                                     .txt7X4Challenge,
                                                 style: TextStyle(
                                                     color: Colur.white,
-                                                    fontSize: 16.0)),
+                                                    fontSize: 14.0)),
                                           ),
                                         ],
                                       ),
@@ -719,8 +721,8 @@ class _TrainingScreenState extends State<TrainingScreen>
         children: [
           (isAvailableHistory.isNotEmpty && !isAvailableHistory[index])
               ? Container(
-                  width: 30,
-                  height: 30,
+                  width: 40,
+                  height: 40,
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(width: 0.5, color: Colors.black)),

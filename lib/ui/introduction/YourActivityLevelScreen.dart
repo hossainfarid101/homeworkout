@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
@@ -25,14 +26,36 @@ class _YourActivityLevelScreenState extends State<YourActivityLevelScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      scrollDirection: Axis.vertical,
-      shrinkWrap: true,
-      itemCount: yourActivityLevelList.length,
-      itemBuilder: (context, int index) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            margin: const EdgeInsets.only(top: 30.0, bottom: 30.0),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40.0),
+              child: Text(
+                Languages.of(context)!.txtWhatsYourActivityLevel.toUpperCase(),
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 20,
+                  color: Colur.txtBlack,
+                ),
+              ),
+            ),
+          ),
+          ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            itemCount: yourActivityLevelList.length,
+            itemBuilder: (context, int index) {
 
-        return _itemYourActivityLevel(index);
-      },
+              return _itemYourActivityLevel(index);
+            },
+          ),
+        ],
+      ),
     );
   }
 
@@ -55,7 +78,7 @@ class _YourActivityLevelScreenState extends State<YourActivityLevelScreen> {
         widget.onValueChange(yourActivityLevelList[index].exName);
       },
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
         padding: const EdgeInsets.all(2.5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(22),
@@ -101,7 +124,7 @@ class _YourActivityLevelScreenState extends State<YourActivityLevelScreen> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 12, vertical: 22),
                     child: Image.asset(yourActivityLevelList[index].image!,
-                        height: MediaQuery.of(context).size.height * 0.1),
+                        height: MediaQuery.of(context).size.height * 0.065),
                   ),
                   Expanded(
                     child: Padding(
@@ -110,22 +133,23 @@ class _YourActivityLevelScreenState extends State<YourActivityLevelScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
+                          AutoSizeText(
                             yourActivityLevelList[index].exName!,
+                            maxLines: 1,
                             style: TextStyle(
                                 fontWeight: FontWeight.w600,
-                                fontSize: 22,
+                                fontSize: 20,
                                 color: Colur.txtBlack),
                           ),
                           if (yourActivityLevelList[index].isSelected) ...{
                             Container(
                               height: 8,
                             ),
-                            Text(
+                            AutoSizeText(
                               yourActivityLevelList[index].description!,
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
-                                  fontSize: 14,
+                                  fontSize: 12,
                                   color: Colur.txtBlack),
                             ),
                           }
@@ -141,8 +165,8 @@ class _YourActivityLevelScreenState extends State<YourActivityLevelScreen> {
                 margin: const EdgeInsets.all(10),
                 child: Image.asset(
                   "assets/icons/ic_round_true_gradient.webp",
-                  height: 35,
-                  width: 35,
+                  height: 30,
+                  width: 30,
                 ),
               )
             }

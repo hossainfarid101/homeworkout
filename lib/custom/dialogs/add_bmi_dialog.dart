@@ -126,18 +126,19 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                               ),
                               InkWell(
                                 onTap: () {
-                                  if (weightController.text == "")
-                                    weightController.text = "0.0";
-                                  if (isLsb! && !isKg!) {
-                                    Debug.printLog(
-                                        "Before converted value of weightController --> " +
-                                            weightController.text);
-                                    weightController.text = Utils.lbToKg(
-                                            double.parse(weightController.text))
-                                        .toString();
-                                    Debug.printLog(
-                                        "After converted value of weightController in to LB to KG --> " +
-                                            weightController.text);
+                                  if (weightController.text != "") {
+                                    if (isLsb! && !isKg!) {
+                                      Debug.printLog(
+                                          "Before converted value of weightController --> " +
+                                              weightController.text);
+                                      weightController.text = Utils.lbToKg(
+                                              double.parse(
+                                                  weightController.text))
+                                          .toString();
+                                      Debug.printLog(
+                                          "After converted value of weightController in to LB to KG --> " +
+                                              weightController.text);
+                                    }
                                   }
                                   setState(() {
                                     isKg = true;
@@ -174,18 +175,19 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                               ),
                               InkWell(
                                 onTap: () {
-                                  if (weightController.text == "")
-                                    weightController.text = "0.0";
-                                  if (isKg! && !isLsb!) {
-                                    Debug.printLog(
-                                        "Before converted value of weightController --> " +
-                                            weightController.text);
-                                    weightController.text = Utils.kgToLb(
-                                            double.parse(weightController.text))
-                                        .toString();
-                                    Debug.printLog(
-                                        "After converted value of weightController in to KG to LB --> " +
-                                            weightController.text);
+                                  if (weightController.text != "") {
+                                    if (isKg! && !isLsb!) {
+                                      Debug.printLog(
+                                          "Before converted value of weightController --> " +
+                                              weightController.text);
+                                      weightController.text = Utils.kgToLb(
+                                              double.parse(
+                                                  weightController.text))
+                                          .toString();
+                                      Debug.printLog(
+                                          "After converted value of weightController in to KG to LB --> " +
+                                              weightController.text);
+                                    }
                                   }
 
                                   setState(() {
@@ -724,10 +726,12 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
     isLsb = !isKg!;
 
     weight = Preference.shared.getDouble(Preference.WEIGHT) ?? 0;
-    if (isKg! && !isLsb!) {
-      weightController.text = weight!.toStringAsFixed(1);
-    } else {
-      weightController.text = Utils.kgToLb(weight!).toStringAsFixed(1);
+    if (weight != 0) {
+      if (isKg! && !isLsb!) {
+        weightController.text = weight!.toStringAsFixed(1);
+      } else {
+        weightController.text = Utils.kgToLb(weight!).toStringAsFixed(1);
+      }
     }
 
 

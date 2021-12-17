@@ -89,129 +89,131 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
           child: Column(
             children: [
               _topBar(),
-              _titleWidget(),
+              //_titleWidget(),
               Expanded(
-                child: PageView(
-                  controller: pageController,
-                  physics: NeverScrollableScrollPhysics(),
-                  onPageChanged: (int index) {
-                    setState(() {
-                      currentPageIndex = index;
-                    });
+                child: Center(
+                  child: PageView(
+                    controller: pageController,
+                    physics: NeverScrollableScrollPhysics(),
+                    onPageChanged: (int index) {
+                      setState(() {
+                        currentPageIndex = index;
+                      });
 
-                    if (index == 0) {
-                      setState(() {
-                        mainTitle = Languages.of(context)!
-                            .txtWhatsYourGender
-                            .toUpperCase();
-                        subTitle = Languages.of(context)!.txtLetUsKnowYouBetter;
-                      });
-                    } else if (index == 1) {
-                      setState(() {
-                        mainTitle = Languages.of(context)!
-                            .txtPleaseChooseYourFocusArea
-                            .toUpperCase();
-                        subTitle = "";
-                      });
-                    } else if (index == 2) {
-                      setState(() {
-                        mainTitle = Languages.of(context)!
-                            .txtWhatAreYourMainGoals
-                            .toUpperCase();
-                        subTitle = "";
-                      });
-                    } else if (index == 3) {
-                      setState(() {
-                        mainTitle = Languages.of(context)!
-                            .txtWhatMotivatesYouTheMost
-                            .toUpperCase();
-                        subTitle = "";
-                      });
-                    } else if (index == 4) {
-                      setState(() {
-                        mainTitle = Languages.of(context)!
-                            .txtHowManyPushUpsCan
-                            .toUpperCase();
-                        subTitle = "";
-                      });
-                    } else if (index == 5) {
-                      setState(() {
-                        mainTitle = Languages.of(context)!
-                            .txtWhatsYourActivityLevel
-                            .toUpperCase();
-                        subTitle = "";
-                      });
-                    } else if (index == 6) {
-                      setState(() {
-                        mainTitle = Languages.of(context)!
-                            .txtSetWeeklyGoal
-                            .toUpperCase();
-                        subTitle =
-                            Languages.of(context)!.txtWeRecommendTraining;
-                      });
-                    } else if (index == 7) {
-                      setState(() {
-                        mainTitle = Languages.of(context)!
-                            .txtLetUsKnowYouBetter
-                            .toUpperCase();
-                        subTitle =
-                            Languages.of(context)!.txtLetUsKnowYouBetterToHelp;
-                      });
-                    } else if (index == 8) {
-                      setState(() {
-                        mainTitle = Languages.of(context)!
-                            .txtGeneratingThePlan
-                            .toUpperCase();
-                        subTitle = Languages.of(context)!.txtPreparingYourPlan;
-                      });
-                    } else if (index == 9) {
-                      setState(() {
-                        mainTitle = Languages.of(context)!
-                            .txtYourPlanIsReady
-                            .toUpperCase();
-                        subTitle =
-                            Languages.of(context)!.txtWeHaveSelectedThisPlan;
-                      });
-                    }
-                  },
-                  children: <Widget>[
-                    GenderSelectionScreen(),
-                    ChooseYourFocusAreaScreen(prefChooseYourFocusAreaList),
-                    MainGoalsScreen(prefMainGoalsList),
-                    MotivatesYouScreen(prefMotivatesYouMostList),
-                    PushUpsCanYouDoScreen(prefHowManyPushUps,(value){
-                      prefHowManyPushUps = value;
-                      setState(() { });
-                    }),
-                    YourActivityLevelScreen(prefActivityLevel, (value){
-                      prefActivityLevel = value;
-                      setState(() { });
-                    }),
-                    SetYourIntroWeeklyGoalScreen(),
-                    WeightHeightSelectionScreen(),
-                    GeneratingThePlanScreen(isPlanReady, (value) {
-                      setState(() {
-                        isPlanReady = value;
-                        if(!isPlanReady!) {
+                      if (index == 0) {
+                        setState(() {
+                          mainTitle = Languages.of(context)!
+                              .txtWhatsYourGender
+                              .toUpperCase();
+                          subTitle = Languages.of(context)!.txtLetUsKnowYouBetter;
+                        });
+                      } else if (index == 1) {
+                        setState(() {
+                          mainTitle = Languages.of(context)!
+                              .txtPleaseChooseYourFocusArea
+                              .toUpperCase();
+                          subTitle = "";
+                        });
+                      } else if (index == 2) {
+                        setState(() {
+                          mainTitle = Languages.of(context)!
+                              .txtWhatAreYourMainGoals
+                              .toUpperCase();
+                          subTitle = "";
+                        });
+                      } else if (index == 3) {
+                        setState(() {
+                          mainTitle = Languages.of(context)!
+                              .txtWhatMotivatesYouTheMost
+                              .toUpperCase();
+                          subTitle = "";
+                        });
+                      } else if (index == 4) {
+                        setState(() {
+                          mainTitle = Languages.of(context)!
+                              .txtHowManyPushUpsCan
+                              .toUpperCase();
+                          subTitle = "";
+                        });
+                      } else if (index == 5) {
+                        setState(() {
+                          mainTitle = Languages.of(context)!
+                              .txtWhatsYourActivityLevel
+                              .toUpperCase();
+                          subTitle = "";
+                        });
+                      } else if (index == 6) {
+                        setState(() {
+                          mainTitle = Languages.of(context)!
+                              .txtSetWeeklyGoal
+                              .toUpperCase();
+                          subTitle =
+                              Languages.of(context)!.txtWeRecommendTraining;
+                        });
+                      } else if (index == 7) {
+                        setState(() {
+                          mainTitle = Languages.of(context)!
+                              .txtLetUsKnowYouBetter
+                              .toUpperCase();
+                          subTitle =
+                              Languages.of(context)!.txtLetUsKnowYouBetterToHelp;
+                        });
+                      } else if (index == 8) {
+                        setState(() {
                           mainTitle = Languages.of(context)!
                               .txtGeneratingThePlan
                               .toUpperCase();
-                          subTitle =
-                              Languages.of(context)!.txtPreparingYourPlan;
-                        }else{
+                          subTitle = Languages.of(context)!.txtPreparingYourPlan;
+                        });
+                      } else if (index == 9) {
+                        setState(() {
                           mainTitle = Languages.of(context)!
                               .txtYourPlanIsReady
                               .toUpperCase();
                           subTitle =
                               Languages.of(context)!.txtWeHaveSelectedThisPlan;
-                        }
-                      });
-                    },(value){
-                      setState(() {
-                        randomPlanData = value;
-                      });
-                    }),
-                  ],
+                        });
+                      }
+                    },
+                    children: <Widget>[
+                      GenderSelectionScreen(),
+                      ChooseYourFocusAreaScreen(prefChooseYourFocusAreaList),
+                      MainGoalsScreen(prefMainGoalsList),
+                      MotivatesYouScreen(prefMotivatesYouMostList),
+                      PushUpsCanYouDoScreen(prefHowManyPushUps,(value){
+                        prefHowManyPushUps = value;
+                        setState(() { });
+                      }),
+                      YourActivityLevelScreen(prefActivityLevel, (value){
+                        prefActivityLevel = value;
+                        setState(() { });
+                      }),
+                      SetYourIntroWeeklyGoalScreen(),
+                      WeightHeightSelectionScreen(),
+                      GeneratingThePlanScreen(isPlanReady, (value) {
+                        setState(() {
+                          isPlanReady = value;
+                          if(!isPlanReady!) {
+                            mainTitle = Languages.of(context)!
+                                .txtGeneratingThePlan
+                                .toUpperCase();
+                            subTitle =
+                                Languages.of(context)!.txtPreparingYourPlan;
+                          }else{
+                            mainTitle = Languages.of(context)!
+                                .txtYourPlanIsReady
+                                .toUpperCase();
+                            subTitle =
+                                Languages.of(context)!.txtWeHaveSelectedThisPlan;
+                          }
+                        });
+                      },(value){
+                        setState(() {
+                          randomPlanData = value;
+                        });
+                      }),
+                    ],
+                  ),
                 ),
               ),
               _nextButton(),
@@ -223,76 +225,122 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
   }
 
   _topBar() {
-    return Column(
-      children: [
-        Row(
-          children: [
-            if (currentPageIndex != 0 && currentPageIndex != 8) ...{
-              InkWell(
-                onTap: () {
-                  pageController.previousPage(
-                    duration: const Duration(milliseconds: 200),
-                    curve: Curves.easeInOut,
-                  );
-                  setState(() {
-                    updateValue = updateValue! - 0.125;
-                  });
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Icon(
-                    Icons.arrow_back_ios_outlined,
-                    size: 22,
-                    color: Colur.darkBlueColor,
+    return Visibility(
+      visible: currentPageIndex != 8,
+      child: Column(
+        children: [
+          Row(
+            children: [
+              currentPageIndex != 0 ? InkWell(
+                  onTap: () {
+                    pageController.previousPage(
+                      duration: const Duration(milliseconds: 200),
+                      curve: Curves.easeInOut,
+                    );
+                    setState(() {
+                      updateValue = updateValue! - 0.125;
+                    });
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Icon(
+                      Icons.arrow_back_ios_outlined,
+                      size: 22,
+                      color: Colur.darkBlueColor,
+                    ),
                   ),
+                ) : Padding(
+                padding: const EdgeInsets.all(10),
+                child: Icon(
+                  Icons.arrow_back_ios_outlined,
+                  size: 22,
+                  color: Colur.white,
                 ),
               ),
-            },
-            Expanded(child: Container()),
-            if (currentPageIndex != 8) ...{
-              InkWell(
-                onTap: () {
-                  Preference.shared.setBool(Constant.PREF_INTRODUCTION_FINISH, true);
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, "/training", (route) => false);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(11.5),
-                  child: Text(
-                    Languages.of(context)!.txtSkip,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                        color: Colur.darkBlueColor),
+              /*Visibility(
+                visible: currentPageIndex != 0,
+                child: InkWell(
+                  onTap: () {
+                    pageController.previousPage(
+                      duration: const Duration(milliseconds: 200),
+                      curve: Curves.easeInOut,
+                    );
+                    setState(() {
+                      updateValue = updateValue! - 0.125;
+                    });
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Icon(
+                      Icons.arrow_back_ios_outlined,
+                      size: 22,
+                      color: Colur.darkBlueColor,
+                    ),
                   ),
                 ),
-              ),
-            },
-          ],
-        ),
-        if (currentPageIndex != 8) ...{
-          Container(
-            alignment: Alignment.center,
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(30.0)),
-              child: LinearProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(Colur.darkBlueColor),
-                value: updateValue,
-                backgroundColor: Colur.unSelectedProgressColor,
-                minHeight: 4,
-                semanticsValue: '10',
+              ),*/
+
+
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.only(left: 25, right: 25),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                      child: LinearProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(Colur.darkBlueColor),
+                        value: updateValue,
+                        backgroundColor: Colur.unSelectedProgressColor,
+                        minHeight: 4,
+                        semanticsValue: '10',
+                      ),
+                    ),
+                  ),
+                ),
+
+                InkWell(
+                  onTap: () {
+                    Preference.shared.setBool(Constant.PREF_INTRODUCTION_FINISH, true);
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, "/training", (route) => false);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(11.5),
+                    child: Text(
+                      Languages.of(context)!.txtSkip,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          color: Colur.darkBlueColor),
+                    ),
+                  ),
+                ),
+
+            ],
+          ),
+         /* if (currentPageIndex != 8) ...{
+            Container(
+              alignment: Alignment.center,
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                child: LinearProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Colur.darkBlueColor),
+                  value: updateValue,
+                  backgroundColor: Colur.unSelectedProgressColor,
+                  minHeight: 4,
+                  semanticsValue: '10',
+                ),
               ),
             ),
-          ),
-        }
-      ],
+          }*/
+        ],
+      ),
     );
   }
 
   _titleWidget() {
     return Container(
-      margin: const EdgeInsets.only(top: 18.0, bottom: 25.0),
+      margin: const EdgeInsets.only(top: 18.0, bottom: 5.0),
       child: Column(
         children: [
           Padding(
@@ -307,7 +355,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
               ),
             ),
           ),
-          Container(
+          subTitle != "" ? Container(
             margin: const EdgeInsets.only(top: 8.0),
             padding: const EdgeInsets.symmetric(horizontal: 40.0),
             child: Text(
@@ -319,7 +367,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                 color: Colur.txtBlack,
               ),
             ),
-          ),
+          ) : Container(),
         ],
       ),
     );
@@ -372,7 +420,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
             child: Container(
               width: double.infinity,
               alignment: Alignment.center,
-              margin: EdgeInsets.symmetric(horizontal: 60.0, vertical: (isPlanReady!)?0.0:30.0),
+              margin: EdgeInsets.only(left: 60.0, right: 60, bottom: (isPlanReady!)?0.0:15.0),
               padding: const EdgeInsets.symmetric(vertical: 18.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100.0),
@@ -386,28 +434,16 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                     stops: [0.0, 1.0],
                     tileMode: TileMode.clamp),
               ),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Text(
-                  (currentPageIndex == 8 && isPlanReady!)?Languages.of(context)!.txtStartNow.toUpperCase():
-                  Languages.of(context)!.txtNext.toUpperCase(),
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 20,
-                        color: Colur.white),
-                  ),
-                  Container(
-                    alignment: Alignment.centerRight,
-                    margin: const EdgeInsets.only(right: 20.0),
-                    child: Icon(
-                      Icons.arrow_forward_ios_outlined,
-                      size: 22,
-                      color: Colur.white,
-                    ),
-                  ),
-                ],
+              child: Center(
+                child: Text(
+                (currentPageIndex == 8 && isPlanReady!)?Languages.of(context)!.txtStartNow.toUpperCase():
+                Languages.of(context)!.txtNext.toUpperCase(),
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 20,
+                      color: Colur.white),
+                ),
               ),
             ),
           ),

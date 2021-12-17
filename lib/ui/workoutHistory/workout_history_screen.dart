@@ -23,9 +23,10 @@ import 'package:table_calendar/table_calendar.dart';
 
 class WorkoutHistoryScreen extends StatefulWidget {
   final bool? isFromWorkOut;
+  final bool? isFromTraining;
 
 
-  const WorkoutHistoryScreen({Key? key, this.isFromWorkOut = false}) : super(key: key);
+  const WorkoutHistoryScreen({Key? key, this.isFromWorkOut = false, this.isFromTraining = false}) : super(key: key);
 
   @override
   _WorkoutHistoryScreenState createState() => _WorkoutHistoryScreenState();
@@ -606,10 +607,14 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
   }
 
   _backToReportScreen() {
-      Preference.shared.setInt(Preference.DRAWER_INDEX, 2);
-      Navigator.pushAndRemoveUntil(
-          context, MaterialPageRoute(builder: (context) => ReportScreen()), (
-          route) => false);
+      if (!widget.isFromTraining!) {
+        Preference.shared.setInt(Preference.DRAWER_INDEX, 2);
+        Navigator.pushAndRemoveUntil(
+            context, MaterialPageRoute(builder: (context) => ReportScreen()), (
+            route) => false);
+      } else {
+        Navigator.pop(context);
+      }
 
   }
 }

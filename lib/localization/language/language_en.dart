@@ -600,7 +600,7 @@ class LanguageEn extends Languages {
   String get txtDesSedentary => "You do at least 30 minutes per day of intentional exercise, you are considered sedentary.";
 
   @override
-  String get txtDesVeryActive => "Activities of daily living, such as shopping, cleaning, watering plants, taking out the trash, walking the dog, mowing the lawn, and gardening.";
+  String get txtDesVeryActive => "Activities of daily living, such as shopping, cleaning, watering plants, taking out the trash, mowing the lawn, and gardening.";
 
   @override
   String get txtLightlyActive => "Lightly Active";
