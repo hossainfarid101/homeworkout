@@ -594,15 +594,14 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
           ),
         ),
         Visibility(
-          visible:  bmi! > 0,
+          visible: bmi! > 0,
           child: Stack(
             children: [
               Column(
                 children: [
                   Container(
-                    // margin: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 30.0),
                     margin: const EdgeInsets.only(
-                        left: 15.0, right: 15.0, top: 15.0, bottom: 5),
+                        left: 15.0, right: 15.0, top: 30.0, bottom: 5),
                     height: 45,
                     child: Row(
                       children: [
@@ -665,14 +664,19 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
                   dx: bmiValuePosition(fullWidth),
                   child: Column(
                     children: [
-                      Text(bmi!.toStringAsFixed(2)),
+                      Text(
+                          bmi!.toStringAsFixed(2),
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600
+                        ),
+                      ),
                       Container(
-                        //alignment: Alignment.center,
                         margin: const EdgeInsets.symmetric(
-                            horizontal: 15.0, vertical: 0),
-                        height: 50,
+                            horizontal: 15.0, vertical: 8.0),
+                        height: 53,
                         child: VerticalDivider(
-                          thickness: 5,
+                          thickness: 4,
                           color: Colur.black,
                         ),
                       ),

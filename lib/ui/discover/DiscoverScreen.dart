@@ -806,6 +806,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
               alignment: Alignment.bottomLeft,
               child: Text(
                 forBeginnerDiscoverPlanList[index].planName.toString(),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 15,
@@ -1142,7 +1144,6 @@ class _DiscoverScreenState extends State<DiscoverScreen>
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/exerciseImage/discover/equipment/with_equipment.webp'),
-              // image: AssetImage(withEqipmentDiscoverPlanList[0].planImage.toString()),
               fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.circular(15.0),
@@ -1150,7 +1151,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
           ),
           child: UnconstrainedBox(
             child: Container(
-              margin: const EdgeInsets.only(right: 50.0),
+              margin: const EdgeInsets.only(right: 20.0),
               decoration: BoxDecoration(
                 color: Colur.theme,
                 borderRadius: BorderRadius.circular(50.0),

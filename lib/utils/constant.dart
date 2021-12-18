@@ -79,7 +79,7 @@ class Constant {
   /* Todo home category static*/
   static const titleQuarantineAtHome = "Quarantine At Home";
   static const title = "title";
-  static const txt_7_4_challenge = "7 X 4 Challenge";
+  static const txt_7_4_challenge = "7X4 Challenge";
   static const Build_wider = "Build Wider";
   static const full_body = "full_data";
   static const biginner = "biginner";

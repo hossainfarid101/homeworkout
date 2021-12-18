@@ -73,7 +73,7 @@ class LanguageEn extends Languages {
   String get txtWeekGoalDesc => "Set weekly goals for a better body shape";
 
   @override
-  String get txt7X4Challenge => "7 X 4 Challenge";
+  String get txt7X4Challenge => "7X4 Challenge";
 
   @override
   String get txtAbsBeginner => "Abs Beginner";
@@ -661,4 +661,7 @@ class LanguageEn extends Languages {
 
   @override
   String get txtExitMessage => "Press back twice to exit";
+
+  @override
+  String get txtWarningForBMIDialog => "Please enter height and weight.";
 }

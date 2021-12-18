@@ -436,4 +436,6 @@ abstract class Languages {
   String get txtGoPremium;
 
   String get txtExitMessage;
+
+  String get txtWarningForBMIDialog;
 }

@@ -13,7 +13,6 @@ import 'package:homeworkout_flutter/database/tables/home_plan_table.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/discover/DiscoverScreen.dart';
 import 'package:homeworkout_flutter/ui/exerciseDays/exercise_days_status_screen.dart';
-import 'package:homeworkout_flutter/ui/exercisePlan/exercise_plan_screen.dart';
 import 'package:homeworkout_flutter/ui/quarantineathome/QuarantineAtHomeScreen.dart';
 import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
 import 'package:homeworkout_flutter/ui/workout/workout_screen.dart';

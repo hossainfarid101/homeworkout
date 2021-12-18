@@ -338,41 +338,6 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
     );
   }
 
-  _titleWidget() {
-    return Container(
-      margin: const EdgeInsets.only(top: 18.0, bottom: 5.0),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40.0),
-            child: Text(
-              mainTitle!,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 20,
-                color: Colur.txtBlack,
-              ),
-            ),
-          ),
-          subTitle != "" ? Container(
-            margin: const EdgeInsets.only(top: 8.0),
-            padding: const EdgeInsets.symmetric(horizontal: 40.0),
-            child: Text(
-              subTitle!,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 14,
-                color: Colur.txtBlack,
-              ),
-            ),
-          ) : Container(),
-        ],
-      ),
-    );
-  }
-
   _nextButton() {
     return Column(
       children: [

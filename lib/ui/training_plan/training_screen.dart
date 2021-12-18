@@ -430,7 +430,7 @@ class _TrainingScreenState extends State<TrainingScreen>
               child: Text(
                 allPlanDataList[index].catName.toString().toUpperCase(),
                 style: TextStyle(
-                  fontWeight: FontWeight.w900,
+                  fontWeight: FontWeight.w700,
                   fontSize: 18,
                   color: Colur.black,
                 ),
@@ -440,14 +440,13 @@ class _TrainingScreenState extends State<TrainingScreen>
           Visibility(
               visible: (allPlanDataList[index].catSubCategory != Constant.title)?true:false,
               child: Container(
-                height: 150,
+                height: 130,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
                   child: Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                          // image: AssetImage('assets/exerciseImage/beginner/abs_beginner_men.webp'),
                           image: AssetImage((allPlanDataList[index].catImage! != Constant.title)
                               ?allPlanDataList[index].catImage!+"_$gender.webp"
                               :'assets/exerciseImage/beginner/abs_beginner_men.webp'),
@@ -502,80 +501,92 @@ class _TrainingScreenState extends State<TrainingScreen>
                                       ),
                                     ),
 
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Container(
-                                          child: Row(
-                                            children: [
-                                              FutureBuilder(
-                                                future: _setLeftDayProgressDataByPlan(allPlanDataList[index].catTableName.toString()),
-                                                builder: (BuildContext context,
-                                                    AsyncSnapshot<dynamic> snapshot) {
-                                                  if (snapshot.hasData) {
-                                                    return
-                                                      Container(
-                                                        margin: const EdgeInsets.symmetric(horizontal: 15.0),
-                                                        child: Text(snapshot.data.toString(),
-                                                            style: TextStyle(
-                                                                color: Colur.white,
-                                                                fontSize: 14.0)),
-                                                      );
-                                                  }else {
-                                                    return Container();
-                                                  }
-                                                },
-                                              ),
-                                              Expanded(
-                                                child: FutureBuilder(
-                                                  future: _setDayProgressPercentagePlan(allPlanDataList[index].catTableName.toString()),
+                                    Visibility(
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: [
+                                          Container(
+                                            child: Row(
+                                              children: [
+                                                FutureBuilder(
+                                                  future: _setLeftDayProgressDataByPlan(allPlanDataList[index].catTableName.toString()),
                                                   builder: (BuildContext context,
                                                       AsyncSnapshot<dynamic> snapshot) {
                                                     if (snapshot.hasData) {
+
                                                       return
-                                                        Container(
-                                                          alignment: Alignment.centerRight,
-                                                          margin:
-                                                          const EdgeInsets.symmetric(horizontal: 15.0),
-                                                          child: Text(snapshot.data.toString(),
-                                                              style: TextStyle(
-                                                                  color: Colur.white, fontSize: 14.0)),
+                                                        Visibility(
+                                                          visible: snapshot.data.toString() != "28" + " " + Languages.of(context)!.txtDayLeft,
+                                                          child: Container(
+                                                            margin: const EdgeInsets.symmetric(horizontal: 15.0),
+                                                            child: Text(snapshot.data.toString(),
+                                                                style: TextStyle(
+                                                                    color: Colur.white,
+                                                                    fontSize: 14.0)),
+                                                          ),
                                                         );
                                                     }else {
                                                       return Container();
                                                     }
                                                   },
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-
-                                        FutureBuilder(
-                                          future: _setDayProgressDataByPlan(allPlanDataList[index].catTableName.toString()),
-                                          builder: (BuildContext context,
-                                              AsyncSnapshot<dynamic> snapshot) {
-                                            if (snapshot.hasData) {
-                                              return
-                                                Container(
-                                                  margin: const EdgeInsets.only(right: 10,left: 10,top: 10,bottom: 20),
-                                                  child: ClipRRect(
-                                                    borderRadius: BorderRadius.circular(10.0),
-                                                    child: LinearProgressIndicator(
-                                                      value: (snapshot.data / 100).toDouble(),
-                                                      valueColor: AlwaysStoppedAnimation<Color>(Colur.theme),
-                                                      backgroundColor: Colur.transparent_50,
-                                                      minHeight: 5,
-                                                    ),
+                                                Expanded(
+                                                  child: FutureBuilder(
+                                                    future: _setDayProgressPercentagePlan(allPlanDataList[index].catTableName.toString()),
+                                                    builder: (BuildContext context,
+                                                        AsyncSnapshot<dynamic> snapshot) {
+                                                      if (snapshot.hasData) {
+                                                        return
+                                                          Visibility(
+                                                            visible: snapshot.data.toString() != "0%",
+                                                            child: Container(
+                                                              alignment: Alignment.centerRight,
+                                                              margin:
+                                                              const EdgeInsets.symmetric(horizontal: 15.0),
+                                                              child: Text(snapshot.data.toString(),
+                                                                  style: TextStyle(
+                                                                      color: Colur.white, fontSize: 14.0)),
+                                                            ),
+                                                          );
+                                                      }else {
+                                                        return Container();
+                                                      }
+                                                    },
                                                   ),
-                                                );
-                                            }else {
-                                              return Container();
-                                            }
-                                          },
-                                        ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
 
-                                      ],
+                                          FutureBuilder(
+                                            future: _setDayProgressDataByPlan(allPlanDataList[index].catTableName.toString()),
+                                            builder: (BuildContext context,
+                                                AsyncSnapshot<dynamic> snapshot) {
+                                              if (snapshot.hasData) {
+                                                return
+                                                  Visibility(
+                                                    visible: snapshot.data != 0,
+                                                    child: Container(
+                                                      margin: const EdgeInsets.only(right: 10,left: 10,top: 10,bottom: 20),
+                                                      child: ClipRRect(
+                                                        borderRadius: BorderRadius.circular(10.0),
+                                                        child: LinearProgressIndicator(
+                                                          value: (snapshot.data / 100).toDouble(),
+                                                          valueColor: AlwaysStoppedAnimation<Color>(Colur.theme),
+                                                          backgroundColor: Colur.transparent_50,
+                                                          minHeight: 5,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                              }else {
+                                                return Container();
+                                              }
+                                            },
+                                          ),
+
+                                        ],
+                                      ),
                                     )
                                   ],
                                 ),
@@ -887,7 +898,7 @@ class _TrainingScreenState extends State<TrainingScreen>
       List<FullBodyWorkoutTable> compDay =
       await DataBaseHelper().getCompleteDayCountByTableName(strTableName);
       String proPercentage =
-      (compDay.length.toDouble() * 100 / 30).toDouble().toStringAsFixed(0);
+      (compDay.length.toDouble() * 100 / 28).toDouble().toStringAsFixed(0);
       progress = proPercentage + "%";
       return double.parse(proPercentage).toInt();
     }else{
@@ -899,7 +910,7 @@ class _TrainingScreenState extends State<TrainingScreen>
     if(strTableName == Constant.tbl_full_body_workouts_list || strTableName == Constant.tbl_lower_body_list) {
       List<FullBodyWorkoutTable> compDay =
       await DataBaseHelper().getCompleteDayCountByTableName(strTableName);
-      String daysLeft = (30 - compDay.length).toString();
+      String daysLeft = (28 - compDay.length).toString();
       return daysLeft + " " + Languages.of(context)!.txtDayLeft;
     }else{
       return "";
@@ -911,7 +922,7 @@ class _TrainingScreenState extends State<TrainingScreen>
       List<FullBodyWorkoutTable> compDay =
           await DataBaseHelper().getCompleteDayCountByTableName(strTableName);
       String proPercentage =
-          (compDay.length.toDouble() * 100 / 30).toDouble().toStringAsFixed(0);
+          (compDay.length.toDouble() * 100 / 28).toDouble().toStringAsFixed(0);
       return proPercentage + "%";
     } else {
       return "";

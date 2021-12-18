@@ -756,13 +756,19 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                       dx: bmiValuePosition(fullWidth),
                       child: Column(
                         children: [
-                          Text(bmi != 0 ? bmi!.toStringAsFixed(2) : "0"),
+                          Text(
+                            bmi!.toStringAsFixed(2),
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600
+                            ),
+                          ),
                           Container(
                             margin: const EdgeInsets.symmetric(
-                                horizontal: 15.0, vertical: 5.0),
-                            height: 50,
+                                horizontal: 15.0, vertical: 8.0),
+                            height: 53,
                             child: VerticalDivider(
-                              thickness: 5,
+                              thickness: 4,
                               color: Colur.black,
                             ),
                           ),
@@ -773,12 +779,24 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                 ],
               ),
             ),
-            Text(bmiCategory!,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                    color: bmiColor,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500)),
+            Visibility(
+              visible: bmi! > 0,
+              child: Container(
+                margin: EdgeInsets.only(bottom: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(bmiCategory!,
+                        overflow: TextOverflow.ellipsis,
+                        //textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: bmiColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500)),
+                  ],
+                ),
+              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
