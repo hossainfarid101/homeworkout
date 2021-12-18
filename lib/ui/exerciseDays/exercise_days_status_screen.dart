@@ -539,17 +539,19 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
   }
 
 
-  _getDataFromDatabase()async{
-    weeklyDataList = await DataBaseHelper().getWorkoutWeeklyData(widget.planName.toString());
+  _getDataFromDatabase() async {
+    weeklyDataList =
+        await DataBaseHelper().getWorkoutWeeklyData(widget.planName.toString());
     weeklyDataList.forEach((element) {
       Debug.printLog("_getWeeklyData==>> "+element.weekName.toString()+"  "+element.dayName.toString());
       element.arrWeekDayData!.forEach((element1) {
         Debug.printLog("arrWeekDayData==>>  "+element1.dayName.toString()+"  "+element1.isCompleted.toString());
       });
     });
-    setState(() {});
+    Future.delayed(Duration(milliseconds: 200), () {
+      setState(() {});
+    });
   }
-
 
   Future<int?> _setDayProgressDataByPlan(String strTableName) async {
     // if(strTableName == Constant.tbl_full_body_workouts_list || strTableName == Constant.tbl_lower_body_list) {

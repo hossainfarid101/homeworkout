@@ -102,7 +102,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                 return <Widget>[
                   SliverAppBar(
                     elevation: 2,
-                    expandedHeight: 280.0,
+                    expandedHeight: (selectedTrainingDay == "0")  ? 280.0 : 250.0,
                     floating: false,
                     pinned: true,
                     titleSpacing:-5,
@@ -150,7 +150,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                                       Container(
                                         height: 180,
                                         child: Container(
-                                          margin: EdgeInsets.only(top: 30),
+                                          margin: EdgeInsets.only(top: (selectedTrainingDay == "0")  ? 30 : 60),
                                           child: InkWell(
                                             onTap: () {
                                               Navigator.push(
@@ -226,8 +226,8 @@ class _TrainingScreenState extends State<TrainingScreen>
                                   ),
 
                                   Container(
-                                    margin: const EdgeInsets.only(
-                                        top: 90.0, right: 20, left: 20,bottom: 10),
+                                    margin: EdgeInsets.only(
+                                        top: (selectedTrainingDay == "0")  ? 90.0 : 120.0, right: 20, left: 20,bottom: 10),
                                     decoration: const BoxDecoration(
                                       color: Colur.white,
                                       borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -740,8 +740,8 @@ class _TrainingScreenState extends State<TrainingScreen>
                   child:
                       Image.asset(
                         "assets/icons/ic_challenge_complete_day.webp",
-                        height: 33,
-                        width: 33,
+                        height: 40,
+                        width: 40,
                       ))
         ],
       ),
