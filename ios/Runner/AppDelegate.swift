@@ -1,5 +1,7 @@
 import UIKit
 import Flutter
+import StoreKit
+import AVFoundation
 
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
@@ -10,6 +12,11 @@ import Flutter
   if #available(iOS 10.0, *) {
         UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
       }
+
+    for transaction:SKPaymentTransaction in SKPaymentQueue.default().transactions {
+        SKPaymentQueue.default().finishTransaction(transaction)
+    }
+
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }

@@ -34,6 +34,10 @@ class Utils {
     return (uid != null && uid.isNotEmpty);
   }
 
+  static bool isPurchased() {
+    return Preference.shared.getBool(Preference.IS_PURCHASED) ?? false;
+  }
+
   static getCurrentDateTime() {
     DateTime dateTime = DateTime.now();
     return "${dateTime.year.toString()}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')} ${dateTime.hour.toString()}-${dateTime.minute.toString()}-${dateTime.second.toString()}";

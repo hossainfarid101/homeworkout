@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -15,10 +18,14 @@ import 'package:homeworkout_flutter/utils/Debug.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
+import 'package:in_app_purchase_android/in_app_purchase_android.dart';
+import 'package:in_app_purchase_ios/store_kit_wrappers.dart';
 
+import 'inapppurchase/InAppPurchaseHelper.dart';
 import 'localization/locale_constant.dart';
 import 'localization/localizations_delegate.dart';
 
@@ -53,6 +60,23 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize();
   await Preference().instance();
+  InAppPurchaseAndroidPlatformAddition.enablePendingPurchases();
+
+  if (Platform.isIOS) {
+    final transactions = await SKPaymentQueueWrapper().transactions();
+
+    for (SKPaymentTransactionWrapper element in transactions) {
+      await SKPaymentQueueWrapper().finishTransaction(element);
+      await SKPaymentQueueWrapper()
+          .finishTransaction(element.originalTransaction!);
+    }
+
+    transactions.forEach((element) async {
+      await SKPaymentQueueWrapper().finishTransaction(element);
+      await SKPaymentQueueWrapper().finishTransaction(element.originalTransaction!);
+    });
+  }
+  InAppPurchaseHelper().initStoreInfo();
 
    const AndroidInitializationSettings initializationSettingsAndroid =
   AndroidInitializationSettings('ic_notification');
@@ -105,6 +129,8 @@ class MyApp extends StatefulWidget {
   static final navigatorKey = GlobalKey<NavigatorState>();
   static final GlobalKey<ScaffoldState> scaffoldKey =
       GlobalKey<ScaffoldState>();
+
+  static final StreamController purchaseStreamController = StreamController<PurchaseDetails>.broadcast();
 
   const MyApp({Key? key}) : super(key: key);
 

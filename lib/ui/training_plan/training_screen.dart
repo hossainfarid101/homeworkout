@@ -6,6 +6,8 @@ import 'package:homeworkout_flutter/custom/drawer/drawer_menu.dart';
 import 'package:homeworkout_flutter/database/database_helper.dart';
 import 'package:homeworkout_flutter/database/tables/fullbody_workout_table.dart';
 import 'package:homeworkout_flutter/database/tables/home_plan_table.dart';
+import 'package:homeworkout_flutter/inapppurchase/IAPCallback.dart';
+import 'package:homeworkout_flutter/inapppurchase/InAppPurchaseHelper.dart';
 import 'package:homeworkout_flutter/interfaces/topbar_clicklistener.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/discover/DiscoverScreen.dart';
@@ -19,6 +21,7 @@ import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
+import 'package:in_app_purchase_platform_interface/src/types/purchase_details.dart';
 
 class TrainingScreen extends StatefulWidget {
   const TrainingScreen({Key? key}) : super(key: key);
@@ -29,7 +32,7 @@ class TrainingScreen extends StatefulWidget {
 
 
 class _TrainingScreenState extends State<TrainingScreen>
-    implements TopBarClickListener {
+    implements TopBarClickListener , IAPCallback {
 
   ScrollController? _scrollController;
 
@@ -66,6 +69,7 @@ class _TrainingScreenState extends State<TrainingScreen>
 
   @override
   void initState() {
+    InAppPurchaseHelper().getAlreadyPurchaseItems(this);
     Preference.shared.setInt(Preference.DRAWER_INDEX, 0);
     _getPreference();
     _scrollController = ScrollController();
@@ -938,6 +942,26 @@ class _TrainingScreenState extends State<TrainingScreen>
       return Future.value(false);
     }
     return Future.value(true);
+  }
+
+  @override
+  void onBillingError(error) {
+    // TODO: implement onBillingError
+  }
+
+  @override
+  void onLoaded(bool initialized) {
+    // TODO: implement onLoaded
+  }
+
+  @override
+  void onPending(PurchaseDetails product) {
+    // TODO: implement onPending
+  }
+
+  @override
+  void onSuccessPurchase(PurchaseDetails product) {
+    // TODO: implement onSuccessPurchase
   }
 }
 

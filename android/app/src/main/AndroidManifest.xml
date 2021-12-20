@@ -1,9 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.homeworkout_flutter">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
    <application
-        android:label="Home Workout"
+        android:label="Home Workout For Men Women"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:allowBackup="false"
         android:screenOrientation="portrait">
 
        <meta-data

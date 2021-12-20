@@ -17,6 +17,7 @@ class Preference {
   static const String isNotificationAllowed = "IS_NOTIFICATION_ALLOWED";
   static const String percentage = "PERCENTAGE";
   static const String needToSync = "NEED_TO_SYNC";
+  static const String IS_PURCHASED = "IS_PURCHASED";
   static const SELECTED_FIRST_DAY_OF_WEEK = "SELECTED_FIRST_DAY_OF_WEEK";
 
 

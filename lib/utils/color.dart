@@ -23,6 +23,7 @@ class Colur {
   static const anim_bg = Color(0xFFF4F6FA);
   static const track_gray = Color(0xff4F4F4F);
   static const txt_grey = const Color(0xff9195B6);
+  static const common_shadow = Color(0x10484B52);
 
  /* static const blueGradientButton1 = Color(0xff046FF9);
   static const blueGradientButton2 = Color(0xff004DF8);*/

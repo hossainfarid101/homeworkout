@@ -11,6 +11,7 @@ import 'package:homeworkout_flutter/ui/exerciselist/ExerciseListScreen.dart';
 import 'package:homeworkout_flutter/ui/unlockPremium/unlock_premium_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
+import 'package:homeworkout_flutter/utils/utils.dart';
 
 class QuarantineAtHomeScreen extends StatefulWidget {
 
@@ -253,152 +254,157 @@ class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
 
   _showDialogForWatchVideoUnlock(int index) {
     selectedCategoryIndex = index;
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return Scaffold(
-            backgroundColor: Colur.transparent_black_80,
-            body: Container(
-              width: double.infinity,
-              height: double.infinity,
-              child: Stack(
-                // crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.all(10),
-                      child: Icon(
-                        Icons.arrow_back_rounded,
-                        color: Colur.white,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.lock_open_rounded,
+
+    if(Utils.isPurchased()){
+      _startNextScreen();
+    }else{
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return Scaffold(
+              backgroundColor: Colur.transparent_black_80,
+              body: Container(
+                width: double.infinity,
+                height: double.infinity,
+                child: Stack(
+                  // crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.all(10),
+                        child: Icon(
+                          Icons.arrow_back_rounded,
                           color: Colur.white,
                         ),
-                        Container(
-                          margin: const EdgeInsets.symmetric(vertical: 10),
-                          child: Text(
-                            Languages.of(context)!
-                                .txtWatchVideoToUnlock
-                                .toUpperCase(),
-                            style: TextStyle(
-                                color: Colur.white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 17),
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.lock_open_rounded,
+                            color: Colur.white,
                           ),
-                        ),
-                        Container(
-                          child: Text(
-                            Languages.of(context)!.txtWatchVideoToUnlockDesc,
-                            style: TextStyle(
-                                color: Colur.white,
-                                fontWeight: FontWeight.w300,
-                                fontSize: 15),
-                          ),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 40.0, vertical: 13.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.0),
-                            gradient: LinearGradient(
-                              colors: [
-                                Colur.blueGradientButton1,
-                                Colur.blueGradientButton2,
-                              ],
-                              begin: Alignment.centerLeft,
-                              end: Alignment.centerRight,
-                              tileMode: TileMode.clamp,
-                            ),
-                          ),
-                          child: TextButton(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.play_circle_fill_rounded,
+                          Container(
+                            margin: const EdgeInsets.symmetric(vertical: 10),
+                            child: Text(
+                              Languages.of(context)!
+                                  .txtWatchVideoToUnlock
+                                  .toUpperCase(),
+                              style: TextStyle(
                                   color: Colur.white,
-                                  size: 16,
-                                ),
-                                Container(
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 10),
-                                  child: Text(
-                                    Languages.of(context)!
-                                        .txtUnlockOnce
-                                        .toUpperCase(),
-                                    style: TextStyle(
-                                      color: Colur.white,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 16.0,
-                                    ),
-                                  ),
-                                ),
-                              ],
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 17),
                             ),
-                            onPressed: () {
-                              _showRewardedAd();
-                            },
                           ),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 40.0, vertical: 5.0),
-                          decoration: BoxDecoration(
+                          Container(
+                            child: Text(
+                              Languages.of(context)!.txtWatchVideoToUnlockDesc,
+                              style: TextStyle(
+                                  color: Colur.white,
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: 15),
+                            ),
+                          ),
+                          Container(
+                            width: double.infinity,
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 40.0, vertical: 13.0),
+                            decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.0),
-                              color: Colur.gray_unlock),
-                          child: TextButton(
-                            child: Container(
-                              margin:
-                              const EdgeInsets.symmetric(horizontal: 10),
-                              child: Text(
-                                Languages.of(context)!
-                                    .txtFree7DaysTrial
-                                    .toUpperCase(),
-                                style: TextStyle(
-                                  color: Colur.white,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 16.0,
-                                ),
+                              gradient: LinearGradient(
+                                colors: [
+                                  Colur.blueGradientButton1,
+                                  Colur.blueGradientButton2,
+                                ],
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                                tileMode: TileMode.clamp,
                               ),
                             ),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          UnlockPremiumScreen()))
-                                  .then((value) => Navigator.pop(context));
-                            },
+                            child: TextButton(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.play_circle_fill_rounded,
+                                    color: Colur.white,
+                                    size: 16,
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 10),
+                                    child: Text(
+                                      Languages.of(context)!
+                                          .txtUnlockOnce
+                                          .toUpperCase(),
+                                      style: TextStyle(
+                                        color: Colur.white,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              onPressed: () {
+                                _showRewardedAd();
+                              },
+                            ),
                           ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.symmetric(vertical: 10),
-                          child: Text(
-                            Languages.of(context)!.txtFreeTrialDesc,
-                            style: TextStyle(color: Colur.white, fontSize: 12),
-                            textAlign: TextAlign.center,
+                          Container(
+                            width: double.infinity,
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 40.0, vertical: 5.0),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Colur.gray_unlock),
+                            child: TextButton(
+                              child: Container(
+                                margin:
+                                const EdgeInsets.symmetric(horizontal: 10),
+                                child: Text(
+                                  Languages.of(context)!
+                                      .txtFree7DaysTrial
+                                      .toUpperCase(),
+                                  style: TextStyle(
+                                    color: Colur.white,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            UnlockPremiumScreen()))
+                                    .then((value) => Navigator.pop(context));
+                              },
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
+                          Container(
+                            margin: const EdgeInsets.symmetric(vertical: 10),
+                            child: Text(
+                              Languages.of(context)!.txtFreeTrialDesc,
+                              style: TextStyle(color: Colur.white, fontSize: 12),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-          );
-        });
+            );
+          });
+    }
   }
 }
