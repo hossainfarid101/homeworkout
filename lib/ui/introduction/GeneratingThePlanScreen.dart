@@ -102,6 +102,20 @@ class _GeneratingThePlanScreenState extends State<GeneratingThePlanScreen> with 
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+         /* ClipRRect(
+            borderRadius: BorderRadius.circular(8.0),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                color: Colur.txt_gray,
+              ),
+              child: Image.asset(
+                'assets/images/avatar_male.png',
+                fit: BoxFit.fill,
+                scale: 2,
+              ),
+            ),
+          ),*/
           Text(
             Languages.of(context)!.txtYourPlanIsReady.toUpperCase(),
             style: TextStyle(

@@ -148,7 +148,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                                 top: 15.0,
                                 bottom: 15.0,
                                 left: 15.0,
-                                right: 25.0),
+                                right: 15.0),
                             child: Image.asset(
                               'assets/icons/ic_back.webp',
                               color: Colur.white,
@@ -396,13 +396,13 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                           fontSize: 14,
                           fontWeight: FontWeight.w700)),
                 ),
-                Text(dayCompleted!.toString(), // TODO
+                Text(dayCompleted!.toString(),
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                         color: Colur.blueGradientButton1,
                         fontSize: 16,
                         fontWeight: FontWeight.w400)),
-                Text("/" + "7", // TODO
+                Text("/" + "7",
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                         color: Colur.grey,
@@ -412,30 +412,19 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(left: 10, right: 5),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    width: double.infinity,
-                    height: 50,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: 7,
-                      scrollDirection: Axis.horizontal,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemBuilder: (BuildContext context, int index) {
-                        return _buildWeekItem(index);
-                      },
-                    ),
-                  ),
-                ),
-                Image.asset(
-                    (dayCompleted == 7)
-                        ? "assets/images/ic_challenge_complete.png"
-                        : "assets/images/ic_challenge_uncomplete.webp",
-                    scale: 5)
-              ],
+            margin: EdgeInsets.symmetric(horizontal: 6),
+            child: Container(
+              alignment: Alignment.center,
+              height: 50,
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: 7,
+                scrollDirection: Axis.horizontal,
+                physics: NeverScrollableScrollPhysics(),
+                itemBuilder: (BuildContext context, int index) {
+                  return _buildWeekItem(index);
+                },
+              ),
             ),
           )
         ],
@@ -444,47 +433,60 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
   }
 
   _buildWeekItem(int index) {
-    return Row(
-      children: [
-        if (weeklyDataList!.isNotEmpty) if (
-                weeklyDataList![index].isCompleted == "1" ||
-            weeklyDataList![index].dayName == "0${dayCompleted.toString()}")
-             Container(
-              padding: const EdgeInsets.all(5),
-              //height: 50,
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle, color: Colur.blueGradient1),
-              child: Icon(
-                Icons.check,
-                color: Colur.white,
-                size: 20,
-              ),
-            )
-           else Container(
-                padding: const EdgeInsets.all(10),
-                //height: 50,
+    return Container(
+      //width: double.infinity,
+      child: Row(
+        children: [
+          if (weeklyDataList!.isNotEmpty) if (
+                  weeklyDataList![index].isCompleted == "1" ||
+              weeklyDataList![index].dayName == "0${dayCompleted.toString()}")
+               Container(
+                padding: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(color: Colur.grey)),
-                child: Center(
-                  child: Text("${index + 1}",
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          color: Colur.grey,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400)),
+                    shape: BoxShape.circle, color: Colur.blueGradient1),
+                child: Icon(
+                  Icons.check,
+                  color: Colur.white,
+                  size: 20,
                 ),
-              ),
-        Visibility(
-          visible: (weeklyDataList!.length-1 != index),
-          child: Container(
-            margin: const EdgeInsets.only(top: 24, bottom: 24),
-            width: 18,
-            color: weeklyDataList!.isNotEmpty ? (weeklyDataList![index].isCompleted == "1" ||
-                weeklyDataList![index].dayName == "0${dayCompleted.toString()}") ? Colur.blueGradient1 : Colur.grey.withOpacity(0.7)  : Colur.grey.withOpacity(0.7),
+              )
+             else Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colur.grey)),
+                  child: Center(
+                    child: Text("${index + 1}",
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            color: Colur.grey,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400)),
+                  ),
+                ),
+          Visibility(
+            visible: (weeklyDataList!.length-1 != index),
+            child: Container(
+              margin: const EdgeInsets.only(top: 24, bottom: 24),
+              width: MediaQuery.of(context).size.width * 0.04,
+              color: weeklyDataList!.isNotEmpty ? (weeklyDataList![index].isCompleted == "1" ||
+                  weeklyDataList![index].dayName == "0${dayCompleted.toString()}") ? Colur.blueGradient1 : Colur.grey.withOpacity(0.7)  : Colur.grey.withOpacity(0.7),
+            ),
           ),
-        ),
-      ],
+
+          Visibility(
+            visible: index == 6,
+            child: Container(
+              margin: EdgeInsets.only(bottom: 7, left: MediaQuery.of(context).size.width * 0.01),
+              child: Image.asset(
+                  (dayCompleted == 7)
+                      ? "assets/images/ic_challenge_complete.png"
+                      : "assets/images/ic_challenge_uncomplete.webp",
+                  scale: 5),
+            ),
+          )
+        ],
+      ),
     );
   }
 
@@ -975,7 +977,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
 
   nextButtonWidget(double fullWidth) {
     return Container(
-      margin: EdgeInsets.only(top: 10, bottom: 0),
+      margin: EdgeInsets.only(top: 10, bottom: 10),
       height: 50,
       width: fullWidth * 0.7,
       child: ElevatedButton(

@@ -143,7 +143,7 @@ class _WeightHeightSelectionScreenState extends State<WeightHeightSelectionScree
                                       height: 12,
                                       width: 12,
                                     ),
-                                    SizedBox(width: 30,),
+                                    SizedBox(width: MediaQuery.of(context).size.width*0.01,),
                                     InkWell(
                                       onTap: () async{
                                         await showDialog(
@@ -264,7 +264,7 @@ class _WeightHeightSelectionScreenState extends State<WeightHeightSelectionScree
                                         height: 12,
                                         width: 12,
                                       ),
-                                      SizedBox(width: 30,),
+                                      SizedBox(width: MediaQuery.of(context).size.width*0.01,),
                                       InkWell(
                                         onTap: () async{
                                           await showDialog(
@@ -321,14 +321,8 @@ class _WeightHeightSelectionScreenState extends State<WeightHeightSelectionScree
 
   getPreference() {
     kgSelected = Preference.shared.getBool(Preference.IS_KG) ?? true;
-
     weight = Preference.shared.getDouble(Preference.WEIGHT) ?? 0;
-
-
-
     cmSelected = Preference.shared.getBool(Preference.IS_CM) ?? true;
-
-
     heightCM = Preference.shared.getDouble(Preference.HEIGHT_CM) ?? 0;
     heightIN = Preference.shared.getDouble(Preference.HEIGHT_IN) ?? 0;
     heightFT = Preference.shared.getDouble(Preference.HEIGHT_FT) ?? 0;

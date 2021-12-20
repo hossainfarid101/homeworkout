@@ -19,6 +19,7 @@ import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 import 'package:open_settings/open_settings.dart';
+import 'package:rate_my_app/rate_my_app.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -43,6 +44,8 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
 
   bool isShowGoPremiumButton = Utils.isPurchased();
 
+  RateMyApp? rateMyApp;
+
   final AndroidIntent intent = const AndroidIntent(
       action: 'com.android.settings.TTS_SETTINGS',
       componentName: "com.android.settings.TextToSpeechSettings"
@@ -51,6 +54,98 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
   @override
   void initState() {
     _getPreference();
+    rateMyApp = RateMyApp(
+        preferencesPrefix: 'rateMyApp_',
+        minDays: 7,
+        minLaunches: 10,
+        remindDays: 7,
+        remindLaunches: 10,
+        googlePlayIdentifier: 'com.homeworkout.men.women',
+        appStoreIdentifier: '1601155923'
+    );
+
+    if (Platform.isIOS) {
+      rateMyApp!.init().then((_) {
+        if (rateMyApp!.shouldOpenDialog) {
+          rateMyApp!.showRateDialog(
+            context,
+            title: 'Rate this app',
+
+            message:
+            'If you like this app, please take a little bit of your time to review it !\nIt really helps us and it shouldn\'t take you more than one minute.',
+
+            rateButton: 'RATE',
+
+            noButton: 'NO THANKS',
+
+            laterButton: 'MAYBE LATER',
+
+            listener: (button) {
+
+              switch (button) {
+                case RateMyAppDialogButton.rate:
+                  print('Clicked on "Rate".');
+                  break;
+                case RateMyAppDialogButton.later:
+                  print('Clicked on "Later".');
+                  break;
+                case RateMyAppDialogButton.no:
+                  print('Clicked on "No".');
+                  break;
+              }
+
+              return true;
+            },
+            ignoreNativeDialog: Platform.isAndroid,
+
+            dialogStyle: const DialogStyle(),
+
+            onDismissed: () => rateMyApp!.callEvent(RateMyAppEventType
+                .laterButtonPressed),
+          );
+
+          rateMyApp!.showStarRateDialog(
+            context,
+            title: 'Rate this app',
+
+            message:
+            'You like this app ? Then take a little bit of your time to leave a rating :',
+
+            actionsBuilder: (context, stars) {
+              return [
+
+                TextButton(
+                  child: Text('OK'),
+                  onPressed: () async {
+                    print('Thanks for the ' +
+                        (stars == null ? '0' : stars.round().toString()) +
+                        ' star(s) !');
+
+
+                    await rateMyApp!
+                        .callEvent(RateMyAppEventType.rateButtonPressed);
+                    Navigator.pop<RateMyAppDialogButton>(
+                        context, RateMyAppDialogButton.rate);
+                  },
+                ),
+              ];
+            },
+            ignoreNativeDialog: Platform.isAndroid,
+
+            dialogStyle: const DialogStyle(
+
+              titleAlign: TextAlign.center,
+              messageAlign: TextAlign.center,
+              messagePadding: EdgeInsets.only(bottom: 20),
+            ),
+            starRatingOptions: const StarRatingOptions(),
+
+            onDismissed: () => rateMyApp!.callEvent(RateMyAppEventType
+                .laterButtonPressed),
+          );
+        }
+      });
+    }
     super.initState();
   }
 
@@ -683,7 +778,11 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
 
             InkWell(
               onTap: () {
-                //rateMyApp!.showRateDialog(context);
+                if (Platform.isIOS) {
+                  rateMyApp!.showRateDialog(context);
+                } else {
+                  rateMyApp!.launchStore();
+                }
               },
               child: Container(
                 margin: const EdgeInsets.only(bottom: 10, top:10),
@@ -751,7 +850,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                 await _loadPrivacyPolicy();
               },
               child: Container(
-                margin: const EdgeInsets.only(bottom: 10, top:10),
+                margin: const EdgeInsets.only(bottom: 20, top:10),
                 child: Row(
                   children: [
                     Container(
@@ -776,8 +875,6 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                 ),
               ),
             ),
-
-
           ],
         ),
       ),
