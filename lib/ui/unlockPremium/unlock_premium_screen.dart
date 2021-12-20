@@ -76,7 +76,7 @@ class _UnlockPremiumScreenState extends State<UnlockPremiumScreen>
     );
   }
 
-  _itemUnlockScreen(BuildContext context){
+  _itemUnlockScreen(BuildContext context) {
     return Scaffold(
       backgroundColor: Colur.white,
       body: SafeArea(
@@ -90,7 +90,7 @@ class _UnlockPremiumScreenState extends State<UnlockPremiumScreen>
                     children: [
                       InkWell(
                         onTap: () {
-                          Navigator.pop(context);
+                          Navigator.pop(context,false);
                         },
                         child: Container(
                           margin: const EdgeInsets.all(10),
@@ -383,6 +383,9 @@ class _UnlockPremiumScreenState extends State<UnlockPremiumScreen>
           ),
         ),
         onPressed: () {
+          setState(() {
+            isShowProgress = true;
+          });
           onPurchaseClick();
         },
       ),
@@ -393,7 +396,7 @@ class _UnlockPremiumScreenState extends State<UnlockPremiumScreen>
   void onBillingError(error) {
     setState(() {
       isShowProgress = false;
-      Debug.printLog( "onBillingError ==>" + error.message);
+      Debug.printLog("onBillingError ==>" + error.message);
     });
   }
 
@@ -413,6 +416,6 @@ class _UnlockPremiumScreenState extends State<UnlockPremiumScreen>
       isShowProgress = false;
     });
     Preference.shared.setBool(Preference.IS_PURCHASED, true);
-    Navigator.pop(context);
+    Navigator.pop(context, true);
   }
 }

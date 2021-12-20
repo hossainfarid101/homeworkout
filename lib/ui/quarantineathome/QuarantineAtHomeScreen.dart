@@ -381,11 +381,16 @@ class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
                               ),
                               onPressed: () {
                                 Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            UnlockPremiumScreen()))
-                                    .then((value) => Navigator.pop(context));
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => UnlockPremiumScreen(),
+                                  ),
+                                ).then((value) {
+                                  Navigator.pop(context);
+                                  if (value != null && value) {
+                                    _startNextScreen();
+                                  }
+                                });
                               },
                             ),
                           ),

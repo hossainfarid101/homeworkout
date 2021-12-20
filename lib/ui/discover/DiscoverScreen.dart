@@ -1456,11 +1456,16 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                               ),
                               onPressed: () {
                                 Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            UnlockPremiumScreen()))
-                                    .then((value) => Navigator.pop(context));
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => UnlockPremiumScreen(),
+                                  ),
+                                ).then((value) {
+                                  Navigator.pop(context);
+                                  if (value != null && value) {
+                                    _startNextScreen();
+                                  }
+                                });
                               },
                             ),
                           ),

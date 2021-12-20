@@ -70,11 +70,6 @@ Future<void> main() async {
       await SKPaymentQueueWrapper()
           .finishTransaction(element.originalTransaction!);
     }
-
-    transactions.forEach((element) async {
-      await SKPaymentQueueWrapper().finishTransaction(element);
-      await SKPaymentQueueWrapper().finishTransaction(element.originalTransaction!);
-    });
   }
   InAppPurchaseHelper().initStoreInfo();
 
