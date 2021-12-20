@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:align_positioned/align_positioned.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:homeworkout_flutter/common/commonTopBar/commom_topbar.dart';
 import 'package:homeworkout_flutter/custom/chart/custom_circle_symbol_renderer.dart';
 import 'package:homeworkout_flutter/custom/dialogs/add_bmi_dialog.dart';
@@ -15,6 +16,7 @@ import 'package:homeworkout_flutter/interfaces/topbar_clicklistener.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
 import 'package:homeworkout_flutter/ui/workoutHistory/workout_history_screen.dart';
+import 'package:homeworkout_flutter/utils/ad_helper.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
@@ -68,6 +70,29 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
   String? date = DateFormat.yMd().format(DateTime.now());
   List<bool> isAvailableHistory = [];
 
+  late BannerAd _bottomBannerAd;
+  bool _isBottomBannerAdLoaded = false;
+
+
+  void _createBottomBannerAd() {
+    _bottomBannerAd = BannerAd(
+      adUnitId: AdHelper.bannerAdUnitId,
+      size: AdSize.banner,
+      request: AdRequest(),
+      listener: BannerAdListener(
+        onAdLoaded: (_) {
+          setState(() {
+            _isBottomBannerAdLoaded = true;
+          });
+        },
+        onAdFailedToLoad: (ad, error) {
+          ad.dispose();
+        },
+      ),
+    );
+    _bottomBannerAd.load();
+  }
+
   @override
   void initState() {
     int totalDaysInYear = DateTime(DateTime.now().year, 12, 31)
@@ -85,6 +110,7 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
     getWeightData();
     _getDataFromDatabase();
     setBmiCalculation();
+    _createBottomBannerAd();
     super.initState();
   }
 
@@ -108,7 +134,11 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
     }
   }
 
-
+  @override
+  void dispose() {
+    _bottomBannerAd.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     var fullWidth = MediaQuery.of(context).size.width;
@@ -161,7 +191,14 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
                       ],
                     ),
                   )
+                ),
+                (_isBottomBannerAdLoaded && !Utils.isPurchased())
+                    ? Container(
+                  height: _bottomBannerAd.size.height.toDouble(),
+                  width: _bottomBannerAd.size.width.toDouble(),
+                  child: AdWidget(ad: _bottomBannerAd),
                 )
+                    : Container()
 
               ],
             ),

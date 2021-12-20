@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:homeworkout_flutter/custom/drawer/drawer_menu.dart';
 import 'package:homeworkout_flutter/database/database_helper.dart';
 import 'package:homeworkout_flutter/database/model/WeeklyDayData.dart';
@@ -10,10 +11,12 @@ import 'package:homeworkout_flutter/database/tables/fullbody_workout_table.dart'
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/exerciselist/ExerciseListScreen.dart';
 import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
+import 'package:homeworkout_flutter/utils/ad_helper.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
+import 'package:homeworkout_flutter/utils/utils.dart';
 
 class ExerciseDaysStatusScreen extends StatefulWidget {
 
@@ -28,6 +31,28 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
   ScrollController? _scrollController;
   List<WeeklyDayData> weeklyDataList = [];
   bool lastStatus = true;
+
+  late BannerAd _bottomBannerAd;
+  bool _isBottomBannerAdLoaded = false;
+
+  void _createBottomBannerAd() {
+    _bottomBannerAd = BannerAd(
+      adUnitId: AdHelper.bannerAdUnitId,
+      size: AdSize.banner,
+      request: AdRequest(),
+      listener: BannerAdListener(
+        onAdLoaded: (_) {
+          setState(() {
+            _isBottomBannerAdLoaded = true;
+          });
+        },
+        onAdFailedToLoad: (ad, error) {
+          ad.dispose();
+        },
+      ),
+    );
+    _bottomBannerAd.load();
+  }
 
   _scrollListener() {
     if (isShrink != lastStatus) {
@@ -47,12 +72,14 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
     _scrollController = ScrollController();
     _scrollController!.addListener(_scrollListener);
     _getDataFromDatabase();
+    _createBottomBannerAd();
     super.initState();
   }
 
   @override
   void dispose() {
     _scrollController!.removeListener(_scrollListener);
+    _bottomBannerAd.dispose();
     super.dispose();
   }
 
@@ -269,19 +296,32 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => ExerciseListScreen(fromPage: Constant.PAGE_DAYS_STATUS,
-                                        weeklyDayData: weeklyDataList[weekPosition],
-                                        dayName: weeklyDataList[weekPosition]
-                                            .arrWeekDayData![weekDaysPosition]
-                                            .dayName,
-                                        weekName: (weekPosition + 1).toString(),
-                                        planName:widget.planName ,))).then((value) {
-                                          _getDataFromDatabase();
-                                          setState(() {   });
+                                      builder: (context) => ExerciseListScreen(
+                                            fromPage: Constant.PAGE_DAYS_STATUS,
+                                            weeklyDayData:
+                                                weeklyDataList[weekPosition],
+                                            dayName:
+                                                weeklyDataList[weekPosition]
+                                                    .arrWeekDayData![
+                                                        weekDaysPosition]
+                                                    .dayName,
+                                            weekName:
+                                                (weekPosition + 1).toString(),
+                                            planName: widget.planName,
+                                          ))).then((value) {
+                                _getDataFromDatabase();
+                                setState(() {});
                               });
                             },
                           ),
                         ),
+                        (_isBottomBannerAdLoaded && !Utils.isPurchased())
+                            ? Container(
+                                height: _bottomBannerAd.size.height.toDouble(),
+                                width: _bottomBannerAd.size.width.toDouble(),
+                                child: AdWidget(ad: _bottomBannerAd),
+                              )
+                            : Container()
                       ],
                     ))),
           ),

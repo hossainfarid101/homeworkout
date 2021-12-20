@@ -3,9 +3,11 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_picker/flutter_picker.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/main.dart';
 import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
+import 'package:homeworkout_flutter/utils/ad_helper.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
@@ -28,9 +30,38 @@ class _SetWeeklyGoalScreenState extends State<SetWeeklyGoalScreen> {
   List<int>? initialFirstDay = [];
   int? selectedFirstDay = 0;
 
+  late BannerAd _bottomBannerAd;
+  bool _isBottomBannerAdLoaded = false;
+
+  void _createBottomBannerAd() {
+    _bottomBannerAd = BannerAd(
+      adUnitId: AdHelper.bannerAdUnitId,
+      size: AdSize.banner,
+      request: AdRequest(),
+      listener: BannerAdListener(
+        onAdLoaded: (_) {
+          setState(() {
+            _isBottomBannerAdLoaded = true;
+          });
+        },
+        onAdFailedToLoad: (ad, error) {
+          ad.dispose();
+        },
+      ),
+    );
+    _bottomBannerAd.load();
+  }
+
+  @override
+  void dispose() {
+    _bottomBannerAd.dispose();
+    super.dispose();
+  }
+
   @override
   void initState() {
     _getPreference();
+    _createBottomBannerAd();
     super.initState();
   }
 
@@ -85,7 +116,7 @@ class _SetWeeklyGoalScreenState extends State<SetWeeklyGoalScreen> {
                 fit: BoxFit.cover)),
         child: SafeArea(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               InkWell(
                 onTap: () {
@@ -95,6 +126,7 @@ class _SetWeeklyGoalScreenState extends State<SetWeeklyGoalScreen> {
                       ModalRoute.withName("/training"));
                 },
                 child: Container(
+                  alignment: Alignment.centerLeft,
                     margin:
                         const EdgeInsets.only(top: 15, left: 10, bottom: 10),
                     child: Icon(
@@ -134,7 +166,15 @@ class _SetWeeklyGoalScreenState extends State<SetWeeklyGoalScreen> {
                     ],
                   ),
                 ),
+              ),
+              (_isBottomBannerAdLoaded && !Utils.isPurchased())
+                  ? Container(
+                alignment: Alignment.center,
+                height: _bottomBannerAd.size.height.toDouble(),
+                width: _bottomBannerAd.size.width.toDouble(),
+                child: AdWidget(ad: _bottomBannerAd),
               )
+                  : Container()
             ],
           ),
         ),

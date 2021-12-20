@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:homeworkout_flutter/common/commonTopBar/commom_topbar.dart';
 import 'package:homeworkout_flutter/database/tables/history_table.dart';
 import 'package:homeworkout_flutter/database/tables/history_week_data.dart';
@@ -11,6 +12,7 @@ import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/localization/locale_constant.dart';
 import 'package:homeworkout_flutter/ui/exerciselist/ExerciseListScreen.dart';
 import 'package:homeworkout_flutter/ui/report/report_screen.dart';
+import 'package:homeworkout_flutter/utils/ad_helper.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
@@ -55,6 +57,28 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
 
   List calendarDates = [];
 
+  late BannerAd _bottomBannerAd;
+  bool _isBottomBannerAdLoaded = false;
+
+  void _createBottomBannerAd() {
+    _bottomBannerAd = BannerAd(
+      adUnitId: AdHelper.bannerAdUnitId,
+      size: AdSize.banner,
+      request: AdRequest(),
+      listener: BannerAdListener(
+        onAdLoaded: (_) {
+          setState(() {
+            _isBottomBannerAdLoaded = true;
+          });
+        },
+        onAdFailedToLoad: (ad, error) {
+          ad.dispose();
+        },
+      ),
+    );
+    _bottomBannerAd.load();
+  }
+
   @override
   void initState() {
     getDataFromDatabase();
@@ -71,11 +95,16 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
     Debug.printLog(startDateOfCurrentWeek.toString().split(" ")[0] +
         endDateOfCurrentWeek.toString().split(" ")[0]);
 
-
+    _createBottomBannerAd();
     // getDataFromDatabase();
     super.initState();
   }
 
+  @override
+  void dispose() {
+    _bottomBannerAd.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +139,14 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
                   ),
                 ),
                 //=======History screen========
-                historyScreenWidget(fullWidth)
+                historyScreenWidget(fullWidth),
+                (_isBottomBannerAdLoaded && !Utils.isPurchased())
+                    ? Container(
+                  height: _bottomBannerAd.size.height.toDouble(),
+                  width: _bottomBannerAd.size.width.toDouble(),
+                  child: AdWidget(ad: _bottomBannerAd),
+                )
+                    : Container()
               ],
             ),
           ),

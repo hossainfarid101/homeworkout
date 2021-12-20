@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:homeworkout_flutter/common/commonTopBar/commom_topbar.dart';
 import 'package:homeworkout_flutter/interfaces/topbar_clicklistener.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
@@ -9,7 +10,9 @@ import 'package:homeworkout_flutter/utils/Color.dart';
 import 'package:homeworkout_flutter/utils/Constant.dart';
 import 'package:homeworkout_flutter/utils/Debug.dart';
 import 'package:group_radio_button/group_radio_button.dart';
+import 'package:homeworkout_flutter/utils/ad_helper.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
+import 'package:homeworkout_flutter/utils/utils.dart';
 
 
 enum WeightUnit{lbs, kg}
@@ -31,13 +34,42 @@ class _MetricImperialUnitsScreenState extends State<MetricImperialUnitsScreen>
   HeightUnit? _heightUnit;
   bool? isCM;
 
+  late BannerAd _bottomBannerAd;
+  bool _isBottomBannerAdLoaded = false;
+
+
+  void _createBottomBannerAd() {
+    _bottomBannerAd = BannerAd(
+      adUnitId: AdHelper.bannerAdUnitId,
+      size: AdSize.banner,
+      request: AdRequest(),
+      listener: BannerAdListener(
+        onAdLoaded: (_) {
+          setState(() {
+            _isBottomBannerAdLoaded = true;
+          });
+        },
+        onAdFailedToLoad: (ad, error) {
+          ad.dispose();
+        },
+      ),
+    );
+    _bottomBannerAd.load();
+  }
+
 
   @override
   void initState() {
     _getPreference();
+    _createBottomBannerAd();
     super.initState();
   }
 
+  @override
+  void dispose() {
+    _bottomBannerAd.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     var fullHeight = MediaQuery.of(context).size.height;
@@ -74,7 +106,13 @@ class _MetricImperialUnitsScreenState extends State<MetricImperialUnitsScreen>
                   ],
                 ),
               ),
-
+              (_isBottomBannerAdLoaded && !Utils.isPurchased())
+                  ? Container(
+                height: _bottomBannerAd.size.height.toDouble(),
+                width: _bottomBannerAd.size.width.toDouble(),
+                child: AdWidget(ad: _bottomBannerAd),
+              )
+                  : Container()
             ],
           ),
         ),

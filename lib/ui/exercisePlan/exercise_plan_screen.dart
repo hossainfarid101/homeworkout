@@ -11,6 +11,7 @@ import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/discover/DiscoverScreen.dart';
 import 'package:homeworkout_flutter/ui/exerciselist/ExerciseListScreen.dart';
 import 'package:homeworkout_flutter/ui/unlockPremium/unlock_premium_screen.dart';
+import 'package:homeworkout_flutter/utils/ad_helper.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
@@ -37,6 +38,28 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
   int _numRewardedLoadAttempts = 0;
   int? selectedCategoryIndex = 0;
 
+  late BannerAd _bottomBannerAd;
+  bool _isBottomBannerAdLoaded = false;
+
+  void _createBottomBannerAd() {
+    _bottomBannerAd = BannerAd(
+      adUnitId: AdHelper.bannerAdUnitId,
+      size: AdSize.banner,
+      request: AdRequest(),
+      listener: BannerAdListener(
+        onAdLoaded: (_) {
+          setState(() {
+            _isBottomBannerAdLoaded = true;
+          });
+        },
+        onAdFailedToLoad: (ad, error) {
+          ad.dispose();
+        },
+      ),
+    );
+    _bottomBannerAd.load();
+  }
+
   static final AdRequest request = AdRequest(
     nonPersonalizedAds: true,
   );
@@ -60,6 +83,7 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
     _scrollController!.addListener(_scrollListener);
     _getHomeSubPlanList();
     _createRewardedAd();
+    _createBottomBannerAd();
     super.initState();
   }
 
@@ -132,6 +156,7 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
   void dispose() {
     _scrollController!.removeListener(_scrollListener);
     _rewardedAd?.dispose();
+    _bottomBannerAd.dispose();
     super.dispose();
   }
 
@@ -188,7 +213,7 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
                           ),
                         ),
                       ),
-                      backgroundColor: Colors.white,
+                      backgroundColor: Colur.iconGreyBg,
                       centerTitle: false,
                       flexibleSpace: FlexibleSpaceBar(
                         centerTitle: true,
@@ -233,81 +258,94 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
                     ),
                   ];
                 },
-                body: Container(
-                  color: Colur.iconGreyBg,
-                  child: ListView.separated(
-                    padding: EdgeInsets.only(top: 10),
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap:() {
-                          _showDialogForWatchVideoUnlock(index);
+                body: Column(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        color: Colur.iconGreyBg,
+                        child: ListView.separated(
+                          padding: EdgeInsets.only(top: 10),
+                          itemBuilder: (context, index) {
+                            return InkWell(
+                              onTap:() {
+                                _showDialogForWatchVideoUnlock(index);
 
-                        },
-                        child: Container(
-                          margin: const EdgeInsets.all(20),
-                          child: Row(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
-                                child: Image.asset(
-                                  // "assets/images/abs_advanced.webp",
-                                  discoverSubPlanList[index].planImageSub.toString(),
-                                  width: 55,
-                                  height: 55,
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                              Expanded(
-                                child: Container(
-                                  margin: const EdgeInsets.only(left: 15),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        margin: const EdgeInsets.symmetric(vertical: 3.0),
-                                        child: Text(
-                                            discoverSubPlanList[index].planName.toString(),
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                              color: Colur.black,
-                                              fontSize: 18.0,
-                                              fontWeight: FontWeight.w600
-                                          )
-                                        ),
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.all(20),
+                                child: Row(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                                      child: Image.asset(
+                                        // "assets/images/abs_advanced.webp",
+                                        discoverSubPlanList[index].planImageSub.toString(),
+                                        width: 55,
+                                        height: 55,
+                                        fit: BoxFit.fill,
                                       ),
-
-                                        Container(
-                                          margin: const EdgeInsets.symmetric(vertical: 3.0),
-                                          child: Text(
-                                            discoverSubPlanList[index].planText.toString(),
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 14,
-                                              color: Colur.txt_gray,
+                                    ),
+                                    Expanded(
+                                      child: Container(
+                                        margin: const EdgeInsets.only(left: 15),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              margin: const EdgeInsets.symmetric(vertical: 3.0),
+                                              child: Text(
+                                                  discoverSubPlanList[index].planName.toString(),
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                    color: Colur.black,
+                                                    fontSize: 18.0,
+                                                    fontWeight: FontWeight.w600
+                                                )
+                                              ),
                                             ),
+
+                                              Container(
+                                                margin: const EdgeInsets.symmetric(vertical: 3.0),
+                                                child: Text(
+                                                  discoverSubPlanList[index].planText.toString(),
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w400,
+                                                    fontSize: 14,
+                                                    color: Colur.txt_gray,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                      ],
-                                    ),
+                                      )
+                                    ],
                                   ),
-                                )
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                      itemCount: discoverSubPlanList.length,
-                      separatorBuilder: (BuildContext context, int index) {
-                        return Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 15,),
-                          child: Divider(
-                            thickness: 1.3,
-                          ),
-                        );
-                      },
+                                ),
+                              );
+                            },
+                            itemCount: discoverSubPlanList.length,
+                            separatorBuilder: (BuildContext context, int index) {
+                              return Container(
+                                margin: const EdgeInsets.symmetric(horizontal: 15,),
+                                child: Divider(
+                                  thickness: 1.3,
+                                ),
+                              );
+                            },
 
-                  )
+                        )
+                      ),
+                    ),
+                    (_isBottomBannerAdLoaded && !Utils.isPurchased())
+                        ? Container(
+                      height: _bottomBannerAd.size.height.toDouble(),
+                      width: _bottomBannerAd.size.width.toDouble(),
+                      child: AdWidget(ad: _bottomBannerAd),
+                    )
+                        : Container()
+                  ],
                 )
             ),
           ),

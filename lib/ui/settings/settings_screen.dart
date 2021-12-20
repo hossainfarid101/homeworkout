@@ -4,6 +4,7 @@ import 'package:android_intent_plus/android_intent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:group_radio_button/group_radio_button.dart';
 import 'package:homeworkout_flutter/common/commonTopBar/commom_topbar.dart';
 import 'package:homeworkout_flutter/custom/drawer/drawer_menu.dart';
@@ -13,6 +14,7 @@ import 'package:homeworkout_flutter/ui/healthData/healthdata_screen.dart';
 import 'package:homeworkout_flutter/ui/metric&ImperialUnits/metricimperialunit_screen.dart';
 import 'package:homeworkout_flutter/ui/reminder/reminder_screen.dart';
 import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
+import 'package:homeworkout_flutter/utils/ad_helper.dart';
 import 'package:homeworkout_flutter/ui/unlockPremium/unlock_premium_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
@@ -42,6 +44,10 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
   bool? isCoachTips;
   bool? isVoiceGuide;
 
+
+  late BannerAd _bottomBannerAd;
+  bool _isBottomBannerAdLoaded = false;
+
   bool isShowGoPremiumButton = Utils.isPurchased();
 
   RateMyApp? rateMyApp;
@@ -50,6 +56,25 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
       action: 'com.android.settings.TTS_SETTINGS',
       componentName: "com.android.settings.TextToSpeechSettings"
   );
+
+  void _createBottomBannerAd() {
+    _bottomBannerAd = BannerAd(
+      adUnitId: AdHelper.bannerAdUnitId,
+      size: AdSize.banner,
+      request: AdRequest(),
+      listener: BannerAdListener(
+        onAdLoaded: (_) {
+          setState(() {
+            _isBottomBannerAdLoaded = true;
+          });
+        },
+        onAdFailedToLoad: (ad, error) {
+          ad.dispose();
+        },
+      ),
+    );
+    _bottomBannerAd.load();
+  }
 
   @override
   void initState() {
@@ -146,7 +171,14 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
         }
       });
     }
+    _createBottomBannerAd();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _bottomBannerAd.dispose();
+    super.dispose();
   }
 
   @override
@@ -189,7 +221,14 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                 ),
                 const Divider(color: Colur.grey,),
 
-                _settingsScreenWidget(fullWidth)
+                _settingsScreenWidget(fullWidth),
+                (_isBottomBannerAdLoaded && !Utils.isPurchased())
+                    ? Container(
+                  height: _bottomBannerAd.size.height.toDouble(),
+                  width: _bottomBannerAd.size.width.toDouble(),
+                  child: AdWidget(ad: _bottomBannerAd),
+                )
+                    : Container()
               ],
             ),
           ),

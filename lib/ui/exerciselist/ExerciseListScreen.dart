@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:homeworkout_flutter/custom/dialogs/exercise_dialog.dart';
 import 'package:homeworkout_flutter/database/database_helper.dart';
 import 'package:homeworkout_flutter/database/model/DiscoverSingleExerciseData.dart';
@@ -17,6 +18,7 @@ import 'package:homeworkout_flutter/ui/quarantineathome/QuarantineAtHomeScreen.d
 import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
 import 'package:homeworkout_flutter/ui/workout/workout_screen.dart';
 import 'package:homeworkout_flutter/ui/workoutHistory/workout_history_screen.dart';
+import 'package:homeworkout_flutter/utils/ad_helper.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
@@ -60,6 +62,29 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
   int? totalSeconds = 0;
   int? totalMinutes = 0;
 
+  late BannerAd _bottomBannerAd;
+  bool _isBottomBannerAdLoaded = false;
+
+  void _createBottomBannerAd() {
+    _bottomBannerAd = BannerAd(
+      adUnitId: AdHelper.bannerAdUnitId,
+      size: AdSize.banner,
+      request: AdRequest(),
+      listener: BannerAdListener(
+        onAdLoaded: (_) {
+          setState(() {
+            _isBottomBannerAdLoaded = true;
+          });
+        },
+        onAdFailedToLoad: (ad, error) {
+          ad.dispose();
+        },
+      ),
+    );
+    _bottomBannerAd.load();
+  }
+
+
   _scrollListener() {
     if (isShrink != lastStatus) {
       setState(() {
@@ -74,7 +99,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
     for (int j = 0; j < listLifeGuideController.length; j++) {
       listLifeGuideController[j].dispose();
     }
-
+    _bottomBannerAd.dispose();
     super.dispose();
   }
 
@@ -88,6 +113,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
     _scrollController = ScrollController();
     _scrollController!.addListener(_scrollListener);
     _getDataFromDatabase();
+    _createBottomBannerAd();
     super.initState();
   }
 
@@ -291,6 +317,13 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
                     ),
                     _divider(),
                     _startButton(),
+                    (_isBottomBannerAdLoaded && !Utils.isPurchased())
+                        ? Container(
+                            height: _bottomBannerAd.size.height.toDouble(),
+                            width: _bottomBannerAd.size.width.toDouble(),
+                            child: AdWidget(ad: _bottomBannerAd),
+                          )
+                        : Container()
                   ],
                 ),
               ),

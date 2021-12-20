@@ -16,6 +16,7 @@ import 'package:homeworkout_flutter/ui/quarantineathome/QuarantineAtHomeScreen.d
 import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
 import 'package:homeworkout_flutter/ui/unlockPremium/unlock_premium_screen.dart';
 import 'package:homeworkout_flutter/ui/workoutHistory/workout_history_screen.dart';
+import 'package:homeworkout_flutter/utils/ad_helper.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
@@ -54,6 +55,28 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   String? selectedCategory = "";
   int? selectedCategoryIndex = 0;
 
+  late BannerAd _bottomBannerAd;
+  bool _isBottomBannerAdLoaded = false;
+
+  void _createBottomBannerAd() {
+    _bottomBannerAd = BannerAd(
+      adUnitId: AdHelper.bannerAdUnitId,
+      size: AdSize.banner,
+      request: AdRequest(),
+      listener: BannerAdListener(
+        onAdLoaded: (_) {
+          setState(() {
+            _isBottomBannerAdLoaded = true;
+          });
+        },
+        onAdFailedToLoad: (ad, error) {
+          ad.dispose();
+        },
+      ),
+    );
+    _bottomBannerAd.load();
+  }
+
   static final AdRequest request = AdRequest(
     nonPersonalizedAds: true,
   );
@@ -61,6 +84,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   void initState() {
     _getDataFromDatabase();
     _createRewardedAd();
+    _createBottomBannerAd();
     super.initState();
   }
 
@@ -190,6 +214,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   @override
   void dispose() {
     super.dispose();
+    _bottomBannerAd.dispose();
     _rewardedAd?.dispose();
   }
 
@@ -248,6 +273,13 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                   ),
                 ),
               ),
+              (_isBottomBannerAdLoaded && !Utils.isPurchased())
+                  ? Container(
+                height: _bottomBannerAd.size.height.toDouble(),
+                width: _bottomBannerAd.size.width.toDouble(),
+                child: AdWidget(ad: _bottomBannerAd),
+              )
+                  : Container()
             ],
           ),
         ),

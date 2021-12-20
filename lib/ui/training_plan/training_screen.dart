@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:homeworkout_flutter/custom/drawer/drawer_menu.dart';
 import 'package:homeworkout_flutter/database/database_helper.dart';
 import 'package:homeworkout_flutter/database/tables/fullbody_workout_table.dart';
@@ -16,6 +17,7 @@ import 'package:homeworkout_flutter/ui/exerciselist/ExerciseListScreen.dart';
 import 'package:homeworkout_flutter/ui/quarantineathome/QuarantineAtHomeScreen.dart';
 import 'package:homeworkout_flutter/ui/setWeeklyGoal/set_weekly_goal_screen.dart';
 import 'package:homeworkout_flutter/ui/workoutHistory/workout_history_screen.dart';
+import 'package:homeworkout_flutter/utils/ad_helper.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
@@ -53,6 +55,27 @@ class _TrainingScreenState extends State<TrainingScreen>
   int? totalDayOfWeekGoal = 0;
 
   DateTime? currentBackPressTime;
+  late BannerAd _bottomBannerAd;
+  bool _isBottomBannerAdLoaded = false;
+
+  void _createBottomBannerAd() {
+    _bottomBannerAd = BannerAd(
+      adUnitId: AdHelper.bannerAdUnitId,
+      size: AdSize.banner,
+      request: AdRequest(),
+      listener: BannerAdListener(
+        onAdLoaded: (_) {
+          setState(() {
+            _isBottomBannerAdLoaded = true;
+          });
+        },
+        onAdFailedToLoad: (ad, error) {
+          ad.dispose();
+        },
+      ),
+    );
+    _bottomBannerAd.load();
+  }
 
   _scrollListener() {
     if (isShrink != lastStatus) {
@@ -75,12 +98,14 @@ class _TrainingScreenState extends State<TrainingScreen>
     _scrollController = ScrollController();
     _scrollController!.addListener(_scrollListener);
     _getDataFromDatabase();
+    _createBottomBannerAd();
     super.initState();
   }
 
   @override
   void dispose() {
     _scrollController!.removeListener(_scrollListener);
+    _bottomBannerAd.dispose();
     super.dispose();
   }
 
@@ -394,8 +419,15 @@ class _TrainingScreenState extends State<TrainingScreen>
                           ],
                         ),
                       ),
-                    )
-                  ],
+                    ),
+                    (_isBottomBannerAdLoaded && !Utils.isPurchased())
+                          ? Container(
+                              height: _bottomBannerAd.size.height.toDouble(),
+                              width: _bottomBannerAd.size.width.toDouble(),
+                              child: AdWidget(ad: _bottomBannerAd),
+                            )
+                          : Container()
+                    ],
                 ),
               ),
             )
