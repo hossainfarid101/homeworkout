@@ -125,6 +125,7 @@ class MyApp extends StatefulWidget {
   static final GlobalKey<ScaffoldState> scaffoldKey =
       GlobalKey<ScaffoldState>();
 
+  // ignore: close_sinks
   static final StreamController purchaseStreamController = StreamController<PurchaseDetails>.broadcast();
 
   const MyApp({Key? key}) : super(key: key);
@@ -166,6 +167,11 @@ class _MyAppState extends State<MyApp> {
     Debug.printLog(isFirstTimeUser.toString());
   }
 
+  @override
+  void dispose() {
+    MyApp.purchaseStreamController.close();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

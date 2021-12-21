@@ -23,7 +23,7 @@ import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
-import 'package:in_app_purchase_platform_interface/src/types/purchase_details.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 
 class TrainingScreen extends StatefulWidget {
   const TrainingScreen({Key? key}) : super(key: key);

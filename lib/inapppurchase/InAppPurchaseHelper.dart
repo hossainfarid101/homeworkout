@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:homeworkout_flutter/inapppurchase/IAPCallback.dart';
@@ -12,7 +11,6 @@ import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 import 'package:in_app_purchase_ios/store_kit_wrappers.dart';
-import 'package:in_app_purchase_android/src/billing_client_wrappers/billing_client_wrapper.dart';
 
 import '../main.dart';
 
@@ -22,14 +20,9 @@ class InAppPurchaseHelper {
 
   InAppPurchaseHelper._internal();
 
-  factory InAppPurchaseHelper({BuildContext? buildContext}) {
-    if (buildContext != null) {
-      _inAppPurchaseHelper._buildContext = buildContext;
-    }
+  factory InAppPurchaseHelper() {
     return _inAppPurchaseHelper;
   }
-
-  BuildContext? _buildContext;
 
   static const String monthlySubscriptionId = 'sub_month';
   static const String yearlySubscriptionId = 'sub_year';
@@ -40,14 +33,11 @@ class InAppPurchaseHelper {
   ];
 
   final InAppPurchase _connection = InAppPurchase.instance;
+
+  // ignore: cancel_subscriptions
   StreamSubscription<List<PurchaseDetails>>? _subscription;
   List<ProductDetails> _products = [];
   List<PurchaseDetails> _purchases = [];
-
-  bool _isAvailable = false;
-  bool _purchasePending = false;
-  bool _loading = true;
-  String? _queryProductError;
 
   IAPCallback? _iapCallback;
 
@@ -79,7 +69,7 @@ class InAppPurchaseHelper {
     final Stream<List<PurchaseDetails>> purchaseUpdated =
         _connection.purchaseStream;
     _subscription = purchaseUpdated.listen((purchaseDetailsList) {
-      if (purchaseDetailsList != null && purchaseDetailsList.isNotEmpty) {
+      if (purchaseDetailsList != [] && purchaseDetailsList.isNotEmpty) {
         purchaseDetailsList
             .sort((a, b) => a.transactionDate!.compareTo(b.transactionDate!));
 
@@ -101,42 +91,26 @@ class InAppPurchaseHelper {
   Future<void> initStoreInfo() async {
     final bool isAvailable = await _connection.isAvailable();
     if (!isAvailable) {
-      _isAvailable = isAvailable;
       _products = [];
       _purchases = [];
-      _purchasePending = false;
-      _loading = false;
       return;
     }
 
     ProductDetailsResponse productDetailResponse =
         await _connection.queryProductDetails(_kProductIds.toSet());
     if (productDetailResponse.error != null) {
-      _queryProductError = productDetailResponse.error!.message;
-      _queryProductError = productDetailResponse.error!.message;
-      _isAvailable = isAvailable;
       _products = productDetailResponse.productDetails;
       _purchases = [];
-      _purchasePending = false;
-      _loading = false;
       return;
     }
 
     if (productDetailResponse.productDetails.isEmpty) {
-      _queryProductError = null;
-      _isAvailable = isAvailable;
       _products = productDetailResponse.productDetails;
       _purchases = [];
-      _purchasePending = false;
-      _loading = false;
       return;
     } else {
-      _queryProductError = null;
-      _isAvailable = isAvailable;
       _products = productDetailResponse.productDetails;
       _purchases = [];
-      _purchasePending = false;
-      _loading = false;
     }
 
     await _connection.restorePurchases();
@@ -148,14 +122,6 @@ class InAppPurchaseHelper {
         .sort((a, b) => a.transactionDate!.compareTo(b.transactionDate!));
 
     if (Platform.isIOS) {
-      Map<String, PurchaseDetails> purchases =
-          Map.fromEntries(verifiedPurchases.map((PurchaseDetails purchase) {
-        if (purchase.pendingCompletePurchase) {
-          _connection.completePurchase(purchase);
-        }
-        return MapEntry<String, PurchaseDetails>(purchase.productID, purchase);
-      }));
-
       if (verifiedPurchases.isNotEmpty)
         await _verifyReceipts(verifiedPurchases);
       else {
@@ -164,7 +130,7 @@ class InAppPurchaseHelper {
       }
     } else {
       if (verifiedPurchases.length > 0) {
-        if (verifiedPurchases != null && verifiedPurchases.isNotEmpty) {
+        if (verifiedPurchases != [] && verifiedPurchases.isNotEmpty) {
           _purchases = verifiedPurchases;
           Debug.printLog("You have already Purchased :::::::::::::::::::=>");
           Preference.shared.setBool(Preference.IS_PURCHASED, true);
@@ -216,7 +182,7 @@ class InAppPurchaseHelper {
           if (data.productID == receiptData.latestReceiptInfo![0].productId) {
             _purchases.clear();
             _purchases.add(data);
-            if (_purchases != null && _purchases.isNotEmpty) {
+            if (_purchases != [] && _purchases.isNotEmpty) {
               Preference.shared.setBool(Preference.IS_PURCHASED, true);
               MyApp.purchaseStreamController.add(_purchases[0]);
             } else {
@@ -239,7 +205,6 @@ class InAppPurchaseHelper {
       }
     } on DioError catch (ex) {
       try {
-        var res = ex.response!.data;
         Preference.shared.setBool(Preference.IS_PURCHASED, false);
         Debug.printLog("Verify Receipt =======> ${ex.response!.data}");
       } catch (e) {
@@ -333,7 +298,7 @@ class InAppPurchaseHelper {
           changeSubscriptionParam: (oldSubscription != null)
               ? ChangeSubscriptionParam(
                   oldPurchaseDetails: oldSubscription,
-                  prorationMode: ProrationMode.immediateWithTimeProration,
+                  // prorationMode: ProrationMode.immediateWithTimeProration,
                 )
               : null);
     } else {
@@ -377,13 +342,11 @@ class InAppPurchaseHelper {
   void deliverProduct(PurchaseDetails purchaseDetails) async {
     // IMPORTANT!! Always verify a purchase purchase details before delivering the product.
     _purchases.add(purchaseDetails);
-    _purchasePending = false;
     MyApp.purchaseStreamController.add(purchaseDetails);
     _iapCallback!.onSuccessPurchase(purchaseDetails);
   }
 
   void handleError(dynamic error) {
-    _purchasePending = false;
     _iapCallback!.onBillingError(error);
   }
 
