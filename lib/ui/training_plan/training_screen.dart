@@ -450,12 +450,20 @@ class _TrainingScreenState extends State<TrainingScreen>
     );
   }
 
+  DateTime getDate(DateTime d) => DateTime(d.year, d.month, d.day);
+
   itemPlan(int index) {
     var t = allPlanDataList[index].catTableName != null ? Preference.shared.getLastTime(allPlanDataList[index].catTableName!) ?? null : null;
     Debug.printLog("$t");
     var lastTime = " ";
     if (t != null) {
-      lastTime = DateFormat.MMMd().format(DateTime.parse(t));
+      if(getDate(DateTime.parse(t)) == getDate(DateTime.now())){
+        lastTime = "Today";
+      } else if(getDate(DateTime.parse(t)) == getDate(DateTime.now().subtract(Duration(days: 1)))){
+        lastTime = "Yesterday";
+      } else {
+        lastTime = DateFormat.MMMd().format(DateTime.parse(t));
+      }
     }
     Debug.printLog("lastTime :$lastTime");
 
@@ -724,9 +732,9 @@ class _TrainingScreenState extends State<TrainingScreen>
                                                     color: Colur.white),
                                               ),
                                               Visibility(
-                                                visible: false,
+                                                visible: t != null,
                                                 child: Text(
-                                                  Languages.of(context)!.txtLastTime + "lastTime",
+                                                  Languages.of(context)!.txtLastTime + lastTime,
                                                   maxLines: 1,
                                                   softWrap: true,
                                                   overflow: TextOverflow.ellipsis,
