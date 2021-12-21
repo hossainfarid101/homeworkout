@@ -191,6 +191,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
           Preference.shared.getLastUnCompletedExPos(widget.planName.toString());
     }
 
+    Debug.printLog("===>lastPosition: $lastPosition");
     _setImageRotation(lastPosition!);
 
     Future.delayed(Duration(milliseconds: 100), () {
@@ -236,8 +237,6 @@ class _WorkoutScreenState extends State<WorkoutScreen>
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        /*_showBackDialogScreen();
-        return true;*/
         return Future.delayed(Duration(milliseconds: 5), () async {
           return _showBackDialogScreen();
         });
@@ -306,15 +305,6 @@ class _WorkoutScreenState extends State<WorkoutScreen>
   }
 
   _controllerForward() {
-    /*var length = 0;
-    if(widget.fromPage == Constant.PAGE_HOME){
-      length = widget.exerciseDataList!.length;
-    }else if(widget.fromPage == Constant.PAGE_DAYS_STATUS){
-      length = widget.dayStatusDetailList!.length;
-    }else if(widget.fromPage == Constant.PAGE_DISCOVER){
-      length = widget.discoverSingleExerciseData!.length;
-    }*/
-
     controller!.forward().whenComplete(() async => {
           if ((lastPosition! + 1) >= _getLengthFromList())
             {
@@ -1066,7 +1056,9 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                     onTap: () {
                       setState(() {
                         _setLastFinishExe(lastPosition! - 1);
-                        // Preference.shared.setLastUnCompletedExPos(widget.tableName.toString(),lastPosition! - 1);
+                        if(controller != null) {
+                          controller!.stop();
+                        }
                         _getLastPosition();
                         _startExercise();
                       });

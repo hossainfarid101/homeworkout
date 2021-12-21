@@ -24,6 +24,7 @@ import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:intl/intl.dart';
 
 class TrainingScreen extends StatefulWidget {
   const TrainingScreen({Key? key}) : super(key: key);
@@ -450,6 +451,13 @@ class _TrainingScreenState extends State<TrainingScreen>
   }
 
   itemPlan(int index) {
+    var t = allPlanDataList[index].catTableName != null ? Preference.shared.getLastTime(allPlanDataList[index].catTableName!) ?? null : null;
+    Debug.printLog("$t");
+    var lastTime = " ";
+    if (t != null) {
+      lastTime = DateFormat.MMMd().format(DateTime.parse(t));
+    }
+    Debug.printLog("lastTime :$lastTime");
 
     var gender = Preference.shared.getString(Constant.SELECTED_GENDER)??Constant.GENDER_MEN;
     Debug.printLog("allPlanDataList[index].catImage====>>  "+allPlanDataList[index].catImage.toString());
@@ -667,11 +675,11 @@ class _TrainingScreenState extends State<TrainingScreen>
                                       ),
                                     ),
                                     Container(
-                                        margin: const EdgeInsets.symmetric(horizontal: 10),
-                                        child: Icon(
-                                          Icons.arrow_forward_ios,
-                                          size: 30,
-                                          color: Colur.white,
+                                        margin: const EdgeInsets.symmetric(horizontal: 15),
+                                        child: Image.asset(
+                                          "assets/icons/ic_arrow.webp",
+                                          height: 25,
+                                          width: 25,
                                         )),
                                   ],
                                 ),
@@ -702,15 +710,33 @@ class _TrainingScreenState extends State<TrainingScreen>
                                         child: Container(
                                           width: double.infinity,
                                           margin: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 15),
-                                          child: Text(
-                                            allPlanDataList[index].catName!.toUpperCase(),
-                                            maxLines: 1,
-                                            softWrap: true,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: 18,
-                                                color: Colur.white),
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                allPlanDataList[index].catName!.toUpperCase(),
+                                                maxLines: 1,
+                                                softWrap: true,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w700,
+                                                    fontSize: 18,
+                                                    color: Colur.white),
+                                              ),
+                                              Visibility(
+                                                visible: false,
+                                                child: Text(
+                                                  Languages.of(context)!.txtLastTime + "lastTime",
+                                                  maxLines: 1,
+                                                  softWrap: true,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                      fontWeight: FontWeight.w300,
+                                                      fontSize: 16,
+                                                      color: Colur.borderGray,)
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ),

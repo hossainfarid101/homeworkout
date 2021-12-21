@@ -1274,6 +1274,8 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
       planId = int.parse(widget.planId.toString());
     }
 
+    Preference.shared.setLastTime(widget.tableName!, DateTime.now().toString());
+
     await DataBaseHelper().insertHistoryData(HistoryTable(
         id: null,
         planId: planId,

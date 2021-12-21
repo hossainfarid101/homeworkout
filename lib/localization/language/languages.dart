@@ -438,4 +438,6 @@ abstract class Languages {
   String get txtExitMessage;
 
   String get txtWarningForBMIDialog;
+
+  String get txtLastTime;
 }

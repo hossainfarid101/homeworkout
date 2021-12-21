@@ -398,6 +398,7 @@ flutter:
     - assets/icons/history/ic_history_leg.webp
     - assets/icons/history/ic_history_lower.webp
     - assets/icons/history/ic_history_shoulder.webp
+    - assets/icons/ic_arrow.webp
     - assets/icons/ic_1_star.webp
     - assets/icons/ic_2_star.webp
     - assets/icons/ic_3_star.webp

@@ -201,10 +201,10 @@ class Utils {
       await flutterTts.speak(speakText);
     } else {
       await flutterTts.awaitSpeakCompletion(true);
-      await flutterTts.setLanguage("en-US");
+      await flutterTts.setLanguage("en-AU");
       await flutterTts.setVolume(1.0);
       await flutterTts.setPitch(1.0);
-      await flutterTts.isLanguageAvailable("en-US");
+      await flutterTts.isLanguageAvailable("en-AU");
       await flutterTts.setSpeechRate(0.5);
       await flutterTts.speak(speakText);
     }

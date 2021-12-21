@@ -537,7 +537,7 @@ class LanguageEn extends Languages {
 
   @override
   String get txtWeHaveSelectedThisPlan =>
-      "We have selected this plan that suits you best";
+      "We have selected this plan that suits you the best.";
 
   @override
   String get txtGetMyPlan => "Get my plan";
@@ -664,4 +664,7 @@ class LanguageEn extends Languages {
 
   @override
   String get txtWarningForBMIDialog => "Please enter height and weight.";
+
+  @override
+  String get txtLastTime => "Last time: ";
 }

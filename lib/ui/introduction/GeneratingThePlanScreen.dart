@@ -101,21 +101,20 @@ class _GeneratingThePlanScreenState extends State<GeneratingThePlanScreen> with 
       ),*/
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-         /* ClipRRect(
-            borderRadius: BorderRadius.circular(8.0),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                color: Colur.txt_gray,
-              ),
-              child: Image.asset(
-                'assets/images/avatar_male.png',
-                fit: BoxFit.fill,
-                scale: 2,
-              ),
+          Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colur.grey.withOpacity(0.1),
             ),
-          ),*/
+            child: Image.asset(
+              'assets/images/avatar_male.png',
+              fit: BoxFit.fill,
+              scale: 2,
+            ),
+          ),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.04,),
           Text(
             Languages.of(context)!.txtYourPlanIsReady.toUpperCase(),
             style: TextStyle(
@@ -124,7 +123,20 @@ class _GeneratingThePlanScreenState extends State<GeneratingThePlanScreen> with 
               color: Colur.txtBlack
             ),
           ),
-          SizedBox(height: 30,),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.04,),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            child: Text(
+              Languages.of(context)!.txtWeHaveSelectedThisPlan,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w400,
+                  color: Colur.txtBlack
+              ),
+            ),
+          ),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.04,),
           _discoverCard()
         ],
       )
