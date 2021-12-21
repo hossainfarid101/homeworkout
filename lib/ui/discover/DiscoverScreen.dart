@@ -121,7 +121,6 @@ class _DiscoverScreenState extends State<DiscoverScreen>
       onAdDismissedFullScreenContent: (RewardedAd ad) {
         print('$ad onAdDismissedFullScreenContent.');
         ad.dispose();
-        _startNextScreen();
         _createRewardedAd();
       },
       onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error) {
@@ -135,6 +134,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
     _rewardedAd!.setImmersiveMode(true);
     _rewardedAd!.show(onUserEarnedReward: (RewardedAd ad, RewardItem reward) {
       print('$ad with reward $RewardItem(${reward.amount}, ${reward.type}');
+      _startNextScreen();
+      _createRewardedAd();
     });
     _rewardedAd = null;
   }

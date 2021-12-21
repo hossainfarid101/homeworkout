@@ -172,12 +172,15 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
                                           AsyncSnapshot<dynamic> snapshot) {
                                         if (snapshot.hasData) {
                                           return
-                                            Container(
-                                              margin: const EdgeInsets.symmetric(horizontal: 15.0),
-                                              child: Text(snapshot.data.toString(),
-                                                  style: TextStyle(
-                                                      color: Colur.white,
-                                                      fontSize: 14.0)),
+                                            Visibility(
+                                              visible:  snapshot.data.toString() != "28" + " " + Languages.of(context)!.txtDayLeft,
+                                              child: Container(
+                                                margin: const EdgeInsets.symmetric(horizontal: 15.0),
+                                                child: Text(snapshot.data.toString(),
+                                                    style: TextStyle(
+                                                        color: Colur.white,
+                                                        fontSize: 14.0)),
+                                              ),
                                             );
                                         }else {
                                           return Container();
@@ -201,13 +204,16 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
                                             AsyncSnapshot<dynamic> snapshot) {
                                           if (snapshot.hasData) {
                                             return
-                                              Container(
-                                                alignment: Alignment.centerRight,
-                                                margin:
-                                                const EdgeInsets.symmetric(horizontal: 15.0),
-                                                child: Text(snapshot.data.toString(),
-                                                    style: TextStyle(
-                                                        color: Colur.white, fontSize: 14.0)),
+                                              Visibility(
+                                                visible: snapshot.data.toString() != "0%",
+                                                child: Container(
+                                                  alignment: Alignment.centerRight,
+                                                  margin:
+                                                  const EdgeInsets.symmetric(horizontal: 15.0),
+                                                  child: Text(snapshot.data.toString(),
+                                                      style: TextStyle(
+                                                          color: Colur.white, fontSize: 14.0)),
+                                                ),
                                               );
                                           }else {
                                             return Container();
@@ -238,14 +244,17 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
                                       AsyncSnapshot<dynamic> snapshot) {
                                     if (snapshot.hasData) {
                                       return
-                                        ClipRRect(
-                                          borderRadius: BorderRadius.circular(10.0),
-                                          child: LinearProgressIndicator(
-                                            value: (snapshot.data / 100).toDouble(),
-                                            valueColor:
-                                            AlwaysStoppedAnimation<Color>(Colur.theme),
-                                            backgroundColor: Colur.transparent_50,
-                                            minHeight: 5,
+                                        Visibility(
+                                          visible: snapshot.data != 0,
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(10.0),
+                                            child: LinearProgressIndicator(
+                                              value: (snapshot.data / 100).toDouble(),
+                                              valueColor:
+                                              AlwaysStoppedAnimation<Color>(Colur.theme),
+                                              backgroundColor: Colur.transparent_50,
+                                              minHeight: 5,
+                                            ),
                                           ),
                                         );
                                     }else {
@@ -455,8 +464,6 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
 
   _itemOfDays(int index,int mainIndex, bool boolFlagWeekComplete) {
 
-
-
     var flagPrevDay = weeklyDataList[mainIndex].arrWeekDayData!.isNotEmpty && index != 7 && index != 0 &&
         weeklyDataList[mainIndex].arrWeekDayData![index-1].isCompleted == "1" &&
         weeklyDataList[mainIndex].arrWeekDayData![index+1].isCompleted == "0";
@@ -473,16 +480,35 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
       children: [
         if (weeklyDataList[mainIndex].arrWeekDayData!.isNotEmpty &&
             weeklyDataList[mainIndex].arrWeekDayData![index].isCompleted == "1" && index != 7) ...{
-          Container(
-            alignment: Alignment.center,
-            height: 60,
-            width: 60,
-            decoration:
-            BoxDecoration(shape: BoxShape.circle, color: Colur.theme),
-            child: Icon(
-              Icons.done_rounded,
-              size: 20,
-              color: Colur.white,
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ExerciseListScreen(
+                        fromPage: Constant.PAGE_DAYS_STATUS,
+                        weeklyDayData: weeklyDataList[mainIndex],
+                        dayName: weeklyDataList[mainIndex]
+                            .arrWeekDayData![index]
+                            .dayName,
+                        weekName: (mainIndex + 1).toString(),
+                        planName:widget.planName ,
+                      )));
+            },
+            child: Container(
+              alignment: Alignment.center,
+              height: 60,
+              width: 60,
+              decoration:
+              BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colur.theme,
+              ),
+              child: Icon(
+                Icons.done_rounded,
+                size: 20,
+                color: Colur.white,
+              ),
             ),
           )
         }
@@ -594,7 +620,6 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
   }
 
   Future<int?> _setDayProgressDataByPlan(String strTableName) async {
-    // if(strTableName == Constant.tbl_full_body_workouts_list || strTableName == Constant.tbl_lower_body_list) {
     String? tableName = "";
     if(strTableName.toUpperCase() == Constant.Full_body_small.toUpperCase()){
       tableName = Constant.tbl_full_body_workouts_list;
@@ -604,15 +629,11 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
       List<FullBodyWorkoutTable> compDay =
       await DataBaseHelper().getCompleteDayCountByTableName(tableName);
       String proPercentage =
-      (compDay.length.toDouble() * 100 / 30).toDouble().toStringAsFixed(0);
+      (compDay.length.toDouble() * 100 / 28).toDouble().toStringAsFixed(0);
       return double.parse(proPercentage).toInt();
-    /*}else{
-      return 0;
-    }*/
   }
 
   Future<String?> _setLeftDayProgressDataByPlan(String strTableName) async {
-    // if(strTableName == Constant.tbl_full_body_workouts_list || strTableName == Constant.tbl_lower_body_list) {
       String? tableName = "";
       if(strTableName.toUpperCase() == Constant.Full_body_small.toUpperCase()){
         tableName = Constant.tbl_full_body_workouts_list;
@@ -621,16 +642,11 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
       }
       List<FullBodyWorkoutTable> compDay =
       await DataBaseHelper().getCompleteDayCountByTableName(tableName);
-      String daysLeft = (30 - compDay.length).toString();
+      String daysLeft = (28 - compDay.length).toString();
       return daysLeft + " " + Languages.of(context)!.txtDayLeft;
-    /*}else{
-      return "";
-    }*/
   }
 
   Future<String?> _setDayProgressPercentagePlan(String strTableName) async {
-    /*if (strTableName == Constant.tbl_full_body_workouts_list ||
-        strTableName == Constant.tbl_lower_body_list) {*/
       String? tableName = "";
       if(strTableName.toUpperCase() == Constant.Full_body_small.toUpperCase()){
         tableName = Constant.tbl_full_body_workouts_list;
@@ -640,10 +656,7 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
       List<FullBodyWorkoutTable> compDay =
       await DataBaseHelper().getCompleteDayCountByTableName(tableName);
       String proPercentage =
-      (compDay.length.toDouble() * 100 / 30).toDouble().toStringAsFixed(0);
+      (compDay.length.toDouble() * 100 / 28).toDouble().toStringAsFixed(0);
       return proPercentage + "%";
-    /*} else {
-      return "";
-    }*/
   }
 }

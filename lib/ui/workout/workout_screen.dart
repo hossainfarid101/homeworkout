@@ -5,6 +5,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:homeworkout_flutter/database/model/DiscoverSingleExerciseData.dart';
 import 'package:homeworkout_flutter/database/model/ExerciseListData.dart';
 import 'package:homeworkout_flutter/database/model/WeeklyDayData.dart';
@@ -16,6 +17,7 @@ import 'package:homeworkout_flutter/ui/pause/pause_screen.dart';
 import 'package:homeworkout_flutter/ui/skipExercise/skip_exercise_screen.dart';
 import 'package:homeworkout_flutter/ui/videoAnimation/video_animation_screen.dart';
 import 'package:homeworkout_flutter/ui/workoutComplete/workout_complete_screen.dart';
+import 'package:homeworkout_flutter/utils/ad_helper.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
@@ -95,6 +97,40 @@ class _WorkoutScreenState extends State<WorkoutScreen>
   int? trainingRestTime;
   int? lastPosition = 0;
   FlutterTts flutterTts = FlutterTts();
+  InterstitialAd? _interstitialAd;
+
+
+  void _createInterstitialAd() {
+    InterstitialAd.load(
+      adUnitId: AdHelper.interstitialAdUnitId,
+      request: AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (InterstitialAd ad) {
+          _interstitialAd = ad;
+        },
+        onAdFailedToLoad: (LoadAdError error) {
+          _interstitialAd = null;
+          _createInterstitialAd();
+        },
+      ),
+    );
+  }
+
+  void _showInterstitialAd() {
+    if (_interstitialAd != null) {
+      _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+        onAdDismissedFullScreenContent: (InterstitialAd ad) {
+          ad.dispose();
+          _moveWorkoutCompleteScreen();
+        },
+        onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
+          ad.dispose();
+          _moveWorkoutCompleteScreen();
+        },
+      );
+      _interstitialAd!.show();
+    }
+  }
 
   @override
   void initState() {
@@ -104,11 +140,14 @@ class _WorkoutScreenState extends State<WorkoutScreen>
     _getPreference();
     timerForCount =
         Timer.periodic(Duration(seconds: 1), (Timer t) => _setSoundCountDown());
+    _createInterstitialAd();
     super.initState();
   }
 
+
   @override
   dispose() {
+    _interstitialAd?.dispose();
     timerForCount!.cancel();
 
     if (controller != null) {
@@ -417,15 +456,10 @@ class _WorkoutScreenState extends State<WorkoutScreen>
   }
 
   _startWellDoneScreen() async {
-    /*if (controller != null) {
-      controller!.dispose();
-    }
-    controller = null;
-    if (listLifeGuideController != null) {
-      listLifeGuideController!.dispose();
-    }
-    listLifeGuideController = null;*/
+    _showInterstitialAd();
+  }
 
+  _moveWorkoutCompleteScreen(){
     endTime = DateTime.now();
     print("====${endTime!.difference(startTime!).inSeconds}");
     print("===${widget.totalMin!}====");
@@ -455,20 +489,19 @@ class _WorkoutScreenState extends State<WorkoutScreen>
         context,
         MaterialPageRoute(
             builder: (context) => WorkoutCompleteScreen(
-                  fromPage: widget.fromPage,
-                  dayStatusDetailList: widget.dayStatusDetailList,
-                  exerciseDataList: widget.exerciseDataList,
-                  tableName: widget.tableName,
-                  dayName: widget.dayName,
-                  weekName: widget.weekName,
-                  discoverSingleExerciseData: widget.discoverSingleExerciseData,
-                  planName: widget.planName,
-                  planId: widget.planId,
-                  totalMin: widget.totalMin,
-                )),
+              fromPage: widget.fromPage,
+              dayStatusDetailList: widget.dayStatusDetailList,
+              exerciseDataList: widget.exerciseDataList,
+              tableName: widget.tableName,
+              dayName: widget.dayName,
+              weekName: widget.weekName,
+              discoverSingleExerciseData: widget.discoverSingleExerciseData,
+              planName: widget.planName,
+              planId: widget.planId,
+              totalMin: widget.totalMin,
+            )),
         ModalRoute.withName("/workoutCompleteScreen"));
   }
-
   _widgetExeImage() {
     return Stack(
       children: [

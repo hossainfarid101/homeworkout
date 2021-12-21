@@ -67,7 +67,7 @@ class _UnlockPremiumScreenState extends State<UnlockPremiumScreen>
       data: ThemeData(
         appBarTheme: AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle.dark,
-        ), //
+        ),
       ),
       child: ProgressDialog(
         child: _itemUnlockScreen(context),
