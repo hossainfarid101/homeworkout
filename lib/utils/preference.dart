@@ -2,6 +2,7 @@
 import 'dart:async';
 
 // Package imports:
+import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /* global class for handle all the preference activity into application */
@@ -277,11 +278,11 @@ class Preference {
   }
 
   setLastTime(String tableName, String time) {
-    return _pref!.setString(tableName, time);
+    return _pref!.setString(Constant.LAST_TIME + tableName, time);
   }
 
   String? getLastTime(String tableName) {
-    return _pref!.getString(tableName);
+    return _pref!.getString(Constant.LAST_TIME + tableName) ?? null;
   }
 
 }

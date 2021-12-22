@@ -145,6 +145,7 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
     bmiTextCategory();
     return  Theme(
       data: ThemeData(
+        fontFamily: Constant.FONT_OSWALD,
           appBarTheme: AppBarTheme(
             systemOverlayStyle: SystemUiOverlayStyle.dark,
           ),
@@ -337,31 +338,12 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
       width: MediaQuery.of(context).size.width / 7.3,
       child: Column(
         children: [
-          Text(Utils.getDaysNameOfWeek()[index].toString()[0]),
+          Text(Utils.getDaysNameOfWeek(Preference.shared.getInt(
+              Preference.SELECTED_FIRST_DAY_OF_WEEK)??0)[index].toString()[0]),
           Container(
             width: 20,
             height: 20,
             margin: const EdgeInsets.symmetric(vertical: 10),
-           /* child: (index != 3)
-                ? Container(
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        border:
-                            Border.all(color: Colur.disableTxtColor, width: 5),
-                        shape: BoxShape.circle),
-                  )
-                : (index > 3 && index != 3)
-                    ? Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                                color: Colur.disableTxtColor, width: 1)),
-                      )
-                    : Container(
-                        alignment: Alignment.center,
-                        child: Image.asset(
-                          "assets/icons/ic_challenge_complete_day.png",
-                        )),*/
             child: (!isAvailableHistory[index])
                 ? Container(
                     alignment: Alignment.center,

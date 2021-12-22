@@ -5,6 +5,8 @@ import 'package:intl/intl.dart';
 
 class Constant {
 
+  static const FONT_OSWALD = "Oswald";
+
   static const PLAN_7_MIN_BUTT_WORKOUT = "7 min butt workout";
   static const PLAN_7_MIN_LOSE_ARM_FAT = "7 min lose arm fat";
   static const PLAN_ARM_WORKOUT_NO_PUSH_UPS = "Arm workout (NO PUSH-UPS!)";
@@ -110,12 +112,8 @@ class Constant {
   static const PREF_RANDOM_DISCOVER_PLAN_DATE = "PREF_RANDOM_DISCOVER_PLAN_DATE";
   static const EXERCISE_EXTENSION = ".webp";
 
+  static const LAST_TIME = "LAST_TIME";
 
-/*  static const minKG = 20.00;
-  static const maxKG = 997.00;
-
-  static const minLBS = 45.00;
-  static const maxLBS = 2200.00;*/
 
   static const ML_100 = 100;
   static const ML_150 = 150;

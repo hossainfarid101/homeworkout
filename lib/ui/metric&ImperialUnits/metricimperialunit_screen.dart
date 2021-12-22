@@ -7,10 +7,11 @@ import 'package:homeworkout_flutter/common/commonTopBar/commom_topbar.dart';
 import 'package:homeworkout_flutter/interfaces/topbar_clicklistener.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/Color.dart';
-import 'package:homeworkout_flutter/utils/Constant.dart';
+
 import 'package:homeworkout_flutter/utils/Debug.dart';
 import 'package:group_radio_button/group_radio_button.dart';
 import 'package:homeworkout_flutter/utils/ad_helper.dart';
+import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 
@@ -75,6 +76,7 @@ class _MetricImperialUnitsScreenState extends State<MetricImperialUnitsScreen>
     var fullHeight = MediaQuery.of(context).size.height;
     return Theme(
       data: ThemeData(
+        fontFamily: Constant.FONT_OSWALD,
         appBarTheme: AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle.dark,
         ),

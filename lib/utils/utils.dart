@@ -211,9 +211,9 @@ class Utils {
   }
 
 
-  static List<String> getDaysNameOfWeek() {
+  static List<String> getDaysNameOfWeek(int? firstDay) {
     final now = DateTime.now();
-    final firstDayOfWeek = now.subtract(Duration(days: now.weekday));
+    final firstDayOfWeek = now.subtract(Duration(days: now.weekday - firstDay!));
     return List.generate(7, (index) => index)
         .map((value) => DateFormat(DateFormat.WEEKDAY)
         .format(firstDayOfWeek.add(Duration(days: value))))

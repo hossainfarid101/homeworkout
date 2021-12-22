@@ -115,6 +115,7 @@ class _TrainingScreenState extends State<TrainingScreen>
   Widget build(BuildContext context) {
     return Theme(
       data: ThemeData(
+        fontFamily: Constant.FONT_OSWALD,
         appBarTheme: AppBarTheme(
           systemOverlayStyle: isShrink ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light,
         ),//
@@ -257,7 +258,7 @@ class _TrainingScreenState extends State<TrainingScreen>
 
                                   Container(
                                     margin: EdgeInsets.only(
-                                        top: (selectedTrainingDay == "0")  ? 90.0 : 120.0, right: 20, left: 20,bottom: 10),
+                                        top: (selectedTrainingDay == "0")  ? 78.0 : 120.0, right: 20, left: 20,bottom: 10),
                                     decoration: const BoxDecoration(
                                       color: Colur.white,
                                       borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -482,15 +483,15 @@ class _TrainingScreenState extends State<TrainingScreen>
               child: Text(
                 allPlanDataList[index].catName.toString().toUpperCase(),
                 style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
                   color: Colur.black,
                 ),
               ),
             ),
           ),
           Visibility(
-              visible: (allPlanDataList[index].catSubCategory != Constant.title)?true:false,
+              visible: (allPlanDataList[index].catSubCategory != Constant.title) ? true : false,
               child: Container(
                 height: 130,
                 child: ClipRRect(
@@ -534,20 +535,21 @@ class _TrainingScreenState extends State<TrainingScreen>
                                               softWrap: true,
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
-                                                  fontWeight: FontWeight.w500,
+                                                  fontWeight: FontWeight.w700,
                                                   fontSize: 20,
                                                   color: Colur.white),
                                             ),
                                           ),
                                           Container(
                                             margin: const EdgeInsets.symmetric(
-                                                horizontal: 15.0, vertical: 5),
+                                                horizontal: 15.0, ),
                                             child: Text(
                                                 Languages.of(context)!
-                                                    .txt7X4Challenge,
+                                                    .txt7X4Challenge.toUpperCase(),
                                                 style: TextStyle(
+                                                    fontWeight: FontWeight.w500,
                                                     color: Colur.white,
-                                                    fontSize: 14.0)),
+                                                    fontSize: 18.0)),
                                           ),
                                         ],
                                       ),

@@ -84,6 +84,7 @@ class _PauseScreenState extends State<PauseScreen>
       },
       child: Theme(
         data: ThemeData(
+          fontFamily: Constant.FONT_OSWALD,
           appBarTheme: AppBarTheme(
             systemOverlayStyle: SystemUiOverlayStyle.dark,
           ), //

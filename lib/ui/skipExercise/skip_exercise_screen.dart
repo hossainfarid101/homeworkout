@@ -192,6 +192,7 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
       },
       child: Theme(
         data: ThemeData(
+          fontFamily: Constant.FONT_OSWALD,
           appBarTheme: AppBarTheme(
             systemOverlayStyle: SystemUiOverlayStyle.dark,
           ), //

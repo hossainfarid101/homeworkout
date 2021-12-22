@@ -185,7 +185,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         splashColor: Colur.transparent,
         highlightColor: Colur.transparent,
-        fontFamily: 'Poppins',
+        fontFamily: Constant.FONT_OSWALD,
       ),
       debugShowCheckedModeBanner: false,
       locale: _locale,
@@ -208,6 +208,7 @@ class _MyAppState extends State<MyApp> {
         return supportedLocales.first;
       },
       darkTheme: ThemeData(
+        fontFamily: Constant.FONT_OSWALD,
         appBarTheme: const AppBarTheme(
             backgroundColor: Colur.transparent,
             systemOverlayStyle: SystemUiOverlayStyle.dark),

@@ -87,6 +87,7 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
   Widget build(BuildContext context) {
     return Theme(
       data: ThemeData(
+        fontFamily: Constant.FONT_OSWALD,
         appBarTheme: AppBarTheme(
           systemOverlayStyle:
               isShrink ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light,

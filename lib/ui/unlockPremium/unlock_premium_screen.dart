@@ -5,6 +5,7 @@ import 'package:homeworkout_flutter/inapppurchase/IAPCallback.dart';
 import 'package:homeworkout_flutter/inapppurchase/InAppPurchaseHelper.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
+import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -65,6 +66,7 @@ class _UnlockPremiumScreenState extends State<UnlockPremiumScreen>
   Widget build(BuildContext context) {
     return Theme(
       data: ThemeData(
+        fontFamily: Constant.FONT_OSWALD,
         appBarTheme: AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle.dark,
         ),

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:android_intent_plus/android_intent.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -187,6 +188,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
     double fullWidth = MediaQuery.of(context).size.height;
     return  Theme(
       data: ThemeData(
+        fontFamily: Constant.FONT_OSWALD,
         appBarTheme: AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle.dark,
         ), //
@@ -1404,8 +1406,9 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
             builder: (context, setState) {
               return AlertDialog(
                 content: SizedBox(
-                  height: 230,
+                  height: 180,
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         Languages.of(context)!.txtUnableToHearVoiceDesc,
@@ -1420,18 +1423,16 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                           Utils.downLoadTTS();
                           Navigator.pop(context);
                         },
-                        child: Container(
-                          margin: const EdgeInsets.only(top: 30, bottom: 25),
-                          child: Text(
-                            Languages.of(context)!
-                                .txtDownloadTTSEngine
-                                .toUpperCase(),
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            style: const TextStyle(
-                                color: Colur.txtBlack,
-                                fontWeight: FontWeight.w500),
-                          ),
+                        child: Text(
+                          Languages.of(context)!
+                              .txtDownloadTTSEngine
+                              .toUpperCase(),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          style: const TextStyle(
+                              color: Colur.txtBlack,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500),
                         ),
                       ),
                       InkWell(
@@ -1446,7 +1447,9 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: const TextStyle(
-                              color: Colur.txtBlack, fontWeight: FontWeight.w500),
+                              color: Colur.txtBlack,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500),
                         ),
                       ),
                     ],

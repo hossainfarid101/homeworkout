@@ -21,6 +21,7 @@ import 'package:homeworkout_flutter/ui/workoutHistory/workout_history_screen.dar
 import 'package:homeworkout_flutter/utils/ad_helper.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
+import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 
@@ -855,6 +856,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
       totalSeconds = await DataBaseHelper().getTotalWorkoutMinutesForDiscover(
           widget.discoverPlanTable!.planId.toString());
     }
+    Debug.printLog("fdsf " + totalSeconds!.toString());
     totalMinutes = Duration(seconds: totalSeconds!).inMinutes;
   }
 
@@ -906,6 +908,8 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
         duration = 9000;
       } else if (listOfImagesCount[i] > 12 && listOfImagesCount[i] <= 14) {
         duration = 10500;
+      } else  if (listOfImagesCount[i] > 15 && listOfImagesCount[i] <= 18) {
+        duration = 13000;
       } else {
         duration = 1500;
       }

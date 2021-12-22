@@ -73,6 +73,7 @@ class _HealthDataScreenState extends State<HealthDataScreen> implements TopBarCl
     var fullHeight = MediaQuery.of(context).size.height;
     return Theme(
       data: ThemeData(
+        fontFamily: Constant.FONT_OSWALD,
         appBarTheme: AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle.dark,
         ), //

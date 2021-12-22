@@ -243,6 +243,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
       },
       child: Theme(
         data: ThemeData(
+          fontFamily: Constant.FONT_OSWALD,
           appBarTheme: AppBarTheme(
             systemOverlayStyle: SystemUiOverlayStyle.dark,
           ), //

@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:align_positioned/align_positioned.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -137,6 +138,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
     double fullWidth = MediaQuery.of(context).size.width;
     return Theme(
       data: ThemeData(
+        fontFamily: Constant.FONT_OSWALD,
         appBarTheme:
             AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.light), //
       ),
@@ -796,8 +798,8 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                       dx: bmiValuePosition(fullWidth),
                       child: Column(
                         children: [
-                          Text(
-                            bmi!.toStringAsFixed(2),
+                          AutoSizeText(
+                          bmi!.toStringAsFixed(2) !=  "0.00" ? bmi!.toStringAsFixed(2) : "0",
                             style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w600
@@ -926,6 +928,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
 
   String calculateBMI(double weight, double height) {
     bmi = weight / pow(height / 100, 2);
+    Debug.printLog("====>BMI" + bmi!.toStringAsFixed(1));
     return bmi!.toStringAsFixed(1);
   }
 
@@ -1105,6 +1108,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
     var time = Preference.shared.getString(Preference.END_TIME) ??
         DateTime.now().toString();
     endTime = DateTime.parse(time);
+    Debug.printLog("end time ===> $endTime");
 
     if (bmi! < 15) {
       bmiColor = Colur.black;
@@ -1246,7 +1250,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
         }
       }
     }
-
+    Preference.shared.setLastTime(widget.tableName!, endTime.toString());
     _insertExerciseHistoryData();
     Navigator.push(
         context,
@@ -1273,8 +1277,6 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
       //totalEx = widget.discoverSingleExerciseData!.length;
       planId = int.parse(widget.planId.toString());
     }
-
-    Preference.shared.setLastTime(widget.tableName!, DateTime.now().toString());
 
     await DataBaseHelper().insertHistoryData(HistoryTable(
         id: null,
