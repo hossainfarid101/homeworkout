@@ -219,7 +219,7 @@ abstract class Languages {
 
   String get txtSettings;
 
-  String get txtResetProgress;
+  String get txtRestartProgress;
 
   String get txtWorkout;
 
@@ -440,4 +440,6 @@ abstract class Languages {
   String get txtWarningForBMIDialog;
 
   String get txtLastTime;
+
+  String get txtExerciseDayWarning;
 }

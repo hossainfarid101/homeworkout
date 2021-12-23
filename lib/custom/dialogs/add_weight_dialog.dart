@@ -328,6 +328,9 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                               decoration: (isLsb!)
                                   ? BoxDecoration(
                                 color: Colur.theme,
+                                border: Border.all(
+                                  color: Colur.theme,
+                                ),
                                 borderRadius: BorderRadius.circular(5.0),
                               )
                                   : BoxDecoration(
@@ -337,7 +340,7 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
                               child: Container(
-                                margin: EdgeInsets.only(left: 5, right: 5),
+                                margin: EdgeInsets.only(left: 2, right: 2),
                                 child: Text(
                                   Languages.of(context)!.txtLB.toUpperCase(),
                                   style: TextStyle(

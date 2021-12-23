@@ -110,7 +110,6 @@ class _SetReminderScreenState extends State<SetReminderScreen> implements TopBar
   Widget build(BuildContext context) {
     return Theme(
       data: ThemeData(
-        fontFamily: Constant.FONT_OSWALD,
         appBarTheme: AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle.dark,
         ),
@@ -302,7 +301,6 @@ class _SetReminderScreenState extends State<SetReminderScreen> implements TopBar
           ? selectedTime!
           : TimeOfDay.now(),
       theme: ThemeData(
-        fontFamily: Constant.FONT_OSWALD,
         primarySwatch: Colors.grey,
         primaryColor: Colur.theme,
         colorScheme: ColorScheme.fromSwatch().copyWith(

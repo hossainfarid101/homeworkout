@@ -121,7 +121,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Text(
-                          Languages.of(context)!.txtResetProgress,
+                          Languages.of(context)!.txtRestartProgress,
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                               fontSize: 14,
@@ -241,7 +241,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
             builder: (context, setState) {
               return AlertDialog(
                 title: Text(
-                  Languages.of(context)!.txtResetProgress,
+                  Languages.of(context)!.txtRestartProgress,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     color: Colur.txtBlack,

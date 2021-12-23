@@ -511,15 +511,6 @@ class DataBaseHelper {
     return historyData;
   }
 
-  Future<int> deleteHistoryData(int id) async {
-    var dbClient = await db;
-    return await dbClient.delete(
-      historyTable,
-      where: "Id = ?",
-      whereArgs: [id],
-    );
-  }
-
   Future<int?> getHistoryTotalWorkout() async {
     var dbClient = await db;
     List<Map> res = await dbClient.rawQuery(

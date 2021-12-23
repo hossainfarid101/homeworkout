@@ -138,7 +138,6 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
     double fullWidth = MediaQuery.of(context).size.width;
     return Theme(
       data: ThemeData(
-        fontFamily: Constant.FONT_OSWALD,
         appBarTheme:
             AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.light), //
       ),

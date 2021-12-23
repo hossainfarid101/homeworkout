@@ -111,7 +111,6 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
     var fullWidth = MediaQuery.of(context).size.width;
     return Theme(
       data: ThemeData(
-        fontFamily: Constant.FONT_OSWALD,
         appBarTheme: AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle.dark,
         ), //
@@ -500,32 +499,6 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
                         ),
                       ),
                     ),
-                    //=========option icon========
-                    PopupMenuButton(
-                      //initialValue: 0,
-                      icon: Icon(
-                        Icons.more_vert_rounded,
-                        color: Colur.grey_icon,
-                      ),
-                      itemBuilder: (BuildContext context) => <PopupMenuEntry>[
-                        PopupMenuItem(
-                          value: 0,
-                          height: 30,
-                          child: Text(Languages.of(context)!.txtDelete,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                color: Colur.orange,
-                                fontSize: 16,
-                              )),
-                        )
-                      ],
-                      onSelected: (value) {
-                        if (value == 0 && value != null) {
-                          _deleteExerciseDialog(arrHistoryDetail[index].id!);
-                        }
-                      },
-                    )
                   ],
                 ),
                 Divider(
@@ -602,39 +575,6 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
     Debug.printLog(calendarDates.toString());
   }
 
-  void _deleteExerciseDialog(int id) {
-    Widget cancelButton = TextButton(
-      child: Text(Languages.of(context)!.txtCancel.toUpperCase(),
-          style: TextStyle(color: Colur.theme)),
-      onPressed: () {
-        Navigator.pop(context);
-      },
-    );
-    Widget okButton = TextButton(
-      child: Text(
-        Languages.of(context)!.txtOk.toUpperCase(),
-        style: TextStyle(color: Colur.theme),
-      ),
-      onPressed: () {
-        DataBaseHelper()
-            .deleteHistoryData(id)
-            .then((value) {
-          getDataFromDatabase();
-          setState(() {});
-        });
-        Navigator.pop(context);
-      },
-    );
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return new AlertDialog(
-            title: new Text(Languages.of(context)!.txtDelete),
-            content: new Text(Languages.of(context)!.txtDeleteExe),
-            actions: [cancelButton, okButton],
-          );
-        });
-  }
 
   @override
   void onTopBarClick(String name, {bool value = true}) {

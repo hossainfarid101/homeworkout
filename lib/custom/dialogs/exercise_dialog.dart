@@ -304,7 +304,9 @@ class _ExerciseDialogState extends State<ExerciseDialog>  with TickerProviderSta
         duration = 9000;
       } else if(countOfImages > 12 && countOfImages<=14){
         duration = 10500;
-      }else{
+      } else  if (countOfImages > 15 && countOfImages <= 18) {
+        duration = 13000;
+      } else{
         duration = 1500;
       }
 

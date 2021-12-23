@@ -145,7 +145,6 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
     bmiTextCategory();
     return  Theme(
       data: ThemeData(
-        fontFamily: Constant.FONT_OSWALD,
           appBarTheme: AppBarTheme(
             systemOverlayStyle: SystemUiOverlayStyle.dark,
           ),
@@ -320,10 +319,13 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
             itemCount: isAvailableHistory.length,
           ),
         ),
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 10),
-          alignment: Alignment.center,
-          child: Text(Languages.of(context)!.txtRecords),
+        InkWell(
+          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => WorkoutHistoryScreen())),
+          child: Container(
+            margin: const EdgeInsets.symmetric(vertical: 10),
+            alignment: Alignment.center,
+            child: Text(Languages.of(context)!.txtRecords),
+          ),
         ),
         Divider(
           height: 30,
@@ -937,6 +939,7 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
     totalWorkout = await DataBaseHelper().getHistoryTotalWorkout() ?? 0;
     totalKcal = await DataBaseHelper().getHistoryTotalKCal() ?? 0;
     totalMin = await DataBaseHelper().getHistoryTotalMinutes() ?? 0;
+    totalMin = totalMin! ~/ 60;
     setState(() {
 
     });

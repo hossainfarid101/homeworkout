@@ -132,13 +132,13 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
           if(widget.isFromHistory!) {
             Navigator.pop(context);
             return Future.value(true);
-          } else if(widget.isFromOnboarding! || widget.fromPage == Constant.PAGE_HOME) {
+          } else if(widget.isFromOnboarding!) {
             Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TrainingScreen()), (route) => false);
             return Future.value(true);
-          } /*else if(widget.isSubPlan!) {
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => ExercisePlanScreen(homePlanTable: widget.discoverPlanTable)), (route) => false);
+          }else if(widget.fromPage == Constant.PAGE_HOME) {
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TrainingScreen()), (route) => false);
             return Future.value(true);
-          } */else if(widget.fromPage == Constant.PAGE_DISCOVER){
+          }else if(widget.fromPage == Constant.PAGE_DISCOVER){
             Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => DiscoverScreen()), (route) => false);
             return Future.value(true);
           } else if(widget.fromPage == Constant.PAGE_DAYS_STATUS){
@@ -196,7 +196,9 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
                       onTap: () {
                         if(widget.isFromHistory!) {
                           Navigator.pop(context);
-                        } else if(widget.isFromOnboarding! || widget.fromPage == Constant.PAGE_HOME) {
+                        } else if(widget.isFromOnboarding!) {
+                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TrainingScreen()), (route) => false);
+                        }else if(widget.fromPage == Constant.PAGE_HOME) {
                           Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TrainingScreen()), (route) => false);
                         }else if(widget.fromPage == Constant.PAGE_DISCOVER){
                           Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => DiscoverScreen()), (route) => false);
@@ -411,30 +413,20 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
     );
   }
 
+
+
   _getTotalMinAndWorkoutTime() {
     return (widget.fromPage == Constant.PAGE_HOME)
-        ? totalMinutes.toString() +
-            " " +
-            Languages.of(context)!.txtMin.toLowerCase() +
-            " - " +
-            exerciseDataList.length.toString() +
-            " " +
-            Languages.of(context)!.txtWorkouts.toLowerCase()
+        ? widget.homePlanTable!.catText
         : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
-            ? totalMinutes.toString() +
+            ? (totalMinutes! + workoutDetailList.length).toString() +
                 " " +
                 Languages.of(context)!.txtMin.toLowerCase() +
                 " - " +
                 workoutDetailList.length.toString() +
                 " " +
                 Languages.of(context)!.txtWorkouts.toLowerCase()
-            : totalMinutes.toString() +
-                " " +
-                Languages.of(context)!.txtMin.toLowerCase() +
-                " - " +
-                discoverSingleExerciseList.length.toString() +
-                " " +
-                Languages.of(context)!.txtWorkouts.toLowerCase();
+            : widget.discoverPlanTable!.planText;
   }
 
   _divider() {
@@ -508,7 +500,6 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
   }
 
   _listOfExerciseWithEdit(int index) {
-
     return InkWell(
       onTap: () {
         showDialog(
@@ -528,7 +519,6 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
         );
       },
       child: Container(
-        // color: Colur.black,
         margin: const EdgeInsets.symmetric(vertical: 5),
         child: Column(
           children: [
@@ -856,7 +846,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
       totalSeconds = await DataBaseHelper().getTotalWorkoutMinutesForDiscover(
           widget.discoverPlanTable!.planId.toString());
     }
-    Debug.printLog("fdsf " + totalSeconds!.toString());
+    Debug.printLog("totalSeconds " + totalSeconds!.toString());
     totalMinutes = Duration(seconds: totalSeconds!).inMinutes;
   }
 

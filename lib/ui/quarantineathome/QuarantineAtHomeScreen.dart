@@ -142,34 +142,39 @@ class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
   Widget build(BuildContext context) {
     return Theme(
       data: ThemeData(
-        fontFamily: Constant.FONT_OSWALD,
         appBarTheme: AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle.dark,
         ), //
       ),
-      child: Scaffold(
-        appBar: PreferredSize(
-            preferredSize: Size.fromHeight(0),
-            child: AppBar( // Here we create one to set status bar color
-              backgroundColor: Colur.white,
-              elevation: 0,
-            )
-        ),
-        backgroundColor: Colur.white,
-        drawer: DrawerMenu(),
-        body: Column(
-          children: [
-            _topBar(),
-            _divider(),
-            _quarantineExerciseList(),
-            (_isBottomBannerAdLoaded && !Utils.isPurchased())
-                ? Container(
-              height: _bottomBannerAd.size.height.toDouble(),
-              width: _bottomBannerAd.size.width.toDouble(),
-              child: AdWidget(ad: _bottomBannerAd),
-            )
-                : Container()
-          ],
+      child: WillPopScope(
+        onWillPop: () {
+          Navigator.pop(context);
+          return Future.value(false);
+        },
+        child: Scaffold(
+          appBar: PreferredSize(
+              preferredSize: Size.fromHeight(0),
+              child: AppBar( // Here we create one to set status bar color
+                backgroundColor: Colur.white,
+                elevation: 0,
+              )
+          ),
+          backgroundColor: Colur.white,
+          drawer: DrawerMenu(),
+          body: Column(
+            children: [
+              _topBar(),
+              _divider(),
+              _quarantineExerciseList(),
+              (_isBottomBannerAdLoaded && !Utils.isPurchased())
+                  ? Container(
+                height: _bottomBannerAd.size.height.toDouble(),
+                width: _bottomBannerAd.size.width.toDouble(),
+                child: AdWidget(ad: _bottomBannerAd),
+              )
+                  : Container()
+            ],
+          ),
         ),
       ),
     );
@@ -243,30 +248,82 @@ class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
                       ),
                     ),
                   ),
-                  Container(
-                    width: double.infinity,
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 15.0, vertical: 10),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.bolt_rounded,
-                          color: Colur.blue,
-                          size: 18,
+                  if (quarantinePlanList[index].planText!.split(" ").last == Constant.BEGINNER)...{
+                    Container(
+                        width: double.infinity,
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 15.0, vertical: 10),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.bolt_rounded,
+                              color: Colur.blue,
+                              size: 18,
+                            ),
+                            Icon(
+                              Icons.bolt_rounded,
+                              color: Colur.grey_icon,
+                              size: 18,
+                            ),
+                            Icon(
+                              Icons.bolt_rounded,
+                              color: Colur.grey_icon,
+                              size: 18,
+                            ),
+                          ],
                         ),
-                        Icon(
-                          Icons.bolt_rounded,
-                          color: Colur.grey_icon,
-                          size: 18,
-                        ),
-                        Icon (
-                          Icons.bolt_rounded,
-                          color: Colur.grey_icon,
-                          size: 18,
-                        ),
-                      ],
+                      ),
+                  } else if (quarantinePlanList[index].planText!.split(" ").last == Constant.INTERMEDIATE)...{
+                    Container(
+                      width: double.infinity,
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 15.0, vertical: 10),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.bolt_rounded,
+                            color: Colur.blue,
+                            size: 18,
+                          ),
+                          Icon(
+                            Icons.bolt_rounded,
+                            color: Colur.blue,
+                            size: 18,
+                          ),
+                          Icon(
+                            Icons.bolt_rounded,
+                            color: Colur.grey_icon,
+                            size: 18,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
+                  } else if(quarantinePlanList[index].planText!.split(" ").last == Constant.ADVANCED)...{
+                    Container(
+                      width: double.infinity,
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 15.0, vertical: 10),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.bolt_rounded,
+                            color: Colur.blue,
+                            size: 18,
+                          ),
+                          Icon(
+                            Icons.bolt_rounded,
+                            color: Colur.blue,
+                            size: 18,
+                          ),
+                          Icon(
+                            Icons.bolt_rounded,
+                            color: Colur.blue,
+                            size: 18,
+                          ),
+                        ],
+                      ),
+                    ),
+                  }
                 ],
               ),
             ),

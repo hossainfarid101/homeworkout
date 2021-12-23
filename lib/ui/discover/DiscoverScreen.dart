@@ -223,7 +223,6 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   Widget build(BuildContext context) {
     return Theme(
       data: ThemeData(
-        fontFamily: Constant.FONT_OSWALD,
         appBarTheme: AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle.dark,
         ), //
@@ -483,23 +482,30 @@ class _DiscoverScreenState extends State<DiscoverScreen>
     );
   }
 
+    var totalPagePicksForYouList = 0;
   _picksForYouList() {
-    var totalPage = 0;
     if((picksForYouDiscoverPlanList.length~/2) < picksForYouDiscoverPlanList.length/2){
-      totalPage = (picksForYouDiscoverPlanList.length~/2)+1;
+      totalPagePicksForYouList = (picksForYouDiscoverPlanList.length~/2)+1;
     }else{
-      totalPage = (picksForYouDiscoverPlanList.length~/2);
+      totalPagePicksForYouList = (picksForYouDiscoverPlanList.length~/2);
     }
     return Container(
       height: 195,
       margin: const EdgeInsets.only(top: 15.0),
       child: PageView.builder(
-        itemCount: totalPage,
+        itemCount: totalPagePicksForYouList,
         padEnds: false,
         controller: _pageControllerPicksForYou,
         onPageChanged: (value) {
           setState(() {
             currentPicksForYouPage = value;
+            if (value == totalPagePicksForYouList - 1) {
+              _pageControllerPicksForYou = PageController(
+                  initialPage: 0, keepPage: true, viewportFraction: 1);
+            } else {
+              _pageControllerPicksForYou = PageController(
+                  initialPage: 0, keepPage: true, viewportFraction: 0.9);
+            }
           });
         },
         physics: AlwaysScrollableScrollPhysics(),
@@ -515,7 +521,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
     var secondCardPos = 1+(2*index);
     Debug.printLog("first card: $firstCardPos \n second card: $secondCardPos");
     return Container(
-      margin: const EdgeInsets.only(left: 20.0),
+      margin: EdgeInsets.only(left: 20.0, right: (index == totalPagePicksForYouList - 1) ? MediaQuery.of(context).size.width * 0.1 : 0.0),
       child: Column(
         children: [
           (picksForYouDiscoverPlanList.length > (firstCardPos))
@@ -751,6 +757,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                     width: double.infinity,
                     child: Text(
                       "Best quarantine workout",
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 22,
@@ -869,24 +877,31 @@ class _DiscoverScreenState extends State<DiscoverScreen>
     );
   }
 
+    var totalPageFastWorkoutList = 0;
   _fastWorkoutList() {
-    var totalPage = 0;
     if((fastWorkoutDiscoverPlanList.length~/2) < fastWorkoutDiscoverPlanList.length/2){
-      totalPage = (fastWorkoutDiscoverPlanList.length~/2)+1;
+      totalPageFastWorkoutList = (fastWorkoutDiscoverPlanList.length~/2)+1;
     }else{
-      totalPage = (fastWorkoutDiscoverPlanList.length~/2);
+      totalPageFastWorkoutList = (fastWorkoutDiscoverPlanList.length~/2);
     }
     return Container(
       height: 195,
       margin: const EdgeInsets.only(top: 15.0),
       child: PageView.builder(
-        itemCount: totalPage,
+        itemCount: totalPageFastWorkoutList,
         padEnds: false,
         controller: _pageControllerFastWorkout,
         onPageChanged: (value) {
           setState(() {
             currentFastWorkoutPage = value;
           });
+          if (value == totalPageFastWorkoutList - 1) {
+            _pageControllerFastWorkout = PageController(
+                initialPage: 0, keepPage: true, viewportFraction: 1);
+          } else {
+            _pageControllerFastWorkout = PageController(
+                initialPage: 0, keepPage: true, viewportFraction: 0.9);
+          }
         },
         physics: AlwaysScrollableScrollPhysics(),
         itemBuilder: (BuildContext context, int index) {
@@ -900,7 +915,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
     var firstCardPos = 0+(2*index);
     var secondCardPos = 1+(2*index);
     return Container(
-      margin: const EdgeInsets.only(left: 20.0),
+      margin: EdgeInsets.only(left: 20.0, right: (index == totalPageFastWorkoutList - 1) ? MediaQuery.of(context).size.width * 0.1 : 0.0),
       child: Column(
         children: [
           (fastWorkoutDiscoverPlanList.length > (firstCardPos))

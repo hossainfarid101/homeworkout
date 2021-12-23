@@ -624,15 +624,15 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  fonts:
-     - family: Oswald
-       fonts:
-         - asset: fonts/Oswald-Regular.ttf
-         - asset: fonts/Oswald-Bold.ttf
-         - asset: fonts/Oswald-Light.ttf
-         - asset: fonts/Oswald-Medium.ttf
-         - asset: fonts/Oswald-SemiBold.ttf
-         - asset: fonts/Oswald-ExtraLight.ttf
+#  fonts:
+#     - family: Oswald
+#       fonts:
+#         - asset: fonts/Oswald-Regular.ttf
+#         - asset: fonts/Oswald-Bold.ttf
+#         - asset: fonts/Oswald-Light.ttf
+#         - asset: fonts/Oswald-Medium.ttf
+#         - asset: fonts/Oswald-SemiBold.ttf
+#         - asset: fonts/Oswald-ExtraLight.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

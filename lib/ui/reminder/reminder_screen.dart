@@ -67,7 +67,6 @@ class _ReminderScreenState extends State<ReminderScreen> implements TopBarClickL
   Widget build(BuildContext context) {
     return  Theme(
       data: ThemeData(
-        fontFamily: Constant.FONT_OSWALD,
         appBarTheme: AppBarTheme(
         systemOverlayStyle: SystemUiOverlayStyle.dark,
         ),

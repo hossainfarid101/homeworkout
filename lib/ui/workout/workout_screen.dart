@@ -243,7 +243,6 @@ class _WorkoutScreenState extends State<WorkoutScreen>
       },
       child: Theme(
         data: ThemeData(
-          fontFamily: Constant.FONT_OSWALD,
           appBarTheme: AppBarTheme(
             systemOverlayStyle: SystemUiOverlayStyle.dark,
           ), //
@@ -1495,6 +1494,8 @@ class _WorkoutScreenState extends State<WorkoutScreen>
       duration = 9000;
     } else if (countOfImages > 12 && countOfImages <= 14) {
       duration = 14000;
+    } else  if (countOfImages > 15 && countOfImages <= 18) {
+      duration = 13000;
     } else {
       duration = 1500;
     }

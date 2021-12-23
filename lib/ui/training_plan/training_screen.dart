@@ -115,7 +115,6 @@ class _TrainingScreenState extends State<TrainingScreen>
   Widget build(BuildContext context) {
     return Theme(
       data: ThemeData(
-        fontFamily: Constant.FONT_OSWALD,
         appBarTheme: AppBarTheme(
           systemOverlayStyle: isShrink ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light,
         ),//
@@ -258,7 +257,7 @@ class _TrainingScreenState extends State<TrainingScreen>
 
                                   Container(
                                     margin: EdgeInsets.only(
-                                        top: (selectedTrainingDay == "0")  ? 78.0 : 120.0, right: 20, left: 20,bottom: 10),
+                                        top: (selectedTrainingDay == "0")  ? 90.0 : 120.0, right: 20, left: 20,bottom: 10),
                                     decoration: const BoxDecoration(
                                       color: Colur.white,
                                       borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -476,15 +475,14 @@ class _TrainingScreenState extends State<TrainingScreen>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Visibility(
-            // visible: (index == 0 || index == 2 || index == 3 || index == 8 || index == 13 || index == 18),
             visible: (allPlanDataList[index].catSubCategory == Constant.title)?true:false,
             child: Container(
-              margin: const EdgeInsets.only(top: 10, bottom: 5,left: 5),
+              margin: const EdgeInsets.only(top: 10, left: 5),
               child: Text(
                 allPlanDataList[index].catName.toString().toUpperCase(),
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
-                  fontSize: 16,
+                  fontSize: 17,
                   color: Colur.black,
                 ),
               ),
@@ -536,7 +534,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
                                                   fontWeight: FontWeight.w700,
-                                                  fontSize: 20,
+                                                  fontSize: 18,
                                                   color: Colur.white),
                                             ),
                                           ),
@@ -547,9 +545,9 @@ class _TrainingScreenState extends State<TrainingScreen>
                                                 Languages.of(context)!
                                                     .txt7X4Challenge.toUpperCase(),
                                                 style: TextStyle(
-                                                    fontWeight: FontWeight.w500,
+                                                    fontWeight: FontWeight.w400,
                                                     color: Colur.white,
-                                                    fontSize: 18.0)),
+                                                    fontSize: 14.0)),
                                           ),
                                         ],
                                       ),
@@ -666,7 +664,7 @@ class _TrainingScreenState extends State<TrainingScreen>
                                             margin: const EdgeInsets.symmetric(horizontal: 15.0),
                                             child: Text(
                                               allPlanDataList[index].catName!.toUpperCase(),
-                                              maxLines: 1,
+                                              maxLines: 2,
                                               softWrap: true,
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
@@ -924,6 +922,7 @@ class _TrainingScreenState extends State<TrainingScreen>
     totalWorkout = await DataBaseHelper().getHistoryTotalWorkout() ?? 0;
     totalKcal = await DataBaseHelper().getHistoryTotalKCal() ?? 0;
     totalMin = await DataBaseHelper().getHistoryTotalMinutes() ?? 0;
+    totalMin = totalMin! ~/ 60;
     setState(() {
 
     });

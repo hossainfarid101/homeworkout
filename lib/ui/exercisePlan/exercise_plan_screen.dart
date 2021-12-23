@@ -170,7 +170,6 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
       },
       child: Theme(
         data: ThemeData(
-          fontFamily: Constant.FONT_OSWALD,
           appBarTheme: AppBarTheme(
             systemOverlayStyle:
             isShrink ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light,

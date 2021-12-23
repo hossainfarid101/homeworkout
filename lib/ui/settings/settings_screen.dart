@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:android_intent_plus/android_intent.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -188,7 +187,6 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
     double fullWidth = MediaQuery.of(context).size.height;
     return  Theme(
       data: ThemeData(
-        fontFamily: Constant.FONT_OSWALD,
         appBarTheme: AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle.dark,
         ), //
@@ -485,10 +483,10 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                 child: Row(
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(right:10),
+                      margin: const EdgeInsets.only(right:10, left: 3),
                       child: Image.asset(
-                        "assets/icons/ic_setting_reminder.webp",
-                        scale: 1.5,
+                        "assets/icons/drawer/ic_reminder_unselected.webp",
+                        scale: 3.9,
                         color: Colur.iconGrey,
                       ),
                     ),

@@ -109,7 +109,7 @@ class LanguageEn extends Languages {
   String get txtReminder => "Reminder";
 
   @override
-  String get txtResetProgress => "Reset Progress";
+  String get txtRestartProgress => "Restart Progress";
 
   @override
   String get txtSettings => "Settings";
@@ -445,7 +445,7 @@ class LanguageEn extends Languages {
   String get txtExhausted => "Exhausted";
 
   @override
-  String get txtIFeel => "IFeel";
+  String get txtIFeel => "I Feel";
 
   @override
   String get txtSkip => "Skip";
@@ -667,4 +667,7 @@ class LanguageEn extends Languages {
 
   @override
   String get txtLastTime => "Last time: ";
+
+  @override
+  String get txtExerciseDayWarning => "Please complete the previous days challenge first";
 }

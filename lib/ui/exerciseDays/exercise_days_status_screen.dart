@@ -87,7 +87,6 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
   Widget build(BuildContext context) {
     return Theme(
       data: ThemeData(
-        fontFamily: Constant.FONT_OSWALD,
         appBarTheme: AppBarTheme(
           systemOverlayStyle:
               isShrink ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light,
@@ -228,17 +227,6 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
                               Container(
                                 margin: const EdgeInsets.only(
                                     right: 10, left: 10, top: 10, bottom: 20),
-                                /*child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  child: LinearProgressIndicator(
-                                    value: (10 / 100).toDouble(),
-                                    valueColor:
-                                        AlwaysStoppedAnimation<Color>(Colur.theme),
-                                    backgroundColor: Colur.transparent_50,
-                                    minHeight: 5,
-                                  ),
-                                ),*/
-
                                 child:  FutureBuilder(
                                   future: _setDayProgressDataByPlan(widget.planName.toString()),
                                   builder: (BuildContext context,
@@ -375,7 +363,18 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
         children: [
           Row(
             children: [
-              Container(
+              count == 7 ? Container(
+                padding: const EdgeInsets.all(1),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color:Colur.theme,
+                ),
+                child: Icon(
+                  Icons.check_rounded,
+                  size: 20,
+                  color: Colur.white,
+                ),
+              ): Container(
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: (boolFlagWeekComplete)?Colur.theme:Colur.gray,
@@ -514,23 +513,33 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
           )
         }
         else if (index == 7 && index != 0) ...{
-          Container(
-            alignment: Alignment.center,
-            width: 60,
-            height: 60,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(
-                        (weeklyDataList[mainIndex].isCompleted == "1")
-                            ? "assets/images/ic_challenge_complete.png"
-                            : "assets/images/ic_challenge_uncomplete.webp"),
-                    scale: 5)),
-            /*child: Container(
-        margin: const EdgeInsets.only(bottom: 5),
-        child: Text(
-          (mainIndex + 1).toString(),
-          style: TextStyle(fontSize: 18, color: Colur.disableTxtColor),
-        )),*/
+          Stack(
+            alignment: Alignment.topCenter,
+            children: [
+              Container(
+                alignment: Alignment.center,
+                width: 60,
+                height: 60,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage(
+                            (weeklyDataList[mainIndex].isCompleted == "1")
+                                ? "assets/images/ic_challenge_complete.png"
+                                : "assets/images/ic_challenge_uncomplete.webp"),
+                        scale: 5)),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 8),
+                child: Text(
+                 (mainIndex+1).toString(),
+                  style: TextStyle(
+                    fontSize: 10,
+                    color: weeklyDataList[mainIndex].isCompleted == "1" ? Colors.deepOrangeAccent : Colors.transparent.withOpacity(0.5),
+                  ),
+                ),
+              )
+            ],
+
           )
         }
         else if ((weeklyDataList[mainIndex].arrWeekDayData!.isNotEmpty &&
@@ -572,20 +581,25 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
 
           }
           else ...{
-              Container(
+            InkWell(
+              onTap: (){
+                  Utils.showToast(context, Languages.of(context)!.txtExerciseDayWarning);
+              },
+              child: Container(
                 alignment: Alignment.center,
                 height: 60,
                 width: 60,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  // border: Border.all(color: Colur.grey_icon),
                   border: Border.all(color: Colur.disableTxtColor),
                 ),
                 child: Text(
                   (index + 1).toString(),
                   style: TextStyle(color: Colur.disableTxtColor, fontSize: 18),
                 ),
-              )
+              ),
+            )
+
             },
 
         Expanded(

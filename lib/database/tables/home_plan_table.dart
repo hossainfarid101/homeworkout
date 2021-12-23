@@ -8,6 +8,7 @@ class HomePlanTable {
     this.catSubCategory,
     this.catImage,
     this.catTableName,
+    this.catText
   });
 
 
@@ -17,6 +18,7 @@ class HomePlanTable {
   String? catSubCategory;
   String? catImage;
   String? catTableName;
+  String? catText;
 
   factory HomePlanTable.fromRawJson(String str) =>
       HomePlanTable.fromJson(json.decode(str));
@@ -30,6 +32,7 @@ class HomePlanTable {
     catSubCategory: json["catSubCategory"],
     catImage: json["catImage"],
     catTableName: json["catTableName"],
+    catText: json["catText"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -39,5 +42,6 @@ class HomePlanTable {
     "catSubCategory": catSubCategory,
     "catImage": catImage,
     "catTableName": catTableName,
+    "catText": catText,
   };
 }

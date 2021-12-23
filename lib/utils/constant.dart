@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 
 class Constant {
 
-  static const FONT_OSWALD = "Oswald";
 
   static const PLAN_7_MIN_BUTT_WORKOUT = "7 min butt workout";
   static const PLAN_7_MIN_LOSE_ARM_FAT = "7 min lose arm fat";
@@ -113,6 +112,10 @@ class Constant {
   static const EXERCISE_EXTENSION = ".webp";
 
   static const LAST_TIME = "LAST_TIME";
+
+  static const BEGINNER = "Beginner";
+  static const INTERMEDIATE = "Intermediate";
+  static const ADVANCED = "Advanced";
 
 
   static const ML_100 = 100;
