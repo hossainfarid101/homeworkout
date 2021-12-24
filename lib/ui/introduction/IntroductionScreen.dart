@@ -322,24 +322,8 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                     ),
                   ),
                 ),
-
             ],
           ),
-         /* if (currentPageIndex != 8) ...{
-            Container(
-              alignment: Alignment.center,
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                child: LinearProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colur.darkBlueColor),
-                  value: updateValue,
-                  backgroundColor: Colur.unSelectedProgressColor,
-                  minHeight: 4,
-                  semanticsValue: '10',
-                ),
-              ),
-            ),
-          }*/
         ],
       ),
     );

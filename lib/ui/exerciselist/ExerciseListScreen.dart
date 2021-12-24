@@ -135,10 +135,10 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
           } else if(widget.isFromOnboarding!) {
             Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TrainingScreen()), (route) => false);
             return Future.value(true);
-          }else if(widget.fromPage == Constant.PAGE_HOME) {
+          } else if(widget.fromPage == Constant.PAGE_HOME) {
             Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TrainingScreen()), (route) => false);
             return Future.value(true);
-          }else if(widget.fromPage == Constant.PAGE_DISCOVER){
+          } else if(widget.fromPage == Constant.PAGE_DISCOVER && !widget.isFromOnboarding!){
             Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => DiscoverScreen()), (route) => false);
             return Future.value(true);
           } else if(widget.fromPage == Constant.PAGE_DAYS_STATUS){
@@ -200,7 +200,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
                           Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TrainingScreen()), (route) => false);
                         }else if(widget.fromPage == Constant.PAGE_HOME) {
                           Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TrainingScreen()), (route) => false);
-                        }else if(widget.fromPage == Constant.PAGE_DISCOVER){
+                        }else if(widget.fromPage == Constant.PAGE_DISCOVER && !widget.isFromOnboarding!){
                           Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => DiscoverScreen()), (route) => false);
                         } else if(widget.fromPage == Constant.PAGE_DAYS_STATUS){
                           Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => ExerciseDaysStatusScreen(planName: widget.planName)), (route) => false);
@@ -224,7 +224,6 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
                     flexibleSpace: FlexibleSpaceBar(
                       centerTitle: false,
                       background:
-
                       Container(
                         alignment: Alignment.bottomLeft,
                         decoration: BoxDecoration(
@@ -246,9 +245,8 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
                             children: [
                               Container(
                                 margin: EdgeInsets.symmetric(
-                                    vertical: (widget.fromPage !=
-                                            Constant.PAGE_DAYS_STATUS)
-                                        ? 30
+                                    vertical: (widget.fromPage == Constant.PAGE_HOME)
+                                        ? 10
                                         : 0),
                                 child: Text(
                                   (widget.fromPage == Constant.PAGE_HOME)
@@ -283,6 +281,24 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
                                     style: TextStyle(
                                       color: Colur.white,
                                       fontWeight: FontWeight.w700,
+                                      fontSize: 14.0,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Visibility(
+                                visible:
+                                widget.fromPage == Constant.PAGE_DISCOVER,
+                                child: Container(
+                                  margin: const EdgeInsets.symmetric(vertical: 10),
+                                  child: Text(
+                                    (widget.fromPage == Constant.PAGE_DISCOVER && widget.discoverPlanTable!.shortDes != null)
+                                        ? widget.discoverPlanTable!.shortDes!
+                                        : "",
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      color: Colur.white,
+                                      fontWeight: FontWeight.w500,
                                       fontSize: 14.0,
                                     ),
                                   ),

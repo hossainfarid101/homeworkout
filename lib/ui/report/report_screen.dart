@@ -324,7 +324,7 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
           child: Container(
             margin: const EdgeInsets.symmetric(vertical: 10),
             alignment: Alignment.center,
-            child: Text(Languages.of(context)!.txtRecords),
+            child: Text(Languages.of(context)!.txtRecords, style: TextStyle(color: Colur.theme)),
           ),
         ),
         Divider(

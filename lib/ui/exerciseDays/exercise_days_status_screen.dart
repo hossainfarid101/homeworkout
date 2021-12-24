@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -263,7 +264,9 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
                     color: Colur.iconGreyBg,
                     child: Column(
                       children: [
+
                         _widgetListOfDays(),
+
                         Container(
                           width: double.infinity,
                           margin: const EdgeInsets.symmetric(
@@ -442,12 +445,12 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
                   child: GridView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       gridDelegate:
-                          const SliverGridDelegateWithMaxCrossAxisExtent(
-                              maxCrossAxisExtent: 105,
+                           SliverGridDelegateWithMaxCrossAxisExtent(
+                              maxCrossAxisExtent: MediaQuery.of(context).size.width < 370 ? MediaQuery.of(context).size.width*0.25 : 105,
                               childAspectRatio: 3 / 1.2,
                               crossAxisSpacing: 0,
                               mainAxisSpacing: 10),
-                      padding: const EdgeInsets.all(0),
+                      padding: const EdgeInsets.only(left: 0),
                       itemCount: 8,
                       shrinkWrap: true,
                       itemBuilder: (BuildContext ctx, index) {
@@ -474,6 +477,7 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
         (index == 0 && boolFlagWeekComplete)){
       weekDaysPosition = index;
     }
+    Debug.printLog("====>" + MediaQuery.of(context).size.width.toString());
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -593,7 +597,7 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
                   shape: BoxShape.circle,
                   border: Border.all(color: Colur.disableTxtColor),
                 ),
-                child: Text(
+                child: AutoSizeText(
                   (index + 1).toString(),
                   style: TextStyle(color: Colur.disableTxtColor, fontSize: 18),
                 ),

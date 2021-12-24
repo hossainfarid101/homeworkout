@@ -532,7 +532,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Colur.transparent.withOpacity(0.1),
+                          color: Colur.iconGrey.withOpacity(0.2),
                           shape: BoxShape.circle,
                         ),
                         padding: const EdgeInsets.all(5.0),
@@ -577,7 +577,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                       margin: const EdgeInsets.symmetric(
                           vertical: 15.0, horizontal: 5),
                       decoration: BoxDecoration(
-                        color: Colur.transparent.withOpacity(0.1),
+                        color: Colur.iconGrey.withOpacity(0.2),
                         shape: BoxShape.circle,
                       ),
                       child: Padding(
@@ -621,7 +621,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                     child: Container(
                       margin: const EdgeInsets.symmetric(vertical: 15.0),
                       decoration: BoxDecoration(
-                        color: Colur.transparent.withOpacity(0.1),
+                        color: Colur.iconGrey.withOpacity(0.2),
                         shape: BoxShape.circle,
                       ),
                       child: Padding(

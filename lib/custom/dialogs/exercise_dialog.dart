@@ -104,42 +104,6 @@ class _ExerciseDialogState extends State<ExerciseDialog>  with TickerProviderSta
       children: [
         Stack(
           children: [
-            /*SizedBox(
-              height: 120.0,
-              width: double.infinity,
-              child: Image.asset(
-                'assets/images/arm_intermediate.webp',
-                fit: BoxFit.cover,
-              ),
-            ),*/
-            /*(listOfImagesCount.isEmpty)
-                ? Container(
-                    height: MediaQuery.of(context).size.height * 0.2,
-                    width: MediaQuery.of(context).size.height * 0.1,
-                    margin: const EdgeInsets.all(10),
-                    child: Image.asset(
-                      'assets/images/arm_advanced.webp',
-                      gaplessPlayback: true,
-                      fit: BoxFit.cover,
-                    ),
-                  )
-                : Container(
-                    height: MediaQuery.of(context).size.height * 0.1,
-                    width: MediaQuery.of(context).size.height * 0.1,
-                    child: AnimatedBuilder(
-                      animation: listLifeGuideAnimation[widget.index!],
-                      builder: (BuildContext context, Widget? child) {
-                        String frame = listLifeGuideAnimation[widget.index!]
-                            .value
-                            .toString();
-                        return new Image.asset(
-                          'assets/${_getImagePathFromList(widget.index!)}/$frame${Constant.EXERCISE_EXTENSION}',
-                          gaplessPlayback: true,
-                        );
-                      },
-                    ),
-                  ),*/
-
             listLifeGuideAnimation != null ? Container(
               height: 120.0,
               width: double.infinity,
@@ -173,7 +137,7 @@ class _ExerciseDialogState extends State<ExerciseDialog>  with TickerProviderSta
                   width: 30,
                   height: 30,
                   decoration: BoxDecoration(
-                      color: Colur.iconBgColor,
+                      color: Colur.iconGrey.withOpacity(0.2),
                       shape: BoxShape.circle
                   ),
                   child: Icon(
