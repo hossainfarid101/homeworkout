@@ -8,27 +8,6 @@ class LanguageEn extends Languages {
   String get txtLB => "Lb";
 
   @override
-  String get txtGood => "Good";
-
-  @override
-  String get txtBad => "Bad";
-
-  @override
-  String get txtGreat => "Great";
-
-  @override
-  String get txtOkay => "Okay";
-
-  @override
-  String get txtTerrible => "Terrible";
-
-  @override
-  String get txtBestWeCanGet => "The best we can get";
-
-  @override
-  String get txtRate => "Rate";
-
-  @override
   String get txtCancel => "Cancel";
 
   @override
@@ -41,9 +20,6 @@ class LanguageEn extends Languages {
   @override
   String get txtWarningForLbs =>
       "Please enter lbs greater than 45 and less 2200";
-
-  @override
-  String get txtRatingOnGooglePlay => "Rate on Google Play";
 
   @override
   String get txtReport => "Report";
@@ -76,31 +52,10 @@ class LanguageEn extends Languages {
   String get txt7X4Challenge => "7X4 Challenge";
 
   @override
-  String get txtAbsBeginner => "Abs Beginner";
-
-  @override
-  String get txtArmBeginner => "Arm Beginner";
-
-  @override
   String get txtBeginner => "Beginner";
 
   @override
-  String get txtChestBeginner => "Chest Beginner";
-
-  @override
-  String get txtDaysLeft => "Days Left";
-
-  @override
   String get txtFullBody => "Full Body";
-
-  @override
-  String get txtLegBeginner => "Leg Beginner";
-
-  @override
-  String get txtLowerBody => "Lower Body";
-
-  @override
-  String get txtShoulderBackBeginner => "Shoulder & Back Beginner";
 
   @override
   String get txtDiscover => "Discover";
@@ -118,7 +73,7 @@ class LanguageEn extends Languages {
   String get txtCountdownTime => "Countdown Time";
 
   @override
-  String get txtFeedBack => "FeedBack";
+  String get txtFeedBack => "Feedback";
 
   @override
   String get txtGeneralSettings => "General Settings";
@@ -170,7 +125,7 @@ class LanguageEn extends Languages {
 
   @override
   String get txtShareDesc =>
-      "I'm training with Home Workout and am getting great results.\n\nHere are workouts for all your main muscle groups to help you build and tone muscles - no equipment needed. Challenge yourself! \n\nDownload the app:";
+      "I'm training with Home Workout and getting great results.\n\nHere are workouts for all your main muscle groups to help you build and tone muscles - no equipment needed. Challenge yourself! \n\nDownload the app:";
 
   @override
   String get txtHomeWorkoutFeedbackAndroid => "Home Workout Feedback - Android";
@@ -232,7 +187,7 @@ class LanguageEn extends Languages {
   String get txtMale => "Male";
 
   @override
-  String get txtBirthYear => "Birth year";
+  String get txtBirthDate => "Birth date";
 
   @override
   String get txtGender => "Gender";
@@ -260,9 +215,6 @@ class LanguageEn extends Languages {
 
   @override
   String get txtGo => "Go";
-
-  @override
-  String get txtMins => "Mins";
 
   @override
   String get txtWorkouts => "Workouts";
@@ -322,14 +274,11 @@ class LanguageEn extends Languages {
   String get txtBmiKg => "BMI(kg/m\u00B2) :";
 
   @override
-  String get txtheight => "Height";
-
-  @override
   String get txtIn => "In";
 
   @override
   String get txtWarningForCm =>
-      "Please enter height greater than 20 cm and less 400 cm";
+      "Please enter height greater than 20 cm and less than 400 cm";
 
   @override
   String get txtWarningForInch =>
@@ -351,9 +300,6 @@ class LanguageEn extends Languages {
   String get txtUnderweight => "Underweight";
 
   @override
-  String get txtVeryObese => "Very Obese";
-
-  @override
   String get txtVeryUnderweight => "Very Underweight";
 
   @override
@@ -366,7 +312,7 @@ class LanguageEn extends Languages {
   String get txtBeginnerDay => "Beginner Day ";
 
   @override
-  String get txtAdvance => "Advance";
+  String get txtAdvance => "Advanced";
 
   @override
   String get txtIntermediate => "Intermediate";
@@ -378,17 +324,7 @@ class LanguageEn extends Languages {
   String get txtIntermediateDay => "Intermediate Day ";
 
   @override
-  String get txtDelete => "Delete";
-
-  @override
-  String get txtDeleteExe => "Are you sure you want to delete exercise?";
-
-  @override
   String get txtSetWeeklyGoal => "Set your weekly goal";
-
-  @override
-  String get txtSetGoalDesc =>
-      "We recommend training at least 3 days weekly for a better result.";
 
   @override
   String get txtWeeklyTrainingDays => "Weekly training days";
@@ -481,9 +417,6 @@ class LanguageEn extends Languages {
   String get txtResume => "Resume";
 
   @override
-  String get txtBestQuarantine => "Best Quarantine workout";
-
-  @override
   String get txtSeconds => "Seconds";
 
   @override
@@ -509,13 +442,10 @@ class LanguageEn extends Languages {
 
   @override
   String get txtHowManyPushUpsCan =>
-      "How many push-ups can you do at one time?";
+      "How many push-ups can you do at a time?";
 
   @override
   String get txtWhatsYourActivityLevel => "What's your activity level?";
-
-  @override
-  String get txSetYourWeeklyGoal => "Set your weekly goal";
 
   @override
   String get txtWeRecommendTraining =>
@@ -536,11 +466,7 @@ class LanguageEn extends Languages {
   String get txtYourPlanIsReady => "Your plan is ready!";
 
   @override
-  String get txtWeHaveSelectedThisPlan =>
-      "We have selected this plan that suits you the best.";
-
-  @override
-  String get txtGetMyPlan => "Get my plan";
+  String get txtWeHaveSelectedThisPlan => "We have selected the plan that suits you the best.";
 
   @override
   String get txtStartNow => "Start now";
@@ -558,7 +484,7 @@ class LanguageEn extends Languages {
   String get txtLeg => "Leg";
 
   @override
-  String get txtDayLeft => "day left";
+  String get txtDayLeft => "days left";
 
   @override
   String get txtBuildMuscle => "Build Muscle";
@@ -594,7 +520,7 @@ class LanguageEn extends Languages {
   String get txtDesLightlyActive => "I occasionally exercise or walk for 30 minutes";
 
   @override
-  String get txtDesModeratelyActive => "You moving fast enough or strenuously enough to burn off three to six times as much energy per minute.";
+  String get txtDesModeratelyActive => "You move fast enough or strenuously enough to burn off three to six times as much energy per minute.";
 
   @override
   String get txtDesSedentary => "You do at least 30 minutes per day of intentional exercise, you are considered sedentary.";
@@ -639,7 +565,7 @@ class LanguageEn extends Languages {
   String get txtUnlockOnce => "Unlock once";
 
   @override
-  String get txtFreeTrialDesc => "Free 7Days Trial,then ₹3500.00/year. \nCancel anything during the trial.";
+  String get txtFreeTrialDesc => "Free 7 Days Trial,then ₹3500.00/year. \nCancel anytime during the trial.";
 
   @override
   String get txtFree7DaysTrial => "Free 7 days trial";

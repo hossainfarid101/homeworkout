@@ -59,10 +59,19 @@ class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
 
   @override
   void initState() {
+    _manageDrawer();
     _getDataFromQuarantine();
     _createRewardedAd();
     _createBottomBannerAd();
     super.initState();
+  }
+
+  void _manageDrawer() {
+    Constant.isReportScreen = false;
+    Constant.isReminderScreen = false;
+    Constant.isSettingsScreen = false;
+    Constant.isDiscoverScreen = false;
+    Constant.isTrainingScreen = false;
   }
 
 

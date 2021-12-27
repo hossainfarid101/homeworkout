@@ -59,7 +59,7 @@ abstract class Languages {
 
   String get txtWhatsYourActivityLevel;
 
-  String get txSetYourWeeklyGoal;
+  //String get txSetYourWeeklyGoal;
 
   String get txtWeRecommendTraining;
 
@@ -73,7 +73,7 @@ abstract class Languages {
 
   String get txtWeHaveSelectedThisPlan;
 
-  String get txtGetMyPlan;
+  // String get txtGetMyPlan;
 
   String get txtStartNow;
 
@@ -119,7 +119,7 @@ abstract class Languages {
 
   String get txtWorkouts;
 
-  String get txtMins;
+  // String get txtMins;
 
   String get txtWeightUnit;
 
@@ -135,7 +135,7 @@ abstract class Languages {
 
   String get txtGender;
 
-  String get txtBirthYear;
+  String get txtBirthDate;
 
   String get txtFemale;
 
@@ -231,21 +231,21 @@ abstract class Languages {
 
   String get txtTrainingPlans;
 
-  String get txtGood;
+  // String get txtGood;
 
-  String get txtOkay;
+  // String get txtOkay;
 
-  String get txtRate;
+  // String get txtRate;
 
-  String get txtTerrible;
+  // String get txtTerrible;
 
-  String get txtBad;
+  // String get txtBad;
 
-  String get txtGreat;
+  // String get txtGreat;
 
-  String get txtRatingOnGooglePlay;
+  // String get txtRatingOnGooglePlay;
 
-  String get txtBestWeCanGet;
+  // String get txtBestWeCanGet;
 
   String get txtKG;
 
@@ -271,21 +271,21 @@ abstract class Languages {
 
   String get txtFullBody;
 
-  String get txtLowerBody;
+  // String get txtLowerBody;
 
-  String get txtDaysLeft;
+  // String get txtDaysLeft;
 
-  String get txtBeginner;
+   String get txtBeginner;
 
-  String get txtAbsBeginner;
+  // String get txtAbsBeginner;
 
-  String get txtChestBeginner;
+  // String get txtChestBeginner;
 
-  String get txtArmBeginner;
+  // String get txtArmBeginner;
 
-  String get txtLegBeginner;
+  // String get txtLegBeginner;
 
-  String get txtShoulderBackBeginner;
+  // String get txtShoulderBackBeginner;
 
   String get txtMoreWorkout;
 
@@ -307,7 +307,7 @@ abstract class Languages {
 
   String get txtBmiKg;
 
-  String get txtheight;
+  // String get txtheight;
 
   String get txtIn;
 
@@ -325,7 +325,7 @@ abstract class Languages {
 
   String get txtModeratelyObese;
 
-  String get txtVeryObese;
+  // String get txtVeryObese;
 
   String get txtSeverelyObese;
 
@@ -343,13 +343,13 @@ abstract class Languages {
 
   String get txtAdvanceDay;
 
-  String get txtDelete;
+  // String get txtDelete;
 
-  String get txtDeleteExe;
+  // String get txtDeleteExe;
 
   String get txtSetWeeklyGoal;
 
-  String get txtSetGoalDesc;
+  // String get txtSetGoalDesc;
 
   String get txtWeeklyTrainingDays;
 
@@ -395,7 +395,7 @@ abstract class Languages {
 
   String get txtResume;
 
-  String get txtBestQuarantine;
+  // String get txtBestQuarantine;
 
   String get txtSeconds;
 

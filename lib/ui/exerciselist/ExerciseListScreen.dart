@@ -129,31 +129,8 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
       ),
       child: WillPopScope(
         onWillPop: () {
-          if(widget.isFromHistory!) {
-            Navigator.pop(context);
-            return Future.value(true);
-          } else if(widget.isFromOnboarding!) {
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TrainingScreen()), (route) => false);
-            return Future.value(true);
-          } else if(widget.fromPage == Constant.PAGE_HOME) {
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TrainingScreen()), (route) => false);
-            return Future.value(true);
-          } else if(widget.fromPage == Constant.PAGE_DISCOVER && !widget.isFromOnboarding!){
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => DiscoverScreen()), (route) => false);
-            return Future.value(true);
-          } else if(widget.fromPage == Constant.PAGE_DAYS_STATUS){
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => ExerciseDaysStatusScreen(planName: widget.planName)), (route) => false);
-            return Future.value(true);
-          } else if(widget.fromPage == Constant.PAGE_QUARANTINE){
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => QuarantineAtHomeScreen()), (route) => false);
-            return Future.value(true);
-          } else if(widget.fromPage == Constant.PAGE_HISTORY){
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => WorkoutHistoryScreen()), (route) => false);
-            return Future.value(true);
-          } else {
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TrainingScreen()), (route) => false);
-            return Future.value(true);
-          }
+          _goBack(context);
+          return Future.value(false);
         },
         child: Scaffold(
           body: SafeArea(
@@ -194,23 +171,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
                         : Container(),
                     leading: InkWell(
                       onTap: () {
-                        if(widget.isFromHistory!) {
-                          Navigator.pop(context);
-                        } else if(widget.isFromOnboarding!) {
-                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TrainingScreen()), (route) => false);
-                        }else if(widget.fromPage == Constant.PAGE_HOME) {
-                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TrainingScreen()), (route) => false);
-                        }else if(widget.fromPage == Constant.PAGE_DISCOVER && !widget.isFromOnboarding!){
-                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => DiscoverScreen()), (route) => false);
-                        } else if(widget.fromPage == Constant.PAGE_DAYS_STATUS){
-                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => ExerciseDaysStatusScreen(planName: widget.planName)), (route) => false);
-                        } else if(widget.fromPage == Constant.PAGE_QUARANTINE){
-                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => QuarantineAtHomeScreen()), (route) => false);
-                        } else if(widget.fromPage == Constant.PAGE_HISTORY){
-                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => WorkoutHistoryScreen()), (route) => false);
-                        } else {
-                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TrainingScreen()), (route) => false);
-                        }
+                        _goBack(context);
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(0.0),
@@ -351,6 +312,26 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
         ),
       ),
     );
+  }
+
+  void _goBack(BuildContext context) {
+    if(widget.isFromHistory!) {
+      Navigator.pop(context);
+    } else if(widget.isFromOnboarding!) {
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TrainingScreen()), (route) => false);
+    } else if(widget.fromPage == Constant.PAGE_HOME) {
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TrainingScreen()), (route) => false);
+    } else if(widget.fromPage == Constant.PAGE_DISCOVER && !widget.isFromOnboarding!){
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => DiscoverScreen()), (route) => false);
+    } else if(widget.fromPage == Constant.PAGE_DAYS_STATUS){
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => ExerciseDaysStatusScreen(planName: widget.planName)), (route) => false);
+    } else if(widget.fromPage == Constant.PAGE_QUARANTINE){
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => QuarantineAtHomeScreen()), (route) => false);
+    } else if(widget.fromPage == Constant.PAGE_HISTORY){
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => WorkoutHistoryScreen()), (route) => false);
+    } else {
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TrainingScreen()), (route) => false);
+    }
   }
 
   _instructionWidget() {

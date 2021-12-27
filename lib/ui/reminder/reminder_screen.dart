@@ -52,9 +52,18 @@ class _ReminderScreenState extends State<ReminderScreen> implements TopBarClickL
 
   @override
   void initState() {
+    _manageDrawer();
     _refresh();
     _createBottomBannerAd();
     super.initState();
+  }
+
+  void _manageDrawer() {
+    Constant.isReportScreen = false;
+    Constant.isReminderScreen = true;
+    Constant.isSettingsScreen = false;
+    Constant.isDiscoverScreen = false;
+    Constant.isTrainingScreen = false;
   }
 
   @override

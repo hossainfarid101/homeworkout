@@ -79,12 +79,21 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
 
   @override
   void initState() {
+    _manageDrawer();
     _scrollController = ScrollController();
     _scrollController!.addListener(_scrollListener);
     _getHomeSubPlanList();
     _createRewardedAd();
     _createBottomBannerAd();
     super.initState();
+  }
+
+  void _manageDrawer() {
+    Constant.isReportScreen = false;
+    Constant.isReminderScreen = false;
+    Constant.isSettingsScreen = false;
+    Constant.isDiscoverScreen = false;
+    Constant.isTrainingScreen = false;
   }
 
 

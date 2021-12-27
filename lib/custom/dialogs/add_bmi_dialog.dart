@@ -240,7 +240,7 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                             margin: EdgeInsets.only(left: 25, bottom: 10),
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              Languages.of(context)!.txtheight,
+                              Languages.of(context)!.txtHeight,
                               style: TextStyle(
                                   color: Colur.black,
                                   fontWeight: FontWeight.w600,

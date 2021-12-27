@@ -70,11 +70,20 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
 
   @override
   void initState() {
+    _manageDrawer();
     _scrollController = ScrollController();
     _scrollController!.addListener(_scrollListener);
     _getDataFromDatabase();
     _createBottomBannerAd();
     super.initState();
+  }
+
+  void _manageDrawer() {
+    Constant.isReportScreen = false;
+    Constant.isReminderScreen = false;
+    Constant.isSettingsScreen = false;
+    Constant.isDiscoverScreen = false;
+    Constant.isTrainingScreen = false;
   }
 
   @override
@@ -271,7 +280,7 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
                           width: double.infinity,
                           margin: const EdgeInsets.symmetric(
                               horizontal: 20.0, vertical: 15.0),
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          padding: const EdgeInsets.symmetric(vertical: 5.0),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(40.0),
                             gradient: LinearGradient(

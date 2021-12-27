@@ -93,6 +93,7 @@ class _TrainingScreenState extends State<TrainingScreen>
 
   @override
   void initState() {
+    _manageDrawer();
     InAppPurchaseHelper().getAlreadyPurchaseItems(this);
     Preference.shared.setInt(Preference.DRAWER_INDEX, 0);
     _getPreference();
@@ -101,6 +102,14 @@ class _TrainingScreenState extends State<TrainingScreen>
     _getDataFromDatabase();
     _createBottomBannerAd();
     super.initState();
+  }
+
+  void _manageDrawer() {
+    Constant.isReportScreen = false;
+    Constant.isReminderScreen = false;
+    Constant.isSettingsScreen = false;
+    Constant.isDiscoverScreen = false;
+    Constant.isTrainingScreen = true;
   }
 
   @override

@@ -168,7 +168,7 @@ class _HealthDataScreenState extends State<HealthDataScreen> implements TopBarCl
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-              Languages.of(context)!.txtBirthYear,
+              Languages.of(context)!.txtBirthDate,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
                 color: Colur.txtBlack,

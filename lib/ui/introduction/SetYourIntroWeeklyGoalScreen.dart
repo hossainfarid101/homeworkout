@@ -32,7 +32,14 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourIntroWeeklyGoalScreen> 
   @override
   void initState() {
     selectTrainingDays = Preference.shared.getString(Preference.SELECTED_TRAINING_DAY) ?? "0";
-    selectFirstDayOfWeek = Preference.shared.getString(Preference.SELECTED_FIRST_DAY_OF_WEEK) ?? "Sunday";
+    var firstDayOfWeek = Preference.shared.getInt(Preference.SELECTED_FIRST_DAY_OF_WEEK) ?? 0;
+    if(firstDayOfWeek == 0) {
+      selectFirstDayOfWeek = "Sunday";
+    } else if(firstDayOfWeek == 1) {
+      selectFirstDayOfWeek = "Monday";
+    } else if(firstDayOfWeek == 2) {
+      selectFirstDayOfWeek = "Saturday";
+    }
 
     if(selectTrainingDays == "1") {
       selectedOne = true;

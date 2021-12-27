@@ -95,6 +95,7 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
 
   @override
   void initState() {
+    _manageDrawer();
     int totalDaysInYear = DateTime(DateTime.now().year, 12, 31)
         .difference(DateTime(DateTime.now().year, 1, 1))
         .inDays;
@@ -112,6 +113,13 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
     setBmiCalculation();
     _createBottomBannerAd();
     super.initState();
+  }
+  void _manageDrawer() {
+    Constant.isReportScreen = true;
+    Constant.isReminderScreen = false;
+    Constant.isSettingsScreen = false;
+    Constant.isDiscoverScreen = false;
+    Constant.isTrainingScreen = false;
   }
 
   _getDataFromDatabase(){

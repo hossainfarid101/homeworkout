@@ -10,6 +10,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:homeworkout_flutter/ui/discover/DiscoverScreen.dart';
 import 'package:homeworkout_flutter/ui/introduction/IntroductionScreen.dart';
 import 'package:homeworkout_flutter/ui/reminder/reminder_screen.dart';
+import 'package:homeworkout_flutter/ui/reminder/reminder_screen_.dart';
 import 'package:homeworkout_flutter/ui/report/report_screen.dart';
 import 'package:homeworkout_flutter/ui/settings/settings_screen.dart';
 import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
@@ -229,7 +230,7 @@ class _MyAppState extends State<MyApp> {
         '/discover': (BuildContext context) => DiscoverScreen(),
         '/report': (BuildContext context) => ReportScreen(),
         '/settings': (BuildContext context) => SettingsScreen(),
-        '/reminder': (BuildContext context) => ReminderScreen(),
+        '/reminder': (BuildContext context) => ReminderScreen_(),
         '/workoutCompleteScreen': (BuildContext context) =>
             WorkoutCompleteScreen(),
         '/introductionScreen': (BuildContext context) => IntroductionScreen(),

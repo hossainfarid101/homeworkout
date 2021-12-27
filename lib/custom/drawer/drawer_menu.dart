@@ -6,6 +6,7 @@ import 'package:homeworkout_flutter/database/database_helper.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
+import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 
 class DrawerMenu extends StatefulWidget {
@@ -144,11 +145,20 @@ class _DrawerMenuState extends State<DrawerMenu> {
   _itemDrawer(int index) {
     return InkWell(
       onTap: () {
-        setState(() {
-          currentIndex = index;
-        });
-        Preference.shared.setInt(Preference.DRAWER_INDEX, currentIndex!);
-        Navigator.popAndPushNamed(context, drawerDataList[index].navPath!);
+        //_navigateFromDrawer(index);
+        if(index == 0 && Constant.isTrainingScreen) {
+          Navigator.pop(context);
+        } else if(index == 1 && Constant.isDiscoverScreen) {
+          Navigator.pop(context);
+        } else if(index == 2 && Constant.isReportScreen) {
+          Navigator.pop(context);
+        } else if(index == 3 && Constant.isReminderScreen) {
+          Navigator.pop(context);
+        } else if(index == 4 && Constant.isSettingsScreen) {
+          Navigator.pop(context);
+        } else {
+          _navigateFromDrawer(index);
+        }
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -186,6 +196,14 @@ class _DrawerMenuState extends State<DrawerMenu> {
         ),
       ),
     );
+  }
+
+  void _navigateFromDrawer(int index) {
+    setState(() {
+      currentIndex = index;
+    });
+    Preference.shared.setInt(Preference.DRAWER_INDEX, currentIndex!);
+    Navigator.popAndPushNamed(context, drawerDataList[index].navPath!);
   }
 
   _drawerData(BuildContext context) {

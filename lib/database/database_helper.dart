@@ -7,6 +7,7 @@ import 'package:homeworkout_flutter/database/tables/fullbody_workout_table.dart'
 import 'package:homeworkout_flutter/database/tables/history_table.dart';
 import 'package:homeworkout_flutter/database/tables/history_week_data.dart';
 import 'package:homeworkout_flutter/database/tables/home_plan_table.dart';
+import 'package:homeworkout_flutter/database/tables/reminder_table.dart';
 import 'package:homeworkout_flutter/database/tables/weight_table.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
@@ -81,12 +82,11 @@ class DataBaseHelper {
 
   String historyTable ="tbl_history";
   String weightTable = "tbl_Weight";
-  String youtubeLinkTable = "tbl_youtube_link";
-  String reminderTable = "tbl_reminder";
-  String discoverPlanTable = "DiscoverPlanTable";
+       String discoverPlanTable = "DiscoverPlanTable";
   String homePlanTable = "HomePlanTable";
   String homeExSingleTable = "HomeExSingleTable";
   String exerciseTable = "ExerciseTable";
+  String reminderTable = "tbl_reminder";
 
 
 
@@ -595,5 +595,22 @@ class DataBaseHelper {
       }
     }
     return homePlanList.first;
+  }
+
+  Future<List<ReminderTable>> getReminderData() async {
+    List<ReminderTable>homePlanList = [];
+    var dbClient = await db;
+    List<Map<String, dynamic>> maps = await dbClient
+        .rawQuery("SELECT * FROM $reminderTable");
+    if (maps.length > 0) {
+      for (var answer in maps) {
+        var homePlanData = ReminderTable.fromJson(answer);
+        homePlanList.add(homePlanData);
+      }
+    }
+    homePlanList.forEach((element) { 
+      Debug.printLog("id: " + element.id.toString() + "time: " + element.time! + "isActive: " + element.isActive!.toString());
+    });
+    return homePlanList;
   }
 }

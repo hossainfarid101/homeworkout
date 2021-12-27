@@ -82,10 +82,19 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   );
   @override
   void initState() {
+    _manageDrawer();
     _getDataFromDatabase();
     _createRewardedAd();
     _createBottomBannerAd();
     super.initState();
+  }
+
+  void _manageDrawer() {
+    Constant.isReportScreen = false;
+    Constant.isReminderScreen = false;
+    Constant.isSettingsScreen = false;
+    Constant.isDiscoverScreen = true;
+    Constant.isTrainingScreen = false;
   }
 
   void _createRewardedAd() {
@@ -1206,7 +1215,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                 borderRadius: BorderRadius.circular(50.0),
               ),
               child: Icon(Icons.navigate_next_rounded,
-                  size: 40.0, color: Colur.white),
+                  size: 35.0, color: Colur.white),
             ),
           ),
         ),

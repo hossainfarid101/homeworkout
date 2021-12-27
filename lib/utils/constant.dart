@@ -138,6 +138,12 @@ class Constant {
   static const MIN_FT = 0.0;
   static const MAX_FT = 14.0;
 
+  static  bool isTrainingScreen = false;
+  static  bool isDiscoverScreen = false;
+  static  bool isReportScreen = false;
+  static  bool isReminderScreen = false;
+  static  bool isSettingsScreen = false;
+
   static List<MultiSelectDialogItem> daysList = [
     MultiSelectDialogItem("1", DateFormat.EEEE(getLocale().languageCode).dateSymbols.WEEKDAYS[0]),
     MultiSelectDialogItem("2", DateFormat.EEEE(getLocale().languageCode).dateSymbols.WEEKDAYS[1]),

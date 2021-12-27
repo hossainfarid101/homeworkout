@@ -153,7 +153,7 @@ class _SetWeeklyGoalScreenState extends State<SetWeeklyGoalScreen> {
                       Container(
                         margin: const EdgeInsets.only(bottom: 10),
                         child: Text(
-                          Languages.of(context)!.txtSetGoalDesc,
+                          Languages.of(context)!.txtWeRecommendTraining,
                           style: TextStyle(
                               fontSize: 14,
                               color: Colur.txt_gray,

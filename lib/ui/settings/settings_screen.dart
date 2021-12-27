@@ -13,6 +13,7 @@ import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/healthData/healthdata_screen.dart';
 import 'package:homeworkout_flutter/ui/metric&ImperialUnits/metricimperialunit_screen.dart';
 import 'package:homeworkout_flutter/ui/reminder/reminder_screen.dart';
+import 'package:homeworkout_flutter/ui/reminder/reminder_screen_.dart';
 import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
 import 'package:homeworkout_flutter/utils/ad_helper.dart';
 import 'package:homeworkout_flutter/ui/unlockPremium/unlock_premium_screen.dart';
@@ -78,6 +79,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
 
   @override
   void initState() {
+    _manageDrawer();
     _getPreference();
     rateMyApp = RateMyApp(
         preferencesPrefix: 'rateMyApp_',
@@ -173,6 +175,14 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
     }
     _createBottomBannerAd();
     super.initState();
+  }
+
+  void _manageDrawer() {
+    Constant.isReportScreen = false;
+    Constant.isReminderScreen = false;
+    Constant.isSettingsScreen = true;
+    Constant.isDiscoverScreen = false;
+    Constant.isTrainingScreen = false;
   }
 
   @override
@@ -472,7 +482,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
             //==reminder======
             InkWell(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const ReminderScreen())).then((value) {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const ReminderScreen_())).then((value) {
                   /*setState(() {
                     _getPreference();
                   });*/
