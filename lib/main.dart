@@ -230,7 +230,7 @@ class _MyAppState extends State<MyApp> {
         '/discover': (BuildContext context) => DiscoverScreen(),
         '/report': (BuildContext context) => ReportScreen(),
         '/settings': (BuildContext context) => SettingsScreen(),
-        '/reminder': (BuildContext context) => ReminderScreen_(),
+        '/reminder': (BuildContext context) => ReminderScreenExtra(),
         '/workoutCompleteScreen': (BuildContext context) =>
             WorkoutCompleteScreen(),
         '/introductionScreen': (BuildContext context) => IntroductionScreen(),

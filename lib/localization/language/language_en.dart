@@ -596,4 +596,16 @@ class LanguageEn extends Languages {
 
   @override
   String get txtExerciseDayWarning => "Please complete the previous days challenge first";
+
+  @override
+  String get txtSetReminder => "Please, set your reminder.";
+
+  @override
+  String get txtTip => "Tip";
+
+  @override
+  String get txtDeleteDesc => "Are you sure you want to delete this reminder?";
+
+  @override
+  String get txtDelete => "Delete";
 }

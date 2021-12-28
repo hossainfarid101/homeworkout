@@ -59,8 +59,6 @@ abstract class Languages {
 
   String get txtWhatsYourActivityLevel;
 
-  //String get txSetYourWeeklyGoal;
-
   String get txtWeRecommendTraining;
 
   String get txtLetUsKnowYouBetterToHelp;
@@ -72,8 +70,6 @@ abstract class Languages {
   String get txtYourPlanIsReady;
 
   String get txtWeHaveSelectedThisPlan;
-
-  // String get txtGetMyPlan;
 
   String get txtStartNow;
 
@@ -118,8 +114,6 @@ abstract class Languages {
   String get txtStart;
 
   String get txtWorkouts;
-
-  // String get txtMins;
 
   String get txtWeightUnit;
 
@@ -231,22 +225,6 @@ abstract class Languages {
 
   String get txtTrainingPlans;
 
-  // String get txtGood;
-
-  // String get txtOkay;
-
-  // String get txtRate;
-
-  // String get txtTerrible;
-
-  // String get txtBad;
-
-  // String get txtGreat;
-
-  // String get txtRatingOnGooglePlay;
-
-  // String get txtBestWeCanGet;
-
   String get txtKG;
 
   String get txtLB;
@@ -271,21 +249,7 @@ abstract class Languages {
 
   String get txtFullBody;
 
-  // String get txtLowerBody;
-
-  // String get txtDaysLeft;
-
    String get txtBeginner;
-
-  // String get txtAbsBeginner;
-
-  // String get txtChestBeginner;
-
-  // String get txtArmBeginner;
-
-  // String get txtLegBeginner;
-
-  // String get txtShoulderBackBeginner;
 
   String get txtMoreWorkout;
 
@@ -307,8 +271,6 @@ abstract class Languages {
 
   String get txtBmiKg;
 
-  // String get txtheight;
-
   String get txtIn;
 
   String get txtWarningForCm;
@@ -324,8 +286,6 @@ abstract class Languages {
   String get txtOverWeight;
 
   String get txtModeratelyObese;
-
-  // String get txtVeryObese;
 
   String get txtSeverelyObese;
 
@@ -343,13 +303,15 @@ abstract class Languages {
 
   String get txtAdvanceDay;
 
-  // String get txtDelete;
-
-  // String get txtDeleteExe;
-
   String get txtSetWeeklyGoal;
 
-  // String get txtSetGoalDesc;
+  String get txtSetReminder;
+
+  String get txtTip;
+
+  String get txtDeleteDesc;
+
+  String get txtDelete;
 
   String get txtWeeklyTrainingDays;
 
@@ -394,8 +356,6 @@ abstract class Languages {
   String get txtQuit;
 
   String get txtResume;
-
-  // String get txtBestQuarantine;
 
   String get txtSeconds;
 

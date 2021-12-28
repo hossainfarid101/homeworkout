@@ -613,4 +613,42 @@ class DataBaseHelper {
     });
     return homePlanList;
   }
+
+  Future<int> insertReminderData(ReminderTable reminderData) async {
+    var dbClient = await db;
+    var result = await dbClient.insert(reminderTable, reminderData.toJson());
+    Debug.printLog("res: $result");
+    return result;
+  }
+
+  Future<int?> updateReminderTime(int id, String time) async {
+    var dbClient = await db;
+    var result = await dbClient.rawUpdate(
+        " UPDATE $reminderTable SET time = '$time' where id = $id ");
+    Debug.printLog("res: $result");
+    return result;
+  }
+
+  Future<int?> updateReminderDays(int id, String days, String repeatNo) async {
+    var dbClient = await db;
+    var result = await dbClient.rawUpdate(
+        " UPDATE $reminderTable SET days = '$days', repeatNo = '$repeatNo' where id = $id ");
+    Debug.printLog("res: $result");
+    return result;
+  }
+
+  Future<int?> updateReminderStatus(int id, String isActive) async {
+    var dbClient = await db;
+    var result = await dbClient.rawUpdate(
+        " UPDATE $reminderTable SET isActive = '$isActive' where id = $id ");
+    Debug.printLog("res: $result");
+    return result;
+  }
+
+  Future<int?> deleteReminder(int id) async {
+    var dbClient = await db;
+    var result = await dbClient.delete(reminderTable, where: "id = ?", whereArgs: [id] );
+    Debug.printLog("res: $result");
+    return result;
+  }
 }

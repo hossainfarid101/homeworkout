@@ -294,6 +294,13 @@ class _SetReminderScreenState extends State<SetReminderScreen> implements TopBar
     );
   }
 
+  @override
+  void onTopBarClick(String name, {bool value = true}) {
+    if (name == Constant.strBack) {
+      Navigator.of(context).pop();
+    }
+  }
+
   showTimePickerDialog(BuildContext context) async {
     final TimeOfDay? picked = await showRoundedTimePicker(
       context: context,
@@ -315,13 +322,6 @@ class _SetReminderScreenState extends State<SetReminderScreen> implements TopBar
           DateTime(2021, 08, 1, selectedTime!.hour, selectedTime!.minute));
       Debug.printLog("${timeController.text}");
       setState(() {});
-    }
-  }
-
-  @override
-  void onTopBarClick(String name, {bool value = true}) {
-    if (name == Constant.strBack) {
-      Navigator.of(context).pop();
     }
   }
 

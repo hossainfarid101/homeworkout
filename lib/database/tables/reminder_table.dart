@@ -5,12 +5,14 @@ class ReminderTable {
   String? isActive;
   String? time;
   String? days;
+  String? repeatNo;
 
   ReminderTable({
     this.id,
     this.time,
     this.days,
     this.isActive,
+     this.repeatNo,
   });
 
   factory ReminderTable.fromRawJson(String str) =>
@@ -23,6 +25,7 @@ class ReminderTable {
     time: json["time"],
     days: json["days"],
     isActive: json["isActive"],
+    repeatNo: json["repeatNo"]
 
 
   );
@@ -32,5 +35,6 @@ class ReminderTable {
     "time": time,
     "days": days,
     "isActive": isActive,
+    "repeatNo": repeatNo
   };
 }

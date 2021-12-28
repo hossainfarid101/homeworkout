@@ -482,7 +482,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
             //==reminder======
             InkWell(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const ReminderScreen_())).then((value) {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const ReminderScreen())).then((value) {
                   /*setState(() {
                     _getPreference();
                   });*/
