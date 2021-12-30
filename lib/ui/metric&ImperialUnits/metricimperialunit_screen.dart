@@ -145,7 +145,7 @@ class _MetricImperialUnitsScreenState extends State<MetricImperialUnitsScreen>
           Text(Languages.of(context)!.txtWeightUnit,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
-                color: Colur.txtBlack,
+                color: Colur.black,
                 fontSize: 16,
               )),
           Text(
@@ -153,7 +153,7 @@ class _MetricImperialUnitsScreenState extends State<MetricImperialUnitsScreen>
                   ? Languages.of(context)!.txtKG.toLowerCase()
                   : Languages.of(context)!.txtLB.toLowerCase(),
               style: const TextStyle(
-                color: Colur.txtBlack,
+                color: Colur.black,
                 fontSize: 12,
               )),
         ],
@@ -172,7 +172,7 @@ class _MetricImperialUnitsScreenState extends State<MetricImperialUnitsScreen>
           Text(Languages.of(context)!.txtHeightUnit,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
-                color: Colur.txtBlack,
+                color: Colur.black,
                 fontSize: 16,
               )),
           Text(
@@ -180,7 +180,7 @@ class _MetricImperialUnitsScreenState extends State<MetricImperialUnitsScreen>
                   ? Languages.of(context)!.txtCM.toLowerCase()
                   : Languages.of(context)!.txtINCH.toLowerCase(),
               style: const TextStyle(
-                color: Colur.txtBlack,
+                color: Colur.black,
                 fontSize: 12,
               )),
         ],
@@ -199,7 +199,7 @@ class _MetricImperialUnitsScreenState extends State<MetricImperialUnitsScreen>
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       fontWeight: FontWeight.w600,
-                      color: Colur.txtBlack,
+                      color: Colur.black,
                       fontSize: 20,
                     )),
                 content: SizedBox(
@@ -250,7 +250,7 @@ class _MetricImperialUnitsScreenState extends State<MetricImperialUnitsScreen>
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       fontWeight: FontWeight.w600,
-                      color: Colur.txtBlack,
+                      color: Colur.black,
                       fontSize: 20,
                     )),
                 content: SizedBox(

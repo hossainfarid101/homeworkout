@@ -90,6 +90,9 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
   late BannerAd _bottomBannerAd;
   bool _isBottomBannerAdLoaded = false;
 
+  late NativeAd _nativeAd;
+  bool _isNativeAdLoaded = false;
+
   void _createBottomBannerAd() {
     _bottomBannerAd = BannerAd(
       adUnitId: AdHelper.bannerAdUnitId,
@@ -109,6 +112,26 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
     _bottomBannerAd.load();
   }
 
+  void _createNativeAd() {
+    _nativeAd = NativeAd(
+      adUnitId: AdHelper.nativeAdUnitId,
+      request: AdRequest(),
+      factoryId: 'adFactoryExample',
+      listener: NativeAdListener(
+        onAdLoaded: (Ad ad) {
+          setState(() {
+            _isNativeAdLoaded = true;
+          });
+        },
+        onAdFailedToLoad: (Ad ad, LoadAdError error) {
+          _createNativeAd();
+          ad.dispose();
+        },
+      ),
+    );
+    _nativeAd.load();
+  }
+
   @override
   void initState() {
     if (widget.fromPage == Constant.PAGE_DAYS_STATUS) {
@@ -123,6 +146,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
         isAnimation = false;
       });
     });
+    _createNativeAd();
     _createBottomBannerAd();
     super.initState();
   }
@@ -205,6 +229,10 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                                   ),
                                   weightWidget(),
                                   bmiWidget(fullWidth),
+
+                                  (_isNativeAdLoaded && !Utils.isPurchased()) ? Container(
+                                      width: double.infinity, height: 350, child: AdWidget(ad: _nativeAd)) : Container(),
+
                                   iFeelWidget(),
                                   nextButtonWidget(fullWidth)
                                 ],

@@ -85,6 +85,46 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
     _bottomBannerAd.load();
   }
 
+  InterstitialAd? _interstitialAd;
+  int? _interstitialCount;
+
+  void _createInterstitialAd() {
+    if (Debug.GOOGLE_AD) {
+      InterstitialAd.load(
+        adUnitId: AdHelper.interstitialAdUnitId,
+        request: AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: (InterstitialAd ad) {
+            _interstitialAd = ad;
+            Preference.shared.setInt(Preference.INTERSTITIAL_AD_COUNT, _interstitialCount!+1);
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            _interstitialAd = null;
+            _createInterstitialAd();
+          },
+        ),
+      );
+    }
+  }
+
+  void _showInterstitialAd() {
+    if (_interstitialAd != null && _interstitialCount! % 2 == 0) {
+      _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+        onAdDismissedFullScreenContent: (InterstitialAd ad) {
+          _moveToWorkoutScreen();
+          ad.dispose();
+        },
+        onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
+          ad.dispose();
+          _moveToWorkoutScreen();
+        },
+      );
+      _interstitialAd!.show();
+    } else {
+      _moveToWorkoutScreen();
+    }
+  }
+
   _scrollListener() {
     if (isShrink != lastStatus) {
       setState(() {
@@ -110,9 +150,11 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
 
   @override
   void initState() {
+    _interstitialCount = Preference.shared.getInt(Preference.INTERSTITIAL_AD_COUNT) ?? 1;
     _scrollController = ScrollController();
     _scrollController!.addListener(_scrollListener);
     _getDataFromDatabase();
+    _createInterstitialAd();
     _createBottomBannerAd();
     super.initState();
   }
@@ -784,47 +826,52 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
           ),
         ),
         onPressed: () {
-          var tableName = "";
-          var planId = "";
-          if (widget.fromPage == Constant.PAGE_HOME) {
-            tableName = widget.homePlanTable!.catTableName.toString();
-          } else if (widget.fromPage == Constant.PAGE_DAYS_STATUS &&
-              widget.planName != "") {
-            if (widget.planName == Constant.Full_body_small) {
-              tableName = Constant.tbl_full_body_workouts_list;
-            } else if (widget.planName == Constant.Lower_body_small) {
-              tableName = Constant.tbl_lower_body_list;
-            }
-          } else if (widget.fromPage == Constant.PAGE_DISCOVER) {
-            planId = widget.discoverPlanTable!.planId.toString();
-          }
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => WorkoutScreen(
-                      fromPage: widget.fromPage,
-                      dayStatusDetailList: workoutDetailList,
-                      exerciseDataList: exerciseDataList,
-                      tableName: tableName,
-                      dayName: widget.dayName,
-                      weekName: widget.weekName,
-                      discoverSingleExerciseData: discoverSingleExerciseList,
-                      planName: widget.planName,
-                      planId: planId,
-                      totalMin: totalMinutes,
-                      homePlanTable: widget.homePlanTable,
-                      isSubPlan: widget.isSubPlan,
-                      weeklyDayData: widget.weeklyDayData,
-                      discoverPlanTable: widget.discoverPlanTable,
-                      isFromOnboarding: widget.isFromOnboarding!))).then(
-              (value) {
-            setState(() {
-              _getDataFromDatabase();
-            });
-          });
+          _showInterstitialAd();
+
         },
       ),
     );
+  }
+
+  void _moveToWorkoutScreen() {
+    var tableName = "";
+    var planId = "";
+    if (widget.fromPage == Constant.PAGE_HOME) {
+      tableName = widget.homePlanTable!.catTableName.toString();
+    } else if (widget.fromPage == Constant.PAGE_DAYS_STATUS &&
+        widget.planName != "") {
+      if (widget.planName == Constant.Full_body_small) {
+        tableName = Constant.tbl_full_body_workouts_list;
+      } else if (widget.planName == Constant.Lower_body_small) {
+        tableName = Constant.tbl_lower_body_list;
+      }
+    } else if (widget.fromPage == Constant.PAGE_DISCOVER) {
+      planId = widget.discoverPlanTable!.planId.toString();
+    }
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => WorkoutScreen(
+                fromPage: widget.fromPage,
+                dayStatusDetailList: workoutDetailList,
+                exerciseDataList: exerciseDataList,
+                tableName: tableName,
+                dayName: widget.dayName,
+                weekName: widget.weekName,
+                discoverSingleExerciseData: discoverSingleExerciseList,
+                planName: widget.planName,
+                planId: planId,
+                totalMin: totalMinutes,
+                homePlanTable: widget.homePlanTable,
+                isSubPlan: widget.isSubPlan,
+                weeklyDayData: widget.weeklyDayData,
+                discoverPlanTable: widget.discoverPlanTable,
+                isFromOnboarding: widget.isFromOnboarding!))).then(
+        (value) {
+      setState(() {
+        _getDataFromDatabase();
+      });
+    });
   }
 
   _getDataFromDatabase() async {

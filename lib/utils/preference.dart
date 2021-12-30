@@ -43,6 +43,8 @@ class Preference {
 
   static const String END_TIME = "END_TIME";
 
+  static const String INTERSTITIAL_AD_COUNT = "INTERSTITIAL_AD_COUNT";
+
   // ------------------ SINGLETON -----------------------
   static final Preference _preference = Preference._internal();
 

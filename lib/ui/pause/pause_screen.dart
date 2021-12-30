@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:homeworkout_flutter/common/commonTopBar/commom_topbar.dart';
 import 'package:homeworkout_flutter/database/model/DiscoverSingleExerciseData.dart';
 import 'package:homeworkout_flutter/database/model/ExerciseListData.dart';
@@ -14,8 +15,10 @@ import 'package:homeworkout_flutter/interfaces/topbar_clicklistener.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/exerciselist/ExerciseListScreen.dart';
 import 'package:homeworkout_flutter/ui/videoAnimation/video_animation_screen.dart';
+import 'package:homeworkout_flutter/utils/ad_helper.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
+import 'package:homeworkout_flutter/utils/utils.dart';
 
 class PauseScreen extends StatefulWidget {
   final List<WorkoutDetail>? workoutDetailList;
@@ -62,8 +65,31 @@ class _PauseScreenState extends State<PauseScreen>
 
   int countOfImages = 0;
 
+  late BannerAd _bottomBannerAd;
+  bool _isBottomBannerAdLoaded = false;
+
+  void _createBottomBannerAd() {
+    _bottomBannerAd = BannerAd(
+      adUnitId: AdHelper.bannerAdUnitId,
+      size: AdSize.banner,
+      request: AdRequest(),
+      listener: BannerAdListener(
+        onAdLoaded: (_) {
+          setState(() {
+            _isBottomBannerAdLoaded = true;
+          });
+        },
+        onAdFailedToLoad: (ad, error) {
+          ad.dispose();
+        },
+      ),
+    );
+    _bottomBannerAd.load();
+  }
+
   @override
   void initState() {
+    _createBottomBannerAd();
     _setImageRotation(widget.index!);
     super.initState();
   }
@@ -105,16 +131,29 @@ class _PauseScreenState extends State<PauseScreen>
                     isShowBack: true,
                     iconColor: Colur.white,
                   ),
-                  Container(
-                    margin:
-                        const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                    child: Column(
-                      children: [
-                        _pauseHeader(context),
-                        _restartBtn(context),
-                        _quitBtn(context),
-                        _resumeBtn(context),
-                      ],
+                  Expanded(
+                    child: Container(
+                      margin:
+                          const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                      child: Column(
+                        children: [
+                          _pauseHeader(context),
+                          _restartBtn(context),
+                          _quitBtn(context),
+                          _resumeBtn(context),
+                          Expanded(child: Container(
+
+                          )),
+
+                          (_isBottomBannerAdLoaded && !Utils.isPurchased())
+                              ? Container(
+                                  height: _bottomBannerAd.size.height.toDouble(),
+                                  width: _bottomBannerAd.size.width.toDouble(),
+                                  child: AdWidget(ad: _bottomBannerAd),
+                                )
+                              : Container()
+                        ],
+                      ),
                     ),
                   ),
                 ],

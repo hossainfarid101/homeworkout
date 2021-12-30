@@ -2,10 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:homeworkout_flutter/database/model/DiscoverSingleExerciseData.dart';
 import 'package:homeworkout_flutter/database/model/ExerciseListData.dart';
 import 'package:homeworkout_flutter/database/model/WorkoutDetailData.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
+import 'package:homeworkout_flutter/utils/ad_helper.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
@@ -39,8 +41,31 @@ class _VideoAnimationScreenState extends State<VideoAnimationScreen>
 
   int countOfImages = 0;
 
+  late BannerAd _bottomBannerAd;
+  bool _isBottomBannerAdLoaded = false;
+
+  void _createBottomBannerAd() {
+    _bottomBannerAd = BannerAd(
+      adUnitId: AdHelper.bannerAdUnitId,
+      size: AdSize.banner,
+      request: AdRequest(),
+      listener: BannerAdListener(
+        onAdLoaded: (_) {
+          setState(() {
+            _isBottomBannerAdLoaded = true;
+          });
+        },
+        onAdFailedToLoad: (ad, error) {
+          ad.dispose();
+        },
+      ),
+    );
+    _bottomBannerAd.load();
+  }
+
   @override
   void initState() {
+    _createBottomBannerAd();
     _getYoutubeVideo();
     super.initState();
   }
@@ -78,7 +103,16 @@ class _VideoAnimationScreenState extends State<VideoAnimationScreen>
                 children: [
                   _topBar(),
                   _youtubeAndAnimationView(),
-                  _descriptionOfExercise()
+                  _descriptionOfExercise(),
+                  (_isBottomBannerAdLoaded &&
+                          !Utils.isPurchased() &&
+                          !isAnimation)
+                      ? Container(
+                          height: _bottomBannerAd.size.height.toDouble(),
+                          width: _bottomBannerAd.size.width.toDouble(),
+                          child: AdWidget(ad: _bottomBannerAd),
+                        )
+                      : Container()
                 ],
               ),
             ),

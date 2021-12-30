@@ -99,6 +99,9 @@ class _WorkoutScreenState extends State<WorkoutScreen>
   FlutterTts flutterTts = FlutterTts();
   InterstitialAd? _interstitialAd;
 
+  int? _interstitialCount;
+
+
   void _createInterstitialAd() {
     if (Debug.GOOGLE_AD) {
       InterstitialAd.load(
@@ -107,6 +110,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (InterstitialAd ad) {
             _interstitialAd = ad;
+            Preference.shared.setInt(Preference.INTERSTITIAL_AD_COUNT, _interstitialCount!+1);
           },
           onAdFailedToLoad: (LoadAdError error) {
             _interstitialAd = null;
@@ -116,9 +120,8 @@ class _WorkoutScreenState extends State<WorkoutScreen>
       );
     }
   }
-
   void _showInterstitialAd() {
-    if (_interstitialAd != null) {
+    if (_interstitialAd != null && _interstitialCount! % 2 != 0 ) {
       _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
         onAdDismissedFullScreenContent: (InterstitialAd ad) {
           ad.dispose();
@@ -130,6 +133,8 @@ class _WorkoutScreenState extends State<WorkoutScreen>
         },
       );
       _interstitialAd!.show();
+    } else {
+      _moveWorkoutCompleteScreen();
     }
   }
 
@@ -599,10 +604,12 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                           countDownController.resume();
                           timerForCount = Timer.periodic(Duration(seconds: 1),
                               (Timer t) => _setSoundCountDown());
-                        }
-                        Debug.printLog("VALUE: " + _timeTypeCheck().toString());
-                        if (_timeTypeCheck()) {
-                          _controllerForward();
+                        } else{
+                          Debug.printLog(
+                              "VALUE: " + _timeTypeCheck().toString());
+                          if (_timeTypeCheck()) {
+                            _controllerForward();
+                          }
                         }
                       });
                     },
@@ -1301,6 +1308,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
   }
 
   _getPreference() {
+    _interstitialCount = Preference.shared.getInt(Preference.INTERSTITIAL_AD_COUNT) ?? 1;
     countDownDuration =
         Preference.shared.getInt(Preference.countdownTime) ?? 10;
 
