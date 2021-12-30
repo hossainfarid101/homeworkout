@@ -1,3 +1,3 @@
 class TopBarClickListener {
-  void onTopBarClick(String name,{bool value = true}) {}
+  void onTopBarClick(String name, {bool value = true}) {}
 }

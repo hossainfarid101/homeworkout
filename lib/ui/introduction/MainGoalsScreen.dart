@@ -4,6 +4,7 @@ import 'package:homeworkout_flutter/utils/color.dart';
 
 class MainGoalsScreen extends StatefulWidget {
   final List<dynamic>? prefMainGoalsList;
+
   const MainGoalsScreen(this.prefMainGoalsList);
 
   @override
@@ -36,7 +37,7 @@ class _MainGoalsScreenState extends State<MainGoalsScreen> {
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20,
-                  color: Colur.txtBlack,
+                  color: Colur.black,
                 ),
               ),
             ),
@@ -49,7 +50,7 @@ class _MainGoalsScreenState extends State<MainGoalsScreen> {
             itemBuilder: (context, int index) {
               for (int i = 0; i < widget.prefMainGoalsList!.length; i++) {
                 yourMainGoalList[
-                int.parse(widget.prefMainGoalsList![i].toString())]
+                        int.parse(widget.prefMainGoalsList![i].toString())]
                     .isSelected = true;
               }
               return _itemYourMainGoal(index);
@@ -121,7 +122,7 @@ class _MainGoalsScreenState extends State<MainGoalsScreen> {
                       fontSize: 20,
                       color: (yourMainGoalList[index].isSelected)
                           ? Colur.white
-                          : Colur.txtBlack),
+                          : Colur.black),
                 ),
               ),
             ),

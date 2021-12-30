@@ -15,14 +15,12 @@ import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 
 class QuarantineAtHomeScreen extends StatefulWidget {
-
   @override
   _QuarantineAtHomeScreenState createState() => _QuarantineAtHomeScreenState();
 }
 
 class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
     implements TopBarClickListener {
-
   List<DiscoverPlanTable> quarantinePlanList = [];
   String testDevice = 'YOUR_DEVICE_ID';
   int maxFailedLoadAttempts = 3;
@@ -73,8 +71,6 @@ class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
     Constant.isDiscoverScreen = false;
     Constant.isTrainingScreen = false;
   }
-
-
 
   void _createRewardedAd() {
     RewardedAd.load(
@@ -127,7 +123,6 @@ class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
     _rewardedAd = null;
   }
 
-
   _startNextScreen() {
     Navigator.push(
         context,
@@ -146,14 +141,13 @@ class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Theme(
       data: ThemeData(
         appBarTheme: AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle.dark,
-        ), //
+        ),
       ),
       child: WillPopScope(
         onWillPop: () {
@@ -163,11 +157,10 @@ class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
         child: Scaffold(
           appBar: PreferredSize(
               preferredSize: Size.fromHeight(0),
-              child: AppBar( // Here we create one to set status bar color
+              child: AppBar(
                 backgroundColor: Colur.white,
                 elevation: 0,
-              )
-          ),
+              )),
           backgroundColor: Colur.white,
           drawer: DrawerMenu(),
           body: Column(
@@ -177,10 +170,10 @@ class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
               _quarantineExerciseList(),
               (_isBottomBannerAdLoaded && !Utils.isPurchased())
                   ? Container(
-                height: _bottomBannerAd.size.height.toDouble(),
-                width: _bottomBannerAd.size.width.toDouble(),
-                child: AdWidget(ad: _bottomBannerAd),
-              )
+                      height: _bottomBannerAd.size.height.toDouble(),
+                      width: _bottomBannerAd.size.width.toDouble(),
+                      child: AdWidget(ad: _bottomBannerAd),
+                    )
                   : Container()
             ],
           ),
@@ -230,8 +223,8 @@ class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
             width: double.infinity,
             decoration: BoxDecoration(
               image: DecorationImage(
-                // image: AssetImage('assets/images/abs_advanced.webp'),
-                image: AssetImage(quarantinePlanList[index].planImage.toString()),
+                image:
+                    AssetImage(quarantinePlanList[index].planImage.toString()),
                 fit: BoxFit.cover,
               ),
               shape: BoxShape.rectangle,
@@ -257,32 +250,37 @@ class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
                       ),
                     ),
                   ),
-                  if (quarantinePlanList[index].planText!.split(" ").last == Constant.BEGINNER)...{
+                  if (quarantinePlanList[index].planText!.split(" ").last ==
+                      Constant.BEGINNER) ...{
                     Container(
-                        width: double.infinity,
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 15.0, vertical: 10),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.bolt_rounded,
-                              color: Colur.blue,
-                              size: 18,
-                            ),
-                            Icon(
-                              Icons.bolt_rounded,
-                              color: Colur.grey_icon,
-                              size: 18,
-                            ),
-                            Icon(
-                              Icons.bolt_rounded,
-                              color: Colur.grey_icon,
-                              size: 18,
-                            ),
-                          ],
-                        ),
+                      width: double.infinity,
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 15.0, vertical: 10),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.bolt_rounded,
+                            color: Colur.blue,
+                            size: 18,
+                          ),
+                          Icon(
+                            Icons.bolt_rounded,
+                            color: Colur.grey_icon,
+                            size: 18,
+                          ),
+                          Icon(
+                            Icons.bolt_rounded,
+                            color: Colur.grey_icon,
+                            size: 18,
+                          ),
+                        ],
                       ),
-                  } else if (quarantinePlanList[index].planText!.split(" ").last == Constant.INTERMEDIATE)...{
+                    ),
+                  } else if (quarantinePlanList[index]
+                          .planText!
+                          .split(" ")
+                          .last ==
+                      Constant.INTERMEDIATE) ...{
                     Container(
                       width: double.infinity,
                       margin: const EdgeInsets.symmetric(
@@ -307,7 +305,11 @@ class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
                         ],
                       ),
                     ),
-                  } else if(quarantinePlanList[index].planText!.split(" ").last == Constant.ADVANCED)...{
+                  } else if (quarantinePlanList[index]
+                          .planText!
+                          .split(" ")
+                          .last ==
+                      Constant.ADVANCED) ...{
                     Container(
                       width: double.infinity,
                       margin: const EdgeInsets.symmetric(
@@ -345,19 +347,18 @@ class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
   @override
   void onTopBarClick(String name, {bool value = true}) {}
 
-
-  _getDataFromQuarantine() async{
-    quarantinePlanList = await DataBaseHelper().getPlanDataCatWise(Constant.catQuarantineAtHome);
+  _getDataFromQuarantine() async {
+    quarantinePlanList =
+        await DataBaseHelper().getPlanDataCatWise(Constant.catQuarantineAtHome);
     setState(() {});
   }
-
 
   _showDialogForWatchVideoUnlock(int index) {
     selectedCategoryIndex = index;
 
-    if(Utils.isPurchased()){
+    if (Utils.isPurchased()) {
       _startNextScreen();
-    }else{
+    } else {
       showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -367,7 +368,6 @@ class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
                 width: double.infinity,
                 height: double.infinity,
                 child: Stack(
-                  // crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     InkWell(
                       onTap: () {
@@ -419,8 +419,8 @@ class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
                               borderRadius: BorderRadius.circular(10.0),
                               gradient: LinearGradient(
                                 colors: [
-                                  Colur.blueGradientButton1,
-                                  Colur.blueGradientButton2,
+                                  Colur.blueGradient1,
+                                  Colur.blueGradient2,
                                 ],
                                 begin: Alignment.centerLeft,
                                 end: Alignment.centerRight,
@@ -467,7 +467,7 @@ class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
                             child: TextButton(
                               child: Container(
                                 margin:
-                                const EdgeInsets.symmetric(horizontal: 10),
+                                    const EdgeInsets.symmetric(horizontal: 10),
                                 child: Text(
                                   Languages.of(context)!
                                       .txtFree7DaysTrial
@@ -498,7 +498,8 @@ class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
                             margin: const EdgeInsets.symmetric(vertical: 10),
                             child: Text(
                               Languages.of(context)!.txtFreeTrialDesc,
-                              style: TextStyle(color: Colur.white, fontSize: 12),
+                              style:
+                                  TextStyle(color: Colur.white, fontSize: 12),
                               textAlign: TextAlign.center,
                             ),
                           ),

@@ -21,8 +21,9 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
   bool? isKg;
   bool? isLsb;
 
-  bool? isCm ;
-  bool? isIn ;
+  bool? isCm;
+
+  bool? isIn;
 
   bool isConvert = true;
 
@@ -86,14 +87,15 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                                     maxLines: 1,
                                     maxLength: 5,
                                     textInputAction: TextInputAction.done,
-                                    keyboardType: TextInputType.numberWithOptions(decimal: true),
+                                    keyboardType:
+                                        TextInputType.numberWithOptions(
+                                            decimal: true),
                                     inputFormatters: <TextInputFormatter>[
-                                      // FilteringTextInputFormatter.digitsOnly,
                                       FilteringTextInputFormatter.allow(
                                           RegExp(r'^(\d+)?\.?\d{0,1}')),
                                     ],
                                     style: TextStyle(
-                                        color: Colur.txt_black,
+                                        color: Colur.black,
                                         fontSize: 22,
                                         fontWeight: FontWeight.w500),
                                     cursorColor: Colur.txt_gray,
@@ -107,15 +109,15 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                                       counterText: "",
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide:
-                                            BorderSide(color: Colur.txt_black),
+                                            BorderSide(color: Colur.black),
                                       ),
                                       focusedBorder: UnderlineInputBorder(
                                         borderSide:
-                                            BorderSide(color: Colur.txt_black),
+                                            BorderSide(color: Colur.black),
                                       ),
                                       border: UnderlineInputBorder(
                                         borderSide:
-                                            BorderSide(color: Colur.txt_black),
+                                            BorderSide(color: Colur.black),
                                       ),
                                     ),
                                     onEditingComplete: () {
@@ -144,7 +146,8 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                                     isKg = true;
                                     isLsb = false;
                                   });
-                                  Preference.shared.setBool(Preference.IS_KG, isKg!);
+                                  Preference.shared
+                                      .setBool(Preference.IS_KG, isKg!);
                                 },
                                 child: Container(
                                   margin: const EdgeInsets.only(left: 20.0),
@@ -157,7 +160,7 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                                         )
                                       : BoxDecoration(
                                           border: Border.all(
-                                            color: Colur.txt_black,
+                                            color: Colur.black,
                                           ),
                                           borderRadius:
                                               BorderRadius.circular(5.0),
@@ -165,9 +168,8 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                                   child: Text(
                                     Languages.of(context)!.txtKG.toUpperCase(),
                                     style: TextStyle(
-                                        color: (isKg!)
-                                            ? Colur.white
-                                            : Colur.txt_black,
+                                        color:
+                                            (isKg!) ? Colur.white : Colur.black,
                                         fontSize: 18.0,
                                         fontWeight: FontWeight.w500),
                                   ),
@@ -194,7 +196,8 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                                     isKg = false;
                                     isLsb = true;
                                   });
-                                  Preference.shared.setBool(Preference.IS_KG, isKg!);
+                                  Preference.shared
+                                      .setBool(Preference.IS_KG, isKg!);
                                 },
                                 child: Container(
                                   margin: const EdgeInsets.only(
@@ -208,7 +211,7 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                                         )
                                       : BoxDecoration(
                                           border: Border.all(
-                                            color: Colur.txt_black,
+                                            color: Colur.black,
                                           ),
                                           borderRadius:
                                               BorderRadius.circular(5.0),
@@ -216,11 +219,13 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                                   child: Container(
                                     margin: EdgeInsets.only(left: 4, right: 4),
                                     child: Text(
-                                      Languages.of(context)!.txtLB.toUpperCase(),
+                                      Languages.of(context)!
+                                          .txtLB
+                                          .toUpperCase(),
                                       style: TextStyle(
                                           color: (isLsb!)
                                               ? Colur.white
-                                              : Colur.txt_black,
+                                              : Colur.black,
                                           fontSize: 18.0,
                                           fontWeight: FontWeight.w500),
                                     ),
@@ -261,14 +266,15 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                                       maxLines: 1,
                                       maxLength: 5,
                                       textInputAction: TextInputAction.done,
-                                      keyboardType: TextInputType.numberWithOptions(decimal: true),
+                                      keyboardType:
+                                          TextInputType.numberWithOptions(
+                                              decimal: true),
                                       inputFormatters: <TextInputFormatter>[
-                                        // FilteringTextInputFormatter.digitsOnly,
                                         FilteringTextInputFormatter.allow(
                                             RegExp(r'^(\d+)?\.?\d{0,1}')),
                                       ],
                                       style: TextStyle(
-                                          color: Colur.txt_black,
+                                          color: Colur.black,
                                           fontSize: 22,
                                           fontWeight: FontWeight.w500),
                                       cursorColor: Colur.txt_gray,
@@ -282,15 +288,15 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                                         counterText: "",
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide:
-                                              BorderSide(color: Colur.txt_black),
+                                              BorderSide(color: Colur.black),
                                         ),
                                         focusedBorder: UnderlineInputBorder(
                                           borderSide:
-                                              BorderSide(color: Colur.txt_black),
+                                              BorderSide(color: Colur.black),
                                         ),
                                         border: UnderlineInputBorder(
                                           borderSide:
-                                              BorderSide(color: Colur.txt_black),
+                                              BorderSide(color: Colur.black),
                                         ),
                                       ),
                                       onEditingComplete: () {
@@ -317,15 +323,16 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                                               maxLength: 5,
                                               textInputAction:
                                                   TextInputAction.done,
-                                              keyboardType: TextInputType.number,
+                                              keyboardType:
+                                                  TextInputType.number,
                                               inputFormatters: <
                                                   TextInputFormatter>[
-                                                // FilteringTextInputFormatter.digitsOnly,
-                                                FilteringTextInputFormatter.allow(
-                                                    RegExp(r'^(\d+)?\.?\d{0,1}')),
+                                                FilteringTextInputFormatter
+                                                    .allow(RegExp(
+                                                        r'^(\d+)?\.?\d{0,1}')),
                                               ],
                                               style: TextStyle(
-                                                  color: Colur.txt_black,
+                                                  color: Colur.black,
                                                   fontSize: 22,
                                                   fontWeight: FontWeight.w500),
                                               cursorColor: Colur.txt_gray,
@@ -336,48 +343,51 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                                                 hintStyle: TextStyle(
                                                     color: Colur.txt_grey,
                                                     fontSize: 22,
-                                                    fontWeight: FontWeight.w500),
+                                                    fontWeight:
+                                                        FontWeight.w500),
                                                 counterText: "",
                                                 enabledBorder:
                                                     UnderlineInputBorder(
                                                   borderSide: BorderSide(
-                                                      color: Colur.txt_black),
+                                                      color: Colur.black),
                                                 ),
                                                 focusedBorder:
                                                     UnderlineInputBorder(
                                                   borderSide: BorderSide(
-                                                      color: Colur.txt_black),
+                                                      color: Colur.black),
                                                 ),
                                                 border: UnderlineInputBorder(
                                                   borderSide: BorderSide(
-                                                      color: Colur.txt_black),
+                                                      color: Colur.black),
                                                 ),
                                               ),
                                               onEditingComplete: () {
-                                                FocusScope.of(context).unfocus();
+                                                FocusScope.of(context)
+                                                    .unfocus();
                                               },
                                             ),
                                           ),
                                         ),
                                         Expanded(
                                           child: Container(
-                                            margin:
-                                                const EdgeInsets.only(left: 10.0),
+                                            margin: const EdgeInsets.only(
+                                                left: 10.0),
                                             child: TextFormField(
                                               controller: inHeightController,
                                               maxLines: 1,
                                               maxLength: 5,
                                               textInputAction:
                                                   TextInputAction.done,
-                                              keyboardType: TextInputType.number,
+                                              keyboardType:
+                                                  TextInputType.number,
                                               inputFormatters: <
                                                   TextInputFormatter>[
-                                                // FilteringTextInputFormatter.digitsOnly,
-                                                FilteringTextInputFormatter.allow(
-                                                    RegExp(r'^(\d+)?\.?\d{0,1}')),
+                                                FilteringTextInputFormatter
+                                                    .allow(RegExp(
+                                                        r'^(\d+)?\.?\d{0,1}')),
                                               ],
                                               style: TextStyle(
-                                                  color: Colur.txt_black,
+                                                  color: Colur.black,
                                                   fontSize: 22,
                                                   fontWeight: FontWeight.w500),
                                               cursorColor: Colur.txt_gray,
@@ -388,25 +398,27 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                                                 hintStyle: TextStyle(
                                                     color: Colur.txt_gray,
                                                     fontSize: 22,
-                                                    fontWeight: FontWeight.w500),
+                                                    fontWeight:
+                                                        FontWeight.w500),
                                                 counterText: "",
                                                 enabledBorder:
                                                     UnderlineInputBorder(
                                                   borderSide: BorderSide(
-                                                      color: Colur.txt_black),
+                                                      color: Colur.black),
                                                 ),
                                                 focusedBorder:
                                                     UnderlineInputBorder(
                                                   borderSide: BorderSide(
-                                                      color: Colur.txt_black),
+                                                      color: Colur.black),
                                                 ),
                                                 border: UnderlineInputBorder(
                                                   borderSide: BorderSide(
-                                                      color: Colur.txt_black),
+                                                      color: Colur.black),
                                                 ),
                                               ),
                                               onEditingComplete: () {
-                                                FocusScope.of(context).unfocus();
+                                                FocusScope.of(context)
+                                                    .unfocus();
                                               },
                                             ),
                                           ),
@@ -439,7 +451,8 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                                     isCm = true;
                                     isIn = false;
                                   });
-                                  Preference.shared.setBool(Preference.IS_CM, isCm!);
+                                  Preference.shared
+                                      .setBool(Preference.IS_CM, isCm!);
                                 },
                                 child: Container(
                                   margin: const EdgeInsets.only(left: 20.0),
@@ -452,7 +465,7 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                                         )
                                       : BoxDecoration(
                                           border: Border.all(
-                                            color: Colur.txt_black,
+                                            color: Colur.black,
                                           ),
                                           borderRadius:
                                               BorderRadius.circular(5.0),
@@ -460,9 +473,8 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                                   child: Text(
                                     Languages.of(context)!.txtCM.toUpperCase(),
                                     style: TextStyle(
-                                        color: (isCm!)
-                                            ? Colur.white
-                                            : Colur.txt_black,
+                                        color:
+                                            (isCm!) ? Colur.white : Colur.black,
                                         fontSize: 18.0,
                                         fontWeight: FontWeight.w500),
                                   ),
@@ -495,8 +507,8 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                                     isCm = false;
                                     isIn = true;
                                   });
-                                  Preference.shared.setBool(Preference.IS_CM, isCm!);
-
+                                  Preference.shared
+                                      .setBool(Preference.IS_CM, isCm!);
                                 },
                                 child: Container(
                                   margin: const EdgeInsets.only(
@@ -510,7 +522,7 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                                         )
                                       : BoxDecoration(
                                           border: Border.all(
-                                            color: Colur.txt_black,
+                                            color: Colur.black,
                                           ),
                                           borderRadius:
                                               BorderRadius.circular(5.0),
@@ -518,11 +530,13 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                                   child: Container(
                                     margin: EdgeInsets.only(left: 5, right: 5),
                                     child: Text(
-                                      Languages.of(context)!.txtIn.toUpperCase(),
+                                      Languages.of(context)!
+                                          .txtIn
+                                          .toUpperCase(),
                                       style: TextStyle(
                                           color: (isIn!)
                                               ? Colur.white
-                                              : Colur.txt_black,
+                                              : Colur.black,
                                           fontSize: 18.0,
                                           fontWeight: FontWeight.w500),
                                     ),
@@ -561,16 +575,25 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                           InkWell(
                             onTap: () {
                               if (isCm!) {
-                                if (weightController.text != "" && cmHeightController.text != "") {
+                                if (weightController.text != "" &&
+                                    cmHeightController.text != "") {
                                   saveBMI();
-                                } else{
-                                  Utils.showToast(context, Languages.of(context)!.txtWarningForBMIDialog);
+                                } else {
+                                  Utils.showToast(
+                                      context,
+                                      Languages.of(context)!
+                                          .txtWarningForBMIDialog);
                                 }
                               } else {
-                                if (weightController.text != "" && ftHeightController.text != "" && inHeightController.text != "") {
+                                if (weightController.text != "" &&
+                                    ftHeightController.text != "" &&
+                                    inHeightController.text != "") {
                                   saveBMI();
-                                } else{
-                                  Utils.showToast(context, Languages.of(context)!.txtWarningForBMIDialog);
+                                } else {
+                                  Utils.showToast(
+                                      context,
+                                      Languages.of(context)!
+                                          .txtWarningForBMIDialog);
                                 }
                               }
                             },
@@ -598,22 +621,19 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
     );
   }
 
-  saveBMI(){
+  saveBMI() {
     if (isKg! && !isLsb!) {
-      if (double.parse(weightController.text) >=
-          Constant.MIN_KG &&
-          double.parse(weightController.text) <=
-              Constant.MAX_KG) {
+      if (double.parse(weightController.text) >= Constant.MIN_KG &&
+          double.parse(weightController.text) <= Constant.MAX_KG) {
         if (isCm! && !isIn!) {
           Debug.printLog("cm - ${cmHeightController.text}");
           if (double.parse(cmHeightController.text) >= Constant.MIN_CM &&
               double.parse(cmHeightController.text) <= Constant.MAX_CM) {
-
             setState(() {
               save();
               Debug.printLog("true");
             });
-          }else {
+          } else {
             Utils.showToast(context, Languages.of(context)!.txtWarningForCm);
           }
         } else if (isIn! && !isCm!) {
@@ -625,49 +645,40 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
               save();
               Debug.printLog("true");
             });
-          }else {
+          } else {
             Utils.showToast(context, Languages.of(context)!.txtWarningForInch);
           }
         }
       } else {
-        Utils.showToast(context,
-            Languages.of(context)!.txtWarningForKg);
+        Utils.showToast(context, Languages.of(context)!.txtWarningForKg);
       }
     } else {
-      if (double.parse(weightController.text) >=
-          Constant.MIN_LBS &&
-          double.parse(weightController.text) <=
-              Constant.MAX_LBS) {
+      if (double.parse(weightController.text) >= Constant.MIN_LBS &&
+          double.parse(weightController.text) <= Constant.MAX_LBS) {
         setState(() {
           save();
           Debug.printLog("true");
         });
       } else {
-        Utils.showToast(context,
-            Languages.of(context)!.txtWarningForLbs);
+        Utils.showToast(context, Languages.of(context)!.txtWarningForLbs);
       }
     }
   }
 
-   save() {
+  save() {
     convertWeight();
     convertHeight();
 
     if (isCm! && !isIn!) {
-      Preference.shared
-          .setDouble(Preference.HEIGHT_CM, heightCm!);
-    }else {
-      Preference.shared
-          .setDouble(Preference.HEIGHT_FT, heightFt!);
-      Preference.shared
-          .setDouble(Preference.HEIGHT_IN, heightIn!);
+      Preference.shared.setDouble(Preference.HEIGHT_CM, heightCm!);
+    } else {
+      Preference.shared.setDouble(Preference.HEIGHT_FT, heightFt!);
+      Preference.shared.setDouble(Preference.HEIGHT_IN, heightIn!);
 
-      Preference.shared
-          .setDouble(Preference.HEIGHT_CM, heightCm!);
+      Preference.shared.setDouble(Preference.HEIGHT_CM, heightCm!);
     }
 
-    Preference.shared
-        .setDouble(Preference.WEIGHT, weight!);
+    Preference.shared.setDouble(Preference.WEIGHT, weight!);
     Navigator.pop(context);
   }
 
@@ -677,7 +688,8 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
     } else {
       heightFt = double.parse(ftHeightController.text);
       heightIn = double.parse(inHeightController.text);
-      heightCm = Utils.inToCm(double.parse(ftHeightController.text), double.parse(inHeightController.text));
+      heightCm = Utils.inToCm(double.parse(ftHeightController.text),
+          double.parse(inHeightController.text));
     }
   }
 
@@ -688,7 +700,6 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
       weight = Utils.lbToKg(double.parse(weightController.text));
     }
   }
-
 
   getPreference() {
     isKg = Preference.shared.getBool(Preference.IS_KG) ?? true;
@@ -703,7 +714,6 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
       }
     }
 
-
     isCm = Preference.shared.getBool(Preference.IS_CM) ?? true;
     isIn = !isCm!;
 
@@ -715,12 +725,12 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
         cmHeightController.text = heightCm!.toStringAsFixed(1);
       }
     } else {
-     if (heightFt != 0) {
-       ftHeightController.text = heightFt!.toStringAsFixed(0);
-     }
-     if (heightIn != 0) {
-       inHeightController.text = heightIn!.toStringAsFixed(0);
-     }
+      if (heightFt != 0) {
+        ftHeightController.text = heightFt!.toStringAsFixed(0);
+      }
+      if (heightIn != 0) {
+        inHeightController.text = heightIn!.toStringAsFixed(0);
+      }
     }
   }
 }

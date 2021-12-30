@@ -6,6 +6,7 @@ import 'package:homeworkout_flutter/utils/color.dart';
 class YourActivityLevelScreen extends StatefulWidget {
   final String? prefActivityLevel;
   final Function onValueChange;
+
   YourActivityLevelScreen(this.prefActivityLevel, this.onValueChange);
 
   @override
@@ -39,7 +40,7 @@ class _YourActivityLevelScreenState extends State<YourActivityLevelScreen> {
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20,
-                  color: Colur.txtBlack,
+                  color: Colur.black,
                 ),
               ),
             ),
@@ -50,7 +51,6 @@ class _YourActivityLevelScreenState extends State<YourActivityLevelScreen> {
             shrinkWrap: true,
             itemCount: yourActivityLevelList.length,
             itemBuilder: (context, int index) {
-
               return _itemYourActivityLevel(index);
             },
           ),
@@ -64,12 +64,12 @@ class _YourActivityLevelScreenState extends State<YourActivityLevelScreen> {
       splashColor: Colur.transparent,
       highlightColor: Colors.transparent,
       onTap: () {
-        for(int i = 0; i < yourActivityLevelList.length; i++) {
-          if( i == index){
+        for (int i = 0; i < yourActivityLevelList.length; i++) {
+          if (i == index) {
             setState(() {
               yourActivityLevelList[index].isSelected = true;
             });
-          }else {
+          } else {
             setState(() {
               yourActivityLevelList[i].isSelected = false;
             });
@@ -139,7 +139,7 @@ class _YourActivityLevelScreenState extends State<YourActivityLevelScreen> {
                             style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 20,
-                                color: Colur.txtBlack),
+                                color: Colur.black),
                           ),
                           if (yourActivityLevelList[index].isSelected) ...{
                             Container(
@@ -150,7 +150,7 @@ class _YourActivityLevelScreenState extends State<YourActivityLevelScreen> {
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 12,
-                                  color: Colur.txtBlack),
+                                  color: Colur.black),
                             ),
                           }
                         ],
@@ -197,7 +197,7 @@ class _YourActivityLevelScreenState extends State<YourActivityLevelScreen> {
           description: Languages.of(context)!.txtDesVeryActive),
     ];
     yourActivityLevelList.forEach((element) {
-      if(element.exName == widget.prefActivityLevel) {
+      if (element.exName == widget.prefActivityLevel) {
         setState(() {
           element.isSelected = true;
         });

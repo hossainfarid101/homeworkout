@@ -86,8 +86,6 @@ class _SetWeeklyGoalScreenState extends State<SetWeeklyGoalScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //
-
     if (_pickerDataTrainingDay.isEmpty) {
       _pickerDataTrainingDay.addAll([
         Text("1"),
@@ -126,7 +124,7 @@ class _SetWeeklyGoalScreenState extends State<SetWeeklyGoalScreen> {
                       ModalRoute.withName("/training"));
                 },
                 child: Container(
-                  alignment: Alignment.centerLeft,
+                    alignment: Alignment.centerLeft,
                     margin:
                         const EdgeInsets.only(top: 15, left: 10, bottom: 10),
                     child: Icon(
@@ -169,11 +167,11 @@ class _SetWeeklyGoalScreenState extends State<SetWeeklyGoalScreen> {
               ),
               (_isBottomBannerAdLoaded && !Utils.isPurchased())
                   ? Container(
-                alignment: Alignment.center,
-                height: _bottomBannerAd.size.height.toDouble(),
-                width: _bottomBannerAd.size.width.toDouble(),
-                child: AdWidget(ad: _bottomBannerAd),
-              )
+                      alignment: Alignment.center,
+                      height: _bottomBannerAd.size.height.toDouble(),
+                      width: _bottomBannerAd.size.width.toDouble(),
+                      child: AdWidget(ad: _bottomBannerAd),
+                    )
                   : Container()
             ],
           ),
@@ -293,8 +291,8 @@ class _SetWeeklyGoalScreenState extends State<SetWeeklyGoalScreen> {
         borderRadius: BorderRadius.circular(10.0),
         gradient: LinearGradient(
             colors: [
-              Colur.blueGradientButton1,
-              Colur.blueGradientButton2,
+              Colur.blueGradient1,
+              Colur.blueGradient2,
             ],
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
@@ -313,8 +311,6 @@ class _SetWeeklyGoalScreenState extends State<SetWeeklyGoalScreen> {
         onPressed: () {
           Preference.shared
               .setString(Preference.SELECTED_TRAINING_DAY, selectTrainingDays!);
-          /*Preference.shared
-              .setString(Preference.PREF_FIRST_DAY, selectFirstDayOfWeek!);*/
 
           if (selectFirstDayOfWeek == Languages.of(context)!.txtSunday) {
             Preference.shared.setInt(Preference.SELECTED_FIRST_DAY_OF_WEEK, 0);
@@ -344,13 +340,9 @@ class _SetWeeklyGoalScreenState extends State<SetWeeklyGoalScreen> {
         selecteds: isTraining ? initialTrainingDays! : initialFirstDay,
         hideHeader: true,
         confirmText: Languages.of(context)!.txtOk.toUpperCase(),
-        confirmTextStyle: TextStyle(
-          color: Colur.theme
-        ),
+        confirmTextStyle: TextStyle(color: Colur.theme),
         cancelText: Languages.of(context)!.txtCancel.toUpperCase(),
-        cancelTextStyle: TextStyle(
-            color: Colur.theme
-        ),
+        cancelTextStyle: TextStyle(color: Colur.theme),
         itemExtent: 50,
         looping: false,
         backgroundColor: Colur.white,
@@ -368,72 +360,4 @@ class _SetWeeklyGoalScreenState extends State<SetWeeklyGoalScreen> {
           });
         }).showDialog(context);
   }
-
-/*_showDialogPicker(bool isTraining){
-     showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return Scaffold(
-              backgroundColor: Colur.transparent,
-              body: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                child: Center(
-                  child: Container(
-                    color: Colur.white,
-                    child: Wrap(
-                      children: [
-                        Container(
-                          // color: Colur.grey_icon,
-                          height: 200,
-                          child: CupertinoPicker(
-                            useMagnifier: true,
-                            magnification: 1,
-                            selectionOverlay: CupertinoPickerDefaultSelectionOverlay(
-                              background: Colur.transparent,
-                            ),
-                            scrollController: _scrollController,
-                            onSelectedItemChanged: (value) {
-                              print(value.toString());
-                            },
-                            itemExtent: 50,
-                            looping: false,
-                            children: (isTraining)?_pickerDataTrainingDay:_pickerDataFirstDayWeek,
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(left: 15,right: 15,bottom: 15),
-                          child: Row(mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                Navigator.pop(context);
-                              },
-                              child: Container(
-                                margin: const EdgeInsets.symmetric(horizontal: 10),
-                                child: Text(
-                                    Languages.of(context)!.txtCancel.toUpperCase()),
-                              ),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Navigator.pop(context);
-                              },
-                              child: Container(
-                                margin: const EdgeInsets.symmetric(horizontal: 10),
-                                child: Text(
-                                    Languages.of(context)!.txtOk.toUpperCase()),
-                              ),
-                            ),
-                          ],
-                      ),
-                        ),
-                    ],
-                    ),
-                  ),
-                ),
-              ),
-            );
-          });
-
-  }*/
 }

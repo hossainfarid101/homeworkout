@@ -345,12 +345,6 @@ class LanguageEn extends Languages {
   String get txtRepeat => "Repeat";
 
   @override
-  String get txtDailyReminder => "Daily Reminder";
-
-  @override
-  String get txtExerciseReminder => "Exercise Reminder";
-
-  @override
   String get txtCompleted => "Completed";
 
   @override
@@ -441,8 +435,7 @@ class LanguageEn extends Languages {
   String get txtWhatMotivatesYouTheMost => "What motivates you the most?";
 
   @override
-  String get txtHowManyPushUpsCan =>
-      "How many push-ups can you do at a time?";
+  String get txtHowManyPushUpsCan => "How many push-ups can you do at a time?";
 
   @override
   String get txtWhatsYourActivityLevel => "What's your activity level?";
@@ -466,7 +459,8 @@ class LanguageEn extends Languages {
   String get txtYourPlanIsReady => "Your plan is ready!";
 
   @override
-  String get txtWeHaveSelectedThisPlan => "We have selected the plan that suits you the best.";
+  String get txtWeHaveSelectedThisPlan =>
+      "We have selected the plan that suits you the best.";
 
   @override
   String get txtStartNow => "Start now";
@@ -517,16 +511,20 @@ class LanguageEn extends Languages {
   String get txtAtLeast10 => "At least 10";
 
   @override
-  String get txtDesLightlyActive => "I occasionally exercise or walk for 30 minutes";
+  String get txtDesLightlyActive =>
+      "I occasionally exercise or walk for 30 minutes";
 
   @override
-  String get txtDesModeratelyActive => "You move fast enough or strenuously enough to burn off three to six times as much energy per minute.";
+  String get txtDesModeratelyActive =>
+      "You move fast enough or strenuously enough to burn off three to six times as much energy per minute.";
 
   @override
-  String get txtDesSedentary => "You do at least 30 minutes per day of intentional exercise, you are considered sedentary.";
+  String get txtDesSedentary =>
+      "You do at least 30 minutes per day of intentional exercise, you are considered sedentary.";
 
   @override
-  String get txtDesVeryActive => "Activities of daily living, such as shopping, cleaning, watering plants, taking out the trash, mowing the lawn, and gardening.";
+  String get txtDesVeryActive =>
+      "Activities of daily living, such as shopping, cleaning, watering plants, taking out the trash, mowing the lawn, and gardening.";
 
   @override
   String get txtLightlyActive => "Lightly Active";
@@ -541,7 +539,8 @@ class LanguageEn extends Languages {
   String get txtVeryActive => "Very Active";
 
   @override
-  String get txtSelectingTargetedWorkoutsForYou =>  "Selecting Targeted Workouts For You";
+  String get txtSelectingTargetedWorkoutsForYou =>
+      "Selecting Targeted Workouts For You";
 
   @override
   String get txtInstruction => "Instruction";
@@ -559,13 +558,15 @@ class LanguageEn extends Languages {
   String get txtWatchVideoToUnlock => "Watch video to unlock";
 
   @override
-  String get txtWatchVideoToUnlockDesc => "Watch the video to use training plan once";
+  String get txtWatchVideoToUnlockDesc =>
+      "Watch the video to use training plan once";
 
   @override
   String get txtUnlockOnce => "Unlock once";
 
   @override
-  String get txtFreeTrialDesc => "Free 7 Days Trial, then ₹3500.00/year. \nCancel anytime during the trial.";
+  String get txtFreeTrialDesc =>
+      "Free 7 Days Trial, then ₹3500.00/year. \nCancel anytime during the trial.";
 
   @override
   String get txtFree7DaysTrial => "Free 7 days trial";
@@ -595,7 +596,8 @@ class LanguageEn extends Languages {
   String get txtLastTime => "Last time: ";
 
   @override
-  String get txtExerciseDayWarning => "Please complete the previous days challenge first";
+  String get txtExerciseDayWarning =>
+      "Please complete the previous days challenge first";
 
   @override
   String get txtSetReminder => "Please, set your reminder.";

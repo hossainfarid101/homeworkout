@@ -33,22 +33,21 @@ class PauseScreen extends StatefulWidget {
   final bool? isSubPlan;
   final bool? isFromOnboarding;
 
-  PauseScreen({
-    this.workoutDetailList,
-    this.fromPage,
-    this.exerciseListDataList,
-    this.discoverSingleExerciseDataList,
-    this.index,
-    this.isForQuit,
-    this.planName = "",
-    this.dayName = "",
-    this.weekName = "",
-    this.homePlanTable,
-    this.isSubPlan=false,
-    this.discoverPlanTable,
-    this.weeklyDayData,
-    this.isFromOnboarding
-  });
+  PauseScreen(
+      {this.workoutDetailList,
+      this.fromPage,
+      this.exerciseListDataList,
+      this.discoverSingleExerciseDataList,
+      this.index,
+      this.isForQuit,
+      this.planName = "",
+      this.dayName = "",
+      this.weekName = "",
+      this.homePlanTable,
+      this.isSubPlan = false,
+      this.discoverPlanTable,
+      this.weeklyDayData,
+      this.isFromOnboarding});
 
   @override
   _PauseScreenState createState() => _PauseScreenState();
@@ -86,13 +85,12 @@ class _PauseScreenState extends State<PauseScreen>
         data: ThemeData(
           appBarTheme: AppBarTheme(
             systemOverlayStyle: SystemUiOverlayStyle.dark,
-          ), //
+          ),
         ),
         child: Scaffold(
           appBar: PreferredSize(
               preferredSize: Size.fromHeight(0),
               child: AppBar(
-                // Here we create one to set status bar color
                 backgroundColor: Colur.theme,
                 elevation: 0,
               )),
@@ -159,20 +157,16 @@ class _PauseScreenState extends State<PauseScreen>
             context,
             MaterialPageRoute(
                 builder: (context) => ExerciseListScreen(
-                  fromPage: widget.fromPage,
-                  planName: widget.planName,
-                  dayName: widget.dayName,
-                  weekName: widget.weekName,
-                  discoverPlanTable: widget.discoverPlanTable,
-                  homePlanTable: widget.homePlanTable,
-                  weeklyDayData: widget.weeklyDayData,
-                  isSubPlan: widget.isSubPlan,
-                  isFromOnboarding: widget.isFromOnboarding
-                )),
+                    fromPage: widget.fromPage,
+                    planName: widget.planName,
+                    dayName: widget.dayName,
+                    weekName: widget.weekName,
+                    discoverPlanTable: widget.discoverPlanTable,
+                    homePlanTable: widget.homePlanTable,
+                    weeklyDayData: widget.weeklyDayData,
+                    isSubPlan: widget.isSubPlan,
+                    isFromOnboarding: widget.isFromOnboarding)),
             (route) => false);
-        /*Navigator.pop(context, false);
-        Navigator.pop(context);
-        Navigator.pop(context);*/
       },
       child: Container(
         height: 80,
@@ -312,31 +306,6 @@ class _PauseScreenState extends State<PauseScreen>
       Navigator.pop(context, true);
     }
   }
-
-  /*bool _timeTypeCheck() {
-    return ((widget.fromPage == Constant.PAGE_HOME)
-        ? widget.exerciseListDataList![widget.index!].timeType!
-        : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
-        ? widget.workoutDetailList![widget.index!].timeType!
-        : widget.discoverSingleExerciseDataList![widget.index!].exUnit!) ==
-        ((widget.fromPage != Constant.PAGE_DISCOVER) ? "time" : "s");
-  }
-
-  String _getExerciseTimeFromList() {
-    return ((widget.fromPage == Constant.PAGE_HOME)
-        ? widget.exerciseListDataList![widget.index!].time!
-        : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
-        ? widget.workoutDetailList![widget.index!].Time_beginner
-        : widget.discoverSingleExerciseDataList![widget.index!].exTime).toString();
-  }
-
-  int _getLengthFromList(){
-    return ((widget.fromPage == Constant.PAGE_HOME)
-        ? widget.exerciseListDataList!.length
-        : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
-        ? widget.workoutDetailList!.length
-        : widget.discoverSingleExerciseDataList!.length);
-  }*/
 
   String _getExerciseNameFromList() {
     return ((widget.fromPage == Constant.PAGE_HOME)

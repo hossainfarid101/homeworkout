@@ -12,7 +12,7 @@ class ReminderTable {
     this.time,
     this.days,
     this.isActive,
-     this.repeatNo,
+    this.repeatNo,
   });
 
   factory ReminderTable.fromRawJson(String str) =>
@@ -21,20 +21,17 @@ class ReminderTable {
   String toRawJson() => json.encode(toJson());
 
   factory ReminderTable.fromJson(Map<String, dynamic> json) => ReminderTable(
-    id: json["id"],
-    time: json["time"],
-    days: json["days"],
-    isActive: json["isActive"],
-    repeatNo: json["repeatNo"]
-
-
-  );
+      id: json["id"],
+      time: json["time"],
+      days: json["days"],
+      isActive: json["isActive"],
+      repeatNo: json["repeatNo"]);
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "time": time,
-    "days": days,
-    "isActive": isActive,
-    "repeatNo": repeatNo
-  };
+        "id": id,
+        "time": time,
+        "days": days,
+        "isActive": isActive,
+        "repeatNo": repeatNo
+      };
 }

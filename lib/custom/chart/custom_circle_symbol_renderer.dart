@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:charts_flutter/flutter.dart';
+
 //ignore: implementation_imports
 import 'package:charts_flutter/src/text_style.dart' as style2;
 
@@ -21,9 +22,8 @@ class CustomCircleSymbolRenderer extends CircleSymbolRenderer {
         strokeColor: strokeColor,
         strokeWidthPx: strokeWidthPx);
 
-    //canvas.
     canvas.drawRRect(
-      Rectangle(bounds.left-8, bounds.top - 30, bounds.width + 40,
+      Rectangle(bounds.left - 8, bounds.top - 30, bounds.width + 40,
           bounds.height + 10),
       fill: Color.white,
       radius: 10,
@@ -41,6 +41,6 @@ class CustomCircleSymbolRenderer extends CircleSymbolRenderer {
     textElement.textStyle = textStyle;
 
     canvas.drawText(
-        textElement, (bounds.left+5).round(), (bounds.top - 24).round());
+        textElement, (bounds.left + 5).round(), (bounds.top - 24).round());
   }
 }

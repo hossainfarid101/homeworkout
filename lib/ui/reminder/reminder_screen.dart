@@ -22,7 +22,9 @@ import 'package:intl/intl.dart';
 
 class ReminderScreen extends StatefulWidget {
   final bool isFromWorkoutComplete;
-  const ReminderScreen({Key? key, this.isFromWorkoutComplete = false}) : super(key: key);
+
+  const ReminderScreen({Key? key, this.isFromWorkoutComplete = false})
+      : super(key: key);
 
   @override
   _ReminderScreenState createState() => _ReminderScreenState();
@@ -87,7 +89,6 @@ class _ReminderScreenState extends State<ReminderScreen>
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     var fullHeight = MediaQuery.of(context).size.height;
@@ -102,8 +103,9 @@ class _ReminderScreenState extends State<ReminderScreen>
           if (!widget.isFromWorkoutComplete) {
             Preference.shared.setInt(Preference.DRAWER_INDEX, 0);
             Navigator.pushAndRemoveUntil(
-                context, MaterialPageRoute(builder: (context) => TrainingScreen()), (
-                route) => false);
+                context,
+                MaterialPageRoute(builder: (context) => TrainingScreen()),
+                (route) => false);
           } else {
             Navigator.pop(context);
           }
@@ -118,8 +120,7 @@ class _ReminderScreenState extends State<ReminderScreen>
                 child: AppBar(
                   backgroundColor: Colur.commonBgColor,
                   elevation: 0,
-                )
-            ),
+                )),
             drawer: const DrawerMenu(),
             backgroundColor: Colur.commonBgColor,
             body: Column(
@@ -135,8 +136,9 @@ class _ReminderScreenState extends State<ReminderScreen>
                   color: Colur.grayDivider,
                   thickness: 0.0,
                 ),
-                reminderList.isEmpty ? _setReminderWidget(fullHeight) :
-                _reminderListWidget(),
+                reminderList.isEmpty
+                    ? _setReminderWidget(fullHeight)
+                    : _reminderListWidget(),
                 (_isBottomBannerAdLoaded && !Utils.isPurchased())
                     ? Container(
                         height: _bottomBannerAd.size.height.toDouble(),
@@ -146,7 +148,6 @@ class _ReminderScreenState extends State<ReminderScreen>
                     : Container()
               ],
             ),
-            //floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterFloat,
             floatingActionButton: FloatingActionButton(
               onPressed: () async {
                 await showTimePickerDialog(context);
@@ -160,8 +161,8 @@ class _ReminderScreenState extends State<ReminderScreen>
                 ),
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    gradient: LinearGradient(colors: [Colur.blueGradient1, Colur.blueGradient2])
-                ),
+                    gradient: LinearGradient(
+                        colors: [Colur.blueGradient1, Colur.blueGradient2])),
               ),
             ),
           ),
@@ -212,7 +213,6 @@ class _ReminderScreenState extends State<ReminderScreen>
   }
 
   _reminderCard(BuildContext context, int index) {
-
     var hr = int.parse(reminderList[index].time!.split(":")[0]);
     var min = int.parse(reminderList[index].time!.split(":")[1]);
     var reminderTime = DateFormat.jm().format(DateTime(DateTime.now().year,
@@ -232,20 +232,17 @@ class _ReminderScreenState extends State<ReminderScreen>
           ]),
       child: Column(
         children: [
-          //===========Reminder time and switch=========
           Container(
             margin: EdgeInsets.all(10),
             child: Row(
-              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                //======reminder time======
                 Expanded(
                   child: InkWell(
                     onTap: () async {
                       await showTimePickerDialog(context, index: index);
                       DataBaseHelper()
-                          .updateReminderTime(reminderList[index].id!,
-                              timeController.text)
+                          .updateReminderTime(
+                              reminderList[index].id!, timeController.text)
                           .then((value) {
                         setState(() {
                           getDataFromDatabase();
@@ -263,15 +260,17 @@ class _ReminderScreenState extends State<ReminderScreen>
                     ),
                   ),
                 ),
-                //=========switch==========
                 Switch(
                   value: reminderList[index].isActive! == "true",
-                  onChanged: (value) async{
+                  onChanged: (value) async {
                     setState(() {
                       reminderList[index].isActive = value.toString();
                     });
                     DataBaseHelper()
-                        .updateReminderStatus(reminderList[index].id!, reminderList[index].isActive!,)
+                        .updateReminderStatus(
+                      reminderList[index].id!,
+                      reminderList[index].isActive!,
+                    )
                         .then((value) {
                       setState(() {
                         getDataFromDatabase();
@@ -284,21 +283,18 @@ class _ReminderScreenState extends State<ReminderScreen>
               ],
             ),
           ),
-          //============repeat and delete=============
           Container(
             margin: EdgeInsets.all(10),
             child: Row(
-              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                //==========repeat=======
                 Expanded(
                   child: InkWell(
                     onTap: () async {
                       await showDaySelectionDialog(context, index: index);
 
                       DataBaseHelper()
-                          .updateReminderDays(
-                              reminderList[index].id!, repeatController.text, repeatNo!)
+                          .updateReminderDays(reminderList[index].id!,
+                              repeatController.text, repeatNo!)
                           .then((value) {
                         setState(() {
                           getDataFromDatabase();
@@ -311,14 +307,12 @@ class _ReminderScreenState extends State<ReminderScreen>
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            Languages.of(context)!.txtRepeat,
-                            overflow: TextOverflow.ellipsis,
+                          Text(Languages.of(context)!.txtRepeat,
+                              overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                   color: Colur.black,
                                   fontSize: 18,
-                                  fontWeight: FontWeight.w500)
-                          ),
+                                  fontWeight: FontWeight.w500)),
                           Container(
                             margin: const EdgeInsets.only(top: 5),
                             child: Text(
@@ -335,10 +329,10 @@ class _ReminderScreenState extends State<ReminderScreen>
                     ),
                   ),
                 ),
-                //=======delete btn======
                 InkWell(
                   onTap: () async {
-                    await _deleteAlertDialog(index).then((value) => getDataFromDatabase());
+                    await _deleteAlertDialog(index)
+                        .then((value) => getDataFromDatabase());
                     Utils.saveReminder(reminderList: reminderList);
                   },
                   child: Container(
@@ -381,7 +375,6 @@ class _ReminderScreenState extends State<ReminderScreen>
                   ),
                 ),
                 actions: [
-                  //=============Cancel btn=================
                   TextButton(
                     child: Text(
                       Languages.of(context)!.txtCancel.toUpperCase(),
@@ -393,7 +386,6 @@ class _ReminderScreenState extends State<ReminderScreen>
                       Navigator.of(context).pop();
                     },
                   ),
-                  //===========Delete btn=============
                   TextButton(
                     child: Text(
                       Languages.of(context)!.txtDelete.toUpperCase(),
@@ -430,7 +422,7 @@ class _ReminderScreenState extends State<ReminderScreen>
           "--repeatDays =====>" +
           element.days.toString() +
           "--repeatNo =====>" +
-          element.repeatNo.toString()  );
+          element.repeatNo.toString());
     });
     setState(() {});
   }
@@ -444,30 +436,29 @@ class _ReminderScreenState extends State<ReminderScreen>
 
     final TimeOfDay? picked = await showRoundedTimePicker(
       context: context,
-      initialTime: index != null
-          ? selectedTime!
-          : TimeOfDay.now(),
+      initialTime: index != null ? selectedTime! : TimeOfDay.now(),
       theme: ThemeData(
         primarySwatch: Colors.grey,
         primaryColor: Colur.theme,
         colorScheme: ColorScheme.fromSwatch().copyWith(
-          primary:  Colur.theme,
+          primary: Colur.theme,
         ),
       ),
     );
 
     if (picked != null) {
       selectedTime = picked;
-      timeController.text = "${selectedTime!.hour.toString().padLeft(2, '0')}:${selectedTime!.minute.toString().padLeft(2, '0')}";
+      timeController.text =
+          "${selectedTime!.hour.toString().padLeft(2, '0')}:${selectedTime!.minute.toString().padLeft(2, '0')}";
       Debug.printLog("time: ==> ${timeController.text}");
       setState(() {});
-      if(index == null){
+      if (index == null) {
         await showDaySelectionDialog(context);
       }
     }
   }
 
-  showDaySelectionDialog(BuildContext context,{int? index}) async {
+  showDaySelectionDialog(BuildContext context, {int? index}) async {
     List? selectedValues = await showDialog<List>(
       context: context,
       builder: (BuildContext context) {
@@ -475,18 +466,15 @@ class _ReminderScreenState extends State<ReminderScreen>
           title: Text(
             Languages.of(context)!.txtRepeat,
             style: TextStyle(
-                color: Colur.txt_black,
-                fontSize: 18,
-                fontWeight: FontWeight.w500),
+                color: Colur.black, fontSize: 18, fontWeight: FontWeight.w500),
           ),
           okButtonLabel: Languages.of(context)!.txtOk.toUpperCase(),
           cancelButtonLabel: Languages.of(context)!.txtCancel.toUpperCase(),
           items: daysList,
-          initialSelectedValues: index != null ? reminderList[index].repeatNo!.split(", ") : [],
+          initialSelectedValues:
+              index != null ? reminderList[index].repeatNo!.split(", ") : [],
           labelStyle: TextStyle(
-              color: Colur.txt_black,
-              fontSize: 16,
-              fontWeight: FontWeight.w400),
+              color: Colur.black, fontSize: 16, fontWeight: FontWeight.w400),
           dialogShapeBorder: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(0.0)),
           ),
@@ -502,7 +490,7 @@ class _ReminderScreenState extends State<ReminderScreen>
       repeatController.text = "";
       repeatNo = "";
       selectedDays.sort(
-              (a, b) => int.parse(a as String).compareTo(int.parse(b as String)));
+          (a, b) => int.parse(a as String).compareTo(int.parse(b as String)));
       List<String> temp = [];
       selectedDays.forEach((element) {
         temp.add(
@@ -512,7 +500,7 @@ class _ReminderScreenState extends State<ReminderScreen>
       repeatController.text = temp.join(", ");
       repeatNo = selectedDays.join(", ");
 
-      if(index == null){
+      if (index == null) {
         DataBaseHelper()
             .insertReminderData(ReminderTable(
           id: null,
@@ -520,14 +508,14 @@ class _ReminderScreenState extends State<ReminderScreen>
           days: repeatController.text,
           repeatNo: repeatNo,
           isActive: "true",
-        )).then((value) async{
-            await getDataFromDatabase();
-            Utils.saveReminder(reminderList: reminderList);
+        ))
+            .then((value) async {
+          await getDataFromDatabase();
+          Utils.saveReminder(reminderList: reminderList);
         });
-
       }
     } else {
-      if (index !=  null) {
+      if (index != null) {
         repeatController.text = reminderList[index].days!;
         repeatNo = reminderList[index].repeatNo!;
       }
@@ -536,80 +524,6 @@ class _ReminderScreenState extends State<ReminderScreen>
     setState(() {});
   }
 
-  /*Future<void> saveReminder({int? index}) async {
-
-      int notificationId = 100;
-
-      List<PendingNotificationRequest> pendingNoti =
-      await flutterLocalNotificationsPlugin.pendingNotificationRequests();
-
-      pendingNoti.forEach((element) {
-        if (element.payload == Constant.strExerciseReminder) {
-          Debug.printLog(
-              "Cancel Notification ::::::==> ${element.id}");
-          flutterLocalNotificationsPlugin.cancel(element.id);
-        }
-
-      });
-
-      reminderList.forEach((element) {
-
-        selectedDays = element.repeatNo!.split(", ");
-        var hr = int.parse(element.time!.split(":")[0]);
-        var min = int.parse(element.time!.split(":")[1]);
-        selectedTime = TimeOfDay(hour: hr, minute: min);
-        Debug.printLog("selected days: $selectedDays");
-
-        final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
-
-        tz.TZDateTime scheduledDate = tz.TZDateTime(tz.local, now.year, now.month,
-            now.day, selectedTime!.hour, selectedTime!.minute);
-
-        if (element.isActive == "true") {
-          selectedDays.forEach((element) async {
-            notificationId += 1;
-            if (int.parse(element as String) == DateTime.now().weekday &&
-                DateTime.now().isBefore(scheduledDate)) {
-              await scheduledNotification(scheduledDate, notificationId);
-            } else {
-              var tempTime = scheduledDate.add(const Duration(days: 1));
-              while (tempTime.weekday != int.parse(element)) {
-                tempTime = tempTime.add(const Duration(days: 1));
-              }
-              await scheduledNotification(tempTime, notificationId);
-            }
-          });
-        }
-      });
-  }
-
-  scheduledNotification(tz.TZDateTime scheduledDate, int notificationId) async {
-    Debug.printLog(
-        "Schedule Notification at ::::::==> ${scheduledDate.toIso8601String()}");
-    Debug.printLog(
-        "Schedule Notification at scheduledDate.millisecond::::::==> $notificationId");
-
-    var titleText = "Exercise Reminder";
-    var msg = "It's time to exercise.";
-
-    await flutterLocalNotificationsPlugin.zonedSchedule(
-        notificationId,
-        titleText,
-        msg,
-        scheduledDate,
-        const NotificationDetails(
-          android: AndroidNotificationDetails(
-              'exercise_reminder',
-              'Exercise Reminder',
-              channelDescription: 'This is reminder for exercise',icon: 'ic_notification'),
-        ),
-        androidAllowWhileIdle: true,
-        uiLocalNotificationDateInterpretation:
-        UILocalNotificationDateInterpretation.absoluteTime,
-        matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
-        payload: Constant.strExerciseReminder);
-  }*/
-
   @override
   void onTopBarClick(String name, {bool value = true}) {
     if (name == Constant.strBack) {
@@ -617,4 +531,3 @@ class _ReminderScreenState extends State<ReminderScreen>
     }
   }
 }
-

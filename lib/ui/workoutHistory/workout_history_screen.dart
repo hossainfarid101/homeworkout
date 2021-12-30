@@ -22,13 +22,13 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-
 class WorkoutHistoryScreen extends StatefulWidget {
   final bool? isFromWorkOut;
   final bool? isFromTraining;
 
-
-  const WorkoutHistoryScreen({Key? key, this.isFromWorkOut = false, this.isFromTraining = false}) : super(key: key);
+  const WorkoutHistoryScreen(
+      {Key? key, this.isFromWorkOut = false, this.isFromTraining = false})
+      : super(key: key);
 
   @override
   _WorkoutHistoryScreenState createState() => _WorkoutHistoryScreenState();
@@ -96,7 +96,6 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
         endDateOfCurrentWeek.toString().split(" ")[0]);
 
     _createBottomBannerAd();
-    // getDataFromDatabase();
     super.initState();
   }
 
@@ -113,21 +112,20 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
       data: ThemeData(
         appBarTheme: AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle.dark,
-        ), //
+        ),
       ),
       child: WillPopScope(
-        onWillPop:() async{
+        onWillPop: () async {
           _backToReportScreen();
           return false;
         },
         child: Scaffold(
           appBar: PreferredSize(
               preferredSize: Size.fromHeight(0),
-              child: AppBar( // Here we create one to set status bar color
+              child: AppBar(
                 backgroundColor: Colur.bg_white,
                 elevation: 0,
-              )
-          ),
+              )),
           body: SafeArea(
             child: Column(
               children: [
@@ -138,14 +136,13 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
                     isShowBack: true,
                   ),
                 ),
-                //=======History screen========
                 historyScreenWidget(fullWidth),
                 (_isBottomBannerAdLoaded && !Utils.isPurchased())
                     ? Container(
-                  height: _bottomBannerAd.size.height.toDouble(),
-                  width: _bottomBannerAd.size.width.toDouble(),
-                  child: AdWidget(ad: _bottomBannerAd),
-                )
+                        height: _bottomBannerAd.size.height.toDouble(),
+                        width: _bottomBannerAd.size.width.toDouble(),
+                        child: AdWidget(ad: _bottomBannerAd),
+                      )
                     : Container()
               ],
             ),
@@ -161,9 +158,7 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
         physics: AlwaysScrollableScrollPhysics(),
         child: Column(
           children: [
-            //======Calendar==========
             calendarWidget(fullWidth),
-
             workoutPlansHistory(),
           ],
         ),
@@ -179,18 +174,14 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
       itemBuilder: (BuildContext context, int index) {
         return Column(
           children: [
-            //=====thick divider=========
             Divider(
               color: Colur.txt_gray.withOpacity(0.2),
               thickness: 10,
             ),
-            //=========date, no. of workout, total duration and calories for week=========
             weekTotalDataWidget(historyWeekData[index]),
-            //======divider=========
             Divider(
               color: Colur.txt_gray,
             ),
-            //=========completed workout plans===========
             weeklyWorkoutPlansWidget(historyWeekData[index].arrHistoryDetail),
           ],
         );
@@ -201,14 +192,16 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
   calendarWidget(double fullWidth) {
     return TableCalendar(
       calendarFormat: CalendarFormat.month,
-      selectedDayPredicate: (day){
-        //Debug.printLog("==>" + day.toString() + calendarDates.contains(day).toString());
-        if(day == DateTime.parse(DateTime.parse(DateTime.now().toString().split(" ")[0]).toString() + "Z")) {
+      selectedDayPredicate: (day) {
+        if (day ==
+            DateTime.parse(
+                DateTime.parse(DateTime.now().toString().split(" ")[0])
+                        .toString() +
+                    "Z")) {
           return false;
         } else {
           return calendarDates.contains(day);
         }
-
       },
       calendarStyle: CalendarStyle(
           defaultTextStyle: TextStyle(color: Colur.txt_gray),
@@ -220,10 +213,8 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
             shape: BoxShape.circle,
             color: Colur.theme_trans,
           ),
-          selectedDecoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colur.theme
-          ),
+          selectedDecoration:
+              BoxDecoration(shape: BoxShape.circle, color: Colur.theme),
           selectedTextStyle:
               TextStyle(fontWeight: FontWeight.w400, color: Colur.white),
           todayTextStyle:
@@ -250,7 +241,6 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
           headerMargin: EdgeInsets.only(
               left: fullWidth * 0.25, right: fullWidth * 0.25, bottom: 10)),
       startingDayOfWeek: StartingDayOfWeek.monday,
-
       daysOfWeekStyle: DaysOfWeekStyle(
           weekdayStyle:
               TextStyle(color: Colur.txt_gray, fontWeight: FontWeight.w600),
@@ -266,8 +256,6 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
 
   convertStringFromDate(String date) {
     final todayDate = DateTime.parse(date);
-    /*print(formatDate(todayDate,
-        [yyyy, '-', mm, '-', dd, ' ', hh, ':', nn, ':', ss, ' ', am]));*/
     return formatDate(todayDate, [MM.substring(1), ' ', dd]);
   }
 
@@ -283,11 +271,9 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          //===========date and no. of workouts in current week===========
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //========start & end date of week=======
               Text(
                   convertStringFromDate(historyWeekData.weekStart.toString()) +
                       " : " +
@@ -297,7 +283,6 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
                     color: Colur.black,
                     fontSize: 15,
                   )),
-              //=========no. of workouts=========
               Text(
                   historyWeekData.totWorkout.toString() +
                       " " +
@@ -312,7 +297,6 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //========duration=======
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -337,7 +321,6 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
               SizedBox(
                 height: 5,
               ),
-              //=========calories=========
               Row(
                 children: [
                   Image.asset(
@@ -376,27 +359,29 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
           onTap: () async {
             var homePlanTable;
             var discoverPlanTable;
-            if(arrHistoryDetail[index].fromPage == Constant.PAGE_HOME) {
-               homePlanTable =  await DataBaseHelper().getHomePlanDataForHistory(arrHistoryDetail[index].tableName!);
-            } else if(arrHistoryDetail[index].fromPage == Constant.PAGE_DISCOVER) {
-              discoverPlanTable = await DataBaseHelper().getDiscoverPlanDataForHistory(arrHistoryDetail[index].planId!);
+            if (arrHistoryDetail[index].fromPage == Constant.PAGE_HOME) {
+              homePlanTable = await DataBaseHelper().getHomePlanDataForHistory(
+                  arrHistoryDetail[index].tableName!);
+            } else if (arrHistoryDetail[index].fromPage ==
+                Constant.PAGE_DISCOVER) {
+              discoverPlanTable = await DataBaseHelper()
+                  .getDiscoverPlanDataForHistory(
+                      arrHistoryDetail[index].planId!);
             }
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ExerciseListScreen(
-                        fromPage: arrHistoryDetail[index].fromPage,
-                        planName: arrHistoryDetail[index].planName,
-                        discoverPlanTable: discoverPlanTable,
-                        //weeklyDayData: ,
-                        isSubPlan: false,
-                        homePlanTable: homePlanTable,
-                        dayName: arrHistoryDetail[index].dayName,
-                        weekName: arrHistoryDetail[index].weekName,
-                        isFromOnboarding: false,
-                        isFromHistory: true,
-                      )));
-
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ExerciseListScreen(
+                          fromPage: arrHistoryDetail[index].fromPage,
+                          planName: arrHistoryDetail[index].planName,
+                          discoverPlanTable: discoverPlanTable,
+                          isSubPlan: false,
+                          homePlanTable: homePlanTable,
+                          dayName: arrHistoryDetail[index].dayName,
+                          weekName: arrHistoryDetail[index].weekName,
+                          isFromOnboarding: false,
+                          isFromHistory: true,
+                        )));
           },
           child: Container(
             margin: EdgeInsets.only(left: 15, right: 15),
@@ -411,34 +396,28 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
                         scale: 3.5,
                       ),
                     ),
-                    //======workout details======
                     Expanded(
                       child: Container(
                         margin: EdgeInsets.only(left: 20, right: 20),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            //=======date and time==========
                             Text(
                                 DateFormat.MMMd(getLocale().languageCode)
-                                    .format(DateTime.parse(arrHistoryDetail[index].dateTime!))
-                                    +", " + arrHistoryDetail[index].completionTime!,
-
+                                        .format(DateTime.parse(
+                                            arrHistoryDetail[index]
+                                                .dateTime!)) +
+                                    ", " +
+                                    arrHistoryDetail[index].completionTime!,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   color: Colur.txt_gray,
                                   fontSize: 14,
                                 )),
-                            //=========exercise name======
                             Container(
                               margin: const EdgeInsets.symmetric(vertical: 5),
                               child: Text(
-                                  /*currentWeekHistoryData[index].HLvlName! + " " +
-                                    Languages.of(context)!.txtDay + " " + currentWeekHistoryData[index].HDayName!*/
-                                  /*arrHistoryDetail[index]
-                                      .planName
-                                      .toString().toUpperCase(),*/
-                                getPlanNameFromList(arrHistoryDetail[index])!,
+                                  getPlanNameFromList(arrHistoryDetail[index])!,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                     fontWeight: FontWeight.w400,
@@ -446,11 +425,9 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
                                     fontSize: 16,
                                   )),
                             ),
-                            //calorie and duration
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                //========duration=======
                                 Image.asset(
                                   "assets/icons/ic_workout_time.webp",
                                   height: 20,
@@ -462,7 +439,6 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
                                 Container(
                                   margin: const EdgeInsets.only(top: 3.5),
                                   child: Text(
-                                      /*calculateDuration(currentWeekHistoryData[index].HDuration!)*/
                                       Utils.secondToMMSSFormat(int.parse(
                                           arrHistoryDetail[index]
                                               .duration
@@ -476,7 +452,6 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
                                 SizedBox(
                                   width: 15,
                                 ),
-                                //=========calories=========
                                 Image.asset(
                                   "assets/icons/ic_workout_calories.webp",
                                   height: 20,
@@ -518,41 +493,66 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
     );
   }
 
-
-  String? getPlanNameFromList(HistoryTable arrHistoryDetail){
+  String? getPlanNameFromList(HistoryTable arrHistoryDetail) {
     String? planName = "";
-    if(arrHistoryDetail.tableName == Constant.tbl_full_body_workouts_list ||
-        arrHistoryDetail.tableName == Constant.tbl_lower_body_list){
+    if (arrHistoryDetail.tableName == Constant.tbl_full_body_workouts_list ||
+        arrHistoryDetail.tableName == Constant.tbl_lower_body_list) {
       planName = arrHistoryDetail.planName.toString() +
           " - " +
           Languages.of(context)!.txtDay +
           " " +
-          arrHistoryDetail.dayName!.replaceAll("0", "");
-    }else{
+          arrHistoryDetail.dayName!.replaceAll(RegExp(r'^0+(?=.)'), '');
+    } else {
       planName = arrHistoryDetail.planName.toString();
     }
     return planName.toUpperCase();
   }
 
   String setPlanImage(List<HistoryTable> arrHistoryDetail, int index) {
-
     if (arrHistoryDetail[index].fromPage.toString() == Constant.PAGE_DISCOVER) {
       return "assets/icons/history/ic_history_discover.webp";
-    } else if (arrHistoryDetail[index].tableName.toString()== Constant.tbl_full_body_workouts_list) {
+    } else if (arrHistoryDetail[index].tableName.toString() ==
+        Constant.tbl_full_body_workouts_list) {
       return "assets/icons/history/ic_history_full_body.webp";
-    } else if (arrHistoryDetail[index].tableName.toString()== Constant.tbl_lower_body_list) {
+    } else if (arrHistoryDetail[index].tableName.toString() ==
+        Constant.tbl_lower_body_list) {
       return "assets/icons/history/ic_history_lower.webp";
-    }else if (arrHistoryDetail[index].tableName.toString()== Constant.tbl_abs_beginner || arrHistoryDetail[index].tableName.toString()== Constant.tbl_abs_intermediate || arrHistoryDetail[index].tableName.toString()== Constant.tbl_abs_advanced) {
+    } else if (arrHistoryDetail[index].tableName.toString() ==
+            Constant.tbl_abs_beginner ||
+        arrHistoryDetail[index].tableName.toString() ==
+            Constant.tbl_abs_intermediate ||
+        arrHistoryDetail[index].tableName.toString() ==
+            Constant.tbl_abs_advanced) {
       return "assets/icons/history/ic_history_abs.webp";
-    }else if (arrHistoryDetail[index].tableName.toString()== Constant.tbl_chest_beginner || arrHistoryDetail[index].tableName.toString()== Constant.tbl_chest_intermediate || arrHistoryDetail[index].tableName.toString()== Constant.tbl_chest_advanced) {
+    } else if (arrHistoryDetail[index].tableName.toString() ==
+            Constant.tbl_chest_beginner ||
+        arrHistoryDetail[index].tableName.toString() ==
+            Constant.tbl_chest_intermediate ||
+        arrHistoryDetail[index].tableName.toString() ==
+            Constant.tbl_chest_advanced) {
       return "assets/icons/history/ic_history_chest.webp";
-    }else if (arrHistoryDetail[index].tableName.toString()== Constant.tbl_arm_beginner || arrHistoryDetail[index].tableName.toString()== Constant.tbl_arm_intermediate || arrHistoryDetail[index].tableName.toString()== Constant.tbl_arm_advanced) {
+    } else if (arrHistoryDetail[index].tableName.toString() ==
+            Constant.tbl_arm_beginner ||
+        arrHistoryDetail[index].tableName.toString() ==
+            Constant.tbl_arm_intermediate ||
+        arrHistoryDetail[index].tableName.toString() ==
+            Constant.tbl_arm_advanced) {
       return "assets/icons/history/ic_history_arm.webp";
-    }else if (arrHistoryDetail[index].tableName.toString()== Constant.tbl_leg_beginner || arrHistoryDetail[index].tableName.toString()== Constant.tbl_leg_intermediate || arrHistoryDetail[index].tableName.toString()== Constant.tbl_leg_advanced) {
+    } else if (arrHistoryDetail[index].tableName.toString() ==
+            Constant.tbl_leg_beginner ||
+        arrHistoryDetail[index].tableName.toString() ==
+            Constant.tbl_leg_intermediate ||
+        arrHistoryDetail[index].tableName.toString() ==
+            Constant.tbl_leg_advanced) {
       return "assets/icons/history/ic_history_leg.webp";
-    }else if (arrHistoryDetail[index].tableName.toString()== Constant.tbl_shoulder_back_beginner || arrHistoryDetail[index].tableName.toString()== Constant.tbl_shoulder_back_intermediate || arrHistoryDetail[index].tableName.toString()== Constant.tbl_shoulder_back_advanced) {
+    } else if (arrHistoryDetail[index].tableName.toString() ==
+            Constant.tbl_shoulder_back_beginner ||
+        arrHistoryDetail[index].tableName.toString() ==
+            Constant.tbl_shoulder_back_intermediate ||
+        arrHistoryDetail[index].tableName.toString() ==
+            Constant.tbl_shoulder_back_advanced) {
       return "assets/icons/history/ic_history_shoulder.webp";
-    } else{
+    } else {
       return "assets/icons/history/ic_history_discover.webp";
     }
   }
@@ -570,34 +570,45 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
     historyWeekData.forEach((element) {
       element.arrHistoryDetail!.forEach((element1) {
         Debug.printLog("History::Plan::==>  " +
-            "id: "+element1.id.toString() +
-            "\t-\t"+
-            "day name: " +element1.dayName.toString() + "\t-\t" + "table name: "+element1.tableName! + "\t-\t" + "plan name: " +element1.planName! + "\t-\t" + "plan id: " +element1.planId!.toString());
+            "id: " +
+            element1.id.toString() +
+            "\t-\t" +
+            "day name: " +
+            element1.dayName.toString() +
+            "\t-\t" +
+            "table name: " +
+            element1.tableName! +
+            "\t-\t" +
+            "plan name: " +
+            element1.planName! +
+            "\t-\t" +
+            "plan id: " +
+            element1.planId!.toString());
 
-        calendarDates.add(DateTime.parse(DateTime.parse(element1.dateTime!.split(" ")[0]).toString() + "Z"));
+        calendarDates.add(DateTime.parse(
+            DateTime.parse(element1.dateTime!.split(" ")[0]).toString() + "Z"));
       });
     });
 
     Debug.printLog(calendarDates.toString());
   }
 
-
   @override
   void onTopBarClick(String name, {bool value = true}) {
-    if(name == Constant.strBack){
+    if (name == Constant.strBack) {
       _backToReportScreen();
     }
   }
 
   _backToReportScreen() {
-      if (!widget.isFromTraining!) {
-        Preference.shared.setInt(Preference.DRAWER_INDEX, 2);
-        Navigator.pushAndRemoveUntil(
-            context, MaterialPageRoute(builder: (context) => ReportScreen()), (
-            route) => false);
-      } else {
-        Navigator.pop(context);
-      }
-
+    if (!widget.isFromTraining!) {
+      Preference.shared.setInt(Preference.DRAWER_INDEX, 2);
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => ReportScreen()),
+          (route) => false);
+    } else {
+      Navigator.pop(context);
+    }
   }
 }

@@ -19,7 +19,6 @@ import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 
 class SkipExerciseScreen extends StatefulWidget {
-
   final List<ExerciseListData>? exerciseDataList;
   final String? fromPage;
   final String? tableName;
@@ -34,7 +33,6 @@ class SkipExerciseScreen extends StatefulWidget {
   final bool? isSubPlan;
   final bool? isFromOnboarding;
 
-
   SkipExerciseScreen(
       {this.fromPage = "",
       this.exerciseDataList,
@@ -44,7 +42,7 @@ class SkipExerciseScreen extends StatefulWidget {
       this.weekName = "",
       this.discoverSingleExerciseData,
       this.homePlanTable,
-      this.isSubPlan=false,
+      this.isSubPlan = false,
       this.discoverPlanTable,
       this.weeklyDayData,
       this.isFromOnboarding,
@@ -63,13 +61,14 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
   int? _pointerValueInt;
   FlutterTts flutterTts = FlutterTts();
 
-  bool? isMute =false;
+  bool? isMute = false;
   bool? isVoiceGuide = false;
 
-  Animation<int>? listLifeGuideAnimation ;
-  AnimationController? listLifeGuideController ;
-  int countOfImages = 0;
+  Animation<int>? listLifeGuideAnimation;
 
+  AnimationController? listLifeGuideController;
+
+  int countOfImages = 0;
 
   @override
   void initState() {
@@ -80,27 +79,21 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
     super.initState();
   }
 
-
   _getLastPosition() {
-    // lastPosition = Preference.shared.getLastUnCompletedExPos(widget.tableName.toString());
-    if(widget.fromPage == Constant.PAGE_HOME){
+    if (widget.fromPage == Constant.PAGE_HOME) {
       lastPosition = Preference.shared
           .getLastUnCompletedExPos(widget.tableName.toString());
-    }else if(widget.fromPage == Constant.PAGE_DAYS_STATUS){
+    } else if (widget.fromPage == Constant.PAGE_DAYS_STATUS) {
       lastPosition = Preference.shared.getLastUnCompletedExPosForDays(
           widget.tableName.toString(),
           widget.weekName.toString(),
           widget.dayName.toString());
-    }else if(widget.fromPage == Constant.PAGE_DISCOVER){
-      lastPosition = Preference.shared.getLastUnCompletedExPos(widget.planName.toString());
+    } else if (widget.fromPage == Constant.PAGE_DISCOVER) {
+      lastPosition =
+          Preference.shared.getLastUnCompletedExPos(widget.planName.toString());
     }
     _setImageRotation(lastPosition!);
     Future.delayed(Duration(milliseconds: 100), () {
-   /*   String sec = widget.exerciseDataList![lastPosition!].timeType! == "time"
-          ? Languages.of(context)!.txtSeconds
-          : Languages.of(context)!.txtTimes;
-*/
-
       String sec = "";
       String time = "";
       String title = "";
@@ -114,17 +107,19 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
         sec = widget.dayStatusDetailList![lastPosition!].timeType! == "time"
             ? Languages.of(context)!.txtSeconds
             : Languages.of(context)!.txtTimes;
-        time = widget.dayStatusDetailList![lastPosition!].timeBeginner.toString();
+        time =
+            widget.dayStatusDetailList![lastPosition!].timeBeginner.toString();
         title = widget.dayStatusDetailList![lastPosition!].title.toString();
-      }else if (widget.fromPage == Constant.PAGE_DISCOVER) {
+      } else if (widget.fromPage == Constant.PAGE_DISCOVER) {
         sec = widget.discoverSingleExerciseData![lastPosition!].exUnit! == "s"
             ? Languages.of(context)!.txtSeconds
             : Languages.of(context)!.txtTimes;
 
-        time = widget.discoverSingleExerciseData![lastPosition!].exTime.toString();
-        title = widget.discoverSingleExerciseData![lastPosition!].exName.toString();
+        time =
+            widget.discoverSingleExerciseData![lastPosition!].exTime.toString();
+        title =
+            widget.discoverSingleExerciseData![lastPosition!].exName.toString();
       }
-
 
       if (isCountDownStart) {
         if (!isMute! && isVoiceGuide!) {
@@ -164,53 +159,51 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async{
+      onWillPop: () async {
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => PauseScreen(
-                  fromPage: widget.fromPage,
-                  index: lastPosition,
-                  exerciseListDataList: widget.exerciseDataList,
-                  workoutDetailList: widget.dayStatusDetailList,
-                  discoverSingleExerciseDataList: widget.discoverSingleExerciseData,
-                  isForQuit: true,
-                  dayName: widget.dayName,
-                  weekName: widget.weekName,
-                  planName: widget.planName,
-                  discoverPlanTable: widget.discoverPlanTable,
-                  weeklyDayData: widget.weeklyDayData,
-                  isSubPlan: widget.isSubPlan,
-                  homePlanTable: widget.homePlanTable,
-                  isFromOnboarding: widget.isFromOnboarding,
-                )));
+                      fromPage: widget.fromPage,
+                      index: lastPosition,
+                      exerciseListDataList: widget.exerciseDataList,
+                      workoutDetailList: widget.dayStatusDetailList,
+                      discoverSingleExerciseDataList:
+                          widget.discoverSingleExerciseData,
+                      isForQuit: true,
+                      dayName: widget.dayName,
+                      weekName: widget.weekName,
+                      planName: widget.planName,
+                      discoverPlanTable: widget.discoverPlanTable,
+                      weeklyDayData: widget.weeklyDayData,
+                      isSubPlan: widget.isSubPlan,
+                      homePlanTable: widget.homePlanTable,
+                      isFromOnboarding: widget.isFromOnboarding,
+                    )));
         return true;
       },
       child: Theme(
         data: ThemeData(
           appBarTheme: AppBarTheme(
             systemOverlayStyle: SystemUiOverlayStyle.dark,
-          ), //
+          ),
         ),
         child: Scaffold(
           appBar: PreferredSize(
               preferredSize: Size.fromHeight(0),
-              child: AppBar( // Here we create one to set status bar color
+              child: AppBar(
                 backgroundColor: Colur.blueGradient1,
                 elevation: 0,
-              )
-          ),
+              )),
           backgroundColor: Colur.blueGradient1,
           body: SafeArea(
             child: Container(
               child: Column(
                 children: [
                   _widgetCenterTimer(),
-
                   _widgetBottomExe(),
                 ],
               ),
@@ -233,18 +226,16 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 28,
-                  color: Colur.white
-              ),
+                  color: Colur.white),
             ),
             Container(
               margin: const EdgeInsets.all(10),
               child: Text(
                 Utils.secondToMMSSFormat(_pointerValueInt!),
                 style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 48,
-                  color: Colur.white
-                ),
+                    fontWeight: FontWeight.w700,
+                    fontSize: 48,
+                    color: Colur.white),
               ),
             ),
             Row(
@@ -263,10 +254,9 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
                     height: 35,
                     width: 100,
                     decoration: BoxDecoration(
-                      color: Colur.theme,
-                      borderRadius: BorderRadius.circular(30.0),
-                      border: Border.all(color: Colur.white)
-                    ),
+                        color: Colur.theme,
+                        borderRadius: BorderRadius.circular(30.0),
+                        border: Border.all(color: Colur.white)),
                     child: Center(
                       child: Text(
                         "+20s",
@@ -276,7 +266,6 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
                     ),
                   ),
                 ),
-
                 InkWell(
                   onTap: () {
                     flutterTts.stop();
@@ -325,24 +314,21 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
                     child: Row(
                       children: [
                         Text(
-                            Languages.of(context)!.txtNext.toUpperCase(),
-                          style: TextStyle(
-                              color: Colur.txt_gray
-                          ),
-                           ),
+                          Languages.of(context)!.txtNext.toUpperCase(),
+                          style: TextStyle(color: Colur.txt_gray),
+                        ),
                         Text(
                           (lastPosition! + 1).toString() +
                               "/" +
                               (_getLengthFromList()).toString(),
-                          style: TextStyle(
-                            color: Colur.theme
-                          ),
+                          style: TextStyle(color: Colur.theme),
                         ),
                       ],
                     ),
                   ),
                   Container(
-                    margin: const EdgeInsets.only(top: 10.0, bottom: 10,right: 5),
+                    margin:
+                        const EdgeInsets.only(top: 10.0, bottom: 10, right: 5),
                     child: Text(
                       (_getExerciseNameFromList()),
                       overflow: TextOverflow.ellipsis,
@@ -350,32 +336,17 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
                           fontSize: 18.0,
                           color: Colur.black,
                           fontWeight: FontWeight.w600),
-
                     ),
                   ),
                   Container(
-                    margin: const EdgeInsets.only(bottom: 10.0),
-                    child: Text(
-                      (_getTimeAndCheckTimeType()),
-                        style: TextStyle(
-                          color: Colur.txt_gray
-                      ),
-                    )
-                  )
+                      margin: const EdgeInsets.only(bottom: 10.0),
+                      child: Text(
+                        (_getTimeAndCheckTimeType()),
+                        style: TextStyle(color: Colur.txt_gray),
+                      ))
                 ],
               ),
             ),
-            /*Container(
-              color: Colur.theme_trans,
-              width: 70.0,
-              height: 70.0,
-              child: Image.asset(
-                'assets/images/img_exercise.webp',
-                gaplessPlayback: true,
-                fit: BoxFit.cover,
-              ),
-            ),*/
-
             (listLifeGuideAnimation != null)
                 ? Container(
                     color: Colur.theme_trans,
@@ -405,68 +376,53 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
   }
 
   _getPreference() {
-    trainingRestTime = Preference.shared.getInt(Preference.trainingRestTime) ?? 20;
+    trainingRestTime =
+        Preference.shared.getInt(Preference.trainingRestTime) ?? 20;
   }
-
-
-  /*bool _timeTypeCheck() {
-    return ((widget.fromPage == Constant.PAGE_HOME)
-        ? widget.exerciseDataList![lastPosition!].timeType!
-        : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
-        ? widget.dayStatusDetailList![lastPosition!].timeType!
-        : widget.discoverSingleExerciseData![lastPosition!].exUnit!) ==
-        ((widget.fromPage != Constant.PAGE_DISCOVER) ? "time" : "s");
-  }*/
 
   String _getTimeAndCheckTimeType() {
     return (widget.fromPage == Constant.PAGE_HOME)
         ? (widget.exerciseDataList![lastPosition!].timeType == "time")
-        ? Utils.secondToMMSSFormat(
-        int.parse(widget.exerciseDataList![lastPosition!].time.toString()))
-        : "X ${widget.exerciseDataList![lastPosition!].time}"
+            ? Utils.secondToMMSSFormat(int.parse(
+                widget.exerciseDataList![lastPosition!].time.toString()))
+            : "X ${widget.exerciseDataList![lastPosition!].time}"
         : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
-        ? (widget.dayStatusDetailList![lastPosition!].timeType == "time")
-        ? Utils.secondToMMSSFormat(int.parse(
-        widget.dayStatusDetailList![lastPosition!].timeBeginner.toString()))
-        : "X ${widget.dayStatusDetailList![lastPosition!].timeBeginner}"
-        : (widget.discoverSingleExerciseData![lastPosition!].exUnit == "s")
-        ? Utils.secondToMMSSFormat(int.parse(
-        widget.discoverSingleExerciseData![lastPosition!].exTime
-            .toString()))
-        : "X ${widget.discoverSingleExerciseData![lastPosition!].exTime}";
+            ? (widget.dayStatusDetailList![lastPosition!].timeType == "time")
+                ? Utils.secondToMMSSFormat(int.parse(widget
+                    .dayStatusDetailList![lastPosition!].timeBeginner
+                    .toString()))
+                : "X ${widget.dayStatusDetailList![lastPosition!].timeBeginner}"
+            : (widget.discoverSingleExerciseData![lastPosition!].exUnit == "s")
+                ? Utils.secondToMMSSFormat(int.parse(widget
+                    .discoverSingleExerciseData![lastPosition!].exTime
+                    .toString()))
+                : "X ${widget.discoverSingleExerciseData![lastPosition!].exTime}";
   }
 
-  /*String _getExerciseTimeFromList() {
-    return ((widget.fromPage == Constant.PAGE_HOME)
-        ? widget.exerciseDataList![lastPosition!].time!
-        : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
-        ? widget.dayStatusDetailList![lastPosition!].Time_beginner
-        : widget.discoverSingleExerciseData![lastPosition!].exTime).toString();
-  }*/
-
-  int _getLengthFromList(){
+  int _getLengthFromList() {
     return ((widget.fromPage == Constant.PAGE_HOME)
         ? widget.exerciseDataList!.length
         : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
-        ? widget.dayStatusDetailList!.length
-        : widget.discoverSingleExerciseData!.length);
+            ? widget.dayStatusDetailList!.length
+            : widget.discoverSingleExerciseData!.length);
   }
 
-
-  String _getExerciseNameFromList(){
+  String _getExerciseNameFromList() {
     return ((widget.fromPage == Constant.PAGE_HOME)
-        ? widget.exerciseDataList![lastPosition!].title!
-        : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
-        ? widget.dayStatusDetailList![lastPosition!].title
-        : widget.discoverSingleExerciseData![lastPosition!].exName).toString();
+            ? widget.exerciseDataList![lastPosition!].title!
+            : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
+                ? widget.dayStatusDetailList![lastPosition!].title
+                : widget.discoverSingleExerciseData![lastPosition!].exName)
+        .toString();
   }
 
-  String _getExercisePathFromList(){
+  String _getExercisePathFromList() {
     return ((widget.fromPage == Constant.PAGE_HOME)
-        ? widget.exerciseDataList![lastPosition!].image!
-        : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
-        ? widget.dayStatusDetailList![lastPosition!].image
-        : widget.discoverSingleExerciseData![lastPosition!].exPath).toString();
+            ? widget.exerciseDataList![lastPosition!].image!
+            : (widget.fromPage == Constant.PAGE_DAYS_STATUS)
+                ? widget.dayStatusDetailList![lastPosition!].image
+                : widget.discoverSingleExerciseData![lastPosition!].exPath)
+        .toString();
   }
 
   _setImageRotation(int pos) async {
@@ -504,11 +460,10 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
     final Map<String, dynamic> manifestMap = json.decode(manifestContent);
 
     final imagePaths = manifestMap.keys
-        .where((String key) => key
-        .contains(_getExercisePathFromList().toString()+"/"))
+        .where((String key) =>
+            key.contains(_getExercisePathFromList().toString() + "/"))
         .toList();
 
     countOfImages = imagePaths.length;
-
   }
 }

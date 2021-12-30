@@ -32,9 +32,8 @@ class ReportScreen extends StatefulWidget {
   _ReportScreenState createState() => _ReportScreenState();
 }
 
-
-class _ReportScreenState extends State<ReportScreen> implements TopBarClickListener{
-
+class _ReportScreenState extends State<ReportScreen>
+    implements TopBarClickListener {
   List<charts.Series<LinearSales, DateTime>>? series;
   List<LinearSales> data = [];
   double? currentWeightKg;
@@ -48,7 +47,6 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
   double? heightBMI;
   double? bmi;
 
-
   List<WeightTable> weightDataList = [];
 
   int minWeight = Constant.MIN_KG.toInt();
@@ -57,7 +55,6 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
   WeightTable? minWeightData;
   WeightTable? maxWeightData;
   WeightTable? currentWeightData;
-
 
   bool? isKg;
 
@@ -72,7 +69,6 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
 
   late BannerAd _bottomBannerAd;
   bool _isBottomBannerAdLoaded = false;
-
 
   void _createBottomBannerAd() {
     _bottomBannerAd = BannerAd(
@@ -105,7 +101,6 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
       start = start.add(Duration(days: 1));
     }
 
-    // _getDataFromDatabase();
     getPreference();
     getWeightChartDataFromDatabase();
     getWeightData();
@@ -114,6 +109,7 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
     _createBottomBannerAd();
     super.initState();
   }
+
   void _manageDrawer() {
     Constant.isReportScreen = true;
     Constant.isReminderScreen = false;
@@ -122,11 +118,10 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
     Constant.isTrainingScreen = false;
   }
 
-  _getDataFromDatabase(){
+  _getDataFromDatabase() {
     _getHistoryWeekWise();
     _getTotalWorkoutDetail();
   }
-
 
   getPreference() {
     weightBMI = Preference.shared.getDouble(Preference.WEIGHT) ?? 0;
@@ -135,10 +130,9 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
     isKg = Preference.shared.getBool(Preference.IS_KG) ?? true;
     bmiCategory = Preference.shared.getString(Preference.BMI_TEXT) ?? "";
 
-    if(weightBMI != 0 && heightBMI != 0) {
+    if (weightBMI != 0 && heightBMI != 0) {
       setBmiCalculation();
       Preference.shared.setDouble(Preference.BMI, bmi!);
-
     }
   }
 
@@ -147,32 +141,33 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
     _bottomBannerAd.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     var fullWidth = MediaQuery.of(context).size.width;
     bmiTextCategory();
-    return  Theme(
+    return Theme(
       data: ThemeData(
-          appBarTheme: AppBarTheme(
-            systemOverlayStyle: SystemUiOverlayStyle.dark,
-          ),
+        appBarTheme: AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle.dark,
+        ),
       ),
       child: WillPopScope(
         onWillPop: () {
           Preference.shared.setInt(Preference.DRAWER_INDEX, 0);
           Navigator.pushAndRemoveUntil(
-              context, MaterialPageRoute(builder: (context) => TrainingScreen()), (
-              route) => false);
+              context,
+              MaterialPageRoute(builder: (context) => TrainingScreen()),
+              (route) => false);
           return Future.value(true);
         },
         child: Scaffold(
           appBar: PreferredSize(
               preferredSize: Size.fromHeight(0),
-              child: AppBar( // Here we create one to set status bar color
+              child: AppBar(
                 backgroundColor: Colur.commonBgColor,
                 elevation: 0,
-              )
-          ),
+              )),
           drawer: const DrawerMenu(),
           backgroundColor: Colur.commonBgColor,
           body: SafeArea(
@@ -190,32 +185,28 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
                   color: Colur.grayDivider,
                   thickness: 0.0,
                 ),
-
                 Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _widgetTotalWorkout(),
-                        _widgetDayHistory(),
-                        _widgetWeightChart(),
-                        _widgetBmiChart(fullWidth),
-                      ],
-                    ),
-                  )
-                ),
+                    child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _widgetTotalWorkout(),
+                      _widgetDayHistory(),
+                      _widgetWeightChart(),
+                      _widgetBmiChart(fullWidth),
+                    ],
+                  ),
+                )),
                 (_isBottomBannerAdLoaded && !Utils.isPurchased())
                     ? Container(
-                  height: _bottomBannerAd.size.height.toDouble(),
-                  width: _bottomBannerAd.size.width.toDouble(),
-                  child: AdWidget(ad: _bottomBannerAd),
-                )
+                        height: _bottomBannerAd.size.height.toDouble(),
+                        width: _bottomBannerAd.size.width.toDouble(),
+                        child: AdWidget(ad: _bottomBannerAd),
+                      )
                     : Container()
-
               ],
             ),
           ),
-
         ),
       ),
     );
@@ -233,7 +224,9 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
                 child: Column(
                   children: [
                     Text(
-                      (totalWorkout != 0 && totalWorkout != null) ? totalWorkout.toString() : "0",
+                      (totalWorkout != 0 && totalWorkout != null)
+                          ? totalWorkout.toString()
+                          : "0",
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
@@ -250,7 +243,9 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
                 child: Column(
                   children: [
                     Text(
-                      (totalKcal != 0 && totalKcal != null) ? totalKcal.toString() : "0",
+                      (totalKcal != 0 && totalKcal != null)
+                          ? totalKcal.toString()
+                          : "0",
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
@@ -267,7 +262,11 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
                 child: Column(
                   children: [
                     Text(
-                      totalMin != null ? (totalMin != 0) ? totalMin!.toString() : "0" : "0",
+                      totalMin != null
+                          ? (totalMin != 0)
+                              ? totalMin!.toString()
+                              : "0"
+                          : "0",
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20.0,
@@ -297,7 +296,10 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
       children: [
         InkWell(
           onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => WorkoutHistoryScreen()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => WorkoutHistoryScreen()));
           },
           child: Row(
             children: [
@@ -307,7 +309,7 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
                   child: Text(
                     Languages.of(context)!.txtHistory,
                     style:
-                    TextStyle(fontWeight: FontWeight.w600, fontSize: 16.0),
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 16.0),
                   ),
                 ),
               ),
@@ -326,17 +328,19 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
             itemBuilder: (BuildContext context, int index) {
-              return _itemOfHistory(index,isAvailableHistory);
+              return _itemOfHistory(index, isAvailableHistory);
             },
             itemCount: isAvailableHistory.length,
           ),
         ),
         InkWell(
-          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => WorkoutHistoryScreen())),
+          onTap: () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => WorkoutHistoryScreen())),
           child: Container(
             margin: const EdgeInsets.symmetric(vertical: 10),
             alignment: Alignment.center,
-            child: Text(Languages.of(context)!.txtRecords, style: TextStyle(color: Colur.theme)),
+            child: Text(Languages.of(context)!.txtRecords,
+                style: TextStyle(color: Colur.theme)),
           ),
         ),
         Divider(
@@ -352,8 +356,10 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
       width: MediaQuery.of(context).size.width / 7.3,
       child: Column(
         children: [
-          Text(Utils.getDaysNameOfWeek(Preference.shared.getInt(
-              Preference.SELECTED_FIRST_DAY_OF_WEEK)??0)[index].toString()[0]),
+          Text(Utils.getDaysNameOfWeek(Preference.shared
+                      .getInt(Preference.SELECTED_FIRST_DAY_OF_WEEK) ??
+                  0)[index]
+              .toString()[0]),
           Container(
             width: 20,
             height: 20,
@@ -375,8 +381,10 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
           Container(
               alignment: Alignment.center,
               child: Text(
-                Utils.getDaysDateOfWeek(Preference.shared.getInt(
-                    Preference.SELECTED_FIRST_DAY_OF_WEEK)??0)[index].toString(),
+                Utils.getDaysDateOfWeek(Preference.shared
+                            .getInt(Preference.SELECTED_FIRST_DAY_OF_WEEK) ??
+                        0)[index]
+                    .toString(),
                 textAlign: TextAlign.center,
               ))
         ],
@@ -419,25 +427,28 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
         ),
         Container(
           child: _weightWidget(context),
-          // child: _weightFlChart(),
         ),
         Column(
           children: [
             Container(
               margin:
-              const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
               child: Row(
                 children: [
                   Expanded(
                       child: Text(Languages.of(context)!.txtCurrent + ":")),
                   Text(
                     isKg!
-                        ? currentWeightKg != null ? currentWeightKg.toString() +
-                        " " +
-                        Languages.of(context)!.txtKG.toUpperCase() : "0.0 KG"
-                        : currentWeightLb != null ? currentWeightLb.toString() +
-                        " " +
-                        Languages.of(context)!.txtLB.toUpperCase() : "0.0 LB",
+                        ? currentWeightKg != null
+                            ? currentWeightKg.toString() +
+                                " " +
+                                Languages.of(context)!.txtKG.toUpperCase()
+                            : "0.0 KG"
+                        : currentWeightLb != null
+                            ? currentWeightLb.toString() +
+                                " " +
+                                Languages.of(context)!.txtLB.toUpperCase()
+                            : "0.0 LB",
                     style: TextStyle(fontSize: 16.0, color: Colur.black),
                   )
                 ],
@@ -451,12 +462,16 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
                       child: Text(Languages.of(context)!.txtHeaviest + ":")),
                   Text(
                     isKg!
-                        ? maxWeightKg != null ? maxWeightKg.toString() +
-                        " " +
-                        Languages.of(context)!.txtKG.toUpperCase() : "0.0 KG"
-                        : maxWeightKg != null ? maxWeightLb.toString() +
-                        " " +
-                        Languages.of(context)!.txtLB.toUpperCase() : "0.0 LB",
+                        ? maxWeightKg != null
+                            ? maxWeightKg.toString() +
+                                " " +
+                                Languages.of(context)!.txtKG.toUpperCase()
+                            : "0.0 KG"
+                        : maxWeightKg != null
+                            ? maxWeightLb.toString() +
+                                " " +
+                                Languages.of(context)!.txtLB.toUpperCase()
+                            : "0.0 LB",
                     style: TextStyle(fontSize: 16.0, color: Colur.black),
                   )
                 ],
@@ -464,19 +479,23 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
             ),
             Container(
               margin:
-              const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
               child: Row(
                 children: [
                   Expanded(
                       child: Text(Languages.of(context)!.txtLightest + ":")),
                   Text(
                     isKg!
-                        ? minWeightKg != null ? minWeightKg.toString() +
-                        " " +
-                        Languages.of(context)!.txtKG.toUpperCase() : "0.0 KG"
-                        : minWeightLb != null ? minWeightLb.toString() +
-                        " " +
-                        Languages.of(context)!.txtLB.toUpperCase() : "0.0 LB",
+                        ? minWeightKg != null
+                            ? minWeightKg.toString() +
+                                " " +
+                                Languages.of(context)!.txtKG.toUpperCase()
+                            : "0.0 KG"
+                        : minWeightLb != null
+                            ? minWeightLb.toString() +
+                                " " +
+                                Languages.of(context)!.txtLB.toUpperCase()
+                            : "0.0 LB",
                     style: TextStyle(fontSize: 16.0, color: Colur.black),
                   )
                 ],
@@ -537,9 +556,7 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
               behaviors: [
                 new charts.PanBehavior(),
                 charts.LinePointHighlighter(
-                    symbolRenderer:
-                    CustomCircleSymbolRenderer() // add this line in behaviours
-                )
+                    symbolRenderer: CustomCircleSymbolRenderer())
               ],
               primaryMeasureAxis: charts.NumericAxisSpec(
                 tickProviderSpec: charts.BasicNumericTickProviderSpec(
@@ -559,13 +576,12 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
               selectionModels: [
                 charts.SelectionModelConfig(
                     changedListener: (charts.SelectionModel model) {
-                      if (model.hasDatumSelection) {
-                        final value = model.selectedSeries[0]
-                            .measureFn(model.selectedDatum[0].index);
-                        CustomCircleSymbolRenderer.value =
-                            value.toString(); // paints the tapped value
-                      }
-                    })
+                  if (model.hasDatumSelection) {
+                    final value = model.selectedSeries[0]
+                        .measureFn(model.selectedDatum[0].index);
+                    CustomCircleSymbolRenderer.value = value.toString();
+                  }
+                })
               ],
             ),
           ),
@@ -611,8 +627,6 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
                   if (res != 0) {
                     setState(() {
                       getPreference();
-                      /*getWeightChartDataFromDatabase();
-                      getWeightData();*/
                       setBmiCalculation();
                       Preference.shared.setDouble(Preference.BMI, bmi!);
                       bmiTextCategory();
@@ -698,11 +712,9 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
                   child: Column(
                     children: [
                       Text(
-                          bmi!.toStringAsFixed(2),
+                        bmi!.toStringAsFixed(2),
                         style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600
-                        ),
+                            fontSize: 15, fontWeight: FontWeight.w600),
                       ),
                       Container(
                         margin: const EdgeInsets.symmetric(
@@ -729,7 +741,6 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
               children: [
                 Text(bmiCategory!,
                     overflow: TextOverflow.ellipsis,
-                    //textAlign: TextAlign.center,
                     style: TextStyle(
                         color: bmiColor,
                         fontSize: 14,
@@ -742,11 +753,8 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
     );
   }
 
-
   @override
-  void onTopBarClick(String name, {bool value = true}) {
-
-  }
+  void onTopBarClick(String name, {bool value = true}) {}
 
   setBmiCalculation() {
     var lastWeight = Preference.shared.getDouble(Preference.WEIGHT) ?? 0;
@@ -865,7 +873,7 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
 
         DateTime date = DateFormat.yMd().parse(element.date!);
         var index =
-        data.indexWhere((element) => element.date.isAtSameMomentAs(date));
+            data.indexWhere((element) => element.date.isAtSameMomentAs(date));
         if (index > 0) {
           data[index].sales = element.weightKG!;
         }
@@ -885,7 +893,7 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
 
         DateTime date = DateFormat.yMd().parse(element.date!);
         var index =
-        data.indexWhere((element) => element.date.isAtSameMomentAs(date));
+            data.indexWhere((element) => element.date.isAtSameMomentAs(date));
         if (index > 0) {
           data[index].sales = element.weightLB!;
         }
@@ -934,27 +942,25 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
     }
   }
 
-
   _getHistoryWeekWise() {
     Utils.getDaysDateForHistoryOfWeek().forEach((element) async {
-      bool? isAvailable = await DataBaseHelper().isHistoryAvailableDateWise(element.toString());
+      bool? isAvailable =
+          await DataBaseHelper().isHistoryAvailableDateWise(element.toString());
       isAvailableHistory.add(isAvailable!);
-      Debug.printLog("getDaysDateForHistoryOfWeek==>> "+element.toString());
+      Debug.printLog("getDaysDateForHistoryOfWeek==>> " + element.toString());
     });
     isAvailableHistory.forEach((element) {
-      Debug.printLog("isAvailableHistory==>> "+element.toString());
+      Debug.printLog("isAvailableHistory==>> " + element.toString());
     });
     setState(() {});
   }
 
-  _getTotalWorkoutDetail()async{
+  _getTotalWorkoutDetail() async {
     totalWorkout = await DataBaseHelper().getHistoryTotalWorkout() ?? 0;
     totalKcal = await DataBaseHelper().getHistoryTotalKCal() ?? 0;
     totalMin = await DataBaseHelper().getHistoryTotalMinutes() ?? 0;
     totalMin = totalMin! ~/ 60;
-    setState(() {
-
-    });
+    setState(() {});
   }
 }
 

@@ -13,14 +13,14 @@ class CommonTopBar extends StatefulWidget {
   final Color iconColor;
 
   const CommonTopBar(
-      this.headerName,
-      this.clickListener, {
-        this.isShowBack = false,
-        this.isMenu = false,
-        this.isHistory = false,
-        this.iconColor = Colur.black,
-        Key? key,
-      }) : super(key: key);
+    this.headerName,
+    this.clickListener, {
+    this.isShowBack = false,
+    this.isMenu = false,
+    this.isHistory = false,
+    this.iconColor = Colur.black,
+    Key? key,
+  }) : super(key: key);
 
   @override
   _CommonTopBarState createState() => _CommonTopBarState();
@@ -89,7 +89,7 @@ class _CommonTopBarState extends State<CommonTopBar> {
                       style: const TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 18,
-                          color: Colur.txtBlack),
+                          color: Colur.black),
                     ),
                   ],
                 ),

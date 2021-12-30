@@ -32,8 +32,8 @@ class SettingsScreen extends StatefulWidget {
   _SettingsScreenState createState() => _SettingsScreenState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickListener{
-
+class _SettingsScreenState extends State<SettingsScreen>
+    implements TopBarClickListener {
   FlutterTts flutterTts = FlutterTts();
 
   String? selectedEngine;
@@ -44,7 +44,6 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
   bool? isCoachTips;
   bool? isVoiceGuide;
 
-
   late BannerAd _bottomBannerAd;
   bool _isBottomBannerAdLoaded = false;
 
@@ -54,8 +53,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
 
   final AndroidIntent intent = const AndroidIntent(
       action: 'com.android.settings.TTS_SETTINGS',
-      componentName: "com.android.settings.TextToSpeechSettings"
-  );
+      componentName: "com.android.settings.TextToSpeechSettings");
 
   void _createBottomBannerAd() {
     _bottomBannerAd = BannerAd(
@@ -87,8 +85,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
         remindDays: 7,
         remindLaunches: 10,
         googlePlayIdentifier: 'com.homeworkout.men.women',
-        appStoreIdentifier: '1601155923'
-    );
+        appStoreIdentifier: '1601155923');
 
     if (Platform.isIOS) {
       rateMyApp!.init().then((_) {
@@ -96,18 +93,12 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
           rateMyApp!.showRateDialog(
             context,
             title: 'Rate this app',
-
             message:
-            'If you like this app, please take a little bit of your time to review it !\nIt really helps us and it shouldn\'t take you more than one minute.',
-
+                'If you like this app, please take a little bit of your time to review it !\nIt really helps us and it shouldn\'t take you more than one minute.',
             rateButton: 'RATE',
-
             noButton: 'NO THANKS',
-
             laterButton: 'MAYBE LATER',
-
             listener: (button) {
-
               switch (button) {
                 case RateMyAppDialogButton.rate:
                   print('Clicked on "Rate".');
@@ -123,30 +114,24 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
               return true;
             },
             ignoreNativeDialog: Platform.isAndroid,
-
             dialogStyle: const DialogStyle(),
-
-            onDismissed: () => rateMyApp!.callEvent(RateMyAppEventType
-                .laterButtonPressed),
+            onDismissed: () =>
+                rateMyApp!.callEvent(RateMyAppEventType.laterButtonPressed),
           );
 
           rateMyApp!.showStarRateDialog(
             context,
             title: 'Rate this app',
-
             message:
-            'You like this app ? Then take a little bit of your time to leave a rating :',
-
+                'You like this app ? Then take a little bit of your time to leave a rating :',
             actionsBuilder: (context, stars) {
               return [
-
                 TextButton(
                   child: Text('OK'),
                   onPressed: () async {
                     print('Thanks for the ' +
                         (stars == null ? '0' : stars.round().toString()) +
                         ' star(s) !');
-
 
                     await rateMyApp!
                         .callEvent(RateMyAppEventType.rateButtonPressed);
@@ -157,17 +142,14 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
               ];
             },
             ignoreNativeDialog: Platform.isAndroid,
-
             dialogStyle: const DialogStyle(
-
               titleAlign: TextAlign.center,
               messageAlign: TextAlign.center,
               messagePadding: EdgeInsets.only(bottom: 20),
             ),
             starRatingOptions: const StarRatingOptions(),
-
-            onDismissed: () => rateMyApp!.callEvent(RateMyAppEventType
-                .laterButtonPressed),
+            onDismissed: () =>
+                rateMyApp!.callEvent(RateMyAppEventType.laterButtonPressed),
           );
         }
       });
@@ -194,18 +176,19 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
   Widget build(BuildContext context) {
     selectedEngine = Languages.of(context)!.txtGoogleSpeech;
     double fullWidth = MediaQuery.of(context).size.height;
-    return  Theme(
+    return Theme(
       data: ThemeData(
         appBarTheme: AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle.dark,
-        ), //
+        ),
       ),
       child: WillPopScope(
         onWillPop: () {
           Preference.shared.setInt(Preference.DRAWER_INDEX, 0);
           Navigator.pushAndRemoveUntil(
-              context, MaterialPageRoute(builder: (context) => TrainingScreen()), (
-              route) => false);
+              context,
+              MaterialPageRoute(builder: (context) => TrainingScreen()),
+              (route) => false);
           return Future.value(true);
         },
         child: Scaffold(
@@ -214,8 +197,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
               child: AppBar(
                 backgroundColor: Colur.white,
                 elevation: 0,
-              )
-          ),
+              )),
           drawer: const DrawerMenu(),
           backgroundColor: Colur.white,
           body: SafeArea(
@@ -233,19 +215,17 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                   color: Colur.grayDivider,
                   thickness: 0.0,
                 ),
-
                 _settingsScreenWidget(fullWidth),
                 (_isBottomBannerAdLoaded && !Utils.isPurchased())
                     ? Container(
-                  height: _bottomBannerAd.size.height.toDouble(),
-                  width: _bottomBannerAd.size.width.toDouble(),
-                  child: AdWidget(ad: _bottomBannerAd),
-                )
+                        height: _bottomBannerAd.size.height.toDouble(),
+                        width: _bottomBannerAd.size.width.toDouble(),
+                        child: AdWidget(ad: _bottomBannerAd),
+                      )
                     : Container()
               ],
             ),
           ),
-
         ),
       ),
     );
@@ -273,10 +253,12 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
       margin: const EdgeInsets.only(left: 8, right: 8, bottom: 8, top: 8),
       width: fullWidth,
       decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(10))
-      ),
+          borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
-        margin: const EdgeInsets.only(left: 15, right: 15,),
+        margin: const EdgeInsets.only(
+          left: 15,
+          right: 15,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -290,73 +272,71 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                     fontWeight: FontWeight.w500),
               ),
             ),
-            //=====Health data=======
             InkWell(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const HealthDataScreen()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const HealthDataScreen()));
               },
               child: Container(
-                margin: const EdgeInsets.only(bottom: 10, top:0),
+                margin: const EdgeInsets.only(bottom: 10, top: 0),
                 child: Row(
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(right:10),
+                      margin: const EdgeInsets.only(right: 10),
                       child: Image.asset(
                         "assets/icons/ic_setting_health_data.webp",
                         height: 20,
                         width: 20,
-                        color: Colur.iconGrey,
                       ),
                     ),
                     Expanded(
                         child: Text(
-                          Languages.of(context)!.txtHealthData,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                              color: Colur.txtBlack,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400),
-                        )
-                    )
+                      Languages.of(context)!.txtHealthData,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          color: Colur.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400),
+                    ))
                   ],
                 ),
               ),
             ),
-            Divider(color: Colur.grey.withOpacity(0.5),),
-
-
-
-            //====Countdown time========
+            Divider(
+              color: Colur.grey.withOpacity(0.5),
+            ),
             InkWell(
-              onTap: ()  async{
+              onTap: () async {
                 await _countdownTimeDialog();
               },
               child: Container(
-                margin: const EdgeInsets.only(bottom: 10, top:10),
+                margin: const EdgeInsets.only(bottom: 10, top: 10),
                 child: Row(
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(right:10),
+                      margin: const EdgeInsets.only(right: 10),
                       child: Image.asset(
                         "assets/icons/ic_setting_countdown_time.webp",
                         height: 20,
                         width: 20,
-                        color: Colur.iconGrey,
                       ),
                     ),
                     Expanded(
                         child: Text(
-                          Languages.of(context)!.txtCountdownTime,
-                          style: const TextStyle(
-                              color: Colur.txtBlack,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400),
-                        )
-                    ),
+                      Languages.of(context)!.txtCountdownTime,
+                      style: const TextStyle(
+                          color: Colur.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400),
+                    )),
                     Row(
                       children: [
                         Text(
-                          countdownTime!.toString() + " " + Languages.of(context)!.txtSecs,
+                          countdownTime!.toString() +
+                              " " +
+                              Languages.of(context)!.txtSecs,
                           style: const TextStyle(
                               color: Colur.theme,
                               fontSize: 16,
@@ -373,39 +353,40 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                 ),
               ),
             ),
-            Divider(color: Colur.grey.withOpacity(0.5),),
-            //====Training Rest========
+            Divider(
+              color: Colur.grey.withOpacity(0.5),
+            ),
             InkWell(
-              onTap: () async{
+              onTap: () async {
                 await _trainingRestDialog();
               },
               child: Container(
-                margin: const EdgeInsets.only(bottom: 10, top:10),
+                margin: const EdgeInsets.only(bottom: 10, top: 10),
                 child: Row(
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(right:10),
+                      margin: const EdgeInsets.only(right: 10),
                       child: Image.asset(
                         "assets/icons/ic_setting_rest_set.webp",
                         height: 20,
                         width: 20,
-                        color: Colur.iconGrey,
                       ),
                     ),
                     Expanded(
                         child: Text(
-                          Languages.of(context)!.txtTrainingRest,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                              color: Colur.txtBlack,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400),
-                        )
-                    ),
+                      Languages.of(context)!.txtTrainingRest,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          color: Colur.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400),
+                    )),
                     Row(
                       children: [
                         Text(
-                          trainingRestTime!.toString() + " " + Languages.of(context)!.txtSecs,
+                          trainingRestTime!.toString() +
+                              " " +
+                              Languages.of(context)!.txtSecs,
                           style: const TextStyle(
                               color: Colur.theme,
                               fontSize: 16,
@@ -422,40 +403,41 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                 ),
               ),
             ),
-            Divider(color: Colur.grey.withOpacity(0.5),),
-            //====Sound options========
+            Divider(
+              color: Colur.grey.withOpacity(0.5),
+            ),
             InkWell(
               onTap: () async {
                 await _soundOptionsDialog();
               },
               child: Container(
-                margin: const EdgeInsets.only(bottom: 10, top:10),
+                margin: const EdgeInsets.only(bottom: 10, top: 10),
                 child: Row(
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(right:10),
+                      margin: const EdgeInsets.only(right: 10),
                       child: Image.asset(
                         "assets/icons/ic_setting_sound_options.webp",
                         height: 20,
                         width: 20,
-                        color: Colur.iconGrey,
                       ),
                     ),
                     Expanded(
                         child: Text(
-                          Languages.of(context)!.txtSoundOptions,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                              color: Colur.txtBlack,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400),
-                        )
-                    )
+                      Languages.of(context)!.txtSoundOptions,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          color: Colur.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400),
+                    ))
                   ],
                 ),
               ),
             ),
-            Divider(color: Colur.grey.withOpacity(0.5),),
+            Divider(
+              color: Colur.grey.withOpacity(0.5),
+            ),
           ],
         ),
       ),
@@ -466,11 +448,12 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
     return Container(
       margin: const EdgeInsets.only(left: 8, right: 8, bottom: 8, top: 8),
       decoration: const BoxDecoration(
-          //color: Colur.white,
-          borderRadius: BorderRadius.all(Radius.circular(10))
-      ),
+          borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
-        margin: const EdgeInsets.only(left: 15, right: 15,),
+        margin: const EdgeInsets.only(
+          left: 15,
+          right: 15,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -485,19 +468,20 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                     fontWeight: FontWeight.w500),
               ),
             ),
-
-            //==reminder======
             InkWell(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const ReminderScreen(isFromWorkoutComplete: true))).then((value) {
-                });
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ReminderScreen(
+                            isFromWorkoutComplete: true))).then((value) {});
               },
               child: Container(
-                margin: const EdgeInsets.only(bottom: 10, top:10),
+                margin: const EdgeInsets.only(bottom: 10, top: 10),
                 child: Row(
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(right:10, left: 3),
+                      margin: const EdgeInsets.only(right: 10, left: 3),
                       child: Image.asset(
                         "assets/icons/drawer/ic_reminder_unselected.webp",
                         scale: 3.9,
@@ -506,14 +490,13 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                     ),
                     Expanded(
                         child: Text(
-                          Languages.of(context)!.txtReminder,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                              color: Colur.txtBlack,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400),
-                        )
-                    ),
+                      Languages.of(context)!.txtReminder,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          color: Colur.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400),
+                    )),
                     Visibility(
                       visible: false,
                       child: Row(
@@ -537,36 +520,38 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                 ),
               ),
             ),
-            Divider(color: Colur.grey.withOpacity(0.5),),
-
-            //===Metric and Imperial unit========
+            Divider(
+              color: Colur.grey.withOpacity(0.5),
+            ),
             InkWell(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const MetricImperialUnitsScreen()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            const MetricImperialUnitsScreen()));
               },
               child: Container(
-                margin: const EdgeInsets.only(bottom: 10, top:10),
+                margin: const EdgeInsets.only(bottom: 10, top: 10),
                 child: Row(
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(right:10),
+                      margin: const EdgeInsets.only(right: 10),
                       child: Image.asset(
                         "assets/icons/ic_setting_metric.webp",
                         height: 25,
                         width: 25,
-                        color: Colur.iconGrey,
                       ),
                     ),
                     Expanded(
                         child: Text(
-                          Languages.of(context)!.txtMetricImperialUnit,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                              color: Colur.txtBlack,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400),
-                        )
-                    )
+                      Languages.of(context)!.txtMetricImperialUnit,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          color: Colur.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400),
+                    ))
                   ],
                 ),
               ),
@@ -581,11 +566,12 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
     return Container(
       margin: const EdgeInsets.only(left: 8, right: 8, bottom: 8, top: 8),
       decoration: const BoxDecoration(
-          //color: Colur.white,
-          borderRadius: BorderRadius.all(Radius.circular(10))
-      ),
+          borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
-        margin: const EdgeInsets.only(left: 15, right: 15,),
+        margin: const EdgeInsets.only(
+          left: 15,
+          right: 15,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -600,112 +586,106 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                     fontWeight: FontWeight.w500),
               ),
             ),
-            //==test voice====
             InkWell(
-              onTap: () async{
-                Utils.textToSpeech(Languages.of(context)!.txtTestVoiceTts, flutterTts);
+              onTap: () async {
+                Utils.textToSpeech(
+                    Languages.of(context)!.txtTestVoiceTts, flutterTts);
                 await _hearTestVoiceDialog(selectedEngine);
               },
               child: Container(
-                margin: const EdgeInsets.only(bottom: 10, top:10),
+                margin: const EdgeInsets.only(bottom: 10, top: 10),
                 child: Row(
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(right:10),
+                      margin: const EdgeInsets.only(right: 10),
                       child: Image.asset(
                         "assets/icons/ic_setting_test_voice.webp",
                         height: 20,
                         width: 20,
-                        color: Colur.iconGrey,
                       ),
                     ),
                     Expanded(
                         child: Text(
-                          Languages.of(context)!.txtTestVoice,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                              color: Colur.txtBlack,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400),
-                        )
-                    )
+                      Languages.of(context)!.txtTestVoice,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          color: Colur.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400),
+                    ))
                   ],
                 ),
               ),
             ),
-            Divider(color: Colur.grey.withOpacity(0.5),),
-
-            //===select tts engine======
+            Divider(
+              color: Colur.grey.withOpacity(0.5),
+            ),
             InkWell(
-              onTap: () async{
+              onTap: () async {
                 await _selectTTSEngineDialog(selectedEngine!);
               },
               child: Container(
-                margin: const EdgeInsets.only(bottom: 10, top:10),
+                margin: const EdgeInsets.only(bottom: 10, top: 10),
                 child: Row(
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(right:10),
+                      margin: const EdgeInsets.only(right: 10),
                       child: Image.asset(
                         "assets/icons/ic_setting_tts_engine.webp",
                         height: 20,
                         width: 20,
-                        color: Colur.iconGrey,
                       ),
                     ),
                     Expanded(
                         child: Text(
-                          Languages.of(context)!.txtSelectTTSEngine,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                              color: Colur.txtBlack,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400),
-                        )
-                    )
+                      Languages.of(context)!.txtSelectTTSEngine,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          color: Colur.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400),
+                    ))
                   ],
                 ),
               ),
             ),
-            Divider(color: Colur.grey.withOpacity(0.5),),
-
-            //======download tts=====
+            Divider(
+              color: Colur.grey.withOpacity(0.5),
+            ),
             InkWell(
-              onTap: () async{
+              onTap: () async {
                 Utils.downLoadTTS();
               },
               child: Container(
-                margin: const EdgeInsets.only(bottom: 10, top:10),
+                margin: const EdgeInsets.only(bottom: 10, top: 10),
                 child: Row(
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(right:10),
+                      margin: const EdgeInsets.only(right: 10),
                       child: Image.asset(
                         "assets/icons/ic_setting_download_tts_engine.webp",
                         height: 20,
                         width: 20,
-                        color: Colur.iconGrey,
                       ),
                     ),
                     Expanded(
                         child: Text(
-                          Languages.of(context)!.txtDownloadTTSEngine,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                              color: Colur.txtBlack,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400),
-                        )
-                    )
+                      Languages.of(context)!.txtDownloadTTSEngine,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          color: Colur.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400),
+                    ))
                   ],
                 ),
               ),
             ),
-            Divider(color: Colur.grey.withOpacity(0.5),),
-
-            //====device tts setting=====
+            Divider(
+              color: Colur.grey.withOpacity(0.5),
+            ),
             InkWell(
-              onTap: () async{
+              onTap: () async {
                 if (Platform.isAndroid) {
                   await intent.launch();
                 } else {
@@ -713,33 +693,30 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                 }
               },
               child: Container(
-                margin: const EdgeInsets.only(bottom: 10, top:10),
+                margin: const EdgeInsets.only(bottom: 10, top: 10),
                 child: Row(
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(right:10),
+                      margin: const EdgeInsets.only(right: 10),
                       child: Image.asset(
                         "assets/icons/ic_setting_device_tts_setting.webp",
                         height: 20,
                         width: 20,
-                        color: Colur.iconGrey,
                       ),
                     ),
                     Expanded(
                         child: Text(
-                          Languages.of(context)!.txtDeviceTTSSetting,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                              color: Colur.txtBlack,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400),
-                        )
-                    )
+                      Languages.of(context)!.txtDeviceTTSSetting,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          color: Colur.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400),
+                    ))
                   ],
                 ),
               ),
             ),
-            //Divider(color: Colur.grey.withOpacity(0.5),),
           ],
         ),
       ),
@@ -750,11 +727,12 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
     return Container(
       margin: const EdgeInsets.only(left: 8, right: 8, bottom: 8, top: 8),
       decoration: const BoxDecoration(
-          //color: Colur.white,
-          borderRadius: BorderRadius.all(Radius.circular(10))
-      ),
+          borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
-        margin: const EdgeInsets.only(left: 15, right: 15,),
+        margin: const EdgeInsets.only(
+          left: 15,
+          right: 15,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -769,42 +747,38 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                     fontWeight: FontWeight.w500),
               ),
             ),
-
             InkWell(
-              onTap: () async{
+              onTap: () async {
                 await Share.share(
                   Languages.of(context)!.txtShareDesc + Constant.shareLink,
                   subject: Languages.of(context)!.txtHomeWorkout,
                 );
               },
               child: Container(
-                margin: const EdgeInsets.only(bottom: 10, top:10),
+                margin: const EdgeInsets.only(bottom: 10, top: 10),
                 child: Row(
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(right:10),
+                      margin: const EdgeInsets.only(right: 10),
                       child: Image.asset(
                         "assets/icons/ic_setting_share.webp",
                         height: 20,
                         width: 20,
-                        color: Colur.iconGrey,
                       ),
                     ),
                     Expanded(
                         child: Text(
-                          Languages.of(context)!.txtShareWithFriends,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                              color: Colur.txtBlack,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400),
-                        )
-                    )
+                      Languages.of(context)!.txtShareWithFriends,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          color: Colur.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400),
+                    ))
                   ],
                 ),
               ),
             ),
-            //Divider(color: Colur.grey.withOpacity(0.5),),
           ],
         ),
       ),
@@ -815,11 +789,12 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
     return Container(
       margin: const EdgeInsets.only(left: 8, right: 8, bottom: 8, top: 8),
       decoration: const BoxDecoration(
-          //color: Colur.white,
-          borderRadius: BorderRadius.all(Radius.circular(10))
-      ),
+          borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
-        margin: const EdgeInsets.only(left: 15, right: 15,),
+        margin: const EdgeInsets.only(
+          left: 15,
+          right: 15,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -834,7 +809,6 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                     fontWeight: FontWeight.w500),
               ),
             ),
-
             InkWell(
               onTap: () {
                 if (Platform.isIOS) {
@@ -844,95 +818,90 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                 }
               },
               child: Container(
-                margin: const EdgeInsets.only(bottom: 10, top:10),
+                margin: const EdgeInsets.only(bottom: 10, top: 10),
                 child: Row(
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(right:10),
+                      margin: const EdgeInsets.only(right: 10),
                       child: Image.asset(
                         "assets/icons/ic_setting_rate_us.webp",
                         height: 20,
                         width: 20,
-                        color: Colur.iconGrey,
                       ),
                     ),
                     Expanded(
                         child: Text(
-                          Languages.of(context)!.txtRateUs,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                              color: Colur.txtBlack,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400),
-                        )
-                    )
+                      Languages.of(context)!.txtRateUs,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          color: Colur.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400),
+                    ))
                   ],
                 ),
               ),
             ),
-            Divider(color: Colur.grey.withOpacity(0.5),),
-
-
+            Divider(
+              color: Colur.grey.withOpacity(0.5),
+            ),
             InkWell(
               onTap: () {
                 _sendFeedback();
               },
               child: Container(
-                margin: const EdgeInsets.only(bottom: 10, top:10),
+                margin: const EdgeInsets.only(bottom: 10, top: 10),
                 child: Row(
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(right:10),
+                      margin: const EdgeInsets.only(right: 10),
                       child: Image.asset(
                         "assets/icons/ic_setting_feedback.webp",
                         height: 20,
                         width: 20,
-                        color: Colur.iconGrey,
                       ),
                     ),
                     Expanded(
                         child: Text(
-                          Languages.of(context)!.txtFeedBack,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                              color: Colur.txtBlack,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400),
-                        )
-                    )
+                      Languages.of(context)!.txtFeedBack,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          color: Colur.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400),
+                    ))
                   ],
                 ),
               ),
             ),
-            Divider(color: Colur.grey.withOpacity(0.5),),
-
+            Divider(
+              color: Colur.grey.withOpacity(0.5),
+            ),
             InkWell(
-              onTap: () async{
+              onTap: () async {
                 await _loadPrivacyPolicy();
               },
               child: Container(
-                margin: const EdgeInsets.only(bottom: 20, top:10),
+                margin: const EdgeInsets.only(bottom: 20, top: 10),
                 child: Row(
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(right:10),
+                      margin: const EdgeInsets.only(right: 10),
                       child: Image.asset(
                         "assets/icons/ic_setting_privacy_policy.webp",
                         height: 20,
                         width: 20,
-                        color: Colur.iconGrey,
                       ),
                     ),
                     Expanded(
                         child: Text(
-                          Languages.of(context)!.txtPrivacyPolicy,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                              color: Colur.txtBlack,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400),
-                        )
-                    )
+                      Languages.of(context)!.txtPrivacyPolicy,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          color: Colur.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400),
+                    ))
                   ],
                 ),
               ),
@@ -945,7 +914,8 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
 
   _getPreference() {
     countdownTime = Preference.shared.getInt(Preference.countdownTime) ?? 10;
-    trainingRestTime = Preference.shared.getInt(Preference.trainingRestTime) ?? 20;
+    trainingRestTime =
+        Preference.shared.getInt(Preference.trainingRestTime) ?? 20;
     isMute = Preference.shared.getBool(Preference.isMute) ?? false;
     isCoachTips = Preference.shared.getBool(Preference.isCoachTips) ?? true;
     isVoiceGuide = Preference.shared.getBool(Preference.isVoiceGuide) ?? true;
@@ -954,20 +924,18 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
   Future<void> _countdownTimeDialog() {
     return showDialog(
         context: context,
-        builder: (context){
+        builder: (context) {
           return StatefulBuilder(
             builder: (context, setState) {
               return AlertDialog(
-                title: Text(
-                    Languages.of(context)!.txtCountdownTimeDialogHeading
-                ),
+                title:
+                    Text(Languages.of(context)!.txtCountdownTimeDialogHeading),
                 content: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-
                     InkWell(
                       onTap: () {
-                        if(countdownTime! > 10){
+                        if (countdownTime! > 10) {
                           setState(() {
                             countdownTime = countdownTime! - 5;
                           });
@@ -979,7 +947,6 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                         width: 20,
                       ),
                     ),
-
                     Container(
                       margin: const EdgeInsets.only(left: 25, right: 25),
                       height: 70,
@@ -988,24 +955,23 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                           Text(
                             countdownTime!.toString(),
                             style: const TextStyle(
-                                color: Colur.txtBlack,
+                                color: Colur.black,
                                 fontSize: 46,
                                 fontWeight: FontWeight.w500),
                           ),
                           Text(
                             Languages.of(context)!.txtSecs,
                             style: const TextStyle(
-                                color: Colur.txtBlack,
+                                color: Colur.black,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w400),
                           )
                         ],
                       ),
                     ),
-
                     InkWell(
                       onTap: () {
-                        if(countdownTime! < 15){
+                        if (countdownTime! < 15) {
                           setState(() {
                             countdownTime = countdownTime! + 5;
                           });
@@ -1020,19 +986,17 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                   ],
                 ),
                 actions: [
-
                   TextButton(
                     child: Text(
                       Languages.of(context)!.txtCancel.toUpperCase(),
                       style: const TextStyle(
-                        color: Colur.txtBlack,
+                        color: Colur.black,
                       ),
                     ),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
                   ),
-
                   TextButton(
                     child: Text(
                       Languages.of(context)!.txtSet.toUpperCase(),
@@ -1040,8 +1004,9 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                         color: Colur.theme,
                       ),
                     ),
-                    onPressed: ()  {
-                      Preference.shared.setInt(Preference.countdownTime, countdownTime!);
+                    onPressed: () {
+                      Preference.shared
+                          .setInt(Preference.countdownTime, countdownTime!);
                       Navigator.of(context).pop();
                     },
                   ),
@@ -1051,7 +1016,8 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
           );
         }).then((value) {
       setState(() {
-        countdownTime = Preference.shared.getInt(Preference.countdownTime) ?? 10;
+        countdownTime =
+            Preference.shared.getInt(Preference.countdownTime) ?? 10;
       });
     });
   }
@@ -1059,20 +1025,18 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
   Future<void> _trainingRestDialog() {
     return showDialog(
         context: context,
-        builder: (context){
+        builder: (context) {
           return StatefulBuilder(
             builder: (context, setState) {
               return AlertDialog(
                 title: Text(
-                    Languages.of(context)!.txtTrainingRestTimeDialogHeading
-                ),
+                    Languages.of(context)!.txtTrainingRestTimeDialogHeading),
                 content: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-
                     InkWell(
                       onTap: () {
-                        if(trainingRestTime! > 10){
+                        if (trainingRestTime! > 10) {
                           setState(() {
                             trainingRestTime = trainingRestTime! - 5;
                           });
@@ -1084,7 +1048,6 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                         width: 20,
                       ),
                     ),
-
                     Container(
                       margin: const EdgeInsets.only(left: 25, right: 25),
                       height: 70,
@@ -1093,24 +1056,23 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                           Text(
                             trainingRestTime!.toString(),
                             style: const TextStyle(
-                                color: Colur.txtBlack,
+                                color: Colur.black,
                                 fontSize: 46,
                                 fontWeight: FontWeight.w500),
                           ),
                           Text(
                             Languages.of(context)!.txtSecs.toLowerCase(),
                             style: const TextStyle(
-                                color: Colur.txtBlack,
+                                color: Colur.black,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w400),
                           )
                         ],
                       ),
                     ),
-
                     InkWell(
                       onTap: () {
-                        if(trainingRestTime! < 180){
+                        if (trainingRestTime! < 180) {
                           setState(() {
                             trainingRestTime = trainingRestTime! + 5;
                           });
@@ -1125,19 +1087,17 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                   ],
                 ),
                 actions: [
-
                   TextButton(
                     child: Text(
                       Languages.of(context)!.txtCancel.toUpperCase(),
                       style: const TextStyle(
-                        color: Colur.txtBlack,
+                        color: Colur.black,
                       ),
                     ),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
                   ),
-
                   TextButton(
                     child: Text(
                       Languages.of(context)!.txtSet.toUpperCase(),
@@ -1145,8 +1105,9 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                         color: Colur.theme,
                       ),
                     ),
-                    onPressed: ()  {
-                      Preference.shared.setInt(Preference.trainingRestTime, trainingRestTime!);
+                    onPressed: () {
+                      Preference.shared.setInt(
+                          Preference.trainingRestTime, trainingRestTime!);
                       Navigator.of(context).pop();
                     },
                   ),
@@ -1156,8 +1117,8 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
           );
         }).then((value) {
       setState(() {
-        trainingRestTime = Preference.shared.getInt(Preference.trainingRestTime) ?? 20;
-
+        trainingRestTime =
+            Preference.shared.getInt(Preference.trainingRestTime) ?? 20;
       });
     });
   }
@@ -1165,26 +1126,23 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
   Future<void> _soundOptionsDialog() {
     return showDialog(
         context: context,
-        builder: (context){
+        builder: (context) {
           return StatefulBuilder(
             builder: (context, setState) {
               return AlertDialog(
-                title: Text(
-                    Languages.of(context)!.txtSoundOptions
-                ),
+                title: Text(Languages.of(context)!.txtSoundOptions),
                 content: SizedBox(
                   height: 232,
                   width: 300,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-
                       Container(
-                        margin: const EdgeInsets.only(bottom: 5, top:5),
+                        margin: const EdgeInsets.only(bottom: 5, top: 5),
                         child: Row(
                           children: [
                             Container(
-                              margin: const EdgeInsets.only(right:10),
+                              margin: const EdgeInsets.only(right: 10),
                               child: Image.asset(
                                 "assets/icons/ic_sound_options.webp",
                                 color: Colur.iconGrey,
@@ -1193,20 +1151,19 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                             ),
                             Expanded(
                                 child: Text(
-                                  Languages.of(context)!.txtMute,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
-                                      color: Colur.txtBlack,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400),
-                                )
-                            ),
+                              Languages.of(context)!.txtMute,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                  color: Colur.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400),
+                            )),
                             Switch(
                               value: isMute!,
                               onChanged: (value) {
                                 setState(() {
                                   isMute = value;
-                                  if(isMute == true){
+                                  if (isMute == true) {
                                     isVoiceGuide = false;
                                     isCoachTips = false;
                                   }
@@ -1217,13 +1174,12 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                           ],
                         ),
                       ),
-
                       Container(
-                        margin: const EdgeInsets.only(bottom: 5, top:5),
+                        margin: const EdgeInsets.only(bottom: 5, top: 5),
                         child: Row(
                           children: [
                             Container(
-                              margin: const EdgeInsets.only(right:10),
+                              margin: const EdgeInsets.only(right: 10),
                               child: Image.asset(
                                 "assets/icons/ic_setting_voice_guide.webp",
                                 height: 20,
@@ -1232,20 +1188,19 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                             ),
                             Expanded(
                                 child: Text(
-                                  Languages.of(context)!.txtVoiceGuide,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
-                                      color: Colur.txtBlack,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400),
-                                )
-                            ),
+                              Languages.of(context)!.txtVoiceGuide,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                  color: Colur.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400),
+                            )),
                             Switch(
                               value: isVoiceGuide!,
                               onChanged: (value) {
                                 setState(() {
                                   isVoiceGuide = value;
-                                  if(isVoiceGuide == true){
+                                  if (isVoiceGuide == true) {
                                     isMute = false;
                                   }
                                 });
@@ -1255,13 +1210,12 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                           ],
                         ),
                       ),
-
                       Container(
-                        margin: const EdgeInsets.only(bottom: 5, top:5),
+                        margin: const EdgeInsets.only(bottom: 5, top: 5),
                         child: Row(
                           children: [
                             Container(
-                              margin: const EdgeInsets.only(right:10),
+                              margin: const EdgeInsets.only(right: 10),
                               child: Image.asset(
                                 "assets/icons/ic_setting_coach_tips.webp",
                                 height: 20,
@@ -1270,20 +1224,19 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                             ),
                             Expanded(
                                 child: Text(
-                                  Languages.of(context)!.txtCoachTips,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
-                                      color: Colur.txtBlack,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400),
-                                )
-                            ),
+                              Languages.of(context)!.txtCoachTips,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                  color: Colur.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400),
+                            )),
                             Switch(
                               value: isCoachTips!,
                               onChanged: (value) {
                                 setState(() {
                                   isCoachTips = value;
-                                  if(isCoachTips == true){
+                                  if (isCoachTips == true) {
                                     isMute = false;
                                   }
                                 });
@@ -1293,21 +1246,19 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                           ],
                         ),
                       ),
-
                       const SizedBox(
                         width: 80,
                         child: Divider(
-                          color: Colur.txtBlack,
+                          color: Colur.black,
                           thickness: 2,
                         ),
                       ),
-
                       Text(
                         Languages.of(context)!.txtCoachTipsDesc,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
-                            color: Colur.txtBlack,
+                            color: Colur.black,
                             fontSize: 14,
                             fontWeight: FontWeight.w300),
                       )
@@ -1324,8 +1275,10 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                     ),
                     onPressed: () {
                       Preference.shared.setBool(Preference.isMute, isMute!);
-                      Preference.shared.setBool(Preference.isVoiceGuide, isVoiceGuide!);
-                      Preference.shared.setBool(Preference.isCoachTips, isCoachTips!);
+                      Preference.shared
+                          .setBool(Preference.isVoiceGuide, isVoiceGuide!);
+                      Preference.shared
+                          .setBool(Preference.isCoachTips, isCoachTips!);
                       Navigator.of(context).pop();
                     },
                   ),
@@ -1344,9 +1297,10 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
     final Uri emailLaunchUri = Uri(
       scheme: 'mailto',
       path: Constant.emailPath,
-      query: encodeQueryParameters(<String,
-          String>{
-        'subject': Platform.isAndroid ? Languages.of(context)!.txtHomeWorkoutFeedbackAndroid : Languages.of(context)!.txtHomeWorkoutFeedbackiOS,
+      query: encodeQueryParameters(<String, String>{
+        'subject': Platform.isAndroid
+            ? Languages.of(context)!.txtHomeWorkoutFeedbackAndroid
+            : Languages.of(context)!.txtHomeWorkoutFeedbackiOS,
         'body': " "
       }),
     );
@@ -1358,13 +1312,13 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
   String? encodeQueryParameters(Map<String, String> params) {
     return params.entries
         .map((e) =>
-    '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+            '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
         .join('&');
   }
 
   Future<void> _loadPrivacyPolicy() async {
     var url = Constant.getPrivacyPolicyURL();
-    if(await canLaunch(url)) {
+    if (await canLaunch(url)) {
       launch(url);
     } else {
       throw "Cannot load the page";
@@ -1383,7 +1337,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                   style: const TextStyle(
-                    color: Colur.txtBlack,
+                    color: Colur.black,
                   ),
                 ),
                 actions: [
@@ -1434,7 +1388,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                         overflow: TextOverflow.ellipsis,
                         maxLines: 6,
                         style: const TextStyle(
-                          color: Colur.txtBlack,
+                          color: Colur.black,
                         ),
                       ),
                       InkWell(
@@ -1449,7 +1403,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: const TextStyle(
-                              color: Colur.txtBlack,
+                              color: Colur.black,
                               fontSize: 16,
                               fontWeight: FontWeight.w500),
                         ),
@@ -1466,7 +1420,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: const TextStyle(
-                              color: Colur.txtBlack,
+                              color: Colur.black,
                               fontSize: 16,
                               fontWeight: FontWeight.w500),
                         ),
@@ -1492,7 +1446,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                   style: const TextStyle(
-                      color: Colur.txtBlack, fontWeight: FontWeight.w500),
+                      color: Colur.black, fontWeight: FontWeight.w500),
                 ),
                 content: SizedBox(
                   height: 50,
@@ -1503,7 +1457,7 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                     groupValue: selectedEngine!,
                     onChanged: (value) {
                       setState(
-                            () => selectedEngine = value,
+                        () => selectedEngine = value,
                       );
                       Navigator.pop(context);
                     },
@@ -1556,7 +1510,9 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
                 height: 28,
                 width: 28,
               ),
-              SizedBox(width: 15,),
+              SizedBox(
+                width: 15,
+              ),
               Text(
                 Languages.of(context)!.txtGoPremium.toUpperCase(),
                 overflow: TextOverflow.ellipsis,
@@ -1573,6 +1529,5 @@ class _SettingsScreenState extends State<SettingsScreen> implements TopBarClickL
   }
 
   @override
-  void onTopBarClick(String name, {bool value = true}) {
-  }
+  void onTopBarClick(String name, {bool value = true}) {}
 }

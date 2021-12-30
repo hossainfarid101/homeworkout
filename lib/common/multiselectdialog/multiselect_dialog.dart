@@ -20,21 +20,19 @@ class MultiSelectDialog<V> extends StatefulWidget {
   final Color? checkBoxActiveColor;
   final int minimumSelection;
 
-
-  const MultiSelectDialog(
-      {Key? key,
-        this.items,
-        this.initialSelectedValues,
-        this.title,
-        this.okButtonLabel,
-        this.cancelButtonLabel,
-        this.labelStyle = const TextStyle(),
-        this.dialogShapeBorder,
-        this.checkBoxActiveColor,
-        this.checkBoxCheckColor,
-        this.minimumSelection = 1,
-      })
-      : super(key: key);
+  const MultiSelectDialog({
+    Key? key,
+    this.items,
+    this.initialSelectedValues,
+    this.title,
+    this.okButtonLabel,
+    this.cancelButtonLabel,
+    this.labelStyle = const TextStyle(),
+    this.dialogShapeBorder,
+    this.checkBoxActiveColor,
+    this.checkBoxCheckColor,
+    this.minimumSelection = 1,
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _MultiSelectDialogState<V>();
@@ -43,6 +41,7 @@ class MultiSelectDialog<V> extends StatefulWidget {
 class _MultiSelectDialogState<V> extends State<MultiSelectDialog<V>> {
   final _selectedValues = <V>[];
   bool? isDisable;
+
   @override
   void initState() {
     super.initState();
@@ -90,17 +89,15 @@ class _MultiSelectDialogState<V> extends State<MultiSelectDialog<V>> {
       ),
       actions: <Widget>[
         TextButton(
-          child: Text(widget.cancelButtonLabel!,style: const TextStyle(
-              color: Colur.theme)),
+          child: Text(widget.cancelButtonLabel!,
+              style: const TextStyle(color: Colur.theme)),
           onPressed: _onCancelTap,
         ),
         TextButton(
           child: Text(
             widget.okButtonLabel!,
             style: TextStyle(
-                color: isDisable!
-                    ? Colur.theme.withOpacity(0.5)
-                    : Colur.theme),
+                color: isDisable! ? Colur.theme.withOpacity(0.5) : Colur.theme),
           ),
           onPressed: _onSubmitTap,
         )

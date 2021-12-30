@@ -87,10 +87,6 @@ abstract class Languages {
 
   String get txtDay;
 
-  String get txtDailyReminder;
-
-  String get txtExerciseReminder;
-
   String get txtRepeat;
 
   String get txtMin;
@@ -249,7 +245,7 @@ abstract class Languages {
 
   String get txtFullBody;
 
-   String get txtBeginner;
+  String get txtBeginner;
 
   String get txtMoreWorkout;
 

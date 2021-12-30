@@ -39,12 +39,12 @@ class ExerciseListScreen extends StatefulWidget {
 
   ExerciseListScreen(
       {this.homePlanTable,
-      this.isSubPlan=false,
+      this.isSubPlan = false,
       this.discoverPlanTable,
       this.weeklyDayData,
-      this.dayName= "",
-      this.weekName= "",
-      this.planName= "",
+      this.dayName = "",
+      this.weekName = "",
+      this.planName = "",
       required this.fromPage,
       this.isFromHistory = false,
       this.isFromOnboarding = false});
@@ -85,7 +85,6 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
     _bottomBannerAd.load();
   }
 
-
   _scrollListener() {
     if (isShrink != lastStatus) {
       setState(() {
@@ -125,7 +124,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
         appBarTheme: AppBarTheme(
           systemOverlayStyle:
               isShrink ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light,
-        ), //
+        ),
       ),
       child: WillPopScope(
         onWillPop: () {
@@ -158,7 +157,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
                                         " " +
                                         widget.dayName
                                             .toString()
-                                            .replaceAll("0", "")
+                                            .replaceAll(RegExp(r'^0+(?=.)'), '')
                                     : widget.discoverPlanTable!.planName!
                                         .toUpperCase(),
                             textAlign: TextAlign.center,
@@ -184,13 +183,11 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
                     ),
                     flexibleSpace: FlexibleSpaceBar(
                       centerTitle: false,
-                      background:
-                      Container(
+                      background: Container(
                         alignment: Alignment.bottomLeft,
                         decoration: BoxDecoration(
                           image: DecorationImage(
                               image: AssetImage(
-                                // 'assets/images/abs_advanced.webp',
                                 _getTopImageNameFromList(),
                               ),
                               fit: BoxFit.cover),
@@ -199,26 +196,29 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
                           width: double.infinity,
                           color: Colur.transparent_black_50,
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 30.0, vertical: 0.0),
+                              horizontal: 30.0, vertical: 0.0),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.end,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
                                 margin: EdgeInsets.symmetric(
-                                    vertical: (widget.fromPage == Constant.PAGE_HOME)
-                                        ? 10
-                                        : 0),
+                                    vertical:
+                                        (widget.fromPage == Constant.PAGE_HOME)
+                                            ? 10
+                                            : 0),
                                 child: Text(
                                   (widget.fromPage == Constant.PAGE_HOME)
-                                      ? widget.homePlanTable!.catName!.toUpperCase()
+                                      ? widget.homePlanTable!.catName!
+                                          .toUpperCase()
                                       : (widget.fromPage ==
                                               Constant.PAGE_DAYS_STATUS)
                                           ? Languages.of(context)!.txtDay +
                                               " " +
                                               widget.dayName
                                                   .toString()
-                                                  .replaceAll("0", "")
+                                                  .replaceAll(
+                                                      RegExp(r'^0+(?=.)'), '')
                                           : widget.discoverPlanTable!.planName!
                                               .toUpperCase(),
                                   textAlign: TextAlign.center,
@@ -230,13 +230,17 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
                                 ),
                               ),
                               Visibility(
-                                visible:
-                                    widget.fromPage == Constant.PAGE_DAYS_STATUS,
+                                visible: widget.fromPage ==
+                                    Constant.PAGE_DAYS_STATUS,
                                 child: Container(
-                                  margin: const EdgeInsets.symmetric(vertical: 20),
+                                  margin:
+                                      const EdgeInsets.symmetric(vertical: 20),
                                   child: Text(
-                                    (widget.fromPage == Constant.PAGE_DAYS_STATUS)
-                                        ? widget.planName.toString().toUpperCase()
+                                    (widget.fromPage ==
+                                            Constant.PAGE_DAYS_STATUS)
+                                        ? widget.planName
+                                            .toString()
+                                            .toUpperCase()
                                         : "",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
@@ -249,11 +253,16 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
                               ),
                               Visibility(
                                 visible:
-                                widget.fromPage == Constant.PAGE_DISCOVER,
+                                    widget.fromPage == Constant.PAGE_DISCOVER,
                                 child: Container(
-                                  margin: const EdgeInsets.symmetric(vertical: 10),
+                                  margin:
+                                      const EdgeInsets.symmetric(vertical: 10),
                                   child: Text(
-                                    (widget.fromPage == Constant.PAGE_DISCOVER && widget.discoverPlanTable!.shortDes != null)
+                                    (widget.fromPage ==
+                                                Constant.PAGE_DISCOVER &&
+                                            widget.discoverPlanTable!
+                                                    .shortDes !=
+                                                null)
                                         ? widget.discoverPlanTable!.shortDes!
                                         : "",
                                     textAlign: TextAlign.left,
@@ -282,7 +291,8 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
                       child: Column(
                         children: [
                           Visibility(
-                            visible: (widget.fromPage == Constant.PAGE_DISCOVER &&
+                            visible: (widget.fromPage ==
+                                    Constant.PAGE_DISCOVER &&
                                 widget.discoverPlanTable!.introduction != null),
                             child: _instructionWidget(),
                           ),
@@ -315,22 +325,46 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
   }
 
   void _goBack(BuildContext context) {
-    if(widget.isFromHistory!) {
+    if (widget.isFromHistory!) {
       Navigator.pop(context);
-    } else if(widget.isFromOnboarding!) {
-      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TrainingScreen()), (route) => false);
-    } else if(widget.fromPage == Constant.PAGE_HOME) {
-      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TrainingScreen()), (route) => false);
-    } else if(widget.fromPage == Constant.PAGE_DISCOVER && !widget.isFromOnboarding!){
-      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => DiscoverScreen()), (route) => false);
-    } else if(widget.fromPage == Constant.PAGE_DAYS_STATUS){
-      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => ExerciseDaysStatusScreen(planName: widget.planName)), (route) => false);
-    } else if(widget.fromPage == Constant.PAGE_QUARANTINE){
-      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => QuarantineAtHomeScreen()), (route) => false);
-    } else if(widget.fromPage == Constant.PAGE_HISTORY){
-      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => WorkoutHistoryScreen()), (route) => false);
+    } else if (widget.isFromOnboarding!) {
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => TrainingScreen()),
+          (route) => false);
+    } else if (widget.fromPage == Constant.PAGE_HOME) {
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => TrainingScreen()),
+          (route) => false);
+    } else if (widget.fromPage == Constant.PAGE_DISCOVER &&
+        !widget.isFromOnboarding!) {
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => DiscoverScreen()),
+          (route) => false);
+    } else if (widget.fromPage == Constant.PAGE_DAYS_STATUS) {
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  ExerciseDaysStatusScreen(planName: widget.planName)),
+          (route) => false);
+    } else if (widget.fromPage == Constant.PAGE_QUARANTINE) {
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => QuarantineAtHomeScreen()),
+          (route) => false);
+    } else if (widget.fromPage == Constant.PAGE_HISTORY) {
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => WorkoutHistoryScreen()),
+          (route) => false);
     } else {
-      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TrainingScreen()), (route) => false);
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => TrainingScreen()),
+          (route) => false);
     }
   }
 
@@ -356,7 +390,9 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
           Container(
             padding: const EdgeInsets.only(left: 18.0, right: 18.0),
             child: Text(
-                (widget.fromPage == Constant.PAGE_DISCOVER)?setInstructionText():"",
+              (widget.fromPage == Constant.PAGE_DISCOVER)
+                  ? setInstructionText()
+                  : "",
               style: TextStyle(
                 color: Colur.txt_gray,
                 fontSize: 16.0,
@@ -398,7 +434,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
                 _getTotalMinAndWorkoutTime(),
                 textAlign: TextAlign.left,
                 style: TextStyle(
-                  color: Colur.txtBlack,
+                  color: Colur.black,
                   fontWeight: FontWeight.w700,
                   fontSize: 18.0,
                 ),
@@ -409,8 +445,6 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
       ),
     );
   }
-
-
 
   _getTotalMinAndWorkoutTime() {
     return (widget.fromPage == Constant.PAGE_HOME)
@@ -493,7 +527,6 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
             .reorderExercise(workoutDetailList[i].workoutId, i + 1, tableName);
       }
     }
-
   }
 
   _listOfExerciseWithEdit(int index) {
@@ -644,7 +677,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
         );
       },
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         child: Column(
           children: [
             Row(
@@ -733,8 +766,8 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
         borderRadius: BorderRadius.circular(40.0),
         gradient: LinearGradient(
           colors: [
-            Colur.blueGradientButton1,
-            Colur.blueGradientButton2,
+            Colur.blueGradient1,
+            Colur.blueGradient2,
           ],
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
@@ -769,26 +802,26 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
               context,
               MaterialPageRoute(
                   builder: (context) => WorkoutScreen(
-                    fromPage: widget.fromPage,
-                    dayStatusDetailList: workoutDetailList,
-                    exerciseDataList: exerciseDataList,
-                    tableName: tableName,
-                    dayName: widget.dayName,
-                    weekName: widget.weekName,
-                    discoverSingleExerciseData: discoverSingleExerciseList,
-                    planName: widget.planName,
-                    planId: planId,
-                    totalMin: totalMinutes,
-                    homePlanTable: widget.homePlanTable,
-                    isSubPlan: widget.isSubPlan,
-                    weeklyDayData: widget.weeklyDayData,
-                    discoverPlanTable: widget.discoverPlanTable,
-                    isFromOnboarding: widget.isFromOnboarding!
-                    ))).then((value) {
-                      setState(() {
-                        _getDataFromDatabase();
-                      });
-                    });
+                      fromPage: widget.fromPage,
+                      dayStatusDetailList: workoutDetailList,
+                      exerciseDataList: exerciseDataList,
+                      tableName: tableName,
+                      dayName: widget.dayName,
+                      weekName: widget.weekName,
+                      discoverSingleExerciseData: discoverSingleExerciseList,
+                      planName: widget.planName,
+                      planId: planId,
+                      totalMin: totalMinutes,
+                      homePlanTable: widget.homePlanTable,
+                      isSubPlan: widget.isSubPlan,
+                      weeklyDayData: widget.weeklyDayData,
+                      discoverPlanTable: widget.discoverPlanTable,
+                      isFromOnboarding: widget.isFromOnboarding!))).then(
+              (value) {
+            setState(() {
+              _getDataFromDatabase();
+            });
+          });
         },
       ),
     );
@@ -817,10 +850,11 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
         imageName = "assets/exerciseImage/other/lower_body_$gender.webp";
       }
     } else if (widget.fromPage == Constant.PAGE_DISCOVER) {
-      if(!widget.isSubPlan!) {
+      if (!widget.isSubPlan!) {
         imageName = widget.discoverPlanTable!.planImage.toString();
-      }else{
-        imageName  = Utils.getImageBannerForBodyFocusSubPlan(widget.discoverPlanTable!.planName.toString());
+      } else {
+        imageName = Utils.getImageBannerForBodyFocusSubPlan(
+            widget.discoverPlanTable!.planName.toString());
       }
     }
     return imageName;
@@ -895,7 +929,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
         duration = 9000;
       } else if (listOfImagesCount[i] > 12 && listOfImagesCount[i] <= 14) {
         duration = 10500;
-      } else  if (listOfImagesCount[i] > 15 && listOfImagesCount[i] <= 18) {
+      } else if (listOfImagesCount[i] > 15 && listOfImagesCount[i] <= 18) {
         duration = 13000;
       } else {
         duration = 1500;
@@ -908,7 +942,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
       listLifeGuideAnimation.add(
           new IntTween(begin: 1, end: listOfImagesCount[i])
               .animate(listLifeGuideController[i]));
-      setState(() {  });
+      setState(() {});
     }
   }
 
@@ -937,15 +971,14 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
   }
 
   _getImageFromAssets(int index) async {
-
     final manifestContent = await rootBundle.loadString('AssetManifest.json');
 
     final Map<String, dynamic> manifestMap = json.decode(manifestContent);
 
     final imagePaths = manifestMap.keys
-        .where((String key) => key.contains(_getImagePathFromList(index)! + "/"))
+        .where(
+            (String key) => key.contains(_getImagePathFromList(index)! + "/"))
         .toList();
     listOfImagesCount.add(imagePaths.length);
-
   }
 }

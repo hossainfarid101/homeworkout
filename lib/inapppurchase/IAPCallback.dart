@@ -1,7 +1,6 @@
 import 'package:in_app_purchase/in_app_purchase.dart';
 
-class IAPCallback{
-
+class IAPCallback {
   void onLoaded(bool initialized) {}
 
   void onPending(PurchaseDetails product) {}
@@ -9,5 +8,4 @@ class IAPCallback{
   void onSuccessPurchase(PurchaseDetails product) {}
 
   void onBillingError(dynamic error) {}
-
 }

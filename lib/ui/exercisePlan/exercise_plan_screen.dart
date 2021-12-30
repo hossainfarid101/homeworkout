@@ -17,16 +17,15 @@ import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 
 class ExercisePlanScreen extends StatefulWidget {
-
   final DiscoverPlanTable? homePlanTable;
 
   ExercisePlanScreen({required this.homePlanTable});
+
   @override
   _ExercisePlanScreenState createState() => _ExercisePlanScreenState();
 }
 
 class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
-
   ScrollController? _scrollController;
   List<DiscoverPlanTable> discoverSubPlanList = [];
   bool lastStatus = true;
@@ -96,7 +95,6 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
     Constant.isTrainingScreen = false;
   }
 
-
   void _createRewardedAd() {
     RewardedAd.load(
         adUnitId: RewardedAd.testAdUnitId,
@@ -148,17 +146,18 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
     _rewardedAd = null;
   }
 
-
   _startNextScreen() {
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => ExerciseListScreen(
-              fromPage: Constant.PAGE_DISCOVER,
-              planName: discoverSubPlanList[selectedCategoryIndex!].planName,
-              discoverPlanTable: discoverSubPlanList[selectedCategoryIndex!],
-              isSubPlan: true,
-            ))).then((value) => Navigator.pop(context));
+                  fromPage: Constant.PAGE_DISCOVER,
+                  planName:
+                      discoverSubPlanList[selectedCategoryIndex!].planName,
+                  discoverPlanTable:
+                      discoverSubPlanList[selectedCategoryIndex!],
+                  isSubPlan: true,
+                ))).then((value) => Navigator.pop(context));
   }
 
   @override
@@ -169,20 +168,23 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
-        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => DiscoverScreen()), (route) => false);
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => DiscoverScreen()),
+            (route) => false);
         return Future.value(true);
       },
       child: Theme(
         data: ThemeData(
           appBarTheme: AppBarTheme(
-            systemOverlayStyle:
-            isShrink ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light,
-          ), //
+            systemOverlayStyle: isShrink
+                ? SystemUiOverlayStyle.dark
+                : SystemUiOverlayStyle.light,
+          ),
         ),
         child: Scaffold(
           drawer: DrawerMenu(),
@@ -215,7 +217,9 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
                       title: Padding(
                         padding: const EdgeInsets.all(0.0),
                         child: Text(
-                          isShrink ? widget.homePlanTable!.planName!.toUpperCase() : "",
+                          isShrink
+                              ? widget.homePlanTable!.planName!.toUpperCase()
+                              : "",
                           style: TextStyle(
                             color: isShrink ? Colur.black : Colur.white,
                             fontSize: 16.0,
@@ -230,12 +234,13 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
                           decoration: BoxDecoration(
                               image: DecorationImage(
                                   image: AssetImage(
-                                    // 'assets/images/abs_advanced.webp',
-                                    widget.homePlanTable!.planImageSub.toString(),
+                                    widget.homePlanTable!.planImageSub
+                                        .toString(),
                                   ),
                                   fit: BoxFit.cover)),
                           child: Container(
-                            margin: const EdgeInsets.only(right: 15.0, left: 30, bottom: 20),
+                            margin: const EdgeInsets.only(
+                                right: 15.0, left: 30, bottom: 20),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.end,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -243,22 +248,19 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
                                 Container(
                                   margin: const EdgeInsets.only(bottom: 15),
                                   child: Text(
-                                      widget.homePlanTable!.planName!.toUpperCase(),
-                                    style: TextStyle(
-                                      color: Colur.white,
-                                      fontSize: 24.0,
-                                      fontWeight: FontWeight.w600
-                                    )
-                                  ),
+                                      widget.homePlanTable!.planName!
+                                          .toUpperCase(),
+                                      style: TextStyle(
+                                          color: Colur.white,
+                                          fontSize: 24.0,
+                                          fontWeight: FontWeight.w600)),
                                 ),
                                 AutoSizeText(
                                     widget.homePlanTable!.shortDes!.toString(),
                                     style: TextStyle(
                                         color: Colur.white,
                                         fontSize: 16.0,
-                                        fontWeight: FontWeight.w500
-                                    )
-                                ),
+                                        fontWeight: FontWeight.w500)),
                               ],
                             ),
                           ),
@@ -271,53 +273,64 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
                   children: [
                     Expanded(
                       child: Container(
-                        color: Colur.iconGreyBg,
-                        child: ListView.separated(
-                          padding: EdgeInsets.only(top: 10),
-                          itemBuilder: (context, index) {
-                            return InkWell(
-                              onTap:() {
-                                _showDialogForWatchVideoUnlock(index);
-
-                              },
-                              child: Container(
-                                margin: const EdgeInsets.all(20),
-                                child: Row(
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                                      child: Image.asset(
-                                        // "assets/images/abs_advanced.webp",
-                                        discoverSubPlanList[index].planImageSub.toString(),
-                                        width: 55,
-                                        height: 55,
-                                        fit: BoxFit.fill,
+                          color: Colur.iconGreyBg,
+                          child: ListView.separated(
+                            padding: EdgeInsets.only(top: 10),
+                            itemBuilder: (context, index) {
+                              return InkWell(
+                                onTap: () {
+                                  _showDialogForWatchVideoUnlock(index);
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.all(20),
+                                  child: Row(
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)),
+                                        child: Image.asset(
+                                          discoverSubPlanList[index]
+                                              .planImageSub
+                                              .toString(),
+                                          width: 55,
+                                          height: 55,
+                                          fit: BoxFit.fill,
+                                        ),
                                       ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        margin: const EdgeInsets.only(left: 15),
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              margin: const EdgeInsets.symmetric(vertical: 3.0),
-                                              child: Text(
-                                                  discoverSubPlanList[index].planName.toString(),
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                    color: Colur.black,
-                                                    fontSize: 18.0,
-                                                    fontWeight: FontWeight.w600
-                                                )
-                                              ),
-                                            ),
-
+                                      Expanded(
+                                        child: Container(
+                                          margin:
+                                              const EdgeInsets.only(left: 15),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
                                               Container(
-                                                margin: const EdgeInsets.symmetric(vertical: 3.0),
+                                                margin:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 3.0),
                                                 child: Text(
-                                                  discoverSubPlanList[index].planText.toString(),
+                                                    discoverSubPlanList[index]
+                                                        .planName
+                                                        .toString(),
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: TextStyle(
+                                                        color: Colur.black,
+                                                        fontSize: 18.0,
+                                                        fontWeight:
+                                                            FontWeight.w600)),
+                                              ),
+                                              Container(
+                                                margin:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 3.0),
+                                                child: Text(
+                                                  discoverSubPlanList[index]
+                                                      .planText
+                                                      .toString(),
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.w400,
                                                     fontSize: 14,
@@ -335,36 +348,37 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
                               );
                             },
                             itemCount: discoverSubPlanList.length,
-                            separatorBuilder: (BuildContext context, int index) {
+                            separatorBuilder:
+                                (BuildContext context, int index) {
                               return Container(
-                                margin: const EdgeInsets.symmetric(horizontal: 15,),
+                                margin: const EdgeInsets.symmetric(
+                                  horizontal: 15,
+                                ),
                                 child: Divider(
                                   thickness: 1.3,
                                 ),
                               );
                             },
-
-                        )
-                      ),
+                          )),
                     ),
                     (_isBottomBannerAdLoaded && !Utils.isPurchased())
                         ? Container(
-                      height: _bottomBannerAd.size.height.toDouble(),
-                      width: _bottomBannerAd.size.width.toDouble(),
-                      child: AdWidget(ad: _bottomBannerAd),
-                    )
+                            height: _bottomBannerAd.size.height.toDouble(),
+                            width: _bottomBannerAd.size.width.toDouble(),
+                            child: AdWidget(ad: _bottomBannerAd),
+                          )
                         : Container()
                   ],
-                )
-            ),
+                )),
           ),
         ),
       ),
     );
   }
 
-  _getHomeSubPlanList() async{
-    discoverSubPlanList = await DataBaseHelper().getHomeSubPlanList(widget.homePlanTable!.planId!);
+  _getHomeSubPlanList() async {
+    discoverSubPlanList = await DataBaseHelper()
+        .getHomeSubPlanList(widget.homePlanTable!.planId!);
 
     setState(() {});
   }
@@ -372,9 +386,9 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
   _showDialogForWatchVideoUnlock(int index) {
     selectedCategoryIndex = index;
 
-    if(Utils.isPurchased()){
+    if (Utils.isPurchased()) {
       _startNextScreen();
-    }else{
+    } else {
       showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -384,7 +398,6 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
                 width: double.infinity,
                 height: double.infinity,
                 child: Stack(
-                  // crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     InkWell(
                       onTap: () {
@@ -436,8 +449,8 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
                               borderRadius: BorderRadius.circular(10.0),
                               gradient: LinearGradient(
                                 colors: [
-                                  Colur.blueGradientButton1,
-                                  Colur.blueGradientButton2,
+                                  Colur.blueGradient1,
+                                  Colur.blueGradient2,
                                 ],
                                 begin: Alignment.centerLeft,
                                 end: Alignment.centerRight,
@@ -484,7 +497,7 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
                             child: TextButton(
                               child: Container(
                                 margin:
-                                const EdgeInsets.symmetric(horizontal: 10),
+                                    const EdgeInsets.symmetric(horizontal: 10),
                                 child: Text(
                                   Languages.of(context)!
                                       .txtFree7DaysTrial
@@ -515,7 +528,8 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
                             margin: const EdgeInsets.symmetric(vertical: 10),
                             child: Text(
                               Languages.of(context)!.txtFreeTrialDesc,
-                              style: TextStyle(color: Colur.white, fontSize: 12),
+                              style:
+                                  TextStyle(color: Colur.white, fontSize: 12),
                               textAlign: TextAlign.center,
                             ),
                           ),

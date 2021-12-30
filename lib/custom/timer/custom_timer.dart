@@ -54,11 +54,9 @@ class _CustomTimerState extends State<CustomTimer> {
     return streamController.stream;
   }
 
-
   @override
   void dispose() {
     super.dispose();
-
   }
 
   @override
@@ -80,8 +78,8 @@ class _CustomTimerState extends State<CustomTimer> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20.0, vertical: 8.0),
                   color: Colors.green,
                   child: ElevatedButton(
                     onPressed: () {
@@ -111,8 +109,8 @@ class _CustomTimerState extends State<CustomTimer> {
                 ),
                 const SizedBox(width: 40.0),
                 Container(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20.0, vertical: 8.0),
                   color: Colors.red,
                   child: ElevatedButton(
                     onPressed: () {

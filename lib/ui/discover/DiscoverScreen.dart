@@ -32,7 +32,8 @@ class DiscoverScreen extends StatefulWidget {
 
 class _DiscoverScreenState extends State<DiscoverScreen>
     implements TopBarClickListener {
-  PageController _pageControllerPicksForYou = PageController(initialPage: 0, keepPage: true, viewportFraction: 0.9);
+  PageController _pageControllerPicksForYou =
+      PageController(initialPage: 0, keepPage: true, viewportFraction: 0.9);
   PageController _pageControllerFastWorkout =
       PageController(initialPage: 0, keepPage: true, viewportFraction: 0.9);
   List<DiscoverPlanTable> picksForYouDiscoverPlanList = [];
@@ -80,6 +81,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   static final AdRequest request = AdRequest(
     nonPersonalizedAds: true,
   );
+
   @override
   void initState() {
     _manageDrawer();
@@ -240,18 +242,19 @@ class _DiscoverScreenState extends State<DiscoverScreen>
         onWillPop: () {
           Preference.shared.setInt(Preference.DRAWER_INDEX, 0);
           Navigator.pushAndRemoveUntil(
-              context, MaterialPageRoute(builder: (context) => TrainingScreen()), (
-              route) => false);
+              context,
+              MaterialPageRoute(builder: (context) => TrainingScreen()),
+              (route) => false);
           return Future.value(true);
         },
         child: Scaffold(
           appBar: PreferredSize(
               preferredSize: Size.fromHeight(0),
-              child: AppBar( // Here we create one to set status bar color
+              child: AppBar(
+                // Here we create one to set status bar color
                 backgroundColor: Colur.white,
                 elevation: 0,
-              )
-          ),
+              )),
           backgroundColor: Colur.white,
           drawer: DrawerMenu(),
           body: Column(
@@ -285,10 +288,10 @@ class _DiscoverScreenState extends State<DiscoverScreen>
               ),
               (_isBottomBannerAdLoaded && !Utils.isPurchased())
                   ? Container(
-                height: _bottomBannerAd.size.height.toDouble(),
-                width: _bottomBannerAd.size.width.toDouble(),
-                child: AdWidget(ad: _bottomBannerAd),
-              )
+                      height: _bottomBannerAd.size.height.toDouble(),
+                      width: _bottomBannerAd.size.width.toDouble(),
+                      child: AdWidget(ad: _bottomBannerAd),
+                    )
                   : Container()
             ],
           ),
@@ -297,7 +300,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
     );
   }
 
-  _getDataFromDatabase(){
+  _getDataFromDatabase() {
     _getRandomPlanData();
     _getPicksForYouPlanData();
     _getTotalQuarantineWorkout();
@@ -309,24 +312,30 @@ class _DiscoverScreenState extends State<DiscoverScreen>
     _getBodyFocusPlanData();
   }
 
-  _getRandomPlanData() async{
-    var lastDate = Preference.shared.getString(Constant.PREF_RANDOM_DISCOVER_PLAN_DATE)??"";
+  _getRandomPlanData() async {
+    var lastDate =
+        Preference.shared.getString(Constant.PREF_RANDOM_DISCOVER_PLAN_DATE) ??
+            "";
     var currDate = Utils.getCurrentDate();
-    var strPlan = Preference.shared.getString(Constant.PREF_RANDOM_DISCOVER_PLAN)??"";
-    Debug.printLog("strPlan=>>>  "+strPlan.toString());
+    var strPlan =
+        Preference.shared.getString(Constant.PREF_RANDOM_DISCOVER_PLAN) ?? "";
+    Debug.printLog("strPlan=>>>  " + strPlan.toString());
     if (lastDate.isNotEmpty && currDate == lastDate && strPlan.isNotEmpty) {
       randomPlanData = DiscoverPlanTable.fromJson(jsonDecode(strPlan));
-    }else{
+    } else {
       randomPlanData = await DataBaseHelper().getRandomDiscoverPlan();
-      Preference.shared.setString( Constant.PREF_RANDOM_DISCOVER_PLAN_DATE, currDate);
-      Preference.shared.setString( Constant.PREF_RANDOM_DISCOVER_PLAN, jsonEncode(randomPlanData!.toJson()));
+      Preference.shared
+          .setString(Constant.PREF_RANDOM_DISCOVER_PLAN_DATE, currDate);
+      Preference.shared.setString(Constant.PREF_RANDOM_DISCOVER_PLAN,
+          jsonEncode(randomPlanData!.toJson()));
     }
 
     setState(() {});
   }
 
   _getTotalQuarantineWorkout() async {
-    totalQuarantineWorkout = await DataBaseHelper().getTotalWorkoutQuarantineAtHome();
+    totalQuarantineWorkout =
+        await DataBaseHelper().getTotalWorkoutQuarantineAtHome();
     Debug.printLog(
         "totalQuarantineWorkout==>> " + totalQuarantineWorkout.toString());
     setState(() {});
@@ -336,7 +345,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
     picksForYouDiscoverPlanList =
         await DataBaseHelper().getPlanDataCatWise(Constant.catPickForYou);
     picksForYouDiscoverPlanList.forEach((element) {
-      Debug.printLog("picksForYouHomePlanList==>> " + element.planName.toString());
+      Debug.printLog(
+          "picksForYouHomePlanList==>> " + element.planName.toString());
     });
     setState(() {});
   }
@@ -345,7 +355,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
     forBeginnerDiscoverPlanList =
         await DataBaseHelper().getPlanDataCatWise(Constant.catForBeginner);
     forBeginnerDiscoverPlanList.forEach((element) {
-      Debug.printLog("_getForBeginnersPlanData==>> " + element.planName.toString());
+      Debug.printLog(
+          "_getForBeginnersPlanData==>> " + element.planName.toString());
     });
     setState(() {});
   }
@@ -354,7 +365,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
     fastWorkoutDiscoverPlanList =
         await DataBaseHelper().getPlanDataCatWise(Constant.catFastWorkout);
     fastWorkoutDiscoverPlanList.forEach((element) {
-      Debug.printLog("_getFastWorkoutPlanData==>> " + element.planName.toString());
+      Debug.printLog(
+          "_getFastWorkoutPlanData==>> " + element.planName.toString());
     });
     setState(() {});
   }
@@ -363,16 +375,18 @@ class _DiscoverScreenState extends State<DiscoverScreen>
     challengeDiscoverPlanList =
         await DataBaseHelper().getPlanDataCatWise(Constant.catChallenge);
     challengeDiscoverPlanList.forEach((element) {
-      Debug.printLog("_getChallengePlanData==>> " + element.planName.toString());
+      Debug.printLog(
+          "_getChallengePlanData==>> " + element.planName.toString());
     });
     setState(() {});
   }
 
   _getWithEquipmentPlanData() async {
     withEqipmentDiscoverPlanList =
-        await DataBaseHelper().getPlanDataCatWise(Constant.catWithEqipment);
+        await DataBaseHelper().getPlanDataCatWise(Constant.catWithEquipment);
     withEqipmentDiscoverPlanList.forEach((element) {
-      Debug.printLog("_getWithEqipmentPlanData==>> " + element.planName.toString());
+      Debug.printLog(
+          "_getWithEqipmentPlanData==>> " + element.planName.toString());
     });
     setState(() {});
   }
@@ -390,7 +404,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
     bodyFocusDiscoverPlanList =
         await DataBaseHelper().getPlanDataCatWise(Constant.catBodyFocus);
     bodyFocusDiscoverPlanList.forEach((element) {
-      Debug.printLog("_getBodyFocusPlanData==>> " + element.planName.toString());
+      Debug.printLog(
+          "_getBodyFocusPlanData==>> " + element.planName.toString());
     });
     setState(() {});
   }
@@ -411,11 +426,12 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   _discoverCard() {
     return InkWell(
       onTap: () {
-        _showDialogForWatchVideoUnlock(Constant.catDiscoverCard,0);
+        _showDialogForWatchVideoUnlock(Constant.catDiscoverCard, 0);
       },
       child: Card(
         elevation: 5.0,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
         margin: const EdgeInsets.symmetric(horizontal: 20.0),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10.0),
@@ -425,7 +441,9 @@ class _DiscoverScreenState extends State<DiscoverScreen>
             decoration: BoxDecoration(
               image: DecorationImage(
                 // image: AssetImage('assets/images/abs_advanced.webp'),
-                image: AssetImage((randomPlanData != null)?randomPlanData!.planImage.toString():""),
+                image: AssetImage((randomPlanData != null)
+                    ? randomPlanData!.planImage.toString()
+                    : ""),
                 fit: BoxFit.cover,
               ),
               shape: BoxShape.rectangle,
@@ -440,7 +458,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                     margin: const EdgeInsets.only(
                         top: 15.0, bottom: 0.0, left: 15.0, right: 15.0),
                     child: Text(
-                      (randomPlanData != null)?randomPlanData!.planName!:"",
+                      (randomPlanData != null) ? randomPlanData!.planName! : "",
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
@@ -485,18 +503,20 @@ class _DiscoverScreenState extends State<DiscoverScreen>
         style: TextStyle(
           fontWeight: FontWeight.w700,
           fontSize: 20,
-          color: Colur.txtBlack,
+          color: Colur.black,
         ),
       ),
     );
   }
 
-    var totalPagePicksForYouList = 0;
+  var totalPagePicksForYouList = 0;
+
   _picksForYouList() {
-    if((picksForYouDiscoverPlanList.length~/2) < picksForYouDiscoverPlanList.length/2){
-      totalPagePicksForYouList = (picksForYouDiscoverPlanList.length~/2)+1;
-    }else{
-      totalPagePicksForYouList = (picksForYouDiscoverPlanList.length~/2);
+    if ((picksForYouDiscoverPlanList.length ~/ 2) <
+        picksForYouDiscoverPlanList.length / 2) {
+      totalPagePicksForYouList = (picksForYouDiscoverPlanList.length ~/ 2) + 1;
+    } else {
+      totalPagePicksForYouList = (picksForYouDiscoverPlanList.length ~/ 2);
     }
     return Container(
       height: 195,
@@ -526,222 +546,214 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   }
 
   _itemPicksForYouList(int index) {
-    var firstCardPos = 0+(2*index);
-    var secondCardPos = 1+(2*index);
+    var firstCardPos = 0 + (2 * index);
+    var secondCardPos = 1 + (2 * index);
     Debug.printLog("first card: $firstCardPos \n second card: $secondCardPos");
     return Container(
-      margin: EdgeInsets.only(left: 20.0, right: (index == totalPagePicksForYouList - 1) ? MediaQuery.of(context).size.width * 0.1 : 0.0),
+      margin: EdgeInsets.only(
+          left: 20.0,
+          right: (index == totalPagePicksForYouList - 1)
+              ? MediaQuery.of(context).size.width * 0.1
+              : 0.0),
       child: Column(
         children: [
           (picksForYouDiscoverPlanList.length > (firstCardPos))
               ? Expanded(
-            child: InkWell(
-              onTap: () {
-
-                _showDialogForWatchVideoUnlock(Constant.catPickForYou,firstCardPos);
-
-                /*Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ExerciseListScreen(
-                                  fromPage: Constant.PAGE_DISCOVER,
-                                planName: picksForYouDiscoverPlanList[firstCardPos].planName,
-                                discoverPlanTable: picksForYouDiscoverPlanList[firstCardPos]
-                                )));*/
-              },
-              child: Row(
-                children: [
-                  Card(
-                    elevation: 5.0,
-                    margin: const EdgeInsets.all(0.0),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0)),
-                    child: Container(
-                      width: 90.0,
-                      height: 90.0,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: Image.asset(
-                          // 'assets/images/abs_advanced.webp',
-                          picksForYouDiscoverPlanList[firstCardPos].planImage.toString(),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
+                  child: InkWell(
+                    onTap: () {
+                      _showDialogForWatchVideoUnlock(
+                          Constant.catPickForYou, firstCardPos);
+                    },
+                    child: Row(
                       children: [
+                        Card(
+                          elevation: 5.0,
+                          margin: const EdgeInsets.all(0.0),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0)),
+                          child: Container(
+                            width: 90.0,
+                            height: 90.0,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.asset(
+                                // 'assets/images/abs_advanced.webp',
+                                picksForYouDiscoverPlanList[firstCardPos]
+                                    .planImage
+                                    .toString(),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
                         Expanded(
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Container(
-                                width: double.infinity,
-                                margin: const EdgeInsets.symmetric(
-                                    horizontal: 20.0, vertical: 3.0),
-                                child: Text(
-                                  picksForYouDiscoverPlanList[
-                                  firstCardPos]
-                                      .planName
-                                      .toString(),
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 17,
-                                    color: Colur.txtBlack,
-                                  ),
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      width: double.infinity,
+                                      margin: const EdgeInsets.symmetric(
+                                          horizontal: 20.0, vertical: 3.0),
+                                      child: Text(
+                                        picksForYouDiscoverPlanList[
+                                                firstCardPos]
+                                            .planName
+                                            .toString(),
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 17,
+                                          color: Colur.black,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: double.infinity,
+                                      margin: const EdgeInsets.symmetric(
+                                          horizontal: 20.0, vertical: 3.0),
+                                      child: Text(
+                                        picksForYouDiscoverPlanList[
+                                                firstCardPos]
+                                            .planText
+                                            .toString(),
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 14,
+                                          color: Colur.txt_gray,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                               Container(
-                                width: double.infinity,
-                                margin: const EdgeInsets.symmetric(
-                                    horizontal: 20.0, vertical: 3.0),
-                                child: Text(
-                                  picksForYouDiscoverPlanList[
-                                  firstCardPos]
-                                      .planText
-                                      .toString(),
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 14,
-                                    color: Colur.txt_gray,
-                                  ),
-                                ),
+                                margin: const EdgeInsets.only(left: 8.0),
+                                child: _divider(thickness: 1.0),
                               ),
                             ],
                           ),
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(left: 8.0),
-                          child: _divider(thickness: 1.0),
-                        ),
                       ],
                     ),
                   ),
-                ],
-              ),
-            ),
-          )
+                )
               : Expanded(
-            child: Container(
-              child: null,
-              height: 90,
-              width: 90,
-            ),
-          ),
+                  child: Container(
+                    child: null,
+                    height: 90,
+                    width: 90,
+                  ),
+                ),
           Container(
             height: 15.0,
           ),
           (picksForYouDiscoverPlanList.length > (secondCardPos))
               ? Expanded(
-            child: InkWell(
-              onTap: () {
-
-                _showDialogForWatchVideoUnlock(Constant.catPickForYou,secondCardPos);
-
-                /* Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ExerciseListScreen(
-                                  fromPage: Constant.PAGE_DISCOVER,
-                              planName: picksForYouDiscoverPlanList[secondCardPos].planName,
-                              discoverPlanTable: picksForYouDiscoverPlanList[secondCardPos],
-                                )));*/
-              },
-              child: Row(
-                children: [
-                  Card(
-                    elevation: 5.0,
-                    margin: const EdgeInsets.all(0.0),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0)),
-                    child: Container(
-                      width: 90.0,
-                      height: 90.0,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: Image.asset(
-                          // 'assets/images/abs_advanced.webp',
-                          picksForYouDiscoverPlanList[secondCardPos].planImage.toString(),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
+                  child: InkWell(
+                    onTap: () {
+                      _showDialogForWatchVideoUnlock(
+                          Constant.catPickForYou, secondCardPos);
+                    },
+                    child: Row(
                       children: [
+                        Card(
+                          elevation: 5.0,
+                          margin: const EdgeInsets.all(0.0),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0)),
+                          child: Container(
+                            width: 90.0,
+                            height: 90.0,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.asset(
+                                // 'assets/images/abs_advanced.webp',
+                                picksForYouDiscoverPlanList[secondCardPos]
+                                    .planImage
+                                    .toString(),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
                         Expanded(
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Container(
-                                width: double.infinity,
-                                margin: const EdgeInsets.symmetric(
-                                    horizontal: 20.0, vertical: 3.0),
-                                child: Text(
-                                  picksForYouDiscoverPlanList[secondCardPos]
-                                      .planName
-                                      .toString(),
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 17,
-                                    color: Colur.txtBlack,
-                                  ),
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      width: double.infinity,
+                                      margin: const EdgeInsets.symmetric(
+                                          horizontal: 20.0, vertical: 3.0),
+                                      child: Text(
+                                        picksForYouDiscoverPlanList[
+                                                secondCardPos]
+                                            .planName
+                                            .toString(),
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 17,
+                                          color: Colur.black,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: double.infinity,
+                                      margin: const EdgeInsets.symmetric(
+                                          horizontal: 20.0, vertical: 3.0),
+                                      child: Text(
+                                        picksForYouDiscoverPlanList[
+                                                secondCardPos]
+                                            .planText
+                                            .toString(),
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 14,
+                                          color: Colur.txt_gray,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                               Container(
-                                width: double.infinity,
-                                margin: const EdgeInsets.symmetric(
-                                    horizontal: 20.0, vertical: 3.0),
-                                child: Text(
-                                  picksForYouDiscoverPlanList[secondCardPos]
-                                      .planText
-                                      .toString(),
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 14,
-                                    color: Colur.txt_gray,
-                                  ),
-                                ),
+                                margin: const EdgeInsets.only(left: 8.0),
+                                child: _divider(thickness: 1.0),
                               ),
                             ],
                           ),
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(left: 8.0),
-                          child: _divider(thickness: 1.0),
-                        ),
                       ],
                     ),
                   ),
-                ],
-              ),
-            ),
-          )
+                )
               : Expanded(
-              child: Container(
-                child: null,
-                height: 90,
-                width: 90,
-              )),
+                  child: Container(
+                  child: null,
+                  height: 90,
+                  width: 90,
+                )),
         ],
       ),
     );
   }
 
   _bestQuarantineWorkOut() {
-    var gender = Preference.shared.getString(Constant.SELECTED_GENDER)??Constant.GENDER_MEN;
+    var gender = Preference.shared.getString(Constant.SELECTED_GENDER) ??
+        Constant.GENDER_MEN;
     return InkWell(
-      onTap:() {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => QuarantineAtHomeScreen()));
+      onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => QuarantineAtHomeScreen()));
       },
       child: Card(
         elevation: 5.0,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
         margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 45.0),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(8.0),
@@ -751,7 +763,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
             decoration: BoxDecoration(
               image: DecorationImage(
                 // image: AssetImage('assets/images/abs_advanced.webp'),
-                image: AssetImage('assets/exerciseImage/other/best_quarantine_$gender.webp'),
+                image: AssetImage(
+                    'assets/exerciseImage/other/best_quarantine_$gender.webp'),
                 fit: BoxFit.cover,
               ),
               shape: BoxShape.rectangle,
@@ -778,7 +791,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                     width: double.infinity,
                     margin: const EdgeInsets.only(top: 10.0),
                     child: AutoSizeText(
-                      "$totalQuarantineWorkout " + Languages.of(context)!.txtWorkouts.toLowerCase(),
+                      "$totalQuarantineWorkout " +
+                          Languages.of(context)!.txtWorkouts.toLowerCase(),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                       style: TextStyle(
@@ -805,7 +819,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
         style: TextStyle(
           fontWeight: FontWeight.w700,
           fontSize: 20,
-          color: Colur.txtBlack,
+          color: Colur.black,
         ),
       ),
     );
@@ -835,7 +849,6 @@ class _DiscoverScreenState extends State<DiscoverScreen>
       child: InkWell(
         onTap: () {
           _showDialogForWatchVideoUnlock(Constant.catForBeginner, index);
-
         },
         child: Card(
           margin: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -844,7 +857,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
             decoration: BoxDecoration(
               image: DecorationImage(
                 // image: AssetImage('assets/images/abs_advanced.webp'),
-                image: AssetImage(forBeginnerDiscoverPlanList[index].planImage.toString()),
+                image: AssetImage(
+                    forBeginnerDiscoverPlanList[index].planImage.toString()),
                 fit: BoxFit.cover,
               ),
               borderRadius: BorderRadius.circular(4.0),
@@ -880,18 +894,20 @@ class _DiscoverScreenState extends State<DiscoverScreen>
         style: TextStyle(
           fontWeight: FontWeight.w700,
           fontSize: 20,
-          color: Colur.txtBlack,
+          color: Colur.black,
         ),
       ),
     );
   }
 
-    var totalPageFastWorkoutList = 0;
+  var totalPageFastWorkoutList = 0;
+
   _fastWorkoutList() {
-    if((fastWorkoutDiscoverPlanList.length~/2) < fastWorkoutDiscoverPlanList.length/2){
-      totalPageFastWorkoutList = (fastWorkoutDiscoverPlanList.length~/2)+1;
-    }else{
-      totalPageFastWorkoutList = (fastWorkoutDiscoverPlanList.length~/2);
+    if ((fastWorkoutDiscoverPlanList.length ~/ 2) <
+        fastWorkoutDiscoverPlanList.length / 2) {
+      totalPageFastWorkoutList = (fastWorkoutDiscoverPlanList.length ~/ 2) + 1;
+    } else {
+      totalPageFastWorkoutList = (fastWorkoutDiscoverPlanList.length ~/ 2);
     }
     return Container(
       height: 195,
@@ -921,17 +937,22 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   }
 
   _itemFastWorkoutList(int index) {
-    var firstCardPos = 0+(2*index);
-    var secondCardPos = 1+(2*index);
+    var firstCardPos = 0 + (2 * index);
+    var secondCardPos = 1 + (2 * index);
     return Container(
-      margin: EdgeInsets.only(left: 20.0, right: (index == totalPageFastWorkoutList - 1) ? MediaQuery.of(context).size.width * 0.1 : 0.0),
+      margin: EdgeInsets.only(
+          left: 20.0,
+          right: (index == totalPageFastWorkoutList - 1)
+              ? MediaQuery.of(context).size.width * 0.1
+              : 0.0),
       child: Column(
         children: [
           (fastWorkoutDiscoverPlanList.length > (firstCardPos))
               ? Expanded(
                   child: InkWell(
                     onTap: () {
-                      _showDialogForWatchVideoUnlock(Constant.catFastWorkout, firstCardPos);
+                      _showDialogForWatchVideoUnlock(
+                          Constant.catFastWorkout, firstCardPos);
                     },
                     child: Row(
                       children: [
@@ -947,7 +968,9 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                               borderRadius: BorderRadius.circular(8.0),
                               child: Image.asset(
                                 // 'assets/images/abs_advanced.webp',
-                                fastWorkoutDiscoverPlanList[firstCardPos].planImage.toString(),
+                                fastWorkoutDiscoverPlanList[firstCardPos]
+                                    .planImage
+                                    .toString(),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -965,11 +988,14 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                                       margin: const EdgeInsets.symmetric(
                                           horizontal: 20.0, vertical: 3.0),
                                       child: Text(
-                                        fastWorkoutDiscoverPlanList[firstCardPos].planName.toString(),
+                                        fastWorkoutDiscoverPlanList[
+                                                firstCardPos]
+                                            .planName
+                                            .toString(),
                                         style: TextStyle(
                                           fontWeight: FontWeight.w600,
                                           fontSize: 17,
-                                          color: Colur.txtBlack,
+                                          color: Colur.black,
                                         ),
                                       ),
                                     ),
@@ -978,7 +1004,10 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                                       margin: const EdgeInsets.symmetric(
                                           horizontal: 20.0, vertical: 3.0),
                                       child: Text(
-                                        fastWorkoutDiscoverPlanList[firstCardPos].planText.toString(),
+                                        fastWorkoutDiscoverPlanList[
+                                                firstCardPos]
+                                            .planText
+                                            .toString(),
                                         style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 14,
@@ -1014,7 +1043,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
               ? Expanded(
                   child: InkWell(
                     onTap: () {
-                      _showDialogForWatchVideoUnlock(Constant.catFastWorkout, secondCardPos);
+                      _showDialogForWatchVideoUnlock(
+                          Constant.catFastWorkout, secondCardPos);
                     },
                     child: Row(
                       children: [
@@ -1030,7 +1060,9 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                               borderRadius: BorderRadius.circular(8.0),
                               child: Image.asset(
                                 // 'assets/images/abs_advanced.webp',
-                                fastWorkoutDiscoverPlanList[secondCardPos].planImage.toString(),
+                                fastWorkoutDiscoverPlanList[secondCardPos]
+                                    .planImage
+                                    .toString(),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -1048,11 +1080,14 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                                       margin: const EdgeInsets.symmetric(
                                           horizontal: 20.0, vertical: 3.0),
                                       child: Text(
-                                        fastWorkoutDiscoverPlanList[secondCardPos].planName.toString(),
+                                        fastWorkoutDiscoverPlanList[
+                                                secondCardPos]
+                                            .planName
+                                            .toString(),
                                         style: TextStyle(
                                           fontWeight: FontWeight.w600,
                                           fontSize: 17,
-                                          color: Colur.txtBlack,
+                                          color: Colur.black,
                                         ),
                                       ),
                                     ),
@@ -1061,7 +1096,10 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                                       margin: const EdgeInsets.symmetric(
                                           horizontal: 20.0, vertical: 3.0),
                                       child: Text(
-                                        fastWorkoutDiscoverPlanList[secondCardPos].planText.toString(),
+                                        fastWorkoutDiscoverPlanList[
+                                                secondCardPos]
+                                            .planText
+                                            .toString(),
                                         style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 14,
@@ -1103,7 +1141,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
         style: TextStyle(
           fontWeight: FontWeight.w700,
           fontSize: 20,
-          color: Colur.txtBlack,
+          color: Colur.black,
         ),
       ),
     );
@@ -1133,17 +1171,18 @@ class _DiscoverScreenState extends State<DiscoverScreen>
       child: InkWell(
         onTap: () {
           _showDialogForWatchVideoUnlock(Constant.catChallenge, index);
-
         },
         child: Card(
           margin: const EdgeInsets.symmetric(horizontal: 8.0),
           elevation: 3.0,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
           child: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
                 // image: AssetImage('assets/images/abs_advanced.webp'),
-                image: AssetImage(challengeDiscoverPlanList[index].planImage.toString()),
+                image: AssetImage(
+                    challengeDiscoverPlanList[index].planImage.toString()),
                 fit: BoxFit.cover,
               ),
               borderRadius: BorderRadius.circular(4.0),
@@ -1177,7 +1216,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
         style: TextStyle(
           fontWeight: FontWeight.w700,
           fontSize: 20,
-          color: Colur.txtBlack,
+          color: Colur.black,
         ),
       ),
     );
@@ -1193,7 +1232,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                   ))),
       child: Card(
         elevation: 5.0,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
         margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
         child: Container(
           height: 110,
@@ -1201,7 +1241,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
           alignment: Alignment.centerRight,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/exerciseImage/discover/equipment/with_equipment.webp'),
+              image: AssetImage(
+                  'assets/exerciseImage/discover/equipment/with_equipment.webp'),
               fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.circular(15.0),
@@ -1232,7 +1273,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
         style: TextStyle(
           fontWeight: FontWeight.w700,
           fontSize: 20,
-          color: Colur.txtBlack,
+          color: Colur.black,
         ),
       ),
     );
@@ -1260,7 +1301,6 @@ class _DiscoverScreenState extends State<DiscoverScreen>
     return InkWell(
       onTap: () {
         _showDialogForWatchVideoUnlock(Constant.catSleep, index);
-
       },
       child: Column(
         children: [
@@ -1293,7 +1333,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: 16.0,
-                color: Colur.txtBlack,
+                color: Colur.black,
               ),
             ),
           ),
@@ -1311,7 +1351,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
         style: TextStyle(
           fontWeight: FontWeight.w700,
           fontSize: 20,
-          color: Colur.txtBlack,
+          color: Colur.black,
         ),
       ),
     );
@@ -1340,23 +1380,25 @@ class _DiscoverScreenState extends State<DiscoverScreen>
 
   _itemBodyFocusList(int index) {
     return InkWell(
-      onTap:() {
+      onTap: () {
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => ExercisePlanScreen(
-                  homePlanTable: bodyFocusDiscoverPlanList[index],
-                )));
+                      homePlanTable: bodyFocusDiscoverPlanList[index],
+                    )));
       },
       child: Card(
         margin: const EdgeInsets.all(0.0),
         elevation: 4.0,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
               // image: AssetImage('assets/images/abs_advanced.webp'),
-              image: AssetImage(bodyFocusDiscoverPlanList[index].planImage.toString()),
+              image: AssetImage(
+                  bodyFocusDiscoverPlanList[index].planImage.toString()),
               fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.circular(15.0),
@@ -1364,12 +1406,15 @@ class _DiscoverScreenState extends State<DiscoverScreen>
           ),
           child: Container(
             width: double.infinity,
-            padding: const EdgeInsets.symmetric(vertical: 18.0, horizontal: 18.0),
+            padding:
+                const EdgeInsets.symmetric(vertical: 18.0, horizontal: 18.0),
             alignment: Alignment.bottomLeft,
             child: Text(
               bodyFocusDiscoverPlanList[index].planName.toString(),
               style: TextStyle(
-                  fontWeight: FontWeight.w600, fontSize: 16, color: Colur.white),
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                  color: Colur.white),
             ),
           ),
         ),
@@ -1379,8 +1424,9 @@ class _DiscoverScreenState extends State<DiscoverScreen>
 
   @override
   void onTopBarClick(String name, {bool value = true}) {
-    if(name == Constant.strHistory) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => WorkoutHistoryScreen()));
+    if (name == Constant.strHistory) {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => WorkoutHistoryScreen()));
     }
   }
 
@@ -1388,9 +1434,9 @@ class _DiscoverScreenState extends State<DiscoverScreen>
     selectedCategory = catName;
     selectedCategoryIndex = index;
 
-    if(Utils.isPurchased()){
+    if (Utils.isPurchased()) {
       _startNextScreen();
-    }else{
+    } else {
       showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -1452,8 +1498,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                               borderRadius: BorderRadius.circular(10.0),
                               gradient: LinearGradient(
                                 colors: [
-                                  Colur.blueGradientButton1,
-                                  Colur.blueGradientButton2,
+                                  Colur.blueGradient1,
+                                  Colur.blueGradient2,
                                 ],
                                 begin: Alignment.centerLeft,
                                 end: Alignment.centerRight,
@@ -1500,7 +1546,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                             child: TextButton(
                               child: Container(
                                 margin:
-                                const EdgeInsets.symmetric(horizontal: 10),
+                                    const EdgeInsets.symmetric(horizontal: 10),
                                 child: Text(
                                   Languages.of(context)!
                                       .txtFree7DaysTrial
@@ -1531,7 +1577,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                             margin: const EdgeInsets.symmetric(vertical: 10),
                             child: Text(
                               Languages.of(context)!.txtFreeTrialDesc,
-                              style: TextStyle(color: Colur.white, fontSize: 12),
+                              style:
+                                  TextStyle(color: Colur.white, fontSize: 12),
                               textAlign: TextAlign.center,
                             ),
                           ),

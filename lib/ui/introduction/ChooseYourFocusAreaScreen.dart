@@ -33,12 +33,14 @@ class _ChooseYourFocusAreaScreenState extends State<ChooseYourFocusAreaScreen> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
               child: Text(
-                Languages.of(context)!.txtPleaseChooseYourFocusArea.toUpperCase(),
+                Languages.of(context)!
+                    .txtPleaseChooseYourFocusArea
+                    .toUpperCase(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20,
-                  color: Colur.txtBlack,
+                  color: Colur.black,
                 ),
               ),
             ),
@@ -50,9 +52,11 @@ class _ChooseYourFocusAreaScreenState extends State<ChooseYourFocusAreaScreen> {
               shrinkWrap: true,
               itemCount: chooseYourFocusAreaList.length,
               itemBuilder: (context, int index) {
-                for (int i = 0; i < widget.prefChooseYourFocusAreaList!.length; i++) {
-                  chooseYourFocusAreaList[
-                          int.parse(widget.prefChooseYourFocusAreaList![i].toString())]
+                for (int i = 0;
+                    i < widget.prefChooseYourFocusAreaList!.length;
+                    i++) {
+                  chooseYourFocusAreaList[int.parse(
+                          widget.prefChooseYourFocusAreaList![i].toString())]
                       .isSelected = true;
                 }
                 return _itemChooseYourFocusArea(index);
@@ -125,7 +129,7 @@ class _ChooseYourFocusAreaScreenState extends State<ChooseYourFocusAreaScreen> {
                       fontSize: 20,
                       color: (chooseYourFocusAreaList[index].isSelected)
                           ? Colur.white
-                          : Colur.txtBlack),
+                          : Colur.black),
                 ),
               ),
             ),

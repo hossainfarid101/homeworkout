@@ -31,26 +31,26 @@ class WorkoutDetail {
   String toRawJson() => json.encode(toJson());
 
   factory WorkoutDetail.fromJson(Map<String, dynamic> json) => WorkoutDetail(
-    workoutId: json["Workout_id"],
-    title: json["Title"],
-    videoLink: json["videoLink"],
-    description: json["Description"],
-    timeBeginner: json["Time_beginner"],
-    timeType: json["time_type"],
-    image: json["Image"],
-    sort: json["sort"],
-    defaultSort: json["defaultSort"],
-  );
+        workoutId: json["Workout_id"],
+        title: json["Title"],
+        videoLink: json["videoLink"],
+        description: json["Description"],
+        timeBeginner: json["Time_beginner"],
+        timeType: json["time_type"],
+        image: json["Image"],
+        sort: json["sort"],
+        defaultSort: json["defaultSort"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "Workout_id": workoutId,
-    "Title": title,
-    "videoLink": videoLink,
-    "Description": description,
-    "Time_beginner": timeBeginner,
-    "time_type": timeType,
-    "Image": image,
-    "sort": sort,
-    "defaultSort": defaultSort,
-  };
+        "Workout_id": workoutId,
+        "Title": title,
+        "videoLink": videoLink,
+        "Description": description,
+        "Time_beginner": timeBeginner,
+        "time_type": timeType,
+        "Image": image,
+        "sort": sort,
+        "defaultSort": defaultSort,
+      };
 }

@@ -31,45 +31,45 @@ class DiscoverPlanTable {
     this.parentPlanId,
     this.discoverCatName,
     this.introduction,
-});
+  });
 
   factory DiscoverPlanTable.fromRawJson(String str) =>
       DiscoverPlanTable.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory DiscoverPlanTable.fromJson(Map<String, dynamic> json) => DiscoverPlanTable(
-    planId: json["planId"],
-    planName: json["planName"],
-    planText: json["planText"],
-    planLvl: json["planLvl"],
-    planImage: json["planImage"],
-    planImageSub: json["planImageSub"],
-    planType: json["planType"],
-    planWorkouts: json["planWorkouts"],
-    planMinutes: json["planMinutes"],
-    shortDes: json["shortDes"],
-    hasSubPlan: json["hasSubPlan"],
-    parentPlanId: json["parentPlanId"],
-    discoverCatName: json["discoverCatName"],
-    introduction: json["introduction"],
-  );
+  factory DiscoverPlanTable.fromJson(Map<String, dynamic> json) =>
+      DiscoverPlanTable(
+        planId: json["planId"],
+        planName: json["planName"],
+        planText: json["planText"],
+        planLvl: json["planLvl"],
+        planImage: json["planImage"],
+        planImageSub: json["planImageSub"],
+        planType: json["planType"],
+        planWorkouts: json["planWorkouts"],
+        planMinutes: json["planMinutes"],
+        shortDes: json["shortDes"],
+        hasSubPlan: json["hasSubPlan"],
+        parentPlanId: json["parentPlanId"],
+        discoverCatName: json["discoverCatName"],
+        introduction: json["introduction"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "planId": planId,
-    "planName": planName,
-    "planText": planText,
-    "planLvl": planLvl,
-    "planImage": planImage,
-    "planImageSub": planImageSub,
-    "planType": planType,
-    "planWorkouts": planWorkouts,
-    "planMinutes": planMinutes,
-    "shortDes": shortDes,
-    "hasSubPlan": hasSubPlan,
-    "parentPlanId": parentPlanId,
-    "discoverCatName": discoverCatName,
-    "introduction": introduction,
-  };
-
+        "planId": planId,
+        "planName": planName,
+        "planText": planText,
+        "planLvl": planLvl,
+        "planImage": planImage,
+        "planImageSub": planImageSub,
+        "planType": planType,
+        "planWorkouts": planWorkouts,
+        "planMinutes": planMinutes,
+        "shortDes": shortDes,
+        "hasSubPlan": hasSubPlan,
+        "parentPlanId": parentPlanId,
+        "discoverCatName": discoverCatName,
+        "introduction": introduction,
+      };
 }

@@ -28,20 +28,23 @@ class ProgressDialog extends StatelessWidget {
             opacity: opacity!,
             child: ModalBarrier(dismissible: false, color: color),
           ),
-          new Center(child: Container(
-              decoration: BoxDecoration(
-                  color: Colur.white,
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [BoxShadow(
-                    color: Colur.common_shadow,
-                    spreadRadius: 0.1,
-                    offset: Offset(0, 20.0),
-                    blurRadius: 25.0,
-                  ),]),
-            padding: EdgeInsets.all(30),
-            height: 100,
-              width: 100,
-              child: new CircularProgressIndicator())),
+          new Center(
+              child: Container(
+                  decoration: BoxDecoration(
+                      color: Colur.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colur.common_shadow,
+                          spreadRadius: 0.1,
+                          offset: Offset(0, 20.0),
+                          blurRadius: 25.0,
+                        ),
+                      ]),
+                  padding: EdgeInsets.all(30),
+                  height: 100,
+                  width: 100,
+                  child: new CircularProgressIndicator())),
         ],
       );
       widgetList.add(modal);

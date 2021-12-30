@@ -54,7 +54,7 @@ class WorkoutScreen extends StatefulWidget {
       this.planId = "",
       this.totalMin = 0,
       this.homePlanTable,
-      this.isSubPlan=false,
+      this.isSubPlan = false,
       this.discoverPlanTable,
       this.weeklyDayData,
       this.isFromOnboarding});
@@ -98,7 +98,6 @@ class _WorkoutScreenState extends State<WorkoutScreen>
   int? lastPosition = 0;
   FlutterTts flutterTts = FlutterTts();
   InterstitialAd? _interstitialAd;
-
 
   void _createInterstitialAd() {
     if (Debug.GOOGLE_AD) {
@@ -145,7 +144,6 @@ class _WorkoutScreenState extends State<WorkoutScreen>
     _createInterstitialAd();
     super.initState();
   }
-
 
   @override
   dispose() {
@@ -228,8 +226,10 @@ class _WorkoutScreenState extends State<WorkoutScreen>
   _setSoundCountDown() async {
     if (int.parse(countDownController.getTime()) < 4) {
       if (!isMute! && isVoiceGuide!) {
-        Debug.printLog("_setSoundCountDown==>> "+countDownController.getTime().toString()+"  "+
-        timerForCount!.tick.toString());
+        Debug.printLog("_setSoundCountDown==>> " +
+            countDownController.getTime().toString() +
+            "  " +
+            timerForCount!.tick.toString());
         Utils.textToSpeech(countDownController.getTime(), flutterTts);
       }
     }
@@ -247,13 +247,12 @@ class _WorkoutScreenState extends State<WorkoutScreen>
         data: ThemeData(
           appBarTheme: AppBarTheme(
             systemOverlayStyle: SystemUiOverlayStyle.dark,
-          ), //
+          ),
         ),
         child: Scaffold(
           appBar: PreferredSize(
               preferredSize: Size.fromHeight(0),
               child: AppBar(
-                // Here we create one to set status bar color
                 backgroundColor: Colur.commonBgColor,
                 elevation: 0,
               )),
@@ -308,32 +307,34 @@ class _WorkoutScreenState extends State<WorkoutScreen>
 
   _controllerForward() {
     controller!.forward().whenComplete(() async => {
-          if ((lastPosition! + 1) >= _getLengthFromList()) {
+          if ((lastPosition! + 1) >= _getLengthFromList())
+            {
               _setLastFinishExe(lastPosition! + 1),
               _startWellDoneScreen(),
             }
-          else {
+          else
+            {
               _setLastFinishExe(lastPosition! + 1),
               durationOfExercise = null,
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => SkipExerciseScreen(
-                        exerciseDataList: widget.exerciseDataList,
-                        fromPage: widget.fromPage,
-                        tableName: widget.tableName,
-                        dayStatusDetailList: widget.dayStatusDetailList,
-                        weekName: widget.weekName,
-                        dayName: widget.dayName,
-                        discoverSingleExerciseData:
-                            widget.discoverSingleExerciseData,
-                        planName: widget.planName,
-                        discoverPlanTable: widget.discoverPlanTable,
-                        weeklyDayData: widget.weeklyDayData,
-                        isSubPlan: widget.isSubPlan,
-                        homePlanTable: widget.homePlanTable,
-                        isFromOnboarding: widget.isFromOnboarding,
-                      ))).then((value) => value == false
+                            exerciseDataList: widget.exerciseDataList,
+                            fromPage: widget.fromPage,
+                            tableName: widget.tableName,
+                            dayStatusDetailList: widget.dayStatusDetailList,
+                            weekName: widget.weekName,
+                            dayName: widget.dayName,
+                            discoverSingleExerciseData:
+                                widget.discoverSingleExerciseData,
+                            planName: widget.planName,
+                            discoverPlanTable: widget.discoverPlanTable,
+                            weeklyDayData: widget.weeklyDayData,
+                            isSubPlan: widget.isSubPlan,
+                            homePlanTable: widget.homePlanTable,
+                            isFromOnboarding: widget.isFromOnboarding,
+                          ))).then((value) => value == false
                   ? {
                       _getLastPosition(),
                       _startExercise(),
@@ -453,7 +454,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
     }
   }
 
-  _moveWorkoutCompleteScreen(){
+  _moveWorkoutCompleteScreen() {
     endTime = DateTime.now();
     print("====${endTime!.difference(startTime!).inSeconds}");
     print("===${widget.totalMin!}====");
@@ -483,19 +484,20 @@ class _WorkoutScreenState extends State<WorkoutScreen>
         context,
         MaterialPageRoute(
             builder: (context) => WorkoutCompleteScreen(
-              fromPage: widget.fromPage,
-              dayStatusDetailList: widget.dayStatusDetailList,
-              exerciseDataList: widget.exerciseDataList,
-              tableName: widget.tableName,
-              dayName: widget.dayName,
-              weekName: widget.weekName,
-              discoverSingleExerciseData: widget.discoverSingleExerciseData,
-              planName: widget.planName,
-              planId: widget.planId,
-              totalMin: widget.totalMin,
-            )),
+                  fromPage: widget.fromPage,
+                  dayStatusDetailList: widget.dayStatusDetailList,
+                  exerciseDataList: widget.exerciseDataList,
+                  tableName: widget.tableName,
+                  dayName: widget.dayName,
+                  weekName: widget.weekName,
+                  discoverSingleExerciseData: widget.discoverSingleExerciseData,
+                  planName: widget.planName,
+                  planId: widget.planId,
+                  totalMin: widget.totalMin,
+                )),
         ModalRoute.withName("/workoutCompleteScreen"));
   }
+
   _widgetExeImage() {
     return Stack(
       children: [
@@ -581,23 +583,24 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                           }
                         }
                       } else {
-                        if (controller != null && controller!.lastElapsedDuration != null) {
+                        if (controller != null &&
+                            controller!.lastElapsedDuration != null) {
                           durationOfExercise = durationOfExercise == null
                               ? controller!.duration!.inSeconds -
-                              controller!.lastElapsedDuration!.inSeconds
-                              : durationOfExercise! - controller!.lastElapsedDuration!.inSeconds;
+                                  controller!.lastElapsedDuration!.inSeconds
+                              : durationOfExercise! -
+                                  controller!.lastElapsedDuration!.inSeconds;
                           controller!.stop();
                         }
                       }
 
                       await _soundOptionsDialog().then((value) {
-
                         if (isWidgetCountDown) {
                           countDownController.resume();
-                          timerForCount =
-                              Timer.periodic(Duration(seconds: 1), (Timer t) => _setSoundCountDown());
+                          timerForCount = Timer.periodic(Duration(seconds: 1),
+                              (Timer t) => _setSoundCountDown());
                         }
-                        Debug.printLog("VALUE: "+_timeTypeCheck().toString());
+                        Debug.printLog("VALUE: " + _timeTypeCheck().toString());
                         if (_timeTypeCheck()) {
                           _controllerForward();
                         }
@@ -646,17 +649,6 @@ class _WorkoutScreenState extends State<WorkoutScreen>
             margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
             child: InkWell(
               onTap: () {
-                /*Navigator.push(context, MaterialPageRoute(builder: (context) => VideoAnimationScreen())).then((value) =>
-                    _controllerForward()
-                );
-                if (controller != null && controller!.lastElapsedDuration != null) {
-                      durationOfExercise = durationOfExercise == null
-                          ? controller!.duration!.inSeconds -
-                          controller!.lastElapsedDuration!.inSeconds
-                          : durationOfExercise! -
-                          controller!.lastElapsedDuration!.inSeconds;
-                      controller!.stop();
-                    }*/
                 _showVideoAnimationScreen();
               },
               child: RichText(
@@ -696,9 +688,6 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                   InkWell(
                     onTap: () {
                       countDownController.pause();
-                      /* countDownController.pause();
-                      showBottomSheetDialog()
-                          .then((value) => countDownController.resume());*/
                     },
                     child: CircularCountDownTimer(
                       duration: countDownDuration!,
@@ -733,15 +722,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                           isCountDownStart = false;
                           isWidgetCountDown = false;
                         });
-                        // _startTimer();
-                        /*var length = 0;
-                        if(widget.fromPage == Constant.PAGE_HOME){
-                          length = widget.exerciseDataList!.length;
-                        }else if(widget.fromPage == Constant.PAGE_DAYS_STATUS){
-                          length = widget.dayStatusDetailList!.length;
-                        }else if(widget.fromPage == Constant.PAGE_DISCOVER){
-                          length = widget.discoverSingleExerciseData!.length;
-                        }*/
+
                         if (lastPosition! >= _getLengthFromList()) {
                           _startWellDoneScreen();
                         } else {
@@ -759,7 +740,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                         isWidgetCountDown = false;
                         isCountDownStart = false;
                       });
-                      // _startTimer();
+
                       _startExercise();
                     },
                     child: Container(
@@ -786,7 +767,6 @@ class _WorkoutScreenState extends State<WorkoutScreen>
       child: ListView.builder(
         itemBuilder: (BuildContext context, int index) {
           return Container(
-            // width: MediaQuery.of(context).size.width / 10-6,
             width: MediaQuery.of(context).size.width / _getLengthFromList(),
             child: Divider(
               color: (lastPosition! > index) ? Colur.theme : Colur.white,
@@ -803,7 +783,6 @@ class _WorkoutScreenState extends State<WorkoutScreen>
 
   _widgetStartWorkout() {
     return Container(
-      // margin: EdgeInsets.only(left: 9),
       child: Column(
         children: [
           Container(
@@ -855,18 +834,19 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                     alignment: Alignment.center,
                     child: InkWell(
                       onTap: () async {
-                        // controller!.stop();
                         if (isCountDownStart) {
                           setState(() {
                             countDownController.pause();
                           });
                         }
-                        if (controller != null && controller!.lastElapsedDuration != null) {
+                        if (controller != null &&
+                            controller!.lastElapsedDuration != null) {
                           setState(() {
                             durationOfExercise = durationOfExercise == null
                                 ? controller!.duration!.inSeconds -
-                                controller!.lastElapsedDuration!.inSeconds
-                                : durationOfExercise! - controller!.lastElapsedDuration!.inSeconds;
+                                    controller!.lastElapsedDuration!.inSeconds
+                                : durationOfExercise! -
+                                    controller!.lastElapsedDuration!.inSeconds;
                             controller!.stop();
                           });
                         }
@@ -874,25 +854,29 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                             context,
                             MaterialPageRoute(
                                 builder: (context) => PauseScreen(
-                                  fromPage: widget.fromPage,
-                                  index: lastPosition,
-                                  exerciseListDataList: widget.exerciseDataList,
-                                  workoutDetailList: widget.dayStatusDetailList,
-                                  discoverSingleExerciseDataList:
-                                  widget.discoverSingleExerciseData,
-                                  isForQuit: false,
-                                  discoverPlanTable: widget.discoverPlanTable,
-                                  weeklyDayData: widget.weeklyDayData,
-                                  isSubPlan: widget.isSubPlan,
-                                  homePlanTable: widget.homePlanTable,
-                                  weekName: widget.weekName,
-                                  planName: widget.planName,
-                                  dayName: widget.dayName,
-                                  isFromOnboarding: widget.isFromOnboarding,
-                                ))).then((value) {
+                                      fromPage: widget.fromPage,
+                                      index: lastPosition,
+                                      exerciseListDataList:
+                                          widget.exerciseDataList,
+                                      workoutDetailList:
+                                          widget.dayStatusDetailList,
+                                      discoverSingleExerciseDataList:
+                                          widget.discoverSingleExerciseData,
+                                      isForQuit: false,
+                                      discoverPlanTable:
+                                          widget.discoverPlanTable,
+                                      weeklyDayData: widget.weeklyDayData,
+                                      isSubPlan: widget.isSubPlan,
+                                      homePlanTable: widget.homePlanTable,
+                                      weekName: widget.weekName,
+                                      planName: widget.planName,
+                                      dayName: widget.dayName,
+                                      isFromOnboarding: widget.isFromOnboarding,
+                                    ))).then((value) {
                           if (!value) {
                             controller!.reset();
-                            durationOfExercise = int.parse(_getExerciseTimeFromList());
+                            durationOfExercise =
+                                int.parse(_getExerciseTimeFromList());
                           }
                           if (!isCountDownStart && controller!.isAnimating) {
                             controller!.stop();
@@ -949,86 +933,85 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                         InkWell(
                           onTap: () async {
                             if ((lastPosition! + 1) == (_getLengthFromList())) {
-                              /*await DataBaseHelper.instance.updateExerciseWise(
-                            widget.listOfDayWiseExercise![lastPosition!]
-                                .dayExId);*/
                               if (controller != null) {
                                 controller!.stop();
                               }
                               _setLastFinishExe(lastPosition! + 1);
                               _startWellDoneScreen();
                             } else {
-                              /*await DataBaseHelper.instance.updateExerciseWise(
-                            widget.listOfDayWiseExercise![lastPosition!]
-                                .dayExId);
-                        */
-                        _setLastFinishExe(lastPosition! + 1);
-                        durationOfExercise = null;
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SkipExerciseScreen(
-                                  exerciseDataList: widget.exerciseDataList,
-                                  fromPage: widget.fromPage,
-                                  tableName: widget.tableName,
-                                  discoverSingleExerciseData: widget.discoverSingleExerciseData,
-                                  dayStatusDetailList: widget.dayStatusDetailList,
-                                  dayName: widget.dayName,
-                                  weekName: widget.weekName,
-                                  planName: widget.planName,
-                                  discoverPlanTable: widget.discoverPlanTable,
-                                  weeklyDayData: widget.weeklyDayData,
-                                  isSubPlan: widget.isSubPlan,
-                                  homePlanTable: widget.homePlanTable,
-                                  isFromOnboarding: widget.isFromOnboarding,
-                                ))).then((value) => value == false
-                            ? {
-                                  Debug.printLog("From where:::Done "+isWidgetCountDown.toString()),
-                          _getLastPosition(),
-                          _startExercise(),
-                          isWidgetCountDown = false
-                        }
-                            : isWidgetCountDown = true);
-                      }
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colur.theme,
-                        borderRadius: BorderRadius.circular(40.0),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            child: Icon(
-                              Icons.check_rounded,
-                              color: Colur.white,size: 25,
+                              _setLastFinishExe(lastPosition! + 1);
+                              durationOfExercise = null;
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SkipExerciseScreen(
+                                            exerciseDataList:
+                                                widget.exerciseDataList,
+                                            fromPage: widget.fromPage,
+                                            tableName: widget.tableName,
+                                            discoverSingleExerciseData: widget
+                                                .discoverSingleExerciseData,
+                                            dayStatusDetailList:
+                                                widget.dayStatusDetailList,
+                                            dayName: widget.dayName,
+                                            weekName: widget.weekName,
+                                            planName: widget.planName,
+                                            discoverPlanTable:
+                                                widget.discoverPlanTable,
+                                            weeklyDayData: widget.weeklyDayData,
+                                            isSubPlan: widget.isSubPlan,
+                                            homePlanTable: widget.homePlanTable,
+                                            isFromOnboarding:
+                                                widget.isFromOnboarding,
+                                          ))).then((value) => value == false
+                                  ? {
+                                      Debug.printLog("From where:::Done " +
+                                          isWidgetCountDown.toString()),
+                                      _getLastPosition(),
+                                      _startExercise(),
+                                      isWidgetCountDown = false
+                                    }
+                                  : isWidgetCountDown = true);
+                            }
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: Colur.theme,
+                              borderRadius: BorderRadius.circular(40.0),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  child: Icon(
+                                    Icons.check_rounded,
+                                    color: Colur.white,
+                                    size: 25,
+                                  ),
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 10.0),
+                                  child: Text(
+                                    Languages.of(context)!
+                                        .txtDone
+                                        .toUpperCase(),
+                                    style: TextStyle(
+                                        color: Colur.white,
+                                        fontSize: 18.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          Container(
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 10.0),
-                            child: Text(
-                              Languages.of(context)!
-                                  .txtDone
-                                  .toUpperCase(),
-                              style: TextStyle(
-                                  color: Colur.white,
-                                  fontSize: 18.0,
-                                fontWeight: FontWeight.bold
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                        )
+                      ],
                     ),
-                  )
-                ],
-              ),
-            ),
-          ),
+                  ),
+                ),
           Container(
             margin: const EdgeInsets.only(bottom: 20.0),
             alignment: Alignment.bottomCenter,
@@ -1041,7 +1024,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                     onTap: () {
                       setState(() {
                         _setLastFinishExe(lastPosition! - 1);
-                        if(controller != null) {
+                        if (controller != null) {
                           controller!.stop();
                         }
                         _getLastPosition();
@@ -1079,7 +1062,8 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                     child: InkWell(
                   onTap: () async {
                     flutterTts.stop();
-                    Debug.printLog("CHECK: ${lastPosition! + 1} == ${_getLengthFromList()}");
+                    Debug.printLog(
+                        "CHECK: ${lastPosition! + 1} == ${_getLengthFromList()}");
                     if ((lastPosition! + 1) == (_getLengthFromList())) {
                       if (_timeTypeCheck()) {
                         controller!.stop();
@@ -1096,22 +1080,22 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                           context,
                           MaterialPageRoute(
                               builder: (context) => SkipExerciseScreen(
-                                exerciseDataList: widget.exerciseDataList,
-                                fromPage: widget.fromPage,
-                                tableName: widget.tableName,
-                                dayStatusDetailList:
-                                    widget.dayStatusDetailList,
-                                dayName: widget.dayName,
-                                discoverSingleExerciseData:
-                                    widget.discoverSingleExerciseData,
-                                weekName: widget.weekName,
-                                planName: widget.planName,
-                                discoverPlanTable: widget.discoverPlanTable,
-                                weeklyDayData: widget.weeklyDayData,
-                                isSubPlan: widget.isSubPlan,
-                                homePlanTable: widget.homePlanTable,
-                                isFromOnboarding: widget.isFromOnboarding,
-                              ))).then((value) => value == false
+                                    exerciseDataList: widget.exerciseDataList,
+                                    fromPage: widget.fromPage,
+                                    tableName: widget.tableName,
+                                    dayStatusDetailList:
+                                        widget.dayStatusDetailList,
+                                    dayName: widget.dayName,
+                                    discoverSingleExerciseData:
+                                        widget.discoverSingleExerciseData,
+                                    weekName: widget.weekName,
+                                    planName: widget.planName,
+                                    discoverPlanTable: widget.discoverPlanTable,
+                                    weeklyDayData: widget.weeklyDayData,
+                                    isSubPlan: widget.isSubPlan,
+                                    homePlanTable: widget.homePlanTable,
+                                    isFromOnboarding: widget.isFromOnboarding,
+                                  ))).then((value) => value == false
                           ? {
                               _getLastPosition(),
                               _startExercise(),
@@ -1177,7 +1161,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                               Languages.of(context)!.txtMute,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
-                                  color: Colur.txtBlack,
+                                  color: Colur.black,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400),
                             )),
@@ -1214,7 +1198,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                               Languages.of(context)!.txtVoiceGuide,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
-                                  color: Colur.txtBlack,
+                                  color: Colur.black,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400),
                             )),
@@ -1250,7 +1234,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                               Languages.of(context)!.txtCoachTips,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
-                                  color: Colur.txtBlack,
+                                  color: Colur.black,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400),
                             )),
@@ -1265,9 +1249,6 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                                 });
                               },
                               activeColor: Colur.theme,
-                              // activeTrackColor: Colur.bg_txtBlack,
-                              // inactiveThumbColor: Colur.switch_grey,
-                              // inactiveTrackColor: Colur.bg_grey,
                             ),
                           ],
                         ),
@@ -1275,7 +1256,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                       const SizedBox(
                         width: 80,
                         child: Divider(
-                          color: Colur.txtBlack,
+                          color: Colur.black,
                           thickness: 2,
                         ),
                       ),
@@ -1284,7 +1265,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
-                            color: Colur.txtBlack,
+                            color: Colur.black,
                             fontSize: 14,
                             fontWeight: FontWeight.w300),
                       )
@@ -1337,7 +1318,8 @@ class _WorkoutScreenState extends State<WorkoutScreen>
     if (controller != null && controller!.lastElapsedDuration != null) {
       setState(() {
         durationOfExercise = durationOfExercise == null
-            ? controller!.duration!.inSeconds - controller!.lastElapsedDuration!.inSeconds
+            ? controller!.duration!.inSeconds -
+                controller!.lastElapsedDuration!.inSeconds
             : durationOfExercise! - controller!.lastElapsedDuration!.inSeconds;
         controller!.stop();
       });
@@ -1346,22 +1328,22 @@ class _WorkoutScreenState extends State<WorkoutScreen>
         context,
         MaterialPageRoute(
             builder: (context) => PauseScreen(
-              fromPage: widget.fromPage,
-              index: lastPosition,
-              exerciseListDataList: widget.exerciseDataList,
-              workoutDetailList: widget.dayStatusDetailList,
-              discoverSingleExerciseDataList:
-                  widget.discoverSingleExerciseData,
-              isForQuit: true,
-              discoverPlanTable: widget.discoverPlanTable,
-              weeklyDayData: widget.weeklyDayData,
-              isSubPlan: widget.isSubPlan,
-              homePlanTable: widget.homePlanTable,
-              weekName: widget.weekName,
-              planName: widget.planName,
-              dayName: widget.dayName,
-              isFromOnboarding: widget.isFromOnboarding,
-            ))).then((value) {
+                  fromPage: widget.fromPage,
+                  index: lastPosition,
+                  exerciseListDataList: widget.exerciseDataList,
+                  workoutDetailList: widget.dayStatusDetailList,
+                  discoverSingleExerciseDataList:
+                      widget.discoverSingleExerciseData,
+                  isForQuit: true,
+                  discoverPlanTable: widget.discoverPlanTable,
+                  weeklyDayData: widget.weeklyDayData,
+                  isSubPlan: widget.isSubPlan,
+                  homePlanTable: widget.homePlanTable,
+                  weekName: widget.weekName,
+                  planName: widget.planName,
+                  dayName: widget.dayName,
+                  isFromOnboarding: widget.isFromOnboarding,
+                ))).then((value) {
       if (!value) {
         controller!.reset();
         durationOfExercise = int.parse(_getExerciseTimeFromList());
@@ -1403,7 +1385,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                   discoverSingleExerciseDataList:
                       widget.discoverSingleExerciseData,
                 ))).then((value) {
-      Debug.printLog("VALUE: "+value.toString());
+      Debug.printLog("VALUE: " + value.toString());
       if (isWidgetCountDown) {
         countDownController.resume();
       }
@@ -1421,8 +1403,6 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                 : widget.discoverSingleExerciseData![lastPosition!].exUnit!) ==
         ((widget.fromPage != Constant.PAGE_DISCOVER) ? "time" : "s");
   }
-
-
 
   String _getExerciseTimeFromList() {
     return ((widget.fromPage == Constant.PAGE_HOME)
@@ -1475,7 +1455,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
       duration = 9000;
     } else if (countOfImages > 12 && countOfImages <= 14) {
       duration = 14000;
-    } else  if (countOfImages > 15 && countOfImages <= 18) {
+    } else if (countOfImages > 15 && countOfImages <= 18) {
       duration = 13000;
     } else {
       duration = 1500;

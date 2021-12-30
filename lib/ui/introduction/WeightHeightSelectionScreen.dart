@@ -11,16 +11,16 @@ class WeightHeightSelectionScreen extends StatefulWidget {
   const WeightHeightSelectionScreen({Key? key}) : super(key: key);
 
   @override
-  _WeightHeightSelectionScreenState createState() => _WeightHeightSelectionScreenState();
+  _WeightHeightSelectionScreenState createState() =>
+      _WeightHeightSelectionScreenState();
 }
 
-class _WeightHeightSelectionScreenState extends State<WeightHeightSelectionScreen> {
-
+class _WeightHeightSelectionScreenState
+    extends State<WeightHeightSelectionScreen> {
   double? heightCM = 0;
   double heightFT = 0;
   double heightIN = 0;
   double? weight = 0;
-
 
   bool? kgSelected = true;
   bool? cmSelected = true;
@@ -41,20 +41,20 @@ class _WeightHeightSelectionScreenState extends State<WeightHeightSelectionScree
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
                     fontSize: 20,
-                    color: Colur.txtBlack,
+                    color: Colur.black,
                   ),
                 ),
               ),
-             Container(
+              Container(
                 margin: const EdgeInsets.only(top: 8.0),
                 padding: const EdgeInsets.symmetric(horizontal: 40.0),
                 child: Text(
-                 Languages.of(context)!.txtLetUsKnowYouBetterToHelp,
+                  Languages.of(context)!.txtLetUsKnowYouBetterToHelp,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 14,
-                    color: Colur.txtBlack,
+                    color: Colur.black,
                   ),
                 ),
               ),
@@ -75,132 +75,9 @@ class _WeightHeightSelectionScreenState extends State<WeightHeightSelectionScree
                       Text(
                         Languages.of(context)!.txtWeight,
                         style: TextStyle(
-                          color: Colur.black,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 20
-                        ),
-
-                      ),
-                      Container(
-                          margin: EdgeInsets.only(top: 15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Container(
-                              height: 60,
-                              width: 205,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                border: Border.all(color: Colur.black, width: 1.5),
-                                color: Colur.white,
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    width: 100,
-                                    child: Center(
-                                      child: Text(
-                                        Languages.of(context)!.txtKG.toUpperCase(),
-                                        style: TextStyle(
-                                            color: kgSelected! ? Colur.theme: Colur.txt_grey,
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 18),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    height: 23,
-                                    child: VerticalDivider(
-                                      color: Colur.txt_grey,
-                                      width: 1,
-                                      thickness: 1,
-                                    ),
-                                  ),
-                                  Container(
-                                    width: 100,
-                                    child: Center(
-                                      child: Text(
-                                        Languages.of(context)!.txtLB.toUpperCase(),
-                                        style: TextStyle(
-                                            color: !kgSelected! ? Colur.theme : Colur.txt_grey,
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 18),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-
-                            Expanded(
-                              child: Container(
-                                child: Row(
-                                   mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Image.asset(
-                                      "assets/icons/ic_select_pointer.webp",
-                                      height: 12,
-                                      width: 12,
-                                    ),
-                                    SizedBox(width: MediaQuery.of(context).size.width*0.01,),
-                                    InkWell(
-                                      onTap: () async{
-                                        await showDialog(
-                                            context: context, builder: (context) => AddBmiDialog()).then((value) {
-                                          setState(() {
-                                            getPreference();
-                                          });
-                                        });
-                                      },
-                                      child: Container(
-                                        width: 80,
-                                        padding: const EdgeInsets.only(top: 15, bottom: 15),
-                                        decoration: BoxDecoration(
-                                            border: Border(
-                                              top: BorderSide(
-                                                color: Colur.black,
-                                                width: 1,
-                                              ),
-                                              bottom: BorderSide(
-                                                color: Colur.black,
-                                                width: 1,
-                                              ),
-                                            )
-                                        ),
-                                        child: AutoSizeText(
-                                          kgSelected! ? weight!.toStringAsFixed(1) : Utils.kgToLb(weight!).toStringAsFixed(1),
-                                          maxLines: 1,
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              color: Colur.theme,
-                                              fontSize: 30,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            )
-
-                          ],
-                        )
-                      ),
-                    ],
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        Languages.of(context)!.txtHeight,
-                        style: TextStyle(
                             color: Colur.black,
                             fontWeight: FontWeight.w700,
-                            fontSize: 20
-                        ),
-
+                            fontSize: 20),
                       ),
                       Container(
                           margin: EdgeInsets.only(top: 15),
@@ -212,7 +89,8 @@ class _WeightHeightSelectionScreenState extends State<WeightHeightSelectionScree
                                 width: 205,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
-                                  border: Border.all(color: Colur.black, width: 1.5),
+                                  border: Border.all(
+                                      color: Colur.black, width: 1.5),
                                   color: Colur.white,
                                 ),
                                 child: Row(
@@ -222,9 +100,13 @@ class _WeightHeightSelectionScreenState extends State<WeightHeightSelectionScree
                                       width: 100,
                                       child: Center(
                                         child: Text(
-                                          Languages.of(context)!.txtCM.toUpperCase(),
+                                          Languages.of(context)!
+                                              .txtKG
+                                              .toUpperCase(),
                                           style: TextStyle(
-                                              color: cmSelected! ? Colur.theme: Colur.txt_grey,
+                                              color: kgSelected!
+                                                  ? Colur.theme
+                                                  : Colur.txt_grey,
                                               fontWeight: FontWeight.w500,
                                               fontSize: 18),
                                         ),
@@ -242,9 +124,13 @@ class _WeightHeightSelectionScreenState extends State<WeightHeightSelectionScree
                                       width: 100,
                                       child: Center(
                                         child: Text(
-                                          Languages.of(context)!.txtFT.toUpperCase(),
+                                          Languages.of(context)!
+                                              .txtLB
+                                              .toUpperCase(),
                                           style: TextStyle(
-                                              color: !cmSelected! ? Colur.theme : Colur.txt_grey,
+                                              color: !kgSelected!
+                                                  ? Colur.theme
+                                                  : Colur.txt_grey,
                                               fontWeight: FontWeight.w500,
                                               fontSize: 18),
                                         ),
@@ -253,7 +139,6 @@ class _WeightHeightSelectionScreenState extends State<WeightHeightSelectionScree
                                   ],
                                 ),
                               ),
-
                               Expanded(
                                 child: Container(
                                   child: Row(
@@ -264,33 +149,42 @@ class _WeightHeightSelectionScreenState extends State<WeightHeightSelectionScree
                                         height: 12,
                                         width: 12,
                                       ),
-                                      SizedBox(width: MediaQuery.of(context).size.width*0.01,),
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.01,
+                                      ),
                                       InkWell(
-                                        onTap: () async{
+                                        onTap: () async {
                                           await showDialog(
-                                              context: context, builder: (context) => AddBmiDialog()).then((value) {
-                                                setState(() {
-                                                  getPreference();
-                                                });
+                                              context: context,
+                                              builder: (context) =>
+                                                  AddBmiDialog()).then((value) {
+                                            setState(() {
+                                              getPreference();
+                                            });
                                           });
                                         },
                                         child: Container(
                                           width: 80,
-                                          padding: const EdgeInsets.only(top: 15, bottom: 15),
+                                          padding: const EdgeInsets.only(
+                                              top: 15, bottom: 15),
                                           decoration: BoxDecoration(
                                               border: Border(
-                                                top: BorderSide(
-                                                  color: Colur.black,
-                                                  width: 1,
-                                                ),
-                                                bottom: BorderSide(
-                                                  color: Colur.black,
-                                                  width: 1,
-                                                ),
-                                              )
-                                          ),
+                                            top: BorderSide(
+                                              color: Colur.black,
+                                              width: 1,
+                                            ),
+                                            bottom: BorderSide(
+                                              color: Colur.black,
+                                              width: 1,
+                                            ),
+                                          )),
                                           child: AutoSizeText(
-                                            cmSelected! ?heightCM!.toStringAsFixed(1) : "${heightFT.toStringAsFixed(0)}' ${heightIN.toStringAsFixed(0)}\"",
+                                            kgSelected!
+                                                ? weight!.toStringAsFixed(1)
+                                                : Utils.kgToLb(weight!)
+                                                    .toStringAsFixed(1),
                                             maxLines: 1,
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
@@ -304,10 +198,141 @@ class _WeightHeightSelectionScreenState extends State<WeightHeightSelectionScree
                                   ),
                                 ),
                               )
-
                             ],
-                          )
+                          )),
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        Languages.of(context)!.txtHeight,
+                        style: TextStyle(
+                            color: Colur.black,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 20),
                       ),
+                      Container(
+                          margin: EdgeInsets.only(top: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Container(
+                                height: 60,
+                                width: 205,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  border: Border.all(
+                                      color: Colur.black, width: 1.5),
+                                  color: Colur.white,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      width: 100,
+                                      child: Center(
+                                        child: Text(
+                                          Languages.of(context)!
+                                              .txtCM
+                                              .toUpperCase(),
+                                          style: TextStyle(
+                                              color: cmSelected!
+                                                  ? Colur.theme
+                                                  : Colur.txt_grey,
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 18),
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      height: 23,
+                                      child: VerticalDivider(
+                                        color: Colur.txt_grey,
+                                        width: 1,
+                                        thickness: 1,
+                                      ),
+                                    ),
+                                    Container(
+                                      width: 100,
+                                      child: Center(
+                                        child: Text(
+                                          Languages.of(context)!
+                                              .txtFT
+                                              .toUpperCase(),
+                                          style: TextStyle(
+                                              color: !cmSelected!
+                                                  ? Colur.theme
+                                                  : Colur.txt_grey,
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 18),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                child: Container(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Image.asset(
+                                        "assets/icons/ic_select_pointer.webp",
+                                        height: 12,
+                                        width: 12,
+                                      ),
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.01,
+                                      ),
+                                      InkWell(
+                                        onTap: () async {
+                                          await showDialog(
+                                              context: context,
+                                              builder: (context) =>
+                                                  AddBmiDialog()).then((value) {
+                                            setState(() {
+                                              getPreference();
+                                            });
+                                          });
+                                        },
+                                        child: Container(
+                                          width: 80,
+                                          padding: const EdgeInsets.only(
+                                              top: 15, bottom: 15),
+                                          decoration: BoxDecoration(
+                                              border: Border(
+                                            top: BorderSide(
+                                              color: Colur.black,
+                                              width: 1,
+                                            ),
+                                            bottom: BorderSide(
+                                              color: Colur.black,
+                                              width: 1,
+                                            ),
+                                          )),
+                                          child: AutoSizeText(
+                                            cmSelected!
+                                                ? heightCM!.toStringAsFixed(1)
+                                                : "${heightFT.toStringAsFixed(0)}' ${heightIN.toStringAsFixed(0)}\"",
+                                            maxLines: 1,
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                color: Colur.theme,
+                                                fontSize: 30,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              )
+                            ],
+                          )),
                     ],
                   ),
                 ],
@@ -326,6 +351,5 @@ class _WeightHeightSelectionScreenState extends State<WeightHeightSelectionScree
     heightCM = Preference.shared.getDouble(Preference.HEIGHT_CM) ?? 0;
     heightIN = Preference.shared.getDouble(Preference.HEIGHT_IN) ?? 0;
     heightFT = Preference.shared.getDouble(Preference.HEIGHT_FT) ?? 0;
-
   }
 }

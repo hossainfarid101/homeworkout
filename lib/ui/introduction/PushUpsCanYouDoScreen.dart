@@ -6,6 +6,7 @@ import 'package:homeworkout_flutter/utils/debug.dart';
 class PushUpsCanYouDoScreen extends StatefulWidget {
   final String? prefHowManyPushUps;
   final Function onValueChange;
+
   PushUpsCanYouDoScreen(this.prefHowManyPushUps, this.onValueChange);
 
   @override
@@ -38,7 +39,7 @@ class _PushUpsCanYouDoScreenState extends State<PushUpsCanYouDoScreen> {
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20,
-                  color: Colur.txtBlack,
+                  color: Colur.black,
                 ),
               ),
             ),
@@ -62,12 +63,12 @@ class _PushUpsCanYouDoScreenState extends State<PushUpsCanYouDoScreen> {
       splashColor: Colur.transparent,
       highlightColor: Colors.transparent,
       onTap: () {
-        for(int i = 0; i < pushUpsList.length; i++) {
-          if( i == index){
+        for (int i = 0; i < pushUpsList.length; i++) {
+          if (i == index) {
             setState(() {
               pushUpsList[index].isSelected = true;
             });
-          }else {
+          } else {
             setState(() {
               pushUpsList[i].isSelected = false;
             });
@@ -178,7 +179,7 @@ class _PushUpsCanYouDoScreenState extends State<PushUpsCanYouDoScreen> {
     ];
     Debug.printLog("${widget.prefHowManyPushUps}");
     pushUpsList.forEach((element) {
-      if(element.exName == widget.prefHowManyPushUps) {
+      if (element.exName == widget.prefHowManyPushUps) {
         setState(() {
           element.isSelected = true;
         });

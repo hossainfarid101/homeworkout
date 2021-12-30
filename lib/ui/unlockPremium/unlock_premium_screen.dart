@@ -34,7 +34,7 @@ class _UnlockPremiumScreenState extends State<UnlockPremiumScreen>
 
   final kGradientBoxDecoration = BoxDecoration(
     gradient: LinearGradient(
-        colors: [Colur.blueGradientButton1, Colur.blueGradientButton2]),
+        colors: [Colur.blueGradient1, Colur.blueGradient2]),
     border: Border.all(
       color: Colur.white,
     ),
@@ -365,8 +365,8 @@ class _UnlockPremiumScreenState extends State<UnlockPremiumScreen>
         borderRadius: BorderRadius.circular(40.0),
         gradient: LinearGradient(
           colors: [
-            Colur.blueGradientButton1,
-            Colur.blueGradientButton2,
+            Colur.blueGradient1,
+            Colur.blueGradient2,
           ],
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,

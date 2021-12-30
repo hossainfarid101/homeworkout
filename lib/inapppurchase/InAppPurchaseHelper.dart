@@ -16,7 +16,7 @@ import '../main.dart';
 
 class InAppPurchaseHelper {
   static final InAppPurchaseHelper _inAppPurchaseHelper =
-      InAppPurchaseHelper._internal();
+  InAppPurchaseHelper._internal();
 
   InAppPurchaseHelper._internal();
 
@@ -44,16 +44,9 @@ class InAppPurchaseHelper {
   initialize() {
     if (Platform.isAndroid) {
       InAppPurchaseAndroidPlatformAddition.enablePendingPurchases();
-    } /*else {
-      SKPaymentQueueWrapper().restoreTransactions();
-    }*/
+    }
   }
 
-  /*launchReferralCodeFlow(){
-    InAppPurchaseIosPlatformAddition iosPlatformAddition =
-    _connection.getPlatformAddition<InAppPurchaseIosPlatformAddition>();
-    iosPlatformAddition.presentCodeRedemptionSheet();
-  }*/
 
   ProductDetails? getProductDetail(String productID) {
     for (ProductDetails item in _products) {
@@ -83,7 +76,6 @@ class InAppPurchaseHelper {
     }, onError: (error) {
       print(error);
       handleError(error);
-      // handle error here.
     });
     initStoreInfo();
   }
@@ -97,7 +89,7 @@ class InAppPurchaseHelper {
     }
 
     ProductDetailsResponse productDetailResponse =
-        await _connection.queryProductDetails(_kProductIds.toSet());
+    await _connection.queryProductDetails(_kProductIds.toSet());
     if (productDetailResponse.error != null) {
       _products = productDetailResponse.productDetails;
       _purchases = [];
@@ -114,7 +106,6 @@ class InAppPurchaseHelper {
     }
 
     await _connection.restorePurchases();
-    //await getPastPurchases();
   }
 
   Future<void> getPastPurchases(List<PurchaseDetails> verifiedPurchases) async {
@@ -156,7 +147,7 @@ class InAppPurchaseHelper {
 
     Map<String, String> data = {};
     data.putIfAbsent("receipt-data",
-        () => verifiedPurchases[0].verificationData.localVerificationData);
+            () => verifiedPurchases[0].verificationData.localVerificationData);
     data.putIfAbsent("password", () => '89526516ead7470b9f82ebbc3b406ea2');
 
     try {
@@ -168,16 +159,18 @@ class InAppPurchaseHelper {
         verifyReceiptUrl = 'https://buy.itunes.apple.com/verifyReceipt';
 
       final graphResponse =
-          await dio.post<String>(verifyReceiptUrl, data: data);
+      await dio.post<String>(verifyReceiptUrl, data: data);
       Map<String, dynamic> profile = jsonDecode(graphResponse.data!);
 
-      //print("verifyReceipt Response =========> $profile");
+
       var receiptData = IapReceiptData.fromJson(profile);
 
       receiptData.latestReceiptInfo!
           .sort((a, b) => b.expiresDateMs!.compareTo(a.expiresDateMs!));
       if (int.parse(receiptData.latestReceiptInfo![0].expiresDateMs!) >
-          DateTime.now().millisecondsSinceEpoch) {
+          DateTime
+              .now()
+              .millisecondsSinceEpoch) {
         for (PurchaseDetails data in verifiedPurchases) {
           if (data.productID == receiptData.latestReceiptInfo![0].productId) {
             _purchases.clear();
@@ -214,13 +207,10 @@ class InAppPurchaseHelper {
     }
   }
 
-  /* PurchaseDetails _hasPurchased(String productID) {
-    return _purchases.firstWhere((purchase) => purchase.productID == productID, orElse: () => null);
-  }*/
 
   Map<String, PurchaseDetails> getPurchases() {
     Map<String, PurchaseDetails> purchases =
-        Map.fromEntries(_purchases.map((PurchaseDetails purchase) {
+    Map.fromEntries(_purchases.map((PurchaseDetails purchase) {
       if (purchase.pendingCompletePurchase) {
         _connection.completePurchase(purchase);
       }
@@ -284,8 +274,6 @@ class InAppPurchaseHelper {
       }
     }
 
-    /* var userData = Utils.getUserData();
-    var applicationUserName = (Platform.isAndroid)?base64Url.encode(utf8.encode(userData.email)):sha256.convert(utf8.encode(userData.email)).toString();*/
 
     PurchaseParam purchaseParam;
 
@@ -297,9 +285,9 @@ class InAppPurchaseHelper {
           applicationUserName: null,
           changeSubscriptionParam: (oldSubscription != null)
               ? ChangeSubscriptionParam(
-                  oldPurchaseDetails: oldSubscription,
-                  // prorationMode: ProrationMode.immediateWithTimeProration,
-                )
+            oldPurchaseDetails: oldSubscription,
+
+          )
               : null);
     } else {
       purchaseParam = PurchaseParam(
@@ -313,7 +301,7 @@ class InAppPurchaseHelper {
         .catchError((error) async {
       if (error is PlatformException &&
           error.code == "storekit_duplicate_product_object") {
-        // await InAppPurchase.instance.completePurchase(purchases[productDetails.id]);
+
       }
       handleError(error);
       print(error);
@@ -331,7 +319,6 @@ class InAppPurchaseHelper {
             await SKPaymentQueueWrapper()
                 .finishTransaction(transaction.originalTransaction!);
           }
-          //await SKPaymentQueueWrapper().finishTransaction(transaction);
         } catch (e) {
           print(e);
         }
@@ -340,7 +327,6 @@ class InAppPurchaseHelper {
   }
 
   void deliverProduct(PurchaseDetails purchaseDetails) async {
-    // IMPORTANT!! Always verify a purchase purchase details before delivering the product.
     _purchases.add(purchaseDetails);
     MyApp.purchaseStreamController.add(purchaseDetails);
     _iapCallback!.onSuccessPurchase(purchaseDetails);
@@ -351,13 +337,11 @@ class InAppPurchaseHelper {
   }
 
   Future<bool> _verifyPurchase(PurchaseDetails purchaseDetails) {
-    // IMPORTANT!! Always verify a purchase before delivering the product.
-    // For the purpose of an example, we directly return true.
     return Future<bool>.value(true);
   }
 
   void _handleInvalidPurchase(PurchaseDetails purchaseDetails) {
-    // handle invalid purchase here if  _verifyPurchase` failed.
+
   }
 
   Future<void> _listenToPurchaseUpdated(
@@ -390,18 +374,18 @@ class InAppPurchaseHelper {
     await clearTransactions();
   }
 
-  GooglePlayPurchaseDetails? _getOldSubscription(
-      ProductDetails productDetails, Map<String, PurchaseDetails> purchases) {
+  GooglePlayPurchaseDetails? _getOldSubscription(ProductDetails productDetails,
+      Map<String, PurchaseDetails> purchases) {
     GooglePlayPurchaseDetails? oldSubscription;
     if (productDetails.id == yearlySubscriptionId &&
         purchases[monthlySubscriptionId] != null) {
       oldSubscription =
-          purchases[yearlySubscriptionId] as GooglePlayPurchaseDetails;
+      purchases[yearlySubscriptionId] as GooglePlayPurchaseDetails;
     } else {
       if (productDetails.id == monthlySubscriptionId &&
           purchases[yearlySubscriptionId] != null) {
         oldSubscription =
-            purchases[monthlySubscriptionId] as GooglePlayPurchaseDetails;
+        purchases[monthlySubscriptionId] as GooglePlayPurchaseDetails;
       }
     }
     return oldSubscription;

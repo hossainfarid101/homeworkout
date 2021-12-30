@@ -79,8 +79,10 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                         children: [
                           InkWell(
                             onTap: () {
-                              var previousMonthDate = DateTime(_selectedDate.year,
-                                  _selectedDate.month - 1, _selectedDate.day);
+                              var previousMonthDate = DateTime(
+                                  _selectedDate.year,
+                                  _selectedDate.month - 1,
+                                  _selectedDate.day);
                               if (previousMonthDate != startDate) {
                                 _datePickerController
                                     .animateToDate(previousMonthDate);
@@ -91,7 +93,7 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                             },
                             child: Padding(
                               padding:
-                              const EdgeInsets.symmetric(horizontal: 15.0),
+                                  const EdgeInsets.symmetric(horizontal: 15.0),
                               child: Icon(
                                 Icons.arrow_back_ios_rounded,
                                 size: 15.0,
@@ -104,7 +106,7 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                                   .format(_selectedDate)
                                   .toString(),
                               style: TextStyle(
-                                  color: Colur.txt_black,
+                                  color: Colur.black,
                                   fontSize: 14.0,
                                   fontWeight: FontWeight.w400),
                             ),
@@ -127,7 +129,7 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                             },
                             child: Padding(
                               padding:
-                              const EdgeInsets.symmetric(horizontal: 15.0),
+                                  const EdgeInsets.symmetric(horizontal: 15.0),
                               child: Icon(
                                 Icons.arrow_forward_ios_rounded,
                                 size: 15.0,
@@ -152,17 +154,17 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                         monthTextStyle: TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 12.0,
-                          color: Colur.txt_black,
+                          color: Colur.black,
                         ),
                         dateTextStyle: TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 18.0,
-                          color: Colur.txt_black,
+                          color: Colur.black,
                         ),
                         dayTextStyle: TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 12.0,
-                          color: Colur.txt_black,
+                          color: Colur.black,
                         ),
                         deactivatedColor: Colors.black26,
                         inactiveDates: [
@@ -212,13 +214,14 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                                 maxLines: 1,
                                 maxLength: 5,
                                 textInputAction: TextInputAction.done,
-                                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                                keyboardType: TextInputType.numberWithOptions(
+                                    decimal: true),
                                 inputFormatters: <TextInputFormatter>[
                                   FilteringTextInputFormatter.allow(
                                       RegExp(r'^(\d+)?\.?\d{0,1}')),
                                 ],
                                 style: TextStyle(
-                                    color: Colur.txt_black,
+                                    color: Colur.black,
                                     fontSize: 22,
                                     fontWeight: FontWeight.w500),
                                 cursorColor: Colur.txt_gray,
@@ -226,21 +229,18 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                                   contentPadding: EdgeInsets.all(0.0),
                                   hintText: "0.0",
                                   hintStyle: TextStyle(
-                                      color: Colur.txt_black,
+                                      color: Colur.black,
                                       fontSize: 22,
                                       fontWeight: FontWeight.w500),
                                   counterText: "",
                                   enabledBorder: UnderlineInputBorder(
-                                    borderSide:
-                                    BorderSide(color: Colur.txt_black),
+                                    borderSide: BorderSide(color: Colur.black),
                                   ),
                                   focusedBorder: UnderlineInputBorder(
-                                    borderSide:
-                                    BorderSide(color: Colur.txt_black),
+                                    borderSide: BorderSide(color: Colur.black),
                                   ),
                                   border: UnderlineInputBorder(
-                                    borderSide:
-                                    BorderSide(color: Colur.txt_black),
+                                    borderSide: BorderSide(color: Colur.black),
                                   ),
                                 ),
                                 onEditingComplete: () {
@@ -259,8 +259,8 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                                       "Before converted value of weightController --> " +
                                           weightController.text);
                                   weightController.text = Utils.lbToKg(
-                                      double.parse(
-                                          weightController.text.toString()))
+                                          double.parse(
+                                              weightController.text.toString()))
                                       .toString();
                                   Debug.printLog(
                                       "After converted value of weightController in to LB to KG --> " +
@@ -278,20 +278,19 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                               padding: const EdgeInsets.all(5.0),
                               decoration: (isKg!)
                                   ? BoxDecoration(
-                                color: Colur.theme,
-                                borderRadius: BorderRadius.circular(5.0),
-                              )
+                                      color: Colur.theme,
+                                      borderRadius: BorderRadius.circular(5.0),
+                                    )
                                   : BoxDecoration(
-                                border: Border.all(
-                                  color: Colur.txt_black,
-                                ),
-                                borderRadius: BorderRadius.circular(5.0),
-                              ),
+                                      border: Border.all(
+                                        color: Colur.black,
+                                      ),
+                                      borderRadius: BorderRadius.circular(5.0),
+                                    ),
                               child: Text(
                                 Languages.of(context)!.txtKG.toUpperCase(),
                                 style: TextStyle(
-                                    color:
-                                    (isKg!) ? Colur.white : Colur.txt_black,
+                                    color: (isKg!) ? Colur.white : Colur.black,
                                     fontSize: 18.0,
                                     fontWeight: FontWeight.w500),
                               ),
@@ -307,8 +306,8 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                                       "Before converted value of weightController --> " +
                                           weightController.text);
                                   weightController.text = Utils.kgToLb(
-                                      double.parse(
-                                          weightController.text.toString()))
+                                          double.parse(
+                                              weightController.text.toString()))
                                       .toString();
                                   Debug.printLog(
                                       "After converted value of weightController in to KG to LB --> " +
@@ -322,31 +321,30 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                               });
                             },
                             child: Container(
-                              margin:
-                              const EdgeInsets.only(right: 15.0, left: 10.0),
+                              margin: const EdgeInsets.only(
+                                  right: 15.0, left: 10.0),
                               padding: const EdgeInsets.all(5.0),
                               decoration: (isLsb!)
                                   ? BoxDecoration(
-                                color: Colur.theme,
-                                border: Border.all(
-                                  color: Colur.theme,
-                                ),
-                                borderRadius: BorderRadius.circular(5.0),
-                              )
+                                      color: Colur.theme,
+                                      border: Border.all(
+                                        color: Colur.theme,
+                                      ),
+                                      borderRadius: BorderRadius.circular(5.0),
+                                    )
                                   : BoxDecoration(
-                                border: Border.all(
-                                  color: Colur.txt_black,
-                                ),
-                                borderRadius: BorderRadius.circular(5.0),
-                              ),
+                                      border: Border.all(
+                                        color: Colur.black,
+                                      ),
+                                      borderRadius: BorderRadius.circular(5.0),
+                                    ),
                               child: Container(
                                 margin: EdgeInsets.only(left: 2, right: 2),
                                 child: Text(
                                   Languages.of(context)!.txtLB.toUpperCase(),
                                   style: TextStyle(
-                                      color: (isLsb!)
-                                          ? Colur.white
-                                          : Colur.txt_black,
+                                      color:
+                                          (isLsb!) ? Colur.white : Colur.black,
                                       fontSize: 18.0,
                                       fontWeight: FontWeight.w500),
                                 ),
@@ -385,7 +383,7 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                             onTap: () {
                               if (isKg! && !isLsb!) {
                                 if (double.parse(weightController.text) >=
-                                    Constant.MIN_KG &&
+                                        Constant.MIN_KG &&
                                     double.parse(weightController.text) <=
                                         Constant.MAX_KG) {
                                   setState(() {
@@ -399,32 +397,31 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                                                   .format(_selectedDate),
                                               weightKG: (isKg! && !isLsb!)
                                                   ? double.parse(
-                                                  weightController.text)
+                                                      weightController.text)
                                                   : Utils.lbToKg(double.parse(
-                                                  weightController.text)),
+                                                      weightController.text)),
                                               weightLBS: (!isKg! && isLsb!)
                                                   ? double.parse(
-                                                  weightController.text)
+                                                      weightController.text)
                                                   : Utils.kgToLb(double.parse(
-                                                  weightController.text)));
+                                                      weightController.text)));
                                         } else {
-                                          DataBaseHelper().insertWeightData(
-                                              WeightTable(
-                                                  id: null,
-                                                  weightKG: (isKg! && !isLsb!)
-                                                      ? double.parse(
+                                          DataBaseHelper().insertWeightData(WeightTable(
+                                              id: null,
+                                              weightKG: (isKg! && !isLsb!)
+                                                  ? double.parse(
                                                       weightController.text)
-                                                      : Utils.lbToKg(double.parse(
+                                                  : Utils.lbToKg(double.parse(
                                                       weightController.text)),
-                                                  weightLB: (!isKg! && isLsb!)
-                                                      ? double.parse(
+                                              weightLB: (!isKg! && isLsb!)
+                                                  ? double.parse(
                                                       weightController.text)
-                                                      : Utils.kgToLb(double.parse(
+                                                  : Utils.kgToLb(double.parse(
                                                       weightController.text)),
-                                                  date: DateFormat.yMd()
-                                                      .format(_selectedDate),
-                                                  currentTimeStamp: Utils
-                                                      .getCurrentDateTime()));
+                                              date: DateFormat.yMd()
+                                                  .format(_selectedDate),
+                                              currentTimeStamp:
+                                                  Utils.getCurrentDateTime()));
                                         }
                                       });
                                     } else {
@@ -433,18 +430,20 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                                               id: null,
                                               weightKG: (isKg! && !isLsb!)
                                                   ? double.parse(
-                                                  weightController.text)
+                                                      weightController.text)
                                                   : Utils.lbToKg(double.parse(
-                                                  weightController.text)),
-                                              weightLB: (!isKg! && isLsb!)
-                                                  ? double.parse(
-                                                  weightController.text)
-                                                  : Utils.kgToLb(double.parse(
-                                                  weightController.text)),
+                                                      weightController.text)),
+                                              weightLB:
+                                                  (!isKg! && isLsb!)
+                                                      ? double.parse(
+                                                          weightController.text)
+                                                      : Utils.kgToLb(double.parse(
+                                                          weightController
+                                                              .text)),
                                               date: DateFormat.yMd()
                                                   .format(_selectedDate),
                                               currentTimeStamp:
-                                              Utils.getCurrentDateTime()));
+                                                  Utils.getCurrentDateTime()));
                                     }
                                     Navigator.pop(context);
                                   });
@@ -454,11 +453,10 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                                 }
                               } else {
                                 if (double.parse(weightController.text) >=
-                                    Constant.MIN_LBS &&
+                                        Constant.MIN_LBS &&
                                     double.parse(weightController.text) <=
                                         Constant.MAX_LBS) {
                                   setState(() {
-
                                     if (weightDataList.isNotEmpty) {
                                       weightDataList.forEach((element) {
                                         if (element.date ==
@@ -469,32 +467,31 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                                                   .format(_selectedDate),
                                               weightKG: (isKg! && !isLsb!)
                                                   ? double.parse(
-                                                  weightController.text)
+                                                      weightController.text)
                                                   : Utils.lbToKg(double.parse(
-                                                  weightController.text)),
+                                                      weightController.text)),
                                               weightLBS: (!isKg! && isLsb!)
                                                   ? double.parse(
-                                                  weightController.text)
+                                                      weightController.text)
                                                   : Utils.kgToLb(double.parse(
-                                                  weightController.text)));
+                                                      weightController.text)));
                                         } else {
-                                          DataBaseHelper().insertWeightData(
-                                              WeightTable(
-                                                  id: null,
-                                                  weightKG: (isKg! && !isLsb!)
-                                                      ? double.parse(
+                                          DataBaseHelper().insertWeightData(WeightTable(
+                                              id: null,
+                                              weightKG: (isKg! && !isLsb!)
+                                                  ? double.parse(
                                                       weightController.text)
-                                                      : Utils.lbToKg(double.parse(
+                                                  : Utils.lbToKg(double.parse(
                                                       weightController.text)),
-                                                  weightLB: (!isKg! && isLsb!)
-                                                      ? double.parse(
+                                              weightLB: (!isKg! && isLsb!)
+                                                  ? double.parse(
                                                       weightController.text)
-                                                      : Utils.kgToLb(double.parse(
+                                                  : Utils.kgToLb(double.parse(
                                                       weightController.text)),
-                                                  date: DateFormat.yMd()
-                                                      .format(_selectedDate),
-                                                  currentTimeStamp: Utils
-                                                      .getCurrentDateTime()));
+                                              date: DateFormat.yMd()
+                                                  .format(_selectedDate),
+                                              currentTimeStamp:
+                                                  Utils.getCurrentDateTime()));
                                         }
                                       });
                                     } else {
@@ -503,23 +500,25 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                                               id: null,
                                               weightKG: (isKg! && !isLsb!)
                                                   ? double.parse(
-                                                  weightController.text)
+                                                      weightController.text)
                                                   : Utils.lbToKg(double.parse(
-                                                  weightController.text)),
-                                              weightLB: (!isKg! && isLsb!)
-                                                  ? double.parse(
-                                                  weightController.text)
-                                                  : Utils.kgToLb(double.parse(
-                                                  weightController.text)),
+                                                      weightController.text)),
+                                              weightLB:
+                                                  (!isKg! && isLsb!)
+                                                      ? double.parse(
+                                                          weightController.text)
+                                                      : Utils.kgToLb(double.parse(
+                                                          weightController
+                                                              .text)),
                                               date: DateFormat.yMd()
                                                   .format(_selectedDate),
                                               currentTimeStamp:
-                                              Utils.getCurrentDateTime()));
+                                                  Utils.getCurrentDateTime()));
                                     }
 
                                     if (isKg!) {
                                       double wKg =
-                                      double.parse(weightController.text);
+                                          double.parse(weightController.text);
                                       Preference.shared
                                           .setDouble(Preference.WEIGHT, wKg);
                                     } else {
@@ -578,4 +577,3 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
     setState(() {});
   }
 }
-

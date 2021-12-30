@@ -15,7 +15,8 @@ class SetYourIntroWeeklyGoalScreen extends StatefulWidget {
       _SetYourWeeklyGoalScreenState();
 }
 
-class _SetYourWeeklyGoalScreenState extends State<SetYourIntroWeeklyGoalScreen> {
+class _SetYourWeeklyGoalScreenState
+    extends State<SetYourIntroWeeklyGoalScreen> {
   bool selectedOne = false;
   bool selectedTwo = false;
   bool selectedThree = false;
@@ -31,32 +32,34 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourIntroWeeklyGoalScreen> 
 
   @override
   void initState() {
-    selectTrainingDays = Preference.shared.getString(Preference.SELECTED_TRAINING_DAY) ?? "0";
-    var firstDayOfWeek = Preference.shared.getInt(Preference.SELECTED_FIRST_DAY_OF_WEEK) ?? 0;
-    if(firstDayOfWeek == 0) {
+    selectTrainingDays =
+        Preference.shared.getString(Preference.SELECTED_TRAINING_DAY) ?? "0";
+    var firstDayOfWeek =
+        Preference.shared.getInt(Preference.SELECTED_FIRST_DAY_OF_WEEK) ?? 0;
+    if (firstDayOfWeek == 0) {
       selectFirstDayOfWeek = "Sunday";
-    } else if(firstDayOfWeek == 1) {
+    } else if (firstDayOfWeek == 1) {
       selectFirstDayOfWeek = "Monday";
-    } else if(firstDayOfWeek == 2) {
+    } else if (firstDayOfWeek == 2) {
       selectFirstDayOfWeek = "Saturday";
     }
 
-    if(selectTrainingDays == "1") {
+    if (selectTrainingDays == "1") {
       selectedOne = true;
-    } else if(selectTrainingDays == "2") {
+    } else if (selectTrainingDays == "2") {
       selectedTwo = true;
-    } else if(selectTrainingDays == "3") {
+    } else if (selectTrainingDays == "3") {
       selectedThree = true;
-    } else if(selectTrainingDays == "4") {
+    } else if (selectTrainingDays == "4") {
       selectedFour = true;
-    } else if(selectTrainingDays == "5") {
+    } else if (selectTrainingDays == "5") {
       selectedFive = true;
-    } else if(selectTrainingDays == "6") {
+    } else if (selectTrainingDays == "6") {
       selectedSix = true;
-    } else if(selectTrainingDays == "7") {
+    } else if (selectTrainingDays == "7") {
       selectedSeven = true;
     }
-   super.initState();
+    super.initState();
   }
 
   @override
@@ -84,7 +87,7 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourIntroWeeklyGoalScreen> 
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20,
-                      color: Colur.txtBlack,
+                      color: Colur.black,
                     ),
                   ),
                 ),
@@ -97,7 +100,7 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourIntroWeeklyGoalScreen> 
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 14,
-                      color: Colur.txtBlack,
+                      color: Colur.black,
                     ),
                   ),
                 ),
@@ -107,7 +110,8 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourIntroWeeklyGoalScreen> 
           Column(
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
                 decoration: BoxDecoration(
                   color: Colur.white,
@@ -129,7 +133,7 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourIntroWeeklyGoalScreen> 
                             style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 18,
-                                color: Colur.txtBlack),
+                                color: Colur.black),
                           ),
                         ),
                         Image.asset(
@@ -158,7 +162,8 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourIntroWeeklyGoalScreen> 
                                 selectedSix = false;
                                 selectedSeven = false;
                               });
-                              Preference.shared.setString(Preference.SELECTED_TRAINING_DAY, "1");
+                              Preference.shared.setString(
+                                  Preference.SELECTED_TRAINING_DAY, "1");
                             },
                             child: _itemWeeklyTrainingDays(
                                 isSelected: selectedOne, day: 1.toString()),
@@ -178,7 +183,8 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourIntroWeeklyGoalScreen> 
                                 selectedSix = false;
                                 selectedSeven = false;
                               });
-                              Preference.shared.setString(Preference.SELECTED_TRAINING_DAY, "2");
+                              Preference.shared.setString(
+                                  Preference.SELECTED_TRAINING_DAY, "2");
                             },
                             child: _itemWeeklyTrainingDays(
                                 isSelected: selectedTwo, day: 2.toString()),
@@ -198,7 +204,8 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourIntroWeeklyGoalScreen> 
                                 selectedSix = false;
                                 selectedSeven = false;
                               });
-                              Preference.shared.setString(Preference.SELECTED_TRAINING_DAY, "3");
+                              Preference.shared.setString(
+                                  Preference.SELECTED_TRAINING_DAY, "3");
                             },
                             child: _itemWeeklyTrainingDays(
                                 isSelected: selectedThree, day: 3.toString()),
@@ -222,7 +229,8 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourIntroWeeklyGoalScreen> 
                                 selectedSix = false;
                                 selectedSeven = false;
                               });
-                              Preference.shared.setString(Preference.SELECTED_TRAINING_DAY, "4");
+                              Preference.shared.setString(
+                                  Preference.SELECTED_TRAINING_DAY, "4");
                             },
                             child: _itemWeeklyTrainingDays(
                                 isSelected: selectedFour, day: 4.toString()),
@@ -242,7 +250,8 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourIntroWeeklyGoalScreen> 
                                 selectedSix = false;
                                 selectedSeven = false;
                               });
-                              Preference.shared.setString(Preference.SELECTED_TRAINING_DAY, "5");
+                              Preference.shared.setString(
+                                  Preference.SELECTED_TRAINING_DAY, "5");
                             },
                             child: _itemWeeklyTrainingDays(
                                 isSelected: selectedFive, day: 5.toString()),
@@ -262,7 +271,8 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourIntroWeeklyGoalScreen> 
                                 selectedSix = true;
                                 selectedSeven = false;
                               });
-                              Preference.shared.setString(Preference.SELECTED_TRAINING_DAY, "6");
+                              Preference.shared.setString(
+                                  Preference.SELECTED_TRAINING_DAY, "6");
                             },
                             child: _itemWeeklyTrainingDays(
                                 isSelected: selectedSix, day: 6.toString()),
@@ -289,7 +299,8 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourIntroWeeklyGoalScreen> 
                                 selectedSix = false;
                                 selectedSeven = true;
                               });
-                              Preference.shared.setString(Preference.SELECTED_TRAINING_DAY, "7");
+                              Preference.shared.setString(
+                                  Preference.SELECTED_TRAINING_DAY, "7");
                             },
                             child: _itemWeeklyTrainingDays(
                                 isSelected: selectedSeven, day: 7.toString()),
@@ -304,7 +315,8 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourIntroWeeklyGoalScreen> 
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
                 decoration: BoxDecoration(
                   color: Colur.white,
@@ -326,7 +338,7 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourIntroWeeklyGoalScreen> 
                             style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 18,
-                                color: Colur.txtBlack),
+                                color: Colur.black),
                           ),
                         ),
                         Image.asset(
@@ -360,7 +372,7 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourIntroWeeklyGoalScreen> 
                                 style: TextStyle(
                                     fontWeight: FontWeight.w600,
                                     fontSize: 18,
-                                    color: Colur.txtBlack),
+                                    color: Colur.black),
                               ),
                             ),
                             Icon(
@@ -425,7 +437,7 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourIntroWeeklyGoalScreen> 
           style: TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: 22,
-            color: (!isSelected) ? Colur.txtBlack : Colur.blueGradient2,
+            color: (!isSelected) ? Colur.black : Colur.blueGradient2,
           ),
         ),
       ),
@@ -455,15 +467,18 @@ class _SetYourWeeklyGoalScreenState extends State<SetYourIntroWeeklyGoalScreen> 
           setState(() {
             for (int i = 0; i < value.length; i++) {
               selectFirstDayOfWeek = picker.getSelectedValues()[i];
-              // Preference.shared.setString(Preference.PREF_FIRST_DAY, selectFirstDayOfWeek!);
 
               if (selectFirstDayOfWeek == Languages.of(context)!.txtSunday) {
-                Preference.shared.setInt(Preference.SELECTED_FIRST_DAY_OF_WEEK, 0);
-              } else if (selectFirstDayOfWeek == Languages.of(context)!.txtMonday) {
-                Preference.shared.setInt(Preference.SELECTED_FIRST_DAY_OF_WEEK, 1);
+                Preference.shared
+                    .setInt(Preference.SELECTED_FIRST_DAY_OF_WEEK, 0);
+              } else if (selectFirstDayOfWeek ==
+                  Languages.of(context)!.txtMonday) {
+                Preference.shared
+                    .setInt(Preference.SELECTED_FIRST_DAY_OF_WEEK, 1);
               } else if (selectFirstDayOfWeek ==
                   Languages.of(context)!.txtSaturday) {
-                Preference.shared.setInt(Preference.SELECTED_FIRST_DAY_OF_WEEK, -1);
+                Preference.shared
+                    .setInt(Preference.SELECTED_FIRST_DAY_OF_WEEK, -1);
               }
               print(value[i].toString());
               print(picker.getSelectedValues()[i]);

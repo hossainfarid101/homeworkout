@@ -85,7 +85,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
 
   List<WeightTable> weightDataList = [];
   List<WeekDayData>? weeklyDataList = [];
-  var totalCompleteDays = 0;
+  var totalCompleteDays = 1;
 
   late BannerAd _bottomBannerAd;
   bool _isBottomBannerAdLoaded = false;
@@ -111,9 +111,9 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
 
   @override
   void initState() {
-    if(widget.fromPage == Constant.PAGE_DAYS_STATUS) {
+    if (widget.fromPage == Constant.PAGE_DAYS_STATUS) {
       currentWeek = int.parse(widget.weekName!.replaceAll("0", ""));
-      dayCompleted = int.parse(widget.dayName!.replaceAll("0", ""));
+      dayCompleted = int.parse(widget.dayName!);
     }
     getPreference();
     getDataFromDatabase();
@@ -132,6 +132,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
     _bottomBannerAd.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     bmiTextCategory();
@@ -139,7 +140,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
     return Theme(
       data: ThemeData(
         appBarTheme:
-            AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.light), //
+            AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.light),
       ),
       child: WillPopScope(
         onWillPop: () async {
@@ -152,7 +153,6 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
           appBar: PreferredSize(
               preferredSize: Size.fromHeight(0),
               child: AppBar(
-                // Here we create one to set status bar color
                 backgroundColor: Colur.black,
                 elevation: 0,
               )),
@@ -199,7 +199,8 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                               child: Column(
                                 children: [
                                   Visibility(
-                                    visible: widget.fromPage == Constant.PAGE_DAYS_STATUS,
+                                    visible: widget.fromPage ==
+                                        Constant.PAGE_DAYS_STATUS,
                                     child: _buildWeek(context),
                                   ),
                                   weightWidget(),
@@ -212,10 +213,11 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                           ),
                           (_isBottomBannerAdLoaded && !Utils.isPurchased())
                               ? Container(
-                            height: _bottomBannerAd.size.height.toDouble(),
-                            width: _bottomBannerAd.size.width.toDouble(),
-                            child: AdWidget(ad: _bottomBannerAd),
-                          )
+                                  height:
+                                      _bottomBannerAd.size.height.toDouble(),
+                                  width: _bottomBannerAd.size.width.toDouble(),
+                                  child: AdWidget(ad: _bottomBannerAd),
+                                )
                               : Container()
                         ],
                       )),
@@ -258,10 +260,12 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                   Visibility(
                     visible: widget.fromPage == Constant.PAGE_DAYS_STATUS,
                     child: Positioned(
-                      left: 55,
+                      left: dayCompleted! < 10 ? 55 : 45,
                       top: 90,
                       child: Text(
-                        dayCompleted.toString(),
+                        dayCompleted
+                            .toString()
+                            .replaceAll(RegExp(r'^0+(?=.)'), ''),
                         style: TextStyle(
                             fontSize: 38,
                             color: Colur.transparent.withOpacity(0.2),
@@ -275,7 +279,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                 visible: widget.fromPage == Constant.PAGE_DAYS_STATUS,
                 child: Text(
                   Languages.of(context)!.txtDay +
-                      " $dayCompleted " +
+                      " ${dayCompleted.toString().replaceAll(RegExp(r'^0+(?=.)'), '')} " +
                       Languages.of(context)!.txtCompleted +
                       "!",
                   style: TextStyle(
@@ -345,14 +349,14 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
               Container(
                 margin: const EdgeInsets.only(bottom: 10),
                 child: Row(
-                  //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
                         onTap: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ReminderScreen(isFromWorkoutComplete: true)));
+                                  builder: (context) => ReminderScreen(
+                                      isFromWorkoutComplete: true)));
                         },
                         child: Text(
                           Languages.of(context)!.txtReminder.toUpperCase(),
@@ -366,11 +370,6 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                     ),
                     InkWell(
                         onTap: () {
-                          /*Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => WorkoutHistoryScreen()),
-                              (route) => false);*/
                           _moverWorkoutHistoryScreen();
                         },
                         child: Text(
@@ -384,9 +383,10 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                       width: 20,
                     ),
                     InkWell(
-                        onTap: () async{
+                        onTap: () async {
                           await Share.share(
-                            Languages.of(context)!.txtShareDesc + Constant.shareLink,
+                            Languages.of(context)!.txtShareDesc +
+                                Constant.shareLink,
                             subject: Languages.of(context)!.txtHomeWorkout,
                           );
                         },
@@ -400,7 +400,6 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                   ],
                 ),
               ),
-
             ],
           ),
         ),
@@ -428,17 +427,17 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                       Languages.of(context)!.txtWeek.toUpperCase() +
                           " ${currentWeek!} - " +
                           Languages.of(context)!.txtDay.toUpperCase() +
-                          " ${dayCompleted!}",
+                          " $totalCompleteDays",
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                           color: Colur.grey,
                           fontSize: 14,
                           fontWeight: FontWeight.w700)),
                 ),
-                Text(dayCompleted!.toString(),
+                Text(totalCompleteDays.toString(),
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                        color: Colur.blueGradientButton1,
+                        color: Colur.blueGradient1,
                         fontSize: 16,
                         fontWeight: FontWeight.w400)),
                 Text("/" + "7",
@@ -473,13 +472,12 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
 
   _buildWeekItem(int index) {
     return Container(
-      //width: double.infinity,
       child: Row(
         children: [
-          if (weeklyDataList!.isNotEmpty) if (
-                  weeklyDataList![index].isCompleted == "1" ||
-              weeklyDataList![index].dayName == "0${dayCompleted.toString()}")
-               Container(
+          if (weeklyDataList!.isNotEmpty)
+            if (weeklyDataList![index].isCompleted == "1" ||
+                weeklyDataList![index].dayName == "${dayCompleted.toString()}")
+              Container(
                 padding: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
                     shape: BoxShape.circle, color: Colur.blueGradient1),
@@ -489,36 +487,45 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                   size: 20,
                 ),
               )
-             else Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(color: Colur.grey)),
-                  child: Center(
-                    child: Text("${index + 1}",
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            color: Colur.grey,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400)),
-                  ),
+            else
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Colur.grey)),
+                child: Center(
+                  child: Text("${index + 1}",
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          color: Colur.grey,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400)),
                 ),
+              ),
           Visibility(
-            visible: (weeklyDataList!.length-1 != index),
+            visible: (weeklyDataList!.length - 1 != index),
             child: Container(
               margin: const EdgeInsets.only(top: 24, bottom: 24),
               width: MediaQuery.of(context).size.width * 0.04,
-              color: weeklyDataList!.isNotEmpty ? (weeklyDataList![index].isCompleted == "1" ||
-                  weeklyDataList![index].dayName == "0${dayCompleted.toString()}") ? Colur.blueGradient1 : Colur.grey.withOpacity(0.7)  : Colur.grey.withOpacity(0.7),
+              color: weeklyDataList!.isNotEmpty
+                  ? (weeklyDataList![index].isCompleted == "1" ||
+                          weeklyDataList![index].dayName ==
+                              "${dayCompleted.toString()}")
+                      ? Colur.blueGradient1
+                      : Colur.grey.withOpacity(0.7)
+                  : Colur.grey.withOpacity(0.7),
             ),
           ),
-
           Visibility(
             visible: index == 6,
             child: Container(
-              margin: EdgeInsets.only(bottom: 7, left: MediaQuery.of(context).size.width * 0.01),
+              margin: EdgeInsets.only(
+                  bottom: 7, left: MediaQuery.of(context).size.width * 0.01),
               child: Image.asset(
-                  (dayCompleted == 7)
+                  (dayCompleted == 07 ||
+                          dayCompleted == 14 ||
+                          dayCompleted == 21 ||
+                          dayCompleted == 28)
                       ? "assets/images/ic_challenge_complete.png"
                       : "assets/images/ic_challenge_uncomplete.webp",
                   scale: 5),
@@ -565,7 +572,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                                 RegExp(r'^(\d+)?\.?\d{0,1}')),
                           ],
                           style: TextStyle(
-                              color: Colur.txt_black,
+                              color: Colur.black,
                               fontSize: 18,
                               fontWeight: FontWeight.w500),
                           cursorColor: Colur.txt_gray,
@@ -578,13 +585,13 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                                 fontWeight: FontWeight.w500),
                             counterText: "",
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colur.txt_black),
+                              borderSide: BorderSide(color: Colur.black),
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colur.txt_black),
+                              borderSide: BorderSide(color: Colur.black),
                             ),
                             border: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colur.txt_black),
+                              borderSide: BorderSide(color: Colur.black),
                             ),
                           ),
                           onEditingComplete: () {
@@ -601,7 +608,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                                 "Before converted value of weightController --> " +
                                     weightController.text);
                             weightController.text = Utils.lbToKg(double.parse(
-                                weightController.text.toString()))
+                                    weightController.text.toString()))
                                 .toString();
                             Debug.printLog(
                                 "After converted value of weightController in to LB to KG --> " +
@@ -611,7 +618,6 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                             isKg = true;
                             isLbs = false;
                           });
-
                         },
                         child: Container(
                           margin: const EdgeInsets.only(left: 20.0),
@@ -623,14 +629,14 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                                 )
                               : BoxDecoration(
                                   border: Border.all(
-                                    color: Colur.txt_black,
+                                    color: Colur.black,
                                   ),
                                   borderRadius: BorderRadius.circular(5.0),
                                 ),
                           child: Text(
                             Languages.of(context)!.txtKG.toUpperCase(),
                             style: TextStyle(
-                                color: (isKg!) ? Colur.white : Colur.txt_black,
+                                color: (isKg!) ? Colur.white : Colur.black,
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.w500),
                           ),
@@ -645,7 +651,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                                 "Before converted value of weightController --> " +
                                     weightController.text);
                             weightController.text = Utils.kgToLb(double.parse(
-                                weightController.text.toString()))
+                                    weightController.text.toString()))
                                 .toString();
                             Debug.printLog(
                                 "After converted value of weightController in to KG to LB --> " +
@@ -666,7 +672,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                                 )
                               : BoxDecoration(
                                   border: Border.all(
-                                    color: Colur.txt_black,
+                                    color: Colur.black,
                                   ),
                                   borderRadius: BorderRadius.circular(5.0),
                                 ),
@@ -675,8 +681,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                             child: Text(
                               Languages.of(context)!.txtLB.toUpperCase(),
                               style: TextStyle(
-                                  color:
-                                      (isLbs!) ? Colur.white : Colur.txt_black,
+                                  color: (isLbs!) ? Colur.white : Colur.black,
                                   fontSize: 18.0,
                                   fontWeight: FontWeight.w500),
                             ),
@@ -801,11 +806,11 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                       child: Column(
                         children: [
                           AutoSizeText(
-                          bmi!.toStringAsFixed(2) !=  "0.00" ? bmi!.toStringAsFixed(2) : "0",
+                            bmi!.toStringAsFixed(2) != "0.00"
+                                ? bmi!.toStringAsFixed(2)
+                                : "0",
                             style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600
-                            ),
+                                fontSize: 15, fontWeight: FontWeight.w600),
                           ),
                           Container(
                             margin: const EdgeInsets.symmetric(
@@ -832,7 +837,6 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                   children: [
                     Text(bmiCategory!,
                         overflow: TextOverflow.ellipsis,
-                        //textAlign: TextAlign.center,
                         style: TextStyle(
                             color: bmiColor,
                             fontSize: 14,
@@ -1130,16 +1134,15 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
       bmiColor = Colur.black;
     }
   }
+
   saveWeightDataToGraph() {
     if (isKg! && !isLbs!) {
       if (double.parse(weightController.text) >= Constant.MIN_KG &&
           double.parse(weightController.text) <= Constant.MAX_KG) {
         setState(() {
-
           if (weightDataList.isNotEmpty) {
             weightDataList.forEach((element) {
-              if (element.date ==
-                  DateFormat.yMd().format(DateTime.now())) {
+              if (element.date == DateFormat.yMd().format(DateTime.now())) {
                 DataBaseHelper().updateWeight(
                     date: DateFormat.yMd().format(DateTime.now()),
                     weightKG: (isKg! && !isLbs!)
@@ -1173,7 +1176,6 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                 date: DateFormat.yMd().format(DateTime.now()),
                 currentTimeStamp: Utils.getCurrentDateTime()));
           }
-
         });
       } else {
         Utils.showToast(context, Languages.of(context)!.txtWarningForKg);
@@ -1182,12 +1184,9 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
       if (double.parse(weightController.text) >= Constant.MIN_LBS &&
           double.parse(weightController.text) <= Constant.MAX_LBS) {
         setState(() {
-
-
           if (weightDataList.isNotEmpty) {
             weightDataList.forEach((element) {
-              if (element.date ==
-                  DateFormat.yMd().format(DateTime.now())) {
+              if (element.date == DateFormat.yMd().format(DateTime.now())) {
                 DataBaseHelper().updateWeight(
                     date: DateFormat.yMd().format(DateTime.now()),
                     weightKG: (isKg! && !isLbs!)
@@ -1229,8 +1228,6 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
             double wKg = Utils.lbToKg(double.parse(weightController.text));
             Preference.shared.setDouble(Preference.WEIGHT, wKg);
           }
-
-
         });
       } else {
         Utils.showToast(context, Languages.of(context)!.txtWarningForLbs);
@@ -1243,12 +1240,12 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
       if (isKg!) {
         if (double.parse(weightController.text) > Constant.MIN_KG &&
             double.parse(weightController.text) < Constant.MAX_KG) {
-           saveWeightDataToGraph();
+          saveWeightDataToGraph();
         }
       } else {
         if (double.parse(weightController.text) > Constant.MIN_LBS &&
             double.parse(weightController.text) < Constant.MAX_LBS) {
-           saveWeightDataToGraph();
+          saveWeightDataToGraph();
         }
       }
     }
@@ -1263,20 +1260,16 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
   }
 
   void _insertExerciseHistoryData() async {
-    //int totalEx = 0;
     int planId = 0;
     if (widget.fromPage == Constant.PAGE_HOME) {
       planId = 0;
-     // totalEx = widget.exerciseDataList!.length;
     }
     if (widget.fromPage == Constant.PAGE_DAYS_STATUS) {
-      //totalEx = widget.dayStatusDetailList!.length;
       planId = 0;
-      await DataBaseHelper().updateDayStatusWeekWise(
-          widget.weekName.toString(), widget.dayName.toString(),widget.tableName.toString(),"1");
+      await DataBaseHelper().updateDayStatusWeekWise(widget.weekName.toString(),
+          widget.dayName.toString(), widget.tableName.toString(), "1");
     }
     if (widget.fromPage == Constant.PAGE_DISCOVER) {
-      //totalEx = widget.discoverSingleExerciseData!.length;
       planId = int.parse(widget.planId.toString());
     }
 
@@ -1300,7 +1293,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
   }
 
   getDataFromDatabase() async {
-    if(widget.fromPage == Constant.PAGE_DAYS_STATUS) {
+    if (widget.fromPage == Constant.PAGE_DAYS_STATUS) {
       _getWeeklyData();
     }
     weightDataList = await DataBaseHelper().getWeightData();
@@ -1332,15 +1325,19 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
     return totalEx.toString();
   }
 
+  _getWeeklyData() async {
+    weeklyDataList = await DataBaseHelper().getWeekDaysData(
+        "0" + widget.weekName.toString(), widget.planName.toString());
 
-  _getWeeklyData()async{
-    weeklyDataList = await DataBaseHelper().getWeekDaysData("0"+widget.weekName.toString(),widget.planName.toString());
-
-    for (int i=0; i < weeklyDataList!.length;i++) {
+    for (int i = 0; i < weeklyDataList!.length; i++) {
       if (weeklyDataList![i].isCompleted == "1") {
         totalCompleteDays++;
       }
     }
-    Debug.printLog("_getWeeklyData===>> "+weeklyDataList!.length.toString());
+    Debug.printLog(
+        "==========total complete days: $totalCompleteDays==========");
+    Debug.printLog(
+        "_getWeeklyData===>> ==>" + weeklyDataList!.length.toString());
+    setState(() {});
   }
 }

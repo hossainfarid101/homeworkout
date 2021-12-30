@@ -28,27 +28,28 @@ class DiscoverSingleExerciseData {
 
   String toRawJson() => json.encode(toJson());
 
-  factory DiscoverSingleExerciseData.fromJson(Map<String, dynamic> json) => DiscoverSingleExerciseData(
-    planId: json["PlanId"],
-    isCompleted: json["IsCompleted"],
-    exTime: json["ExTime"],
-    exId: json["ExId"],
-    exDescription: json["exDescription"],
-    exVideo: json["exVideo"],
-    exPath: json["exPath"],
-    exName: json["exName"],
-    exUnit: json["exUnit"],
-  );
+  factory DiscoverSingleExerciseData.fromJson(Map<String, dynamic> json) =>
+      DiscoverSingleExerciseData(
+        planId: json["PlanId"],
+        isCompleted: json["IsCompleted"],
+        exTime: json["ExTime"],
+        exId: json["ExId"],
+        exDescription: json["exDescription"],
+        exVideo: json["exVideo"],
+        exPath: json["exPath"],
+        exName: json["exName"],
+        exUnit: json["exUnit"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "PlanId": planId,
-    "IsCompleted": isCompleted,
-    "ExTime": exTime,
-    "ExId": exId,
-    "exDescription": exDescription,
-    "exVideo": exVideo,
-    "exPath": exPath,
-    "exName": exName,
-    "exUnit": exUnit,
-  };
+        "PlanId": planId,
+        "IsCompleted": isCompleted,
+        "ExTime": exTime,
+        "ExId": exId,
+        "exDescription": exDescription,
+        "exVideo": exVideo,
+        "exPath": exPath,
+        "exName": exName,
+        "exUnit": exUnit,
+      };
 }

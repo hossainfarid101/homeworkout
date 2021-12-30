@@ -44,7 +44,7 @@ class _GenderSelectionScreenState extends State<GenderSelectionScreen> {
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
                     fontSize: 20,
-                    color: Colur.txtBlack,
+                    color: Colur.black,
                   ),
                 ),
               ),
@@ -57,7 +57,7 @@ class _GenderSelectionScreenState extends State<GenderSelectionScreen> {
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 14,
-                    color: Colur.txtBlack,
+                    color: Colur.black,
                   ),
                 ),
               ),
@@ -69,7 +69,6 @@ class _GenderSelectionScreenState extends State<GenderSelectionScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-
                 InkWell(
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
@@ -77,17 +76,20 @@ class _GenderSelectionScreenState extends State<GenderSelectionScreen> {
                     setState(() {
                       isSelected = true;
                     });
-                    Preference.shared
-                        .setString(Constant.SELECTED_GENDER, Constant.GENDER_MEN);
+                    Preference.shared.setString(
+                        Constant.SELECTED_GENDER, Constant.GENDER_MEN);
                   },
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 30, vertical: 15),
                     margin: const EdgeInsets.symmetric(horizontal: 60),
                     decoration: BoxDecoration(
                       color: Colur.unSelectedProgressColor,
                       borderRadius: BorderRadius.circular(100),
                       border: Border.all(
-                          color: (isSelected!) ? Colur.txtLightBlue : Colur.transparent,
+                          color: (isSelected!)
+                              ? Colur.txtLightBlue
+                              : Colur.transparent,
                           width: 2.5),
                       boxShadow: <BoxShadow>[
                         BoxShadow(
@@ -104,14 +106,14 @@ class _GenderSelectionScreenState extends State<GenderSelectionScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Image.asset("assets/icons/ic_male.webp", height: 70, width: 70),
+                        Image.asset("assets/icons/ic_male.webp",
+                            height: 70, width: 70),
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 15),
                             child: AutoSizeText(
                               Languages.of(context)!.txtMale,
                               maxLines: 1,
-                              //overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 19,
@@ -140,18 +142,20 @@ class _GenderSelectionScreenState extends State<GenderSelectionScreen> {
                     setState(() {
                       isSelected = false;
                     });
-                    Preference.shared
-                        .setString(Constant.SELECTED_GENDER, Constant.GENDER_WOMEN);
+                    Preference.shared.setString(
+                        Constant.SELECTED_GENDER, Constant.GENDER_WOMEN);
                   },
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 30, vertical: 15),
                     margin: const EdgeInsets.symmetric(horizontal: 60),
                     decoration: BoxDecoration(
                       color: Colur.unSelectedProgressColor,
                       borderRadius: BorderRadius.circular(100),
                       border: Border.all(
-                          color:
-                              (!isSelected!) ? Colur.txtLightPink : Colur.transparent,
+                          color: (!isSelected!)
+                              ? Colur.txtLightPink
+                              : Colur.transparent,
                           width: 2.5),
                       boxShadow: <BoxShadow>[
                         BoxShadow(
@@ -175,7 +179,6 @@ class _GenderSelectionScreenState extends State<GenderSelectionScreen> {
                             padding: const EdgeInsets.symmetric(horizontal: 15),
                             child: AutoSizeText(
                               Languages.of(context)!.txtFemale,
-                              //overflow: TextOverflow.ellipsis,
                               maxLines: 1,
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,

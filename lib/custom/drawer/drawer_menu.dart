@@ -17,7 +17,6 @@ class DrawerMenu extends StatefulWidget {
 }
 
 class _DrawerMenuState extends State<DrawerMenu> {
-
   List<DrawerData> drawerDataList = <DrawerData>[];
   int? currentIndex;
 
@@ -67,8 +66,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
                       style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 20,
-                          color: Colur.white
-                      ),
+                          color: Colur.white),
                     ),
                   ),
                 ],
@@ -79,8 +77,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
                 padding: const EdgeInsets.only(top: 15),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Colur.blueGradient1, Colur.blueGradient2]
-                  ),
+                      colors: [Colur.blueGradient1, Colur.blueGradient2]),
                 ),
                 child: ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
@@ -95,7 +92,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
               ),
             ),
             InkWell(
-              onTap: () async{
+              onTap: () async {
                 Navigator.pop(context);
                 await _restartDialog();
               },
@@ -103,8 +100,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
                 margin: const EdgeInsets.only(top: 0.6),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                      colors: [Colur.blueGradient1, Colur.blueGradient2]
-                  ),
+                      colors: [Colur.blueGradient1, Colur.blueGradient2]),
                 ),
                 child: Container(
                   margin: const EdgeInsets.only(top: 12, bottom: 12, left: 15),
@@ -116,7 +112,6 @@ class _DrawerMenuState extends State<DrawerMenu> {
                           "assets/icons/drawer/ic_reset_progress.webp",
                           height: 23,
                           width: 23,
-
                         ),
                       ),
                       Container(
@@ -135,7 +130,6 @@ class _DrawerMenuState extends State<DrawerMenu> {
                 ),
               ),
             ),
-
           ],
         ),
       ),
@@ -145,16 +139,15 @@ class _DrawerMenuState extends State<DrawerMenu> {
   _itemDrawer(int index) {
     return InkWell(
       onTap: () {
-        //_navigateFromDrawer(index);
-        if(index == 0 && Constant.isTrainingScreen) {
+        if (index == 0 && Constant.isTrainingScreen) {
           Navigator.pop(context);
-        } else if(index == 1 && Constant.isDiscoverScreen) {
+        } else if (index == 1 && Constant.isDiscoverScreen) {
           Navigator.pop(context);
-        } else if(index == 2 && Constant.isReportScreen) {
+        } else if (index == 2 && Constant.isReportScreen) {
           Navigator.pop(context);
-        } else if(index == 3 && Constant.isReminderScreen) {
+        } else if (index == 3 && Constant.isReminderScreen) {
           Navigator.pop(context);
-        } else if(index == 4 && Constant.isSettingsScreen) {
+        } else if (index == 4 && Constant.isSettingsScreen) {
           Navigator.pop(context);
         } else {
           _navigateFromDrawer(index);
@@ -166,15 +159,17 @@ class _DrawerMenuState extends State<DrawerMenu> {
           child: Container(
             margin: const EdgeInsets.only(left: 15),
             decoration: BoxDecoration(
-              color: currentIndex == index ? Colur.white : Colur.transparent,
-              borderRadius: BorderRadius.horizontal(left: Radius.circular(50))
-            ),
+                color: currentIndex == index ? Colur.white : Colur.transparent,
+                borderRadius:
+                    BorderRadius.horizontal(left: Radius.circular(50))),
             child: Row(
               children: [
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Image.asset(
-                    currentIndex == index ? drawerDataList[index].selectedIcon! : drawerDataList[index].unselectedIcon!,
+                    currentIndex == index
+                        ? drawerDataList[index].selectedIcon!
+                        : drawerDataList[index].unselectedIcon!,
                     height: 22,
                     width: 22,
                   ),
@@ -186,7 +181,8 @@ class _DrawerMenuState extends State<DrawerMenu> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 14,
-                        color: currentIndex == index ? Colur.theme : Colur.white,
+                        color:
+                            currentIndex == index ? Colur.theme : Colur.white,
                         fontWeight: FontWeight.w600),
                   ),
                 ),
@@ -210,51 +206,45 @@ class _DrawerMenuState extends State<DrawerMenu> {
     drawerDataList.clear();
     drawerDataList.add(
       DrawerData(
-        unselectedIcon: "assets/icons/drawer/ic_training_unselected.webp",
-        selectedIcon: "assets/icons/drawer/ic_training_selected.webp",
-        text: Languages.of(context)!.txtTrainingPlans,
-        navPath: '/training'
-      ),
+          unselectedIcon: "assets/icons/drawer/ic_training_unselected.webp",
+          selectedIcon: "assets/icons/drawer/ic_training_selected.webp",
+          text: Languages.of(context)!.txtTrainingPlans,
+          navPath: '/training'),
     );
     drawerDataList.add(
       DrawerData(
-        unselectedIcon: "assets/icons/drawer/ic_discover_unselected.webp",
-        selectedIcon: "assets/icons/drawer/ic_discover_selected.webp",
-        text: Languages.of(context)!.txtDiscover,
-        navPath: '/discover'
-      ),
+          unselectedIcon: "assets/icons/drawer/ic_discover_unselected.webp",
+          selectedIcon: "assets/icons/drawer/ic_discover_selected.webp",
+          text: Languages.of(context)!.txtDiscover,
+          navPath: '/discover'),
     );
     drawerDataList.add(
       DrawerData(
-        unselectedIcon: "assets/icons/drawer/ic_report_unselected.webp",
-        selectedIcon: "assets/icons/drawer/ic_report_selected.webp",
-        text: Languages.of(context)!.txtReport,
-        navPath: '/report'
-      ),
+          unselectedIcon: "assets/icons/drawer/ic_report_unselected.webp",
+          selectedIcon: "assets/icons/drawer/ic_report_selected.webp",
+          text: Languages.of(context)!.txtReport,
+          navPath: '/report'),
     );
     drawerDataList.add(
       DrawerData(
           unselectedIcon: "assets/icons/drawer/ic_reminder_unselected.webp",
           selectedIcon: "assets/icons/drawer/ic_reminder_selected.webp",
           text: Languages.of(context)!.txtReminder,
-          navPath: '/reminder'
-      ),
+          navPath: '/reminder'),
     );
     drawerDataList.add(
       DrawerData(
-        unselectedIcon: "assets/icons/drawer/ic_setting_unselected.webp",
-        selectedIcon: "assets/icons/drawer/ic_setting_selected.webp",
-        text: Languages.of(context)!.txtSettings,
-        navPath: '/settings'
-      ),
+          unselectedIcon: "assets/icons/drawer/ic_setting_unselected.webp",
+          selectedIcon: "assets/icons/drawer/ic_setting_selected.webp",
+          text: Languages.of(context)!.txtSettings,
+          navPath: '/settings'),
     );
-
   }
 
   _restartDialog() {
     return showDialog(
         context: context,
-        builder: (context){
+        builder: (context) {
           return StatefulBuilder(
             builder: (context, setState) {
               return AlertDialog(
@@ -262,31 +252,29 @@ class _DrawerMenuState extends State<DrawerMenu> {
                   Languages.of(context)!.txtRestartProgress,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
-                    color: Colur.txtBlack,
+                    color: Colur.black,
                   ),
                 ),
                 actions: [
-
                   TextButton(
                     child: Text(
                       Languages.of(context)!.txtNo.toUpperCase(),
                       style: const TextStyle(
-                        color:Colur.theme,
+                        color: Colur.theme,
                       ),
                     ),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
                   ),
-
                   TextButton(
                     child: Text(
                       Languages.of(context)!.txtYes.toUpperCase(),
                       style: const TextStyle(
-                        color:Colur.theme,
+                        color: Colur.theme,
                       ),
                     ),
-                    onPressed: ()  {
+                    onPressed: () {
                       _resetProgress(context);
                     },
                   ),
@@ -297,8 +285,11 @@ class _DrawerMenuState extends State<DrawerMenu> {
         });
   }
 
-  _resetProgress(BuildContext context)async{
+  _resetProgress(BuildContext context) async {
     await DataBaseHelper().resetProgress();
-    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => TrainingScreen()), (route) => false);
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => TrainingScreen()),
+        (route) => false);
   }
 }

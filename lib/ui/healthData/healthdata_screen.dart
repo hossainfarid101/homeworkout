@@ -17,7 +17,7 @@ import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 import 'package:intl/intl.dart';
 
-enum Gender{male, female}
+enum Gender { male, female }
 
 class HealthDataScreen extends StatefulWidget {
   const HealthDataScreen({Key? key}) : super(key: key);
@@ -26,8 +26,8 @@ class HealthDataScreen extends StatefulWidget {
   _HealthDataScreenState createState() => _HealthDataScreenState();
 }
 
-class _HealthDataScreenState extends State<HealthDataScreen> implements TopBarClickListener{
-
+class _HealthDataScreenState extends State<HealthDataScreen>
+    implements TopBarClickListener {
   Gender? _gender;
   String? _birthDate;
   String? strGender;
@@ -75,16 +75,15 @@ class _HealthDataScreenState extends State<HealthDataScreen> implements TopBarCl
       data: ThemeData(
         appBarTheme: AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle.dark,
-        ), //
+        ),
       ),
       child: Scaffold(
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(0),
-            child: AppBar( // Here we create one to set status bar color
+            child: AppBar(
               backgroundColor: Colur.white,
               elevation: 0,
-            )
-        ),
+            )),
         body: SafeArea(
           child: Column(
             children: [
@@ -96,17 +95,16 @@ class _HealthDataScreenState extends State<HealthDataScreen> implements TopBarCl
                       this,
                       isShowBack: true,
                     ),
-
                     _healthDataWidget(fullHeight)
                   ],
                 ),
               ),
               (_isBottomBannerAdLoaded && !Utils.isPurchased())
                   ? Container(
-                height: _bottomBannerAd.size.height.toDouble(),
-                width: _bottomBannerAd.size.width.toDouble(),
-                child: AdWidget(ad: _bottomBannerAd),
-              )
+                      height: _bottomBannerAd.size.height.toDouble(),
+                      width: _bottomBannerAd.size.width.toDouble(),
+                      child: AdWidget(ad: _bottomBannerAd),
+                    )
                   : Container()
             ],
           ),
@@ -115,11 +113,9 @@ class _HealthDataScreenState extends State<HealthDataScreen> implements TopBarCl
     );
   }
 
-
-
   _healthDataWidget(double fullHeight) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(15,10,15,10),
+      margin: const EdgeInsets.fromLTRB(15, 10, 15, 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -135,25 +131,26 @@ class _HealthDataScreenState extends State<HealthDataScreen> implements TopBarCl
 
   _genderWidget() {
     return InkWell(
-      onTap: () async{
+      onTap: () async {
         await _genderDialog();
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-              Languages.of(context)!.txtGender,
+          Text(Languages.of(context)!.txtGender,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
-                color: Colur.txtBlack,
-                fontSize: 16,)
-          ),
+                color: Colur.black,
+                fontSize: 16,
+              )),
           Text(
-              (strGender == Constant.GENDER_MEN) ? Languages.of(context)!.txtMale : Languages.of(context)!.txtFemale,
+              (strGender == Constant.GENDER_MEN)
+                  ? Languages.of(context)!.txtMale
+                  : Languages.of(context)!.txtFemale,
               style: const TextStyle(
-                color: Colur.txtBlack,
-                fontSize: 12,)
-          ),
+                color: Colur.black,
+                fontSize: 12,
+              )),
         ],
       ),
     );
@@ -161,32 +158,30 @@ class _HealthDataScreenState extends State<HealthDataScreen> implements TopBarCl
 
   _dateOfBirthWidget(double fullHeight) {
     return InkWell(
-      onTap: () async{
+      onTap: () async {
         await _birthDatePickerDialog(fullHeight);
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-              Languages.of(context)!.txtBirthDate,
+          Text(Languages.of(context)!.txtBirthDate,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
-                color: Colur.txtBlack,
-                fontSize: 16,)
-          ),
-          Text(
-              _birthDate!,
+                color: Colur.black,
+                fontSize: 16,
+              )),
+          Text(_birthDate!,
               style: const TextStyle(
-                color: Colur.txtBlack,
-                fontSize: 12,)
-          ),
+                color: Colur.black,
+                fontSize: 12,
+              )),
         ],
       ),
     );
   }
 
   Future<void> _birthDatePickerDialog(double fullHeight) async {
-     showRoundedDatePicker(
+    showRoundedDatePicker(
       height: fullHeight * 0.41,
       context: context,
       initialDate: DateTime.parse(_birthDate!),
@@ -197,7 +192,7 @@ class _HealthDataScreenState extends State<HealthDataScreen> implements TopBarCl
         primaryColor: Colur.theme,
       ),
       styleYearPicker: MaterialRoundedYearPickerStyle(
-        textStyleYear: const TextStyle(color: Colur.txtBlack),
+        textStyleYear: const TextStyle(color: Colur.black),
         textStyleYearSelected: const TextStyle(color: Colur.theme),
         heightYearRow: 50,
       ),
@@ -206,13 +201,14 @@ class _HealthDataScreenState extends State<HealthDataScreen> implements TopBarCl
           color: Colur.theme,
           shape: BoxShape.circle,
         ),
-        paddingDatePicker: const EdgeInsets.only(bottom: 0, left: 10, right: 10),
+        paddingDatePicker:
+            const EdgeInsets.only(bottom: 0, left: 10, right: 10),
         paddingActionBar: const EdgeInsets.only(top: 0),
         paddingMonthHeader: const EdgeInsets.only(top: 10),
         textStyleCurrentDayOnCalendar: const TextStyle(color: Colur.theme),
-        textStyleButtonNegative: const TextStyle(color: Colur.txtBlack),
+        textStyleButtonNegative: const TextStyle(color: Colur.black),
         textStyleButtonPositive: const TextStyle(color: Colur.theme),
-        textStyleDayHeader: const TextStyle(color: Colur.txtBlack),
+        textStyleDayHeader: const TextStyle(color: Colur.black),
       ),
       textNegativeButton: Languages.of(context)!.txtCancel.toUpperCase(),
       textPositiveButton: Languages.of(context)!.txtSet.toUpperCase(),
@@ -228,40 +224,46 @@ class _HealthDataScreenState extends State<HealthDataScreen> implements TopBarCl
     });
   }
 
-  Future<void> _genderDialog(){
-    return showDialog(context: context, builder: (context){
-      return StatefulBuilder(
-        builder: (context, setState) {
-          return AlertDialog(
-            content: SizedBox(
-              height: 60,
-              width: 300,
-              child: RadioGroup<Gender>.builder(
-                activeColor: Colur.theme,
-                groupValue: _gender!,
-                onChanged: (value) => setState(() {
-                  _gender = value;
-                  Debug.printLog(_gender.toString());
-                  if(_gender == Gender.male) {
-                    Preference.shared.setBool(Preference.isMale, true);
-                    Preference.shared.setString(Constant.SELECTED_GENDER, Constant.GENDER_MEN);
-                  } else {
-                    Preference.shared.setBool(Preference.isMale, false);
-                    Preference.shared.setString(Constant.SELECTED_GENDER, Constant.GENDER_WOMEN);
-                  }
+  Future<void> _genderDialog() {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return StatefulBuilder(
+            builder: (context, setState) {
+              return AlertDialog(
+                content: SizedBox(
+                  height: 60,
+                  width: 300,
+                  child: RadioGroup<Gender>.builder(
+                    activeColor: Colur.theme,
+                    groupValue: _gender!,
+                    onChanged: (value) => setState(() {
+                      _gender = value;
+                      Debug.printLog(_gender.toString());
+                      if (_gender == Gender.male) {
+                        Preference.shared.setBool(Preference.isMale, true);
+                        Preference.shared.setString(
+                            Constant.SELECTED_GENDER, Constant.GENDER_MEN);
+                      } else {
+                        Preference.shared.setBool(Preference.isMale, false);
+                        Preference.shared.setString(
+                            Constant.SELECTED_GENDER, Constant.GENDER_WOMEN);
+                      }
 
-                  Navigator.pop(context);
-                }),
-                items: Gender.values,
-                itemBuilder: (item) => RadioButtonBuilder(
-                  item.index == 0 ? Languages.of(context)!.txtMale : Languages.of(context)!.txtFemale,
+                      Navigator.pop(context);
+                    }),
+                    items: Gender.values,
+                    itemBuilder: (item) => RadioButtonBuilder(
+                      item.index == 0
+                          ? Languages.of(context)!.txtMale
+                          : Languages.of(context)!.txtFemale,
+                    ),
+                  ),
                 ),
-              ),
-            ),
+              );
+            },
           );
-          },
-      );
-    }).then((value) {
+        }).then((value) {
       setState(() {
         _getPreference();
       });
@@ -269,25 +271,21 @@ class _HealthDataScreenState extends State<HealthDataScreen> implements TopBarCl
   }
 
   _getPreference() {
-    strGender = Preference.shared.getString(Constant.SELECTED_GENDER) ?? Constant.GENDER_MEN;
-    /*isMale = Preference.shared.getBool(Preference.isMale) ?? true;
-    if(isMale!){
-      _gender = Gender.male;
-    }else{
-      _gender = Gender.female;
-    }*/
+    strGender = Preference.shared.getString(Constant.SELECTED_GENDER) ??
+        Constant.GENDER_MEN;
     if (strGender == Constant.GENDER_MEN) {
       _gender = Gender.male;
     } else {
       _gender = Gender.female;
     }
 
-    _birthDate = Preference.shared.getString(Preference.dateOfBirth) ?? DateFormat("yyyy-MM-dd").format(DateTime.now());
+    _birthDate = Preference.shared.getString(Preference.dateOfBirth) ??
+        DateFormat("yyyy-MM-dd").format(DateTime.now());
   }
 
   @override
   void onTopBarClick(String name, {bool value = true}) {
-    if(name == Constant.strBack){
+    if (name == Constant.strBack) {
       Navigator.pop(context);
     }
   }
