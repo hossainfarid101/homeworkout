@@ -3,14 +3,19 @@ import 'dart:io';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:homeworkout_flutter/database/tables/reminder_table.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
+import 'package:homeworkout_flutter/main.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:timezone/timezone.dart' as tz;
+
 
 import 'constant.dart';
 
@@ -309,5 +314,81 @@ class Utils {
       imageName = "ic_ripped_vcut_banner.webp";
     }
     return "assets/exerciseImage/discover/subPlanBanner/"+imageName;
+  }
+
+  static Future<void> saveReminder({List<ReminderTable>? reminderList}) async {
+
+    int notificationId = 100;
+    List selectedDays = [];
+    TimeOfDay? selectedTime;
+
+    List<PendingNotificationRequest> pendingNoti =
+    await flutterLocalNotificationsPlugin.pendingNotificationRequests();
+
+    pendingNoti.forEach((element) {
+      if (element.payload == Constant.strExerciseReminder) {
+        Debug.printLog(
+            "Cancel Notification ::::::==> ${element.id}");
+        flutterLocalNotificationsPlugin.cancel(element.id);
+      }
+
+    });
+
+    reminderList!.forEach((element) {
+
+      selectedDays = element.repeatNo!.split(", ");
+      var hr = int.parse(element.time!.split(":")[0]);
+      var min = int.parse(element.time!.split(":")[1]);
+      selectedTime = TimeOfDay(hour: hr, minute: min);
+      Debug.printLog("selected days: $selectedDays");
+
+      final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
+
+      tz.TZDateTime scheduledDate = tz.TZDateTime(tz.local, now.year, now.month,
+          now.day, selectedTime!.hour, selectedTime!.minute);
+
+      if (element.isActive == "true") {
+        selectedDays.forEach((element) async {
+          notificationId += 1;
+          if (int.parse(element as String) == DateTime.now().weekday &&
+              DateTime.now().isBefore(scheduledDate)) {
+            await scheduledNotification(scheduledDate, notificationId);
+          } else {
+            var tempTime = scheduledDate.add(const Duration(days: 1));
+            while (tempTime.weekday != int.parse(element)) {
+              tempTime = tempTime.add(const Duration(days: 1));
+            }
+            await scheduledNotification(tempTime, notificationId);
+          }
+        });
+      }
+    });
+  }
+
+  static scheduledNotification(tz.TZDateTime scheduledDate, int notificationId) async {
+    Debug.printLog(
+        "Schedule Notification at ::::::==> ${scheduledDate.toIso8601String()}");
+    Debug.printLog(
+        "Schedule Notification at scheduledDate.millisecond::::::==> $notificationId");
+
+    var titleText = "Exercise Reminder";
+    var msg = "It's time to exercise.";
+
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+        notificationId,
+        titleText,
+        msg,
+        scheduledDate,
+        const NotificationDetails(
+          android: AndroidNotificationDetails(
+              'exercise_reminder',
+              'Exercise Reminder',
+              channelDescription: 'This is reminder for exercise',icon: 'ic_notification'),
+        ),
+        androidAllowWhileIdle: true,
+        uiLocalNotificationDateInterpretation:
+        UILocalNotificationDateInterpretation.absoluteTime,
+        matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
+        payload: Constant.strExerciseReminder);
   }
 }

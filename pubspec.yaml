@@ -407,32 +407,27 @@ flutter:
     - assets/icons/ic_select_pointer.webp
     - assets/icons/ic_challenge_complete_day.webp
     - assets/icons/ic_menu.png
-    - assets/icons/ic_menu_library.webp
-    - assets/icons/ic_menu_reminder.webp
-    - assets/icons/ic_menu_report.png
-    - assets/icons/ic_menu_restart_progress.webp
-    - assets/icons/ic_menu_setting.webp
     - assets/icons/ic_training_plan.webp
     - assets/icons/ic_setting_coach_tips.webp
     - assets/icons/ic_setting_countdown_time.webp
-    - assets/icons/ic_setting_device_tts_setting.png
+    - assets/icons/ic_setting_device_tts_setting.webp
     - assets/icons/ic_setting_download_more_tts_langu.webp
     - assets/icons/ic_setting_download_tts_engine.webp
-    - assets/icons/ic_setting_feedback.png
-    - assets/icons/ic_setting_health_data.png
-    - assets/icons/ic_setting_lang.webp
-    - assets/icons/ic_setting_metric.png
-    - assets/icons/ic_setting_navigat_pre.png
-    - assets/icons/ic_setting_navigat_right.png
+    - assets/icons/ic_setting_feedback.webp
+    - assets/icons/ic_setting_health_data.webp
+    - assets/icons/ic_setting_metric.webp
+    - assets/icons/ic_setting_navigat_pre.webp
+    - assets/icons/ic_setting_navigat_right.webp
     - assets/icons/ic_setting_privacy_policy.webp
     - assets/icons/ic_setting_rate_us.webp
     - assets/icons/ic_setting_reminder.webp
-    - assets/icons/ic_setting_rest_set.png
+    - assets/icons/ic_setting_rest_set.webp
     - assets/icons/ic_setting_share.webp
     - assets/icons/ic_setting_test_voice.webp
     - assets/icons/ic_setting_tts_engine.webp
     - assets/icons/ic_setting_voice_guide.webp
     - assets/icons/ic_sound_options.webp
+    - assets/icons/ic_setting_sound_options.webp
     - assets/icons/ic_back.webp
     - assets/icons/ic_edit.webp
     - assets/icons/ic_setting_remove_ads.webp
@@ -452,10 +447,6 @@ flutter:
     - assets/icons/ic_done_purchase.webp
     - assets/icons/ic_workout_time.webp
     - assets/icons/ic_workout_calories.webp
-    - assets/icons/ic_history_training_plan.webp
-    - assets/icons/ic_history_advanced.webp
-    - assets/icons/ic_history_intermediate.webp
-    - assets/icons/ic_history_normal.webp
     - assets/images/
     - assets/images/ic_7_day_free_trial.webp
     - assets/images/main_bg.webp

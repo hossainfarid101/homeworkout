@@ -185,7 +185,11 @@ class _ReportScreenState extends State<ReportScreen> implements TopBarClickListe
                   this,
                   isMenu: true,
                 ),
-                const Divider(color: Colur.grey,),
+                Divider(
+                  height: 1.0,
+                  color: Colur.grayDivider,
+                  thickness: 0.0,
+                ),
 
                 Expanded(
                   child: SingleChildScrollView(

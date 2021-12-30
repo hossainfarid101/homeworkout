@@ -565,7 +565,7 @@ class LanguageEn extends Languages {
   String get txtUnlockOnce => "Unlock once";
 
   @override
-  String get txtFreeTrialDesc => "Free 7 Days Trial,then ₹3500.00/year. \nCancel anytime during the trial.";
+  String get txtFreeTrialDesc => "Free 7 Days Trial, then ₹3500.00/year. \nCancel anytime during the trial.";
 
   @override
   String get txtFree7DaysTrial => "Free 7 days trial";

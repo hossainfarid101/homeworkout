@@ -5,6 +5,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:homeworkout_flutter/database/database_helper.dart';
 import 'package:homeworkout_flutter/database/tables/discover_plan_table.dart';
+import 'package:homeworkout_flutter/database/tables/reminder_table.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/exerciselist/ExerciseListScreen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
@@ -18,8 +19,9 @@ class GeneratingThePlanScreen extends StatefulWidget {
   final bool? isPlanReady;
   final Function onValueChanged;
   final Function onValueChangeRandomPlanData;
+  final List<ReminderTable>? onReminderList;
 
-  GeneratingThePlanScreen(this.isPlanReady, this.onValueChanged,this.onValueChangeRandomPlanData);
+  GeneratingThePlanScreen(this.isPlanReady, this.onValueChanged,this.onValueChangeRandomPlanData, this.onReminderList);
 
   @override
   _GeneratingThePlanScreenState createState() => _GeneratingThePlanScreenState();
@@ -94,11 +96,6 @@ class _GeneratingThePlanScreenState extends State<GeneratingThePlanScreen> with 
         ),
       ),
     ) : Center(
-      /*child: Image.asset(
-        "assets/images/plan_ready.webp",
-        height: 240,
-        width: 240,
-      ),*/
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -146,13 +143,16 @@ class _GeneratingThePlanScreenState extends State<GeneratingThePlanScreen> with 
   _discoverCard() {
     return InkWell(
       onTap: () {
+        Utils.saveReminder(reminderList: widget.onReminderList);
+        Preference.shared.setBool(Constant.PREF_INTRODUCTION_FINISH, true);
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => ExerciseListScreen(
-                    fromPage: Constant.PAGE_DISCOVER,
-                    planName: randomPlanData!.planName,
-                    discoverPlanTable: randomPlanData
+                  fromPage: Constant.PAGE_DISCOVER,
+                  planName: randomPlanData!.planName,
+                  discoverPlanTable: randomPlanData,
+                  isFromOnboarding: true
                 )));
       },
       child: Card(

@@ -17,7 +17,7 @@ import 'package:homeworkout_flutter/database/tables/history_table.dart';
 import 'package:homeworkout_flutter/database/tables/weight_table.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/localization/locale_constant.dart';
-import 'package:homeworkout_flutter/ui/reminder/set_reminder_screen.dart';
+import 'package:homeworkout_flutter/ui/reminder/reminder_screen.dart';
 import 'package:homeworkout_flutter/ui/workoutHistory/workout_history_screen.dart';
 import 'package:homeworkout_flutter/utils/ad_helper.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
@@ -352,7 +352,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => SetReminderScreen()));
+                                  builder: (context) => ReminderScreen(isFromWorkoutComplete: true)));
                         },
                         child: Text(
                           Languages.of(context)!.txtReminder.toUpperCase(),
@@ -573,7 +573,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                             contentPadding: EdgeInsets.all(0.0),
                             hintText: "0.0",
                             hintStyle: TextStyle(
-                                color: Colur.txt_black,
+                                color: Colur.txt_gray,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w500),
                             counterText: "",
@@ -594,22 +594,24 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                       ),
                       InkWell(
                         onTap: () {
+                          if (!isKg!) {
+                            if (weightController.text == "")
+                              weightController.text = "0.0";
+                            Debug.printLog(
+                                "Before converted value of weightController --> " +
+                                    weightController.text);
+                            weightController.text = Utils.lbToKg(double.parse(
+                                weightController.text.toString()))
+                                .toString();
+                            Debug.printLog(
+                                "After converted value of weightController in to LB to KG --> " +
+                                    weightController.text);
+                          }
                           setState(() {
                             isKg = true;
                             isLbs = false;
                           });
 
-                          if (weightController.text == "")
-                            weightController.text = "0.0";
-                          Debug.printLog(
-                              "Before converted value of weightController --> " +
-                                  weightController.text);
-                          weightController.text = Utils.lbToKg(double.parse(
-                                  weightController.text.toString()))
-                              .toString();
-                          Debug.printLog(
-                              "After converted value of weightController in to LB to KG --> " +
-                                  weightController.text);
                         },
                         child: Container(
                           margin: const EdgeInsets.only(left: 20.0),
@@ -636,22 +638,23 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                       ),
                       InkWell(
                         onTap: () {
+                          if (!isLbs!) {
+                            if (weightController.text == "")
+                              weightController.text = "0.0";
+                            Debug.printLog(
+                                "Before converted value of weightController --> " +
+                                    weightController.text);
+                            weightController.text = Utils.kgToLb(double.parse(
+                                weightController.text.toString()))
+                                .toString();
+                            Debug.printLog(
+                                "After converted value of weightController in to KG to LB --> " +
+                                    weightController.text);
+                          }
                           setState(() {
                             isKg = false;
                             isLbs = true;
                           });
-
-                          if (weightController.text == "")
-                            weightController.text = "0.0";
-                          Debug.printLog(
-                              "Before converted value of weightController --> " +
-                                  weightController.text);
-                          weightController.text = Utils.kgToLb(double.parse(
-                                  weightController.text.toString()))
-                              .toString();
-                          Debug.printLog(
-                              "After converted value of weightController in to KG to LB --> " +
-                                  weightController.text);
                         },
                         child: Container(
                           margin: const EdgeInsets.only(left: 10.0),

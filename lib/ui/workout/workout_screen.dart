@@ -573,35 +573,13 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                   ),
                   InkWell(
                     onTap: () async {
-                      /*if (isWidgetCountDown) {
+                      if (isWidgetCountDown) {
                         countDownController.pause();
                         if (int.parse(countDownController.getTime()) < 4) {
                           if (!isMute! && isVoiceGuide!) {
                             timerForCount!.cancel();
                           }
                         }
-
-                      } else {
-                        if (controller != null) {
-                          controller!.stop();
-                        }
-                      }
-                      await _soundOptionsDialog().then((value) {
-                        if (isWidgetCountDown) {
-                          countDownController.resume();
-
-                          timerForCount =
-                              Timer.periodic(Duration(seconds: 1), (Timer t) => _setSoundCountDown());
-                        } else {
-                          if (controller != null) {
-                            _controllerForward();
-                          }
-                        }
-                      });*/
-                      // await _soundOptionsDialog();
-
-                      if (isWidgetCountDown) {
-                        countDownController.pause();
                       } else {
                         if (controller != null && controller!.lastElapsedDuration != null) {
                           durationOfExercise = durationOfExercise == null
@@ -616,6 +594,8 @@ class _WorkoutScreenState extends State<WorkoutScreen>
 
                         if (isWidgetCountDown) {
                           countDownController.resume();
+                          timerForCount =
+                              Timer.periodic(Duration(seconds: 1), (Timer t) => _setSoundCountDown());
                         }
                         Debug.printLog("VALUE: "+_timeTypeCheck().toString());
                         if (_timeTypeCheck()) {
@@ -1225,8 +1205,8 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                               margin: const EdgeInsets.only(right: 10),
                               child: Image.asset(
                                 "assets/icons/ic_setting_voice_guide.webp",
-                                color: Colur.iconGrey,
-                                scale: 1.7,
+                                height: 20,
+                                width: 20,
                               ),
                             ),
                             Expanded(
@@ -1249,9 +1229,6 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                                 });
                               },
                               activeColor: Colur.theme,
-                              // activeTrackColor: Colur.bg_txtBlack,
-                              // inactiveThumbColor: Colur.switch_grey,
-                              // inactiveTrackColor: Colur.bg_grey,
                             ),
                           ],
                         ),
@@ -1264,8 +1241,8 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                               margin: const EdgeInsets.only(right: 10),
                               child: Image.asset(
                                 "assets/icons/ic_setting_coach_tips.webp",
-                                color: Colur.iconGrey,
-                                scale: 1.7,
+                                height: 20,
+                                width: 20,
                               ),
                             ),
                             Expanded(

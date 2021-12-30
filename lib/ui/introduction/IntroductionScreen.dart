@@ -2,13 +2,16 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:homeworkout_flutter/database/database_helper.dart';
 import 'package:homeworkout_flutter/database/tables/discover_plan_table.dart';
+import 'package:homeworkout_flutter/database/tables/reminder_table.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/exerciselist/ExerciseListScreen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
+import 'package:homeworkout_flutter/utils/utils.dart';
 
 import 'ChooseYourFocusAreaScreen.dart';
 import 'GenderSelectionScreen.dart';
@@ -43,6 +46,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
   String?  prefActivityLevel;
   bool? isPlanReady = false;
   DiscoverPlanTable? randomPlanData;
+  List<ReminderTable>? reminderList;
 
   @override
   void initState() {
@@ -51,7 +55,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
     super.initState();
   }
 
-  _getPrefData() {
+  _getPrefData() async{
     prefChooseYourFocusAreaList.clear();
     var prefChooseYourFocusAreaValue = Preference.shared.getString(Constant.SELECTED_YOUR_FOCUS_AREA) ?? [].toString();
     prefChooseYourFocusAreaList = json.decode(prefChooseYourFocusAreaValue);
@@ -68,6 +72,9 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
 
 
     prefHowManyPushUps = Preference.shared.getString(Constant.SELECTED_HOW_MANY_PUSH_UPS) ?? "Beginner";
+
+    reminderList = await DataBaseHelper().getReminderData();
+    setState(() {  });
   }
 
   @override
@@ -96,7 +103,6 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
           child: Column(
             children: [
               _topBar(),
-              //_titleWidget(),
               Expanded(
                 child: Center(
                   child: PageView(
@@ -218,7 +224,9 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                         setState(() {
                           randomPlanData = value;
                         });
-                      }),
+                      },
+                          reminderList
+                      ),
                     ],
                   ),
                 ),
@@ -306,6 +314,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
 
                 InkWell(
                   onTap: () {
+                    Utils.saveReminder(reminderList: reminderList);
                     Preference.shared.setBool(Constant.PREF_INTRODUCTION_FINISH, true);
                     Navigator.pushNamedAndRemoveUntil(
                         context, "/training", (route) => false);
@@ -361,6 +370,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
               }else if (currentPageIndex == 5) {
                 Preference.shared.setString(Constant.SELECTED_ACTIVITY_LEVEL, prefActivityLevel!);
               } else if (currentPageIndex == 8) {
+                Utils.saveReminder(reminderList: reminderList);
                 Preference.shared.setBool(Constant.PREF_INTRODUCTION_FINISH, true);
                 Navigator.push(
                     context,
@@ -408,6 +418,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
           visible: isPlanReady!,
           child: InkWell(
             onTap:() {
+              Utils.saveReminder(reminderList: reminderList);
               Preference.shared.setBool(Constant.PREF_INTRODUCTION_FINISH, true);
               Navigator.pushNamedAndRemoveUntil(
                   context, "/training", (route) => false);
@@ -426,5 +437,6 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
       ],
     );
   }
+
 
 }

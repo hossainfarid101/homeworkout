@@ -314,11 +314,12 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
             children: [
               //========duration=======
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
                     "assets/icons/ic_workout_time.webp",
-                    scale: 1.2,
-                    color: Colur.blue,
+                    height: 20,
+                    width: 20,
                   ),
                   SizedBox(
                     width: 10,
@@ -341,8 +342,8 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
                 children: [
                   Image.asset(
                     "assets/icons/ic_workout_calories.webp",
-                    scale: 1.2,
-                    color: Colur.orange,
+                    height: 20,
+                    width: 20,
                   ),
                   SizedBox(
                     width: 10,
@@ -452,47 +453,52 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
                                 //========duration=======
                                 Image.asset(
                                   "assets/icons/ic_workout_time.webp",
-                                  scale: 1.2,
-                                  color: Colur.blue,
+                                  height: 20,
+                                  width: 20,
                                 ),
                                 SizedBox(
-                                  width: 10,
+                                  width: 5,
                                 ),
-                                Text(
-                                    /*calculateDuration(currentWeekHistoryData[index].HDuration!)*/
-                                    Utils.secondToMMSSFormat(int.parse(
-                                        arrHistoryDetail[index]
-                                            .duration
-                                            .toString())),
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      color: Colur.black,
-                                      fontSize: 13,
-                                    )),
+                                Container(
+                                  margin: const EdgeInsets.only(top: 3.5),
+                                  child: Text(
+                                      /*calculateDuration(currentWeekHistoryData[index].HDuration!)*/
+                                      Utils.secondToMMSSFormat(int.parse(
+                                          arrHistoryDetail[index]
+                                              .duration
+                                              .toString())),
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        color: Colur.black,
+                                        fontSize: 13,
+                                      )),
+                                ),
                                 SizedBox(
                                   width: 15,
                                 ),
                                 //=========calories=========
                                 Image.asset(
                                   "assets/icons/ic_workout_calories.webp",
-                                  scale: 1.2,
-                                  color: Colur.orange,
+                                  height: 20,
+                                  width: 20,
                                 ),
                                 SizedBox(
-                                  width: 10,
+                                  width: 5,
                                 ),
-                                Text(
-                                    /*currentWeekHistoryData[index].HBurnKcal! + " " + Languages.of(context)!.txtKcal*/
-                                    arrHistoryDetail[index]
-                                            .burnKcal
-                                            .toString() +
-                                        " " +
-                                        Languages.of(context)!.txtKcal,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      color: Colur.black,
-                                      fontSize: 13,
-                                    )),
+                                Container(
+                                  margin: const EdgeInsets.only(top: 3.5),
+                                  child: Text(
+                                      arrHistoryDetail[index]
+                                              .burnKcal
+                                              .toString() +
+                                          " " +
+                                          Languages.of(context)!.txtKcal,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        color: Colur.black,
+                                        fontSize: 13,
+                                      )),
+                                ),
                               ],
                             ),
                           ],

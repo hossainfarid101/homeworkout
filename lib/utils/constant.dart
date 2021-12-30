@@ -145,13 +145,13 @@ class Constant {
   static  bool isSettingsScreen = false;
 
   static List<MultiSelectDialogItem> daysList = [
-    MultiSelectDialogItem("1", DateFormat.EEEE(getLocale().languageCode).dateSymbols.WEEKDAYS[0]),
-    MultiSelectDialogItem("2", DateFormat.EEEE(getLocale().languageCode).dateSymbols.WEEKDAYS[1]),
-    MultiSelectDialogItem("3", DateFormat.EEEE(getLocale().languageCode).dateSymbols.WEEKDAYS[2]),
-    MultiSelectDialogItem("4", DateFormat.EEEE(getLocale().languageCode).dateSymbols.WEEKDAYS[3]),
-    MultiSelectDialogItem("5", DateFormat.EEEE(getLocale().languageCode).dateSymbols.WEEKDAYS[4]),
-    MultiSelectDialogItem("6", DateFormat.EEEE(getLocale().languageCode).dateSymbols.WEEKDAYS[5]),
-    MultiSelectDialogItem("7", DateFormat.EEEE(getLocale().languageCode).dateSymbols.WEEKDAYS[6]),
+    MultiSelectDialogItem("1", DateFormat.EEEE(getLocale().languageCode).dateSymbols.WEEKDAYS[1]),
+    MultiSelectDialogItem("2", DateFormat.EEEE(getLocale().languageCode).dateSymbols.WEEKDAYS[2]),
+    MultiSelectDialogItem("3", DateFormat.EEEE(getLocale().languageCode).dateSymbols.WEEKDAYS[3]),
+    MultiSelectDialogItem("4", DateFormat.EEEE(getLocale().languageCode).dateSymbols.WEEKDAYS[4]),
+    MultiSelectDialogItem("5", DateFormat.EEEE(getLocale().languageCode).dateSymbols.WEEKDAYS[5]),
+    MultiSelectDialogItem("6", DateFormat.EEEE(getLocale().languageCode).dateSymbols.WEEKDAYS[6]),
+    MultiSelectDialogItem("7", DateFormat.EEEE(getLocale().languageCode).dateSymbols.WEEKDAYS[0]),
   ];
   static const String emailPath = 'fitnessentertainmentapps@gmail.com';
 
