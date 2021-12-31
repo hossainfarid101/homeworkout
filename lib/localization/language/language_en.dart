@@ -587,7 +587,7 @@ class LanguageEn extends Languages {
   String get txtUnlimitedWorkout => "Unlimited Workout plans";
 
   @override
-  String get txtExitMessage => "Press back twice to exit";
+  String get txtExitMessage => "Tap again to exit";
 
   @override
   String get txtWarningForBMIDialog => "Please enter height and weight.";

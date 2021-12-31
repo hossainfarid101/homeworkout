@@ -14,6 +14,8 @@ import 'package:homeworkout_flutter/ui/report/report_screen.dart';
 import 'package:homeworkout_flutter/ui/settings/settings_screen.dart';
 import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
 import 'package:homeworkout_flutter/ui/workoutComplete/workout_complete_screen.dart';
+import 'package:homeworkout_flutter/utils/AppLifecycleReactor.dart';
+import 'package:homeworkout_flutter/utils/AppOpenAdManager.dart';
 import 'package:homeworkout_flutter/utils/Debug.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
@@ -24,6 +26,7 @@ import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 import 'package:in_app_purchase_ios/store_kit_wrappers.dart';
+
 
 import 'inapppurchase/InAppPurchaseHelper.dart';
 import 'localization/locale_constant.dart';
@@ -57,8 +60,15 @@ class ReceivedNotification {
 String? selectedNotificationPayload;
 
 Future<void> main() async {
+
+
   WidgetsFlutterBinding.ensureInitialized();
-  MobileAds.instance.initialize();
+  MobileAds.instance.initialize().then((value) {
+    MobileAds.instance.updateRequestConfiguration(
+      //Add more configs
+      RequestConfiguration(testDeviceIds: []),
+    );
+  });
   await Preference().instance();
   InAppPurchaseAndroidPlatformAddition.enablePendingPurchases();
 
@@ -143,6 +153,8 @@ class _MyAppState extends State<MyApp> {
   Locale? _locale;
   bool isFirstTimeUser = true;
 
+  late AppLifecycleReactor _appLifecycleReactor;
+
   void setLocale(Locale locale) {
     setState(() {
       _locale = locale;
@@ -158,6 +170,12 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     isFirstTime();
+
+    AppOpenAdManager appOpenAdManager = AppOpenAdManager()..loadAd();
+    _appLifecycleReactor = AppLifecycleReactor(
+        appOpenAdManager: appOpenAdManager);
+
+    _appLifecycleReactor.listenToAppStateChanges();
     super.initState();
   }
 

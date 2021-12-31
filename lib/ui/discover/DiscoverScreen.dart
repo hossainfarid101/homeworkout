@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -101,7 +102,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
 
   void _createRewardedAd() {
     RewardedAd.load(
-        adUnitId: RewardedAd.testAdUnitId,
+        adUnitId: AdHelper.rewardedAdUnitId,
         request: request,
         rewardedAdLoadCallback: RewardedAdLoadCallback(
           onAdLoaded: (RewardedAd ad) {
@@ -257,43 +258,47 @@ class _DiscoverScreenState extends State<DiscoverScreen>
               )),
           backgroundColor: Colur.white,
           drawer: DrawerMenu(),
-          body: Column(
-            children: [
-              _topBar(),
-              _divider(),
-              Expanded(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.only(top: 25.0, bottom: 50.0),
-                  child: Column(
-                    children: [
-                      _discoverCard(),
-                      _textPicksForYou(),
-                      _picksForYouList(),
-                      _bestQuarantineWorkOut(),
-                      _textForBeginners(),
-                      _forBeginnersList(),
-                      _textFastWorkout(),
-                      _fastWorkoutList(),
-                      _textChallenge(),
-                      _challengeList(),
-                      _textWithEquipment(),
-                      _cardWithEquipment(),
-                      _textSleep(),
-                      _sleepList(),
-                      _textBodyFocus(),
-                      _bodyFocusList(),
-                    ],
+          body: SafeArea(
+            top: false,
+            bottom: Platform.isAndroid ? true : false,
+            child: Column(
+              children: [
+                _topBar(),
+                _divider(),
+                Expanded(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.only(top: 25.0, bottom: 50.0),
+                    child: Column(
+                      children: [
+                        _discoverCard(),
+                        _textPicksForYou(),
+                        _picksForYouList(),
+                        _bestQuarantineWorkOut(),
+                        _textForBeginners(),
+                        _forBeginnersList(),
+                        _textFastWorkout(),
+                        _fastWorkoutList(),
+                        _textChallenge(),
+                        _challengeList(),
+                        _textWithEquipment(),
+                        _cardWithEquipment(),
+                        _textSleep(),
+                        _sleepList(),
+                        _textBodyFocus(),
+                        _bodyFocusList(),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              (_isBottomBannerAdLoaded && !Utils.isPurchased())
-                  ? Container(
-                      height: _bottomBannerAd.size.height.toDouble(),
-                      width: _bottomBannerAd.size.width.toDouble(),
-                      child: AdWidget(ad: _bottomBannerAd),
-                    )
-                  : Container()
-            ],
+                (_isBottomBannerAdLoaded && !Utils.isPurchased())
+                    ? Container(
+                        height: _bottomBannerAd.size.height.toDouble(),
+                        width: _bottomBannerAd.size.width.toDouble(),
+                        child: AdWidget(ad: _bottomBannerAd),
+                      )
+                    : Container()
+              ],
+            ),
           ),
         ),
       ),

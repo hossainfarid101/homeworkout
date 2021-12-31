@@ -32,11 +32,44 @@ class AdHelper {
   }
 
   static String get nativeAdUnitId {
-    if (Platform.isAndroid) {
-      return 'ca-app-pub-3940256099942544/2247696110';
-    } else if (Platform.isIOS) {
-      return 'ca-app-pub-3940256099942544/3986624511';
+    if (Debug.GOOGLE_AD) {
+      if (Platform.isAndroid) {
+        return 'ca-app-pub-3940256099942544/2247696110';
+      } else if (Platform.isIOS) {
+        return 'ca-app-pub-3940256099942544/3986624511';
+      } else {
+        throw new UnsupportedError("Unsupported platform");
+      }
+    } else {
+      return "";
     }
-    throw new UnsupportedError("Unsupported platform");
+  }
+
+  static String get rewardedAdUnitId {
+    if (Debug.GOOGLE_AD) {
+      if (Platform.isAndroid) {
+        return 'ca-app-pub-3940256099942544/5224354917';
+      } else if (Platform.isIOS) {
+        return 'ca-app-pub-3940256099942544/1712485313';
+      } else {
+        throw new UnsupportedError("Unsupported platform");
+      }
+    } else {
+      return "";
+    }
+  }
+
+  static String get appOpenAdUnitId {
+    if (Debug.GOOGLE_AD) {
+      if (Platform.isAndroid) {
+        return 'ca-app-pub-3940256099942544/3419835294';
+      } else if (Platform.isIOS) {
+        return 'ca-app-pub-3940256099942544/5662855259';
+      } else {
+        throw new UnsupportedError("Unsupported platform");
+      }
+    } else {
+      return "";
+    }
   }
 }

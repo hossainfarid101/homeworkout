@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:homeworkout_flutter/database/model/DiscoverSingleExerciseData.dart';
 import 'package:homeworkout_flutter/database/model/ExerciseListData.dart';
 import 'package:homeworkout_flutter/database/model/WeeklyDayData.dart';
@@ -12,6 +14,7 @@ import 'package:homeworkout_flutter/database/tables/discover_plan_table.dart';
 import 'package:homeworkout_flutter/database/tables/home_plan_table.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/pause/pause_screen.dart';
+import 'package:homeworkout_flutter/utils/ad_helper.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
@@ -70,8 +73,12 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
 
   int countOfImages = 0;
 
+  late NativeAd _nativeAd;
+  bool _isNativeAdLoaded = false;
+
   @override
   void initState() {
+    _createNativeAd();
     _getPreference();
     _pointerValueInt = trainingRestTime!;
     _getLastPosition();
@@ -146,6 +153,26 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
     super.dispose();
   }
 
+  void _createNativeAd() {
+    _nativeAd = NativeAd(
+      adUnitId: AdHelper.nativeAdUnitId,
+      request: AdRequest(),
+      factoryId: 'listTile',
+      listener: NativeAdListener(
+        onAdLoaded: (Ad ad) {
+          setState(() {
+            _isNativeAdLoaded = true;
+          });
+        },
+        onAdFailedToLoad: (Ad ad, LoadAdError error) {
+          _createNativeAd();
+          ad.dispose();
+        },
+      ),
+    );
+    _nativeAd.load();
+  }
+
   void _startTimer() {
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       if (_pointerValueInt! > 0) {
@@ -200,9 +227,20 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
               )),
           backgroundColor: Colur.blueGradient1,
           body: SafeArea(
+            top: false,
+            bottom: Platform.isAndroid ? true : false,
             child: Container(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  (_isNativeAdLoaded && !Utils.isPurchased())
+                      ? Container(
+                      margin: EdgeInsets.only(top: 15, bottom: 7.5),
+                      width: double.infinity,
+                      height: 250,
+                      child: AdWidget(ad: _nativeAd)
+                  ) : Container(),
+
                   _widgetCenterTimer(),
                   _widgetBottomExe(),
                 ],
@@ -217,7 +255,7 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
   _widgetCenterTimer() {
     return Expanded(
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 30.0),
+        margin: const EdgeInsets.only(left: 30.0, right: 30.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

@@ -18,6 +18,8 @@ import 'package:homeworkout_flutter/ui/videoAnimation/video_animation_screen.dar
 import 'package:homeworkout_flutter/utils/ad_helper.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
+import 'package:homeworkout_flutter/utils/debug.dart';
+import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 
 class PauseScreen extends StatefulWidget {
@@ -68,6 +70,84 @@ class _PauseScreenState extends State<PauseScreen>
   late BannerAd _bottomBannerAd;
   bool _isBottomBannerAdLoaded = false;
 
+  int? _interstitialCount;
+  InterstitialAd? _interstitialAd;
+
+  void _createInterstitialAd() {
+    if (Debug.GOOGLE_AD) {
+      InterstitialAd.load(
+        adUnitId: AdHelper.interstitialAdUnitId,
+        request: AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: (InterstitialAd ad) {
+            _interstitialAd = ad;
+            Preference.shared.setInt(Preference.INTERSTITIAL_AD_COUNT_QUIT, _interstitialCount!+1);
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            _interstitialAd = null;
+            _createInterstitialAd();
+          },
+        ),
+      );
+    }
+  }
+  void _showInterstitialAd() {
+    if (_interstitialAd != null && _interstitialCount! % 2 != 0 ) {
+      _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+        onAdDismissedFullScreenContent: (InterstitialAd ad) {
+          ad.dispose();
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ExerciseListScreen(
+                      fromPage: widget.fromPage,
+                      planName: widget.planName,
+                      dayName: widget.dayName,
+                      weekName: widget.weekName,
+                      discoverPlanTable: widget.discoverPlanTable,
+                      homePlanTable: widget.homePlanTable,
+                      weeklyDayData: widget.weeklyDayData,
+                      isSubPlan: widget.isSubPlan,
+                      isFromOnboarding: widget.isFromOnboarding)),
+                  (route) => false);
+        },
+        onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
+          ad.dispose();
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ExerciseListScreen(
+                      fromPage: widget.fromPage,
+                      planName: widget.planName,
+                      dayName: widget.dayName,
+                      weekName: widget.weekName,
+                      discoverPlanTable: widget.discoverPlanTable,
+                      homePlanTable: widget.homePlanTable,
+                      weeklyDayData: widget.weeklyDayData,
+                      isSubPlan: widget.isSubPlan,
+                      isFromOnboarding: widget.isFromOnboarding)),
+                  (route) => false);
+        },
+      );
+      _interstitialAd!.show();
+    } else {
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ExerciseListScreen(
+                  fromPage: widget.fromPage,
+                  planName: widget.planName,
+                  dayName: widget.dayName,
+                  weekName: widget.weekName,
+                  discoverPlanTable: widget.discoverPlanTable,
+                  homePlanTable: widget.homePlanTable,
+                  weeklyDayData: widget.weeklyDayData,
+                  isSubPlan: widget.isSubPlan,
+                  isFromOnboarding: widget.isFromOnboarding)),
+              (route) => false);
+    }
+  }
+
   void _createBottomBannerAd() {
     _bottomBannerAd = BannerAd(
       adUnitId: AdHelper.bannerAdUnitId,
@@ -89,6 +169,8 @@ class _PauseScreenState extends State<PauseScreen>
 
   @override
   void initState() {
+    _interstitialCount = Preference.shared.getInt(Preference.INTERSTITIAL_AD_COUNT_QUIT) ?? 1;
+    _createInterstitialAd();
     _createBottomBannerAd();
     _setImageRotation(widget.index!);
     super.initState();
@@ -192,20 +274,25 @@ class _PauseScreenState extends State<PauseScreen>
   _quitBtn(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ExerciseListScreen(
-                    fromPage: widget.fromPage,
-                    planName: widget.planName,
-                    dayName: widget.dayName,
-                    weekName: widget.weekName,
-                    discoverPlanTable: widget.discoverPlanTable,
-                    homePlanTable: widget.homePlanTable,
-                    weeklyDayData: widget.weeklyDayData,
-                    isSubPlan: widget.isSubPlan,
-                    isFromOnboarding: widget.isFromOnboarding)),
-            (route) => false);
+        if (Debug.GOOGLE_AD) {
+          _showInterstitialAd();
+        } else {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ExerciseListScreen(
+                      fromPage: widget.fromPage,
+                      planName: widget.planName,
+                      dayName: widget.dayName,
+                      weekName: widget.weekName,
+                      discoverPlanTable: widget.discoverPlanTable,
+                      homePlanTable: widget.homePlanTable,
+                      weeklyDayData: widget.weeklyDayData,
+                      isSubPlan: widget.isSubPlan,
+                      isFromOnboarding: widget.isFromOnboarding)),
+                  (route) => false);
+        }
+
       },
       child: Container(
         height: 80,

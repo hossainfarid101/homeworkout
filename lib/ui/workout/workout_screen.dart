@@ -97,6 +97,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
   int? trainingRestTime;
   int? lastPosition = 0;
   FlutterTts flutterTts = FlutterTts();
+
   InterstitialAd? _interstitialAd;
 
   int? _interstitialCount;
@@ -110,7 +111,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (InterstitialAd ad) {
             _interstitialAd = ad;
-            Preference.shared.setInt(Preference.INTERSTITIAL_AD_COUNT, _interstitialCount!+1);
+            Preference.shared.setInt(Preference.INTERSTITIAL_AD_COUNT_COMPLETE, _interstitialCount!+1);
           },
           onAdFailedToLoad: (LoadAdError error) {
             _interstitialAd = null;
@@ -1308,7 +1309,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
   }
 
   _getPreference() {
-    _interstitialCount = Preference.shared.getInt(Preference.INTERSTITIAL_AD_COUNT) ?? 1;
+    _interstitialCount = Preference.shared.getInt(Preference.INTERSTITIAL_AD_COUNT_COMPLETE) ?? 1;
     countDownDuration =
         Preference.shared.getInt(Preference.countdownTime) ?? 10;
 

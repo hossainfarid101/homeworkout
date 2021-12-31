@@ -87,36 +87,18 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
   List<WeekDayData>? weeklyDataList = [];
   var totalCompleteDays = 1;
 
-  late BannerAd _bottomBannerAd;
-  bool _isBottomBannerAdLoaded = false;
+
 
   late NativeAd _nativeAd;
   bool _isNativeAdLoaded = false;
 
-  void _createBottomBannerAd() {
-    _bottomBannerAd = BannerAd(
-      adUnitId: AdHelper.bannerAdUnitId,
-      size: AdSize.banner,
-      request: AdRequest(),
-      listener: BannerAdListener(
-        onAdLoaded: (_) {
-          setState(() {
-            _isBottomBannerAdLoaded = true;
-          });
-        },
-        onAdFailedToLoad: (ad, error) {
-          ad.dispose();
-        },
-      ),
-    );
-    _bottomBannerAd.load();
-  }
+
 
   void _createNativeAd() {
     _nativeAd = NativeAd(
       adUnitId: AdHelper.nativeAdUnitId,
       request: AdRequest(),
-      factoryId: 'adFactoryExample',
+      factoryId: 'listTile',
       listener: NativeAdListener(
         onAdLoaded: (Ad ad) {
           setState(() {
@@ -147,13 +129,12 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
       });
     });
     _createNativeAd();
-    _createBottomBannerAd();
     super.initState();
   }
 
   @override
   void dispose() {
-    _bottomBannerAd.dispose();
+    _nativeAd.dispose();
     super.dispose();
   }
 
@@ -181,87 +162,89 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                 elevation: 0,
               )),
           backgroundColor: Colur.iconGreyBg,
-          body: Stack(
-            children: [
-              GestureDetector(
-                onTap: () => FocusScope.of(context).unfocus(),
-                child: NestedScrollView(
-                  headerSliverBuilder:
-                      (BuildContext context, bool innerBoxIsScrolled) {
-                    return <Widget>[
-                      SliverAppBar(
-                        elevation: 2.0,
-                        expandedHeight: 350,
-                        pinned: true,
-                        backgroundColor: Colur.black,
-                        leading: InkWell(
-                          onTap: () {
-                            _moverWorkoutHistoryScreen();
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                top: 15.0,
-                                bottom: 15.0,
-                                left: 15.0,
-                                right: 15.0),
-                            child: Image.asset(
-                              'assets/icons/ic_back.webp',
-                              color: Colur.white,
-                            ),
-                          ),
-                        ),
-                        flexibleSpace: _sliverHeader(context),
-                      )
-                    ];
-                  },
-                  body: Container(
-                      color: Colur.grayDivider.withOpacity(0.5),
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  Visibility(
-                                    visible: widget.fromPage ==
-                                        Constant.PAGE_DAYS_STATUS,
-                                    child: _buildWeek(context),
-                                  ),
-                                  weightWidget(),
-                                  bmiWidget(fullWidth),
-
-                                  (_isNativeAdLoaded && !Utils.isPurchased()) ? Container(
-                                      width: double.infinity, height: 350, child: AdWidget(ad: _nativeAd)) : Container(),
-
-                                  iFeelWidget(),
-                                  nextButtonWidget(fullWidth)
-                                ],
+          body: SafeArea(
+            top: false,
+            bottom: Platform.isAndroid ? true : false,
+            child: Stack(
+              children: [
+                GestureDetector(
+                  onTap: () => FocusScope.of(context).unfocus(),
+                  child: NestedScrollView(
+                    headerSliverBuilder:
+                        (BuildContext context, bool innerBoxIsScrolled) {
+                      return <Widget>[
+                        SliverAppBar(
+                          elevation: 2.0,
+                          expandedHeight: 350,
+                          pinned: true,
+                          backgroundColor: Colur.black,
+                          leading: InkWell(
+                            onTap: () {
+                              _moverWorkoutHistoryScreen();
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 15.0,
+                                  bottom: 15.0,
+                                  left: 15.0,
+                                  right: 15.0),
+                              child: Image.asset(
+                                'assets/icons/ic_back.webp',
+                                color: Colur.white,
                               ),
                             ),
                           ),
-                          (_isBottomBannerAdLoaded && !Utils.isPurchased())
-                              ? Container(
-                                  height:
-                                      _bottomBannerAd.size.height.toDouble(),
-                                  width: _bottomBannerAd.size.width.toDouble(),
-                                  child: AdWidget(ad: _bottomBannerAd),
-                                )
-                              : Container()
-                        ],
-                      )),
-                ),
-              ),
-              Visibility(
-                visible: isAnimation,
-                child: SafeArea(
-                  child: Container(
-                    margin: EdgeInsets.only(top: 55),
-                    child: Lottie.asset('assets/animations/congrats3.json',
-                        repeat: false, alignment: Alignment.topCenter),
+                          flexibleSpace: _sliverHeader(context),
+                        )
+                      ];
+                    },
+                    body: Container(
+                        color: Colur.grayDivider.withOpacity(0.5),
+                        child: Column(
+                          children: [
+                            Expanded(
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    Visibility(
+                                      visible: widget.fromPage ==
+                                          Constant.PAGE_DAYS_STATUS,
+                                      child: _buildWeek(context),
+                                    ),
+                                    weightWidget(),
+                                    bmiWidget(fullWidth),
+
+                                    (_isNativeAdLoaded && !Utils.isPurchased())
+                                        ? Container(
+                                          margin: EdgeInsets.only(top: 7.5, bottom: 7.5),
+                                          width: double.infinity,
+                                          height: 250,
+                                          child: AdWidget(ad: _nativeAd)
+                                       ) : Container(),
+
+                                    iFeelWidget(),
+                                    nextButtonWidget(fullWidth)
+                                  ],
+                                ),
+                              ),
+                            ),
+
+                          ],
+                        )),
                   ),
                 ),
-              ),
-            ],
+                Visibility(
+                  visible: isAnimation,
+                  child: SafeArea(
+                    child: Container(
+                      margin: EdgeInsets.only(top: 55),
+                      child: Lottie.asset('assets/animations/congrats3.json',
+                          repeat: false, alignment: Alignment.topCenter),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

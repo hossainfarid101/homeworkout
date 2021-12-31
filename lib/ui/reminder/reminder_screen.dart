@@ -197,7 +197,7 @@ class _ReminderScreenState extends State<ReminderScreen>
   _reminderListWidget() {
     return Expanded(
       child: Container(
-        margin: const EdgeInsets.only(bottom: 70),
+        margin: const EdgeInsets.only(bottom: 40),
         child: ListView.builder(
           padding: EdgeInsets.zero,
           shrinkWrap: true,

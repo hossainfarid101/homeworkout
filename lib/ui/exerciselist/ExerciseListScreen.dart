@@ -96,7 +96,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (InterstitialAd ad) {
             _interstitialAd = ad;
-            Preference.shared.setInt(Preference.INTERSTITIAL_AD_COUNT, _interstitialCount!+1);
+            Preference.shared.setInt(Preference.INTERSTITIAL_AD_COUNT_START, _interstitialCount!+1);
           },
           onAdFailedToLoad: (LoadAdError error) {
             _interstitialAd = null;
@@ -150,7 +150,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
 
   @override
   void initState() {
-    _interstitialCount = Preference.shared.getInt(Preference.INTERSTITIAL_AD_COUNT) ?? 1;
+    _interstitialCount = Preference.shared.getInt(Preference.INTERSTITIAL_AD_COUNT_START) ?? 1;
     _scrollController = ScrollController();
     _scrollController!.addListener(_scrollListener);
     _getDataFromDatabase();

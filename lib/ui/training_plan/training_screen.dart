@@ -57,6 +57,9 @@ class _TrainingScreenState extends State<TrainingScreen>
   late BannerAd _bottomBannerAd;
   bool _isBottomBannerAdLoaded = false;
 
+  late NativeAd _nativeAd;
+  bool _isNativeAdLoaded = false;
+
   void _createBottomBannerAd() {
     _bottomBannerAd = BannerAd(
       adUnitId: AdHelper.bannerAdUnitId,
@@ -92,6 +95,7 @@ class _TrainingScreenState extends State<TrainingScreen>
   @override
   void initState() {
     _manageDrawer();
+    _createNativeAd();
     InAppPurchaseHelper().getAlreadyPurchaseItems(this);
     Preference.shared.setInt(Preference.DRAWER_INDEX, 0);
     _getPreference();
@@ -110,10 +114,31 @@ class _TrainingScreenState extends State<TrainingScreen>
     Constant.isTrainingScreen = true;
   }
 
+  void _createNativeAd() {
+    _nativeAd = NativeAd(
+      adUnitId: AdHelper.nativeAdUnitId,
+      request: AdRequest(),
+      factoryId: 'listTile',
+      listener: NativeAdListener(
+        onAdLoaded: (Ad ad) {
+          setState(() {
+            _isNativeAdLoaded = true;
+          });
+        },
+        onAdFailedToLoad: (Ad ad, LoadAdError error) {
+          _createNativeAd();
+          ad.dispose();
+        },
+      ),
+    );
+    _nativeAd.load();
+  }
+
   @override
   void dispose() {
     _scrollController!.removeListener(_scrollListener);
     _bottomBannerAd.dispose();
+    _nativeAd.dispose();
     super.dispose();
   }
 
@@ -127,7 +152,10 @@ class _TrainingScreenState extends State<TrainingScreen>
         ),
       ),
       child: WillPopScope(
-        onWillPop: onWillPop,
+        onWillPop: () async {
+          onWillPop();
+          return Future.value(false);
+        },
         child: Scaffold(
           drawer: DrawerMenu(),
           backgroundColor: Colur.iconGreyBg,
@@ -1260,7 +1288,7 @@ class _TrainingScreenState extends State<TrainingScreen>
     }
   }
 
-  Future<bool> onWillPop() {
+ /* Future<bool> onWillPop() {
     DateTime now = DateTime.now();
     if (currentBackPressTime == null ||
         now.difference(currentBackPressTime!) > Duration(seconds: 3)) {
@@ -1270,6 +1298,63 @@ class _TrainingScreenState extends State<TrainingScreen>
       return Future.value(false);
     }
     return Future.value(true);
+  }*/
+
+  onWillPop() {
+    return showModalBottomSheet(
+      isDismissible: true,
+      context: context,
+      builder: (BuildContext context) {
+        return WillPopScope(
+          onWillPop: () {
+            SystemNavigator.pop();
+            return Future.value(false);
+          },
+          child: Wrap(
+            children: [
+              SafeArea(
+                top: false,
+                bottom: Platform.isAndroid ? true : false,
+                child: Container(
+                  color: Colur.bg_white,
+                  child: Column(
+                    children: [
+                     Visibility(
+                        visible: _isNativeAdLoaded && !Utils.isPurchased(),
+                            child: Container(
+                              height: 250,
+                              margin: EdgeInsets.only(top: 15, bottom: 7.5),
+                              width: double.infinity,
+                              child: AdWidget(ad: _nativeAd)
+                            ),
+                          ) ,
+
+                      InkWell(
+                        onTap: () {
+                          SystemNavigator.pop();
+                        },
+                        child: Container(
+                          color: Colur.white,
+                          width: double.infinity,
+                          height: 50,
+                          child: Center(
+                            child: Text(
+                              Languages.of(context)!.txtExitMessage,
+                              style: TextStyle(
+                                color: Colur.black
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      });
   }
 
   @override

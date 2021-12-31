@@ -2,6 +2,8 @@ import UIKit
 import Flutter
 import StoreKit
 import AVFoundation
+import google_mobile_ads
+
 
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
@@ -18,6 +20,11 @@ import AVFoundation
     }
 
     GeneratedPluginRegistrant.register(with: self)
+    
+    let listTileFactory = ListTileNativeAdFactory()
+        FLTGoogleMobileAdsPlugin.registerNativeAdFactory(
+            self, factoryId: "listTile", nativeAdFactory: listTileFactory)
+    
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 }
