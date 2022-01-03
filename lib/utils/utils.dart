@@ -6,19 +6,16 @@ import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:homeworkout_flutter/database/tables/reminder_table.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/main.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
-import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 
-import 'ad_helper.dart';
 import 'constant.dart';
 
 class Utils {
@@ -174,7 +171,6 @@ class Utils {
   }
 
   static String getImageBannerForBodyFocusSubPlan(String planName){
-    Debug.printLog("getImageBannerForBodyFocusSubPlan==>> $planName");
     String imageName = "";
     if(planName == Constant.PLAN_7_MIN_BUTT_WORKOUT || planName == Constant.PLAN_7_MIN_ABS_WORKOUT){
       imageName = "ic_7_min_butt_banner.webp";
@@ -222,8 +218,8 @@ class Utils {
 
     pendingNoti.forEach((element) {
       if (element.payload == Constant.strExerciseReminder) {
-        Debug.printLog(
-            "Cancel Notification ::::::==> ${element.id}");
+
+
         flutterLocalNotificationsPlugin.cancel(element.id);
       }
 
@@ -235,7 +231,6 @@ class Utils {
       var hr = int.parse(element.time!.split(":")[0]);
       var min = int.parse(element.time!.split(":")[1]);
       selectedTime = TimeOfDay(hour: hr, minute: min);
-      Debug.printLog("selected days: $selectedDays");
 
       final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
 
@@ -261,10 +256,8 @@ class Utils {
   }
 
   static scheduledNotification(tz.TZDateTime scheduledDate, int notificationId) async {
-    Debug.printLog(
-        "Schedule Notification at ::::::==> ${scheduledDate.toIso8601String()}");
-    Debug.printLog(
-        "Schedule Notification at scheduledDate.millisecond::::::==> $notificationId");
+
+
 
     var titleText = "Exercise Reminder";
     var msg = "It's time to exercise.";

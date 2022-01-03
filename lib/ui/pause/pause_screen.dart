@@ -81,7 +81,8 @@ class _PauseScreenState extends State<PauseScreen>
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (InterstitialAd ad) {
             _interstitialAd = ad;
-            Preference.shared.setInt(Preference.INTERSTITIAL_AD_COUNT_QUIT, _interstitialCount!+1);
+            Preference.shared.setInt(
+                Preference.INTERSTITIAL_AD_COUNT_QUIT, _interstitialCount! + 1);
           },
           onAdFailedToLoad: (LoadAdError error) {
             _interstitialAd = null;
@@ -91,8 +92,9 @@ class _PauseScreenState extends State<PauseScreen>
       );
     }
   }
+
   void _showInterstitialAd() {
-    if (_interstitialAd != null && _interstitialCount! % 2 != 0 ) {
+    if (_interstitialAd != null && _interstitialCount! % 2 != 0) {
       _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
         onAdDismissedFullScreenContent: (InterstitialAd ad) {
           ad.dispose();
@@ -109,7 +111,7 @@ class _PauseScreenState extends State<PauseScreen>
                       weeklyDayData: widget.weeklyDayData,
                       isSubPlan: widget.isSubPlan,
                       isFromOnboarding: widget.isFromOnboarding)),
-                  (route) => false);
+              (route) => false);
         },
         onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
           ad.dispose();
@@ -126,7 +128,7 @@ class _PauseScreenState extends State<PauseScreen>
                       weeklyDayData: widget.weeklyDayData,
                       isSubPlan: widget.isSubPlan,
                       isFromOnboarding: widget.isFromOnboarding)),
-                  (route) => false);
+              (route) => false);
         },
       );
       _interstitialAd!.show();
@@ -144,7 +146,7 @@ class _PauseScreenState extends State<PauseScreen>
                   weeklyDayData: widget.weeklyDayData,
                   isSubPlan: widget.isSubPlan,
                   isFromOnboarding: widget.isFromOnboarding)),
-              (route) => false);
+          (route) => false);
     }
   }
 
@@ -169,7 +171,8 @@ class _PauseScreenState extends State<PauseScreen>
 
   @override
   void initState() {
-    _interstitialCount = Preference.shared.getInt(Preference.INTERSTITIAL_AD_COUNT_QUIT) ?? 1;
+    _interstitialCount =
+        Preference.shared.getInt(Preference.INTERSTITIAL_AD_COUNT_QUIT) ?? 1;
     _createInterstitialAd();
     _createBottomBannerAd();
     _setImageRotation(widget.index!);
@@ -215,21 +218,19 @@ class _PauseScreenState extends State<PauseScreen>
                   ),
                   Expanded(
                     child: Container(
-                      margin:
-                          const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 15, vertical: 5),
                       child: Column(
                         children: [
                           _pauseHeader(context),
                           _restartBtn(context),
                           _quitBtn(context),
                           _resumeBtn(context),
-                          Expanded(child: Container(
-
-                          )),
-
+                          Expanded(child: Container()),
                           (_isBottomBannerAdLoaded && !Utils.isPurchased())
                               ? Container(
-                                  height: _bottomBannerAd.size.height.toDouble(),
+                                  height:
+                                      _bottomBannerAd.size.height.toDouble(),
                                   width: _bottomBannerAd.size.width.toDouble(),
                                   child: AdWidget(ad: _bottomBannerAd),
                                 )
@@ -290,9 +291,8 @@ class _PauseScreenState extends State<PauseScreen>
                       weeklyDayData: widget.weeklyDayData,
                       isSubPlan: widget.isSubPlan,
                       isFromOnboarding: widget.isFromOnboarding)),
-                  (route) => false);
+              (route) => false);
         }
-
       },
       child: Container(
         height: 80,

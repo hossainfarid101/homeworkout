@@ -59,17 +59,4 @@ class AdHelper {
     }
   }
 
-  static String get appOpenAdUnitId {
-    if (Debug.GOOGLE_AD) {
-      if (Platform.isAndroid) {
-        return 'ca-app-pub-3940256099942544/3419835294';
-      } else if (Platform.isIOS) {
-        return 'ca-app-pub-3940256099942544/5662855259';
-      } else {
-        throw new UnsupportedError("Unsupported platform");
-      }
-    } else {
-      return "";
-    }
-  }
 }

@@ -12,7 +12,6 @@ import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/ad_helper.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
-import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 import 'package:intl/intl.dart';
@@ -215,7 +214,7 @@ class _HealthDataScreenState extends State<HealthDataScreen>
     ).then((value) {
       if (value != null) {
         _birthDate = DateFormat("yyyy-MM-dd").format(value);
-        Debug.printLog(_birthDate!);
+
         Preference.shared.setString(Preference.dateOfBirth, _birthDate!);
       }
       setState(() {
@@ -239,7 +238,7 @@ class _HealthDataScreenState extends State<HealthDataScreen>
                     groupValue: _gender!,
                     onChanged: (value) => setState(() {
                       _gender = value;
-                      Debug.printLog(_gender.toString());
+
                       if (_gender == Gender.male) {
                         Preference.shared.setBool(Preference.isMale, true);
                         Preference.shared.setString(

@@ -101,12 +101,10 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
         request: request,
         rewardedAdLoadCallback: RewardedAdLoadCallback(
           onAdLoaded: (RewardedAd ad) {
-            print('$ad loaded.');
             _rewardedAd = ad;
             _numRewardedLoadAttempts = 0;
           },
           onAdFailedToLoad: (LoadAdError error) {
-            print('RewardedAd failed to load: $error');
             _rewardedAd = null;
             _numRewardedLoadAttempts += 1;
             if (_numRewardedLoadAttempts <= maxFailedLoadAttempts) {
@@ -119,20 +117,16 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
   void _showRewardedAd() {
     if (_rewardedAd == null) {
       _startNextScreen();
-      print('Warning: attempt to show rewarded before loaded.');
+
       return;
     }
     _rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
-      onAdShowedFullScreenContent: (RewardedAd ad) =>
-          print('ad onAdShowedFullScreenContent.'),
       onAdDismissedFullScreenContent: (RewardedAd ad) {
-        print('$ad onAdDismissedFullScreenContent.');
         ad.dispose();
         _startNextScreen();
         _createRewardedAd();
       },
       onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error) {
-        print('$ad onAdFailedToShowFullScreenContent: $error');
         ad.dispose();
         _startNextScreen();
         _createRewardedAd();
@@ -140,9 +134,8 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
     );
 
     _rewardedAd!.setImmersiveMode(true);
-    _rewardedAd!.show(onUserEarnedReward: (RewardedAd ad, RewardItem reward) {
-      print('$ad with reward $RewardItem(${reward.amount}, ${reward.type}');
-    });
+    _rewardedAd!
+        .show(onUserEarnedReward: (RewardedAd ad, RewardItem reward) {});
     _rewardedAd = null;
   }
 

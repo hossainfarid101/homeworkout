@@ -8,7 +8,6 @@ import 'package:homeworkout_flutter/database/tables/weight_table.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
-import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 import 'package:intl/intl.dart';
@@ -46,8 +45,6 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
         DateTime.now().year - 1, DateTime.now().month, DateTime.now().day);
     endDate = DateTime.now().add(Duration(days: 4));
     daysCount = endDate!.difference(startDate!).inDays;
-
-    Debug.printLog(DateFormat.yMd().format(_selectedDate));
 
     getDataFromDatabase();
 
@@ -255,16 +252,10 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                                 if (weightController.text == "")
                                   weightController.text = "0.0";
                                 if (isLsb! && !isKg!) {
-                                  Debug.printLog(
-                                      "Before converted value of weightController --> " +
-                                          weightController.text);
                                   weightController.text = Utils.lbToKg(
                                           double.parse(
                                               weightController.text.toString()))
                                       .toString();
-                                  Debug.printLog(
-                                      "After converted value of weightController in to LB to KG --> " +
-                                          weightController.text);
                                 }
 
                                 isKg = true;
@@ -302,16 +293,10 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                                 if (weightController.text == "")
                                   weightController.text = "0.0";
                                 if (isKg! && !isLsb!) {
-                                  Debug.printLog(
-                                      "Before converted value of weightController --> " +
-                                          weightController.text);
                                   weightController.text = Utils.kgToLb(
                                           double.parse(
                                               weightController.text.toString()))
                                       .toString();
-                                  Debug.printLog(
-                                      "After converted value of weightController in to KG to LB --> " +
-                                          weightController.text);
                                 }
 
                                 isKg = false;

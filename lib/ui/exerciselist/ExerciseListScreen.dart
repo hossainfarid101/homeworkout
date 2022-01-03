@@ -96,7 +96,8 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (InterstitialAd ad) {
             _interstitialAd = ad;
-            Preference.shared.setInt(Preference.INTERSTITIAL_AD_COUNT_START, _interstitialCount!+1);
+            Preference.shared.setInt(Preference.INTERSTITIAL_AD_COUNT_START,
+                _interstitialCount! + 1);
           },
           onAdFailedToLoad: (LoadAdError error) {
             _interstitialAd = null;
@@ -150,7 +151,8 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
 
   @override
   void initState() {
-    _interstitialCount = Preference.shared.getInt(Preference.INTERSTITIAL_AD_COUNT_START) ?? 1;
+    _interstitialCount =
+        Preference.shared.getInt(Preference.INTERSTITIAL_AD_COUNT_START) ?? 1;
     _scrollController = ScrollController();
     _scrollController!.addListener(_scrollListener);
     _getDataFromDatabase();
@@ -263,7 +265,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
                                                       RegExp(r'^0+(?=.)'), '')
                                           : widget.discoverPlanTable!.planName!
                                               .toUpperCase(),
-                                  textAlign: TextAlign.center,
+                                  textAlign: TextAlign.left,
                                   style: TextStyle(
                                     color: Colur.white,
                                     fontWeight: FontWeight.w700,
@@ -827,7 +829,6 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
         ),
         onPressed: () {
           _showInterstitialAd();
-
         },
       ),
     );
@@ -866,8 +867,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
                 isSubPlan: widget.isSubPlan,
                 weeklyDayData: widget.weeklyDayData,
                 discoverPlanTable: widget.discoverPlanTable,
-                isFromOnboarding: widget.isFromOnboarding!))).then(
-        (value) {
+                isFromOnboarding: widget.isFromOnboarding!))).then((value) {
       setState(() {
         _getDataFromDatabase();
       });
@@ -924,7 +924,6 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
       totalSeconds = await DataBaseHelper().getTotalWorkoutMinutesForDiscover(
           widget.discoverPlanTable!.planId.toString());
     }
-    Debug.printLog("totalSeconds " + totalSeconds!.toString());
     totalMinutes = Duration(seconds: totalSeconds!).inMinutes;
   }
 

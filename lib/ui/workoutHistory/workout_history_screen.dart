@@ -15,7 +15,6 @@ import 'package:homeworkout_flutter/ui/report/report_screen.dart';
 import 'package:homeworkout_flutter/utils/ad_helper.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
-import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 import 'package:intl/intl.dart';
@@ -90,10 +89,6 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
         .format(startDateOfCurrentWeek);
     formatEndDateOfCurrentWeek =
         DateFormat.MMMd(getLocale().languageCode).format(endDateOfCurrentWeek);
-    Debug.printLog(formatStartDateOfCurrentWeek);
-    Debug.printLog(formatEndDateOfCurrentWeek);
-    Debug.printLog(startDateOfCurrentWeek.toString().split(" ")[0] +
-        endDateOfCurrentWeek.toString().split(" ")[0]);
 
     _createBottomBannerAd();
     super.initState();
@@ -569,28 +564,10 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
     setState(() {});
     historyWeekData.forEach((element) {
       element.arrHistoryDetail!.forEach((element1) {
-        Debug.printLog("History::Plan::==>  " +
-            "id: " +
-            element1.id.toString() +
-            "\t-\t" +
-            "day name: " +
-            element1.dayName.toString() +
-            "\t-\t" +
-            "table name: " +
-            element1.tableName! +
-            "\t-\t" +
-            "plan name: " +
-            element1.planName! +
-            "\t-\t" +
-            "plan id: " +
-            element1.planId!.toString());
-
         calendarDates.add(DateTime.parse(
             DateTime.parse(element1.dateTime!.split(" ")[0]).toString() + "Z"));
       });
     });
-
-    Debug.printLog(calendarDates.toString());
   }
 
   @override

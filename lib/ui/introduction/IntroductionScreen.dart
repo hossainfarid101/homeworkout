@@ -9,7 +9,6 @@ import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/exerciselist/ExerciseListScreen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
-import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 
@@ -32,9 +31,6 @@ class IntroductionScreen extends StatefulWidget {
 
 class _IntroductionScreenState extends State<IntroductionScreen> {
   PageController pageController = new PageController(initialPage: 0);
-
-  String? mainTitle;
-  String? subTitle;
 
   double? updateValue;
   int currentPageIndex = 0;
@@ -88,11 +84,6 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (mainTitle == null)
-      mainTitle = Languages.of(context)!.txtWhatsYourGender.toUpperCase();
-    if (subTitle == null)
-      subTitle = Languages.of(context)!.txtLetUsKnowYouBetter;
-
     return Theme(
       data: ThemeData(
         appBarTheme: AppBarTheme(
@@ -120,83 +111,6 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                       setState(() {
                         currentPageIndex = index;
                       });
-
-                      if (index == 0) {
-                        setState(() {
-                          mainTitle = Languages.of(context)!
-                              .txtWhatsYourGender
-                              .toUpperCase();
-                          subTitle =
-                              Languages.of(context)!.txtLetUsKnowYouBetter;
-                        });
-                      } else if (index == 1) {
-                        setState(() {
-                          mainTitle = Languages.of(context)!
-                              .txtPleaseChooseYourFocusArea
-                              .toUpperCase();
-                          subTitle = "";
-                        });
-                      } else if (index == 2) {
-                        setState(() {
-                          mainTitle = Languages.of(context)!
-                              .txtWhatAreYourMainGoals
-                              .toUpperCase();
-                          subTitle = "";
-                        });
-                      } else if (index == 3) {
-                        setState(() {
-                          mainTitle = Languages.of(context)!
-                              .txtWhatMotivatesYouTheMost
-                              .toUpperCase();
-                          subTitle = "";
-                        });
-                      } else if (index == 4) {
-                        setState(() {
-                          mainTitle = Languages.of(context)!
-                              .txtHowManyPushUpsCan
-                              .toUpperCase();
-                          subTitle = "";
-                        });
-                      } else if (index == 5) {
-                        setState(() {
-                          mainTitle = Languages.of(context)!
-                              .txtWhatsYourActivityLevel
-                              .toUpperCase();
-                          subTitle = "";
-                        });
-                      } else if (index == 6) {
-                        setState(() {
-                          mainTitle = Languages.of(context)!
-                              .txtSetWeeklyGoal
-                              .toUpperCase();
-                          subTitle =
-                              Languages.of(context)!.txtWeRecommendTraining;
-                        });
-                      } else if (index == 7) {
-                        setState(() {
-                          mainTitle = Languages.of(context)!
-                              .txtLetUsKnowYouBetter
-                              .toUpperCase();
-                          subTitle = Languages.of(context)!
-                              .txtLetUsKnowYouBetterToHelp;
-                        });
-                      } else if (index == 8) {
-                        setState(() {
-                          mainTitle = Languages.of(context)!
-                              .txtGeneratingThePlan
-                              .toUpperCase();
-                          subTitle =
-                              Languages.of(context)!.txtPreparingYourPlan;
-                        });
-                      } else if (index == 9) {
-                        setState(() {
-                          mainTitle = Languages.of(context)!
-                              .txtYourPlanIsReady
-                              .toUpperCase();
-                          subTitle =
-                              Languages.of(context)!.txtWeHaveSelectedThisPlan;
-                        });
-                      }
                     },
                     children: <Widget>[
                       GenderSelectionScreen(),
@@ -216,19 +130,6 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                       GeneratingThePlanScreen(isPlanReady, (value) {
                         setState(() {
                           isPlanReady = value;
-                          if (!isPlanReady!) {
-                            mainTitle = Languages.of(context)!
-                                .txtGeneratingThePlan
-                                .toUpperCase();
-                            subTitle =
-                                Languages.of(context)!.txtPreparingYourPlan;
-                          } else {
-                            mainTitle = Languages.of(context)!
-                                .txtYourPlanIsReady
-                                .toUpperCase();
-                            subTitle = Languages.of(context)!
-                                .txtWeHaveSelectedThisPlan;
-                          }
                         });
                       }, (value) {
                         setState(() {
@@ -352,7 +253,6 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                 Preference.shared.setString(Constant.SELECTED_MOTIVATES_YOU,
                     json.encode(prefMotivatesYouMostList));
               } else if (currentPageIndex == 4) {
-                Debug.printLog(prefHowManyPushUps!);
                 Preference.shared.setString(
                     Constant.SELECTED_HOW_MANY_PUSH_UPS, prefHowManyPushUps!);
               } else if (currentPageIndex == 5) {

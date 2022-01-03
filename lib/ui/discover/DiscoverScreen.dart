@@ -20,7 +20,6 @@ import 'package:homeworkout_flutter/ui/workoutHistory/workout_history_screen.dar
 import 'package:homeworkout_flutter/utils/ad_helper.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
-import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 
@@ -106,12 +105,10 @@ class _DiscoverScreenState extends State<DiscoverScreen>
         request: request,
         rewardedAdLoadCallback: RewardedAdLoadCallback(
           onAdLoaded: (RewardedAd ad) {
-            print('$ad loaded.');
             _rewardedAd = ad;
             _numRewardedLoadAttempts = 0;
           },
           onAdFailedToLoad: (LoadAdError error) {
-            print('RewardedAd failed to load: $error');
             _rewardedAd = null;
             _numRewardedLoadAttempts += 1;
             if (_numRewardedLoadAttempts <= maxFailedLoadAttempts) {
@@ -124,19 +121,15 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   void _showRewardedAd() {
     if (_rewardedAd == null) {
       _startNextScreen();
-      print('Warning: attempt to show rewarded before loaded.');
+
       return;
     }
     _rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
-      onAdShowedFullScreenContent: (RewardedAd ad) =>
-          print('ad onAdShowedFullScreenContent.'),
       onAdDismissedFullScreenContent: (RewardedAd ad) {
-        print('$ad onAdDismissedFullScreenContent.');
         ad.dispose();
         _createRewardedAd();
       },
       onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error) {
-        print('$ad onAdFailedToShowFullScreenContent: $error');
         ad.dispose();
         _startNextScreen();
         _createRewardedAd();
@@ -145,7 +138,6 @@ class _DiscoverScreenState extends State<DiscoverScreen>
 
     _rewardedAd!.setImmersiveMode(true);
     _rewardedAd!.show(onUserEarnedReward: (RewardedAd ad, RewardItem reward) {
-      print('$ad with reward $RewardItem(${reward.amount}, ${reward.type}');
       _startNextScreen();
       _createRewardedAd();
     });
@@ -324,7 +316,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
     var currDate = Utils.getCurrentDate();
     var strPlan =
         Preference.shared.getString(Constant.PREF_RANDOM_DISCOVER_PLAN) ?? "";
-    Debug.printLog("strPlan=>>>  " + strPlan.toString());
+
     if (lastDate.isNotEmpty && currDate == lastDate && strPlan.isNotEmpty) {
       randomPlanData = DiscoverPlanTable.fromJson(jsonDecode(strPlan));
     } else {
@@ -341,77 +333,56 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   _getTotalQuarantineWorkout() async {
     totalQuarantineWorkout =
         await DataBaseHelper().getTotalWorkoutQuarantineAtHome();
-    Debug.printLog(
-        "totalQuarantineWorkout==>> " + totalQuarantineWorkout.toString());
+
     setState(() {});
   }
 
   _getPicksForYouPlanData() async {
     picksForYouDiscoverPlanList =
         await DataBaseHelper().getPlanDataCatWise(Constant.catPickForYou);
-    picksForYouDiscoverPlanList.forEach((element) {
-      Debug.printLog(
-          "picksForYouHomePlanList==>> " + element.planName.toString());
-    });
+    picksForYouDiscoverPlanList.forEach((element) {});
     setState(() {});
   }
 
   _getForBeginnersPlanData() async {
     forBeginnerDiscoverPlanList =
         await DataBaseHelper().getPlanDataCatWise(Constant.catForBeginner);
-    forBeginnerDiscoverPlanList.forEach((element) {
-      Debug.printLog(
-          "_getForBeginnersPlanData==>> " + element.planName.toString());
-    });
+    forBeginnerDiscoverPlanList.forEach((element) {});
     setState(() {});
   }
 
   _getFastWorkoutPlanData() async {
     fastWorkoutDiscoverPlanList =
         await DataBaseHelper().getPlanDataCatWise(Constant.catFastWorkout);
-    fastWorkoutDiscoverPlanList.forEach((element) {
-      Debug.printLog(
-          "_getFastWorkoutPlanData==>> " + element.planName.toString());
-    });
+    fastWorkoutDiscoverPlanList.forEach((element) {});
     setState(() {});
   }
 
   _getChallengePlanData() async {
     challengeDiscoverPlanList =
         await DataBaseHelper().getPlanDataCatWise(Constant.catChallenge);
-    challengeDiscoverPlanList.forEach((element) {
-      Debug.printLog(
-          "_getChallengePlanData==>> " + element.planName.toString());
-    });
+    challengeDiscoverPlanList.forEach((element) {});
     setState(() {});
   }
 
   _getWithEquipmentPlanData() async {
     withEqipmentDiscoverPlanList =
         await DataBaseHelper().getPlanDataCatWise(Constant.catWithEquipment);
-    withEqipmentDiscoverPlanList.forEach((element) {
-      Debug.printLog(
-          "_getWithEqipmentPlanData==>> " + element.planName.toString());
-    });
+    withEqipmentDiscoverPlanList.forEach((element) {});
     setState(() {});
   }
 
   _getSleepPlanData() async {
     sleepDiscoverPlanList =
         await DataBaseHelper().getPlanDataCatWise(Constant.catSleep);
-    sleepDiscoverPlanList.forEach((element) {
-      Debug.printLog("_getSleepPlanData==>> " + element.planName.toString());
-    });
+    sleepDiscoverPlanList.forEach((element) {});
     setState(() {});
   }
 
   _getBodyFocusPlanData() async {
     bodyFocusDiscoverPlanList =
         await DataBaseHelper().getPlanDataCatWise(Constant.catBodyFocus);
-    bodyFocusDiscoverPlanList.forEach((element) {
-      Debug.printLog(
-          "_getBodyFocusPlanData==>> " + element.planName.toString());
-    });
+    bodyFocusDiscoverPlanList.forEach((element) {});
     setState(() {});
   }
 
@@ -465,6 +436,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                     child: Text(
                       (randomPlanData != null) ? randomPlanData!.planName! : "",
                       overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 24,
@@ -553,7 +525,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   _itemPicksForYouList(int index) {
     var firstCardPos = 0 + (2 * index);
     var secondCardPos = 1 + (2 * index);
-    Debug.printLog("first card: $firstCardPos \n second card: $secondCardPos");
+
     return Container(
       margin: EdgeInsets.only(
           left: 20.0,

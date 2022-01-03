@@ -9,7 +9,6 @@ import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/videoAnimation/video_animation_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
-import 'package:homeworkout_flutter/utils/debug.dart';
 
 class ExerciseDialog extends StatefulWidget {
   final List<WorkoutDetail>? workoutDetailList;
@@ -305,10 +304,7 @@ class _ExerciseDialogState extends State<ExerciseDialog>
         .where(
             (String key) => key.contains(_getImagePathFromList(index)! + "/"))
         .toList();
-    Debug.printLog("_getImageFromAssets==>>  " +
-        _getImagePathFromList(index)!.toString() +
-        "  " +
-        imagePaths.length.toString());
+
     countOfImages = imagePaths.length;
     setState(() {});
   }

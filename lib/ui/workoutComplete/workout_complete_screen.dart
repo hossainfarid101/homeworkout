@@ -22,7 +22,6 @@ import 'package:homeworkout_flutter/ui/workoutHistory/workout_history_screen.dar
 import 'package:homeworkout_flutter/utils/ad_helper.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
-import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 import 'package:intl/intl.dart';
@@ -87,12 +86,8 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
   List<WeekDayData>? weeklyDataList = [];
   var totalCompleteDays = 1;
 
-
-
   late NativeAd _nativeAd;
   bool _isNativeAdLoaded = false;
-
-
 
   void _createNativeAd() {
     _nativeAd = NativeAd(
@@ -213,22 +208,20 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                                     ),
                                     weightWidget(),
                                     bmiWidget(fullWidth),
-
                                     (_isNativeAdLoaded && !Utils.isPurchased())
                                         ? Container(
-                                          margin: EdgeInsets.only(top: 7.5, bottom: 7.5),
-                                          width: double.infinity,
-                                          height: 250,
-                                          child: AdWidget(ad: _nativeAd)
-                                       ) : Container(),
-
+                                            margin: EdgeInsets.only(
+                                                top: 7.5, bottom: 7.5),
+                                            width: double.infinity,
+                                            height: 250,
+                                            child: AdWidget(ad: _nativeAd))
+                                        : Container(),
                                     iFeelWidget(),
                                     nextButtonWidget(fullWidth)
                                   ],
                                 ),
                               ),
                             ),
-
                           ],
                         )),
                   ),
@@ -615,15 +608,10 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                           if (!isKg!) {
                             if (weightController.text == "")
                               weightController.text = "0.0";
-                            Debug.printLog(
-                                "Before converted value of weightController --> " +
-                                    weightController.text);
+
                             weightController.text = Utils.lbToKg(double.parse(
                                     weightController.text.toString()))
                                 .toString();
-                            Debug.printLog(
-                                "After converted value of weightController in to LB to KG --> " +
-                                    weightController.text);
                           }
                           setState(() {
                             isKg = true;
@@ -658,15 +646,10 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
                           if (!isLbs!) {
                             if (weightController.text == "")
                               weightController.text = "0.0";
-                            Debug.printLog(
-                                "Before converted value of weightController --> " +
-                                    weightController.text);
+
                             weightController.text = Utils.kgToLb(double.parse(
                                     weightController.text.toString()))
                                 .toString();
-                            Debug.printLog(
-                                "After converted value of weightController in to KG to LB --> " +
-                                    weightController.text);
                           }
                           setState(() {
                             isKg = false;
@@ -925,27 +908,20 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
     }
     double bmiVal = 0;
     bmiVal = ((pos * totalDiffForTwoPoint) / totalDiffInLoop) / 100;
-    Debug.printLog("bmiVal===>>  " + bmiVal.toString() + "  " + pos.toString());
     return fullWidth * (totalWidth + bmiVal);
   }
 
   setBmiCalculation() {
     var lastWeight = Preference.shared.getDouble(Preference.WEIGHT) ?? 0;
-    var lastFoot = Preference.shared.getDouble(Preference.HEIGHT_FT) ?? 0;
-    var lastInch = Preference.shared.getDouble(Preference.HEIGHT_IN) ?? 0;
     var heightCM = Preference.shared.getDouble(Preference.HEIGHT_CM) ?? 0;
 
     if (lastWeight != 0 && heightCM != 0) {
       bmi = double.parse(calculateBMI(lastWeight, heightCM));
-
-      Debug.printLog(
-          "BMI=>>>Well Done===>>>  ${bmi.toString()}   $lastWeight $lastFoot  $lastInch ");
     }
   }
 
   String calculateBMI(double weight, double height) {
     bmi = weight / pow(height / 100, 2);
-    Debug.printLog("====>BMI" + bmi!.toStringAsFixed(1));
     return bmi!.toStringAsFixed(1);
   }
 
@@ -1125,7 +1101,6 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
     var time = Preference.shared.getString(Preference.END_TIME) ??
         DateTime.now().toString();
     endTime = DateTime.parse(time);
-    Debug.printLog("end time ===> $endTime");
 
     if (bmi! < 15) {
       bmiColor = Colur.black;
@@ -1345,10 +1320,6 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
         totalCompleteDays++;
       }
     }
-    Debug.printLog(
-        "==========total complete days: $totalCompleteDays==========");
-    Debug.printLog(
-        "_getWeeklyData===>> ==>" + weeklyDataList!.length.toString());
     setState(() {});
   }
 }

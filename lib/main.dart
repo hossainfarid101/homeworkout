@@ -14,9 +14,6 @@ import 'package:homeworkout_flutter/ui/report/report_screen.dart';
 import 'package:homeworkout_flutter/ui/settings/settings_screen.dart';
 import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
 import 'package:homeworkout_flutter/ui/workoutComplete/workout_complete_screen.dart';
-import 'package:homeworkout_flutter/utils/AppLifecycleReactor.dart';
-import 'package:homeworkout_flutter/utils/AppOpenAdManager.dart';
-import 'package:homeworkout_flutter/utils/Debug.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
@@ -26,7 +23,6 @@ import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 import 'package:in_app_purchase_ios/store_kit_wrappers.dart';
-
 
 import 'inapppurchase/InAppPurchaseHelper.dart';
 import 'localization/locale_constant.dart';
@@ -60,8 +56,6 @@ class ReceivedNotification {
 String? selectedNotificationPayload;
 
 Future<void> main() async {
-
-
   WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize().then((value) {
     MobileAds.instance.updateRequestConfiguration(
@@ -83,12 +77,11 @@ Future<void> main() async {
   }
   InAppPurchaseHelper().initStoreInfo();
 
-   const AndroidInitializationSettings initializationSettingsAndroid =
-  AndroidInitializationSettings('ic_notification');
-
+  const AndroidInitializationSettings initializationSettingsAndroid =
+      AndroidInitializationSettings('ic_notification');
 
   final IOSInitializationSettings initializationSettingsIOS =
-  IOSInitializationSettings(
+      IOSInitializationSettings(
     requestAlertPermission: true,
     requestBadgePermission: true,
     requestSoundPermission: true,
@@ -106,18 +99,14 @@ Future<void> main() async {
 
   await flutterLocalNotificationsPlugin.initialize(initializationSettings,
       onSelectNotification: (String? payload) async {
-        if (payload != null) {
-          debugPrint('notification payload: $payload');
-        }
-
-        if (payload != null && payload == Constant.strExerciseReminder) {
-          Future.delayed(Duration(seconds: 1)).then((value) => Navigator.push(
-              MyApp.navigatorKey.currentState!.overlay!.context,
-              MaterialPageRoute(builder: (context) => TrainingScreen())));
-        }
-        selectedNotificationPayload = payload;
-        selectNotificationSubject.add(payload);
-      });
+    if (payload != null && payload == Constant.strExerciseReminder) {
+      Future.delayed(Duration(seconds: 1)).then((value) => Navigator.push(
+          MyApp.navigatorKey.currentState!.overlay!.context,
+          MaterialPageRoute(builder: (context) => TrainingScreen())));
+    }
+    selectedNotificationPayload = payload;
+    selectNotificationSubject.add(payload);
+  });
 
   _configureLocalTimeZone();
 
@@ -136,7 +125,8 @@ class MyApp extends StatefulWidget {
       GlobalKey<ScaffoldState>();
 
   // ignore: close_sinks
-  static final StreamController purchaseStreamController = StreamController<PurchaseDetails>.broadcast();
+  static final StreamController purchaseStreamController =
+      StreamController<PurchaseDetails>.broadcast();
 
   const MyApp({Key? key}) : super(key: key);
 
@@ -152,8 +142,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   Locale? _locale;
   bool isFirstTimeUser = true;
-
-  late AppLifecycleReactor _appLifecycleReactor;
 
   void setLocale(Locale locale) {
     setState(() {
@@ -171,18 +159,12 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     isFirstTime();
 
-    AppOpenAdManager appOpenAdManager = AppOpenAdManager()..loadAd();
-    _appLifecycleReactor = AppLifecycleReactor(
-        appOpenAdManager: appOpenAdManager);
-
-    _appLifecycleReactor.listenToAppStateChanges();
     super.initState();
   }
 
   isFirstTime() async {
     isFirstTimeUser =
         Preference.shared.getBool(Preference.isUserFirsttime) ?? true;
-    Debug.printLog(isFirstTimeUser.toString());
   }
 
   @override
@@ -190,6 +172,7 @@ class _MyAppState extends State<MyApp> {
     MyApp.purchaseStreamController.close();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

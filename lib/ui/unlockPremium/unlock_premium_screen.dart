@@ -5,7 +5,6 @@ import 'package:homeworkout_flutter/inapppurchase/IAPCallback.dart';
 import 'package:homeworkout_flutter/inapppurchase/InAppPurchaseHelper.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
-import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
@@ -33,8 +32,8 @@ class _UnlockPremiumScreenState extends State<UnlockPremiumScreen>
   );
 
   final kGradientBoxDecoration = BoxDecoration(
-    gradient: LinearGradient(
-        colors: [Colur.blueGradient1, Colur.blueGradient2]),
+    gradient:
+        LinearGradient(colors: [Colur.blueGradient1, Colur.blueGradient2]),
     border: Border.all(
       color: Colur.white,
     ),
@@ -90,7 +89,7 @@ class _UnlockPremiumScreenState extends State<UnlockPremiumScreen>
                     children: [
                       InkWell(
                         onTap: () {
-                          Navigator.pop(context,false);
+                          Navigator.pop(context, false);
                         },
                         child: Container(
                           margin: const EdgeInsets.all(10),
@@ -396,7 +395,6 @@ class _UnlockPremiumScreenState extends State<UnlockPremiumScreen>
   void onBillingError(error) {
     setState(() {
       isShowProgress = false;
-      Debug.printLog("onBillingError ==>" + error.message);
     });
   }
 

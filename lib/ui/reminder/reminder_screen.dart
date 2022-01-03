@@ -15,7 +15,6 @@ import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
 import 'package:homeworkout_flutter/utils/ad_helper.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
-import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 import 'package:intl/intl.dart';
@@ -412,18 +411,7 @@ class _ReminderScreenState extends State<ReminderScreen>
 
   getDataFromDatabase() async {
     reminderList = await DataBaseHelper().getReminderData();
-    reminderList.forEach((element) {
-      Debug.printLog("id =====> " +
-          element.id.toString() +
-          "--isReminderOn =====> " +
-          element.isActive.toString() +
-          "--reminderTime ==>" +
-          element.time.toString() +
-          "--repeatDays =====>" +
-          element.days.toString() +
-          "--repeatNo =====>" +
-          element.repeatNo.toString());
-    });
+
     setState(() {});
   }
 
@@ -450,7 +438,6 @@ class _ReminderScreenState extends State<ReminderScreen>
       selectedTime = picked;
       timeController.text =
           "${selectedTime!.hour.toString().padLeft(2, '0')}:${selectedTime!.minute.toString().padLeft(2, '0')}";
-      Debug.printLog("time: ==> ${timeController.text}");
       setState(() {});
       if (index == null) {
         await showDaySelectionDialog(context);

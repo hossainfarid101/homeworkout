@@ -480,8 +480,6 @@ class _SetYourWeeklyGoalScreenState
                 Preference.shared
                     .setInt(Preference.SELECTED_FIRST_DAY_OF_WEEK, -1);
               }
-              print(value[i].toString());
-              print(picker.getSelectedValues()[i]);
             }
           });
         }).showDialog(context);

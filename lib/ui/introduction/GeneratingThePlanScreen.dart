@@ -10,7 +10,6 @@ import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/ui/exerciselist/ExerciseListScreen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
-import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -226,7 +225,6 @@ class _GeneratingThePlanScreenState extends State<GeneratingThePlanScreen>
     var currDate = Utils.getCurrentDate();
     var strPlan =
         Preference.shared.getString(Constant.PREF_RANDOM_DISCOVER_PLAN) ?? "";
-    Debug.printLog("strPlan=>>>  " + strPlan.toString());
     if (lastDate.isNotEmpty && currDate == lastDate && strPlan.isNotEmpty) {
       randomPlanData = DiscoverPlanTable.fromJson(jsonDecode(strPlan));
     } else {

@@ -20,7 +20,6 @@ import 'package:homeworkout_flutter/ui/workoutHistory/workout_history_screen.dar
 import 'package:homeworkout_flutter/utils/ad_helper.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
-import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -625,7 +624,6 @@ class _TrainingScreenState extends State<TrainingScreen>
         ? Preference.shared.getLastTime(allPlanDataList[index].catTableName!) ??
             null
         : null;
-    Debug.printLog("$t");
     var lastTime = " ";
     if (t != null) {
       if (getDate(DateTime.parse(t)) == getDate(DateTime.now())) {
@@ -637,12 +635,10 @@ class _TrainingScreenState extends State<TrainingScreen>
         lastTime = DateFormat.MMMd().format(DateTime.parse(t));
       }
     }
-    Debug.printLog("lastTime :$lastTime");
 
     var gender = Preference.shared.getString(Constant.SELECTED_GENDER) ??
         Constant.GENDER_MEN;
-    Debug.printLog("allPlanDataList[index].catImage====>>  " +
-        allPlanDataList[index].catImage.toString());
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       child: Column(
@@ -1212,20 +1208,14 @@ class _TrainingScreenState extends State<TrainingScreen>
 
   _getAllPlanList() async {
     allPlanDataList = await DataBaseHelper().getHomePlanData();
-    allPlanDataList.forEach((element) {
-      Debug.printLog("_getAllPlanList==>> " +
-          element.catId!.toString() +
-          "\t" +
-          element.catTableName.toString());
-    });
+
     setState(() {});
   }
 
   _getTotalQuarantineWorkout() async {
     totalQuarantineWorkout =
         await DataBaseHelper().getTotalWorkoutQuarantineAtHome();
-    Debug.printLog(
-        "totalQuarantineWorkout==>> " + totalQuarantineWorkout.toString());
+
     setState(() {});
   }
 
@@ -1241,11 +1231,8 @@ class _TrainingScreenState extends State<TrainingScreen>
           totalDayOfWeekGoal = totalDayOfWeekGoal! + 1;
         }
       }
-      Debug.printLog("getDaysDateForHistoryOfWeek==>> " + element.toString());
     });
-    isAvailableHistory.forEach((element) {
-      Debug.printLog("isAvailableHistory==>> " + element.toString());
-    });
+    isAvailableHistory.forEach((element) {});
     setState(() {});
   }
 
@@ -1288,73 +1275,58 @@ class _TrainingScreenState extends State<TrainingScreen>
     }
   }
 
- /* Future<bool> onWillPop() {
-    DateTime now = DateTime.now();
-    if (currentBackPressTime == null ||
-        now.difference(currentBackPressTime!) > Duration(seconds: 3)) {
-      currentBackPressTime = now;
-      Utils.showToast(context, Languages.of(context)!.txtExitMessage,
-          duration: 3);
-      return Future.value(false);
-    }
-    return Future.value(true);
-  }*/
-
   onWillPop() {
     return showModalBottomSheet(
-      isDismissible: true,
-      context: context,
-      builder: (BuildContext context) {
-        return WillPopScope(
-          onWillPop: () {
-            SystemNavigator.pop();
-            return Future.value(false);
-          },
-          child: Wrap(
-            children: [
-              SafeArea(
-                top: false,
-                bottom: Platform.isAndroid ? true : false,
-                child: Container(
-                  color: Colur.bg_white,
-                  child: Column(
-                    children: [
-                     Visibility(
-                        visible: _isNativeAdLoaded && !Utils.isPurchased(),
-                            child: Container(
+        enableDrag: true,
+        isDismissible: false,
+        context: context,
+        builder: (BuildContext context) {
+          return WillPopScope(
+            onWillPop: () {
+              SystemNavigator.pop();
+              return Future.value(false);
+            },
+            child: Wrap(
+              children: [
+                SafeArea(
+                  top: false,
+                  bottom: Platform.isAndroid ? true : false,
+                  child: Container(
+                    color: Colur.bg_white,
+                    child: Column(
+                      children: [
+                        Visibility(
+                          visible: _isNativeAdLoaded && !Utils.isPurchased(),
+                          child: Container(
                               height: 250,
                               margin: EdgeInsets.only(top: 15, bottom: 7.5),
                               width: double.infinity,
-                              child: AdWidget(ad: _nativeAd)
-                            ),
-                          ) ,
-
-                      InkWell(
-                        onTap: () {
-                          SystemNavigator.pop();
-                        },
-                        child: Container(
-                          color: Colur.white,
-                          width: double.infinity,
-                          height: 50,
-                          child: Center(
-                            child: Text(
-                              Languages.of(context)!.txtExitMessage,
-                              style: TextStyle(
-                                color: Colur.black
+                              child: AdWidget(ad: _nativeAd)),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            SystemNavigator.pop();
+                          },
+                          child: Container(
+                            color: Colur.white,
+                            width: double.infinity,
+                            height: 50,
+                            child: Center(
+                              child: Text(
+                                Languages.of(context)!.txtExitMessage,
+                                style: TextStyle(color: Colur.black),
                               ),
                             ),
                           ),
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        );
-      });
+              ],
+            ),
+          );
+        });
   }
 
   @override

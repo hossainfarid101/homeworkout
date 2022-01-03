@@ -101,13 +101,10 @@ class _SettingsScreenState extends State<SettingsScreen>
             listener: (button) {
               switch (button) {
                 case RateMyAppDialogButton.rate:
-                  print('Clicked on "Rate".');
                   break;
                 case RateMyAppDialogButton.later:
-                  print('Clicked on "Later".');
                   break;
                 case RateMyAppDialogButton.no:
-                  print('Clicked on "No".');
                   break;
               }
 
@@ -129,10 +126,6 @@ class _SettingsScreenState extends State<SettingsScreen>
                 TextButton(
                   child: Text('OK'),
                   onPressed: () async {
-                    print('Thanks for the ' +
-                        (stars == null ? '0' : stars.round().toString()) +
-                        ' star(s) !');
-
                     await rateMyApp!
                         .callEvent(RateMyAppEventType.rateButtonPressed);
                     Navigator.pop<RateMyAppDialogButton>(

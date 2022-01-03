@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
-import 'package:homeworkout_flutter/utils/debug.dart';
 
 class PushUpsCanYouDoScreen extends StatefulWidget {
   final String? prefHowManyPushUps;
@@ -177,7 +176,6 @@ class _PushUpsCanYouDoScreenState extends State<PushUpsCanYouDoScreen> {
           exName: Languages.of(context)!.txtAdvance,
           description: Languages.of(context)!.txtAtLeast10),
     ];
-    Debug.printLog("${widget.prefHowManyPushUps}");
     pushUpsList.forEach((element) {
       if (element.exName == widget.prefHowManyPushUps) {
         setState(() {

@@ -8,7 +8,6 @@ import 'package:homeworkout_flutter/interfaces/topbar_clicklistener.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/Color.dart';
 
-import 'package:homeworkout_flutter/utils/Debug.dart';
 import 'package:group_radio_button/group_radio_button.dart';
 import 'package:homeworkout_flutter/utils/ad_helper.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
@@ -211,7 +210,6 @@ class _MetricImperialUnitsScreenState extends State<MetricImperialUnitsScreen>
                     onChanged: (value) {
                       setState(() {
                         _weightUnit = value;
-                        Debug.printLog(_weightUnit.toString());
                         if (_weightUnit == WeightUnit.lbs) {
                           isKG = false;
                         } else {
@@ -261,7 +259,6 @@ class _MetricImperialUnitsScreenState extends State<MetricImperialUnitsScreen>
                     groupValue: _heightUnit!,
                     onChanged: (value) => setState(() {
                       _heightUnit = value;
-                      Debug.printLog(_heightUnit.toString());
                       if (_heightUnit == HeightUnit.cm) {
                         isCM = true;
                         Preference.shared.setBool(Preference.IS_CM, true);

@@ -10,7 +10,6 @@ import 'package:homeworkout_flutter/database/tables/home_plan_table.dart';
 import 'package:homeworkout_flutter/database/tables/reminder_table.dart';
 import 'package:homeworkout_flutter/database/tables/weight_table.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
-import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' as path;
 import 'dart:io' as io;
@@ -35,10 +34,8 @@ class DataBaseHelper {
 
   init() async {
     var dbPath = await getDatabasesPath();
-    Debug.printLog("getDatabasesPath ===>" + dbPath.toString());
 
     String dbPathHomeWorkout = path.join(dbPath, "HomeWorkoutFlutter.db");
-    Debug.printLog("dbPathEnliven ===>" + dbPathHomeWorkout.toString());
 
     bool dbExistsEnliven = await io.File(dbPathHomeWorkout).exists();
 
@@ -214,12 +211,6 @@ class DataBaseHelper {
         getWeekDaysData(weeklyData.weekName!, strCategoryName).then((value) => {
               aClass.arrWeekDayData = value,
               aClass.arrWeekDayData!.add(aClass1),
-              value.forEach((element) {
-                Debug.printLog("getWeekDaysData==>> " +
-                    element.isCompleted.toString() +
-                    "  " +
-                    element.dayName.toString());
-              }),
             });
 
         weeklyDataList.add(aClass);
@@ -273,7 +264,6 @@ class DataBaseHelper {
     var dbClient = await db;
     var result = await dbClient.update(tableName, row,
         where: 'Workout_id = ?', whereArgs: [workOutId]);
-    Debug.printLog("res:reorderExercise ::::::::  $result  $sortValue");
     return result;
   }
 
@@ -295,7 +285,6 @@ class DataBaseHelper {
   Future<int> insertWeightData(WeightTable weightData) async {
     var dbClient = await db;
     var result = await dbClient.insert(weightTable, weightData.toJson());
-    Debug.printLog("res: $result");
     return result;
   }
 
@@ -342,7 +331,6 @@ class DataBaseHelper {
   }
 
   Future<WeightTable?> getCurrentWeight(String? date) async {
-    Debug.printLog("$date");
     var dbClient = await db;
     var weightDataList;
     List<Map<String, dynamic>> result = await dbClient
@@ -361,7 +349,6 @@ class DataBaseHelper {
     var dbClient = await db;
     var result = await dbClient.rawUpdate(
         " UPDATE $weightTable SET WeightKG = $weightKG, WeightLB = $weightLBS where Date = '$date' ");
-    Debug.printLog("res: $result");
     return result;
   }
 
@@ -370,7 +357,6 @@ class DataBaseHelper {
     var dbClient = await db;
     var result = await dbClient.rawUpdate(
         "update $tableName set Is_completed ='$status' where Week_name = '0$weekName' and Day_name = '$dayName'");
-    Debug.printLog("updateDayStatusWeekWise::::: $result");
     return result;
   }
 
@@ -380,14 +366,13 @@ class DataBaseHelper {
         .rawUpdate("update $fullBodyWorkoutTable set Is_completed ='0'");
     var result1 = await dbClient
         .rawUpdate("update $lowerBodyTable set Is_completed ='0'");
-    Debug.printLog("updateDayStatusWeekWise::::: $result  $result1");
-    return result;
+    return result + result1;
   }
 
   Future<int>? insertHistoryData(HistoryTable historyData) async {
     var dbClient = await db;
     var result = await dbClient.insert(historyTable, historyData.toJson());
-    Debug.printLog("insertHistoryData:::::: $result  ${historyData.toJson()}");
+
     return result;
   }
 
@@ -606,21 +591,14 @@ class DataBaseHelper {
         homePlanList.add(homePlanData);
       }
     }
-    homePlanList.forEach((element) {
-      Debug.printLog("id: " +
-          element.id.toString() +
-          "time: " +
-          element.time! +
-          "isActive: " +
-          element.isActive!.toString());
-    });
+
     return homePlanList;
   }
 
   Future<int> insertReminderData(ReminderTable reminderData) async {
     var dbClient = await db;
     var result = await dbClient.insert(reminderTable, reminderData.toJson());
-    Debug.printLog("res: $result");
+
     return result;
   }
 
@@ -628,7 +606,7 @@ class DataBaseHelper {
     var dbClient = await db;
     var result = await dbClient
         .rawUpdate(" UPDATE $reminderTable SET time = '$time' where id = $id ");
-    Debug.printLog("res: $result");
+
     return result;
   }
 
@@ -636,7 +614,7 @@ class DataBaseHelper {
     var dbClient = await db;
     var result = await dbClient.rawUpdate(
         " UPDATE $reminderTable SET days = '$days', repeatNo = '$repeatNo' where id = $id ");
-    Debug.printLog("res: $result");
+
     return result;
   }
 
@@ -644,7 +622,7 @@ class DataBaseHelper {
     var dbClient = await db;
     var result = await dbClient.rawUpdate(
         " UPDATE $reminderTable SET isActive = '$isActive' where id = $id ");
-    Debug.printLog("res: $result");
+
     return result;
   }
 
@@ -652,7 +630,7 @@ class DataBaseHelper {
     var dbClient = await db;
     var result =
         await dbClient.delete(reminderTable, where: "id = ?", whereArgs: [id]);
-    Debug.printLog("res: $result");
+
     return result;
   }
 }

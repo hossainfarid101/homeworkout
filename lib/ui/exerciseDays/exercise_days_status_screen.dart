@@ -15,7 +15,6 @@ import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
 import 'package:homeworkout_flutter/utils/ad_helper.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
-import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 
@@ -495,8 +494,6 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
         weeklyDataList[mainIndex].arrWeekDayData![index - 1].isCompleted ==
             "1" &&
         weeklyDataList[mainIndex].arrWeekDayData![index + 1].isCompleted == "0";
-    Debug.printLog(
-        "flagPrevDay==>>  " + flagPrevDay.toString() + "  " + index.toString());
 
     if ((weeklyDataList[mainIndex].arrWeekDayData!.isNotEmpty &&
             weeklyDataList[mainIndex].arrWeekDayData![index].isCompleted !=
@@ -505,7 +502,6 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
         (index == 0 && boolFlagWeekComplete)) {
       weekDaysPosition = index;
     }
-    Debug.printLog("====>" + MediaQuery.of(context).size.width.toString());
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -655,18 +651,7 @@ class _ExerciseDaysStatusScreenState extends State<ExerciseDaysStatusScreen> {
   _getDataFromDatabase() async {
     weeklyDataList =
         await DataBaseHelper().getWorkoutWeeklyData(widget.planName.toString());
-    weeklyDataList.forEach((element) {
-      Debug.printLog("_getWeeklyData==>> " +
-          element.weekName.toString() +
-          "  " +
-          element.dayName.toString());
-      element.arrWeekDayData!.forEach((element1) {
-        Debug.printLog("arrWeekDayData==>>  " +
-            element1.dayName.toString() +
-            "  " +
-            element1.isCompleted.toString());
-      });
-    });
+
     Future.delayed(Duration(milliseconds: 200), () {
       setState(() {});
     });

@@ -19,7 +19,6 @@ import 'package:homeworkout_flutter/ui/workoutHistory/workout_history_screen.dar
 import 'package:homeworkout_flutter/utils/ad_helper.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
-import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
@@ -758,15 +757,10 @@ class _ReportScreenState extends State<ReportScreen>
 
   setBmiCalculation() {
     var lastWeight = Preference.shared.getDouble(Preference.WEIGHT) ?? 0;
-    var lastFoot = Preference.shared.getDouble(Preference.HEIGHT_FT) ?? 0;
-    var lastInch = Preference.shared.getDouble(Preference.HEIGHT_IN) ?? 0;
     var heightCM = Preference.shared.getDouble(Preference.HEIGHT_CM);
 
     if (lastWeight != 0 && heightCM != 0) {
       bmi = double.parse(calculateBMI(lastWeight, heightCM!));
-
-      Debug.printLog(
-          "BMI=>>> ${bmi.toString()}   $lastWeight $lastFoot  $lastInch ");
     }
   }
 
@@ -851,7 +845,6 @@ class _ReportScreenState extends State<ReportScreen>
     }
     double bmiVal = 0;
     bmiVal = ((pos * totalDiffForTwoPoint) / totalDiffInLoop) / 100;
-    Debug.printLog("bmiVal===>>  " + bmiVal.toString() + "  " + pos.toString());
     return fullWidth * (totalWidth + bmiVal);
   }
 
@@ -947,11 +940,8 @@ class _ReportScreenState extends State<ReportScreen>
       bool? isAvailable =
           await DataBaseHelper().isHistoryAvailableDateWise(element.toString());
       isAvailableHistory.add(isAvailable!);
-      Debug.printLog("getDaysDateForHistoryOfWeek==>> " + element.toString());
     });
-    isAvailableHistory.forEach((element) {
-      Debug.printLog("isAvailableHistory==>> " + element.toString());
-    });
+
     setState(() {});
   }
 

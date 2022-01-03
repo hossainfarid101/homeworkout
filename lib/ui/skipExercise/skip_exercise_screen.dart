@@ -17,7 +17,6 @@ import 'package:homeworkout_flutter/ui/pause/pause_screen.dart';
 import 'package:homeworkout_flutter/utils/ad_helper.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
-import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 
@@ -235,12 +234,11 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
                 children: [
                   (_isNativeAdLoaded && !Utils.isPurchased())
                       ? Container(
-                      margin: EdgeInsets.only(top: 15, bottom: 7.5),
-                      width: double.infinity,
-                      height: 250,
-                      child: AdWidget(ad: _nativeAd)
-                  ) : Container(),
-
+                          margin: EdgeInsets.only(top: 15, bottom: 7.5),
+                          width: double.infinity,
+                          height: 250,
+                          child: AdWidget(ad: _nativeAd))
+                      : Container(),
                   _widgetCenterTimer(),
                   _widgetBottomExe(),
                 ],
@@ -284,8 +282,6 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
                     setState(() {
                       _pointerValueInt = _pointerValueInt! + 20;
                       trainingRestTime = trainingRestTime! + 20;
-                      Debug.printLog(
-                          "totalSkipCount==>  " + trainingRestTime.toString());
                     });
                   },
                   child: Container(

@@ -132,7 +132,7 @@ class _MotivatesYouScreenState extends State<MotivatesYouScreen> {
                     maxLines: 1,
                     style: TextStyle(
                         fontWeight: FontWeight.w600,
-                        fontSize: 20,
+                        fontSize: 16,
                         color: Colur.black),
                   ),
                 ),

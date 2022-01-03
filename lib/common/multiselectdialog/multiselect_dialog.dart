@@ -49,8 +49,6 @@ class _MultiSelectDialogState<V> extends State<MultiSelectDialog<V>> {
       _selectedValues.addAll(widget.initialSelectedValues!);
     }
     isDisable = _selectedValues.isEmpty;
-
-    print("Values: ===> ${_selectedValues.toString()}");
   }
 
   void _onItemCheckedChange(V itemValue, bool? checked) {
@@ -69,7 +67,6 @@ class _MultiSelectDialogState<V> extends State<MultiSelectDialog<V>> {
   }
 
   void _onSubmitTap() {
-    print("Values: ===> ${_selectedValues.toString()}");
     if (!isDisable!) Navigator.pop(context, _selectedValues);
   }
 

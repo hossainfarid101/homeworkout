@@ -102,7 +102,6 @@ class _WorkoutScreenState extends State<WorkoutScreen>
 
   int? _interstitialCount;
 
-
   void _createInterstitialAd() {
     if (Debug.GOOGLE_AD) {
       InterstitialAd.load(
@@ -111,7 +110,8 @@ class _WorkoutScreenState extends State<WorkoutScreen>
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (InterstitialAd ad) {
             _interstitialAd = ad;
-            Preference.shared.setInt(Preference.INTERSTITIAL_AD_COUNT_COMPLETE, _interstitialCount!+1);
+            Preference.shared.setInt(Preference.INTERSTITIAL_AD_COUNT_COMPLETE,
+                _interstitialCount! + 1);
           },
           onAdFailedToLoad: (LoadAdError error) {
             _interstitialAd = null;
@@ -121,8 +121,9 @@ class _WorkoutScreenState extends State<WorkoutScreen>
       );
     }
   }
+
   void _showInterstitialAd() {
-    if (_interstitialAd != null && _interstitialCount! % 2 != 0 ) {
+    if (_interstitialAd != null && _interstitialCount! % 2 != 0) {
       _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
         onAdDismissedFullScreenContent: (InterstitialAd ad) {
           ad.dispose();
@@ -182,8 +183,6 @@ class _WorkoutScreenState extends State<WorkoutScreen>
   }
 
   _getLastPosition() async {
-    Debug.printLog("_getLastPosition==>tblName>" + widget.tableName.toString());
-
     if (widget.fromPage == Constant.PAGE_HOME) {
       lastPosition = Preference.shared
           .getLastUnCompletedExPos(widget.tableName.toString());
@@ -197,7 +196,6 @@ class _WorkoutScreenState extends State<WorkoutScreen>
           Preference.shared.getLastUnCompletedExPos(widget.planName.toString());
     }
 
-    Debug.printLog("===>lastPosition: $lastPosition");
     _setImageRotation(lastPosition!);
 
     Future.delayed(Duration(milliseconds: 100), () {
@@ -232,10 +230,6 @@ class _WorkoutScreenState extends State<WorkoutScreen>
   _setSoundCountDown() async {
     if (int.parse(countDownController.getTime()) < 4) {
       if (!isMute! && isVoiceGuide!) {
-        Debug.printLog("_setSoundCountDown==>> " +
-            countDownController.getTime().toString() +
-            "  " +
-            timerForCount!.tick.toString());
         Utils.textToSpeech(countDownController.getTime(), flutterTts);
       }
     }
@@ -462,8 +456,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
 
   _moveWorkoutCompleteScreen() {
     endTime = DateTime.now();
-    print("====${endTime!.difference(startTime!).inSeconds}");
-    print("===${widget.totalMin!}====");
+
     diffsec = endTime!.difference(startTime!).inSeconds + widget.totalMin!;
 
     calories = diffsec! * 0.08;
@@ -605,9 +598,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                           countDownController.resume();
                           timerForCount = Timer.periodic(Duration(seconds: 1),
                               (Timer t) => _setSoundCountDown());
-                        } else{
-                          Debug.printLog(
-                              "VALUE: " + _timeTypeCheck().toString());
+                        } else {
                           if (_timeTypeCheck()) {
                             _controllerForward();
                           }
@@ -722,7 +713,6 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                       isTimerTextShown: true,
                       autoStart: true,
                       onStart: () {
-                        print('Countdown Started');
                         isCountDownStart = true;
                       },
                       onComplete: () {
@@ -973,8 +963,6 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                                                 widget.isFromOnboarding,
                                           ))).then((value) => value == false
                                   ? {
-                                      Debug.printLog("From where:::Done " +
-                                          isWidgetCountDown.toString()),
                                       _getLastPosition(),
                                       _startExercise(),
                                       isWidgetCountDown = false
@@ -1070,8 +1058,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                     child: InkWell(
                   onTap: () async {
                     flutterTts.stop();
-                    Debug.printLog(
-                        "CHECK: ${lastPosition! + 1} == ${_getLengthFromList()}");
+
                     if ((lastPosition! + 1) == (_getLengthFromList())) {
                       if (_timeTypeCheck()) {
                         controller!.stop();
@@ -1309,7 +1296,9 @@ class _WorkoutScreenState extends State<WorkoutScreen>
   }
 
   _getPreference() {
-    _interstitialCount = Preference.shared.getInt(Preference.INTERSTITIAL_AD_COUNT_COMPLETE) ?? 1;
+    _interstitialCount =
+        Preference.shared.getInt(Preference.INTERSTITIAL_AD_COUNT_COMPLETE) ??
+            1;
     countDownDuration =
         Preference.shared.getInt(Preference.countdownTime) ?? 10;
 
@@ -1394,7 +1383,6 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                   discoverSingleExerciseDataList:
                       widget.discoverSingleExerciseData,
                 ))).then((value) {
-      Debug.printLog("VALUE: " + value.toString());
       if (isWidgetCountDown) {
         countDownController.resume();
       }

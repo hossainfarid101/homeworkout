@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:homeworkout_flutter/localization/language/languages.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
-import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 
@@ -130,16 +129,10 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                                 onTap: () {
                                   if (weightController.text != "") {
                                     if (isLsb! && !isKg!) {
-                                      Debug.printLog(
-                                          "Before converted value of weightController --> " +
-                                              weightController.text);
                                       weightController.text = Utils.lbToKg(
                                               double.parse(
                                                   weightController.text))
                                           .toString();
-                                      Debug.printLog(
-                                          "After converted value of weightController in to LB to KG --> " +
-                                              weightController.text);
                                     }
                                   }
                                   setState(() {
@@ -179,16 +172,10 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                                 onTap: () {
                                   if (weightController.text != "") {
                                     if (isKg! && !isLsb!) {
-                                      Debug.printLog(
-                                          "Before converted value of weightController --> " +
-                                              weightController.text);
                                       weightController.text = Utils.kgToLb(
                                               double.parse(
                                                   weightController.text))
                                           .toString();
-                                      Debug.printLog(
-                                          "After converted value of weightController in to KG to LB --> " +
-                                              weightController.text);
                                     }
                                   }
 
@@ -432,18 +419,12 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                                 onTap: () {
                                   if (ftHeightController.text != "") {
                                     if (isIn! && !isCm!) {
-                                      Debug.printLog(
-                                          "Before converted value of heightController --> " +
-                                              cmHeightController.text);
                                       cmHeightController.text = Utils.inToCm(
                                               double.parse(
                                                   ftHeightController.text),
                                               double.parse(
                                                   inHeightController.text))
                                           .toString();
-                                      Debug.printLog(
-                                          "After converted value of heightController in to CM to IN --> " +
-                                              cmHeightController.text);
                                     }
                                   }
 
@@ -484,9 +465,6 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                                 onTap: () {
                                   if (cmHeightController.text != "") {
                                     if (isCm! && !isIn!) {
-                                      Debug.printLog(
-                                          "Before converted value of heightController --> " +
-                                              ftHeightController.text);
                                       ftHeightController.text = Utils.cmToIn(
                                               double.parse(
                                                   cmHeightController.text))
@@ -496,10 +474,6 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
                                                   cmHeightController.text))
                                           .toString()
                                           .split(".")[1];
-                                      Debug.printLog(
-                                          "After converted value of heightController in to Cm to In --> " +
-                                              ftHeightController.text +
-                                              inHeightController.text);
                                     }
                                   }
 
@@ -626,24 +600,19 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
       if (double.parse(weightController.text) >= Constant.MIN_KG &&
           double.parse(weightController.text) <= Constant.MAX_KG) {
         if (isCm! && !isIn!) {
-          Debug.printLog("cm - ${cmHeightController.text}");
           if (double.parse(cmHeightController.text) >= Constant.MIN_CM &&
               double.parse(cmHeightController.text) <= Constant.MAX_CM) {
             setState(() {
               save();
-              Debug.printLog("true");
             });
           } else {
             Utils.showToast(context, Languages.of(context)!.txtWarningForCm);
           }
         } else if (isIn! && !isCm!) {
-          Debug.printLog("ft - ${ftHeightController.text}");
-          Debug.printLog("inch - ${inHeightController.text}");
           if (double.parse(ftHeightController.text) > Constant.MIN_FT &&
               double.parse(ftHeightController.text) <= Constant.MAX_FT) {
             setState(() {
               save();
-              Debug.printLog("true");
             });
           } else {
             Utils.showToast(context, Languages.of(context)!.txtWarningForInch);
@@ -657,7 +626,6 @@ class _AddBmiDialogState extends State<AddBmiDialog> {
           double.parse(weightController.text) <= Constant.MAX_LBS) {
         setState(() {
           save();
-          Debug.printLog("true");
         });
       } else {
         Utils.showToast(context, Languages.of(context)!.txtWarningForLbs);

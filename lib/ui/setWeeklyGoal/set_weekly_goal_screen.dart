@@ -354,8 +354,6 @@ class _SetWeeklyGoalScreenState extends State<SetWeeklyGoalScreen> {
               } else {
                 selectFirstDayOfWeek = picker.getSelectedValues()[i];
               }
-              print(value[i].toString());
-              print(picker.getSelectedValues()[i]);
             }
           });
         }).showDialog(context);
