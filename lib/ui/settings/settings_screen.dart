@@ -84,8 +84,8 @@ class _SettingsScreenState extends State<SettingsScreen>
         minLaunches: 10,
         remindDays: 7,
         remindLaunches: 10,
-        googlePlayIdentifier: 'com.homeworkout.men.women',
-        appStoreIdentifier: '1601155923');
+        googlePlayIdentifier: 'Add your googlePlayIdentifier here',
+        appStoreIdentifier: 'Add your appStoreIdentifier here');
 
     if (Platform.isIOS) {
       rateMyApp!.init().then((_) {

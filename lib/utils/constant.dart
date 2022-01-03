@@ -135,11 +135,11 @@ class Constant {
     MultiSelectDialogItem(
         "7", DateFormat.EEEE(getLocale().languageCode).dateSymbols.WEEKDAYS[0]),
   ];
-  static const String emailPath = 'fitnessentertainmentapps@gmail.com';
+  static const String emailPath = 'Add your email address here';
 
-  static String shareLink = "Add the link"; //todo
+  static String shareLink = "Add your app link here";
 
   static String getPrivacyPolicyURL() {
-    return "https://sites.google.com/view/home-workout-for-men-women/home";
+    return "Add your privacy policy link here";
   }
 }
