@@ -137,9 +137,9 @@ class Constant {
   ];
   static const String emailPath = 'fitnessentertainmentapps@gmail.com';
 
-  static String shareLink = "Add the link"; //TODO
+  static String shareLink = "Add the link"; //todo
 
   static String getPrivacyPolicyURL() {
-    return "https://sites.google.com/view/trackerapp-pp/home";
+    return "https://sites.google.com/view/home-workout-for-men-women/home";
   }
 }
