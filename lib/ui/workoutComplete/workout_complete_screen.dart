@@ -479,8 +479,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
       child: Row(
         children: [
           if (weeklyDataList!.isNotEmpty)
-            if (weeklyDataList![index].isCompleted == "1" ||
-                weeklyDataList![index].dayName == "${dayCompleted.toString()}")
+            if (index+1 <= totalCompleteDays)
               Container(
                 padding: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
@@ -512,9 +511,7 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
               margin: const EdgeInsets.only(top: 24, bottom: 24),
               width: MediaQuery.of(context).size.width * 0.04,
               color: weeklyDataList!.isNotEmpty
-                  ? (weeklyDataList![index].isCompleted == "1" ||
-                          weeklyDataList![index].dayName ==
-                              "${dayCompleted.toString()}")
+                  ? (index+1 <= totalCompleteDays)
                       ? Colur.blueGradient1
                       : Colur.grey.withOpacity(0.7)
                   : Colur.grey.withOpacity(0.7),

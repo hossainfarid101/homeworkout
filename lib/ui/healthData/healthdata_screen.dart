@@ -90,7 +90,7 @@ class _HealthDataScreenState extends State<HealthDataScreen>
                 child: Column(
                   children: [
                     CommonTopBar(
-                      Languages.of(context)!.txtHealthData.toUpperCase(),
+                      Languages.of(context)!.txtGender.toUpperCase(),
                       this,
                       isShowBack: true,
                     ),

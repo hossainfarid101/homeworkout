@@ -286,7 +286,7 @@ class _SettingsScreenState extends State<SettingsScreen>
                     ),
                     Expanded(
                         child: Text(
-                      Languages.of(context)!.txtHealthData,
+                      Languages.of(context)!.txtGender,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                           color: Colur.black,

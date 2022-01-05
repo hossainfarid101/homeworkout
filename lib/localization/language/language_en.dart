@@ -79,9 +79,6 @@ class LanguageEn extends Languages {
   String get txtGeneralSettings => "General Settings";
 
   @override
-  String get txtHealthData => "Health Data";
-
-  @override
   String get txtMetricImperialUnit => "Metric & Imperial Unit";
 
   @override

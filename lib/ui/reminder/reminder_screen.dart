@@ -147,21 +147,24 @@ class _ReminderScreenState extends State<ReminderScreen>
                     : Container()
               ],
             ),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () async {
-                await showTimePickerDialog(context);
-              },
-              child: Container(
-                width: 60,
-                height: 60,
-                child: Icon(
-                  Icons.add,
-                  size: 30,
+            floatingActionButton: Container(
+              margin: const EdgeInsets.only(bottom: 45),
+              child: FloatingActionButton(
+                onPressed: () async {
+                  await showTimePickerDialog(context);
+                },
+                child: Container(
+                  width: 60,
+                  height: 60,
+                  child: Icon(
+                    Icons.add,
+                    size: 30,
+                  ),
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      gradient: LinearGradient(
+                          colors: [Colur.blueGradient1, Colur.blueGradient2])),
                 ),
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: LinearGradient(
-                        colors: [Colur.blueGradient1, Colur.blueGradient2])),
               ),
             ),
           ),
@@ -195,18 +198,15 @@ class _ReminderScreenState extends State<ReminderScreen>
 
   _reminderListWidget() {
     return Expanded(
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 40),
-        child: ListView.builder(
-          padding: EdgeInsets.zero,
-          shrinkWrap: true,
-          physics: AlwaysScrollableScrollPhysics(),
-          scrollDirection: Axis.vertical,
-          itemCount: reminderList.length,
-          itemBuilder: (BuildContext context, int index) {
-            return _reminderCard(context, index);
-          },
-        ),
+      child: ListView.builder(
+        padding: EdgeInsets.only(bottom: 40),
+        shrinkWrap: true,
+        physics: AlwaysScrollableScrollPhysics(),
+        scrollDirection: Axis.vertical,
+        itemCount: reminderList.length,
+        itemBuilder: (BuildContext context, int index) {
+          return _reminderCard(context, index);
+        },
       ),
     );
   }
@@ -239,15 +239,13 @@ class _ReminderScreenState extends State<ReminderScreen>
                   child: InkWell(
                     onTap: () async {
                       await showTimePickerDialog(context, index: index);
-                      DataBaseHelper()
+                      await DataBaseHelper()
                           .updateReminderTime(
                               reminderList[index].id!, timeController.text)
-                          .then((value) {
-                        setState(() {
-                          getDataFromDatabase();
-                        });
+                          .then((value) async {
+                          await getDataFromDatabase();
                       });
-                      Utils.saveReminder(reminderList: reminderList);
+                      await Utils.saveReminder(reminderList: reminderList);
                     },
                     child: Text(
                       reminderTime,
@@ -265,17 +263,15 @@ class _ReminderScreenState extends State<ReminderScreen>
                     setState(() {
                       reminderList[index].isActive = value.toString();
                     });
-                    DataBaseHelper()
+                    await DataBaseHelper()
                         .updateReminderStatus(
                       reminderList[index].id!,
                       reminderList[index].isActive!,
                     )
-                        .then((value) {
-                      setState(() {
-                        getDataFromDatabase();
-                      });
+                        .then((value) async{
+                        await getDataFromDatabase();
                     });
-                    Utils.saveReminder(reminderList: reminderList);
+                    await Utils.saveReminder(reminderList: reminderList);
                   },
                   activeColor: Colur.theme,
                 ),
@@ -291,16 +287,14 @@ class _ReminderScreenState extends State<ReminderScreen>
                     onTap: () async {
                       await showDaySelectionDialog(context, index: index);
 
-                      DataBaseHelper()
+                      await DataBaseHelper()
                           .updateReminderDays(reminderList[index].id!,
                               repeatController.text, repeatNo!)
-                          .then((value) {
-                        setState(() {
-                          getDataFromDatabase();
-                        });
+                          .then((value) async {
+                          await getDataFromDatabase();
                       });
 
-                      Utils.saveReminder(reminderList: reminderList);
+                      await Utils.saveReminder(reminderList: reminderList);
                     },
                     child: Container(
                       child: Column(
@@ -331,8 +325,8 @@ class _ReminderScreenState extends State<ReminderScreen>
                 InkWell(
                   onTap: () async {
                     await _deleteAlertDialog(index)
-                        .then((value) => getDataFromDatabase());
-                    Utils.saveReminder(reminderList: reminderList);
+                        .then((value) async => await getDataFromDatabase());
+                    await Utils.saveReminder(reminderList: reminderList);
                   },
                   child: Container(
                     margin: const EdgeInsets.only(right: 8),
@@ -488,7 +482,7 @@ class _ReminderScreenState extends State<ReminderScreen>
       repeatNo = selectedDays.join(", ");
 
       if (index == null) {
-        DataBaseHelper()
+        await DataBaseHelper()
             .insertReminderData(ReminderTable(
           id: null,
           time: timeController.text,
@@ -498,7 +492,7 @@ class _ReminderScreenState extends State<ReminderScreen>
         ))
             .then((value) async {
           await getDataFromDatabase();
-          Utils.saveReminder(reminderList: reminderList);
+          await Utils.saveReminder(reminderList: reminderList);
         });
       }
     } else {

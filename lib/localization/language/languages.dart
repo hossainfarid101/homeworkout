@@ -181,8 +181,6 @@ abstract class Languages {
 
   String get txtGeneralSettings;
 
-  String get txtHealthData;
-
   String get txtMetricImperialUnit;
 
   String get txtRateUs;

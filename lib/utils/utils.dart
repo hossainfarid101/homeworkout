@@ -15,7 +15,6 @@ import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:timezone/timezone.dart' as tz;
 
-
 import 'constant.dart';
 
 class Utils {
@@ -78,7 +77,6 @@ class Utils {
 
   static String formatDecimal(num value) => '$value'.padLeft(2, '0');
 
-
   static downLoadTTS() {
     if (Platform.isAndroid) {
       try {
@@ -119,22 +117,23 @@ class Utils {
     }
   }
 
-
   static List<String> getDaysNameOfWeek(int? firstDay) {
     final now = DateTime.now();
-    final firstDayOfWeek = now.subtract(Duration(days: now.weekday - firstDay!));
+    final firstDayOfWeek =
+        now.subtract(Duration(days: now.weekday - firstDay!));
     return List.generate(7, (index) => index)
         .map((value) => DateFormat(DateFormat.WEEKDAY)
-        .format(firstDayOfWeek.add(Duration(days: value))))
+            .format(firstDayOfWeek.add(Duration(days: value))))
         .toList();
   }
 
   static List<String> getDaysDateOfWeek(int? firstDay) {
     final now = DateTime.now();
-    final firstDayOfWeek = now.subtract(Duration(days: now.weekday - firstDay!));
+    final firstDayOfWeek =
+        now.subtract(Duration(days: now.weekday - firstDay!));
     return List.generate(7, (index) => index)
         .map((value) => DateFormat(DateFormat.DAY)
-        .format(firstDayOfWeek.add(Duration(days: value))))
+            .format(firstDayOfWeek.add(Duration(days: value))))
         .toList();
   }
 
@@ -143,7 +142,7 @@ class Utils {
     final firstDayOfWeek = now.subtract(Duration(days: now.weekday));
     return List.generate(7, (index) => index)
         .map((value) => DateFormat("yyyy-MM-dd")
-        .format(firstDayOfWeek.add(Duration(days: value))))
+            .format(firstDayOfWeek.add(Duration(days: value))))
         .toList();
   }
 
@@ -151,82 +150,77 @@ class Utils {
     final List<String> splitStr = input.split(' ');
     for (int i = 0; i < splitStr.length; i++) {
       splitStr[i] =
-      '${splitStr[i][0].toUpperCase()}${splitStr[i].substring(1)}';
+          '${splitStr[i][0].toUpperCase()}${splitStr[i].substring(1)}';
     }
     final output = splitStr.join(' ');
     return output;
   }
 
-
-  static String getFirstDayOfWeek(BuildContext context,int? selectedDay){
-    String day="";
-    if(selectedDay == 0){
+  static String getFirstDayOfWeek(BuildContext context, int? selectedDay) {
+    String day = "";
+    if (selectedDay == 0) {
       day = Languages.of(context)!.txtSunday;
-    }else if(selectedDay == 1){
+    } else if (selectedDay == 1) {
       day = Languages.of(context)!.txtMonday;
-    }else if(selectedDay == -1){
+    } else if (selectedDay == -1) {
       day = Languages.of(context)!.txtSaturday;
     }
     return day;
   }
 
-  static String getImageBannerForBodyFocusSubPlan(String planName){
+  static String getImageBannerForBodyFocusSubPlan(String planName) {
     String imageName = "";
-    if(planName == Constant.PLAN_7_MIN_BUTT_WORKOUT || planName == Constant.PLAN_7_MIN_ABS_WORKOUT){
+    if (planName == Constant.PLAN_7_MIN_BUTT_WORKOUT ||
+        planName == Constant.PLAN_7_MIN_ABS_WORKOUT) {
       imageName = "ic_7_min_butt_banner.webp";
-    }else if(planName == Constant.PLAN_7_MIN_LOSE_ARM_FAT){
+    } else if (planName == Constant.PLAN_7_MIN_LOSE_ARM_FAT) {
       imageName = "ic_7_min_lose_arm_banner.webp";
-    }else if(planName == Constant.PLAN_ARM_WORKOUT_NO_PUSH_UPS){
+    } else if (planName == Constant.PLAN_ARM_WORKOUT_NO_PUSH_UPS) {
       imageName = "ic_arm_workout_no_push_banner.webp";
-    }else if(planName == Constant.PLAN_BELLY_FAT_BURNER_HIIT_INTERMEDIATE ||
-        planName == Constant.PLAN_BELLY_FAT_BURNER_HIIT){
+    } else if (planName == Constant.PLAN_BELLY_FAT_BURNER_HIIT_INTERMEDIATE ||
+        planName == Constant.PLAN_BELLY_FAT_BURNER_HIIT) {
       imageName = "ic_belly_fat_burner_banner.webp";
-    }else if(planName == Constant.PLAN_BUILD_WIDER_SHOULDERS){
+    } else if (planName == Constant.PLAN_BUILD_WIDER_SHOULDERS) {
       imageName = "ic_build_wider_banner.webp";
-    }else if(planName == Constant.PLAN_BUTT_BLASTER_CHALLENGE){
+    } else if (planName == Constant.PLAN_BUTT_BLASTER_CHALLENGE) {
       imageName = "ic_butt_blaster_banner.webp";
-    }else if(planName == Constant.PLAN_GET_RID_OF_MAN_BOOBS_HIIT){
+    } else if (planName == Constant.PLAN_GET_RID_OF_MAN_BOOBS_HIIT) {
       imageName = "ic_get_rid_of_man_banner.webp";
-    }else if(planName == Constant.PLAN_INTENSE_INNER_THIGH_CHALLENGE){
+    } else if (planName == Constant.PLAN_INTENSE_INNER_THIGH_CHALLENGE) {
       imageName = "ic_intense_inner_banner.webp";
-    }else if(planName == Constant.PLAN_KILLER_CHEST_WORKOUT){
+    } else if (planName == Constant.PLAN_KILLER_CHEST_WORKOUT) {
       imageName = "ic_killeR_chest_banner.webp";
-    }else if(planName == Constant.PLAN_HIIT_KILLER_CORE){
+    } else if (planName == Constant.PLAN_HIIT_KILLER_CORE) {
       imageName = "ic_killer_core_hiit_banner.webp";
-    }else if(planName == Constant.PLAN_LEGS_BUTT_WORKOUT){
+    } else if (planName == Constant.PLAN_LEGS_BUTT_WORKOUT) {
       imageName = "ic_leg_butt_workout_banner.webp";
-    }else if(planName == Constant.PLAN_LEG_WORKOUT_NO_JUMPING){
+    } else if (planName == Constant.PLAN_LEG_WORKOUT_NO_JUMPING) {
       imageName = "ic_leg_workout_no_jump_banner.webp";
-    }else if(planName == Constant.PLAN_ONLY_4_MOVES_FOR_ABS){
+    } else if (planName == Constant.PLAN_ONLY_4_MOVES_FOR_ABS) {
       imageName = "ic_only_4_move_banner.webp";
-    }else if(planName == Constant.PLAN_PLANK_CHALLENGE){
+    } else if (planName == Constant.PLAN_PLANK_CHALLENGE) {
       imageName = "ic_plank_banner.webp";
-    }else if(planName == Constant.PLAN_RIPPED_V_CUT_ABS_SCULPTING){
+    } else if (planName == Constant.PLAN_RIPPED_V_CUT_ABS_SCULPTING) {
       imageName = "ic_ripped_vcut_banner.webp";
     }
-    return "assets/exerciseImage/discover/subPlanBanner/"+imageName;
+    return "assets/exerciseImage/discover/subPlanBanner/" + imageName;
   }
 
   static Future<void> saveReminder({List<ReminderTable>? reminderList}) async {
-
     int notificationId = 100;
     List selectedDays = [];
     TimeOfDay? selectedTime;
 
     List<PendingNotificationRequest> pendingNoti =
-    await flutterLocalNotificationsPlugin.pendingNotificationRequests();
+        await flutterLocalNotificationsPlugin.pendingNotificationRequests();
 
     pendingNoti.forEach((element) {
       if (element.payload == Constant.strExerciseReminder) {
-
-
         flutterLocalNotificationsPlugin.cancel(element.id);
       }
-
     });
 
     reminderList!.forEach((element) {
-
       selectedDays = element.repeatNo!.split(", ");
       var hr = int.parse(element.time!.split(":")[0]);
       var min = int.parse(element.time!.split(":")[1]);
@@ -255,10 +249,8 @@ class Utils {
     });
   }
 
-  static scheduledNotification(tz.TZDateTime scheduledDate, int notificationId) async {
-
-
-
+  static scheduledNotification(
+      tz.TZDateTime scheduledDate, int notificationId) async {
     var titleText = "Exercise Reminder";
     var msg = "It's time to exercise.";
 
@@ -269,13 +261,13 @@ class Utils {
         scheduledDate,
         const NotificationDetails(
           android: AndroidNotificationDetails(
-              'exercise_reminder',
-              'Exercise Reminder',
-              channelDescription: 'This is reminder for exercise',icon: 'ic_notification'),
+              'exercise_reminder', 'Exercise Reminder',
+              channelDescription: 'This is reminder for exercise',
+              icon: 'ic_notification'),
         ),
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:
-        UILocalNotificationDateInterpretation.absoluteTime,
+            UILocalNotificationDateInterpretation.absoluteTime,
         matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
         payload: Constant.strExerciseReminder);
   }
