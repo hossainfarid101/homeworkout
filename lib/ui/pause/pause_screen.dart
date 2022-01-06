@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:homeworkout_flutter/common/commonTopBar/commom_topbar.dart';
 import 'package:homeworkout_flutter/database/model/DiscoverSingleExerciseData.dart';

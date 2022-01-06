@@ -10,7 +10,7 @@ import 'package:homeworkout_flutter/inapppurchase/IAPReceiptData.dart';
 import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
-import 'package:in_app_purchase_ios/store_kit_wrappers.dart';
+import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
 
 import '../main.dart';
 
@@ -43,6 +43,7 @@ class InAppPurchaseHelper {
 
   initialize() {
     if (Platform.isAndroid) {
+      // ignore: deprecated_member_use
       InAppPurchaseAndroidPlatformAddition.enablePendingPurchases();
     }
   }

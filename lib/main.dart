@@ -22,7 +22,7 @@ import 'package:rxdart/subjects.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
-import 'package:in_app_purchase_ios/store_kit_wrappers.dart';
+import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
 
 import 'inapppurchase/InAppPurchaseHelper.dart';
 import 'localization/locale_constant.dart';
@@ -62,6 +62,7 @@ Future<void> main() async {
     );
   });
   await Preference().instance();
+  // ignore: deprecated_member_use
   InAppPurchaseAndroidPlatformAddition.enablePendingPurchases();
 
   if (Platform.isIOS) {

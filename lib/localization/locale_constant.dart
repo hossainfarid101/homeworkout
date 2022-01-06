@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:shared_preferences/shared_preferences.dart';
