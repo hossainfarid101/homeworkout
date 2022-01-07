@@ -24,8 +24,8 @@ class InAppPurchaseHelper {
     return _inAppPurchaseHelper;
   }
 
-  static const String monthlySubscriptionId = 'sub_month';
-  static const String yearlySubscriptionId = 'sub_year';
+  static const String monthlySubscriptionId = 'Add your monthly subscription product id here which must be same for both play console and app store connect';
+  static const String yearlySubscriptionId = 'Add your yearly subscription product id here which must be same for both play console and app store connect';
 
   static const List<String> _kProductIds = <String>[
     monthlySubscriptionId,

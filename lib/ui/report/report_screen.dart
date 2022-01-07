@@ -104,7 +104,6 @@ class _ReportScreenState extends State<ReportScreen>
     getWeightChartDataFromDatabase();
     getWeightData();
     _getDataFromDatabase();
-    setBmiCalculation();
     _createBottomBannerAd();
     super.initState();
   }
@@ -295,8 +294,7 @@ class _ReportScreenState extends State<ReportScreen>
       children: [
         InkWell(
           onTap: () {
-            Navigator.push(
-                context,
+            Navigator.of(context).push(
                 MaterialPageRoute(
                     builder: (context) => WorkoutHistoryScreen()));
           },

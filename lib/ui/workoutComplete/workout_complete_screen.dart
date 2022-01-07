@@ -1234,12 +1234,11 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
     }
     Preference.shared.setLastTime(widget.tableName!, endTime.toString());
     _insertExerciseHistoryData();
-    Navigator.push(
-        context,
+    Navigator.of(context).push(
         MaterialPageRoute(
             builder: (context) => WorkoutHistoryScreen(
                   isFromWorkOut: true,
-                ))).then((value) => Navigator.pop(context));
+                ))).then((value) => Navigator.of(context).pop());
   }
 
   void _insertExerciseHistoryData() async {

@@ -578,12 +578,11 @@ class _WorkoutHistoryScreenState extends State<WorkoutHistoryScreen>
   _backToReportScreen() {
     if (!widget.isFromTraining!) {
       Preference.shared.setInt(Preference.DRAWER_INDEX, 2);
-      Navigator.pushAndRemoveUntil(
-          context,
+      Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => ReportScreen()),
           (route) => false);
     } else {
-      Navigator.pop(context);
+      Navigator.of(context).pop();
     }
   }
 }
