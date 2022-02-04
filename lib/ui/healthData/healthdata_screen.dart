@@ -37,7 +37,9 @@ class _HealthDataScreenState extends State<HealthDataScreen>
     _bottomBannerAd = BannerAd(
       adUnitId: AdHelper.bannerAdUnitId,
       size: AdSize.banner,
-      request: AdRequest(),
+      request: AdRequest(
+          nonPersonalizedAds: Utils.nonPersonalizedAds()
+      ),
       listener: BannerAdListener(
         onAdLoaded: (_) {
           setState(() {

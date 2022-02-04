@@ -76,7 +76,9 @@ class _PauseScreenState extends State<PauseScreen>
     if (Debug.GOOGLE_AD) {
       InterstitialAd.load(
         adUnitId: AdHelper.interstitialAdUnitId,
-        request: AdRequest(),
+        request: AdRequest(
+            nonPersonalizedAds: Utils.nonPersonalizedAds()
+        ),
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (InterstitialAd ad) {
             _interstitialAd = ad;
@@ -153,7 +155,9 @@ class _PauseScreenState extends State<PauseScreen>
     _bottomBannerAd = BannerAd(
       adUnitId: AdHelper.bannerAdUnitId,
       size: AdSize.banner,
-      request: AdRequest(),
+      request: AdRequest(
+          nonPersonalizedAds: Utils.nonPersonalizedAds()
+      ),
       listener: BannerAdListener(
         onAdLoaded: (_) {
           setState(() {

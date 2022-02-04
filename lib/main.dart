@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -16,6 +17,7 @@ import 'package:homeworkout_flutter/ui/training_plan/training_screen.dart';
 import 'package:homeworkout_flutter/ui/workoutComplete/workout_complete_screen.dart';
 import 'package:homeworkout_flutter/utils/color.dart';
 import 'package:homeworkout_flutter/utils/constant.dart';
+import 'package:homeworkout_flutter/utils/debug.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:rxdart/subjects.dart';
@@ -55,13 +57,9 @@ String? selectedNotificationPayload;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  MobileAds.instance.initialize().then((value) {
-    MobileAds.instance.updateRequestConfiguration(
-      //Add more configs
-      RequestConfiguration(testDeviceIds: []),
-    );
-  });
+
   await Preference().instance();
+  await initPlugin();
   // ignore: deprecated_member_use
   InAppPurchaseAndroidPlatformAddition.enablePendingPurchases();
 
@@ -106,10 +104,28 @@ Future<void> main() async {
     selectedNotificationPayload = payload;
     selectNotificationSubject.add(payload);
   });
-
+  await _initMobileAds();
   _configureLocalTimeZone();
 
   runApp(const MyApp());
+}
+
+Future<InitializationStatus> _initMobileAds() {
+  return MobileAds.instance.initialize();
+}
+
+Future<void> initPlugin() async {
+  try {
+    final TrackingStatus status =
+    await AppTrackingTransparency.trackingAuthorizationStatus;
+    if (status == TrackingStatus.notDetermined) {
+      var _authStatus = await AppTrackingTransparency.requestTrackingAuthorization();
+      Preference.shared.setString(Preference.TRACK_STATUS, _authStatus.toString());
+    }
+  } on PlatformException {}
+
+  final uuid = await AppTrackingTransparency.getAdvertisingIdentifier();
+  Debug.printLog("UUID:" + uuid);
 }
 
 Future<void> _configureLocalTimeZone() async {

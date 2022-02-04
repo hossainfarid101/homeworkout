@@ -22,7 +22,7 @@ import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 import 'package:open_settings/open_settings.dart';
 import 'package:rate_my_app/rate_my_app.dart';
-import 'package:share/share.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -59,7 +59,9 @@ class _SettingsScreenState extends State<SettingsScreen>
     _bottomBannerAd = BannerAd(
       adUnitId: AdHelper.bannerAdUnitId,
       size: AdSize.banner,
-      request: AdRequest(),
+      request: AdRequest(
+          nonPersonalizedAds: Utils.nonPersonalizedAds()
+      ),
       listener: BannerAdListener(
         onAdLoaded: (_) {
           setState(() {

@@ -63,7 +63,9 @@ class _TrainingScreenState extends State<TrainingScreen>
     _bottomBannerAd = BannerAd(
       adUnitId: AdHelper.bannerAdUnitId,
       size: AdSize.banner,
-      request: AdRequest(),
+      request: AdRequest(
+          nonPersonalizedAds: Utils.nonPersonalizedAds()
+      ),
       listener: BannerAdListener(
         onAdLoaded: (_) {
           setState(() {
@@ -116,7 +118,9 @@ class _TrainingScreenState extends State<TrainingScreen>
   void _createNativeAd() {
     _nativeAd = NativeAd(
       adUnitId: AdHelper.nativeAdUnitId,
-      request: AdRequest(),
+      request: AdRequest(
+          nonPersonalizedAds: Utils.nonPersonalizedAds()
+      ),
       factoryId: 'listTile',
       listener: NativeAdListener(
         onAdLoaded: (Ad ad) {

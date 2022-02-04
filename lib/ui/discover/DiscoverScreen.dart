@@ -63,7 +63,9 @@ class _DiscoverScreenState extends State<DiscoverScreen>
     _bottomBannerAd = BannerAd(
       adUnitId: AdHelper.bannerAdUnitId,
       size: AdSize.banner,
-      request: AdRequest(),
+      request: AdRequest(
+        nonPersonalizedAds: Utils.nonPersonalizedAds()
+      ),
       listener: BannerAdListener(
         onAdLoaded: (_) {
           setState(() {
@@ -79,7 +81,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   }
 
   static final AdRequest request = AdRequest(
-    nonPersonalizedAds: true,
+    nonPersonalizedAds: Utils.nonPersonalizedAds(),
   );
 
   @override

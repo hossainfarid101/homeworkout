@@ -47,6 +47,8 @@ class Preference {
   static const String INTERSTITIAL_AD_COUNT_QUIT = "INTERSTITIAL_AD_COUNT_QUIT";
   static const String INTERSTITIAL_AD_COUNT_COMPLETE = "INTERSTITIAL_AD_COUNT_COMPLETE";
 
+  static const String TRACK_STATUS = "TRACK_STATUS";
+
   // ------------------ SINGLETON -----------------------
   static final Preference _preference = Preference._internal();
 

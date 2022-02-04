@@ -155,7 +155,9 @@ class _SkipExerciseScreenState extends State<SkipExerciseScreen>
   void _createNativeAd() {
     _nativeAd = NativeAd(
       adUnitId: AdHelper.nativeAdUnitId,
-      request: AdRequest(),
+      request: AdRequest(
+          nonPersonalizedAds: Utils.nonPersonalizedAds()
+      ),
       factoryId: 'listTile',
       listener: NativeAdListener(
         onAdLoaded: (Ad ad) {

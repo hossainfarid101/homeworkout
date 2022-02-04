@@ -271,4 +271,16 @@ class Utils {
         matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
         payload: Constant.strExerciseReminder);
   }
+
+  static nonPersonalizedAds()  {
+    if(Platform.isIOS) {
+      if (Preference.shared.getString(Preference.TRACK_STATUS) != Constant.trackingStatus) {
+        return true;
+      } else {
+        return false;
+      }
+    }else {
+      return false;
+    }
+  }
 }

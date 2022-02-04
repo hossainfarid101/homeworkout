@@ -67,7 +67,7 @@ class _GeneratingThePlanScreenState extends State<GeneratingThePlanScreen>
         ? Center(
             child: CircularPercentIndicator(
               backgroundColor: Colur.track_gray,
-              radius: 245,
+              radius: MediaQuery.of(context).size.width*0.4,
               linearGradient: LinearGradient(
                   colors: [Colur.blueGradient1, Colur.blueGradient2]),
               lineWidth: 12,

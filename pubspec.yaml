@@ -15,42 +15,42 @@ dependencies:
     sdk: flutter
 
 
-  cupertino_icons: ^1.0.2
-
-  shared_preferences: ^2.0.6
-  fluttertoast: ^8.0.7
-  permission_handler: ^8.2.6
+  cupertino_icons: ^1.0.4
+  shared_preferences: ^2.0.12
+  fluttertoast: ^8.0.8
+  permission_handler: ^8.3.0
   intl: ^0.17.0
-  flutter_local_notifications: ^9.1.2
+  flutter_local_notifications: ^9.2.0
   flutter_native_timezone: ^2.0.0
-  rxdart: ^0.27.2
+  rxdart: ^0.27.3
   charts_flutter: ^0.12.0
-  share: ^2.0.4
-  url_launcher: ^6.0.9
-  auto_size_text: 3.0.0-nullsafety.0
-  rate_my_app: ^1.1.1
+  share_plus: ^3.0.4
+  url_launcher: ^6.0.18
+  auto_size_text: ^3.0.0
+  rate_my_app: ^1.1.1+1
   date_picker_timeline: ^1.2.3
-  sqflite: ^2.0.0+4
-  group_radio_button: ^1.1.0
+  sqflite: ^2.0.2
+  group_radio_button: ^1.2.0
   open_settings: ^2.0.2
-  android_intent_plus: ^3.0.2
-  flutter_tts: ^3.2.2
+  android_intent_plus: ^3.1.0
+  flutter_tts: ^3.3.3
   flutter_rounded_date_picker: ^2.0.2
-  dotted_border: ^2.0.0+1
-  align_positioned: ^2.0.4
-  table_calendar: ^3.0.2
-  date_format: ^2.0.4
+  dotted_border: ^2.0.0+2
+  align_positioned: ^3.0.0
+  table_calendar: ^3.0.3
+  date_format: ^2.0.5
   flutter_picker: ^2.0.2
   circular_countdown_timer: ^0.2.0
   audioplayers: ^0.20.1
   youtube_player_flutter: ^8.0.0
   lottie: ^1.2.1
-  syncfusion_flutter_gauges: ^19.3.56
-  percent_indicator: ^3.4.0
+  syncfusion_flutter_gauges: ^19.4.48
+  percent_indicator: ^4.0.0
   numberpicker: ^2.1.1
   google_mobile_ads: ^1.0.1
   in_app_purchase: ^2.0.1
   dio: ^4.0.4
+  app_tracking_transparency: ^2.0.2+1
 
 dev_dependencies:
   flutter_test:

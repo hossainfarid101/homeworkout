@@ -106,7 +106,9 @@ class _WorkoutScreenState extends State<WorkoutScreen>
     if (Debug.GOOGLE_AD) {
       InterstitialAd.load(
         adUnitId: AdHelper.interstitialAdUnitId,
-        request: AdRequest(),
+        request: AdRequest(
+            nonPersonalizedAds: Utils.nonPersonalizedAds()
+        ),
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (InterstitialAd ad) {
             _interstitialAd = ad;

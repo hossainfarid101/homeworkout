@@ -70,7 +70,9 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
     _bottomBannerAd = BannerAd(
       adUnitId: AdHelper.bannerAdUnitId,
       size: AdSize.banner,
-      request: AdRequest(),
+      request: AdRequest(
+          nonPersonalizedAds: Utils.nonPersonalizedAds()
+      ),
       listener: BannerAdListener(
         onAdLoaded: (_) {
           setState(() {
@@ -92,7 +94,9 @@ class _ExerciseListScreenState extends State<ExerciseListScreen>
     if (Debug.GOOGLE_AD) {
       InterstitialAd.load(
         adUnitId: AdHelper.interstitialAdUnitId,
-        request: AdRequest(),
+        request: AdRequest(
+            nonPersonalizedAds: Utils.nonPersonalizedAds()
+        ),
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (InterstitialAd ad) {
             _interstitialAd = ad;

@@ -25,7 +25,7 @@ import 'package:homeworkout_flutter/utils/constant.dart';
 import 'package:homeworkout_flutter/utils/preference.dart';
 import 'package:homeworkout_flutter/utils/utils.dart';
 import 'package:intl/intl.dart';
-import 'package:share/share.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:lottie/lottie.dart';
 
@@ -92,7 +92,9 @@ class _WorkoutCompleteScreenState extends State<WorkoutCompleteScreen> {
   void _createNativeAd() {
     _nativeAd = NativeAd(
       adUnitId: AdHelper.nativeAdUnitId,
-      request: AdRequest(),
+      request: AdRequest(
+          nonPersonalizedAds: Utils.nonPersonalizedAds()
+      ),
       factoryId: 'listTile',
       listener: NativeAdListener(
         onAdLoaded: (Ad ad) {
