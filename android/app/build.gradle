@@ -26,15 +26,8 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    signingConfigs {
-        release {
-            storeFile file('/Volumes/BenzatineWorks/JayFinava/FlutterProjects/Product/HOMEWORKOUT_FLUTTER/SignInDetails/HomeWorkout')
-            storePassword 'HomeWorkoutFlutter'
-            keyPassword 'HomeWorkoutFlutter'
-            keyAlias 'HomeWorkoutFlutter'
-        }
-    }
-    compileSdkVersion 31
+
+    compileSdkVersion 32
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -52,7 +45,7 @@ android {
     defaultConfig {
         applicationId "com.homeworkout.men.women"
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 32
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
@@ -61,8 +54,7 @@ android {
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.release
-            shrinkResources false
+            signingConfig signingConfigs.debug
         }
     }
 }
