@@ -112,7 +112,7 @@ class _QuarantineAtHomeScreenState extends State<QuarantineAtHomeScreen>
 
     _rewardedAd!.setImmersiveMode(true);
     _rewardedAd!
-        .show(onUserEarnedReward: (RewardedAd ad, RewardItem reward) {});
+        .show(onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {});
     _rewardedAd = null;
   }
 

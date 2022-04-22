@@ -825,6 +825,7 @@ class _ReportScreenState extends State<ReportScreen>
     } else if (bmi! >= 40) {
       return fullWidth * 0.44;
     }
+    return null;
   }
 
   _setBmiCalculationInLoop(double fullWidth, int totalDiffInLoop,

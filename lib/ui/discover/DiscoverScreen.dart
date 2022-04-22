@@ -139,7 +139,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
     );
 
     _rewardedAd!.setImmersiveMode(true);
-    _rewardedAd!.show(onUserEarnedReward: (RewardedAd ad, RewardItem reward) {
+    _rewardedAd!.show(onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {
       _startNextScreen();
       _createRewardedAd();
     });

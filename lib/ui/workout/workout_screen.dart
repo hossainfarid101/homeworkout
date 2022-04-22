@@ -149,7 +149,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
     _getLastPosition();
     _getPreference();
     timerForCount =
-        Timer.periodic(Duration(seconds: 1), (Timer t) => _setSoundCountDown());
+        Timer.periodic(Duration(milliseconds: 500), (Timer t) => _setSoundCountDown());
     _createInterstitialAd();
     super.initState();
   }
@@ -598,7 +598,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                       await _soundOptionsDialog().then((value) {
                         if (isWidgetCountDown) {
                           countDownController.resume();
-                          timerForCount = Timer.periodic(Duration(seconds: 1),
+                          timerForCount = Timer.periodic(Duration(milliseconds: 500),
                               (Timer t) => _setSoundCountDown());
                         } else {
                           if (_timeTypeCheck()) {

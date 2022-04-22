@@ -314,6 +314,7 @@ class DataBaseHelper {
       }
       return weightDataList;
     }
+    return null;
   }
 
   Future<WeightTable?> getMinWeight() async {
@@ -328,6 +329,7 @@ class DataBaseHelper {
       }
       return weightDataList;
     }
+    return null;
   }
 
   Future<WeightTable?> getCurrentWeight(String? date) async {
@@ -342,6 +344,7 @@ class DataBaseHelper {
       }
       return weightDataList;
     }
+    return null;
   }
 
   Future<int?> updateWeight(

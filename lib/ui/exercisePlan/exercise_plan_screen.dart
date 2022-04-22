@@ -99,7 +99,7 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
 
   void _createRewardedAd() {
     RewardedAd.load(
-        adUnitId: RewardedAd.testAdUnitId,
+        adUnitId: AdHelper.rewardedAdUnitId,
         request: request,
         rewardedAdLoadCallback: RewardedAdLoadCallback(
           onAdLoaded: (RewardedAd ad) {
@@ -137,7 +137,7 @@ class _ExercisePlanScreenState extends State<ExercisePlanScreen> {
 
     _rewardedAd!.setImmersiveMode(true);
     _rewardedAd!
-        .show(onUserEarnedReward: (RewardedAd ad, RewardItem reward) {});
+        .show(onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {});
     _rewardedAd = null;
   }
 
