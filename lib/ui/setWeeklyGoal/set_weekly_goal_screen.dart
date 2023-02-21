@@ -335,7 +335,7 @@ class _SetWeeklyGoalScreenState extends State<SetWeeklyGoalScreen> {
     const PickerDataFirstDay = '''[["Sunday","Monday","Saturday"]]''';
     new Picker(
         adapter: PickerDataAdapter<String>(
-            pickerdata: new JsonDecoder().convert(
+            pickerData: new JsonDecoder().convert(
                 (isTraining) ? PickerDataTraining : PickerDataFirstDay),
             isArray: true),
         selecteds: isTraining ? initialTrainingDays! : initialFirstDay,

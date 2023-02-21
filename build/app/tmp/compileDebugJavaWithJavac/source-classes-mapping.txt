@@ -1,0 +1,4 @@
+io/flutter/plugins/GeneratedPluginRegistrant.java
+ io.flutter.plugins.GeneratedPluginRegistrant
+com/sofiworkout/nilamnick/BuildConfig.java
+ com.sofiworkout.nilamnick.BuildConfig

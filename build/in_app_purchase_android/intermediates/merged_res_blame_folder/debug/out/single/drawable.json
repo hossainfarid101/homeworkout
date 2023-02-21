@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/in_app_purchase_android/intermediates/res/merged/debug/drawable/notification_icon_background.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/6026df9510db401bde1768f72e68950c/core-1.6.0/res/drawable/notification_icon_background.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/in_app_purchase_android/intermediates/res/merged/debug/drawable/notification_bg_low.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/6026df9510db401bde1768f72e68950c/core-1.6.0/res/drawable/notification_bg_low.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/in_app_purchase_android/intermediates/res/merged/debug/drawable/notification_tile_bg.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/6026df9510db401bde1768f72e68950c/core-1.6.0/res/drawable/notification_tile_bg.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/in_app_purchase_android/intermediates/res/merged/debug/drawable/notification_bg.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/6026df9510db401bde1768f72e68950c/core-1.6.0/res/drawable/notification_bg.xml"
+    }
+]

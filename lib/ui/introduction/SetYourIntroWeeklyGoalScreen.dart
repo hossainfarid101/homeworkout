@@ -448,7 +448,7 @@ class _SetYourWeeklyGoalScreenState
     const PickerDataFirstDay = '''[["Sunday","Monday","Saturday"]]''';
     new Picker(
         adapter: PickerDataAdapter<String>(
-            pickerdata: new JsonDecoder().convert(PickerDataFirstDay),
+            pickerData: new JsonDecoder().convert(PickerDataFirstDay),
             isArray: true),
         selecteds: initialFirstDay,
         hideHeader: true,

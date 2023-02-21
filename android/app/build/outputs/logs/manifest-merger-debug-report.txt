@@ -1,0 +1,964 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:1:1-60:12
+INJECTED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:1:1-60:12
+INJECTED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:1:1-60:12
+INJECTED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:1:1-60:12
+MERGED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:1:1-60:12
+MERGED from [:open_settings] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/open_settings/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:sqflite] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/sqflite/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:rate_my_app] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/rate_my_app/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-29:12
+MERGED from [:url_launcher_android] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-14:12
+MERGED from [:path_provider_android] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/path_provider_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:android_intent_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/android_intent_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:shared_preferences_android] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/shared_preferences_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:audioplayers] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/audioplayers/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
+MERGED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-48:12
+MERGED from [:in_app_purchase_android] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/in_app_purchase_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:google_mobile_ads] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/google_mobile_ads/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-15:12
+MERGED from [:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-35:12
+MERGED from [:flutter_native_timezone] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_native_timezone/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
+MERGED from [:fluttertoast] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/fluttertoast/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:flutter_tts] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_tts/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:permission_handler] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/permission_handler/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.window:window-java:1.0.0-beta04] /Users/farid/.gradle/caches/transforms-2/files-2.1/1abeb5769297f5eec846d837788c9c28/jetified-window-java-1.0.0-beta04/AndroidManifest.xml:17:1-23:12
+MERGED from [androidx.window:window:1.0.0-beta04] /Users/farid/.gradle/caches/transforms-2/files-2.1/9d5c36a4e6230461f8085df3c5748b23/jetified-window-1.0.0-beta04/AndroidManifest.xml:17:1-33:12
+MERGED from [com.google.android.material:material:1.2.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/20f43baff626df30d1837cb085d39d57/material-1.2.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat-resources:1.5.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/1e729638fd2b7511366ae36c25109f1d/jetified-appcompat-resources-1.5.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.appcompat:appcompat:1.5.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/e17d6cf8db26f2a076173646aa16e118/appcompat-1.5.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/37ac57a90c117422b21da7c5c5ed767c/jetified-viewpager2-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-ads:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/4d7a7a450203adba940d2605de5f5780/jetified-play-services-ads-20.6.0/AndroidManifest.xml:17:1-25:12
+MERGED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:17:1-67:12
+MERGED from [com.google.android.gms:play-services-ads-base:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/fb2c3a58108d4b564314d3a7eb92a23b/jetified-play-services-ads-base-20.6.0/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.ump:user-messaging-platform:1.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/24f408f38c1414cb6f719e1766b3c977/jetified-user-messaging-platform-1.0.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-ads-identifier:17.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/85c180bc8c546b6a5457ba0aae775764/jetified-play-services-ads-identifier-17.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-appset:16.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/373595d315bb21c945aa82608604f506/jetified-play-services-appset-16.0.0/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:18.0.3] /Users/farid/.gradle/caches/transforms-2/files-2.1/e60047b9fcfc4c66255bdd2a65cb7068/jetified-play-services-measurement-sdk-api-18.0.3/AndroidManifest.xml:17:1-27:12
+MERGED from [com.google.android.gms:play-services-base:17.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/d1ff2b47e450100c1f4b0c70d3c12b32/jetified-play-services-base-17.6.0/AndroidManifest.xml:17:1-29:12
+MERGED from [com.google.android.gms:play-services-measurement-base:18.0.3] /Users/farid/.gradle/caches/transforms-2/files-2.1/0c772bcb424064d33aa1d77163284df3/jetified-play-services-measurement-base-18.0.3/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-tasks:17.2.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/e7cb0398e7a5442b3e28b4a66b174091/jetified-play-services-tasks-17.2.1/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-basement:17.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/e0533de79ff5013197536410e006a327/jetified-play-services-basement-17.6.0/AndroidManifest.xml:17:1-28:12
+MERGED from [androidx.fragment:fragment:1.3.6] /Users/farid/.gradle/caches/transforms-2/files-2.1/336ab7993416a470fe7e04178dc65978/fragment-1.3.6/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.activity:activity:1.5.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/c99b3ab946ebeb3d9ff354ce07bd0227/jetified-activity-1.5.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.loader:loader:1.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/3e6ecf27f63cfd4831dd070ab2488bf2/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.5.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/46e8c7b7514e7beed87e6b6c09c0aaf8/lifecycle-viewmodel-2.5.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.5.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/a1933ed969f0fc2ae5736f544cfbccda/jetified-lifecycle-viewmodel-savedstate-2.5.1/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:2:1-19:12
+MERGED from [androidx.media:media:1.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/933345fe1ab9765e07591562a69814e3/media-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.webkit:webkit:1.5.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/097253908b187679fd1bc70c20b8e3f5/webkit-1.5.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.browser:browser:1.4.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/0c88acb1bdf10b0f050fb9fc31cc59b4/browser-1.4.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/29460756bbbf105040734c07d04ae474/swiperefreshlayout-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.core:core-ktx:1.9.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/39250e0418eed6f1c78c55fa72c5386c/jetified-core-ktx-1.9.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/4fa5764da8e78de1abef97a1c4696de9/coordinatorlayout-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.transition:transition:1.2.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/aaae8bd28a692437c5843712a1483ba6/transition-1.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/18e2e6875a5f40706e9c7104908d4936/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/3f6d78b03ec6d2835ce545763f208a8f/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/56e146259cc8a2ef693ee7b80ed738b0/drawerlayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.emoji2:emoji2-views-helper:1.2.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/b41a11c7b3fd983652214b30479fb146/jetified-emoji2-views-helper-1.2.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.emoji2:emoji2:1.2.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/022f7de969cd3a53c7efee58bf110b23/jetified-emoji2-1.2.0/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eedabc5a5fa13ec5318c7f8647a685a6/recyclerview-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/5fb49b016b22d175d19e7955f7450793/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/71bc4253d24f83ad10547cf8d85c0702/customview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:17:1-145:12
+MERGED from [androidx.core:core:1.9.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/1bf3ab0378ad8779c52e3c82dcf63866/core-1.9.0/AndroidManifest.xml:17:1-30:12
+MERGED from [com.jakewharton.threetenabp:threetenabp:1.2.3] /Users/farid/.gradle/caches/transforms-2/files-2.1/492838a2655abcc2b6f3c2ec27cd67c5/jetified-threetenabp-1.2.3/AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/aef483342d7292f43dae4d6283a6bcf1/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-process:2.4.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/5e9c33db031544e0e387bb7402ec2239/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:17:1-37:12
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/11e3d3629cac0dd1917cc952b210d4a4/jetified-startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/dfb5857f3921986f3c08690b48d9dc97/jetified-tracing-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/962847d18eb5dc53484e76aa565efbc2/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/53cc9e6bdbfb13ff2c056b5a88732355/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-service:2.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/c2f09744c2e602e38b504dfd3ee0317b/jetified-lifecycle-service-2.1.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.5.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/d9e8be32cfc1e66705a329a63b517264/lifecycle-runtime-2.5.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7837080dcc39ff6161fdea9379dd017b/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate:1.2.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/2d6285e8b24c5aa72591df0f2f9977a2/jetified-savedstate-1.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/d0b8dea41fcf2d9f092798e32df597e4/lifecycle-livedata-2.1.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.5.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/7d55dded5536ffd87e672d03fda24942/lifecycle-livedata-core-2.5.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.room:room-runtime:2.2.5] /Users/farid/.gradle/caches/transforms-2/files-2.1/5610ce0cdc0ebb322c29b0d9ed5ff21f/room-runtime-2.2.5/AndroidManifest.xml:17:1-31:12
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/71815f8fa7491d58fe19721f71538dee/core-runtime-2.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.sqlite:sqlite-framework:2.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/4b2337a926d352f7b119652a90a21a9b/sqlite-framework-2.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.sqlite:sqlite:2.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/2e60bf93142b6bbfaff5ad90b2f2a890/sqlite-2.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:2:1-34:12
+MERGED from [androidx.annotation:annotation-experimental:1.3.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/55124f194eb24ee5af5a0b7146619721/jetified-annotation-experimental-1.3.0/AndroidManifest.xml:17:1-22:12
+INJECTED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/debug/AndroidManifest.xml:1:1-7:12
+INJECTED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/debug/AndroidManifest.xml:1:1-7:12
+INJECTED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/debug/AndroidManifest.xml:1:1-7:12
+	package
+		ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:2:5-40
+		INJECTED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/debug/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:1:1-60:12
+		INJECTED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/debug/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:1:1-60:12
+		INJECTED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/debug/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:1:11-69
+uses-permission#android.permission.INTERNET
+ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:4:5-67
+MERGED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:4:5-67
+MERGED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:4:5-67
+MERGED from [:google_mobile_ads] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/google_mobile_ads/intermediates/merged_manifest/debug/AndroidManifest.xml:7:5-67
+MERGED from [:google_mobile_ads] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/google_mobile_ads/intermediates/merged_manifest/debug/AndroidManifest.xml:7:5-67
+MERGED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:18.0.3] /Users/farid/.gradle/caches/transforms-2/files-2.1/e60047b9fcfc4c66255bdd2a65cb7068/jetified-play-services-measurement-sdk-api-18.0.3/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:18.0.3] /Users/farid/.gradle/caches/transforms-2/files-2.1/e60047b9fcfc4c66255bdd2a65cb7068/jetified-play-services-measurement-sdk-api-18.0.3/AndroidManifest.xml:23:5-67
+	android:name
+		ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:4:22-64
+application
+ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:6:4-59:19
+MERGED from [:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:13:5-27:19
+MERGED from [:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:13:5-27:19
+MERGED from [:url_launcher_android] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:7:5-12:19
+MERGED from [:url_launcher_android] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:7:5-12:19
+MERGED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:13:5-46:19
+MERGED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:13:5-46:19
+MERGED from [:google_mobile_ads] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/google_mobile_ads/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-13:19
+MERGED from [:google_mobile_ads] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/google_mobile_ads/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-13:19
+MERGED from [:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:7:5-33:19
+MERGED from [:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:7:5-33:19
+MERGED from [androidx.window:window:1.0.0-beta04] /Users/farid/.gradle/caches/transforms-2/files-2.1/9d5c36a4e6230461f8085df3c5748b23/jetified-window-1.0.0-beta04/AndroidManifest.xml:24:5-31:19
+MERGED from [androidx.window:window:1.0.0-beta04] /Users/farid/.gradle/caches/transforms-2/files-2.1/9d5c36a4e6230461f8085df3c5748b23/jetified-window-1.0.0-beta04/AndroidManifest.xml:24:5-31:19
+MERGED from [com.google.android.material:material:1.2.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/20f43baff626df30d1837cb085d39d57/material-1.2.1/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.2.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/20f43baff626df30d1837cb085d39d57/material-1.2.1/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:46:5-65:19
+MERGED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:46:5-65:19
+MERGED from [com.google.android.gms:play-services-ads-base:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/fb2c3a58108d4b564314d3a7eb92a23b/jetified-play-services-ads-base-20.6.0/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-ads-base:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/fb2c3a58108d4b564314d3a7eb92a23b/jetified-play-services-ads-base-20.6.0/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-ads-identifier:17.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/85c180bc8c546b6a5457ba0aae775764/jetified-play-services-ads-identifier-17.0.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-ads-identifier:17.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/85c180bc8c546b6a5457ba0aae775764/jetified-play-services-ads-identifier-17.0.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-appset:16.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/373595d315bb21c945aa82608604f506/jetified-play-services-appset-16.0.0/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-appset:16.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/373595d315bb21c945aa82608604f506/jetified-play-services-appset-16.0.0/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-base:17.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/d1ff2b47e450100c1f4b0c70d3c12b32/jetified-play-services-base-17.6.0/AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-base:17.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/d1ff2b47e450100c1f4b0c70d3c12b32/jetified-play-services-base-17.6.0/AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-measurement-base:18.0.3] /Users/farid/.gradle/caches/transforms-2/files-2.1/0c772bcb424064d33aa1d77163284df3/jetified-play-services-measurement-base-18.0.3/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-measurement-base:18.0.3] /Users/farid/.gradle/caches/transforms-2/files-2.1/0c772bcb424064d33aa1d77163284df3/jetified-play-services-measurement-base-18.0.3/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-tasks:17.2.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/e7cb0398e7a5442b3e28b4a66b174091/jetified-play-services-tasks-17.2.1/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-tasks:17.2.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/e7cb0398e7a5442b3e28b4a66b174091/jetified-play-services-tasks-17.2.1/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-basement:17.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/e0533de79ff5013197536410e006a327/jetified-play-services-basement-17.6.0/AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.gms:play-services-basement:17.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/e0533de79ff5013197536410e006a327/jetified-play-services-basement-17.6.0/AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:10:3-17:17
+MERGED from [com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:10:3-17:17
+MERGED from [androidx.emoji2:emoji2:1.2.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/022f7de969cd3a53c7efee58bf110b23/jetified-emoji2-1.2.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.emoji2:emoji2:1.2.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/022f7de969cd3a53c7efee58bf110b23/jetified-emoji2-1.2.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:30:5-143:19
+MERGED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:30:5-143:19
+MERGED from [androidx.core:core:1.9.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/1bf3ab0378ad8779c52e3c82dcf63866/core-1.9.0/AndroidManifest.xml:28:5-89
+MERGED from [androidx.core:core:1.9.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/1bf3ab0378ad8779c52e3c82dcf63866/core-1.9.0/AndroidManifest.xml:28:5-89
+MERGED from [com.jakewharton.threetenabp:threetenabp:1.2.3] /Users/farid/.gradle/caches/transforms-2/files-2.1/492838a2655abcc2b6f3c2ec27cd67c5/jetified-threetenabp-1.2.3/AndroidManifest.xml:7:5-20
+MERGED from [com.jakewharton.threetenabp:threetenabp:1.2.3] /Users/farid/.gradle/caches/transforms-2/files-2.1/492838a2655abcc2b6f3c2ec27cd67c5/jetified-threetenabp-1.2.3/AndroidManifest.xml:7:5-20
+MERGED from [androidx.lifecycle:lifecycle-process:2.4.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/5e9c33db031544e0e387bb7402ec2239/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:25:5-35:19
+MERGED from [androidx.lifecycle:lifecycle-process:2.4.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/5e9c33db031544e0e387bb7402ec2239/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:25:5-35:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/11e3d3629cac0dd1917cc952b210d4a4/jetified-startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/11e3d3629cac0dd1917cc952b210d4a4/jetified-startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/962847d18eb5dc53484e76aa565efbc2/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/962847d18eb5dc53484e76aa565efbc2/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.room:room-runtime:2.2.5] /Users/farid/.gradle/caches/transforms-2/files-2.1/5610ce0cdc0ebb322c29b0d9ed5ff21f/room-runtime-2.2.5/AndroidManifest.xml:24:5-29:19
+MERGED from [androidx.room:room-runtime:2.2.5] /Users/farid/.gradle/caches/transforms-2/files-2.1/5610ce0cdc0ebb322c29b0d9ed5ff21f/room-runtime-2.2.5/AndroidManifest.xml:24:5-29:19
+MERGED from [com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:22:5-32:19
+MERGED from [com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:22:5-32:19
+	android:screenOrientation
+		ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:11:9-45
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.9.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/1bf3ab0378ad8779c52e3c82dcf63866/core-1.9.0/AndroidManifest.xml:28:18-86
+	android:label
+		ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:7:9-48
+	android:roundIcon
+		ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:9:9-54
+	android:icon
+		ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:8:9-43
+	android:allowBackup
+		ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:10:9-36
+meta-data#com.google.android.gms.ads.APPLICATION_ID
+ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:13:8-15:69
+	android:value
+		ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:15:12-66
+	android:name
+		ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:14:12-68
+meta-data#com.google.android.gms.version
+ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:18:8-20:68
+MERGED from [com.google.android.gms:play-services-basement:17.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/e0533de79ff5013197536410e006a327/jetified-play-services-basement-17.6.0/AndroidManifest.xml:23:9-25:69
+MERGED from [com.google.android.gms:play-services-basement:17.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/e0533de79ff5013197536410e006a327/jetified-play-services-basement-17.6.0/AndroidManifest.xml:23:9-25:69
+	android:value
+		ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:20:12-65
+	android:name
+		ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:19:12-57
+activity#com.sofiworkout.nilamnick.MainActivity
+ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:22:9-53:20
+	android:launchMode
+		ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:25:13-43
+	android:hardwareAccelerated
+		ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:28:13-47
+	android:windowSoftInputMode
+		ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:29:13-55
+	android:exported
+		ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:24:13-36
+	android:configChanges
+		ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:27:13-163
+	android:theme
+		ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:26:13-47
+	android:name
+		ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:23:13-41
+meta-data#io.flutter.embedding.android.NormalTheme
+ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:34:13-37:17
+	android:resource
+		ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:36:15-52
+	android:name
+		ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:35:15-70
+meta-data#io.flutter.embedding.android.SplashScreenDrawable
+ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:45:13-48:17
+	android:resource
+		ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:47:15-61
+	android:name
+		ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:46:15-79
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:49:13-52:29
+action#android.intent.action.MAIN
+ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:50:17-68
+	android:name
+		ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:50:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:51:17-76
+	android:name
+		ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:51:27-74
+meta-data#flutterEmbedding
+ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:56:9-58:33
+	android:value
+		ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:58:13-30
+	android:name
+		ADDED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:57:13-44
+uses-sdk
+INJECTED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml
+MERGED from [:open_settings] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/open_settings/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:open_settings] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/open_settings/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:sqflite] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/sqflite/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:sqflite] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/sqflite/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:rate_my_app] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/rate_my_app/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:rate_my_app] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/rate_my_app/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:url_launcher_android] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:url_launcher_android] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:path_provider_android] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/path_provider_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:path_provider_android] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/path_provider_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:android_intent_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/android_intent_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:android_intent_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/android_intent_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:shared_preferences_android] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/shared_preferences_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:shared_preferences_android] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/shared_preferences_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:audioplayers] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/audioplayers/intermediates/merged_manifest/debug/AndroidManifest.xml:7:5-44
+MERGED from [:audioplayers] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/audioplayers/intermediates/merged_manifest/debug/AndroidManifest.xml:7:5-44
+MERGED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:in_app_purchase_android] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/in_app_purchase_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:in_app_purchase_android] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/in_app_purchase_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:google_mobile_ads] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/google_mobile_ads/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:google_mobile_ads] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/google_mobile_ads/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:flutter_native_timezone] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_native_timezone/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:flutter_native_timezone] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_native_timezone/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:fluttertoast] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/fluttertoast/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:fluttertoast] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/fluttertoast/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:flutter_tts] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_tts/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:flutter_tts] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_tts/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:permission_handler] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/permission_handler/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:permission_handler] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/permission_handler/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [androidx.window:window-java:1.0.0-beta04] /Users/farid/.gradle/caches/transforms-2/files-2.1/1abeb5769297f5eec846d837788c9c28/jetified-window-java-1.0.0-beta04/AndroidManifest.xml:19:5-21:41
+MERGED from [androidx.window:window-java:1.0.0-beta04] /Users/farid/.gradle/caches/transforms-2/files-2.1/1abeb5769297f5eec846d837788c9c28/jetified-window-java-1.0.0-beta04/AndroidManifest.xml:19:5-21:41
+MERGED from [androidx.window:window:1.0.0-beta04] /Users/farid/.gradle/caches/transforms-2/files-2.1/9d5c36a4e6230461f8085df3c5748b23/jetified-window-1.0.0-beta04/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.window:window:1.0.0-beta04] /Users/farid/.gradle/caches/transforms-2/files-2.1/9d5c36a4e6230461f8085df3c5748b23/jetified-window-1.0.0-beta04/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.material:material:1.2.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/20f43baff626df30d1837cb085d39d57/material-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.2.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/20f43baff626df30d1837cb085d39d57/material-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.5.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/1e729638fd2b7511366ae36c25109f1d/jetified-appcompat-resources-1.5.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.5.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/1e729638fd2b7511366ae36c25109f1d/jetified-appcompat-resources-1.5.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.5.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/e17d6cf8db26f2a076173646aa16e118/appcompat-1.5.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.5.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/e17d6cf8db26f2a076173646aa16e118/appcompat-1.5.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/37ac57a90c117422b21da7c5c5ed767c/jetified-viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/37ac57a90c117422b21da7c5c5ed767c/jetified-viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.gms:play-services-ads:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/4d7a7a450203adba940d2605de5f5780/jetified-play-services-ads-20.6.0/AndroidManifest.xml:21:5-23:52
+MERGED from [com.google.android.gms:play-services-ads:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/4d7a7a450203adba940d2605de5f5780/jetified-play-services-ads-20.6.0/AndroidManifest.xml:21:5-23:52
+MERGED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-ads-base:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/fb2c3a58108d4b564314d3a7eb92a23b/jetified-play-services-ads-base-20.6.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-ads-base:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/fb2c3a58108d4b564314d3a7eb92a23b/jetified-play-services-ads-base-20.6.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.ump:user-messaging-platform:1.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/24f408f38c1414cb6f719e1766b3c977/jetified-user-messaging-platform-1.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.ump:user-messaging-platform:1.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/24f408f38c1414cb6f719e1766b3c977/jetified-user-messaging-platform-1.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-ads-identifier:17.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/85c180bc8c546b6a5457ba0aae775764/jetified-play-services-ads-identifier-17.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-ads-identifier:17.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/85c180bc8c546b6a5457ba0aae775764/jetified-play-services-ads-identifier-17.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-appset:16.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/373595d315bb21c945aa82608604f506/jetified-play-services-appset-16.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-appset:16.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/373595d315bb21c945aa82608604f506/jetified-play-services-appset-16.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:18.0.3] /Users/farid/.gradle/caches/transforms-2/files-2.1/e60047b9fcfc4c66255bdd2a65cb7068/jetified-play-services-measurement-sdk-api-18.0.3/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:18.0.3] /Users/farid/.gradle/caches/transforms-2/files-2.1/e60047b9fcfc4c66255bdd2a65cb7068/jetified-play-services-measurement-sdk-api-18.0.3/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:17.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/d1ff2b47e450100c1f4b0c70d3c12b32/jetified-play-services-base-17.6.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:17.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/d1ff2b47e450100c1f4b0c70d3c12b32/jetified-play-services-base-17.6.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-base:18.0.3] /Users/farid/.gradle/caches/transforms-2/files-2.1/0c772bcb424064d33aa1d77163284df3/jetified-play-services-measurement-base-18.0.3/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-measurement-base:18.0.3] /Users/farid/.gradle/caches/transforms-2/files-2.1/0c772bcb424064d33aa1d77163284df3/jetified-play-services-measurement-base-18.0.3/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-tasks:17.2.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/e7cb0398e7a5442b3e28b4a66b174091/jetified-play-services-tasks-17.2.1/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-tasks:17.2.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/e7cb0398e7a5442b3e28b4a66b174091/jetified-play-services-tasks-17.2.1/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-basement:17.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/e0533de79ff5013197536410e006a327/jetified-play-services-basement-17.6.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement:17.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/e0533de79ff5013197536410e006a327/jetified-play-services-basement-17.6.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.3.6] /Users/farid/.gradle/caches/transforms-2/files-2.1/336ab7993416a470fe7e04178dc65978/fragment-1.3.6/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.3.6] /Users/farid/.gradle/caches/transforms-2/files-2.1/336ab7993416a470fe7e04178dc65978/fragment-1.3.6/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.5.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/c99b3ab946ebeb3d9ff354ce07bd0227/jetified-activity-1.5.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.5.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/c99b3ab946ebeb3d9ff354ce07bd0227/jetified-activity-1.5.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.loader:loader:1.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/3e6ecf27f63cfd4831dd070ab2488bf2/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/3e6ecf27f63cfd4831dd070ab2488bf2/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.5.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/46e8c7b7514e7beed87e6b6c09c0aaf8/lifecycle-viewmodel-2.5.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.5.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/46e8c7b7514e7beed87e6b6c09c0aaf8/lifecycle-viewmodel-2.5.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.5.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/a1933ed969f0fc2ae5736f544cfbccda/jetified-lifecycle-viewmodel-savedstate-2.5.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.5.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/a1933ed969f0fc2ae5736f544cfbccda/jetified-lifecycle-viewmodel-savedstate-2.5.1/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:4:3-70
+MERGED from [com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:4:3-70
+MERGED from [androidx.media:media:1.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/933345fe1ab9765e07591562a69814e3/media-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media:media:1.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/933345fe1ab9765e07591562a69814e3/media-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.webkit:webkit:1.5.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/097253908b187679fd1bc70c20b8e3f5/webkit-1.5.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.webkit:webkit:1.5.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/097253908b187679fd1bc70c20b8e3f5/webkit-1.5.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.browser:browser:1.4.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/0c88acb1bdf10b0f050fb9fc31cc59b4/browser-1.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.browser:browser:1.4.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/0c88acb1bdf10b0f050fb9fc31cc59b4/browser-1.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/29460756bbbf105040734c07d04ae474/swiperefreshlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/29460756bbbf105040734c07d04ae474/swiperefreshlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core-ktx:1.9.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/39250e0418eed6f1c78c55fa72c5386c/jetified-core-ktx-1.9.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-ktx:1.9.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/39250e0418eed6f1c78c55fa72c5386c/jetified-core-ktx-1.9.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/4fa5764da8e78de1abef97a1c4696de9/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/4fa5764da8e78de1abef97a1c4696de9/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.2.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/aaae8bd28a692437c5843712a1483ba6/transition-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.2.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/aaae8bd28a692437c5843712a1483ba6/transition-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/18e2e6875a5f40706e9c7104908d4936/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/18e2e6875a5f40706e9c7104908d4936/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/3f6d78b03ec6d2835ce545763f208a8f/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/3f6d78b03ec6d2835ce545763f208a8f/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/56e146259cc8a2ef693ee7b80ed738b0/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/56e146259cc8a2ef693ee7b80ed738b0/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.emoji2:emoji2-views-helper:1.2.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/b41a11c7b3fd983652214b30479fb146/jetified-emoji2-views-helper-1.2.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2-views-helper:1.2.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/b41a11c7b3fd983652214b30479fb146/jetified-emoji2-views-helper-1.2.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2:1.2.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/022f7de969cd3a53c7efee58bf110b23/jetified-emoji2-1.2.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.emoji2:emoji2:1.2.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/022f7de969cd3a53c7efee58bf110b23/jetified-emoji2-1.2.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eedabc5a5fa13ec5318c7f8647a685a6/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eedabc5a5fa13ec5318c7f8647a685a6/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/5fb49b016b22d175d19e7955f7450793/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/5fb49b016b22d175d19e7955f7450793/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/71bc4253d24f83ad10547cf8d85c0702/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/71bc4253d24f83ad10547cf8d85c0702/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.core:core:1.9.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/1bf3ab0378ad8779c52e3c82dcf63866/core-1.9.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.9.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/1bf3ab0378ad8779c52e3c82dcf63866/core-1.9.0/AndroidManifest.xml:20:5-44
+MERGED from [com.jakewharton.threetenabp:threetenabp:1.2.3] /Users/farid/.gradle/caches/transforms-2/files-2.1/492838a2655abcc2b6f3c2ec27cd67c5/jetified-threetenabp-1.2.3/AndroidManifest.xml:5:5-44
+MERGED from [com.jakewharton.threetenabp:threetenabp:1.2.3] /Users/farid/.gradle/caches/transforms-2/files-2.1/492838a2655abcc2b6f3c2ec27cd67c5/jetified-threetenabp-1.2.3/AndroidManifest.xml:5:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/aef483342d7292f43dae4d6283a6bcf1/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/aef483342d7292f43dae4d6283a6bcf1/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.4.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/5e9c33db031544e0e387bb7402ec2239/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.lifecycle:lifecycle-process:2.4.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/5e9c33db031544e0e387bb7402ec2239/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/11e3d3629cac0dd1917cc952b210d4a4/jetified-startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/11e3d3629cac0dd1917cc952b210d4a4/jetified-startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/dfb5857f3921986f3c08690b48d9dc97/jetified-tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/dfb5857f3921986f3c08690b48d9dc97/jetified-tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/962847d18eb5dc53484e76aa565efbc2/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/962847d18eb5dc53484e76aa565efbc2/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/53cc9e6bdbfb13ff2c056b5a88732355/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/53cc9e6bdbfb13ff2c056b5a88732355/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-service:2.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/c2f09744c2e602e38b504dfd3ee0317b/jetified-lifecycle-service-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-service:2.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/c2f09744c2e602e38b504dfd3ee0317b/jetified-lifecycle-service-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.5.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/d9e8be32cfc1e66705a329a63b517264/lifecycle-runtime-2.5.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.5.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/d9e8be32cfc1e66705a329a63b517264/lifecycle-runtime-2.5.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7837080dcc39ff6161fdea9379dd017b/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7837080dcc39ff6161fdea9379dd017b/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/2d6285e8b24c5aa72591df0f2f9977a2/jetified-savedstate-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.2.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/2d6285e8b24c5aa72591df0f2f9977a2/jetified-savedstate-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/d0b8dea41fcf2d9f092798e32df597e4/lifecycle-livedata-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/d0b8dea41fcf2d9f092798e32df597e4/lifecycle-livedata-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.5.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/7d55dded5536ffd87e672d03fda24942/lifecycle-livedata-core-2.5.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.5.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/7d55dded5536ffd87e672d03fda24942/lifecycle-livedata-core-2.5.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.room:room-runtime:2.2.5] /Users/farid/.gradle/caches/transforms-2/files-2.1/5610ce0cdc0ebb322c29b0d9ed5ff21f/room-runtime-2.2.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.room:room-runtime:2.2.5] /Users/farid/.gradle/caches/transforms-2/files-2.1/5610ce0cdc0ebb322c29b0d9ed5ff21f/room-runtime-2.2.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/71815f8fa7491d58fe19721f71538dee/core-runtime-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/71815f8fa7491d58fe19721f71538dee/core-runtime-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.sqlite:sqlite-framework:2.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/4b2337a926d352f7b119652a90a21a9b/sqlite-framework-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.sqlite:sqlite-framework:2.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/4b2337a926d352f7b119652a90a21a9b/sqlite-framework-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.sqlite:sqlite:2.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/2e60bf93142b6bbfaff5ad90b2f2a890/sqlite-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.sqlite:sqlite:2.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/2e60bf93142b6bbfaff5ad90b2f2a890/sqlite-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:6:5-8:41
+MERGED from [com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:6:5-8:41
+MERGED from [androidx.annotation:annotation-experimental:1.3.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/55124f194eb24ee5af5a0b7146619721/jetified-annotation-experimental-1.3.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.3.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/55124f194eb24ee5af5a0b7146619721/jetified-annotation-experimental-1.3.0/AndroidManifest.xml:20:5-44
+INJECTED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/debug/AndroidManifest.xml
+INJECTED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/debug/AndroidManifest.xml
+	tools:overrideLibrary
+		ADDED from [com.google.android.gms:play-services-ads:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/4d7a7a450203adba940d2605de5f5780/jetified-play-services-ads-20.6.0/AndroidManifest.xml:23:9-49
+	android:targetSdkVersion
+		INJECTED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/debug/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/debug/AndroidManifest.xml
+uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
+ADDED from [:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:7:5-81
+MERGED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:27:5-81
+MERGED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:27:5-81
+	android:name
+		ADDED from [:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:7:22-78
+uses-permission#android.permission.VIBRATE
+ADDED from [:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:8:5-66
+	android:name
+		ADDED from [:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:8:22-63
+uses-permission#android.permission.USE_FULL_SCREEN_INTENT
+ADDED from [:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-81
+	android:name
+		ADDED from [:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:9:22-78
+uses-permission#android.permission.SCHEDULE_EXACT_ALARM
+ADDED from [:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:10:5-79
+	android:name
+		ADDED from [:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:10:22-76
+uses-permission#android.permission.POST_NOTIFICATIONS
+ADDED from [:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:11:5-77
+	android:name
+		ADDED from [:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:11:22-74
+receiver#com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver
+ADDED from [:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:14:9-16:40
+	android:exported
+		ADDED from [:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:16:13-37
+	android:name
+		ADDED from [:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-97
+receiver#com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver
+ADDED from [:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:17:9-26:20
+	android:exported
+		ADDED from [:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:19:13-37
+	android:name
+		ADDED from [:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:18:13-101
+intent-filter#action:name:android.intent.action.BOOT_COMPLETED+action:name:android.intent.action.MY_PACKAGE_REPLACED+action:name:android.intent.action.QUICKBOOT_POWERON+action:name:com.htc.intent.action.QUICKBOOT_POWERON
+ADDED from [:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:20:13-25:29
+action#android.intent.action.BOOT_COMPLETED
+ADDED from [:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:21:17-79
+	android:name
+		ADDED from [:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:21:25-76
+action#android.intent.action.MY_PACKAGE_REPLACED
+ADDED from [:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:22:17-84
+	android:name
+		ADDED from [:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:22:25-81
+action#android.intent.action.QUICKBOOT_POWERON
+ADDED from [:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:23:17-82
+	android:name
+		ADDED from [:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:23:25-79
+action#com.htc.intent.action.QUICKBOOT_POWERON
+ADDED from [:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:24:17-82
+	android:name
+		ADDED from [:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:24:25-79
+activity#io.flutter.plugins.urllauncher.WebViewActivity
+ADDED from [:url_launcher_android] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:8:9-11:74
+	android:exported
+		ADDED from [:url_launcher_android] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:13-37
+	android:theme
+		ADDED from [:url_launcher_android] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-71
+	android:name
+		ADDED from [:url_launcher_android] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:9:13-74
+queries
+ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:7:5-11:15
+MERGED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:28:5-44:15
+MERGED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:28:5-44:15
+MERGED from [com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:16:5-20:15
+MERGED from [com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:16:5-20:15
+intent#action:name:android.support.customtabs.action.CustomTabsService
+ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:8:9-10:18
+action#android.support.customtabs.action.CustomTabsService
+ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:9:13-90
+	android:name
+		ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:9:21-87
+activity#com.pichillilorenzo.flutter_inappwebview.in_app_browser.InAppBrowserActivity
+ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:14:9-18:47
+	android:exported
+		ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:17:13-37
+	android:configChanges
+		ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:16:13-137
+	android:theme
+		ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:18:13-44
+	android:name
+		ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-104
+activity#com.pichillilorenzo.flutter_inappwebview.chrome_custom_tabs.ChromeCustomTabsActivity
+ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:19:9-22:55
+	android:exported
+		ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:21:13-37
+	android:theme
+		ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:22:13-52
+	android:name
+		ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:20:13-112
+activity#com.pichillilorenzo.flutter_inappwebview.chrome_custom_tabs.TrustedWebActivity
+ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:23:9-26:55
+	android:exported
+		ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:25:13-37
+	android:theme
+		ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:26:13-52
+	android:name
+		ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:24:13-106
+activity#com.pichillilorenzo.flutter_inappwebview.chrome_custom_tabs.ChromeCustomTabsActivitySingleInstance
+ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:27:9-31:55
+	android:launchMode
+		ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:30:13-48
+	android:exported
+		ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:29:13-37
+	android:theme
+		ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:31:13-52
+	android:name
+		ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:28:13-126
+activity#com.pichillilorenzo.flutter_inappwebview.chrome_custom_tabs.TrustedWebActivitySingleInstance
+ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:32:9-36:55
+	android:launchMode
+		ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:35:13-48
+	android:exported
+		ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:34:13-37
+	android:theme
+		ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:36:13-52
+	android:name
+		ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:33:13-120
+receiver#com.pichillilorenzo.flutter_inappwebview.chrome_custom_tabs.ActionBroadcastReceiver
+ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:38:9-41:40
+	android:enabled
+		ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:40:13-35
+	android:exported
+		ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:41:13-37
+	android:name
+		ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:39:13-111
+meta-data#io.flutter.embedded_views_preview
+ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:43:9-45:36
+MERGED from [:google_mobile_ads] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/google_mobile_ads/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-12:36
+MERGED from [:google_mobile_ads] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/google_mobile_ads/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-12:36
+	android:value
+		ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:45:13-33
+	android:name
+		ADDED from [:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:44:13-61
+provider#dev.fluttercommunity.plus.share.ShareFileProvider
+ADDED from [:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:13:9-21:20
+	android:grantUriPermissions
+		ADDED from [:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:17:13-47
+	android:authorities
+		ADDED from [:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-74
+	android:exported
+		ADDED from [:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:16:13-37
+	android:name
+		ADDED from [:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-77
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from [:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:18:13-20:68
+	android:resource
+		ADDED from [:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:20:17-65
+	android:name
+		ADDED from [:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:19:17-67
+receiver#dev.fluttercommunity.plus.share.SharePlusPendingIntent
+ADDED from [:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:26:9-32:20
+	android:exported
+		ADDED from [:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:28:13-36
+	android:name
+		ADDED from [:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:27:13-82
+intent-filter#action:name:EXTRA_CHOSEN_COMPONENT
+ADDED from [:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:29:13-31:29
+action#EXTRA_CHOSEN_COMPONENT
+ADDED from [:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:30:17-65
+	android:name
+		ADDED from [:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:30:25-62
+uses-library#androidx.window.extensions
+ADDED from [androidx.window:window:1.0.0-beta04] /Users/farid/.gradle/caches/transforms-2/files-2.1/9d5c36a4e6230461f8085df3c5748b23/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
+	android:required
+		ADDED from [androidx.window:window:1.0.0-beta04] /Users/farid/.gradle/caches/transforms-2/files-2.1/9d5c36a4e6230461f8085df3c5748b23/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from [androidx.window:window:1.0.0-beta04] /Users/farid/.gradle/caches/transforms-2/files-2.1/9d5c36a4e6230461f8085df3c5748b23/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
+uses-library#androidx.window.sidecar
+ADDED from [androidx.window:window:1.0.0-beta04] /Users/farid/.gradle/caches/transforms-2/files-2.1/9d5c36a4e6230461f8085df3c5748b23/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
+	android:required
+		ADDED from [androidx.window:window:1.0.0-beta04] /Users/farid/.gradle/caches/transforms-2/files-2.1/9d5c36a4e6230461f8085df3c5748b23/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
+	android:name
+		ADDED from [androidx.window:window:1.0.0-beta04] /Users/farid/.gradle/caches/transforms-2/files-2.1/9d5c36a4e6230461f8085df3c5748b23/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:18.0.3] /Users/farid/.gradle/caches/transforms-2/files-2.1/e60047b9fcfc4c66255bdd2a65cb7068/jetified-play-services-measurement-sdk-api-18.0.3/AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:18.0.3] /Users/farid/.gradle/caches/transforms-2/files-2.1/e60047b9fcfc4c66255bdd2a65cb7068/jetified-play-services-measurement-sdk-api-18.0.3/AndroidManifest.xml:24:5-79
+MERGED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:26:5-79
+MERGED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:26:5-79
+	android:name
+		ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:24:22-76
+uses-permission#com.google.android.gms.permission.AD_ID
+ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:25:5-79
+	android:name
+		ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:25:22-76
+intent#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+data:scheme:https
+ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:31:9-37:18
+action#android.intent.action.VIEW
+ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:32:13-65
+	android:name
+		ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:32:21-62
+category#android.intent.category.BROWSABLE
+ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:34:13-74
+	android:name
+		ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:34:23-71
+data
+ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:36:13-44
+	android:scheme
+		ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:36:19-41
+activity#com.google.android.gms.ads.AdActivity
+ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:49:9-53:64
+	android:exported
+		ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:52:13-37
+	android:configChanges
+		ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:51:13-122
+	android:theme
+		ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:53:13-61
+	android:name
+		ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:50:13-65
+provider#com.google.android.gms.ads.MobileAdsInitProvider
+ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:55:9-59:39
+	android:authorities
+		ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:57:13-73
+	android:exported
+		ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:58:13-37
+	android:initOrder
+		ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:59:13-36
+	android:name
+		ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:56:13-76
+service#com.google.android.gms.ads.AdService
+ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:61:9-64:40
+	android:enabled
+		ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:63:13-35
+	android:exported
+		ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:64:13-37
+	android:name
+		ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:62:13-64
+uses-permission#android.permission.WAKE_LOCK
+ADDED from [com.google.android.gms:play-services-measurement-sdk-api:18.0.3] /Users/farid/.gradle/caches/transforms-2/files-2.1/e60047b9fcfc4c66255bdd2a65cb7068/jetified-play-services-measurement-sdk-api-18.0.3/AndroidManifest.xml:25:5-68
+MERGED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:25:5-68
+MERGED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:25:5-68
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement-sdk-api:18.0.3] /Users/farid/.gradle/caches/transforms-2/files-2.1/e60047b9fcfc4c66255bdd2a65cb7068/jetified-play-services-measurement-sdk-api-18.0.3/AndroidManifest.xml:25:22-65
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:17.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/d1ff2b47e450100c1f4b0c70d3c12b32/jetified-play-services-base-17.6.0/AndroidManifest.xml:23:9-26:75
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:17.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/d1ff2b47e450100c1f4b0c70d3c12b32/jetified-play-services-base-17.6.0/AndroidManifest.xml:25:13-37
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:17.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/d1ff2b47e450100c1f4b0c70d3c12b32/jetified-play-services-base-17.6.0/AndroidManifest.xml:26:13-72
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:17.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/d1ff2b47e450100c1f4b0c70d3c12b32/jetified-play-services-base-17.6.0/AndroidManifest.xml:24:13-79
+uses-permission#android.permission.FOREGROUND_SERVICE
+ADDED from [com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:8:3-74
+MERGED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:28:5-77
+MERGED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:28:5-77
+	android:name
+		ADDED from [com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:8:20-72
+activity#com.google.android.play.core.missingsplits.PlayCoreMissingSplitsActivity
+ADDED from [com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:12:5-271
+	android:process
+		ADDED from [com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:12:152-203
+	android:enabled
+		ADDED from [com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:12:103-126
+	android:stateNotNeeded
+		ADDED from [com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:12:240-269
+	android:launchMode
+		ADDED from [com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:12:204-239
+	android:exported
+		ADDED from [com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:12:127-151
+	android:name
+		ADDED from [com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:12:15-102
+activity#com.google.android.play.core.common.PlayCoreDialogWrapperActivity
+ADDED from [com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:13:5-226
+	android:enabled
+		ADDED from [com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:13:96-119
+	android:stateNotNeeded
+		ADDED from [com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:13:145-174
+	android:exported
+		ADDED from [com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:13:120-144
+	android:theme
+		ADDED from [com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:13:175-224
+	android:name
+		ADDED from [com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:13:15-95
+service#com.google.android.play.core.assetpacks.AssetPackExtractionService
+ADDED from [com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:16:5-145
+	android:enabled
+		ADDED from [com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:16:96-119
+	android:exported
+		ADDED from [com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:16:120-143
+	android:name
+		ADDED from [com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:16:14-95
+provider#androidx.startup.InitializationProvider
+ADDED from [androidx.emoji2:emoji2:1.2.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/022f7de969cd3a53c7efee58bf110b23/jetified-emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:31:9-39:20
+MERGED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:31:9-39:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.4.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/5e9c33db031544e0e387bb7402ec2239/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:26:9-34:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.4.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/5e9c33db031544e0e387bb7402ec2239/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:26:9-34:20
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/11e3d3629cac0dd1917cc952b210d4a4/jetified-startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/11e3d3629cac0dd1917cc952b210d4a4/jetified-startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+	tools:node
+		ADDED from [androidx.emoji2:emoji2:1.2.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/022f7de969cd3a53c7efee58bf110b23/jetified-emoji2-1.2.0/AndroidManifest.xml:28:13-31
+	android:authorities
+		ADDED from [androidx.emoji2:emoji2:1.2.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/022f7de969cd3a53c7efee58bf110b23/jetified-emoji2-1.2.0/AndroidManifest.xml:26:13-68
+	android:exported
+		ADDED from [androidx.emoji2:emoji2:1.2.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/022f7de969cd3a53c7efee58bf110b23/jetified-emoji2-1.2.0/AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.2.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/022f7de969cd3a53c7efee58bf110b23/jetified-emoji2-1.2.0/AndroidManifest.xml:25:13-67
+meta-data#androidx.emoji2.text.EmojiCompatInitializer
+ADDED from [androidx.emoji2:emoji2:1.2.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/022f7de969cd3a53c7efee58bf110b23/jetified-emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.emoji2:emoji2:1.2.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/022f7de969cd3a53c7efee58bf110b23/jetified-emoji2-1.2.0/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.2.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/022f7de969cd3a53c7efee58bf110b23/jetified-emoji2-1.2.0/AndroidManifest.xml:30:17-75
+meta-data#androidx.work.WorkManagerInitializer
+ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:36:13-38:52
+	android:value
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:38:17-49
+	android:name
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:37:17-68
+service#androidx.work.impl.background.systemalarm.SystemAlarmService
+ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:41:9-46:35
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:44:13-72
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:45:13-37
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:46:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:43:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:42:13-88
+service#androidx.work.impl.background.systemjob.SystemJobService
+ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:47:9-53:35
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:50:13-70
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:51:13-36
+	android:permission
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:52:13-69
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:53:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:49:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:48:13-84
+service#androidx.work.impl.foreground.SystemForegroundService
+ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:54:9-59:35
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:57:13-77
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:58:13-37
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:59:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:56:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:55:13-81
+receiver#androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver
+ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:61:9-66:35
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:64:13-35
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:65:13-37
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:66:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:63:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:62:13-88
+receiver#androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy
+ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:67:9-77:20
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:70:13-36
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:71:13-37
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:72:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:69:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:68:13-106
+intent-filter#action:name:android.intent.action.ACTION_POWER_CONNECTED+action:name:android.intent.action.ACTION_POWER_DISCONNECTED
+ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:73:13-76:29
+action#android.intent.action.ACTION_POWER_CONNECTED
+ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:74:17-87
+	android:name
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:74:25-84
+action#android.intent.action.ACTION_POWER_DISCONNECTED
+ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:75:17-90
+	android:name
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:75:25-87
+receiver#androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy
+ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:78:9-88:20
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:81:13-36
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:82:13-37
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:83:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:80:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:79:13-104
+intent-filter#action:name:android.intent.action.BATTERY_LOW+action:name:android.intent.action.BATTERY_OKAY
+ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:84:13-87:29
+action#android.intent.action.BATTERY_OKAY
+ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:85:17-77
+	android:name
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:85:25-74
+action#android.intent.action.BATTERY_LOW
+ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:86:17-76
+	android:name
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:86:25-73
+receiver#androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy
+ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:89:9-99:20
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:92:13-36
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:93:13-37
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:94:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:91:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:90:13-104
+intent-filter#action:name:android.intent.action.DEVICE_STORAGE_LOW+action:name:android.intent.action.DEVICE_STORAGE_OK
+ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:95:13-98:29
+action#android.intent.action.DEVICE_STORAGE_LOW
+ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:96:17-83
+	android:name
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:96:25-80
+action#android.intent.action.DEVICE_STORAGE_OK
+ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:97:17-82
+	android:name
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:97:25-79
+receiver#androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy
+ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:100:9-109:20
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:103:13-36
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:104:13-37
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:105:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:102:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:101:13-103
+intent-filter#action:name:android.net.conn.CONNECTIVITY_CHANGE
+ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:106:13-108:29
+action#android.net.conn.CONNECTIVITY_CHANGE
+ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:107:17-79
+	android:name
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:107:25-76
+receiver#androidx.work.impl.background.systemalarm.RescheduleReceiver
+ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:110:9-121:20
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:113:13-36
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:114:13-37
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:115:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:112:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:111:13-88
+intent-filter#action:name:android.intent.action.BOOT_COMPLETED+action:name:android.intent.action.TIMEZONE_CHANGED+action:name:android.intent.action.TIME_SET
+ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:116:13-120:29
+action#android.intent.action.TIME_SET
+ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:118:17-73
+	android:name
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:118:25-70
+action#android.intent.action.TIMEZONE_CHANGED
+ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:119:17-81
+	android:name
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:119:25-78
+receiver#androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver
+ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:122:9-131:20
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:125:13-72
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:126:13-37
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:127:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:124:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:123:13-99
+intent-filter#action:name:androidx.work.impl.background.systemalarm.UpdateProxies
+ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:128:13-130:29
+action#androidx.work.impl.background.systemalarm.UpdateProxies
+ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:129:17-98
+	android:name
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:129:25-95
+receiver#androidx.work.impl.diagnostics.DiagnosticsReceiver
+ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:132:9-142:20
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:135:13-35
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:136:13-36
+	android:permission
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:137:13-57
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:138:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:134:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:133:13-78
+intent-filter#action:name:androidx.work.diagnostics.REQUEST_DIAGNOSTICS
+ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:139:13-141:29
+action#androidx.work.diagnostics.REQUEST_DIAGNOSTICS
+ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:140:17-88
+	android:name
+		ADDED from [androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:140:25-85
+permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.9.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/1bf3ab0378ad8779c52e3c82dcf63866/core-1.9.0/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.9.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/1bf3ab0378ad8779c52e3c82dcf63866/core-1.9.0/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.9.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/1bf3ab0378ad8779c52e3c82dcf63866/core-1.9.0/AndroidManifest.xml:23:9-81
+permission#com.sofiworkout.men.women.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.9.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/1bf3ab0378ad8779c52e3c82dcf63866/core-1.9.0/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.9.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/1bf3ab0378ad8779c52e3c82dcf63866/core-1.9.0/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.9.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/1bf3ab0378ad8779c52e3c82dcf63866/core-1.9.0/AndroidManifest.xml:23:9-81
+uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.9.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/1bf3ab0378ad8779c52e3c82dcf63866/core-1.9.0/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.9.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/1bf3ab0378ad8779c52e3c82dcf63866/core-1.9.0/AndroidManifest.xml:26:22-94
+uses-permission#com.sofiworkout.men.women.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.9.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/1bf3ab0378ad8779c52e3c82dcf63866/core-1.9.0/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.9.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/1bf3ab0378ad8779c52e3c82dcf63866/core-1.9.0/AndroidManifest.xml:26:22-94
+meta-data#androidx.lifecycle.ProcessLifecycleInitializer
+ADDED from [androidx.lifecycle:lifecycle-process:2.4.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/5e9c33db031544e0e387bb7402ec2239/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:31:13-33:52
+	android:value
+		ADDED from [androidx.lifecycle:lifecycle-process:2.4.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/5e9c33db031544e0e387bb7402ec2239/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:33:17-49
+	android:name
+		ADDED from [androidx.lifecycle:lifecycle-process:2.4.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/5e9c33db031544e0e387bb7402ec2239/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:32:17-78
+service#androidx.room.MultiInstanceInvalidationService
+ADDED from [androidx.room:room-runtime:2.2.5] /Users/farid/.gradle/caches/transforms-2/files-2.1/5610ce0cdc0ebb322c29b0d9ed5ff21f/room-runtime-2.2.5/AndroidManifest.xml:25:9-28:40
+	android:exported
+		ADDED from [androidx.room:room-runtime:2.2.5] /Users/farid/.gradle/caches/transforms-2/files-2.1/5610ce0cdc0ebb322c29b0d9ed5ff21f/room-runtime-2.2.5/AndroidManifest.xml:28:13-37
+	android:directBootAware
+		ADDED from [androidx.room:room-runtime:2.2.5] /Users/farid/.gradle/caches/transforms-2/files-2.1/5610ce0cdc0ebb322c29b0d9ed5ff21f/room-runtime-2.2.5/AndroidManifest.xml:27:13-43
+	android:name
+		ADDED from [androidx.room:room-runtime:2.2.5] /Users/farid/.gradle/caches/transforms-2/files-2.1/5610ce0cdc0ebb322c29b0d9ed5ff21f/room-runtime-2.2.5/AndroidManifest.xml:26:13-74
+uses-permission#com.android.vending.BILLING
+ADDED from [com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:10:5-67
+	android:name
+		ADDED from [com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:10:22-64
+intent#action:name:com.android.vending.billing.InAppBillingService.BIND
+ADDED from [com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:17:9-19:18
+action#com.android.vending.billing.InAppBillingService.BIND
+ADDED from [com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:18:13-91
+	android:name
+		ADDED from [com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:18:21-88
+meta-data#com.google.android.play.billingclient.version
+ADDED from [com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:23:9-25:37
+	android:value
+		ADDED from [com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:25:13-34
+	android:name
+		ADDED from [com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:24:13-73
+activity#com.android.billingclient.api.ProxyBillingActivity
+ADDED from [com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:27:9-31:75
+	android:exported
+		ADDED from [com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:30:13-37
+	android:configChanges
+		ADDED from [com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:29:13-96
+	android:theme
+		ADDED from [com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:31:13-72
+	android:name
+		ADDED from [com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:28:13-78

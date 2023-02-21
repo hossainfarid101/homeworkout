@@ -140,7 +140,7 @@ class Constant {
   static String shareLink = "Add your app link here";
 
   static String getPrivacyPolicyURL() {
-    return "Add your privacy policy link here";
+    return "https://docs.google.com/document/d/1wZLPnApiEGc_M7Fp0gR5AP1rmR3rqdFbfnUVtbHyJYY/edit?usp=sharing";
   }
 
   static const String trackingStatus = "TrackingStatus.authorized";

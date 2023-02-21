@@ -1,0 +1,138 @@
+[
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ic_splash_bg.png.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/drawable-xxhdpi/ic_splash_bg.png"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_ic_splash_bg.png.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/drawable-xhdpi/ic_splash_bg.png"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/drawable-hdpi_ic_splash_bg.png.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/drawable-hdpi/ic_splash_bg.png"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ic_notification.png.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/drawable-xxhdpi/ic_notification.png"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_ic_notification.png.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/drawable-xhdpi/ic_notification.png"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ic_splash.png.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/drawable-xxhdpi/ic_splash.png"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/mipmap-hdpi_ic_launcher_foreground.png.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/drawable-hdpi_ic_splash.png.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/drawable-hdpi/ic_splash.png"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/mipmap-xhdpi_ic_launcher_foreground.png.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/drawable-mdpi_ic_splash.png.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/drawable-mdpi/ic_splash.png"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ic_notification.png.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/drawable-xxxhdpi/ic_notification.png"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/layout_list_tile_native_ad.xml.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/layout/list_tile_native_ad.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_ic_splash.png.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/drawable-xhdpi/ic_splash.png"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/drawable_launch_background.xml.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/drawable/launch_background.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/drawable-mdpi_ic_splash_bg.png.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/drawable-mdpi/ic_splash_bg.png"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/mipmap-mdpi_ic_launcher_foreground.png.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/mipmap-mdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/drawable-mdpi_ic_notification.png.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/drawable-mdpi/ic_notification.png"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/mipmap-xxhdpi_ic_launcher_foreground.png.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ic_splash_bg.png.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/drawable-xxxhdpi/ic_splash_bg.png"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/drawable-hdpi_ic_notification.png.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/drawable-hdpi/ic_notification.png"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ic_splash.png.flat",
+        "source": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/res/drawable-xxxhdpi/ic_splash.png"
+    }
+]

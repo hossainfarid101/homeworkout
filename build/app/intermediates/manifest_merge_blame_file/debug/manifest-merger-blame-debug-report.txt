@@ -1,0 +1,646 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.sofiworkout.men.women"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+9        android:targetSdkVersion="33" />
+10    <!--
+11         Flutter needs it to communicate with the running application
+12         to allow setting breakpoints, to provide hot reload, etc.
+13    -->
+14    <uses-permission android:name="android.permission.INTERNET" />
+14-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:4:5-67
+14-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:4:22-64
+15    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+15-->[:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:7:5-81
+15-->[:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:7:22-78
+16    <uses-permission android:name="android.permission.VIBRATE" />
+16-->[:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:8:5-66
+16-->[:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:8:22-63
+17    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+17-->[:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-81
+17-->[:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:9:22-78
+18    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+18-->[:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:10:5-79
+18-->[:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:10:22-76
+19    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+19-->[:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:11:5-77
+19-->[:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:11:22-74
+20
+21    <queries>
+21-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:7:5-11:15
+22        <intent>
+22-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:8:9-10:18
+23            <action android:name="android.support.customtabs.action.CustomTabsService" />
+23-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:9:13-90
+23-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:9:21-87
+24        </intent>
+25        <!-- For browser content -->
+26        <intent>
+26-->[com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:31:9-37:18
+27            <action android:name="android.intent.action.VIEW" />
+27-->[com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:32:13-65
+27-->[com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:32:21-62
+28
+29            <category android:name="android.intent.category.BROWSABLE" />
+29-->[com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:34:13-74
+29-->[com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:34:23-71
+30
+31            <data android:scheme="https" />
+31-->[com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:36:13-44
+31-->[com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:36:19-41
+32        </intent>
+33        <intent>
+33-->[com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:17:9-19:18
+34            <action android:name="com.android.vending.billing.InAppBillingService.BIND" />
+34-->[com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:18:13-91
+34-->[com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:18:21-88
+35        </intent>
+36    </queries>
+37
+38    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+38-->[com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:24:5-79
+38-->[com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:24:22-76
+39    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+39-->[com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:25:5-79
+39-->[com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:25:22-76
+40    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- Permission will be merged into the manifest of the hosting app. -->
+40-->[com.google.android.gms:play-services-measurement-sdk-api:18.0.3] /Users/farid/.gradle/caches/transforms-2/files-2.1/e60047b9fcfc4c66255bdd2a65cb7068/jetified-play-services-measurement-sdk-api-18.0.3/AndroidManifest.xml:25:5-68
+40-->[com.google.android.gms:play-services-measurement-sdk-api:18.0.3] /Users/farid/.gradle/caches/transforms-2/files-2.1/e60047b9fcfc4c66255bdd2a65cb7068/jetified-play-services-measurement-sdk-api-18.0.3/AndroidManifest.xml:25:22-65
+41    <!-- Is required to launch foreground extraction service for targetSdkVersion 28+. -->
+42    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+42-->[com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:8:3-74
+42-->[com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:8:20-72
+43
+44    <permission
+44-->[androidx.core:core:1.9.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/1bf3ab0378ad8779c52e3c82dcf63866/core-1.9.0/AndroidManifest.xml:22:5-24:47
+45        android:name="com.sofiworkout.men.women.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+45-->[androidx.core:core:1.9.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/1bf3ab0378ad8779c52e3c82dcf63866/core-1.9.0/AndroidManifest.xml:23:9-81
+46        android:protectionLevel="signature" />
+46-->[androidx.core:core:1.9.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/1bf3ab0378ad8779c52e3c82dcf63866/core-1.9.0/AndroidManifest.xml:24:9-44
+47
+48    <uses-permission android:name="com.sofiworkout.men.women.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+48-->[androidx.core:core:1.9.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/1bf3ab0378ad8779c52e3c82dcf63866/core-1.9.0/AndroidManifest.xml:26:5-97
+48-->[androidx.core:core:1.9.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/1bf3ab0378ad8779c52e3c82dcf63866/core-1.9.0/AndroidManifest.xml:26:22-94
+49    <uses-permission android:name="com.android.vending.BILLING" />
+49-->[com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:10:5-67
+49-->[com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:10:22-64
+50
+51    <application
+51-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:6:4-59:19
+52        android:allowBackup="false"
+52-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:10:9-36
+53        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+53-->[androidx.core:core:1.9.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/1bf3ab0378ad8779c52e3c82dcf63866/core-1.9.0/AndroidManifest.xml:28:18-86
+54        android:debuggable="true"
+55        android:icon="@mipmap/ic_launcher"
+55-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:8:9-43
+56        android:label="soFi Daily Workout Dose"
+56-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:7:9-48
+57        android:roundIcon="@mipmap/ic_launcher_round"
+57-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:9:9-54
+58        android:screenOrientation="portrait" >
+58-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:11:9-45
+59        <meta-data
+59-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:13:8-15:69
+60            android:name="com.google.android.gms.ads.APPLICATION_ID"
+60-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:14:12-68
+61            android:value="ca-app-pub-2106445418736402~5951590243" />
+61-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:15:12-66
+62        <meta-data
+62-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:18:8-20:68
+63            android:name="com.google.android.gms.version"
+63-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:19:12-57
+64            android:value="@integer/google_play_services_version" />
+64-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:20:12-65
+65
+66        <activity
+66-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:22:9-53:20
+67            android:name="com.sofiworkout.nilamnick.MainActivity"
+67-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:23:13-41
+68            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+68-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:27:13-163
+69            android:exported="true"
+69-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:24:13-36
+70            android:hardwareAccelerated="true"
+70-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:28:13-47
+71            android:launchMode="singleTop"
+71-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:25:13-43
+72            android:theme="@style/LaunchTheme"
+72-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:26:13-47
+73            android:windowSoftInputMode="adjustResize" >
+73-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:29:13-55
+74
+75            <!--
+76                 Specifies an Android theme to apply to this Activity as soon as
+77                 the Android process has started. This theme is visible to the user
+78                 while the Flutter UI initializes. After that, this theme continues
+79                 to determine the Window background behind the Flutter UI.
+80            -->
+81            <meta-data
+81-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:34:13-37:17
+82                android:name="io.flutter.embedding.android.NormalTheme"
+82-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:35:15-70
+83                android:resource="@style/NormalTheme" />
+83-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:36:15-52
+84
+85            <!--
+86                 Displays an Android View that continues showing the launch screen
+87                 Drawable until Flutter paints its first frame, then this splash
+88                 screen fades out. A splash screen is useful to avoid any visual
+89                 gap between the end of Android's launch screen and the painting of
+90                 Flutter's first frame.
+91            -->
+92            <meta-data
+92-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:45:13-48:17
+93                android:name="io.flutter.embedding.android.SplashScreenDrawable"
+93-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:46:15-79
+94                android:resource="@drawable/launch_background" />
+94-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:47:15-61
+95
+96            <intent-filter>
+96-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:49:13-52:29
+97                <action android:name="android.intent.action.MAIN" />
+97-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:50:17-68
+97-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:50:25-66
+98
+99                <category android:name="android.intent.category.LAUNCHER" />
+99-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:51:17-76
+99-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:51:27-74
+100            </intent-filter>
+101        </activity>
+102        <!--
+103             Don't delete the meta-data below.
+104             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+105        -->
+106        <meta-data
+106-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:56:9-58:33
+107            android:name="flutterEmbedding"
+107-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:57:13-44
+108            android:value="2" />
+108-->/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/android/app/src/main/AndroidManifest.xml:58:13-30
+109
+110        <receiver
+110-->[:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:14:9-16:40
+111            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver"
+111-->[:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-97
+112            android:exported="false" />
+112-->[:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:16:13-37
+113        <receiver
+113-->[:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:17:9-26:20
+114            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver"
+114-->[:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:18:13-101
+115            android:exported="false" >
+115-->[:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:19:13-37
+116            <intent-filter>
+116-->[:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:20:13-25:29
+117                <action android:name="android.intent.action.BOOT_COMPLETED" />
+117-->[:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:21:17-79
+117-->[:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:21:25-76
+118                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+118-->[:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:22:17-84
+118-->[:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:22:25-81
+119                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+119-->[:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:23:17-82
+119-->[:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:23:25-79
+120                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+120-->[:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:24:17-82
+120-->[:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:24:25-79
+121            </intent-filter>
+122        </receiver>
+123
+124        <activity
+124-->[:url_launcher_android] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:8:9-11:74
+125            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
+125-->[:url_launcher_android] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:9:13-74
+126            android:exported="false"
+126-->[:url_launcher_android] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:13-37
+127            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+127-->[:url_launcher_android] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-71
+128        <activity
+128-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:14:9-18:47
+129            android:name="com.pichillilorenzo.flutter_inappwebview.in_app_browser.InAppBrowserActivity"
+129-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-104
+130            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density"
+130-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:16:13-137
+131            android:exported="false"
+131-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:17:13-37
+132            android:theme="@style/AppTheme" />
+132-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:18:13-44
+133        <activity
+133-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:19:9-22:55
+134            android:name="com.pichillilorenzo.flutter_inappwebview.chrome_custom_tabs.ChromeCustomTabsActivity"
+134-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:20:13-112
+135            android:exported="false"
+135-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:21:13-37
+136            android:theme="@style/ThemeTransparent" />
+136-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:22:13-52
+137        <activity
+137-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:23:9-26:55
+138            android:name="com.pichillilorenzo.flutter_inappwebview.chrome_custom_tabs.TrustedWebActivity"
+138-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:24:13-106
+139            android:exported="false"
+139-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:25:13-37
+140            android:theme="@style/ThemeTransparent" />
+140-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:26:13-52
+141        <activity
+141-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:27:9-31:55
+142            android:name="com.pichillilorenzo.flutter_inappwebview.chrome_custom_tabs.ChromeCustomTabsActivitySingleInstance"
+142-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:28:13-126
+143            android:exported="false"
+143-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:29:13-37
+144            android:launchMode="singleInstance"
+144-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:30:13-48
+145            android:theme="@style/ThemeTransparent" />
+145-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:31:13-52
+146        <activity
+146-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:32:9-36:55
+147            android:name="com.pichillilorenzo.flutter_inappwebview.chrome_custom_tabs.TrustedWebActivitySingleInstance"
+147-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:33:13-120
+148            android:exported="false"
+148-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:34:13-37
+149            android:launchMode="singleInstance"
+149-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:35:13-48
+150            android:theme="@style/ThemeTransparent" />
+150-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:36:13-52
+151
+152        <receiver
+152-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:38:9-41:40
+153            android:name="com.pichillilorenzo.flutter_inappwebview.chrome_custom_tabs.ActionBroadcastReceiver"
+153-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:39:13-111
+154            android:enabled="true"
+154-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:40:13-35
+155            android:exported="false" />
+155-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:41:13-37
+156
+157        <meta-data
+157-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:43:9-45:36
+158            android:name="io.flutter.embedded_views_preview"
+158-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:44:13-61
+159            android:value="true" />
+159-->[:flutter_inappwebview] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:45:13-33
+160        <!--
+161           Declares a provider which allows us to store files to share in
+162           '.../caches/share_plus' and grant the receiving action access
+163        -->
+164        <provider
+164-->[:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:13:9-21:20
+165            android:name="dev.fluttercommunity.plus.share.ShareFileProvider"
+165-->[:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-77
+166            android:authorities="com.sofiworkout.men.women.flutter.share_provider"
+166-->[:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-74
+167            android:exported="false"
+167-->[:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:16:13-37
+168            android:grantUriPermissions="true" >
+168-->[:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:17:13-47
+169            <meta-data
+169-->[:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:18:13-20:68
+170                android:name="android.support.FILE_PROVIDER_PATHS"
+170-->[:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:19:17-67
+171                android:resource="@xml/flutter_share_file_paths" />
+171-->[:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:20:17-65
+172        </provider>
+173        <!--
+174           This manifest declared broadcast receiver allows us to use an explicit
+175           Intent when creating a PendingItent to be informed of the user's choice
+176        -->
+177        <receiver
+177-->[:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:26:9-32:20
+178            android:name="dev.fluttercommunity.plus.share.SharePlusPendingIntent"
+178-->[:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:27:13-82
+179            android:exported="true" >
+179-->[:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:28:13-36
+180            <intent-filter>
+180-->[:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:29:13-31:29
+181                <action android:name="EXTRA_CHOSEN_COMPONENT" />
+181-->[:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:30:17-65
+181-->[:share_plus] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:30:25-62
+182            </intent-filter>
+183        </receiver>
+184
+185        <uses-library
+185-->[androidx.window:window:1.0.0-beta04] /Users/farid/.gradle/caches/transforms-2/files-2.1/9d5c36a4e6230461f8085df3c5748b23/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
+186            android:name="androidx.window.extensions"
+186-->[androidx.window:window:1.0.0-beta04] /Users/farid/.gradle/caches/transforms-2/files-2.1/9d5c36a4e6230461f8085df3c5748b23/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
+187            android:required="false" />
+187-->[androidx.window:window:1.0.0-beta04] /Users/farid/.gradle/caches/transforms-2/files-2.1/9d5c36a4e6230461f8085df3c5748b23/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
+188        <uses-library
+188-->[androidx.window:window:1.0.0-beta04] /Users/farid/.gradle/caches/transforms-2/files-2.1/9d5c36a4e6230461f8085df3c5748b23/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
+189            android:name="androidx.window.sidecar"
+189-->[androidx.window:window:1.0.0-beta04] /Users/farid/.gradle/caches/transforms-2/files-2.1/9d5c36a4e6230461f8085df3c5748b23/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
+190            android:required="false" /> <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
+190-->[androidx.window:window:1.0.0-beta04] /Users/farid/.gradle/caches/transforms-2/files-2.1/9d5c36a4e6230461f8085df3c5748b23/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
+191        <activity
+191-->[com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:49:9-53:64
+192            android:name="com.google.android.gms.ads.AdActivity"
+192-->[com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:50:13-65
+193            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+193-->[com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:51:13-122
+194            android:exported="false"
+194-->[com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:52:13-37
+195            android:theme="@android:style/Theme.Translucent" />
+195-->[com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:53:13-61
+196
+197        <provider
+197-->[com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:55:9-59:39
+198            android:name="com.google.android.gms.ads.MobileAdsInitProvider"
+198-->[com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:56:13-76
+199            android:authorities="com.sofiworkout.men.women.mobileadsinitprovider"
+199-->[com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:57:13-73
+200            android:exported="false"
+200-->[com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:58:13-37
+201            android:initOrder="100" />
+201-->[com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:59:13-36
+202
+203        <service
+203-->[com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:61:9-64:40
+204            android:name="com.google.android.gms.ads.AdService"
+204-->[com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:62:13-64
+205            android:enabled="true"
+205-->[com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:63:13-35
+206            android:exported="false" />
+206-->[com.google.android.gms:play-services-ads-lite:20.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/eaea4b0f94d106cad177a8eae4ea6a66/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:64:13-37
+207
+208        <activity
+208-->[com.google.android.gms:play-services-base:17.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/d1ff2b47e450100c1f4b0c70d3c12b32/jetified-play-services-base-17.6.0/AndroidManifest.xml:23:9-26:75
+209            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+209-->[com.google.android.gms:play-services-base:17.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/d1ff2b47e450100c1f4b0c70d3c12b32/jetified-play-services-base-17.6.0/AndroidManifest.xml:24:13-79
+210            android:exported="false"
+210-->[com.google.android.gms:play-services-base:17.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/d1ff2b47e450100c1f4b0c70d3c12b32/jetified-play-services-base-17.6.0/AndroidManifest.xml:25:13-37
+211            android:theme="@android:style/Theme.Translucent.NoTitleBar" /> <!-- The activities will be merged into the manifest of the hosting app. -->
+211-->[com.google.android.gms:play-services-base:17.6.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/d1ff2b47e450100c1f4b0c70d3c12b32/jetified-play-services-base-17.6.0/AndroidManifest.xml:26:13-72
+212        <activity
+212-->[com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:12:5-271
+213            android:name="com.google.android.play.core.missingsplits.PlayCoreMissingSplitsActivity"
+213-->[com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:12:15-102
+214            android:enabled="false"
+214-->[com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:12:103-126
+215            android:exported="false"
+215-->[com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:12:127-151
+216            android:launchMode="singleInstance"
+216-->[com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:12:204-239
+217            android:process=":playcore_missing_splits_activity"
+217-->[com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:12:152-203
+218            android:stateNotNeeded="true" />
+218-->[com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:12:240-269
+219        <activity
+219-->[com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:13:5-226
+220            android:name="com.google.android.play.core.common.PlayCoreDialogWrapperActivity"
+220-->[com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:13:15-95
+221            android:enabled="false"
+221-->[com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:13:96-119
+222            android:exported="false"
+222-->[com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:13:120-144
+223            android:stateNotNeeded="true"
+223-->[com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:13:145-174
+224            android:theme="@style/Theme.PlayCore.Transparent" /> <!-- The service will be merged into the manifest of the hosting app. -->
+224-->[com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:13:175-224
+225        <service
+225-->[com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:16:5-145
+226            android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService"
+226-->[com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:16:14-95
+227            android:enabled="false"
+227-->[com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:16:96-119
+228            android:exported="true" />
+228-->[com.google.android.play:core:1.8.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/7ff29c6f90f64357b6f96bc67eb286dc/jetified-core-1.8.0/AndroidManifest.xml:16:120-143
+229
+230        <provider
+230-->[androidx.emoji2:emoji2:1.2.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/022f7de969cd3a53c7efee58bf110b23/jetified-emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
+231            android:name="androidx.startup.InitializationProvider"
+231-->[androidx.emoji2:emoji2:1.2.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/022f7de969cd3a53c7efee58bf110b23/jetified-emoji2-1.2.0/AndroidManifest.xml:25:13-67
+232            android:authorities="com.sofiworkout.men.women.androidx-startup"
+232-->[androidx.emoji2:emoji2:1.2.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/022f7de969cd3a53c7efee58bf110b23/jetified-emoji2-1.2.0/AndroidManifest.xml:26:13-68
+233            android:exported="false" >
+233-->[androidx.emoji2:emoji2:1.2.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/022f7de969cd3a53c7efee58bf110b23/jetified-emoji2-1.2.0/AndroidManifest.xml:27:13-37
+234            <meta-data
+234-->[androidx.emoji2:emoji2:1.2.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/022f7de969cd3a53c7efee58bf110b23/jetified-emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
+235                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+235-->[androidx.emoji2:emoji2:1.2.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/022f7de969cd3a53c7efee58bf110b23/jetified-emoji2-1.2.0/AndroidManifest.xml:30:17-75
+236                android:value="androidx.startup" />
+236-->[androidx.emoji2:emoji2:1.2.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/022f7de969cd3a53c7efee58bf110b23/jetified-emoji2-1.2.0/AndroidManifest.xml:31:17-49
+237            <meta-data
+237-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:36:13-38:52
+238                android:name="androidx.work.WorkManagerInitializer"
+238-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:37:17-68
+239                android:value="androidx.startup" />
+239-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:38:17-49
+240            <meta-data
+240-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/5e9c33db031544e0e387bb7402ec2239/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:31:13-33:52
+241                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+241-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/5e9c33db031544e0e387bb7402ec2239/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:32:17-78
+242                android:value="androidx.startup" />
+242-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/farid/.gradle/caches/transforms-2/files-2.1/5e9c33db031544e0e387bb7402ec2239/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:33:17-49
+243        </provider>
+244
+245        <service
+245-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:41:9-46:35
+246            android:name="androidx.work.impl.background.systemalarm.SystemAlarmService"
+246-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:42:13-88
+247            android:directBootAware="false"
+247-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:43:13-44
+248            android:enabled="@bool/enable_system_alarm_service_default"
+248-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:44:13-72
+249            android:exported="false" />
+249-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:45:13-37
+250        <service
+250-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:47:9-53:35
+251            android:name="androidx.work.impl.background.systemjob.SystemJobService"
+251-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:48:13-84
+252            android:directBootAware="false"
+252-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:49:13-44
+253            android:enabled="@bool/enable_system_job_service_default"
+253-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:50:13-70
+254            android:exported="true"
+254-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:51:13-36
+255            android:permission="android.permission.BIND_JOB_SERVICE" />
+255-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:52:13-69
+256        <service
+256-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:54:9-59:35
+257            android:name="androidx.work.impl.foreground.SystemForegroundService"
+257-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:55:13-81
+258            android:directBootAware="false"
+258-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:56:13-44
+259            android:enabled="@bool/enable_system_foreground_service_default"
+259-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:57:13-77
+260            android:exported="false" />
+260-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:58:13-37
+261
+262        <receiver
+262-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:61:9-66:35
+263            android:name="androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver"
+263-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:62:13-88
+264            android:directBootAware="false"
+264-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:63:13-44
+265            android:enabled="true"
+265-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:64:13-35
+266            android:exported="false" />
+266-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:65:13-37
+267        <receiver
+267-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:67:9-77:20
+268            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy"
+268-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:68:13-106
+269            android:directBootAware="false"
+269-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:69:13-44
+270            android:enabled="false"
+270-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:70:13-36
+271            android:exported="false" >
+271-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:71:13-37
+272            <intent-filter>
+272-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:73:13-76:29
+273                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+273-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:74:17-87
+273-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:74:25-84
+274                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+274-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:75:17-90
+274-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:75:25-87
+275            </intent-filter>
+276        </receiver>
+277        <receiver
+277-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:78:9-88:20
+278            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy"
+278-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:79:13-104
+279            android:directBootAware="false"
+279-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:80:13-44
+280            android:enabled="false"
+280-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:81:13-36
+281            android:exported="false" >
+281-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:82:13-37
+282            <intent-filter>
+282-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:84:13-87:29
+283                <action android:name="android.intent.action.BATTERY_OKAY" />
+283-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:85:17-77
+283-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:85:25-74
+284                <action android:name="android.intent.action.BATTERY_LOW" />
+284-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:86:17-76
+284-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:86:25-73
+285            </intent-filter>
+286        </receiver>
+287        <receiver
+287-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:89:9-99:20
+288            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy"
+288-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:90:13-104
+289            android:directBootAware="false"
+289-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:91:13-44
+290            android:enabled="false"
+290-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:92:13-36
+291            android:exported="false" >
+291-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:93:13-37
+292            <intent-filter>
+292-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:95:13-98:29
+293                <action android:name="android.intent.action.DEVICE_STORAGE_LOW" />
+293-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:96:17-83
+293-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:96:25-80
+294                <action android:name="android.intent.action.DEVICE_STORAGE_OK" />
+294-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:97:17-82
+294-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:97:25-79
+295            </intent-filter>
+296        </receiver>
+297        <receiver
+297-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:100:9-109:20
+298            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy"
+298-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:101:13-103
+299            android:directBootAware="false"
+299-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:102:13-44
+300            android:enabled="false"
+300-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:103:13-36
+301            android:exported="false" >
+301-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:104:13-37
+302            <intent-filter>
+302-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:106:13-108:29
+303                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+303-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:107:17-79
+303-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:107:25-76
+304            </intent-filter>
+305        </receiver>
+306        <receiver
+306-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:110:9-121:20
+307            android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver"
+307-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:111:13-88
+308            android:directBootAware="false"
+308-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:112:13-44
+309            android:enabled="false"
+309-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:113:13-36
+310            android:exported="false" >
+310-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:114:13-37
+311            <intent-filter>
+311-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:116:13-120:29
+312                <action android:name="android.intent.action.BOOT_COMPLETED" />
+312-->[:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:21:17-79
+312-->[:flutter_local_notifications] /Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:21:25-76
+313                <action android:name="android.intent.action.TIME_SET" />
+313-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:118:17-73
+313-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:118:25-70
+314                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+314-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:119:17-81
+314-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:119:25-78
+315            </intent-filter>
+316        </receiver>
+317        <receiver
+317-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:122:9-131:20
+318            android:name="androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver"
+318-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:123:13-99
+319            android:directBootAware="false"
+319-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:124:13-44
+320            android:enabled="@bool/enable_system_alarm_service_default"
+320-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:125:13-72
+321            android:exported="false" >
+321-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:126:13-37
+322            <intent-filter>
+322-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:128:13-130:29
+323                <action android:name="androidx.work.impl.background.systemalarm.UpdateProxies" />
+323-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:129:17-98
+323-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:129:25-95
+324            </intent-filter>
+325        </receiver>
+326        <receiver
+326-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:132:9-142:20
+327            android:name="androidx.work.impl.diagnostics.DiagnosticsReceiver"
+327-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:133:13-78
+328            android:directBootAware="false"
+328-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:134:13-44
+329            android:enabled="true"
+329-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:135:13-35
+330            android:exported="true"
+330-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:136:13-36
+331            android:permission="android.permission.DUMP" >
+331-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:137:13-57
+332            <intent-filter>
+332-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:139:13-141:29
+333                <action android:name="androidx.work.diagnostics.REQUEST_DIAGNOSTICS" />
+333-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:140:17-88
+333-->[androidx.work:work-runtime:2.7.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/ff7e287244a156d01f873e34b3bd27ac/work-runtime-2.7.0/AndroidManifest.xml:140:25-85
+334            </intent-filter>
+335        </receiver>
+336
+337        <service
+337-->[androidx.room:room-runtime:2.2.5] /Users/farid/.gradle/caches/transforms-2/files-2.1/5610ce0cdc0ebb322c29b0d9ed5ff21f/room-runtime-2.2.5/AndroidManifest.xml:25:9-28:40
+338            android:name="androidx.room.MultiInstanceInvalidationService"
+338-->[androidx.room:room-runtime:2.2.5] /Users/farid/.gradle/caches/transforms-2/files-2.1/5610ce0cdc0ebb322c29b0d9ed5ff21f/room-runtime-2.2.5/AndroidManifest.xml:26:13-74
+339            android:directBootAware="true"
+339-->[androidx.room:room-runtime:2.2.5] /Users/farid/.gradle/caches/transforms-2/files-2.1/5610ce0cdc0ebb322c29b0d9ed5ff21f/room-runtime-2.2.5/AndroidManifest.xml:27:13-43
+340            android:exported="false" />
+340-->[androidx.room:room-runtime:2.2.5] /Users/farid/.gradle/caches/transforms-2/files-2.1/5610ce0cdc0ebb322c29b0d9ed5ff21f/room-runtime-2.2.5/AndroidManifest.xml:28:13-37
+341
+342        <meta-data
+342-->[com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:23:9-25:37
+343            android:name="com.google.android.play.billingclient.version"
+343-->[com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:24:13-73
+344            android:value="5.1.0" />
+344-->[com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:25:13-34
+345
+346        <activity
+346-->[com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:27:9-31:75
+347            android:name="com.android.billingclient.api.ProxyBillingActivity"
+347-->[com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:28:13-78
+348            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+348-->[com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:29:13-96
+349            android:exported="false"
+349-->[com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:30:13-37
+350            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+350-->[com.android.billingclient:billing:5.1.0] /Users/farid/.gradle/caches/transforms-2/files-2.1/6a40b1be0c2aef3ab45518147ae01335/jetified-billing-5.1.0/AndroidManifest.xml:31:13-72
+351    </application>
+352
+353</manifest>

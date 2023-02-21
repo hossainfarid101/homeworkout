@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/url_launcher_android/intermediates/res/merged/debug/layout/notification_action_tombstone.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/6026df9510db401bde1768f72e68950c/core-1.6.0/res/layout/notification_action_tombstone.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/url_launcher_android/intermediates/res/merged/debug/layout/custom_dialog.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/6026df9510db401bde1768f72e68950c/core-1.6.0/res/layout/custom_dialog.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/url_launcher_android/intermediates/res/merged/debug/layout/notification_template_icon_group.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/6026df9510db401bde1768f72e68950c/core-1.6.0/res/layout/notification_template_icon_group.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/url_launcher_android/intermediates/res/merged/debug/layout/notification_template_part_chronometer.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/6026df9510db401bde1768f72e68950c/core-1.6.0/res/layout/notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/url_launcher_android/intermediates/res/merged/debug/layout/notification_template_part_time.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/6026df9510db401bde1768f72e68950c/core-1.6.0/res/layout/notification_template_part_time.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/url_launcher_android/intermediates/res/merged/debug/layout/notification_action.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/6026df9510db401bde1768f72e68950c/core-1.6.0/res/layout/notification_action.xml"
+    }
+]

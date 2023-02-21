@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/res/merged/release/drawable/notification_tile_bg.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/1bf3ab0378ad8779c52e3c82dcf63866/core-1.9.0/res/drawable/notification_tile_bg.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/res/merged/release/drawable/notification_bg.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/1bf3ab0378ad8779c52e3c82dcf63866/core-1.9.0/res/drawable/notification_bg.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/res/merged/release/drawable/notification_bg_low.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/1bf3ab0378ad8779c52e3c82dcf63866/core-1.9.0/res/drawable/notification_bg_low.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/share_plus/intermediates/res/merged/release/drawable/notification_icon_background.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/1bf3ab0378ad8779c52e3c82dcf63866/core-1.9.0/res/drawable/notification_icon_background.xml"
+    }
+]

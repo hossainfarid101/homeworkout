@@ -1,0 +1,34 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_tts/intermediates/incremental/mergeReleaseResources/merged.dir/values-iw/values-iw.xml",
+            "map": [
+                {
+                    "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/95ee271847c6f83c8716fceeb4547436/core-1.8.0/res/values-iw/values-iw.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_tts/intermediates/res/merged/release/values-iw/values-iw.xml",
+            "map": [
+                {
+                    "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/95ee271847c6f83c8716fceeb4547436/core-1.8.0/res/values-iw/values-iw.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    }
+                }
+            ]
+        }
+    ]
+}

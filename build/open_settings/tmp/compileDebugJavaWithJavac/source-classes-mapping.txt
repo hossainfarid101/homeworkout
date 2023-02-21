@@ -1,0 +1,4 @@
+alihoseinpoor/com/open_settings/OpenSettingsPlugin.java
+ alihoseinpoor.com.open_settings.OpenSettingsPlugin
+alihoseinpoor/com/open_settings/BuildConfig.java
+ alihoseinpoor.com.open_settings.BuildConfig

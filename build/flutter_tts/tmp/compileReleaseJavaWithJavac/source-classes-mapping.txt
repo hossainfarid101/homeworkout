@@ -1,0 +1,2 @@
+com/tundralabs/fluttertts/BuildConfig.java
+ com.tundralabs.fluttertts.BuildConfig

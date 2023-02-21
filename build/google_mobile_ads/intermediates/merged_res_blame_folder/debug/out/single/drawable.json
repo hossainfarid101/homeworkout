@@ -1,0 +1,82 @@
+[
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/google_mobile_ads/intermediates/res/merged/debug/drawable/common_google_signin_btn_icon_light_focused.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/d1ff2b47e450100c1f4b0c70d3c12b32/jetified-play-services-base-17.6.0/res/drawable/common_google_signin_btn_icon_light_focused.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/google_mobile_ads/intermediates/res/merged/debug/drawable/common_google_signin_btn_text_disabled.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/d1ff2b47e450100c1f4b0c70d3c12b32/jetified-play-services-base-17.6.0/res/drawable/common_google_signin_btn_text_disabled.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/google_mobile_ads/intermediates/res/merged/debug/drawable/common_google_signin_btn_icon_dark_normal.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/d1ff2b47e450100c1f4b0c70d3c12b32/jetified-play-services-base-17.6.0/res/drawable/common_google_signin_btn_icon_dark_normal.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/google_mobile_ads/intermediates/res/merged/debug/drawable/admob_close_button_white_circle_black_cross.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/4d7a7a450203adba940d2605de5f5780/jetified-play-services-ads-20.6.0/res/drawable/admob_close_button_white_circle_black_cross.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/google_mobile_ads/intermediates/res/merged/debug/drawable/common_google_signin_btn_text_light_normal.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/d1ff2b47e450100c1f4b0c70d3c12b32/jetified-play-services-base-17.6.0/res/drawable/common_google_signin_btn_text_light_normal.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/google_mobile_ads/intermediates/res/merged/debug/drawable/common_google_signin_btn_text_light.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/d1ff2b47e450100c1f4b0c70d3c12b32/jetified-play-services-base-17.6.0/res/drawable/common_google_signin_btn_text_light.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/google_mobile_ads/intermediates/res/merged/debug/drawable/common_google_signin_btn_text_dark_focused.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/d1ff2b47e450100c1f4b0c70d3c12b32/jetified-play-services-base-17.6.0/res/drawable/common_google_signin_btn_text_dark_focused.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/google_mobile_ads/intermediates/res/merged/debug/drawable/notification_icon_background.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/6026df9510db401bde1768f72e68950c/core-1.6.0/res/drawable/notification_icon_background.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/google_mobile_ads/intermediates/res/merged/debug/drawable/common_google_signin_btn_icon_disabled.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/d1ff2b47e450100c1f4b0c70d3c12b32/jetified-play-services-base-17.6.0/res/drawable/common_google_signin_btn_icon_disabled.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/google_mobile_ads/intermediates/res/merged/debug/drawable/notification_bg_low.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/6026df9510db401bde1768f72e68950c/core-1.6.0/res/drawable/notification_bg_low.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/google_mobile_ads/intermediates/res/merged/debug/drawable/common_google_signin_btn_text_dark_normal.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/d1ff2b47e450100c1f4b0c70d3c12b32/jetified-play-services-base-17.6.0/res/drawable/common_google_signin_btn_text_dark_normal.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/google_mobile_ads/intermediates/res/merged/debug/drawable/notification_bg.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/6026df9510db401bde1768f72e68950c/core-1.6.0/res/drawable/notification_bg.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/google_mobile_ads/intermediates/res/merged/debug/drawable/common_google_signin_btn_text_dark.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/d1ff2b47e450100c1f4b0c70d3c12b32/jetified-play-services-base-17.6.0/res/drawable/common_google_signin_btn_text_dark.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/google_mobile_ads/intermediates/res/merged/debug/drawable/notification_tile_bg.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/6026df9510db401bde1768f72e68950c/core-1.6.0/res/drawable/notification_tile_bg.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/google_mobile_ads/intermediates/res/merged/debug/drawable/common_google_signin_btn_icon_light_normal.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/d1ff2b47e450100c1f4b0c70d3c12b32/jetified-play-services-base-17.6.0/res/drawable/common_google_signin_btn_icon_light_normal.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/google_mobile_ads/intermediates/res/merged/debug/drawable/admob_close_button_black_circle_white_cross.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/4d7a7a450203adba940d2605de5f5780/jetified-play-services-ads-20.6.0/res/drawable/admob_close_button_black_circle_white_cross.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/google_mobile_ads/intermediates/res/merged/debug/drawable/common_google_signin_btn_text_light_focused.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/d1ff2b47e450100c1f4b0c70d3c12b32/jetified-play-services-base-17.6.0/res/drawable/common_google_signin_btn_text_light_focused.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/google_mobile_ads/intermediates/res/merged/debug/drawable/common_google_signin_btn_icon_dark_focused.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/d1ff2b47e450100c1f4b0c70d3c12b32/jetified-play-services-base-17.6.0/res/drawable/common_google_signin_btn_icon_dark_focused.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/google_mobile_ads/intermediates/res/merged/debug/drawable/common_google_signin_btn_icon_light.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/d1ff2b47e450100c1f4b0c70d3c12b32/jetified-play-services-base-17.6.0/res/drawable/common_google_signin_btn_icon_light.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/google_mobile_ads/intermediates/res/merged/debug/drawable/common_google_signin_btn_icon_dark.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/d1ff2b47e450100c1f4b0c70d3c12b32/jetified-play-services-base-17.6.0/res/drawable/common_google_signin_btn_icon_dark.xml"
+    }
+]

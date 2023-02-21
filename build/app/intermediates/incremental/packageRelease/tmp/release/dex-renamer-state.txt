@@ -1,0 +1,4 @@
+#Mon Feb 20 16:50:44 BDT 2023
+base.0=/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

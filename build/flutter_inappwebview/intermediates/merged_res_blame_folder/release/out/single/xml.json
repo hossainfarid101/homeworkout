@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/res/merged/release/xml/provider_paths.xml",
+        "source": "/Users/farid/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/android/src/main/res/xml/provider_paths.xml"
+    },
+    {
+        "merged": "/Users/farid/Downloads/MainFile_Home_Workout 2/SourceCode/build/flutter_inappwebview/intermediates/res/merged/release/xml/image_share_filepaths.xml",
+        "source": "/Users/farid/.gradle/caches/transforms-2/files-2.1/0c88acb1bdf10b0f050fb9fc31cc59b4/browser-1.4.0/res/xml/image_share_filepaths.xml"
+    }
+]

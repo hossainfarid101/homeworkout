@@ -144,7 +144,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
 
   @override
   void initState() {
-    WidgetsBinding.instance!.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
     startTime = DateTime.now();
     _getLastPosition();
     _getPreference();
@@ -163,7 +163,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
       controller!.dispose();
     }
 
-    WidgetsBinding.instance!.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
 
     if (listLifeGuideController != null) {
       listLifeGuideController!.dispose();
@@ -230,9 +230,9 @@ class _WorkoutScreenState extends State<WorkoutScreen>
   }
 
   _setSoundCountDown() async {
-    if (int.parse(countDownController.getTime()) < 4) {
+    if (int.parse(countDownController.getTime().toString()) < 4) {
       if (!isMute! && isVoiceGuide!) {
-        Utils.textToSpeech(countDownController.getTime(), flutterTts);
+        Utils.textToSpeech(countDownController.getTime().toString(), flutterTts);
       }
     }
   }
@@ -468,7 +468,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
     Preference.shared.setInt(Preference.duration, diffsec!);
     Preference.shared.setDouble(Preference.calories, calories!);
 
-    WidgetsBinding.instance!.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     if (widget.fromPage == Constant.PAGE_HOME) {
       Preference.shared.setLastUnCompletedExPos(widget.tableName.toString(), 0);
     } else if (widget.fromPage == Constant.PAGE_DAYS_STATUS) {
@@ -578,7 +578,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                     onTap: () async {
                       if (isWidgetCountDown) {
                         countDownController.pause();
-                        if (int.parse(countDownController.getTime()) < 4) {
+                        if (int.parse(countDownController.getTime().toString()) < 4) {
                           if (!isMute! && isVoiceGuide!) {
                             timerForCount!.cancel();
                           }
